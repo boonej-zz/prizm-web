@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="wrap" id="body-home">
+      <%- include navbar.ejs %>
+      <div class="body column">
+        <h2>
+          Capture and share personal achievements and inspirations as they 
+          happen.
+        </h2>
+        <form>
+          <p>Enter your email below to participate in our private beta</p>
+          <input type="text" class="text" name="email" 
+                 placeholder="Enter your email" />
+          <button>Send</button>
+        </form>
+      </div>
+      <p class="legal">
+        Copyright &copy; 2014 Prizm Powered by Higher Altitude Inc. - 
+        <a href="file:///Users/boonej/work/Prizm/index.html#">
+            Privacy Policy
+        </a> -
+        <a href="file:///Users/boonej/work/Prizm/index.html#">
+          Terms of Service
+        </a> - 
+        <a href="file:///Users/boonej/work/Prizm/index.html#">
+          Support
+        </a>
+      </p>
+    </div>
+    <div class="overlay">
+      <p>
+        <span class="column">
+          Prizm is a visual journal that helps you explore and discover new 
+          opportunities.
+        </span>
+      </p>
+    </div>
+  </body>
+</html>

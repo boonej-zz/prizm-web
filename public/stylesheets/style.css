@@ -1,0 +1,187 @@
+/** FONTS **/
+@font-face {
+  font-family: 'proxima_nova_ltlight';
+  src: url('/fonts/ProximaNova-Light-webfont.eot');
+  src: url('/fonts/ProximaNova-Light-webfont.eot?#iefix') 
+          format('embedded-opentype'),
+       url('/fonts/ProximaNova-Light-webfont.woff') format('woff'),
+       url('/fonts/ProximaNova-Light-webfont.ttf') format('truetype'),
+       url('ProximaNova-Light-webfont.svg#proxima_nova_ltlight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/** GLOBAL STYLE MODIFIERS **/
+.blue-background {
+  background-color: #3B58A5;
+  color: #FFF;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mid-block {
+  height: 400px;
+  padding-top: 100px;
+  font-size: .9em;
+}
+
+.wrap {
+  width: 900px;
+  margin: 0 auto;
+}
+
+.column {
+  display: inline-block;
+  margin-top: 15px;
+  width: 420px;
+  font-size: 1.2em;
+} 
+
+.top-border {
+  border-top: 1px solid #666;
+}
+
+.image {
+  width: 300px;
+  height: 700px;
+  background: #EEE;
+}
+
+.hidden {
+  display: none;
+}
+
+/** STANDARD ELEMENTS **/
+body {
+  font-family: 'proxima_nova_ltlight' 'Futura' sans-serif;
+  font-size: 100%;
+  color: #3B58A5;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  color: #3B58A5;
+}
+
+a.selected {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  height: 32px;
+  width: 80px;
+  background-color: #3B58A5;
+  border: 1px solid #3B58A5;
+  margin: 10px 0px 0px 0px;
+  color: #FFF;
+  font-weight: bold;
+}
+
+/** NAVIGATION BAR **/
+.nav-top {
+  height: 60px;
+  width: 900px;
+  border-bottom: 1px #666 solid;
+}
+
+#logo {
+  height: 57px;
+  width: 100px;
+  background: url('/images/logo.png') no-repeat;
+  background-size: 100px 22px;
+  background-position: left bottom;
+}
+
+.nav-top h1 {
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
+  font-size: 2em;
+  float: left;
+  clear: left;
+}
+
+.menu {
+  float: right;
+  clear: right;
+  height: 60px;
+  vertical-align: baseline;
+}
+
+.menu-button {
+  height: 60px;
+  margin-left: 75px;
+  vertical-align: baseline;
+  padding-top: 30px;
+}
+
+.menu-button a {
+  height: 60px;
+  display: inline-block;
+  margin-top: 40px;
+  text-transform: uppercase;
+}
+
+/** BODY ELEMENTS **/
+
+.body > form {
+  margin-top: 60px;
+  width: 150px;
+}
+
+.body > form > p {
+  width: 150px;
+  font-size: .5em;
+  line-height: 1.1em;
+}
+
+#body-home {
+  background: url('/images/phones.png') no-repeat;
+  background-position: 500px 80px;
+  background-size: 400px 636px;
+  min-height: 700px;
+}
+
+input.text {
+  width: 150px;
+  height: 24px;
+}
+
+.legal {
+  margin-top: 350px;
+  font-size: .6em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/** OVERLAY **/
+
+.overlay {
+  position: absolute;
+  top: 550px;
+  height: 80px;
+  width: 100%;
+  background: #3B58A5;
+  opacity: 0.8;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  border: none;
+}
+
+.overlay p {
+  color: #FFF;
+  width: 900px;
+  height: 80px;
+  margin: 0 auto;
+  vertical-align: middle;
+}
