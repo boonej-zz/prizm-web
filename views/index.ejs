@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include include.ejs %>
   </head>
   <body>
     <div class="wrap" id="body-home">
@@ -16,7 +16,7 @@
           <p>Enter your email below to participate in our private beta</p>
           <input type="text" class="text" name="email" 
                  placeholder="Enter your email" />
-          <button>Send</button>
+          <button onclick="prism.hello('Hello man')">Send</button>
         </form>
       </div>
       <p class="legal">
