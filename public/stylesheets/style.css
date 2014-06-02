@@ -9,7 +9,7 @@
           format('embedded-opentype'),
        url('/fonts/ProximaNova-Light-webfont.woff') format('woff'),
        url('/fonts/ProximaNova-Light-webfont.ttf') format('truetype'),
-       url('ProximaNova-Light-webfont.svg#proxima_nova_ltlight') format('svg');
+       url('/fonts/ProximaNova-Light-webfont.svg#proxima_nova_ltlight') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -64,6 +64,7 @@ body {
   color: #2443A1;
   margin: 0;
   padding: 0;
+  border: none;
   font-weight: normal;
 }
 
@@ -168,7 +169,7 @@ a:hover {
   position: absolute;
   top: 735px;
   margin: 0;
-  padding: 35px;
+  padding: 0;
   height: 300px;
   width: 100%;
   margin: 0 auto;
@@ -177,6 +178,11 @@ a:hover {
   text-align: center;
   vertical-align: middle;
   background-color: #FFF;
+}
+
+.legal-span {
+  display: inline-block;
+  margin-top: 50px;
 }
 
 /** OVERLAY **/
