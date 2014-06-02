@@ -80,12 +80,11 @@ a {
   color: #2443A1;
 }
 
-a.selected {
-  text-decoration: underline;
+.selected {
+  border-bottom: 3px solid #536BB4;
 }
 
 a:hover {
-  text-decoration: underline;
 }
 
 #sign-up {
@@ -136,16 +135,17 @@ a:hover {
 }
 
 .menu-button {
-  height: 60px;
+  display: inline-block;
+  height: 70px;
   margin-left: 75px;
-  vertical-align: baseline;
-  padding-top: 30px;
+  vertical-align: middle;
 }
 
 .menu-button a {
-  height: 60px;
   display: inline-block;
-  margin-top: 40px;
+  margin-top: 45px;
+  height: 70px;
+  vertical-align: middle;
   font-size: 15px;
   text-transform: uppercase;
 }

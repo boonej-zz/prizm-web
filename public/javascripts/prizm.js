@@ -4,7 +4,6 @@ var prizm = {
               });
             },
   submitForm: function(){
-                alert('submitting form');
                 var confirmText = $('#confirm').html();
                 $('#form-body').html(confirmText);
               } 
