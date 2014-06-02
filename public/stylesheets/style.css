@@ -1,3 +1,6 @@
+/** LIGHTBOX STYLE **/
+@import url('/stylesheets/magnific-popup.css');
+
 /** FONTS **/
 @font-face {
   font-family: 'proxima_nova_ltlight';
@@ -28,14 +31,14 @@
 }
 
 .wrap {
-  width: 900px;
+  width: 1200px;
   margin: 0 auto;
 }
 
 .column {
   display: inline-block;
   margin-top: 15px;
-  width: 420px;
+  width: 580px;
   font-size: 1.2em;
 } 
 
@@ -57,15 +60,22 @@
 body {
   font-family: 'proxima_nova_ltlight' 'Futura' sans-serif;
   font-size: 100%;
-  color: #3B58A5;
+  color: #2443A1;
   margin: 0;
   padding: 0;
   font-weight: normal;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 a {
   text-decoration: none;
-  color: #3B58A5;
+  color: #2443A1;
 }
 
 a.selected {
@@ -76,28 +86,34 @@ a:hover {
   text-decoration: underline;
 }
 
-button {
-  height: 32px;
-  width: 80px;
+#sign-up {
+  font-size: 28px;
+  letter-spacing: 1px;
+  height: 75px;
+  width: 400px;
+  display: block;
   background-color: #3B58A5;
   border: 1px solid #3B58A5;
-  margin: 10px 0px 0px 0px;
+  margin: 100px 0px 0px 0px;
   color: #FFF;
   font-weight: bold;
+  padding: 35px 20px 0px 20px;
+  opacity: 0.8;
 }
 
 /** NAVIGATION BAR **/
 .nav-top {
-  height: 60px;
-  width: 900px;
+  height: 75px;
+  width: 1200px;
+  padding: 0 15px;
   border-bottom: 1px #666 solid;
 }
 
 #logo {
-  height: 57px;
-  width: 100px;
+  height: 65px;
+  width: 167px;
   background: url('/images/logo.png') no-repeat;
-  background-size: 100px 22px;
+  background-size: 167px 40px;
   background-position: left bottom;
 }
 
@@ -128,46 +144,45 @@ button {
   height: 60px;
   display: inline-block;
   margin-top: 40px;
+  font-size: 15px;
   text-transform: uppercase;
 }
 
 /** BODY ELEMENTS **/
 
-.body > form {
-  margin-top: 60px;
-  width: 150px;
-}
-
-.body > form > p {
-  width: 150px;
-  font-size: .5em;
-  line-height: 1.1em;
+.body > h2 {
+  font-size: 25pt;
+  margin-top: 80px;
 }
 
 #body-home {
   background: url('/images/phones.png') no-repeat;
-  background-position: 500px 80px;
-  background-size: 400px 636px;
-  min-height: 700px;
-}
-
-input.text {
-  width: 150px;
-  height: 24px;
+  background-position: 653px 80px;
+  background-size: 532px 848px;
+  min-height: 900px;
+  padding: 0;
 }
 
 .legal {
-  margin-top: 350px;
+  position: absolute;
+  top: 735px;
+  margin: 0;
+  padding: 35px;
+  height: 300px;
+  width: 1200px;
+  margin: 0 auto;
   font-size: .6em;
   text-transform: uppercase;
   text-align: center;
+  vertical-align: middle;
+  background-color: #FFF;
 }
 
 /** OVERLAY **/
 
 .overlay {
   position: absolute;
-  top: 550px;
+  top: 655px;
   height: 80px;
   width: 100%;
   background: #3B58A5;
@@ -180,8 +195,160 @@ input.text {
 
 .overlay p {
   color: #FFF;
-  width: 900px;
+  width: 1200px;
   height: 80px;
   margin: 0 auto;
   vertical-align: middle;
+}
+
+/** INFORMATION FORM **/
+
+#info-form {
+  margin: auto;
+  width: 545px;
+  background: #FFF;
+  border: 2px solid #C0C0C0;
+  border-radius: 5px;
+}
+
+#info-form #send {
+  background: #536bb4;
+  color: #FFF;
+  border: none;
+  position: absolute;
+  bottom: 42px;
+  right: 42px;
+  height: 44px;
+  width: 150px;
+  text-align: middle;
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.form-header {
+  height: 110px;
+}
+
+.form-header > h1 {
+  background: url('/images/logo.png') no-repeat center; 
+  height: 110px;
+  background-size: 167px 40px;
+  width: 100%;
+}
+
+.form-section {
+  margin: 0;
+  border-bottom: 1px solid #D4D4D4;
+  height: 65px;
+  width: 100%;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.form-instructions {
+  height: 90px;
+  border-top: 1px solid #D4D4D4;
+  vertical-align: middle;
+}
+
+.form-section p {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 32.54px;
+  color: #456A9A;
+}
+
+.form-section > label {
+  font-size: 20px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.radio-label {
+  display: inline-block;
+  height: 65px;
+  line-height: 65px;
+  font-size: 20px;
+  vertical-align: middle;
+  margin: -28px 10px 0px 10px;
+}
+
+.form-section > input {
+  height: 65px;
+  font-size: 20px;
+  line-height: 65px;
+  font-weight: normal;
+  color: #C0C0C0;
+}
+
+.form-section ::-webkit-input-placeholder {
+  font-size: 20px;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+.form-section > input.input-block {
+  margin: 0;
+  border: none;
+  height: 63px;
+  width: 400px;  
+  font-size: 1em;
+  vertical-align: middle;
+}
+
+#male-label, #female-label {
+  margin-top: -28px;
+}
+
+button.close {
+  cursor: pointer;
+  border: none;
+  height: 18px;
+  width: 18px;
+  font-size: 22px;
+  color: #2443A1;
+  background-color: #FFF;
+  background-image: url(/images/close.png);
+  background-size: 18px 18px;
+  float: right;
+  margin: 0px 20px 0 0;
+  font-weight: normal;
+}
+
+.form-footer {
+  height: 132px;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  margin-top: 16px;
+  background: url(/images/radio.png) no-repeat;
+  width: 36px;
+  height: 33px;
+  background-size: 33px 33px;
+}
+
+input[type="radio"]:checked {
+  background: url(/images/radio-checked.png) no-repeat;
+  background-size: 36px 33px;
+}
+
+h2.form-confirm-title {
+  margin: 50px 0px 40px 0;
+  text-align: center;
+  font-size: 32.54px;
+}
+
+p.form-confirm-text {
+  margin: 40px 40px 90px 40px;
+  font-size: 20px;
+  text-align: center;
+}
+
+p.form-confirm-close {
+  margin: 90px 90px 60px 90px;
+  font-size: 18px;
+  text-align: center;
 }

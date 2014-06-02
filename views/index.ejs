@@ -3,6 +3,13 @@
   <head>
     <title><%= title %></title>
     <%- include include.ejs %>
+    <script type="text/javascript">
+      <!--
+      $(document).ready(function(){
+          $('#info-form').magnificPopup({type: 'ajax'});
+      });
+      -->
+    </script>
   </head>
   <body>
     <div class="wrap" id="body-home">
@@ -12,25 +19,9 @@
           Capture and share personal achievements and inspirations as they 
           happen.
         </h2>
-        <form>
-          <p>Enter your email below to participate in our private beta</p>
-          <input type="text" class="text" name="email" 
-                 placeholder="Enter your email" />
-          <button onclick="prism.hello('Hello man')">Send</button>
-        </form>
+        <a onclick="prizm.signUp()" href="#" id="sign-up">Sign up for the private beta</a>
       </div>
-      <p class="legal">
-        Copyright &copy; 2014 Prizm Powered by Higher Altitude Inc. - 
-        <a href="file:///Users/boonej/work/Prizm/index.html#">
-            Privacy Policy
-        </a> -
-        <a href="file:///Users/boonej/work/Prizm/index.html#">
-          Terms of Service
-        </a> - 
-        <a href="file:///Users/boonej/work/Prizm/index.html#">
-          Support
-        </a>
-      </p>
+     
     </div>
     <div class="overlay">
       <p>
@@ -39,6 +30,11 @@
           opportunities.
         </span>
       </p>
+    </div>
+    <%- include legal.ejs %>
+    <%- include infoform.ejs %>
+    <div class="hidden" id="confirm">
+      <%- include confirmform.ejs %>
     </div>
   </body>
 </html>
