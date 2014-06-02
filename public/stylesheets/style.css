@@ -17,6 +17,7 @@
 /** GLOBAL STYLE MODIFIERS **/
 .blue-background {
   background-color: #3B58A5;
+  opacity: 0.8;
   color: #FFF;
 }
 
@@ -38,7 +39,7 @@
 .column {
   display: inline-block;
   margin-top: 15px;
-  width: 580px;
+  width: 480px;
   font-size: 1.2em;
 } 
 
@@ -169,7 +170,7 @@ a:hover {
   margin: 0;
   padding: 35px;
   height: 300px;
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
   font-size: .6em;
   text-transform: uppercase;
@@ -351,4 +352,27 @@ p.form-confirm-close {
   margin: 90px 90px 60px 90px;
   font-size: 18px;
   text-align: center;
+}
+
+/** ABOUT PAGE **/
+#about-block {
+  margin-top: -1px;
+}
+
+.about-left {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 150px 0 150px 0;
+}
+
+.about-left h2 {
+  margin: 0 0 0px 0;
+}
+
+#about-phone1 {
+
+}
+
+#about-mission {
+  float: right;
 }
