@@ -57,6 +57,10 @@
   display: none;
 }
 
+.top-500 {
+  margin-top: 450px;
+}
+
 /** STANDARD ELEMENTS **/
 body {
   font-family: 'proxima_nova_ltlight' 'Futura' sans-serif;
@@ -183,6 +187,18 @@ a:hover {
 .legal-span {
   display: inline-block;
   margin-top: 50px;
+}
+
+.legal-block {
+  position: relative;
+  top: 300px;
+  margin: 400px auto;
+  font-size: .6em;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: middle;
+  clear: both;
+  
 }
 
 /** OVERLAY **/
@@ -376,9 +392,26 @@ p.form-confirm-close {
 }
 
 #about-phone1 {
+  height: 800px;
+  width: 500px;
+  background-color: #666;
+  position: absolute;
+  top: 150px;
+  margin-left: 700px;
+}
+
+#about-phone2 {
+  height: 800px;
+  width: 500px;
+  background-color: #666;
+  position: absolute;
+  top: 970px;
+  margin-left: 5px;
 
 }
 
-#about-mission {
+#about-mission, #about-result {
   float: right;
+  clear: right;
+  border-top: 1px solid #d4daea; 
 }
