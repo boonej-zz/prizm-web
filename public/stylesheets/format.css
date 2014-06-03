@@ -1,4 +1,8 @@
 @media screen and (max-width:500px) {
+  body {
+    font-size: 14px;
+  }
+
   .wrap {
     width: 320px;
   }
@@ -72,7 +76,96 @@
   }
 
   .form-header {
+    height: 70px;
   }
+
+  .form-header > h1 {
+    height: 70px; 
+    background-size: 84px 20px; 
+  }
+
+  .form-instructions {
+    height: 60px;
+  }
+
+  .form-section p {
+    font-size: 17px;
+    margin-top: 20px;
+  }
+  
+  .form-section label {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .form-section input {
+    height: 44px;
+    line-height: 18px;
+    font-weight: normal;
+    color: #666;
+  }
+
+  .form-section > input.input-block {
+    margin: 0;
+    border: none;
+    height: 63px;
+    width: 150px;  
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+
+  .form-section ::-webkit-input-placeholder {
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: middle;
+  }
+
+
+  input[type="radio"] {
+    margin-top: 22px;
+    background: url(/images/radio.png) no-repeat;
+    width: 23px;
+    height: 20px;
+    background-size: 20px 20px;
+  }
+
+  input[type="radio"]:checked {
+    background: url(/images/radio-checked.png) no-repeat;
+    background-size: 22px 20px;
+  }
+
+  .radio-label {
+    display: inline-block;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    vertical-align: middle;
+    margin: -15px 10px 0px 10px;
+  }
+
+  #male-label, #female-label {
+    margin-top: -15px;
+  }
+
+  button.close {
+    height: 14px;
+    width: 14px;
+    background-size: 14px 14px;
+    margin: 0 10px 0 0;
+  }
+
+  p.form-confirm-text {
+    margin: 10px 10px 30px 10px;
+    font-size: 17px;
+  }
+
+  p.form-confirm-close {
+    margin: 30px 30px 60px 30px;
+    font-size: 17px;
+  }
+ 
+  
 }
 
 
