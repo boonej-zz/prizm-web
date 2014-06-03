@@ -16,6 +16,10 @@ router.get('/terms', function(req, res) {
   res.render('terms', { title: 'Legal', selected:'none'});
 });
 
+router.get('/privacy', function(req, res){
+  res.render('privacy', { title: 'Privacy', selected:'none'});
+});
+
 router.post('/', function(req, res) {
   var data = req.body;
   var record = new Record(data);

@@ -16,7 +16,6 @@
 
 body {
   background-color: #EEF0F4;
-  letter-spacing: -0.5px;
 }
 
 .blue-background {
@@ -63,7 +62,7 @@ body {
 
 /** STANDARD ELEMENTS **/
 body {
-  font-family: 'proxima_nova_ltlight' 'Futura' sans-serif;
+  font-family: 'proxima_nova_ltlight'; 
   font-size: 100%;
   color: #2443A1;
   margin: 0;
@@ -108,7 +107,7 @@ p.sign-up-desc {
 }
 
 .top-500 {
-    margin-top: 450px;
+    margin-top: 250px;
   }
 /** NAVIGATION BAR **/
 #menu-button {
@@ -344,7 +343,7 @@ button.close {
   width: 18px;
   font-size: 22px;
   color: #2443A1;
-  background-color: #FFF;
+  background-color: #EEF0F4;
   background-image: url(/images/close.png);
   background-size: 18px 18px;
   float: right;
@@ -390,32 +389,43 @@ p.form-confirm-close {
 
 /** ABOUT PAGE **/
 #about-block {
+  background-color: #4e70b7;
   margin-top: -1px;
+  opacity: 1;
+}
+
+#about-block p {
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: normal;
+  width: 522px;
+  margin-left: 15px;
 }
 
 .about-left {
   width: 1200px;
   margin: 0 auto;
-  padding: 150px 0 150px 0;
+  padding: 290px 0 230px 0;
 }
 
 .about-left h2 {
-  margin: 0 0 0px 0;
+  margin: 0px 0 0px 15px;
+  font-size: 28px;
 }
 
 #about-phone1 {
-  height: 800px;
+  height: 900px;
   width: 500px;
-  background-color: #666;
+  background: url(/images/phone1.png) no-repeat;
   position: absolute;
   top: 150px;
   margin-left: 700px;
 }
 
 #about-phone2 {
-  height: 800px;
+  height: 900px;
   width: 500px;
-  background-color: #666;
+  background: url(/images/phone2.png) no-repeat;
   position: absolute;
   top: 970px;
   margin-left: 5px;
@@ -426,9 +436,16 @@ p.form-confirm-close {
   float: right;
   clear: right;
   border-top: 1px solid #d4daea; 
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 /** TERMS PAGE **/
 #terms p, ul, h2, h3{
   width: 600px;
+}
+
+#terms .legal-block {
+  top: 0px;
+  margin-top: 40px;
 }
