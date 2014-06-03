@@ -238,8 +238,8 @@ p.sign-up-desc {
 
 #info-form {
   margin: auto;
-  width: 545px;
-  background: #d4daea;
+  width: 545px; 
+  background-color: #EEF0F4;
   border: 2px solid #C0C0C0;
   border-radius: 5px;
 }
