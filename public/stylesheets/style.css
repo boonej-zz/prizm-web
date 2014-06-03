@@ -166,10 +166,8 @@ p.sign-up-desc {
 /** BODY ELEMENTS **/
 
 .body > h2 {
-  font-size: 36pt;
-  letter-spacing: -1px;
+  font-size: 38px;
   margin-top: 100px;
-  width: 680px;
 }
 
 #body-home {

@@ -9,6 +9,7 @@
     width: 320px;
   }
 
+ 
   /** NAVIGATION BAR **/
   #menu-button {
     display: block;
@@ -40,17 +41,23 @@
   .body h2 {
     font-size: 18px;
     margin-top: 36px;
+    width: 300px;
+  }
+
+  p.sign-up-desc {
+    margin-top: 40px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    width: 300px;
   }
 
   #sign-up {
     vertical-align: middle;
     text-align: center;
     line-height: 44px;
-    font-size: 16px;
+    font-size: 13px;
     height: 44px;
     width: 300px;
-    margin: 40px 0px;  
-    padding: 0;
   }
 
   #body-home {
