@@ -1,6 +1,8 @@
 @media screen and (max-width:500px) {
   body {
     font-size: 14px;
+    background-color: #EEF0F4;
+    letter-spacing: -1px;
   }
 
   .wrap {
@@ -8,6 +10,17 @@
   }
 
   /** NAVIGATION BAR **/
+  #menu-button {
+    display: block;
+    float: right;
+    height: 14px;
+    width: 22px;
+    margin-top: 40px;
+    margin-right: 5px;
+    background: url(/images/menu-button.png) no-repeat;
+    border: none;
+  } 
+
   .nav-top {
     height: 64px;
     width: 300px;
@@ -163,6 +176,11 @@
   p.form-confirm-close {
     margin: 30px 30px 60px 30px;
     font-size: 17px;
+  }
+
+  /** TERMS PAGE **/
+  #terms p, ul, h2, h3 {
+    
   }
  
   

@@ -4,7 +4,19 @@ var prizm = {
               });
             },
   submitForm: function(){
-                var confirmText = $('#confirm').html();
-                $('#form-body').html(confirmText);
+                var data = {
+                  name: $('#name').val(),
+                  age:  $('#age').val(),
+                  gender: $('#gender').val(),
+                  cityState: $('#city-state').val(),
+                  email: $('#email').val(),
+                  mobile: $('#mobile').val()
+                };
+               
+                $.post('/', data, function(){
+                  var confirmText = $('#confirm').html();
+                  $('#form-body').html(confirmText);
+                });
+                
               } 
 };
