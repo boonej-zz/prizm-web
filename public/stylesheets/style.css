@@ -314,6 +314,8 @@ p.sign-up-desc {
   line-height: 25px;
   font-weight: normal;
   color: #666;
+
+  background: #EEF0F4;
 }
 
 .form-section ::-webkit-input-placeholder {
