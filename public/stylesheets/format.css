@@ -64,6 +64,15 @@
   .column {
     width: 300px;
   }
+
+  /** INFORMATION FORM **/
+  #info-form {
+    width: 250px;
+    border-radius: 2px;
+  }
+
+  .form-header {
+  }
 }
 
 
