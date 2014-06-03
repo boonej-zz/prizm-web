@@ -1,0 +1,103 @@
+@media screen and (max-width:500px) {
+  .wrap {
+    width: 320px;
+  }
+
+  /** NAVIGATION BAR **/
+  .nav-top {
+    height: 64px;
+    border-bottom: 1px solid #d0d0d0;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  #logo {
+    height: 55px;
+    width: 84px;
+    background-size: 84px 20px; 
+  }
+
+  .body h2 {
+    font-size: 18px;
+    margin-top: 36px;
+  }
+
+  #sign-up {
+    vertical-align: middle;
+    text-align: center;
+    line-height: 44px;
+    font-size: 16px;
+    height: 44px;
+    width: 300px;
+    margin: 40px 0px;  
+    padding: 0;
+  }
+
+  #body-home {
+    background-size: 258px 411px;
+    background-position: 30px 340px;
+  }
+
+  .overlay {
+    top: 600px;
+    height: 65px;
+  }
+  
+  .overlay p {
+    width: 300px;
+    height: 65px;
+    font-size: 12px;
+  }
+
+  .legal {
+    top: 665px;
+    font-size: 10px;
+  }
+
+  .legal-span {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width:500px) {
+  .mid-block {
+    height: 400px;
+    padding-top: 100px;
+  }
+
+  .wrap {
+    width: 1200px;
+  }
+
+  .column {
+    width: 480px;
+  }
+
+  .image {
+    width: 300px;
+    height: 700px;
+  }
+
+  .top-500 {
+    margin-top: 450px;
+  }
+  
+  /** NAVIGATION BAR **/
+
+  .nav-top {
+    height: 75px;
+    width: 1200px;
+    border-bottom: 1px #666 solid;
+  }
+
+  .menu {
+    height: 60px;
+  }
+
+  .menu-button {
+    height: 70px;
+    margin-top: 45px;
+  }
+}
