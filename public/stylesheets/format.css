@@ -146,7 +146,7 @@
   }
 
   .form-section input {
-    height: 44px;
+    height: 40px;
     line-height: 18px;
     font-weight: normal;
     color: #666;
@@ -171,6 +171,7 @@
 
 
   input[type="radio"] {
+    -webkit-appearance: none;
     margin-top: 22px;
     background: url(/images/radio.png) no-repeat;
     width: 23px;
@@ -179,6 +180,7 @@
   }
 
   input[type="radio"]:checked {
+    -webkit-appearance: none;
     background: url(/images/radio-checked.png) no-repeat;
     background-size: 22px 20px;
   }
