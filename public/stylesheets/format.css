@@ -1,8 +1,6 @@
 @media screen and (max-width:500px) {
   body {
     font-size: 14px;
-    background-color: #EEF0F4;
-    letter-spacing: -0.5px;
   }
 
   .wrap {
@@ -25,11 +23,33 @@
   .nav-top {
     height: 64px;
     width: 300px;
-    border-bottom: 1px solid #d0d0d0;
   }
 
   .menu {
     display: none;
+    position: absolute;
+    top: 64px;
+    width: 300px;
+    height: auto;
+    background-color: #EEF0F4;
+  }
+
+  .menu-button {
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    background: #e4e5ea;
+    height: 44px;
+    margin-left: 0px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #d4daea;
+  }
+
+  .menu-button a {
+    display: block;
+    height: 30px;
+    padding-top: 14px;
   }
 
   #logo {

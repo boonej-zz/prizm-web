@@ -1,3 +1,5 @@
+var menuActive = false;
+
 var prizm = {
   signUp:   function(){
               $('#info-form').lightbox_me({
@@ -18,5 +20,14 @@ var prizm = {
                   $('#form-body').html(confirmText);
                 });
                 
-              } 
+              },
+  menuClicked: function(){
+                 if (!menuActive){
+                  menuActive = true;
+                  $('.menu').slideDown();
+                 } else {
+                   menuActive = false;
+                  $('.menu').slideUp();
+                 }
+               } 
 };
