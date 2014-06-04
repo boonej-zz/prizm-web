@@ -62,7 +62,7 @@ body {
 
 /** STANDARD ELEMENTS **/
 body {
-  font-family: 'proxima_nova_ltlight'; 
+  font-family: 'proxima_nova_ltlight', 'Futura', sans-serif; 
   font-size: 100%;
   color: #2443A1;
   margin: 0;
@@ -226,7 +226,7 @@ p.sign-up-desc {
   top: 655px;
   height: 80px;
   width: 100%;
-  background: #2443a2;
+  background: #2346b1;
   opacity: 0.75;
   margin: 0;
   padding: 0;

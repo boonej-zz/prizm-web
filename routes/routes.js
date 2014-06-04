@@ -5,6 +5,11 @@ var Record = mongoose.model('Record');
 var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
+var ejs = require('ejs');
+var fs = require('fs');
+var path = require('path');
+var mail = fs.readFileSync(path.join(__dirname + '/../lib/mail.ejs'), 'utf8');
+
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -27,19 +32,24 @@ router.post('/', function(req, res) {
   var data = req.body;
   var record = new Record(data);
   record.save();
+  var name = record.name.split(' ');
+  var first = name.length > 0?name[0]:'Friend';
+  var messageBody = ejs.render(mail, {first: first});
   mandrill(mandrillEndpointSend, {
       message: {
                   to: [{email: record.email}],
                   from_email: 'admin@prizmapp.com',
-                  subect: 'Test email from prizmapp.com',
-                  html: '<h1>This is a test to make sure mail works</h2>'
+                  subject: 'Thank you for your interest!',
+                  html: messageBody 
                }   
     }, function(err, response) {
       if (err) {
         console.log('MANDRILL ERROR RETURNED: ' + JSON.stringify(err));
       }
     }
-  ); 
+   ); 
+  
+ 
   res.send('success'); 
 });
 
