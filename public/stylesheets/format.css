@@ -81,8 +81,14 @@
   }
 
   #body-home {
+  }
+
+  #phone {
+    position: absolute;
+    top: 280px;
+    height: 411px;
+    width: 258px;
     background-size: 258px 411px;
-    background-position: 30px 340px;
   }
 
   .overlay {

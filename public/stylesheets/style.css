@@ -95,10 +95,10 @@ p.sign-up-desc {
 }
 
 #sign-up {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   letter-spacing: -1px;
-  padding: 5px 10px 5px 10px;
+  padding: 10px 20px 10px 20px;
   background-color: #3B58A5;
   border: 1px solid #3B58A5;
   color: #FFF;
@@ -171,11 +171,20 @@ p.sign-up-desc {
 }
 
 #body-home {
-  background: url('/images/phones.png') no-repeat;
-  background-position: 703px 140px;
-  background-size: 490px 782px;
-  min-height: 900px;
+    min-height: 900px;
   padding: 0;
+}
+
+#phone {
+  height: 782px;
+  width: 490px;
+  float: right;
+  clear: right;
+  margin-top: 60px;
+  margin-right: -20px;
+  background: url('/images/phones.png') no-repeat;
+  background-size: 490px 782px;
+
 }
 
 .legal {
@@ -218,7 +227,7 @@ p.sign-up-desc {
   height: 80px;
   width: 100%;
   background: #2443a2;
-  opacity: 0.8;
+  opacity: 0.75;
   margin: 0;
   padding: 0;
   left: 0;
