@@ -36,7 +36,7 @@ router.post('/', function(req, res) {
                }   
     }, function(err, response) {
       if (err) {
-        console.log('MANDRILL ERROR RETURNED: ' + JSON.stringify(error));
+        console.log('MANDRILL ERROR RETURNED: ' + JSON.stringify(err));
       }
     }
   ); 
