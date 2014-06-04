@@ -227,6 +227,12 @@
     top: 10px;
     margin: 20px auto;
   }
+
+  /** TERMS AND PRIVACY **/
+  #terms p, ul, h3, h3 {
+    width: 300px;
+  }
+
  
   
 }
