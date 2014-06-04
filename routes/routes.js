@@ -38,7 +38,7 @@ router.post('/', function(req, res) {
   mandrill(mandrillEndpointSend, {
       message: {
                   to: [{email: record.email}],
-                  from_email: 'admin@prizmapp.com',
+                  from_email: 'info@prizmapp.com',
                   subject: 'Thank you for your interest!',
                   html: messageBody 
                }   
