@@ -190,6 +190,43 @@
   #terms p, ul, h2, h3 {
     
   }
+
+  /** ABOUT PAGE **/
+  #about-block p {
+    width: 300px;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 0;
+  }
+
+  .about-left {
+    width: 300px;
+    padding: 40px 0 40px 0;
+  }
+  
+  #about-phone1, #about-phone2 {
+    height: 540px;
+    width: 300px;
+    position: relative;
+    top: 20px;
+    margin-left: 10px;
+    background-size: 300px 540px;
+  }
+  
+  #about-mission, #about-result {
+    float: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  } 
+
+  .top-500 {
+    margin-top: 20px;
+  }
+
+  .legal-block {
+    top: 10px;
+    margin: 20px auto;
+  }
  
   
 }
