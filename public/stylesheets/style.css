@@ -239,7 +239,6 @@ p.sign-up-desc {
   margin: auto;
   width: 545px; 
   background-color: #EEF0F4;
-  border: 2px solid #C0C0C0;
   border-radius: 5px;
 }
 
@@ -270,7 +269,7 @@ p.sign-up-desc {
 
 .form-section {
   margin: 0;
-  border-bottom: 1px solid #D4D4D4;
+  border-bottom: 1px solid #D4DAEA;
   height: 65px;
   width: 100%;
   padding: 0;
@@ -312,12 +311,34 @@ p.sign-up-desc {
   font-size: 20px;
   line-height: 25px;
   font-weight: normal;
-  color: #666;
+  color: #919498;
 
   background: #EEF0F4;
 }
 
-.form-section ::-webkit-input-placeholder {
+::-webkit-input-placeholder {
+  color: #919498;
+  font-size: 20px;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+:-moz-placeholder {
+  color: #919498;
+  font-size: 20px;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+::-moz-placeholder {
+  color: #919498;
+  font-size: 20px;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+:-ms-input-placeholder {
+  color: #919498;
   font-size: 20px;
   font-weight: normal;
   vertical-align: middle;
@@ -413,20 +434,21 @@ p.form-confirm-close {
   font-size: 28px;
 }
 
-#about-phone1 {
+#about-phone1, #about-phone2 {
   height: 900px;
   width: 500px;
-  background: url(/images/phone1.png) no-repeat;
-  position: absolute;
+  position: absolute; 
+  background-size: 500px 900px;
+}
+
+#about-phone1 {
+  background-image: url(/images/phone1.png);
   top: 150px;
   margin-left: 700px;
 }
 
 #about-phone2 {
-  height: 900px;
-  width: 500px;
-  background: url(/images/phone2.png) no-repeat;
-  position: absolute;
+  background-image: url(/images/phone2.png); 
   top: 970px;
   margin-left: 5px;
 
