@@ -13,6 +13,9 @@
 }
 
 /** GLOBAL STYLE MODIFIERS **/
+.underline {
+  text-decoration: underline;
+}
 
 body {
   background-color: #EEF0F4;
