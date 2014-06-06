@@ -13,7 +13,7 @@
 }
 
 /** GLOBAL STYLE MODIFIERS **/
-.underline {
+.underline:hover {
   text-decoration: underline;
 }
 
