@@ -161,8 +161,10 @@
     vertical-align: middle;
   }
 
-  .info-form #send {
+  #info-form #send {
     right: 70px;
+   
+
   }
 
 
@@ -211,6 +213,7 @@
     background-size: 14px 14px;
     background-repeat: no-repeat;
     margin: 0 10px 0 0;
+    padding: 0;
   }
 
   p.form-confirm-text {
@@ -246,7 +249,8 @@
     width: 300px;
     position: relative;
     top: 20px;
-    margin-left: 10px;
+    margin-left: 0px;
+    padding: 0;
     background-size: 300px 540px;
   }
   

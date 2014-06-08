@@ -1,4 +1,5 @@
 var menuActive = false;
+var baseURL = window.location.protocol + '//' + window.location.host;
 
 var prizm = {
   signUp:   function(){
@@ -29,5 +30,8 @@ var prizm = {
                    menuActive = false;
                   $('.menu').slideUp();
                  }
-               } 
+               }, 
+  goHome:     function(){
+                window.location = baseURL;
+              }
 };
