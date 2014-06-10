@@ -9,6 +9,9 @@ var ejs = require('ejs');
 var fs = require('fs');
 var path = require('path');
 var mail = fs.readFileSync(path.join(__dirname + '/../lib/mail.ejs'), 'utf8');
+var adminBody = fs.readFileSync(path.join(__dirname + 
+      '/../views/adminMail.ejs'), 'utf8'); 
+var adminEmail = 'info@prizmapp.com'
 
 function validateEmail(email) {
   if (email.length == 0) return false;
@@ -41,6 +44,7 @@ router.post('/', function(req, res) {
     var name = record.name.split(' ');
     var first = name.length > 0?name[0]:'Friend';
     var messageBody = ejs.render(mail, {first: first});
+    console.log(messageBody);
     mandrill(mandrillEndpointSend, {
       message: {
                   to: [{email: record.email}],
@@ -51,10 +55,26 @@ router.post('/', function(req, res) {
       }, function(err, response) {
         if (err) {
           console.log('MANDRILL ERROR RETURNED: ' + JSON.stringify(err));
+
+        }else {
+         var adminText = ejs.render(adminBody, {user: record});
+         mandrill(mandrillEndpointSend, {
+         message: {
+                  to: [{email: adminEmail}],
+                  from_email: 'info@prizmapp.com',
+                  subject: 'Prizm Private Beta Request',
+                  html: adminText
+               }
+         }, function(err, response) {
+            if (err) {
+              console.log('MANDRILL ERROR RETURNED: ' + JSON.stringify(err));
+          }
+    });
+
         }
       }
-    ); 
-  }
+    );
+     }
   res.send('success'); 
 });
 
