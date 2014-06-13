@@ -10,7 +10,7 @@ var prizm = {
                 var data = {
                   name: $('#name').val(),
                   age:  $('#age').val(),
-                  gender: $('#gender').val(),
+                  gender: $('input:radio[name=gender]:checked').val(),
                   cityState: $('#city-state').val(),
                   email: $('#email').val(),
                   mobile: $('#mobile').val()

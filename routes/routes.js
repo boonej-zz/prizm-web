@@ -11,7 +11,7 @@ var path = require('path');
 var mail = fs.readFileSync(path.join(__dirname + '/../lib/mail.ejs'), 'utf8');
 var adminBody = fs.readFileSync(path.join(__dirname + 
       '/../views/adminMail.ejs'), 'utf8'); 
-var adminEmail = 'info@prizmapp.com'
+var adminEmail = 'jb@moonshineinteractive.com'
 
 function validateEmail(email) {
   if (email.length == 0) return false;
@@ -52,7 +52,6 @@ router.post('/', function(req, res) {
     var name = record.name.split(' ');
     var first = name.length > 0?name[0]:'Friend';
     var messageBody = ejs.render(mail, {first: first});
-    console.log(messageBody);
     mandrill(mandrillEndpointSend, {
       message: {
                   to: [{email: record.email}],
