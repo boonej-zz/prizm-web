@@ -1,5 +1,4 @@
 var express = require('express');
-// Another test
 var db = require('./db/db');
 var path = require('path');
 var favicon = require('static-favicon');
