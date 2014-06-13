@@ -11,7 +11,7 @@ var path = require('path');
 var mail = fs.readFileSync(path.join(__dirname + '/../lib/mail.ejs'), 'utf8');
 var adminBody = fs.readFileSync(path.join(__dirname + 
       '/../views/adminMail.ejs'), 'utf8'); 
-var adminEmail = 'jb@moonshineinteractive.com'
+var adminEmail = 'info@prizmapp.com';
 
 function validateEmail(email) {
   if (email.length == 0) return false;
