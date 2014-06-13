@@ -36,6 +36,14 @@ router.get('/privacy', function(req, res){
   res.render('privacy', { title: 'Privacy', selected:'none'});
 });
 
+router.get('/partner', function(req, res){
+  res.render('partner', { title: 'Partners', selected: 'none'});
+});
+
+router.get('/luminary', function(req, res){
+  res.render('luminary', { title: 'Luminaries', selected: 'none'});
+});
+
 router.post('/', function(req, res) {
   var data = req.body;
   var record = new Record(data);
