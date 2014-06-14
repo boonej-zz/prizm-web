@@ -485,3 +485,11 @@ p.form-confirm-close {
   top: 0px;
   margin-top: 40px;
 }
+
+ul.bullet {
+  font-size: 1em;  
+}
+
+ul.bullet li {
+  margin-bottom: 1em;
+}
