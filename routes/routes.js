@@ -44,6 +44,10 @@ router.get('/luminary', function(req, res){
   res.render('luminary', { title: 'Luminaries', selected: 'none'});
 });
 
+router.get('/download', function(req, res){
+  res.render('download', {title: 'Download', selected: 'none'}); 
+});
+
 router.post('/', function(req, res) {
   var data = req.body;
   var record = new Record(data);
