@@ -11,7 +11,8 @@ var recordSchema = new mongoose.Schema({
   mobile:     String
 });
 
-var postSchema = new _mongoose.Schema({
+var postSchema = new mongoose.Schema({
+  _id                 : {type: mongoose.Schema.Types.ObjectId, required:true},
   text                : {type: String, default: null},
   category            : {type: String, required:true},
   create_date         : {type: Date, default:null, index: true},
@@ -21,14 +22,14 @@ var postSchema = new _mongoose.Schema({
   location_name       : {type: String, default: null},
   location_longitude  : {type: Number, default: 0},
   location_latitude   : {type: Number, default: 0},
-  creator             : {type: _mongoose.Schema.Types.ObjectId, ref: 'User'},
+  creator             : {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   status              : {type: String, default: 'active'},
   file_path           : {type: String, default: ''},
   likes_count         : {type: Number, default: 0},
   comments_count      : {type: Number, default: 0},
   tags_count          : {type: Number, default: 0},
   tags                : {type: Array, default: []},
-  comments            : [commentSchema],
+  // comments            : [commentSchema],
   likes               : {type: Array, default: []},
   hash_tags           : [String],
   hash_tags_count     : {type: Number, default: 0},
@@ -45,85 +46,66 @@ var postSchema = new _mongoose.Schema({
   accolade_target     : {type: String, default: null}
 }, { versionKey: false});
 
-postSchema.statics.canResolve = function(){
-  return [
-    {creator: {identifier: '_id', model: 'User'}},
-    {comments: {identifier: 'creator', model: 'User'}},
-    {likes: {identifier: '_id', model: 'User'}},
-    {origin_post_id: {identifier: '_id', model: 'Post'}},
-    {tags: {identifier: '_id', model: 'User'}}
-  ];
-};
-
-postSchema.statics.selectFields = function(type){
-  if(type === 'short'){
-    return ['_id','text','category','create_date','file_path',
-            'location_name','location_longitude','location_latitude',
-            'creator','likes_count','comments_count','scope',
-            'hash_tags','hash_tags_count', 'tags', 'tags_count',
-            'scope_modify_date', 'accolade_target', 'external_provider',
-            'is_flagged', 'flagged_count', 'subtype'];
-  }else{
-    return ['_id','text','category','create_date','file_path',
-            'location_name','location_longitude','location_latitude',
-            'creator','likes_count','comments_count','scope',
-            'status','hash_tags','hash_tags_count', 'tags', 'tags_count',
-            'is_repost','origin_post_id','modify_date', 'delete_date',
-            'scope_modify_date', 'accolade_target', 'external_provider',
-            'is_flagged', 'flagged_count', 'subtype'];
-  }
-};
-
-postSchema.methods.format = function(type, add_fields){
-  var format;
-  if(!type) type = 'basic';
-
-  format = {
-    _id:                  this._id,
-    text:                 this.text,
-    category:             this.category,
-    create_date:          this.create_date,
-    file_path:            this.file_path,
-    location_name:        this.location_name,
-    location_longitude:   this.location_longitude,
-    location_latitude:    this.location_latitude,
-    creator:              this.creator,
-    accolade_target:      this.accolade_target,
-    likes_count:          this.likes_count,
-    comments_count:       this.comments_count,
-    hash_tags_count:      this.hash_tags_count,
-    hash_tags:            this.hash_tags,
-    tags:                 this.tags,
-    tags_count:           this.tags_count,
-    scope:                this.scope,
-    scope_modify_date:    this.scope_modify_date,
-    is_flagged:           this.is_flagged,
-    flagged_count:        this.flagged_count,
-    subtype:              this.subtype
-  };
-
-  if(type === 'basic'){
-    format.status         = this.status;
-    format.is_repost      = this.is_repost;
-    format.origin_post_id = this.origin_post_id;
-    format.modify_date    = this.modify_date;
-    format.delete_date    = this.delete_date;
-  }
-
-  if(add_fields){
-    if(typeof add_fields === 'string') format[add_fields] = this[add_fields];
-    if(Array.isArray(add_fields) && add_fields.length > 0){
-      for(var idx in add_fields){
-        format[add_fields[idx]] = this[add_fields[idx]];
-      }
-    }
-  }
-  return format;
-};
-
+var userSchema = new mongoose.Schema({
+  name                  : {type: String, default: ''},
+  first_name            : {type: String, required: true},
+  last_name             : {type: String, default: ''},
+  email                 : {type: String, required: true,
+                          index: {unique: true}, lowercase: true},
+  info                  : {type: String, default: null},
+  website               : {type: String, default: null},
+  ethnicity             : {type: String, default: null},
+  religion              : {type: String, default: null},
+  phone_number          : {type: String, default: null},
+  affiliations          : {type: Array, default:[]},
+  password              : {type: String, default: null},
+  provider              : {type: String, default: null},
+  provider_id           : {type: String, default: null},
+  provider_token        : {type: String, default: null},
+  provider_token_secret : {type: String, default: null},
+  last_provider_auth    : {type: Date, default: null},
+  gender                : {type: String, default: null},
+  birthday              : {type: String, default: null},
+  address               : {type: String, default: null},
+  city                  : {type: String, default: null},
+  country               : {type: String, default: null},
+  state                 : {type: String, default: null},
+  zip_postal            : {type: String, default: null},
+  cover_photo_url       : {type: String, default: ''},
+  profile_photo_url     : {type: String, default: ''},
+  create_date           : {type: Date, default: null},
+  modify_date           : {type: Date, default: null},
+  delete_date           : {type: Date, default: null},
+  last_login_date       : {type: Date, default: null},
+  posts_count           : {type: Number, default: 0},
+  following             : {type: Array, default: []},
+  followers             : {type: Array, default: []},
+  following_count       : {type: Number, default: 0},
+  followers_count       : {type: Number, default: 0},
+  trust_count           : {type: Number, default: 0},
+  type                  : {type: String, default: 'user'},
+  date_founded          : {type: Date, default: null},
+  mascot                : {type: String, default: null},
+  enrollment            : {type: Number, default: null},
+  instagram_token       : {type: String, default: null},
+  instagram_min_id      : {type: String, default: null},
+  twitter_token         : {type: String, default: null},
+  twitter_min_id        : {type: String, default: null},
+  tumblr_token          : {type: String, default: null},
+  tumblr_min_id         : {type: String, default: null},
+  tumblr_token_secret   : {type: String, default: null},
+  review_key            : {type: String, default: null},
+  reset_key             : {type: String, default: null},
+  reset_date            : {type: String, default: null},
+  password_reset        : {type: String, default: null},
+  device_token          : {type: String, default: null},
+  subtype               : {type: String, default: null},
+  badge_count           : {type: Number, default: 0},
+  active                : {type: Boolean, default: true},
+},{ versionKey          : false });
 
 mongoose.model('Record', recordSchema);
 mongoose.model('Post', postSchema);
-
+mongoose.model('User', userSchema);
 
 mongoose.connect(mongoURI);

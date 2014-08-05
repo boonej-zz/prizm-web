@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Record = mongoose.model('Record');
+var Post = mongoose.model('Post');
 var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
@@ -12,6 +13,7 @@ var mail = fs.readFileSync(path.join(__dirname + '/../lib/mail.ejs'), 'utf8');
 var adminBody = fs.readFileSync(path.join(__dirname + 
       '/../views/adminMail.ejs'), 'utf8'); 
 var adminEmail = 'info@prizmapp.com';
+var ObjectId = require('mongoose').Types.ObjectId;
 
 function validateEmail(email) {
   if (email.length == 0) return false;
@@ -89,8 +91,17 @@ router.post('/', function(req, res) {
   res.send('success'); 
 });
 
-router.get('/post', function(req, res){
-  res.send('working');
+router.get('/posts/:id', function(req, res){
+  var id = req.params.id;
+  Post.findOne({_id: new ObjectId(id)})
+  .populate('creator')
+  .exec(function(err, post){
+    if (err) {
+      res.send(err);
+    }
+    console.log(post.creator);
+    res.render('post', {post: post});
+  });
 });
 
 module.exports = router;
