@@ -89,4 +89,8 @@ router.post('/', function(req, res) {
   res.send('success'); 
 });
 
+router.get('/post', function(req, res){
+  res.send('working');
+});
+
 module.exports = router;
