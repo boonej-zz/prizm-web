@@ -502,8 +502,8 @@ ul.bullet li {
 }
 
 #lum-section-1 {
-  padding-top: 150px;
-  height: 814px;
+  padding-top: 250px;
+  height: 714px;
 }
 
 #lum-section-2 {
@@ -534,7 +534,7 @@ ul.bullet li {
   background: url('/images/lphone1.png') no-repeat;
   background-size: 523px 964px;
   position: absolute;
-  top: 440px;
+  top: 540px;
   margin-left: 760px;
 }
 
