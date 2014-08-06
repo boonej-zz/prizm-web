@@ -5,17 +5,26 @@
     <%- include include.ejs %>
   </head>
   <body>
-      <div class="wrap" id="terms">
+      <div class="wrap" id="luminary">
         <%- include navbar.ejs %>
-        <p>"Young people need models, not critics."<br />
-          <em>~ Coach John Wooden, UCLA</em>
-        </p>
-        <p>We are looking for role models in all fields to engage with students on Prizm.</p>
-        <%- include whatisprizm.ejs %>
+        <div class="bordered text-box">
+          <p class="quote">"Young people need models, not critics."<br />
+            <em>- Coach John Wooden, UCLA</em>
+          </p>
+          <p class="tagline">We are looking for role models in all fields to engage with students on Prizm.</p>
+        </div>
+        <div class="section" id="lum-section-1">
+          <%- include whatisprizm.ejs %>
+        </div> 
+        
+          <div id="luminary-phone1" class="right"></div>
+          <div id="luminary-phone2"></div>
+        <div class="section" id="lum-section-2">
         <h2>Why Prizm?</h2>
-        <p>We began this project because we saw firsthand how the world has changed with the adoption of mobile devices. The way people— especially teens— communicate and relate to each other has fundamentally changed in the past 10 years, and large organizations from colleges and universities to big brands are still working to capitalize on this shift.</p>
-        <p>We recognize that today’s teens are looking to express themselves, have their voices heard, and be inspired while looking for help turning aspirations into actionable goals. Luminaries on the Prizm platform will provide students with both inspiration and a concrete example of what hard work can bring. Teens want to know what it takes to get where they want to be. Luminaries on Prizm can help connect the dots.</p>
-        <p>To join our private beta, or if you’d like more information, please contact us at <a href="mailto:info@prizmapp.com">info@prizmapp.com</p>
+          <p class="text-box">We began this project because we saw firsthand how the world has changed with the adoption of mobile devices. The way people— especially teens— communicate and relate to each other has fundamentally changed in the past 10 years, and large organizations from colleges and universities to big brands are still working to capitalize on this shift.</p>
+          <p class="text-box">We recognize that today’s teens are looking to express themselves, have their voices heard, and be inspired while looking for help turning aspirations into actionable goals. Luminaries on the Prizm platform will provide students with both inspiration and a concrete example of what hard work can bring. Teens want to know what it takes to get where they want to be. Luminaries on Prizm can help connect the dots.</p>
+      </div>
+        <p class="full bordered">If you’d like more information, please contact us at <a href="mailto:info@prizmapp.com">info@prizmapp.com</p>
          <%- include legal.ejs %>
       </div>
   </body>
