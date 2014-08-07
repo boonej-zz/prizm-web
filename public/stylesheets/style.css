@@ -573,3 +573,8 @@ ul.bullet li {
   margin: 30px auto;
   top: 0px;
 }
+
+.full a:hover {
+  text-decoration: underline;
+  z-index: 1000;
+}
