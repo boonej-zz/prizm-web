@@ -274,7 +274,58 @@
     width: 300px;
   }
 
- 
+  /** LUMINARY PAGE **/
+  
+  #luminary .text-box {
+    width: 300px;
+    font-size: 0.9em;
+  }
+
+  .bordered {
+    margin: 40px 0px;
+    width: 300px;
+  }
+
+  .quote {
+    font-size: 1em;
+  }  
+
+  .tagline {
+    font-size: 0.9em;
+    width: 270px;
+  }
+
+  #lum-section-1, #lum-section-2 {
+    top: 0px;
+    height: auto;
+    margin-left: 0px;
+    width: 300px;
+  }
+  
+  #luminary-phone1, #luminary-phone2 {
+    height: 514px;
+    width: 280px;
+  }
+
+  #luminary-phone1, #luminary-phone2 {
+    position: relative;
+    top: 20px;
+    margin-left: 15px;
+    background-size: 280px 514px;
+  }
+
+  .full {
+    width: 300px;
+    font-size: 0.67em;
+  }
+
+  .section {
+    width: 300px;
+  }
+  
+ #luminary h2 {
+    width: 300px;
+  } 
   
 }
 
