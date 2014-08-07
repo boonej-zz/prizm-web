@@ -499,8 +499,9 @@ ul.bullet li {
 .section {
   margin 155px 0px;
   width: 1200px;
-  height: 964px;
+  height: auto;
   vertical-align: middle;
+  z-index: -1000;
 }
 
 #lum-section-1 {
