@@ -6,7 +6,7 @@
     <meta property="twitter:site" content="@beprizmatic" />
     <meta property="twitter:title" content="<%= post.text %>" />
     <meta property="twitter:description" content="<%= post.hashtags | '' %>" />
-    <meta property="twitter:image" content="http<%= post.file_path.substr(5) %>" />
+    <meta property="twitter:image" content="http://<%= post.file_path.substr(7) %>" />
     <meta property="twitter:url" content="http://prizmapp.com/posts/<%= post._id %>"
   </head>
   <body>
