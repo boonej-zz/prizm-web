@@ -7,13 +7,13 @@
     <meta property="twitter:site" content="@beprizmatic" />
     <meta property="twitter:title" content="<%= post.text %>" />
     <meta property="twitter:description" content="<%= post.hashtags | '' %>" />
-    <meta property="twitter:image" content="http://<%= post.file_path.substr(7) %>" />
+    <meta property="twitter:image" content="https://<%= post.file_path.substr(7) %>" />
     <meta property="twitter:url" content="http://prizmapp.com/posts/<%= post._id %>" />
     <meta name="og:title" content="<%= post.text %>" />
     <meta name="og:description" content="Posted via Prizm" />
     <meta name="og:url" content="http://prizmapp.com/posts/<%= post._id %>" />
     <meta name="og:site_name" content="Prizmapp" />
-    <meta name="og:image" content="http://<%= post.file_path.substr(7) %>" />
+    <meta name="og:image" content="https://<%= post.file_path.substr(7) %>" />
     <meta name="og:image:width" content="640" data-dynamic="true" />
     <meta name="og:image:height" content="640" data-dynamic="true" />
     <meta name="og:type" content="website" />
