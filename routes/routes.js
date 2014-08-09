@@ -47,8 +47,9 @@ router.get('/luminary', function(req, res){
 });
 
 router.get('/download', function(req, res){
-  res.redirect('https://itunes.apple.com/us/app/prizm-app/id903458597?ls=1&mt=8');
+  res.render('download', { title: 'Download', selected: 'none'});
 });
+
 
 
 router.post('/', function(req, res) {
