@@ -661,7 +661,7 @@ ul.bullet li {
   margin: 0 auto;
 }
 
-.card-wrap > #nav-top {
+.card-wrap > .nav-top {
   width: 890px;
 } 
 
