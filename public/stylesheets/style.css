@@ -1,4 +1,5 @@
-  font-family: 'proxima_nova_ltlight';
+@font-face { 
+ font-family: 'proxima_nova_ltlight';
   src: url('/fonts/ProximaNova-Light-webfont.eot');
   src: url('/fonts/ProximaNova-Light-webfont.eot?#iefix') 
           format('embedded-opentype'),
@@ -67,7 +68,7 @@ body {
 
 /** STANDARD ELEMENTS **/
 body {
-  font-family: 'proxima_nova_ltlight', 'Futura', sans-serif; 
+  font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
   font-size: 100%;
   color: #2443A1;
   margin: 0;
@@ -589,7 +590,7 @@ ul.bullet li {
 #card {
   width: 378px;
   margin: 156px auto;
-  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  /**font-family: 'Helvetica Neue', 'Helvetica', sans-serif;**/
   font-weight: 200;
   letter-spacing: 1px;
 }
@@ -607,7 +608,7 @@ ul.bullet li {
 #card-header > p {
   color: rgba(255, 255, 255, 0.6);
   float: left;
-  margin-top: 15px;
+  margin-top: 13px;
   line-height: 1.3em;
 }
 
@@ -617,7 +618,7 @@ ul.bullet li {
   background-size: 40px 40px;
   border-radius: 20px;
   float: left;
-  margin: 8px 8px;
+  margin: 6px 8px;
   border: 1px solid #8989a3;
 }
 
