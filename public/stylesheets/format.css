@@ -327,6 +327,34 @@
     width: 300px;
   } 
   
+  .card-wrap {
+    width: 300px;
+  }
+
+  .card-wrap > #nav-top {
+    width: 300px;
+  }
+ 
+ #card, #card-header, #post-footer, #download-text, #post-footer, #tags {
+  width: 280px; 
+  }
+
+  #tags {
+    margin-top: -8px;
+  }
+
+  #post-footer {
+    top: 258px;
+  }
+
+  #post-image-area {
+    height: 280px;
+    width: 280px;
+    background-size: 280px 280px;
+  }
+  
 }
 
-
+#post-card #sign-up {
+  width: 135px;
+}
