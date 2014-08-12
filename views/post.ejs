@@ -5,8 +5,8 @@
     <%- include include.ejs %>
     <meta property="twitter:card" content="photo" />
     <meta property="twitter:site" content="@beprizmatic" />
-    <meta property="twitter:title" content="<%= post.text %>" />
-    <meta property="twitter:description" content="<%= post.hashtags | '' %>" />
+    <meta property="twitter:title" content="<%= post.creator.name %>" />
+    <meta property="twitter:description" content="<%= post.hash_tags | '' %>" />
     <meta property="twitter:image" content="https://<%= post.file_path.substr(7) %>" />
     <meta property="twitter:url" content="http://prizmapp.com/posts/<%= post._id %>" />
     <meta property="twitter:app:id:iphone" content="903458597" />
