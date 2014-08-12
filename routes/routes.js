@@ -134,9 +134,30 @@ router.get('/posts/:id', function(req, res){
     }
     moment.relativeTimeThreshold('d', 6);
     console.log(moment.relativeTimeThreshold('d'));
+    var now = moment();
     var create = moment(post.create_date);
-    var diff = create.fromNow(true);
-    res.render('post', {post: post, tags: tags, ago: diff});
+    var diff = now.diff(create);
+    diff = diff/1000;
+    console.log(diff);
+    var string = '';
+    if (diff < 60) {
+      string = 'now';
+    } if (diff < 3600) {
+      var mins = Math.floor(diff / 60);
+      string = mins + 'm';
+    } else if (diff < 60 * 60 * 24) {
+      var hours = Math.floor(diff/(60*60));
+      string = hours + 'h';
+    } else {
+      var days = Math.floor(diff/(60*60*24));
+      if (days < 7) {
+        string = days + 'd';
+      } else {
+        var weeks = Math.floor(days/7);
+        string = weeks + 'w';
+      }
+    }
+    res.render('post', {post: post, tags: tags, ago: string});
   });
 });
 

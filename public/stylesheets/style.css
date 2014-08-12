@@ -583,7 +583,8 @@ ul.bullet li {
 
 #card {
   width: 378px;
-  margin: 0 auto;
+  margin: 156px auto;
+  font-family: 'HelveticaNeue', 'Helvetica', sans-serif;
 }
 
 #card img {
@@ -599,7 +600,8 @@ ul.bullet li {
 #card-header > p {
   color: rgba(255, 255, 255, 0.6);
   float: left;
-  margin-top: 5px;
+  margin-top: 15px;
+  line-height: 1.3em;
 }
 
 #card-profile-image {
@@ -642,10 +644,34 @@ ul.bullet li {
   display: inline-block;
 }
 
+#time {
+  font-size: 14px;
+}
+
 #tags {
   float: left;
   display: inline-block;
   width: 378px;
-  margin-top: -6px;
+  margin-top: -13px;
   text-align: center;
+}
+
+.card-wrap {
+  width: 890px;
+  margin: 0 auto;
+}
+
+.card-wrap > #nav-top {
+  width: 890px;
+} 
+
+#download-text {
+  width: 500px;
+  margin: 0 auto;
+  font-size: 20px;
+  text-align: center;
+}
+
+#post-card #sign-up {
+  margin: 20px auto;
 }
