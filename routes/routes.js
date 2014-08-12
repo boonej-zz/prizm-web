@@ -122,8 +122,7 @@ router.get('/posts/:id', function(req, res){
   .exec(function(err, post){
     if (err) {
       res.send(err);
-    }
-    console.log(post.creator);
+    } else {
     var tags = '';
     for (var i = 0; i != post.hash_tags.length; ++i ) {
       if (i < 3) {
@@ -132,13 +131,11 @@ router.get('/posts/:id', function(req, res){
         tags = tags + '...';
       }
     }
-    moment.relativeTimeThreshold('d', 6);
-    console.log(moment.relativeTimeThreshold('d'));
     var now = moment();
     var create = moment(post.create_date);
     var diff = now.diff(create);
     diff = diff/1000;
-    console.log(diff);
+    console.log(post.external_provider);
     var string = '';
     if (diff < 60) {
       string = 'now';
@@ -157,7 +154,9 @@ router.get('/posts/:id', function(req, res){
         string = weeks + 'w';
       }
     }
-    res.render('post', {post: post, tags: tags, ago: string});
+    res.render('post', {post: post, tags: tags, ago: string, category: post.category
+    
+    });}
   });
 });
 

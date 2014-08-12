@@ -31,6 +31,11 @@
         <p><%= post.creator.name %><br />
         <span id="clock-image"></span> <span id="time"><%= ago %></span>
         </p>
+        <div id="card-header-right">
+          <div id="category-icon" style="background-image: url('/images/<%= category %>.png')"></div>
+          <% if (post.external_provider) { %><p>Post via <%= post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1) %></p>
+        <% } %>
+        </div>
       </div><!-- end card-header -->
       <div id="post-image-area" 
         style="background-image:url('<%= post.file_path %>')">

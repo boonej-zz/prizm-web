@@ -584,7 +584,9 @@ ul.bullet li {
 #card {
   width: 378px;
   margin: 156px auto;
-  font-family: 'HelveticaNeue', 'Helvetica', sans-serif;
+  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: 200;
+  letter-spacing: 1px;
 }
 
 #card img {
@@ -611,6 +613,7 @@ ul.bullet li {
   border-radius: 20px;
   float: left;
   margin: 8px 8px;
+  border: 1px solid #8989a3;
 }
 
 #post-image-area {
@@ -674,4 +677,27 @@ ul.bullet li {
 
 #post-card #sign-up {
   margin: 20px auto;
+}
+
+#card-header-right {
+  float: right;
+  margin-right: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#card-header-right p {
+  float: right;
+  margin-top: 3px;
+  clear: right;
+  font-weight: 100;
+}
+
+#category-icon {
+  width: 22px;
+  height: 22px;
+  background-size: 22px 22px;
+  float: right;
+  clear: none;
+  margin-top: 10px;
 }
