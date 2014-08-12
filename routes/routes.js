@@ -14,6 +14,28 @@ var adminBody = fs.readFileSync(path.join(__dirname +
       '/../views/adminMail.ejs'), 'utf8'); 
 var adminEmail = 'info@prizmapp.com';
 var ObjectId = require('mongoose').Types.ObjectId;
+var moment = require('moment');
+moment.relativeTimeThreshold('d', 6);
+moment.relativeTimeThreshold('M', 52);
+
+moment.locale('en', {
+  relativeTime: {
+    past: "%s",
+    s:  "%ds",
+    m:  "%dm",
+    mm: "%dm",
+    h:  "%dh",
+    hh: "%dh",
+    d:  "%dd",
+    dd: "%dd",
+    M:  "4w",
+    MM: function(number, withoutSuffix, key, isFuture){
+      return number*4 + 'w';
+    },
+    y:  "%dy",
+    yy: "%dy"
+                } 
+});
 
 function validateEmail(email) {
   if (email.length == 0) return false;
@@ -102,7 +124,19 @@ router.get('/posts/:id', function(req, res){
       res.send(err);
     }
     console.log(post.creator);
-    res.render('post', {post: post});
+    var tags = '';
+    for (var i = 0; i != post.hash_tags.length; ++i ) {
+      if (i < 3) {
+        tags = tags + '#' + post.hash_tags[i] + ' ';
+      } else if (i == 3) {
+        tags = tags + '...';
+      }
+    }
+    moment.relativeTimeThreshold('d', 6);
+    console.log(moment.relativeTimeThreshold('d'));
+    var create = moment(post.create_date);
+    var diff = create.fromNow(true);
+    res.render('post', {post: post, tags: tags, ago: diff});
   });
 });
 

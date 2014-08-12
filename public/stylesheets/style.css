@@ -1,5 +1,3 @@
-/** FONTS **/
-@font-face {
   font-family: 'proxima_nova_ltlight';
   src: url('/fonts/ProximaNova-Light-webfont.eot');
   src: url('/fonts/ProximaNova-Light-webfont.eot?#iefix') 
@@ -94,7 +92,7 @@ p.sign-up-desc {
   margin-top: 100px;
   margin-bottom: 30px;
   font-size: 22px;
-  width: 250px;
+  width: 340px;
 }
 
 #sign-up {
@@ -581,4 +579,73 @@ ul.bullet li {
 .full a:hover {
   text-decoration: underline;
   z-index: 1000;
+}
+
+#card {
+  width: 378px;
+  margin: 0 auto;
+}
+
+#card img {
+  width: 378px;
+}
+
+#card-header {
+  width: 378px;
+  height: 56px;
+  background: url('/images/card-header.png') no-repeat;
+}
+
+#card-header > p {
+  color: rgba(255, 255, 255, 0.6);
+  float: left;
+  margin-top: 5px;
+}
+
+#card-profile-image {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+  border-radius: 20px;
+  float: left;
+  margin: 8px 8px;
+}
+
+#post-image-area {
+  height: 378px;
+  width: 378px;
+  background-size: 378px 378px;
+}
+
+#post-footer {
+  position: relative;
+  height: 22px;
+  width: 378px;
+  top: 356px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 2px;
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+#clock-image {
+  width: 16px;
+  height: 15px;
+  background: url('/images/clock.png');
+  display: inline-block;
+}
+
+#tags {
+  float: left;
+  display: inline-block;
+  width: 378px;
+  margin-top: -6px;
+  text-align: center;
 }

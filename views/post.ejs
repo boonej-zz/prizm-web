@@ -20,8 +20,20 @@
     <meta name="og:type" content="website" />
   </head>
   <body>
-    <a href="prizmapp://open?post_id=<%= post._id %>">
-      <img src="<%= post.file_path %>" alt="no image" />
-    </a>
+    <div id="card">
+      <div id="card-header">
+        <div id="card-profile-image" 
+          style="background-image:url('<%= post.creator.profile_photo_url %>')">
+        </div>
+        <p><%= post.creator.name %><br />
+          <span id="clock-image"></span> <%= ago %>
+        </p>
+      </div><!-- end card-header -->
+      <div id="post-image-area" 
+        style="background-image:url('<%= post.file_path %>')">
+      
+        <div id="post-footer"><span id="tags"><%= tags %></span></div><!-- end post footer -->
+      </div><!-- end post-image-area -->
+  </div>
   </body>
 </html>
