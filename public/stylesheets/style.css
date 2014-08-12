@@ -10,6 +10,10 @@
   font-style: normal;
 }
 
+h2 {
+  font-weight: normal;
+}
+
 /** GLOBAL STYLE MODIFIERS **/
 .underline:hover {
   text-decoration: underline;
@@ -171,6 +175,7 @@ p.sign-up-desc {
 /** BODY ELEMENTS **/
 
 .body > h2 {
+  font-weight: normal;
   font-size: 38px;
   margin-top: 100px;
   width: 550px;
