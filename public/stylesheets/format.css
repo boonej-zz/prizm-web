@@ -334,7 +334,10 @@
   .card-wrap > .nav-top {
     width: 300px;
   }
- 
+  
+ #card {
+   margin: 45px auto;
+  } 
  #card, #card-header, #post-footer, #download-text, #post-footer, #tags {
   width: 280px; 
   }
