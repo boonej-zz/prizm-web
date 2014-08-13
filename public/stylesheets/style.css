@@ -11,9 +11,6 @@
   font-style: normal;
 }
 
-h2 {
-  font-weight: normal;
-}
 
 /** GLOBAL STYLE MODIFIERS **/
 .underline:hover {
@@ -528,7 +525,11 @@ ul.bullet li {
 
 #luminary .text-box {
   width: 560px;
-  font-size: 1.2em;
+  font-size: 1.25em;
+}
+
+#luminary h2 {
+  font-size: 1.63em;
 }
 
 .bordered {
