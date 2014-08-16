@@ -1,3 +1,5 @@
+var serial = require('serializer');
+var utils = require('../utils');
 var mongoURI = process.env.MONGOHQ_URL || 'mongodb://localhost/prizm';
 
 var mongoose = require('mongoose');
@@ -103,6 +105,24 @@ var userSchema = new mongoose.Schema({
   badge_count           : {type: Number, default: 0},
   active                : {type: Boolean, default: true},
 },{ versionKey          : false });
+
+userSchema.methods.createUserSalt = function(){
+  return serial.stringify(this._id+this.create_date.valueOf()+this.email);
+};
+
+userSchema.methods.hashPassword = function(){
+  if(this.password && this.create_date && this.email){
+    var user_salt = this.createUserSalt();
+    console.log(user_salt);
+    var old_pass = this.password;
+    this.password = utils.prismEncrypt(this.password, user_salt);
+    if(this.password != old_pass && this.password.length > old_pass.length){
+      return true;
+    }
+  }
+  return false;
+};
+
 
 mongoose.model('Record', recordSchema);
 mongoose.model('Post', postSchema);

@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Record = mongoose.model('Record');
 var Post = mongoose.model('Post');
+var User = mongoose.model('User');
 var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
@@ -162,9 +163,36 @@ router.get('/posts/:id', function(req, res){
 
 router.get('/users/:id/password', function(req, res){
   var id = req.params.id;
-  var resetKey = req.params.reset_key;
-  res.send(resetKey);
-
+  var resetKey = req.query.reset_key;
+  User.findOne({_id: new ObjectId(id)}, function(err, user){
+    if (err) {
+      console.log(err);
+      res.render('reset', {success: false});
+    }
+    if (user) {
+      if (user.reset_key && user.reset_key == resetKey && user.password_reset) {
+        user.password = user.password_reset;
+        if (user.hashPassword()){
+          user.password_reset = null;
+          user.reset_key = null;
+          user.reset_date = null;
+          user.save(function(err,result){
+            if (err) {
+              res.render('reset', {success: false});
+            } else {
+              res.render('reset', {success: true});
+            }
+          });
+        } else {
+          res.render('reset', {success: false});
+        }
+      } else {
+        res.render('reset', {success: false});
+      } 
+    } else {
+      res.render('reset', {success: false});
+    }
+  }); 
 });
 
 module.exports = router;
