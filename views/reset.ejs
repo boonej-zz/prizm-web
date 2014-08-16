@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prizm >> Post</title>
+    <%- include include.ejs %>
+  </head>
+  <body>
+    <div class="wrap">
+    <%- include navbar_alt.ejs %>
+    <% if (success) { %>
+    <h2>Your password was reset successfully.</h2>
+    <% } else { %>
+    <h2>There was a problem reseting your password.</h2>
+    <% } %>
+    </div>
+  </body>
+</html>
