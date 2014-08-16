@@ -160,4 +160,11 @@ router.get('/posts/:id', function(req, res){
   });
 });
 
+router.get('/users/:id/password', function(req, res){
+  var id = req.params.id;
+  var resetKey = req.params.reset_key;
+  res.send(resetKey);
+
+});
+
 module.exports = router;
