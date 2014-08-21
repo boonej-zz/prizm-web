@@ -66,7 +66,7 @@ router.get('/partner', function(req, res){
 });
 
 router.get('/luminary', function(req, res){
-  res.render('luminary', { title: 'Luminaries', selected: 'none'});
+  res.render('luminary', { title: 'Luminary', selected: 'none'});
 });
 
 router.get('/download', function(req, res){
