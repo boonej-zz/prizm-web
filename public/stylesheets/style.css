@@ -99,13 +99,30 @@ p.sign-up-desc {
 
 #sign-up {
   top: 50px;
-  display: block;
+  display: inline-block;
   margin-top: 30px;
   font-size: 17px;
   font-weight: bold;
   letter-spacing: -1px;
   /** padding: 10px 20px 10px 20px; */
   background: url('/images/app_store.png') no-repeat;
+  width: 135px;
+  height: 40px;
+  color: #FFF;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+#android {
+  top: 50px;
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  /** padding: 10px 20px 10px 20px; */
+  background: url('/images/google.png') no-repeat;
+  background-size: 135px 40px;
   width: 135px;
   height: 40px;
   color: #FFF;
