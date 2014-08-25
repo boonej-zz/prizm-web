@@ -736,3 +736,45 @@ ul.bullet li {
   z-index: -1000;
   top: 75px;
 }
+
+.contact-button {
+  width: 32px;
+  height: 32px;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: inline-block;
+  background-repeat: none;
+}
+
+#twitter, #instagram, #facebook {
+  background-size: 32px 32px;
+}
+
+#twitter {
+  background-image: url('/images/twitter.png');
+}
+
+#facebook {
+  background-image: url('/images/facebook.png');
+}
+
+#instagram {
+  background-image: url('/images/instagram.png');
+}
+
+.social {
+  margin-top: 80px; 
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+#follow-prizm {
+  color: #8698C5;
+  font-size: 1.2em;
+  margin: 0 auto 20px auto;
+  display: block;
+  width: 160px;
+  height: 2em;
+  border-bottom: 1px solid #8698C5;
+}
