@@ -504,6 +504,10 @@ p.form-confirm-close {
   width: 600px;
 }
 
+#terms p.full {
+  width: 1200px;
+}
+
 #terms .legal-block {
   top: 0px;
   margin-top: 40px;
@@ -543,6 +547,7 @@ ul.bullet li {
 
 #luminary .text-box {
   width: 560px;
+  margin: 0 auto;
   font-size: 1.25em;
 }
 

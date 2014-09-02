@@ -235,6 +235,10 @@
     
   }
 
+  #terms p.full {
+    width: 310px;
+  } 
+
   /** ABOUT PAGE **/
   #about-block p {
     width: 300px;
