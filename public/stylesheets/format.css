@@ -359,6 +359,16 @@
     width: 280px;
     background-size: 280px 280px;
   }
+
+  #time-line {
+    position: absolute;
+    height: 100%;
+    width: 10px;
+    background-color: #f5f6f8;
+    margin-left: 75px;
+    z-index: -1000;
+    top: 65px;
+}
   
 }
 

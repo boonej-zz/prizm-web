@@ -701,7 +701,15 @@ ul.bullet li {
 }
 
 #post-card #sign-up {
-  margin: 20px auto;
+  width: 135px;
+  margin: 20px auto 5px auto;
+  display: block;
+}
+
+#post-card #android {
+  width: 135px;
+  margin: 0px auto 100px auto;
+  display: block;
 }
 
 #card-header-right {
