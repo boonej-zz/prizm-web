@@ -46,31 +46,31 @@ function validateEmail(email) {
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Prizm', selected:'home' });
+  res.render('index', { title: 'Prizm App', selected:'home' });
 });
 
 router.get('/about', function(req, res) {
-  res.render('about', { title: 'About', selected:'about' });
+  res.render('about', { title: 'Prizm App | About', selected:'about' });
 });
 
 router.get('/terms', function(req, res) {
-  res.render('terms', { title: 'Legal', selected:'none'});
+  res.render('terms', { title: 'Prizm App | Legal', selected:'none'});
 });
 
 router.get('/privacy', function(req, res){
-  res.render('privacy', { title: 'Privacy', selected:'none'});
+  res.render('privacy', { title: 'Prizm App | Privacy', selected:'none'});
 });
 
 router.get('/partner', function(req, res){
-  res.render('partner', { title: 'Partners', selected: 'none'});
+  res.render('partner', { title: 'Prizm App | Partners', selected: 'none'});
 });
 
 router.get('/luminary', function(req, res){
-  res.render('luminary', { title: 'Luminary', selected: 'none'});
+  res.render('luminary', { title: 'Prizm App | Luminary', selected: 'none'});
 });
 
 router.get('/download', function(req, res){
-  res.render('download', { title: 'Download', selected: 'none'});
+  res.render('download', { title: 'Prizm App | Download', selected: 'none'});
 });
 
 
