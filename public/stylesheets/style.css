@@ -633,6 +633,8 @@ ul.bullet li {
   float: left;
   margin-top: 13px;
   line-height: 1.3em;
+  position: absolute;
+  margin-left: 57px;
 }
 
 #card-profile-image {
