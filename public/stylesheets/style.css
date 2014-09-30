@@ -792,3 +792,8 @@ ul.bullet li {
   height: 2em;
   border-bottom: 1px solid #8698C5;
 }
+
+.mixpanelbadge {
+  display: block;
+  margin: 36px auto;
+}
