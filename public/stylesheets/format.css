@@ -33,6 +33,7 @@
     width: 300px;
     height: auto;
     background-color: #EEF0F4;
+    z-index: 1;
   }
 
   .menu-button {
