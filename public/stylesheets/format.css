@@ -33,6 +33,7 @@
     width: 300px;
     height: auto;
     background-color: #EEF0F4;
+    z-index: 1;
   }
 
   .menu-button {
@@ -66,7 +67,7 @@
   }
 
   p.sign-up-desc {
-    margin-top: 40px;
+    margin-top: 345px;
     margin-bottom: 5px;
     font-size: 16px;
     width: 300px;
@@ -79,6 +80,7 @@
     font-size: 13px;
     height: 44px;
     width: 300px;
+    margin-top: 10px;
   }
 
   #android {
@@ -90,14 +92,14 @@
 
   #phone {
     position: absolute;
-    top: 300px;
-    height: 411px;
+    top: 120px;
+    height: 325px;
     width: 258px;
     background-size: 258px 411px;
   }
 
   .overlay {
-    top: 620px;
+    top: 440px;
     height: 65px;
   }
   
@@ -108,7 +110,7 @@
   }
 
   .legal {
-    top: 685px;
+    top: 645px;
     font-size: 10px;
   }
 
