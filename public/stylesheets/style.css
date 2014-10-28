@@ -142,9 +142,9 @@ p.sign-up-desc {
 #logo {
   cursor: pointer;
   height: 75px;
-  width: 152px;
+  width: 176px;
   background: url('/images/logo.png') no-repeat;
-  background-size: 152px 64px;
+  background-size: 176px 60px;
   background-position: left bottom;
 }
 
