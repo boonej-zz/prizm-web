@@ -197,13 +197,21 @@ router.get('/users/:id/password', function(req, res){
 
 /* Insights */
 router.get('/insights', function (req, res) {
-  res.render('insightsform', { title: 'Prizm App | Insights', selected: 'none', insight: null });
+  User.find({type: {$in: ["institution","luminary"]}}, function (err, docs) {
+    if (err) {
+      console.log(err)
+    };
+    if (docs) {
+      users = docs
+    };
+    res.render('insightsform', {title: 'Prizm App | Insights', selected: 'none',
+                                                                  users: users });
+  });
 });
 
-router.post('/insights', function (req, res, user) {
+router.post('/insights', function (req, res) {
   var insight = new Insight({
-    /** Temp User ID for 'Creator' **/
-    creator: ObjectId("538e0050b52c424a73550764"), // user.id
+    creator: ObjectId(req.param('creator')),
     title: req.param('title'),
     text: req.param('text'),
     file_path: req.param('filePath'),
@@ -224,22 +232,28 @@ router.post('/insights', function (req, res, user) {
 });
 
 router.get('/insights/:id', function (req, res) {
-  // var users;
   User.find(function (err, docs) {
     if (err) {
       console.log(err);
-    }
+    };
     if (docs) {
       users = docs;
-    }
+    };
   });
   Insight.findOne({_id: ObjectId(req.params.id)}, function (err, insight) {
     if (err) {
       console.log(err);
     }
     if (insight) {
-      res.render('insights', { title: 'Prizm App | Insights', selected: 'none', insight: insight, users: users });
-    }
+      User.findOne({_id: ObjectId(insight.creator)} , function (err, creator) {
+        console.log("Creator : " + creator);
+        res.render('insights', { title: 'Prizm App | Insights',
+                                selected: 'none',
+                                insight: insight,
+                                creator: creator,
+                                users: users });
+      });
+    };
   });
 });
 

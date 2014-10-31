@@ -10,25 +10,33 @@
 			<div class="insight">
 				<form method="post">
 					<div class="insight create">
-						<div class="insight create title">
+						<div class="insight creator">
+							<span>Creator:</span>
+							<select name="creator">
+								<% for (var i = 0; i < users.length; i++) { %>
+									<option value="<%= users[i].id %>"><%= users[i].name %></option>
+								<% } %>
+							</select>
+						</div>
+						<div class="insight title">
 							<span>Title:</span><input type="text" name="title" id="insightTitle"/>
 						</div>
-						<div class="insight create text">
+						<div class="insight text">
 							<span>Text:</span><input type="text" name="text" id="insightText"/>
 						</div>
-						<div class="insight create file-path">
+						<div class="insight file-path">
 							<span>File Path:</span><input type="text" name="filePath" id="insight-file-path"/>
 						</div>
-						<div class="insight create link">
+						<div class="insight link">
 							<span>Link:</span><input type="url" name="linkURL" id="insight-link"/>
 						</div>
-						<div class="insight create link-title">
+						<div class="insight link-title">
 							<span>Link Title:</span><input type="text" name="linkTitle" id="insight-link-title"/>
 						</div>
-						<div class="insight create tags">
+						<div class="insight tags">
 							<span>Tags:</span><input type="text" name="tags" id="insight-tags"/>
 						</div>
-						<div class="insight create hash-tags">
+						<div class="insight hash-tags">
 							<span>Hash Tags:</span><input type="text" name="hashTags" id="insight-hash-tags/">
 						</div>
 					</div>
