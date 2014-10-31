@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<%- include include.ejs -%>
+	</head>
+	<body>
+		<div class="wrap" id="insight">
+			<%- include navbar.ejs -%>
+			<div class="insight">
+				<form method="post">
+					<div class="insight create">
+						<div class="insight create title">
+							<span>Title:</span><input type="text" name="title" id="insightTitle"/>
+						</div>
+						<div class="insight create text">
+							<span>Text:</span><input type="text" name="text" id="insightText"/>
+						</div>
+						<div class="insight create file-path">
+							<span>File Path:</span><input type="text" name="filePath" id="insight-file-path"/>
+						</div>
+						<div class="insight create link">
+							<span>Link:</span><input type="url" name="linkURL" id="insight-link"/>
+						</div>
+						<div class="insight create link-title">
+							<span>Link Title:</span><input type="text" name="linkTitle" id="insight-link-title"/>
+						</div>
+						<div class="insight create tags">
+							<span>Tags:</span><input type="text" name="tags" id="insight-tags"/>
+						</div>
+						<div class="insight create hash-tags">
+							<span>Hash Tags:</span><input type="text" name="hashTags" id="insight-hash-tags/">
+						</div>
+					</div>
+					<div id="submit-insight">
+						<input type="submit" value="send"/>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

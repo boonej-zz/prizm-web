@@ -106,6 +106,42 @@ var userSchema = new mongoose.Schema({
   active                : {type: Boolean, default: true},
 },{ versionKey          : false });
 
+var insightSchema = new mongoose.Schema({
+  creator         : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+  create_date     : {type: Date, default: null, required: false, index: true},
+  title           : {type: String, default: null, required: true},
+  text            : {type: String, default: null, required: true}, 
+  file_path       : {type: String, default: ''},
+  likes_count     : {type: Number, default: 0},
+  dislikes_count  : {type: Number, default: 0},
+  tags_count      : {type: Number, default: 0},
+  tags            : {type: Array, default: []},
+  hash_tags       : {type: [String], default: []},
+  hash_tags_count : {type: Number, default: 0},
+  link            : {type: String, default: null},
+  link_title      : {type: String, default: null}
+}); 
+
+var insightTargetSchema = new mongoose.Schema({
+  create_date     : {type: Date, default: null, required: false, index: true},
+  insight         : {type: mongoose.Schema.Types.ObjectId, ref: 'Insight', required: true},
+  creator         : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+  target          : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+  liked           : {type: Boolean, default: false},
+  disliked        : {type: Boolean, default: false},
+  file_path       : {type: String, default: null}
+});
+
+insightSchema.pre('save', function(next){
+  this.create_date = Date.now();
+  next();
+});
+
+// insightTargetSchema.pre('save', function(next){
+//   this.create_date = Date.now();
+//   next();
+// });
+
 userSchema.methods.createUserSalt = function(){
   return serial.stringify(this._id+this.create_date.valueOf()+this.email);
 };
@@ -127,5 +163,7 @@ userSchema.methods.hashPassword = function(){
 mongoose.model('Record', recordSchema);
 mongoose.model('Post', postSchema);
 mongoose.model('User', userSchema);
+mongoose.model('Insight', insightSchema);
+mongoose.model('InsightTarget', insightTargetSchema);
 
 mongoose.connect(mongoURI);

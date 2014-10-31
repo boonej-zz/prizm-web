@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var Record = mongoose.model('Record');
 var Post = mongoose.model('Post');
 var User = mongoose.model('User');
+var Insight = mongoose.model('Insight');
+var InsightTarget = mongoose.model('InsightTarget');
 var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
@@ -72,8 +74,6 @@ router.get('/luminary', function(req, res){
 router.get('/download', function(req, res){
   res.render('download', { title: 'Prizm App | Download', selected: 'none'});
 });
-
-
 
 router.post('/', function(req, res) {
   var data = req.body;
@@ -193,6 +193,81 @@ router.get('/users/:id/password', function(req, res){
       res.render('reset', {success: false});
     }
   }); 
+});
+
+/* Insights */
+router.get('/insights', function (req, res) {
+  res.render('insightsform', { title: 'Prizm App | Insights', selected: 'none', insight: null });
+});
+
+router.post('/insights', function (req, res, user) {
+  var insight = new Insight({
+    /** Temp User ID for 'Creator' **/
+    creator: ObjectId("538e0050b52c424a73550764"), // user.id
+    title: req.param('title'),
+    text: req.param('text'),
+    file_path: req.param('filePath'),
+    link: req.param('link'),
+    link_title: req.param('linkTitle'),
+    tags: req.param('tags"'),
+    hash_tags: req.param('hashTags')
+  });
+  insight.save( function (err, insight) {
+    if (err) {
+      console.log(err);
+    }
+    if (insight) {
+      console.log(insight);
+      res.redirect('/insights/' + insight.id);
+    }
+  });
+});
+
+router.get('/insights/:id', function (req, res) {
+  // var users;
+  User.find(function (err, docs) {
+    if (err) {
+      console.log(err);
+    }
+    if (docs) {
+      users = docs;
+    }
+  });
+  Insight.findOne({_id: ObjectId(req.params.id)}, function (err, insight) {
+    if (err) {
+      console.log(err);
+    }
+    if (insight) {
+      res.render('insights', { title: 'Prizm App | Insights', selected: 'none', insight: insight, users: users });
+    }
+  });
+});
+
+router.post('/insights/:id', function (req, res) {
+  var targetUserId = req.param('user');
+  var insightId = req.params.id;
+  Insight.findOne({_id: ObjectId(insightId)}, function (err, insight) {
+    if (err) {
+      console.log(err);
+    }
+    if (insight) {
+      var insightTarget = new InsightTarget({
+        insight: ObjectId(insight.id),
+        creator: ObjectId(insight.creator),
+        target: ObjectId(targetUserId)
+      });
+    };
+    insightTarget.save(function (err, insightTarget) {
+      if (err) {
+        console.log(err);
+      }
+      if (insightTarget) {
+        console.log(insightTarget);
+        console.log("InsightTarget Saved");
+        res.redirect('/insights/' + insight.id);
+      }
+    })
+  });
 });
 
 module.exports = router;

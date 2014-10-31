@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<%- include include.ejs -%>
+	</head>
+	<body>
+		<div class="wrap" id="insights">
+			<%- include navbar.ejs -%>
+			<div class="insight">
+				<p>Insight Title: <%= insight.title %></p>
+				<p>Insight Text: <%= insight.text %></p>
+				<p>Insight File Path: <%= insight.file_path %></p>
+				<p>Insight Title: <%= insight.title %></p>
+				<p>Insight Likes: <%= insight.likes_count %></p>
+				<p>Insight Dislikes: <%= insight.dislikes_count %></p>
+				<p>Insight Tags: <%= insight.tags_count %>
+					<% for (var i = 0; i < insight.tags.length; i++) { %>
+						<li><%= insight.tags[i] %></li>
+					<% } %>
+				</p>
+				<p>Insight Hashtags: <%= insight.hash_tags_count %>
+					<% for (var i = 0; i < insight.hash_tags.length; i++) { %>
+						<li><%= insight.hash_tags[i] %></li>
+					<% } %>
+				</p>
+				<p>Insight Link: <a href="<%= insight.link_title %>"><%= insight.link_title %></a></p>
+			</div>
+			<div class="insight action">
+				<form method="post">
+					<span>Select User to Target:</span>
+					<div id="insight-target">
+						<input type="submit" value="send"/>
+					</div>
+					<% for (var i = 0; i < users.length; i++) { %>
+						<p><input type="radio" name="user" value="<%= users[i].id %>"><%= users[i].name %></p>
+					<% } %>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
