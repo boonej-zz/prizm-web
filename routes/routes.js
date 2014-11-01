@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var Activity = mongoose.model('Activity');
 var Record = mongoose.model('Record');
 var Post = mongoose.model('Post');
 var User = mongoose.model('User');
@@ -232,7 +233,7 @@ router.post('/insights', function (req, res) {
 });
 
 router.get('/insights/:id', function (req, res) {
-  User.find(function (err, docs) {
+  User.find({type: 'user'}, function (err, docs) {
     if (err) {
       console.log(err);
     };
@@ -246,7 +247,7 @@ router.get('/insights/:id', function (req, res) {
     }
     if (insight) {
       User.findOne({_id: ObjectId(insight.creator)} , function (err, creator) {
-        console.log("Creator : " + creator);
+        console.log("Creator : " + creator.first_name);
         res.render('insights', { title: 'Prizm App | Insights',
                                 selected: 'none',
                                 insight: insight,
@@ -260,27 +261,44 @@ router.get('/insights/:id', function (req, res) {
 router.post('/insights/:id', function (req, res) {
   var targetUserId = req.param('user');
   var insightId = req.params.id;
+  console.log()
   Insight.findOne({_id: ObjectId(insightId)}, function (err, insight) {
     if (err) {
       console.log(err);
-    }
+    };
     if (insight) {
       var insightTarget = new InsightTarget({
         insight: ObjectId(insight.id),
         creator: ObjectId(insight.creator),
-        target: ObjectId(targetUserId)
+        target: ObjectId(targetUserId),
+        file_path: insight.file_path
       });
     };
     insightTarget.save(function (err, insightTarget) {
       if (err) {
         console.log(err);
-      }
+      };
       if (insightTarget) {
         console.log(insightTarget);
         console.log("InsightTarget Saved");
-        res.redirect('/insights/' + insight.id);
-      }
-    })
+        var activity = new Activity({
+          from: ObjectId(insightTarget.creator),
+          to: ObjectId(insightTarget.target),
+          // action: 
+          insight_id: insightTarget.insight,
+          insight_target_id: insightTarget.id
+        });
+        activity.save(function (err, activity) {
+          if (err) {
+            console.log(err);
+          }
+          if (activity) {
+            console.log(activity);
+            res.redirect('/insights/' + insight.id);
+          };
+        });
+      };
+    });
   });
 });
 
