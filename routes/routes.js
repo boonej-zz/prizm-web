@@ -19,6 +19,7 @@ var adminBody = fs.readFileSync(path.join(__dirname +
 var adminEmail = 'info@prizmapp.com';
 var ObjectId = require('mongoose').Types.ObjectId;
 var moment = require('moment');
+var basicAuth = require('basic-auth'); // Replace with better Auth
 moment.relativeTimeThreshold('d', 6);
 moment.relativeTimeThreshold('M', 52);
 
@@ -40,6 +41,25 @@ moment.locale('en', {
     yy: "%dy"
                 } 
 });
+
+var auth = function (req, res, next) {
+  function unauthorized(res) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    return res.send(401);
+  };
+
+  var user = basicAuth(req);
+
+  if (!user || !user.name || !user.pass) {
+    return unauthorized(res);
+  };
+
+  if (user.name === 'beprizmatic' && user.pass === '@pple4Life') {
+    return next();
+  } else {
+    return unauthorized(res);
+  };
+};
 
 function validateEmail(email) {
   if (email.length == 0) return false;
@@ -197,7 +217,7 @@ router.get('/users/:id/password', function(req, res){
 });
 
 /* Insights */
-router.get('/insights', function (req, res) {
+router.get('/insights', auth, function (req, res) {
   User.find({type: {$in: ["institution","luminary"]}}, function (err, docs) {
     if (err) {
       console.log(err)
