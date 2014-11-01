@@ -201,6 +201,7 @@ router.get('/insights', function (req, res) {
   User.find({type: {$in: ["institution","luminary"]}}, function (err, docs) {
     if (err) {
       console.log(err)
+      res.status(500).send({ error: err });
     };
     if (docs) {
       users = docs
@@ -224,6 +225,7 @@ router.post('/insights', function (req, res) {
   insight.save( function (err, insight) {
     if (err) {
       console.log(err);
+      res.status(500).send({ error: err });
     }
     if (insight) {
       console.log(insight);
@@ -236,6 +238,7 @@ router.get('/insights/:id', function (req, res) {
   User.find({type: 'user'}, function (err, docs) {
     if (err) {
       console.log(err);
+      res.status(500).send({ error: err });
     };
     if (docs) {
       users = docs;
@@ -261,7 +264,6 @@ router.get('/insights/:id', function (req, res) {
 router.post('/insights/:id', function (req, res) {
   var targetUserId = req.param('user');
   var insightId = req.params.id;
-  console.log()
   Insight.findOne({_id: ObjectId(insightId)}, function (err, insight) {
     if (err) {
       console.log(err);
@@ -277,6 +279,7 @@ router.post('/insights/:id', function (req, res) {
     insightTarget.save(function (err, insightTarget) {
       if (err) {
         console.log(err);
+        res.status(500).send({ error: err });
       };
       if (insightTarget) {
         console.log(insightTarget);
@@ -291,6 +294,7 @@ router.post('/insights/:id', function (req, res) {
         activity.save(function (err, activity) {
           if (err) {
             console.log(err);
+            res.status(500).send({ error: err });
           }
           if (activity) {
             console.log(activity);
