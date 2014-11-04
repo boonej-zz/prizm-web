@@ -217,10 +217,9 @@ p.sign-up-desc {
   float: right;
   clear: right;
   margin-top: 60px;
-  margin-right: -20px;
-  background: url('/images/phones.png') no-repeat;
-  background-size: 490px 782px;
-
+  /* margin-right: -20px; */
+  background: url('/images/home-phone.png') no-repeat;
+  background-size: 500px 782px;
 }
 
 /** OVERLAY **/
@@ -433,7 +432,7 @@ p.form-confirm-close {
 #about-block {
   margin-top: -0.5px;
   opacity: 1;
-  height: 682px;
+  height: 782px;
 }
 
 #about-block p {
@@ -446,7 +445,7 @@ p.form-confirm-close {
 
 .about-right {
   margin: 0 auto;
-  padding: 190px 0 130px 700px;
+  padding: 290px 0 130px 700px;
 }
 
 .about-right h2 {
@@ -459,7 +458,7 @@ p.form-confirm-close {
   width: 500px;
   position: relative;
   background-size: 500px 900px;
-  background-image: url(/images/phone1.png);
+  background-image: url(/images/about-phone.png);
   top: -620px;
   margin-left: 30px;
 }
@@ -469,7 +468,7 @@ p.form-confirm-close {
 #insight-block {
   margin-top: -0.5px;
   opacity: 1;
-  height: 681px;
+  height: 781px;
 }
 
 #insight-block p {
@@ -495,8 +494,8 @@ p.form-confirm-close {
   width: 500px;
   position: relative;
   background-size: 500px 900px;
-  background-image: url(/images/phone1.png);
-  top: -611px;
+  background-image: url(/images/insight-phone.png);
+  top: -511px;
   margin-left: 750px;
 }
 
@@ -531,7 +530,7 @@ p.form-confirm-close {
   width: 500px;
   position: relative;
   background-size: 500px 900px;
-  background-image: url(/images/phone1.png);
+  background-image: url(/images/mission-phone.png);
   top: -770px;
   margin-left: 50px;
 }
@@ -546,6 +545,11 @@ p.form-confirm-close {
 }
 
 /** TERMS PAGE **/
+
+#terms {
+  margin-top: 100px;
+}
+
 #terms p ul h2 h3{
   width: 600px;
 }

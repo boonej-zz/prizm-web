@@ -50,7 +50,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/about', function(req, res) {
-  res.render('about', { title: 'Prizm App | About', selected:'about' });
+  res.redirect('/#about');
 });
 
 router.get('/terms', function(req, res) {
