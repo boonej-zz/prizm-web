@@ -73,6 +73,10 @@ router.get('/download', function(req, res){
   res.render('download', { title: 'Prizm App | Download', selected: 'none'});
 });
 
+router.get('/newindex', function (req, res) {
+  res.render('newindex', { title: 'Prizm App', selected: 'none'});
+});
+
 
 
 router.post('/', function(req, res) {
