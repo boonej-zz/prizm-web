@@ -135,6 +135,14 @@ p.sign-up-desc {
     margin-top: 250px;
   }
 /** NAVIGATION BAR **/
+
+#navbar {
+  position: fixed;
+  top: 0px;
+  background-color: #EEF0F4;
+  z-index: 1;
+  opacity: .99;
+}
 #menu-button {
   display: none;
 }
@@ -198,12 +206,13 @@ p.sign-up-desc {
 }
 
 #body-home {
-    min-height: 900px;
+  height: 658px;
+  margin-top: 75px;
   padding: 0;
 }
 
 #phone {
-  height: 782px;
+  height: 598px;
   width: 490px;
   float: right;
   clear: right;
@@ -214,43 +223,11 @@ p.sign-up-desc {
 
 }
 
-.legal {
-  position: absolute;
-  top: 735px;
-  margin: 0;
-  padding: 0;
-  height: 300px;
-  width: 100%;
-  margin: 0 auto;
-  font-size: .6em;
-  text-transform: uppercase;
-  text-align: center;
-  vertical-align: middle;
-  background-color: #EEF0F4;
-}
-
-.legal-span {
-  display: inline-block;
-  margin-top: 50px;
-}
-
-.legal-block {
-  position: relative;
-  top: 300px;
-  margin: 400px auto;
-  font-size: .6em;
-  text-transform: uppercase;
-  text-align: center;
-  vertical-align: middle;
-  clear: both;
-  
-}
-
 /** OVERLAY **/
 
 .overlay {
   position: absolute;
-  top: 655px;
+  top: 653px;
   height: 80px;
   width: 100%;
   background: #2346b1;
@@ -445,11 +422,18 @@ p.form-confirm-close {
   text-align: center;
 }
 
-/** ABOUT PAGE **/
+/** ABOUT SECTION**/
+
+.anchor {
+  position: relative;
+  top: -75px;
+  background-image: url(/images/placeholder.png);
+}
+
 #about-block {
-  background-color: #4e70b7;
-  margin-top: -1px;
+  margin-top: -0.5px;
   opacity: 1;
+  height: 682px;
 }
 
 #about-block p {
@@ -460,36 +444,98 @@ p.form-confirm-close {
   margin-left: 15px;
 }
 
-.about-left {
-  width: 1200px;
+.about-right {
   margin: 0 auto;
-  padding: 290px 0 230px 0;
+  padding: 190px 0 130px 700px;
 }
 
-.about-left h2 {
-  margin: 0px 0 0px 15px;
+.about-right h2 {
+  margin: 0 0 0 15px;
   font-size: 28px;
 }
 
-#about-phone1, #about-phone2 {
+#about-phone {
+  height: 670px;
+  width: 500px;
+  position: relative;
+  background-size: 500px 900px;
+  background-image: url(/images/phone1.png);
+  top: -620px;
+  margin-left: 30px;
+}
+
+/** INSIGHT SECTION **/
+
+#insight-block {
+  margin-top: -0.5px;
+  opacity: 1;
+  height: 681px;
+}
+
+#insight-block p {
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: normal;
+  width: 572px;
+  margin-left: 15px;
+}
+
+.insight-left {
+  margin: 0 auto;
+  padding: 240px 0 130px 50px;
+}
+
+.insight-left h2 {
+  margin: 0 0 0 15px;
+  font-size: 28px;
+}
+
+#insight-phone {
+  height: 670px;
+  width: 500px;
+  position: relative;
+  background-size: 500px 900px;
+  background-image: url(/images/phone1.png);
+  top: -611px;
+  margin-left: 750px;
+}
+
+/** MISSION SECTION **/
+
+#mission-block {
+  margin-top: -0.5px;
+  opacity: 1;
+  height: 1082px;
+}
+
+#mission-block p {
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: normal;
+  width: 522px;
+  margin-left: 15px;
+}
+
+.mission-right {
+  margin: 0 auto;
+  padding: 290px 0 130px 700px;
+}
+
+.mission-right h2 {
+  margin: 0 0 0 15px;
+  font-size: 28px;
+}
+
+#mission-phone {
   height: 900px;
   width: 500px;
-  position: absolute; 
+  position: relative;
   background-size: 500px 900px;
-}
-
-#about-phone1 {
   background-image: url(/images/phone1.png);
-  top: 150px;
-  margin-left: 700px;
+  top: -770px;
+  margin-left: 50px;
 }
 
-#about-phone2 {
-  background-image: url(/images/phone2.png); 
-  top: 970px;
-  margin-left: 5px;
-
-}
 /** Luminary Page **/
 #about-mission, #about-result {
   float: right;
@@ -500,7 +546,7 @@ p.form-confirm-close {
 }
 
 /** TERMS PAGE **/
-#terms p, ul, h2, h3{
+#terms p ul h2 h3{
   width: 600px;
 }
 
@@ -751,11 +797,62 @@ ul.bullet li {
   top: 75px;
 }
 
+/** FOOTER SECTION **/
+
+#footer {
+  height: 75px;
+}
+
+#footer #logo {
+  cursor: pointer;
+  /* height: 75px; */
+  width: 176px;
+  background: url('/images/logo.png') no-repeat;
+  background-size: 176px 72px;
+  /* margin: 0px auto; */
+  margin-left: 55px;
+  display: inline-block;
+}
+
+.legal {
+  position: absolute;
+  top: 735px;
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  width: 100%;
+  margin: 0 auto;
+  font-size: .6em;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #EEF0F4;
+}
+
+.legal-span {
+  display: inline-block;
+  margin-top: 33px;
+  margin-left: 45px;
+  margin-right: 45px;
+  vertical-align: top;
+}
+
+.legal-block {
+  /* position: relative; */
+  /* top: 300px; */
+  /* margin: 0px auto; */
+  font-size: .8em;
+  /* text-transform: uppercase; */
+  text-align: left;
+  /* vertical-align: middle; */
+  /* clear: both; */
+}
+
 .contact-button {
   width: 32px;
   height: 32px;
-  margin-left: 15px;
-  margin-right: 15px;
+  /* margin-left: 15px; */
+  margin-right: 25px;
   display: inline-block;
   background-repeat: none;
 }
@@ -777,23 +874,29 @@ ul.bullet li {
 }
 
 .social {
-  margin-top: 80px; 
-  display: block;
-  width: 100%;
-  text-align: center;
+  margin-top: 27px;
+  margin-left: 45px;
+  display: inline-block;
+  vertical-align: top;
+  /* width: 100%; */
+  /* text-align: center; */
 }
 
 #follow-prizm {
   color: #8698C5;
-  font-size: 1.2em;
-  margin: 0 auto 20px auto;
+  /* font-size: 1.2em; */
+  /* margin: 0 auto 20px auto; */
   display: block;
-  width: 160px;
+  /* width: 160px; */
   height: 2em;
-  border-bottom: 1px solid #8698C5;
+  /* border-bottom: 1px solid #8698C5; */
 }
 
 .mixpanelbadge {
-  display: block;
-  margin: 36px auto;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 46px;
+  margin-left: 35px;
+  margin-right: 35px;
+  /* margin: 36px auto; */
 }

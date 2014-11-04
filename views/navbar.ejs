@@ -1,18 +1,23 @@
-<div class="nav-top">
-  <h1 id="logo" onClick="prizm.goHome()"><span class="hidden">Prizm</span></h1>
-  <div class="menu"> 
-    <span class="menu-button <%= selected=='home'?'selected':'' %>">
-      <a href="/" >Home</a>
-    </span>
-    <span class="menu-button <%= selected=='about'?'selected':'' %>">
-      <a href="/about">About</a>
-    </span>  
-    <span class="menu-button <%= selected=='blog'?'selected':'' %>">
-      <a href="http://beprizmatic.com">Blog</a>
-    </span>
-    <span class="menu-button <%= selected=='press'?'selected':'' %>">
-      <a href="mailto:press@prizmapp.com">Press</a>
-    </span>
-  </div>
-  <button id="menu-button" onclick="prizm.menuClicked()"></button>
-</div><!-- end nav-top -->
+<div class="full-width" id="navbar">
+  <div class="nav-top wrap">
+    <h1 id="logo" onClick="prizm.goHome()"><span class="hidden">Prizm</span></h1>
+    <div class="menu"> 
+      <span class="menu-button <%= selected=='home'?'selected':'' %>">
+        <a href="#about" >About</a>
+      </span>
+      <span class="menu-button <%= selected=='about'?'selected':'' %>">
+        <a href="#insight">Insight</a>
+      </span>
+      <span class="menu-button <%= selected=='about'?'selected':'' %>">
+        <a href="#mission">Mission</a>
+      </span>
+      <span class="menu-button <%= selected=='blog'?'selected':'' %>">
+        <a href="http://beprizmatic.com">Blog</a>
+      </span>
+      <span class="menu-button <%= selected=='press'?'selected':'' %>">
+        <a href="mailto:press@prizmapp.com">Press</a>
+      </span>
+    </div>
+    <button id="menu-button" onclick="prizm.menuClicked()"></button>
+  </div><!-- end nav-top -->
+</div>
