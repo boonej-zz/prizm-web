@@ -437,6 +437,9 @@ p.form-confirm-close {
   margin-top: -0.5px;
   opacity: 1;
   height: 634px;
+  background-image: url(/images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #about-block p {
@@ -516,7 +519,10 @@ p.form-confirm-close {
 #mission-block {
   margin-top: -0.5px;
   opacity: 1;
-  height: 974px;
+  height: 634px;
+  background-image: url(/images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #mission-block p {
