@@ -25,8 +25,8 @@
    <meta name="description" content="Prizm is a visual journal app that helps you explore and discover new opportunities." />
   </head>
   <body>
-    <%- include navbar.ejs %>
     <div class="wrap" id="body-home">
+      <%- include navbar.ejs %>
       <div class="body">
         <div id="phone"></div> 
         <h2 class="column">
@@ -42,7 +42,8 @@
           href="#"
           id="android"
           ></a>
-      </div>   
+      </div>
+      
     </div>
     <div class="overlay">
       <p>
@@ -52,9 +53,10 @@
         </span>
       </p>
     </div>
-    <%- include about.ejs %>
-    <div class="full-width" id="footer">
-      <%- include legal.ejs %>
+    <%- include legal.ejs %>
+    <%- include infoform.ejs %>
+    <div class="hidden" id="confirm">
+      <%- include confirmform.ejs %>
     </div>
   </body>
 </html>
