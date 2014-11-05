@@ -39,7 +39,7 @@ body {
 
 .wrap {
   margin: 0 auto;
-  width: 1100px;
+  width: 1200px;
 }
 
 .column {
@@ -92,20 +92,19 @@ a {
 
 p.sign-up-desc {
   margin-top: 100px;
-  margin-left: 15px;
-  /* margin-bottom: 30px; */
+  margin-bottom: 30px;
   font-size: 22px;
   width: 340px;
 }
 
 #sign-up {
-  /* top: 50px; */
+  top: 50px;
   display: inline-block;
-  margin-top: 10px; 
-  margin-left: 15px;
+  margin-top: 30px;
   font-size: 17px;
   font-weight: bold;
   letter-spacing: -1px;
+  /** padding: 10px 20px 10px 20px; */
   background: url('/images/app_store.png') no-repeat;
   width: 135px;
   height: 40px;
@@ -116,13 +115,13 @@ p.sign-up-desc {
 }
 
 #android {
-  /* top: 50px; */
+  top: 50px;
   display: inline-block;
-  margin-top: 10px; 
-  margin-left: 24px;
+  margin-top: 30px;
   font-size: 17px;
   font-weight: bold;
   letter-spacing: -1px;
+  /** padding: 10px 20px 10px 20px; */
   background: url('/images/google.png') no-repeat;
   background-size: 135px 40px;
   width: 135px;
@@ -159,6 +158,7 @@ p.sign-up-desc {
 
 .nav-top {
     height: 75px;
+    width: 1200px;
     border-bottom: 1px #d4daea solid;
   }
 
@@ -206,27 +206,27 @@ p.sign-up-desc {
 }
 
 #body-home {
-  height: 634px;
+  height: 658px;
   margin-top: 75px;
   padding: 0;
 }
 
 #phone {
-  height: 573px;
-  width: 440px;
+  height: 598px;
+  width: 490px;
   float: right;
   clear: right;
   margin-top: 60px;
-  margin-right: 15px; 
+  /* margin-right: -20px; */
   background: url('/images/home-phone.png') no-repeat;
-  background-size: 440px 723px;
+  background-size: 500px 782px;
 }
 
 /** OVERLAY **/
 
 .overlay {
   position: absolute;
-  top: 628px;
+  top: 653px;
   height: 80px;
   width: 100%;
   background: #2346b1;
@@ -239,15 +239,11 @@ p.sign-up-desc {
 
 .overlay p {
   color: #FFF;
-  width: 1100px;
+  width: 1200px;
   height: 80px;
   margin: 0 auto;
   font-size: 16px;
   vertical-align: middle;
-}
-
-.overlay .column {
-  margin-left: 15px;
 }
 
 /** INFORMATION FORM **/
@@ -436,22 +432,20 @@ p.form-confirm-close {
 #about-block {
   margin-top: -0.5px;
   opacity: 1;
-  height: 634px;
+  height: 782px;
 }
 
 #about-block p {
-  line-height: 28px;
-  font-size: 22px;
+  line-height: 30px;
+  font-size: 24px;
   font-weight: normal;
-  width: 529px;
+  width: 522px;
   margin-left: 15px;
 }
 
 .about-right {
-  display: inline-block;
-  float: right;
-  margin-right: 15px;
-  margin-top: 220px;
+  margin: 0 auto;
+  padding: 290px 0 130px 700px;
 }
 
 .about-right h2 {
@@ -460,14 +454,13 @@ p.form-confirm-close {
 }
 
 #about-phone {
-  height: 574px;
-  width: 356px;
-  display: inline-block;
-  float: left;
-  background-size: 356px 726px;
+  height: 670px;
+  width: 500px;
+  position: relative;
+  background-size: 500px 900px;
   background-image: url(/images/about-phone.png);
-  margin-left: 15px;
-  margin-top: 60px;
+  top: -620px;
+  margin-left: 30px;
 }
 
 /** INSIGHT SECTION **/
@@ -475,22 +468,20 @@ p.form-confirm-close {
 #insight-block {
   margin-top: -0.5px;
   opacity: 1;
-  height: 670px;
+  height: 781px;
 }
 
 #insight-block p {
-  line-height: 28px;
-  font-size: 22px;
+  line-height: 30px;
+  font-size: 24px;
   font-weight: normal;
-  width: 529px;
+  width: 572px;
   margin-left: 15px;
 }
 
 .insight-left {
-  display: inline-block;
-  float: left;
-  clear: both;
-  margin-top: 242px;
+  margin: 0 auto;
+  padding: 240px 0 130px 50px;
 }
 
 .insight-left h2 {
@@ -499,16 +490,13 @@ p.form-confirm-close {
 }
 
 #insight-phone {
-  height: 593px;
-  width: 362px;
-  /* position: relative; */
-  background-size: 362px 738px;
+  height: 670px;
+  width: 500px;
+  position: relative;
+  background-size: 500px 900px;
   background-image: url(/images/insight-phone.png);
-  /* top: -511px; */
-  margin-right: 12px;
-  margin-top: 76px;
-  display: inline-block;
-  float: right;
+  top: -511px;
+  margin-left: 750px;
 }
 
 /** MISSION SECTION **/
@@ -516,21 +504,20 @@ p.form-confirm-close {
 #mission-block {
   margin-top: -0.5px;
   opacity: 1;
-  height: 974px;
+  height: 1082px;
 }
 
 #mission-block p {
-  line-height: 28px;
-  font-size: 22px;
+  line-height: 30px;
+  font-size: 24px;
   font-weight: normal;
-  width: 529px;
+  width: 522px;
   margin-left: 15px;
 }
 
 .mission-right {
-  display: inline-block;
-  float: right;
-  margin-top: 260px;
+  margin: 0 auto;
+  padding: 290px 0 130px 700px;
 }
 
 .mission-right h2 {
@@ -539,12 +526,13 @@ p.form-confirm-close {
 }
 
 #mission-phone {
-  height: 651px;
-  width: 364px;
-  background-size: 364px 651px;
+  height: 900px;
+  width: 500px;
+  position: relative;
+  background-size: 500px 900px;
   background-image: url(/images/mission-phone.png);
-  display: inline-block;
-  margin-top: 152px;
+  top: -770px;
+  margin-left: 50px;
 }
 
 /** Luminary Page **/
@@ -821,12 +809,12 @@ ul.bullet li {
 
 #footer #logo {
   cursor: pointer;
-  height: 75px;
-  width: 16%;
+  /* height: 75px; */
+  width: 176px;
   background: url('/images/logo.png') no-repeat;
   background-size: 176px 72px;
   /* margin: 0px auto; */
-  /* margin-left: 55px; */
+  margin-left: 55px;
   display: inline-block;
 }
 
@@ -848,10 +836,9 @@ ul.bullet li {
 .legal-span {
   display: inline-block;
   margin-top: 33px;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 45px;
+  margin-right: 45px;
   vertical-align: top;
-  width: 48%;
 }
 
 .legal-block {
@@ -888,17 +875,15 @@ ul.bullet li {
 
 #instagram {
   background-image: url('/images/instagram.png');
-  margin-right: 0px;
 }
 
 .social {
   margin-top: 27px;
-  /* margin-left: 12px; */
+  margin-left: 45px;
   display: inline-block;
-  float: right;
   vertical-align: top;
-  width: 18%;
-  text-align: right;
+  /* width: 100%; */
+  /* text-align: center; */
 }
 
 #follow-prizm {
@@ -909,16 +894,13 @@ ul.bullet li {
   /* width: 160px; */
   height: 2em;
   /* border-bottom: 1px solid #8698C5; */
-  text-align: center;
 }
 
 .mixpanelbadge {
   display: inline-block;
   vertical-align: top;
   margin-top: 46px;
-  width: 12%;
-  text-align: center;
-  /* margin-left: 22px; */
-  /* margin-right: 44px; */
+  margin-left: 35px;
+  margin-right: 35px;
   /* margin: 36px auto; */
 }

@@ -46,11 +46,11 @@ function validateEmail(email) {
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Prizm App', selected:'none' });
+  res.render('index', { title: 'Prizm App', selected:'home' });
 });
 
 router.get('/about', function(req, res) {
-  res.redirect('/#about', { selected:'about' });
+  res.redirect('/#about');
 });
 
 router.get('/terms', function(req, res) {
@@ -72,6 +72,11 @@ router.get('/luminary', function(req, res){
 router.get('/download', function(req, res){
   res.render('download', { title: 'Prizm App | Download', selected: 'none'});
 });
+
+router.get('/newindex', function (req, res) {
+  res.render('newindex', { title: 'Prizm App', selected: 'none'});
+});
+
 
 
 router.post('/', function(req, res) {
