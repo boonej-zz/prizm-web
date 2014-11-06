@@ -39,7 +39,7 @@ body {
 
 .wrap {
   margin: 0 auto;
-  width: 1200px;
+  width: 1100px;
 }
 
 .column {
@@ -150,7 +150,7 @@ p.sign-up-desc {
 
 .nav-top {
     height: 75px;
-    width: 1200px;
+    width: 1100px;
     border-bottom: 1px #d4daea solid;
   }
 
@@ -198,20 +198,19 @@ p.sign-up-desc {
 }
 
 #body-home {
-    min-height: 900px;
+  min-height: 900px;
   padding: 0;
 }
 
 #phone {
   height: 782px;
   width: 490px;
-  float: right;
-  clear: right;
   margin-top: 60px;
-  margin-right: -20px;
-  background: url('/images/phones.png') no-repeat;
+  margin-right: -10px;
+  background: url('/images/phone-home.png');
   background-size: 490px 782px;
-
+  display: inline-block;
+  float: right;
 }
 
 .legal {
@@ -246,6 +245,20 @@ p.sign-up-desc {
   
 }
 
+/** HOME **/
+
+.home > h2 {
+  font-weight: normal;
+  font-size: 34px;
+  margin-top: 100px;
+  width: 550px;
+}
+
+.home {
+  display: inline-block;
+  float: left;
+}
+
 /** OVERLAY **/
 
 .overlay {
@@ -263,7 +276,7 @@ p.sign-up-desc {
 
 .overlay p {
   color: #FFF;
-  width: 1200px;
+  width: 1100px;
   height: 80px;
   margin: 0 auto;
   font-size: 16px;
@@ -461,7 +474,7 @@ p.form-confirm-close {
 }
 
 .about-left {
-  width: 1200px;
+  width: 1100px;
   margin: 0 auto;
   padding: 290px 0 230px 0;
 }
@@ -505,7 +518,7 @@ p.form-confirm-close {
 }
 
 #terms p.full {
-  width: 1200px;
+  width: 1100px;
 }
 
 #terms .legal-block {
@@ -525,7 +538,7 @@ ul.bullet li {
 
 .section {
   margin 155px 0px;
-  width: 1200px;
+  width: 1100px;
   height: auto;
   vertical-align: middle;
   z-index: -1000;
@@ -593,7 +606,7 @@ ul.bullet li {
 }
 
 .full {
-  width: 1200px;
+  width: 1100px;
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
