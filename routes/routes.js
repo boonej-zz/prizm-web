@@ -21,6 +21,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var moment = require('moment');
 var basicAuth = require('../utils').basicAuth;
 var validateEmail = require('../utils').validateEmail;
+var aws = require('aws-sdk');
 moment.relativeTimeThreshold('d', 6);
 moment.relativeTimeThreshold('M', 52);
 
@@ -193,7 +194,7 @@ router.get('/users/:id/password', function(req, res){
 });
 
 /* Insights */
-router.get('/insights', basicAuth, function (req, res) {
+router.get('/insights'/**, basicAuth**/, function (req, res) {
   User.find({type: {$in: ["institution","luminary"]}}, function (err, docs) {
     if (err) {
       console.log(err)
@@ -300,6 +301,38 @@ router.post('/insights/:id', function (req, res) {
       };
     });
   });
+});
+
+/** S3 Upload **/
+
+var AWS_ACCESS_KEY = 'AKIAJMRLM7O3QH6WWUNA';
+var AWS_SECRET_KEY = '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'
+var S3_BUCKET = 'higheraltitude.prizm.test';
+
+
+router.get('/sign_s3', function(req, res){
+    aws.config.update({accessKeyId: AWS_ACCESS_KEY , secretAccessKey: AWS_SECRET_KEY });
+    var s3 = new aws.S3(); 
+    var s3_params = { 
+        Bucket: S3_BUCKET, 
+        Key: req.query.s3_object_name, 
+        Expires: 60, 
+        ContentType: req.query.s3_object_type, 
+        ACL: 'public-read'
+    }; 
+    s3.getSignedUrl('putObject', s3_params, function(err, data){ 
+        if(err){ 
+            console.log(err); 
+        }
+        else{ 
+            var return_data = {
+                signed_request: data,
+                url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.s3_object_name 
+            };
+            res.write(JSON.stringify(return_data));
+            res.end();
+        } 
+    });
 });
 
 module.exports = router;
