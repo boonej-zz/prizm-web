@@ -887,8 +887,10 @@ ul.bullet li {
 
 .sphere5 {
   background-image: url(/images/ellipse_purple.png);
-  position: absolute; 
-  top: 400px; 
-  right: -100px;
-  height: 500px; width: 500px; background-size: 100%;
+  top: 400px;
+  right: 0;
+  height: 500px;
+  width: 500px;
+  background-position-x: 100px;
+  background-size: 500px;
 }
