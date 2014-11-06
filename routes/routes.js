@@ -53,6 +53,10 @@ router.get('/about', function(req, res) {
   res.render('about', { title: 'Prizm App | About', selected:'about' });
 });
 
+router.get('/insight', function(req, res) {
+  res.render('insight', { title: 'Prizm App | Insight', selected:'insight' });
+});
+
 router.get('/terms', function(req, res) {
   res.render('terms', { title: 'Prizm App | Legal', selected:'none'});
 });

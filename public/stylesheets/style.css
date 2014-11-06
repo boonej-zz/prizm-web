@@ -243,7 +243,6 @@ p.sign-up-desc {
   text-align: center;
   vertical-align: middle;
   clear: both;
-  
 }
 
 /** HOME **/
@@ -486,7 +485,7 @@ p.form-confirm-close {
   font-size: 28px;
 }
 
-#about-phone1, #about-phone2 {
+#about-phone1, #about-phone2, #insight-phone {
   height: 800px;
   width: 400px;
   position: absolute;
@@ -503,8 +502,38 @@ p.form-confirm-close {
   background-image: url(/images/phone-mission.png); 
   top: 970px;
   margin-left: 15px;
-
 }
+
+/** Insight Page **/
+
+#insight-block p {
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: normal;
+  width: 522px;
+  margin-left: 15px;
+}
+
+.insight-left {
+  margin: 0 auto;
+  padding: 290px 0 230px 0; 
+}
+
+.insight-left h2 {
+  margin: 0px 0 0px 15px;
+  font-size: 28px;
+}
+
+#insight-phone {
+  background-image: url(/images/phone-about.png);
+  top: 150px;
+  margin-left: 780px;
+}
+
+.insight-footer > .legal-block {
+  top: 100px;
+}
+
 /** Luminary Page **/
 #about-mission, #about-result {
   float: right;
