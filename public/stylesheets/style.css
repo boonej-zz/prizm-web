@@ -502,6 +502,7 @@ p.form-confirm-close {
   top: 970px;
   background-size: 450px 800px;
   width: 450px;
+  margin-left: -15px;
 }
 
 /** Insight Page **/
@@ -511,7 +512,7 @@ p.form-confirm-close {
   font-size: 24px;
   font-weight: normal;
   width: 522px;
-  margin-left: 15px;
+  /*margin-left: 15px;*/
 }
 
 .insight-left {
@@ -520,14 +521,15 @@ p.form-confirm-close {
 }
 
 .insight-left h2 {
-  margin: 0px 0 0px 15px;
+  margin: 0px;
   font-size: 28px;
 }
 
 #insight-phone {
   background-image: url(/images/phone-insight.png);
-  top: 150px;
-  margin-left: 780px;
+  position: relative;
+  top: -720px;
+  left: 860px;
 }
 
 .insight-footer > .legal-block {
@@ -541,6 +543,7 @@ p.form-confirm-close {
   border-top: 1px solid #d4daea; 
   padding-top: 30px;
   padding-bottom: 30px;
+  width: 550px;
 }
 
 /** TERMS PAGE **/
