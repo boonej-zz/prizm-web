@@ -39,7 +39,7 @@ body {
 
 .wrap {
   margin: 0 auto;
-  width: 1100px;
+  width: 1200px;
 }
 
 .column {
@@ -150,7 +150,7 @@ p.sign-up-desc {
 
 .nav-top {
     height: 75px;
-    width: 1100px;
+    width: 1200px;
     border-bottom: 1px #d4daea solid;
     background-color: #EEF0F4;
   }
@@ -276,7 +276,7 @@ p.sign-up-desc {
 
 .overlay p {
   color: #FFF;
-  width: 1100px;
+  width: 1200px;
   height: 80px;
   margin: 0 auto;
   font-size: 16px;
@@ -474,7 +474,7 @@ p.form-confirm-close {
 }
 
 .about-left {
-  width: 1100px;
+  width: 1200px;
   margin: 0 auto;
   padding: 290px 0 230px 0;
 }
@@ -552,7 +552,7 @@ p.form-confirm-close {
 }
 
 #terms p.full {
-  width: 1100px;
+  width: 1200px;
 }
 
 #terms .legal-block {
@@ -572,7 +572,7 @@ ul.bullet li {
 
 .section {
   margin 155px 0px;
-  width: 1100px;
+  width: 1200px;
   height: auto;
   vertical-align: middle;
   z-index: -1000;
@@ -640,7 +640,7 @@ ul.bullet li {
 }
 
 .full {
-  width: 1100px;
+  width: 1200px;
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
