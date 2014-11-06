@@ -19,7 +19,8 @@ var adminBody = fs.readFileSync(path.join(__dirname +
 var adminEmail = 'info@prizmapp.com';
 var ObjectId = require('mongoose').Types.ObjectId;
 var moment = require('moment');
-var basicAuth = require('basic-auth'); // Replace with better Auth
+var basicAuth = require('../utils').basicAuth;
+var validateEmail = require('../utils').validateEmail;
 moment.relativeTimeThreshold('d', 6);
 moment.relativeTimeThreshold('M', 52);
 
@@ -41,31 +42,6 @@ moment.locale('en', {
     yy: "%dy"
                 } 
 });
-
-var auth = function (req, res, next) {
-  function unauthorized(res) {
-    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-    return res.send(401);
-  };
-
-  var user = basicAuth(req);
-
-  if (!user || !user.name || !user.pass) {
-    return unauthorized(res);
-  };
-
-  if (user.name === 'beprizmatic' && user.pass === '@pple4Life') {
-    return next();
-  } else {
-    return unauthorized(res);
-  };
-};
-
-function validateEmail(email) {
-  if (email.length == 0) return false;
-  var reg = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i;
-  return reg.test(email);
-}
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -217,7 +193,7 @@ router.get('/users/:id/password', function(req, res){
 });
 
 /* Insights */
-router.get('/insights', auth, function (req, res) {
+router.get('/insights', basicAuth, function (req, res) {
   User.find({type: {$in: ["institution","luminary"]}}, function (err, docs) {
     if (err) {
       console.log(err)
