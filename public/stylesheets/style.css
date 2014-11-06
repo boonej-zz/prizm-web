@@ -460,7 +460,6 @@ p.form-confirm-close {
 
 /** ABOUT PAGE **/
 #about-block {
-  background-color: #244672;
   margin-top: -1px;
   opacity: 1;
   height: 792px
@@ -501,7 +500,8 @@ p.form-confirm-close {
 #about-phone2 {
   background-image: url(/images/phone-mission.png); 
   top: 970px;
-  margin-left: 15px;
+  background-size: 450px 800px;
+  width: 450px;
 }
 
 /** Insight Page **/
@@ -525,7 +525,7 @@ p.form-confirm-close {
 }
 
 #insight-phone {
-  background-image: url(/images/phone-about.png);
+  background-image: url(/images/phone-insight.png);
   top: 150px;
   margin-left: 780px;
 }
@@ -840,58 +840,4 @@ ul.bullet li {
 .mixpanelbadge {
   display: block;
   margin: 36px auto;
-}
-
-/** SPHERES **/
-.sphere1 {
-  background-image: url(/images/ellipse_blue.png);
-  position: absolute;
-  top: 600px;
-  left: 400px;
-  height: 268px;
-  width: 500px;
-  background-size: 500px;
-}
-
-.sphere2 {
-  background-image: url(/images/ellipse_green.png); 
-  position: absolute; 
-  top: 300px; l
-  left: -100px; 
-  height: 500px; 
-  width: 500px; 
-  background-size: 100%;
-}
-
-.sphere3 {
-  background-image: url(/images/ellipse_orange.png);
-  background-repeat: no-repeat;
-  position: absolute; 
-  top: 75px; 
-  left: 300px; 
-  height: 500px; width: 500px; 
-  background-size: 100%;
-  background-position-y: -250px;
-  /* z-index: -1; */
-}
-
-.sphere4 {
-  background-image: url(/images/ellipse_pink.png);
-  position: absolute; 
-  top: 175px; 
-  left: 600px; 
-  height: 500px; 
-  width: 500px; 
-  background-size: 100%;
-}
-
-.sphere5 {
-  background-image: url(/images/ellipse_purple.png);
-  position: absolute;
-  top: 400px;
-  right: 0;
-  height: 500px;
-  width: 500px;
-  background-position-x: 100px;
-  background-size: 500px;
 }
