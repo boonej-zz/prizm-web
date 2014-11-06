@@ -152,6 +152,7 @@ p.sign-up-desc {
     height: 75px;
     width: 1100px;
     border-bottom: 1px #d4daea solid;
+    background-color: #EEF0F4;
   }
 
 
@@ -236,7 +237,7 @@ p.sign-up-desc {
 .legal-block {
   position: relative;
   top: 300px;
-  margin: 400px auto;
+  /*margin: 400px auto;*/
   font-size: .6em;
   text-transform: uppercase;
   text-align: center;
@@ -460,9 +461,10 @@ p.form-confirm-close {
 
 /** ABOUT PAGE **/
 #about-block {
-  background-color: #4e70b7;
+  background-color: #244672;
   margin-top: -1px;
   opacity: 1;
+  height: 792px
 }
 
 #about-block p {
@@ -485,22 +487,22 @@ p.form-confirm-close {
 }
 
 #about-phone1, #about-phone2 {
-  height: 900px;
-  width: 500px;
-  position: absolute; 
-  background-size: 500px 900px;
+  height: 800px;
+  width: 400px;
+  position: absolute;
+  background-size: 400px 800px;
 }
 
 #about-phone1 {
-  background-image: url(/images/phone1.png);
+  background-image: url(/images/phone-about.png);
   top: 150px;
   margin-left: 700px;
 }
 
 #about-phone2 {
-  background-image: url(/images/phone2.png); 
+  background-image: url(/images/phone-mission.png); 
   top: 970px;
-  margin-left: 5px;
+  margin-left: 15px;
 
 }
 /** Luminary Page **/
@@ -809,4 +811,55 @@ ul.bullet li {
 .mixpanelbadge {
   display: block;
   margin: 36px auto;
+}
+
+/** SPHERES **/
+.sphere1 {
+  background-image: url(/images/ellipse_blue.png);
+  position: absolute;
+  top: 600px;
+  left: 400px;
+  height: 268px;
+  width: 500px;
+  background-size: 500px;
+}
+
+.sphere2 {
+  background-image: url(/images/ellipse_green.png); 
+  position: absolute; 
+  top: 300px; l
+  left: -100px; 
+  height: 500px; 
+  width: 500px; 
+  background-size: 100%;
+}
+
+.sphere3 {
+  background-image: url(/images/ellipse_orange.png);
+  background-repeat: no-repeat;
+  position: absolute; 
+  top: 75px; 
+  left: 300px; 
+  height: 500px; width: 500px; 
+  background-size: 100%;
+  background-position-y: -250px;
+  /* z-index: -1; */
+}
+
+.sphere4 {
+  background-image: url(/images/ellipse_pink.png);
+  position: absolute; 
+  top: 175px; 
+  left: 600px; 
+  height: 500px; 
+  width: 500px; 
+  background-size: 100%;
+}
+
+.sphere5 {
+  background-image: url(/images/ellipse_purple.png);
+  position: absolute; 
+  top: 400px; 
+  right: -100px;
+  height: 500px; width: 500px; background-size: 100%;
 }
