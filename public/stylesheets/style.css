@@ -494,7 +494,7 @@ p.form-confirm-close {
 #about-phone1 {
   background-image: url(/images/phone-about.png);
   top: 150px;
-  margin-left: 700px;
+  margin-left: 750px;
 }
 
 #about-phone2 {
@@ -512,7 +512,7 @@ p.form-confirm-close {
   font-size: 24px;
   font-weight: normal;
   width: 522px;
-  /*margin-left: 15px;*/
+  margin-left: 15px;
 }
 
 .insight-left {
@@ -521,14 +521,14 @@ p.form-confirm-close {
 }
 
 .insight-left h2 {
-  margin: 0px;
+  margin: 0px 0px 0px 15px;
   font-size: 28px;
 }
 
 #insight-phone {
   background-image: url(/images/phone-insight.png);
   position: relative;
-  top: -720px;
+  top: -725px;
   left: 860px;
 }
 
