@@ -20,6 +20,8 @@
     "serializer": "0.0.3",
     "basic-auth": "1.0.0",
     "aws-sdk": "*",
-    "node-uuid": "1.4.1"
+    "node-uuid": "1.4.1",
+    "request": "*",
+    "underscore": "1.6.0"
   }
 }

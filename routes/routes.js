@@ -8,6 +8,7 @@ var User = mongoose.model('User');
 var Insight = mongoose.model('Insight');
 var InsightTarget = mongoose.model('InsightTarget');
 var Interest = mongoose.model('Interest');
+var Push = require('../classes/push_notification');
 var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
@@ -308,7 +309,7 @@ router.post('/insights/:id', function (req, res) {
                       var activity = new Activity({
                         from: ObjectId(insightTarget.creator),
                         to: ObjectId(insightTarget.target),
-                        // action: 
+                        action: 'insight',
                         insight_id: insightTarget.insight,
                         insight_target_id: insightTarget.id
                       });
@@ -318,7 +319,10 @@ router.post('/insights/:id', function (req, res) {
                           res.status(500).send({ error: err });
                         };
                         if (activity) {
-                          console.log("This is the activity:" + activity);
+                          new Push('activity', activity, function(result){
+                            console.log("logging result of push"+JSON.stringify(result));
+                            // _logger.log('info', 'Push notification result', result);
+                          });
                         };
                       });
                     };
