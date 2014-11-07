@@ -1,6 +1,5 @@
 var serial = require('serializer');
 var utils = require('../utils');
-// var mongoURI = process.env.MONGOHQ_URL || 'mongodb://localhost/prizm';
 
 var mongoose = require('mongoose');
 

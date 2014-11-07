@@ -8,5 +8,6 @@ exports.insightTarget = require('./insight_target');
 exports.post = require('./post');
 exports.record = require('./record');
 exports.user = require('./user');
+exports.interest = require('./interest');
 
 mongoose.connect(mongoURI);
