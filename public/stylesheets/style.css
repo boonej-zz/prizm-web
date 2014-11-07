@@ -22,8 +22,8 @@ body {
 }
 
 .blue-background {
-  background-color: #3B58A5;
-  opacity: 0.8;
+  background-color: #4e70b7;
+  opacity: 1;
   color: #FFF;
 }
 
@@ -152,6 +152,7 @@ p.sign-up-desc {
     height: 75px;
     width: 1200px;
     border-bottom: 1px #d4daea solid;
+    background-color: #EEF0F4;
   }
 
 
@@ -198,20 +199,19 @@ p.sign-up-desc {
 }
 
 #body-home {
-    min-height: 900px;
+  min-height: 900px;
   padding: 0;
 }
 
 #phone {
   height: 782px;
   width: 490px;
-  float: right;
-  clear: right;
   margin-top: 60px;
-  margin-right: -20px;
-  background: url('/images/phones.png') no-repeat;
+  margin-right: -10px;
+  background: url('/images/phone-home.png');
   background-size: 490px 782px;
-
+  display: inline-block;
+  float: right;
 }
 
 .legal {
@@ -237,13 +237,26 @@ p.sign-up-desc {
 .legal-block {
   position: relative;
   top: 300px;
-  margin: 400px auto;
+  /*margin: 400px auto;*/
   font-size: .6em;
   text-transform: uppercase;
   text-align: center;
   vertical-align: middle;
   clear: both;
-  
+}
+
+/** HOME **/
+
+.home > h2 {
+  font-weight: normal;
+  font-size: 38px;
+  margin-top: 100px;
+  width: 550px;
+}
+
+.home {
+  display: inline-block;
+  float: left;
 }
 
 /** OVERLAY **/
@@ -447,9 +460,9 @@ p.form-confirm-close {
 
 /** ABOUT PAGE **/
 #about-block {
-  background-color: #4e70b7;
   margin-top: -1px;
   opacity: 1;
+  height: 792px
 }
 
 #about-block p {
@@ -471,25 +484,58 @@ p.form-confirm-close {
   font-size: 28px;
 }
 
-#about-phone1, #about-phone2 {
-  height: 900px;
-  width: 500px;
-  position: absolute; 
-  background-size: 500px 900px;
+#about-phone1, #about-phone2, #insight-phone {
+  height: 800px;
+  width: 400px;
+  position: absolute;
+  background-size: 400px 800px;
 }
 
 #about-phone1 {
-  background-image: url(/images/phone1.png);
-  top: 150px;
-  margin-left: 700px;
+  background-image: url(/images/phone-about.png);
+  top: 190px;
+  margin-left: 750px;
 }
 
 #about-phone2 {
-  background-image: url(/images/phone2.png); 
+  background-image: url(/images/phone-mission.png); 
   top: 970px;
-  margin-left: 5px;
-
+  background-size: 450px 800px;
+  width: 450px;
+  margin-left: 20px;
 }
+
+/** Insight Page **/
+
+#insight-block p {
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: normal;
+  width: 522px;
+  margin-left: 15px;
+}
+
+.insight-left {
+  margin: 0 auto;
+  padding: 290px 0 230px 0; 
+}
+
+.insight-left h2 {
+  margin: 0px 0px 0px 15px;
+  font-size: 28px;
+}
+
+#insight-phone {
+  background-image: url(/images/phone-insight.png);
+  position: relative;
+  top: -725px;
+  left: 860px;
+}
+
+.insight-footer > .legal-block {
+  top: 100px;
+}
+
 /** Luminary Page **/
 #about-mission, #about-result {
   float: right;
