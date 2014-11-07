@@ -59,6 +59,9 @@ var userSchema = new mongoose.Schema({
   subtype               : {type: String, default: null},
   badge_count           : {type: Number, default: 0},
   active                : {type: Boolean, default: true},
+  program_code          : {type: String, default: null},
+  interests             : {type: Array, default: []},
+  insight_count         : {type: Number, default: 0}
 },{ versionKey          : false });
 
 userSchema.methods.createUserSalt = function(){
