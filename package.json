@@ -19,6 +19,7 @@
     "moment": "~2.8.1",
     "serializer": "0.0.3",
     "basic-auth": "1.0.0",
-    "aws-sdk": "*"
+    "aws-sdk": "*",
+    "node-uuid": "1.4.1"
   }
 }

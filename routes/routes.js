@@ -21,6 +21,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var moment = require('moment');
 var basicAuth = require('../utils').basicAuth;
 var validateEmail = require('../utils').validateEmail;
+var uuid = require('../utils').generateUUID;
 var aws = require('aws-sdk');
 moment.relativeTimeThreshold('d', 6);
 moment.relativeTimeThreshold('M', 52);
@@ -203,8 +204,10 @@ router.get('/insights'/**, basicAuth**/, function (req, res) {
     if (docs) {
       users = docs
     };
+    var fileName = uuid("insight");
     res.render('insightsform', {title: 'Prizm App | Insights', selected: 'none',
-                                                                  users: users });
+                                                                  users: users, 
+                                                                   uuid: fileName});
   });
 });
 

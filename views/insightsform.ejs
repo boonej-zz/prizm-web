@@ -57,6 +57,7 @@
 			    var preview_elem = document.getElementById("preview");
 			    var file_path_elem = document.getElementById("insight-file-path");
 			    var s3upload = new S3Upload({
+			    		s3_object_name: '<%= uuid %>',
 			        file_dom_selector: 'insight-image-upload',
 			        s3_sign_put_url: '/sign_s3',
 			        onProgress: function(percent, message) {
