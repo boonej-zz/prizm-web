@@ -201,7 +201,8 @@ router.get('/users/:id/password', function(req, res){
 });
 
 /* Insights */
-router.get('/insights'/**, basicAuth**/, function (req, res) {
+/**
+router.get('/insights', function (req, res) {
   User.find({type: {$in: ["institution","luminary"]}}, function (err, docs) {
     if (err) {
       console.log(err)
