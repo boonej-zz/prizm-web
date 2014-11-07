@@ -17,6 +17,11 @@
     "mongoose": "~3.8.12",
     "node-mandrill": "~1.0.1",
     "moment": "~2.8.1",
-    "serializer": "0.0.3"
+    "serializer": "0.0.3",
+    "basic-auth": "1.0.0",
+    "aws-sdk": "*",
+    "node-uuid": "1.4.1",
+    "request": "*",
+    "underscore": "1.6.0"
   }
 }

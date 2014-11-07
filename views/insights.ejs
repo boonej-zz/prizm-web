@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<%- include include.ejs -%>
+	</head>
+	<body>
+		<div class="wrap" id="insights">
+			<%- include navbar.ejs -%>
+			<div class="insight">
+				<p>Insight Creator: <%= creator.name %></p>
+				<p>Insight Title: <%= insight.title %></p>
+				<p>Insight Text: <%= insight.text %></p>
+				<p>Insight File Path: <%= insight.file_path %></p>
+				<p>Insight Title: <%= insight.title %></p>
+				<p>Insight Likes: <%= insight.likes_count %></p>
+				<p>Insight Dislikes: <%= insight.dislikes_count %></p>
+				<p>Insight Tags: <%= insight.tags_count %>
+					<% for (var i = 0; i < insight.tags.length; i++) { %>
+						<li><%= insight.tags[i] %></li>
+					<% } %>
+				</p>
+				<p>Insight Hashtags: <%= insight.hash_tags_count %>
+					<% for (var i = 0; i < insight.hash_tags.length; i++) { %>
+						<li><%= insight.hash_tags[i] %></li>
+					<% } %>
+				</p>
+				<p>Insight Link: <a href="<%= insight.link_title %>"><%= insight.link_title %></a></p>
+			</div>
+			<div class="insight action">
+				<form method="post">
+					<span>Select Interest to Target:</span>
+					<select name="interest" id="interest-selection" size="<%= interests.length %>" multiple>
+					<% for (var i = 0; i < interests.length; i++) { %>
+						<option name="interest" value="<%= interests[i].text %>" 
+							<% if (i == 0) { %>
+								selected
+							<% } %>>
+							<%= interests[i].text %>
+						</option>
+					<% } %>
+					<div id="insight-target">
+						<input type="submit" value="send"/>
+					</div>
+					<input type="hidden" name="numberOfInterests" id="interest-count" value="1"/>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
