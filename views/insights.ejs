@@ -29,13 +29,20 @@
 			</div>
 			<div class="insight action">
 				<form method="post">
-					<span>Select User to Target:</span>
+					<span>Select Interest to Target:</span>
+					<select name="interest" id="interest-selection" size="<%= interests.length %>" multiple>
+					<% for (var i = 0; i < interests.length; i++) { %>
+						<option name="interest" value="<%= interests[i].text %>" 
+							<% if (i == 0) { %>
+								selected
+							<% } %>>
+							<%= interests[i].text %>
+						</option>
+					<% } %>
 					<div id="insight-target">
 						<input type="submit" value="send"/>
 					</div>
-					<% for (var i = 0; i < users.length; i++) { %>
-						<input type="radio" name="user" value="<%= users[i].id %>"><%= users[i].name %>
-					<% } %>
+					<input type="hidden" name="numberOfInterests" id="interest-count" value="1"/>
 				</form>
 			</div>
 		</div>

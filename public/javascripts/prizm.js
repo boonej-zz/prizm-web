@@ -35,3 +35,16 @@ var prizm = {
                 window.location = baseURL;
               }
 };
+
+$(function() {
+  var input_element = document.getElementById("interest-selection");
+  input_element.onchange = interestCount;
+});
+
+function interestCount() {
+  var numberOfSelectedInterests = $('#interest-selection :selected').length;
+  var interest_number = document.getElementById("interest-count");
+  interest_number.value = numberOfSelectedInterests;
+}
+
+

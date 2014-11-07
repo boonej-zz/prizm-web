@@ -7,6 +7,7 @@ var Post = mongoose.model('Post');
 var User = mongoose.model('User');
 var Insight = mongoose.model('Insight');
 var InsightTarget = mongoose.model('InsightTarget');
+var Interest = mongoose.model('Interest');
 var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
@@ -235,13 +236,13 @@ router.post('/insights', function (req, res) {
 });
 
 router.get('/insights/:id', function (req, res) {
-  User.find({type: 'user'}, function (err, docs) {
+  Interest.find(function (err, docs) {
     if (err) {
       console.log(err);
       res.status(500).send({ error: err });
     };
     if (docs) {
-      users = docs;
+      interests = docs;
     };
   });
   Insight.findOne({_id: ObjectId(req.params.id)}, function (err, insight) {
@@ -250,59 +251,86 @@ router.get('/insights/:id', function (req, res) {
     }
     if (insight) {
       User.findOne({_id: ObjectId(insight.creator)} , function (err, creator) {
-        console.log("Creator : " + creator.first_name);
         res.render('insights', { title: 'Prizm App | Insights',
                                 selected: 'none',
                                 insight: insight,
                                 creator: creator,
-                                users: users });
+                                interests: interests });
       });
     };
   });
 });
 
 router.post('/insights/:id', function (req, res) {
-  var targetUserId = req.param('user');
   var insightId = req.params.id;
+  var interestsCount = req.param('numberOfInterests');
+  var targetInterests;
+  if (interestsCount == 1) {
+    targetInterests = [req.param('interest')]
+  }
+  else {
+    targetInterests = req.param('interest');
+  }
   Insight.findOne({_id: ObjectId(insightId)}, function (err, insight) {
     if (err) {
       console.log(err);
     };
     if (insight) {
-      var insightTarget = new InsightTarget({
-        insight: ObjectId(insight.id),
-        creator: ObjectId(insight.creator),
-        target: ObjectId(targetUserId),
-        file_path: insight.file_path
-      });
-    };
-    insightTarget.save(function (err, insightTarget) {
-      if (err) {
-        console.log(err);
-        res.status(500).send({ error: err });
-      };
-      if (insightTarget) {
-        console.log(insightTarget);
-        console.log("InsightTarget Saved");
-        var activity = new Activity({
-          from: ObjectId(insightTarget.creator),
-          to: ObjectId(insightTarget.target),
-          // action: 
-          insight_id: insightTarget.insight,
-          insight_target_id: insightTarget.id
-        });
-        activity.save(function (err, activity) {
+      for (var i = 0; i < targetInterests.length; i++) {
+        Interest.findOne({ text: targetInterests[i] }, function (err, interest) {
           if (err) {
             console.log(err);
             res.status(500).send({ error: err });
-          }
-          if (activity) {
-            console.log(activity);
-            res.redirect('/insights/' + insight.id);
+          };
+          if (interest) {
+            User.find({ interests: { $elemMatch: { _id: ObjectId(interest.id) } } }, function (err, users) {
+              if (err) {
+                console.log(err);
+                res.status(500).send({ error: err });
+              };
+              if (users) {
+                console.log("Number of users: " + users.length);
+                for (var i = 0; i < users.length; i++) {
+                  var insightTarget = new InsightTarget({
+                    insight: ObjectId(insight.id),
+                    creator: ObjectId(insight.creator),
+                    target: ObjectId(users[i].id),
+                    file_path: insight.file_path
+                  });
+                  insightTarget.save(function (err, insightTarget) {
+                    if (err) {
+                      console.log(err);
+                      res.status(500).send({ error: err });
+                    };
+                    if (insightTarget) {
+                      console.log(insightTarget);
+                      console.log("InsightTarget Saved");
+                      var activity = new Activity({
+                        from: ObjectId(insightTarget.creator),
+                        to: ObjectId(insightTarget.target),
+                        // action: 
+                        insight_id: insightTarget.insight,
+                        insight_target_id: insightTarget.id
+                      });
+                      activity.save(function (err, activity) {
+                        if (err) {
+                          console.log(err);
+                          res.status(500).send({ error: err });
+                        };
+                        if (activity) {
+                          console.log("This is the activity:" + activity);
+                        };
+                      });
+                    };
+                  });
+                };
+              };
+            });
           };
         });
       };
-    });
+    };
+    res.redirect('/insights/' + insight.id);
   });
 });
 
