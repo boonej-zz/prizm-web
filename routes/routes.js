@@ -13,9 +13,14 @@ var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 var ejs = require('ejs');
+var jade = require('jade');
 var fs = require('fs');
 var path = require('path');
 var mail = fs.readFileSync(path.join(__dirname + '/../lib/mail.ejs'), 'utf8');
+var rejectMail = fs.readFileSync(path.join(__dirname +
+      '/../views/reject_mail.jade'), 'utf8');
+var acceptMail = fs.readFileSync(path.join(__dirname +
+      '/../views/accept_mail.jade'), 'utf8');
 var adminBody = fs.readFileSync(path.join(__dirname + 
       '/../views/adminMail.ejs'), 'utf8'); 
 var adminEmail = 'info@prizmapp.com';
@@ -49,7 +54,7 @@ moment.locale('en', {
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Prizm App', selected:'home' });
+  res.render('index', { title: 'Prizm App', selected:'home', bodyId: 'body-home' });
 });
 
 router.get('/about', function(req, res) {
@@ -160,7 +165,7 @@ router.get('/posts/:id', function(req, res){
         string = weeks + 'w';
       }
     }
-    res.render('post', {post: post, tags: tags, ago: string, category: post.category
+    res.render('post', {bodyId: 'post-card', post: post, tags: tags, ago: string, category: post.category
     
     });}
   });
@@ -198,6 +203,52 @@ router.get('/users/:id/password', function(req, res){
       res.render('reset', {success: false});
     }
   }); 
+});
+
+router.get('/users/:id/institutions', function(req, res){
+  var id = req.params.id;
+  var approval = req.query.approval;
+  var review_key = req.query.review_key;
+  User.findOne({_id: new ObjectId(id)}, function(err, user){
+    if (err) {
+      console.log(err);
+      res.send(401);
+    }
+    if (user.review_key == review_key && user.type == 'institution'){
+      var html = '';
+      var subject = '';
+      if (approval == 'yes') {
+        user.type = 'institution_verified';
+        user.review_key = null;
+        user.save();
+        subject = 'You have been approved!';
+        html = jade.render(acceptMail, {user: user});
+      } else if (approval == 'no') {
+        user.type = 'user';
+        user.review_key = null;
+        user.save();
+        subject = 'Thank you for your interest.';
+        html = jade.render(rejectMail,  {user: user}); 
+      }
+      console.log(user.email);
+      mandrill(mandrillEndpointSend, {
+        message: {
+                  to: [{email: user.email}],
+                  from_email: 'info@prizmapp.com',
+                  subject: subject,
+                  html: html
+               }   
+       }, function(err, response) {
+         if (err) {
+           console.log(response);
+            res.render('error', err);
+         }
+        res.render('approve_deny');
+       });
+    } else {
+      res.render('error', err); 
+    }
+  });
 });
 
 /* Insights */

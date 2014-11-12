@@ -1,0 +1,384 @@
+
+@media screen and (max-width:500px) {
+  body {
+    font-size: 14px;
+  }
+
+  .wrap {
+    width: 300px;
+    margin: 0 auto;
+  }
+
+ 
+  /** NAVIGATION BAR **/
+  #menu-button {
+    display: block;
+    float: right;
+    height: 14px;
+    width: 22px;
+    margin-top: 40px;
+    margin-right: 5px;
+    background: url(/images/menu-button.png) no-repeat;
+    border: none;
+  } 
+
+  .nav-top {
+    height: 64px;
+    width: 300px;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 64px;
+    width: 300px;
+    height: auto;
+    background-color: #EEF0F4;
+    z-index: 1;
+  }
+
+  .menu-button {
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    background: #e4e5ea;
+    height: 44px;
+    margin-left: 0px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #d4daea;
+  }
+
+  .menu-button a {
+    display: block;
+    height: 30px;
+    padding-top: 14px;
+  }
+
+  #logo {
+    height: 60px;
+    width: 88px;
+    background-size: 88px 36px;
+  }
+
+  .body h2 {
+    font-size: 18px;
+    margin-top: 36px;
+    width: 300px;
+  }
+
+  p.sign-up-desc {
+    margin-top: 345px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    width: 300px;
+  }
+
+  #sign-up {
+    vertical-align: middle;
+    text-align: center;
+    line-height: 44px;
+    font-size: 13px;
+    height: 44px;
+    width: 300px;
+    margin-top: 10px;
+  }
+
+  #android {
+    margin-top: 2px;
+  }
+
+  #body-home {
+  }
+
+  #phone {
+    position: absolute;
+    top: 120px;
+    height: 325px;
+    width: 258px;
+    background-size: 258px 411px;
+  }
+
+  .overlay {
+    top: 440px;
+    height: 65px;
+  }
+  
+  .overlay p {
+    width: 300px;
+    height: 65px;
+    font-size: 12px;
+  }
+
+  .legal {
+    top: 645px;
+    font-size: 10px;
+  }
+
+  .legal-span {
+    width: 300px;
+  }
+
+  .column {
+    width: 300px;
+  }
+
+  /** INFORMATION FORM **/
+  #info-form {
+    width: 290px;
+    border-radius: 2px;
+  }
+
+  .form-header {
+    height: 70px;
+  }
+
+  .form-header > h1 {
+    height: 70px; 
+    background-size: 84px 20px; 
+  }
+
+  .form-instructions {
+    height: 60px;
+  }
+
+  .form-section p {
+    font-size: 17px;
+    margin-top: 20px;
+  }
+  
+  .form-section label {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .form-section input {
+    height: 60px;
+    line-height: 18px;
+    font-weight: normal;
+    color: #666;
+  }
+
+  .form-section > input.input-block {
+    margin: 0;
+    border: none;
+    height: 58px;
+    width: 150px;  
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  #info-form #send {
+    right: 70px;
+   
+
+  }
+
+
+  .form-section ::-webkit-input-placeholder {
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: middle;
+  }
+
+
+  input[type="radio"] {
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: 22px;
+    background: url(/images/radio.png) no-repeat;
+    width: 23px;
+    height: 20px;
+    background-size: 20px 20px;
+  }
+
+  input[type="radio"]:checked {
+    -webkit-appearance: none;
+    appearance: none;
+    background: url(/images/radio-checked.png) no-repeat;
+    background-size: 22px 20px;
+  }
+
+  .radio-label {
+    display: inline-block;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    vertical-align: middle;
+    margin: -15px 10px 0px 10px;
+  }
+
+  #male-label, #female-label {
+    margin-top: -15px;
+  }
+
+  button.close {
+    height: 14px;
+    width: 14px;
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    margin: 0 10px 0 0;
+    padding: 0;
+  }
+
+  p.form-confirm-text {
+    margin: 10px 10px 30px 10px;
+    font-size: 17px;
+  }
+
+  p.form-confirm-close {
+    margin: 30px 30px 60px 30px;
+    font-size: 17px;
+  }
+
+  /** TERMS PAGE **/
+  #terms p, ul, h2, h3 {
+    
+  }
+
+  #terms p.full {
+    width: 310px;
+  } 
+
+  /** ABOUT PAGE **/
+  #about-block p {
+    width: 300px;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 0;
+  }
+
+  .about-left {
+    width: 300px;
+    padding: 40px 0 40px 0;
+  }
+  
+  #about-phone1, #about-phone2 {
+    height: 540px;
+    width: 300px;
+    position: relative;
+    top: 20px;
+    margin-left: 0px;
+    padding: 0;
+    background-size: 300px 540px;
+  }
+  
+  #about-mission, #about-result {
+    float: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  } 
+
+  .top-500 {
+    margin-top: 20px;
+  }
+
+  .legal-block {
+    top: 10px;
+    margin: 20px auto;
+  }
+
+  /** TERMS AND PRIVACY **/
+  #terms p, ul, h3, h3 {
+    width: 300px;
+  }
+
+  /** LUMINARY PAGE **/
+  
+  #luminary .text-box {
+    width: 300px;
+    font-size: 0.9em;
+  }
+
+  .bordered {
+    margin: 40px 0px;
+    width: 300px;
+  }
+
+  .quote {
+    font-size: 1em;
+  }  
+
+  .tagline {
+    font-size: 0.9em;
+    width: 270px;
+  }
+
+  #lum-section-1, #lum-section-2 {
+    top: 0px;
+    height: auto;
+    margin-left: 0px;
+    width: 300px;
+  }
+  
+  #luminary-phone1, #luminary-phone2 {
+    height: 514px;
+    width: 280px;
+  }
+
+  #luminary-phone1, #luminary-phone2 {
+    position: relative;
+    top: 20px;
+    margin-left: 15px;
+    background-size: 280px 514px;
+  }
+
+  .full {
+    width: 300px;
+    font-size: 0.67em;
+  }
+
+  .section {
+    width: 300px;
+  }
+  
+ #luminary h2 {
+    width: 300px;
+  } 
+  
+  .card-wrap {
+    width: 300px;
+  }
+
+  .card-wrap > .nav-top {
+    width: 300px;
+  }
+  
+ #card {
+   margin: 45px auto;
+  } 
+ #card, #card-header, #post-footer, #download-text, #post-footer, #tags {
+  width: 280px; 
+  }
+
+  #tags {
+    margin-top: -8px;
+  }
+
+  #post-footer {
+    top: 258px;
+  }
+
+  #post-image-area {
+    height: 280px;
+    width: 280px;
+    background-size: 280px 280px;
+  }
+
+  #time-line {
+    position: absolute;
+    height: 100%;
+    width: 10px;
+    background-color: #f5f6f8;
+    margin-left: 70px;
+    z-index: -1000;
+    top: 65px;
+}
+  
+}
+
+#post-card #sign-up {
+  width: 135px;
+}

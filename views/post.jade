@@ -1,0 +1,36 @@
+extends altlayout
+
+block head
+  meta(property='twitter:card' content='photo')
+  meta(property='twitter:site' content='@beprizmatic')
+  meta(property='twitter:description' content='#{post.creator.name}')
+  meta(property='twitter:image' content='https://#{post.file_path.substr(7)}')
+  meta(property='twitter:url' content='http://prizmapp.com/posts/#{post._id}')
+  meta(property='twitter:app:id:iphone' content='903458597')
+  meta(property='twitter:app:url:iphone' content='prizmapp://open?post_id=#{post._id}')
+  meta(property='twitter:app:name:iphone' content='Prizm')
+
+block content
+  .wrap
+    .card-wrap
+      #time-line
+      #card
+        #card-header
+          #card-profile-image(style="background-image:url('#{post.creator.profile_photo_url')")
+          p #{post.creator.name}
+            br
+            span#clock-image
+            span#time #{ago}
+          #card-header-right
+            #category-icon(style="background-image: url('/images/#{category}.png')")
+            if (post.external_provider)
+              p
+                | Post via #{post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1)}
+        #post-image-area(style="background-image:url('#{post.file_path}')")
+          #post-footer
+            span#tags #{tags}
+      p#download-text Download the Prizm app!
+      a#sign-up(target='itunes_store', 
+                href='https://itunes.apple.com/us/app/prizm-app/id903458597?mt=8&uo=4')
+      a#android(href='#')
+
