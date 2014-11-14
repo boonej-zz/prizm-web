@@ -465,6 +465,8 @@ var S3_BUCKET = 'higheraltitude.prizm.test';
 
 
 router.get('/sign_s3', function(req, res){
+  console.log(AWS_ACCESS_KEY);
+  console.log(AWS_SECRET_KEY);
     aws.config.update({accessKeyId: AWS_ACCESS_KEY , secretAccessKey: AWS_SECRET_KEY });
     var s3 = new aws.S3(); 
     var s3_params = { 

@@ -36,29 +36,36 @@ block content
           input#insight-hash-tags(type='text' name='hashTags')
       #submit-insight
         button#submit Send
+    script(type='text/javascript').
+      function s3_upload(){
+        var status_elem = document.getElementById("status");
+        var url_elem = document.getElementById("avatar_url");
+        var preview_elem = document.getElementById("preview");
+        var file_path_elem = document.getElementById("insight-file-path");
+        var s3upload = new S3Upload({
+                    s3_object_name: '<%= uuid %>',
+            file_dom_selector: 'insight-image-upload',
+            s3_sign_put_url: '/sign_s3',
+            onProgress: function(percent, message) {
+                status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+            },
+            onFinishS3Put: function(public_url) {
+                status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
+                url_elem.value = public_url;
+                preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+                file_path_elem.value = public_url;
+            },
+            onError: function(status) {
+                status_elem.innerHTML = 'Upload error: ' + status;
+            }
+        });
+      }
+      (function() {
+          var input_element = document.getElementById("insight-image-upload");
+          input_element.onchange = s3_upload;
+      })();
 
 
 block head
   script(type='text/javascript' src='/javascripts/s3upload.js')
-  script(type='text/javascript').
-    $(document).ready(function(){
-      $('#insight-image-upload').change(function(){
-        var s3 = new S3Upload({
-          s3_object_name    :   '<%= uuid %>',
-          file_dom_selector :   'insight-image-upload',
-          s3_sign_put_url   :   '/sign_s3',
-          onProgress        :   function(percent, message) {
-            $('#status').html('Upload progress: ' + percent + '% ' + message);
-          },
-          onFinishS3Put: function(public_url) {
-            $('#status').html('Upload completed.');
-            $('#preview img').attr('src', public_url);
-            $('#insight-file-path').val(public_url);
-          },
-          onError: function(status){
-            $('status').html('Upload error: ' + status);
-          }
-        });
-        s3.uploadFile($('#insight-image-upload').val());
-      }); 
-    });
+
