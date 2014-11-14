@@ -32,9 +32,9 @@ var uuid = require('../utils').generateUUID;
 var aws = require('aws-sdk');
 var _ = require('underscore');
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY; 
-var S3_BUCKET = process.env.S3_BUCKET; 
+var AWS_ACCESS_KEY = 'AKIAJ656TNM2SYQUMHCA';
+var AWS_SECRET_KEY = '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'; 
+var S3_BUCKET = 'higheraltitude.prizm.insights'; 
 
 moment.relativeTimeThreshold('d', 6);
 moment.relativeTimeThreshold('M', 52);
