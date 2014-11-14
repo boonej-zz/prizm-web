@@ -5,6 +5,10 @@ block head
   script(type='text/javascript').
     
     $(function(){
+      var success = '#{success}';
+      if (success == 'true') {
+        alert('Successfully sent insights');
+      }
       $("#user").autocomplete({
         source: function(req, res){
           $.ajax({

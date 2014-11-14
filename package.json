@@ -22,7 +22,7 @@
     "aws-sdk": "*",
     "node-uuid": "1.4.1",
     "request": "*",
-    "underscore": "1.6.0",
+    "underscore": "~1.6.0",
     "jade": "~1.7.0",
     "basic-auth-connect": "~1.0.0"
   }

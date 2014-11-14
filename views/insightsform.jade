@@ -14,7 +14,8 @@ block content
           input#insightTitle(type='text' name='title')
         .insight.text
           label(for='insightText') Text:
-          input#insightText(type='text' size='30' name='text')
+          br
+          textarea#insightText(type='text' cols='45' rows='6' name='text')
         .insight.file-path
           label#status(for='insight-image-upload') Please select a file
           input#insight-image-upload(type='file' name='image')
@@ -28,9 +29,6 @@ block content
         .insight.link
           label(for='insight-link') Link:
           input#insight-link(type='text' name='link')
-        .insight.tags
-          label(for='insight-tags') Tags:
-          input#insight-tags(type='text' name='tags')
         .insight.hash-tags
           label(for='insight-hash-tags') Hash Tags:
           input#insight-hash-tags(type='text' name='hashTags')
@@ -43,7 +41,7 @@ block content
         var preview_elem = document.getElementById("preview");
         var file_path_elem = document.getElementById("insight-file-path");
         var s3upload = new S3Upload({
-                    s3_object_name: '<%= uuid %>',
+          s3_object_name: '#{uuid}',
             file_dom_selector: 'insight-image-upload',
             s3_sign_put_url: '/sign_s3',
             onProgress: function(percent, message) {
