@@ -1,6 +1,13 @@
 var basicAuth = require('basic-auth');
 var uuid = require('node-uuid');
 var crypto = require('crypto');
+var express = require('express');
+var basicAuth = require('basic-auth-connect');
+
+exports.auth = basicAuth(function(user, pass, next){
+  var result = (user === 'beprizmatic' && pass === '@pple4Life');
+  next(null, result);
+});
 
 exports.prismEncrypt = function(string, salt_key){
   var cipher  = crypto.createCipher('aes-256-cbc', salt_key);
@@ -9,24 +16,7 @@ exports.prismEncrypt = function(string, salt_key){
   return crypted;
 };
 
-exports.basicAuth = function (req, res, next) {
-  function unauthorized(res) {
-    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-    return res.send(401);
-  };
 
-  var user = basicAuth(req);
-
-  if (!user || !user.name || !user.pass) {
-    return unauthorized(res);
-  };
-
-  if (user.name === 'beprizmatic' && user.pass === '@pple4Life') {
-    return next();
-  } else {
-    return unauthorized(res);
-  };
-};
 
 exports.validateEmail = function(email) {
   if (email.length == 0) return false;

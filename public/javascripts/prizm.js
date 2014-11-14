@@ -35,7 +35,7 @@ var prizm = {
                 window.location = baseURL;
               }
 };
-
+/*
 $(function() {
   var input_element = document.getElementById("interest-selection");
   input_element.onchange = interestCount;
@@ -46,5 +46,6 @@ function interestCount() {
   var interest_number = document.getElementById("interest-count");
   interest_number.value = numberOfSelectedInterests;
 }
+*/
 
 

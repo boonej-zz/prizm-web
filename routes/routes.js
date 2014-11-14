@@ -26,10 +26,11 @@ var adminBody = fs.readFileSync(path.join(__dirname +
 var adminEmail = 'info@prizmapp.com';
 var ObjectId = require('mongoose').Types.ObjectId;
 var moment = require('moment');
-var basicAuth = require('../utils').basicAuth;
+var utils = require('../utils');
 var validateEmail = require('../utils').validateEmail;
 var uuid = require('../utils').generateUUID;
 var aws = require('aws-sdk');
+
 moment.relativeTimeThreshold('d', 6);
 moment.relativeTimeThreshold('M', 52);
 
@@ -205,6 +206,19 @@ router.get('/users/:id/password', function(req, res){
   }); 
 });
 
+router.get('/users', utils.auth, function(req, res){
+  var limit = req.query.limit || 50;
+  if (req.query.name) {
+    var search = new RegExp(req.query.name, 'i');
+    User.find({name: search}).limit(limit).exec(function(err, users) {
+      if (err) {
+        res.send(500);
+      }
+      res.send(users);
+    });
+  }
+});
+
 router.get('/users/:id/institutions', function(req, res){
   var id = req.params.id;
   var approval = req.query.approval;
@@ -252,9 +266,9 @@ router.get('/users/:id/institutions', function(req, res){
 });
 
 /* Insights */
-/**
-router.get('/insights', function (req, res) {
-  User.find({type: {$in: ["institution","luminary"]}}, function (err, docs) {
+
+router.get('/insights', utils.auth, function (req, res) {
+  User.find({subtype: 'luminary'}, function (err, docs) {
     if (err) {
       console.log(err)
       res.status(500).send({ error: err });
@@ -262,14 +276,14 @@ router.get('/insights', function (req, res) {
     if (docs) {
       users = docs
     };
-    var fileName = uuid("insight");
+    var fileName = uuid('insight');
     res.render('insightsform', {title: 'Prizm App | Insights', selected: 'none',
                                                                   users: users, 
                                                                    uuid: fileName});
   });
 });
 
-router.post('/insights', function (req, res) {
+router.post('/insights', utils.auth, function (req, res) {
   var insight = new Insight({
     creator: ObjectId(req.param('creator')),
     title: req.param('title'),
@@ -292,35 +306,83 @@ router.post('/insights', function (req, res) {
   });
 });
 
-router.get('/insights/:id', function (req, res) {
-  Interest.find(function (err, docs) {
-    if (err) {
-      console.log(err);
-      res.status(500).send({ error: err });
-    };
-    if (docs) {
-      interests = docs;
-    };
-  });
+router.get('/insights/:id', utils.auth, function (req, res) {
   Insight.findOne({_id: ObjectId(req.params.id)}, function (err, insight) {
     if (err) {
       console.log(err);
     }
     if (insight) {
       User.findOne({_id: ObjectId(insight.creator)} , function (err, creator) {
-        res.render('insights', { title: 'Prizm App | Insights',
+        Interest.find(function(err, interests){
+          if (err) res.send(500);
+          res.render('insights', { title: 'Prizm App | Insights',
                                 selected: 'none',
                                 insight: insight,
                                 creator: creator,
                                 interests: interests });
+        });
       });
     };
   });
 });
 
-router.post('/insights/:id', function (req, res) {
+var processSingleUserByEmail = function(email, next) {
+  User.findOne({email: email}, function(err, user){
+    next(err, user);
+  });
+};
+
+var processUsersByInterest = function(interest, next){
+  User.find({interests: {$elemMatch: {_id: interest._id}}}, function(err, users){
+    next(err, users);
+  }); 
+};
+
+router.post('/insights/:id', utils.auth, function (req, res) {
   var insightId = req.params.id;
   var interestsCount = req.param('numberOfInterests');
+  var individualUser = req.param('individualUser');
+  if (individualUser){
+    processSingleUserByEmail(individualUser, function(err, user){
+      if(err){
+        res.send(500);
+      }
+      Insight.findOne({_id: insightId}, function(err, insight){
+        var it = new InsightTarget({
+          target: user._id,
+          insight: insight._id,
+          creator: insight.creator,
+          file_path: insight.file_path
+        });
+        it.save(function(err, result){
+          if(err){
+            res.send(500);
+          } else {
+            var activity = new Activity({
+              from: it.creator,
+              to: it.target,
+              action: 'insight',
+              insight_id: it.insight,
+              insight_target_id: it.id
+            });
+            activity.save(function(err, result){
+              if (err){
+                console.log(err);
+              } else {
+                new Push('activity', activity, function(result){
+                  console.log("logging result of push"+JSON.stringify(result));
+                });
+              } 
+            });
+          }
+
+        });
+      });
+    }); 
+  }
+  /**
+  var users = [];
+  
   var targetInterests;
   if (interestsCount == 1) {
     targetInterests = [req.param('interest')]
@@ -392,12 +454,13 @@ router.post('/insights/:id', function (req, res) {
     };
     res.redirect('/insights/' + insight.id);
   });
+  **/
 });
 
 /** S3 Upload **/
 
-var AWS_ACCESS_KEY = 'AKIAJMRLM7O3QH6WWUNA';
-var AWS_SECRET_KEY = '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'
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY; 
 var S3_BUCKET = 'higheraltitude.prizm.test';
 
 
@@ -416,6 +479,7 @@ router.get('/sign_s3', function(req, res){
             console.log(err); 
         }
         else{ 
+            console.log(data);
             var return_data = {
                 signed_request: data,
                 url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.s3_object_name 

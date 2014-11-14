@@ -1,0 +1,63 @@
+extends altlayout
+
+block content
+  .wrap.insight
+    form(method='post')
+      .insight.create
+        .insight.creator
+          span Creator:
+          select(name='creator')
+            each user in users
+              option(value='#{user.id}')= user.name
+        .insight.title
+          label(for='insightTitle') Title:
+          input#insightTitle(type='text' name='title')
+        .insight.text
+          label(for='insightText') Text:
+          input#insightText(type='text' size='30' name='text')
+        .insight.file-path
+          label#status(for='insight-image-upload') Please select a file
+          input#insight-image-upload(type='file' name='image')
+          #preview(style='border: 1px solid #666; width: 300px')
+            img(src='/images/default.png' style='width: 300px;')
+          input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
+          input#insight-file-path(type='hidden' name='filePath' value='')
+        .insight.link
+          label(for='insight-link-title') Link Title:
+          input#insight-link-title(type='text' name='linkTitle')
+        .insight.link
+          label(for='insight-link') Link:
+          input#insight-link(type='text' name='link')
+        .insight.tags
+          label(for='insight-tags') Tags:
+          input#insight-tags(type='text' name='tags')
+        .insight.hash-tags
+          label(for='insight-hash-tags') Hash Tags:
+          input#insight-hash-tags(type='text' name='hashTags')
+      #submit-insight
+        button#submit Send
+
+
+block head
+  script(type='text/javascript' src='/javascripts/s3upload.js')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $('#insight-image-upload').change(function(){
+        new S3Upload({
+          s3_object_name    :   '<%= uuid %>',
+          file_dom_selector :   'insight-image-upload',
+          s3_sign_put_url   :   '/sign_s3',
+          onProgress        :   function(percent, message) {
+            $('#status').html('Upload progress: ' + percent + '% ' + message);
+          },
+          onFinishS3Put: function(public_url) {
+            $('#status').html('Upload completed.');
+            $('#preview img').attr('src', public_url);
+            $('#insight-file-path').val(public_url);
+          },
+          onError: function(status){
+            $('status').html('Upload error: ' + status);
+          }
+        });
+      }); 
+    });

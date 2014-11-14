@@ -1,0 +1,47 @@
+extends altlayout
+
+block head
+  link(rel='stylesheet' href='/stylesheets/jquery.css' type='text/css')
+  script(type='text/javascript').
+    
+    $(function(){
+      $("#user").autocomplete({
+        source: function(req, res){
+          $.ajax({
+            url: "/users?limit=5&name=" + req.term,
+            type: "get",
+            dataType: "json",
+            success: function(data){
+              res($.map(data, function(user){
+                return {
+                  label: user.name + ': ' + user.email,
+                  value: user.email
+                }
+              }))
+            }
+          });
+        },
+        minLength: 2
+      });
+    });
+
+block content
+  #insights.wrap
+    .insight
+      p Insight Creator: #{creator.name}
+      p Insight Title: #{insight.title}
+      p Insight Text: #{insight.text}
+      p Insight Path: #{insight.file_path}
+    .insight.action
+      form(method='post')
+        p Select Interests to Target:
+        select(name='interest' id='interest-selection' size='#{interests.length}' multiple='multiple')
+          each interest in interests
+            option(name='interest' value='#{interest._id}')= interest.text
+        p Select Individual to Target:
+        div.ui-widget
+          input#user(name='individualUser')
+        br
+        #insight-target
+          input(type='submit' value='Send')
+        input#interest-count(type='hidden' name='numberOfInterests')
