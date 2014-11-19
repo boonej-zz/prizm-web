@@ -273,7 +273,8 @@ router.get('/users/:id/institutions', function(req, res){
 /* Insights */
 
 router.get('/insights', utils.auth, function (req, res) {
-  User.find({subtype: 'luminary'}, function (err, docs) {
+  User.find({$or: [{subtype: 'luminary'}, {type: 'institution_verified'}]}, 
+    function (err, docs) {
     if (err) {
       console.log(err)
       res.status(500).send({ error: err });
@@ -384,6 +385,12 @@ var processSingleUserByEmail = function(email, next) {
   });
 };
 
+var processUserByProgramCode = function(programCode, next){
+  user.find({program_code: programCode}, function(err, users){
+    next(err, users);
+  });
+};
+
 var processUsersByInterests = function(interests, next){
   var params = [];
   _.each(interests, function(interest, index, list){
@@ -400,6 +407,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
   var insightId = req.params.id;
   var interestsCount = req.param('numberOfInterests');
   var individualUser = req.param('individualUser');
+  var programCode = req.param('programCode');
   Insight.findOne({_id: insightId}, function(err, insight){
     if(individualUser){
       processSingleUserByEmail(individualUser, function(err, user)  {
@@ -420,7 +428,15 @@ router.post('/insights/:id', utils.auth, function (req, res) {
           });
         });
       }); 
-    } else {
+    } else if (programCode) {
+      processUsersByProgramCode(programCode, function(err, users){
+        _.each(users, function(user, index, list){
+          sendInsightToUser(insight, user, function(err){
+            if (err) console.log(err);
+          });
+        });
+      });
+    }else {
       var interests = _.isArray(req.param('interest'))?req.param('interest'):[req.param('interest')];
       var userArray = [];
       var i = 0;
