@@ -1,0 +1,20 @@
+extends altlayout
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/graph.css')
+  script(type='text/javascript' src='/javascripts/horizBarChart.js')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $('.chart').horizBarChart({
+        selector: '.bar',
+        speed: 1000
+      });
+    });
+block content
+  .wrap
+    ul.chart
+      for result in results
+        li(title='#{result.text}')
+          span.bar(data-number='#{result.count}')
+          span.number= result.count
+

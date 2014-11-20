@@ -335,6 +335,30 @@ router.get('/insights/:id', utils.auth, function (req, res) {
   });
 });
 
+router.get('/interests/graph', utils.auth, function(req, res) {
+  User
+  .aggregate()
+  .unwind('interests')
+  .group({_id: '$interests._id', count: {'$sum': 1}})
+  .exec(function(err, results){
+    Interest.find({}, function(err, interests){
+      _.each(results, function(result, index, list){
+        var interest = _.find(interests, function(it){
+          return String(it._id).indexOf(String(result._id)) != -1;
+        });
+        if (interest) {
+          result.text = interest.text;
+        }
+      });
+      results = _.sortBy(results, function(result){
+        return -result.count
+      });
+      res.render('interest_graph', {results: results, title: 'Interests'});
+    });  
+  });
+    
+});
+
 var sendInsightToUser = function(insight, user, next){
   console.log('sending insight to user');
   InsightTarget.findOne({creator: insight.creator, target: user._id, insight: insight._id}, function(err, it){
