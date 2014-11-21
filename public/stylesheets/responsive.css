@@ -1,4 +1,3 @@
-
 @media screen and (max-width:500px) {
   body {
     font-size: 14px;
@@ -68,10 +67,10 @@
   }
 
   p.sign-up-desc {
-    margin-top: 345px;
-    margin-bottom: 5px;
+    margin: 345px auto 5px auto;
     font-size: 16px;
     width: 300px;
+    text-align: center;
   }
 
   #sign-up {
@@ -80,12 +79,14 @@
     line-height: 44px;
     font-size: 13px;
     height: 44px;
-    width: 300px;
-    margin-top: 10px;
+    width: 135px;
+    margin: 10px auto;
+    display: block;
   }
 
   #android {
-    margin-top: 2px;
+    margin: 2px auto;
+    display: block;
   }
 
   #body-home {
@@ -97,6 +98,8 @@
     height: 325px;
     width: 258px;
     background-size: 258px 411px;
+    margin-left: -280px;
+    float: none;
   }
 
   .overlay {
@@ -108,6 +111,10 @@
     width: 300px;
     height: 65px;
     font-size: 12px;
+  }
+
+  .overlay p .column {
+    margin-top: 7px;
   }
 
   .legal {
@@ -243,6 +250,9 @@
   } 
 
   /** ABOUT PAGE **/
+  #about-block {
+    height: 900px;
+  }
   #about-block p {
     width: 300px;
     font-size: 16px;
@@ -264,12 +274,24 @@
     padding: 0;
     background-size: 300px 540px;
   }
+
+  #about-phone1 {
+    top: -550px;
+    height: 550px;
+    width: 278px;
+    background-size: 278px 550px;
+  }
   
   #about-mission, #about-result {
+    margin-top: -540px;
     float: none;
     padding-top: 20px;
     padding-bottom: 20px;
   } 
+
+  #about-result {
+    margin-top: 20px;
+  }
 
   .top-500 {
     margin-top: 20px;
