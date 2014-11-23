@@ -479,8 +479,6 @@ router.post('/insights/:id', utils.auth, function (req, res) {
 
 /** S3 Upload **/
 
-
-
 router.get('/sign_s3', function(req, res){
     aws.config.update({accessKeyId: AWS_ACCESS_KEY , secretAccessKey: AWS_SECRET_KEY });
     var s3 = new aws.S3(); 
