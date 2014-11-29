@@ -378,6 +378,7 @@ var sendInsightToUser = function(insight, user, next){
           console.log(err);
           next(err);
         }
+        it.sendInsightEmail();
         var activity = new Activity({
           from: it.creator,
           to: it.target,
@@ -391,17 +392,20 @@ var sendInsightToUser = function(insight, user, next){
             next(err);
           } else {
             new Push('activity', activity, function(result){
-              //console.log("logging result of push"+JSON.stringify(result));
+              // console.log("logging result of push"+JSON.stringify(result));
             });
             next();
           }
         });
       });
     } else {
+      it.sendInsightEmail();
       next();
     }
   });
 };
+
+
 
 var processSingleUserByEmail = function(email, next) {
   User.findOne({email: email}, function(err, user){

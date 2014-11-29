@@ -16,8 +16,6 @@ exports.prismEncrypt = function(string, salt_key){
   return crypted;
 };
 
-
-
 exports.validateEmail = function(email) {
   if (email.length == 0) return false;
   var reg = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i;
@@ -27,3 +25,4 @@ exports.validateEmail = function(email) {
 exports.generateUUID = function(suffix) {
 	return uuid.v1() + '-' + suffix;
 }
+

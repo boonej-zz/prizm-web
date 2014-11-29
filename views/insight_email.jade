@@ -6,7 +6,7 @@ html
 					td
 						p
 							| Prizm Insight
-					td			
+					td
 						p
 							| Email not displaying correctly? 
 							a
@@ -23,7 +23,7 @@ html
 								| #{insight.title}
 				tr
 					td
-						img(src='#{avatar.image}')
+						img(src='#{creator.profile_photo_url}')
 					td
 						p
 							| #{creator.name}
@@ -32,9 +32,8 @@ html
 						img(src='#{insight.file_path')
 				tr
 					td
-						for (var i = 0; i < #{insight.hash_tags.length}; i++) {
-							#{insight.hash_tags[i]}
-						}
+						each hashTag in insight.hash_tags
+							hashTag
 				tr
 					td
 						p
@@ -46,20 +45,20 @@ html
 					td
 						| Open Prizm
 				tr(style='background-color: #ffffff')
-          td(style='text-align: center; padding: 20px;')
-            p(style='font-size: 14px; color: #25689a;') FOLLOW PRIZM
-            a(href='https://www.facebook.com/prizmapp'
-            style='text-decoration: none')
-              img(src='http://www.prizmapp.com/images/facebook.png'
-              style='height: 32px; width: 32px;'
-              alt='Facebook')
-            a(href='https://www.twitter.com/beprizmatic'
-            style='text-decoration: none; margin-left: 5px;')
-              img(src='http://www.prizmapp.com/images/twitter.png'
-              style='height: 32px; width: 32px;'
-              alt='Twitter')
-            a(href='https://www.instagram.com/beprizmatic'
-            style='text-decoration: none; margin-left: 5px;')
-              img(src='http://www.prizmapp.com/images/instagram.png'
-              style='height: 32px; width: 32px;'
-              alt='Instagram') 
+					td(style='text-align: center; padding: 20px;')
+						p(style='font-size: 14px; color: #25689a;') FOLLOW PRIZM
+						a(href='https://www.facebook.com/prizmapp'
+						style='text-decoration: none')
+							img(src='http://www.prizmapp.com/images/facebook.png'
+							style='height: 32px; width: 32px;'
+							alt='Facebook')
+						a(href='https://www.twitter.com/beprizmatic'
+						style='text-decoration: none; margin-left: 5px;')
+							img(src='http://www.prizmapp.com/images/twitter.png'
+							style='height: 32px; width: 32px;'
+							alt='Twitter')
+						a(href='https://www.instagram.com/beprizmatic'
+						style='text-decoration: none; margin-left: 5px;')
+							img(src='http://www.prizmapp.com/images/instagram.png'
+							style='height: 32px; width: 32px;'
+							alt='Instagram') 
