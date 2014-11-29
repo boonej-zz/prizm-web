@@ -28,8 +28,10 @@ https.createServer(opts, app).listen(443);
 
 app.use(function(req, res, next){
   var protocol = req.protocol;
+  var hostname = req.hostname;
+  var originalUrl = req.originalUrl;
   if (protocol == 'http'){
-    res.redirect('https://' + req.hostname + req.originalUrl);
+    res.redirect('https://' + hostname + originalUrl);
   } else {
     next();
   }
