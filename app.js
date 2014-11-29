@@ -60,7 +60,8 @@ app.use(function(req, res, next){
 
 app.use(subdomain('admin', admin));
 
-app.use('/', routes);
+app.use(subdomain('', routes));
+app.use(subdomain('www', routes));
 
 
 /// catch 404 and forwarding to error handler
