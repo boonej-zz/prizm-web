@@ -40,7 +40,6 @@ router.get('/', function(req, res){
   res.send(200);
 });
 
-module.exports = router;
 
 /* Insights */
 
@@ -279,3 +278,4 @@ router.get('/sign_s3', function(req, res){
     });
 });
 
+module.exports = router;
