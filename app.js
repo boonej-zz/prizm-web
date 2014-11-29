@@ -27,7 +27,7 @@ https.createServer(opts, app).listen(4433);
 
 app.use(function(req, res, next){
   var protocol = req.protocol;
-  var hostname = req.hostname;
+  var hostname = req.headers.host;
   var originalUrl = req.originalUrl;
   if (protocol == 'http'){
     res.redirect('https://' + hostname + originalUrl);
@@ -60,7 +60,7 @@ app.use(function(req, res, next){
 
 app.use(subdomain('admin', admin));
 
-app.use(subdomain('*', routes));
+app.use('/', routes);
 
 
 /// catch 404 and forwarding to error handler
