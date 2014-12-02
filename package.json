@@ -24,6 +24,7 @@
     "request": "*",
     "underscore": "~1.6.0",
     "jade": "~1.7.0",
-    "basic-auth-connect": "~1.0.0"
+    "basic-auth-connect": "~1.0.0",
+    "express-subdomain": "~1.0.2"
   }
 }

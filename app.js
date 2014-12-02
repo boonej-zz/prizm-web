@@ -1,4 +1,16 @@
+var subdomain = require('express-subdomain');
 var express = require('express');
+var http = require('http');
+var https = require('https');
+var fs = require('fs');
+var opts = {
+  key: fs.readFileSync('ssl/PrizmApp.key'),
+  cert: fs.readFileSync('ssl/star_prizmapp_com.crt'),
+  ca: fs.readFileSync('ssl/DigiCertCA.crt'),
+  requestCert: false,
+  rejectUnauthorized: false
+};
+
 // var db = require('./db/db');
 var models = require('./models');
 var path = require('path');
@@ -7,8 +19,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/routes');
+var adminRoute = require('./routes/admin');
+
 
 var app = express();
+https.createServer(opts, app).listen(4433);
+
+app.use(function(req, res, next){
+  var protocol = req.protocol;
+  var hostname = req.headers.host;
+  var originalUrl = req.originalUrl;
+  if (protocol == 'http'){
+    res.redirect('https://' + hostname + originalUrl);
+  } else {
+    next();
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,7 +47,10 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+
+app.use(subdomain('admin', adminRoute));
+
+app.use(subdomain('*', routes));
 
 
 /// catch 404 and forwarding to error handler
