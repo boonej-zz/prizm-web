@@ -93,6 +93,9 @@ router.get('/insights/:id', utils.auth, function (req, res) {
       User.findOne({_id: ObjectId(insight.creator)} , function (err, creator) {
         Interest.find(function(err, interests){
           if (err) res.send(500);
+          interests = _.sortBy(interests, function(item){
+            return item.text;
+          });
           res.render('insights', { title: 'Prizm App | Insights',
                                 selected: 'none',
                                 insight: insight,
