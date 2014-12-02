@@ -12,6 +12,9 @@ block head
     });
 block content
   .wrap
+    p 
+      strong Active Users: 
+      | #{count}
     ul.chart
       for result in results
         li(title='#{result.text}')

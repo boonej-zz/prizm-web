@@ -127,7 +127,10 @@ router.get('/interests/graph', utils.auth, function(req, res) {
       results = _.sortBy(results, function(result){
         return -result.count
       });
-      res.render('interest_graph', {results: results, title: 'Interests'});
+      User.count({active: true}, function(err, c){
+        res.render('interest_graph', {results: results, title: 'Interests',
+        count: c});
+      });
     });  
   });
     
