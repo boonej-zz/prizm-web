@@ -1,49 +1,55 @@
 html
 	head
-		body
-			table
+		+proxima-font
+		body(style="background-color: #eef0f4; text-align: center; font-family: 'Helvetica', 'Arial', sans-serif; color: #47494d;")
+			table(style="width: 648px; margin: 0 auto; border-collapse: collapse")
 				tr
-					td
-						p
+					td(style="height: 44px;")
+						p(style='font-size: 10px; text-align: left; float: left')
 							| Prizm Insight
-					td
-						p
-							| Email not displaying correctly? 
+						p(style='font-size: 10px; text-align: right; float: right')
+							| Email not displaying correctly?
+						p(style='font-size: 10px; text-align: right; float: right')
 							a
-								| View it iny your browser
-				tr
+								| View it in your browser
+				tr(style="background-color: #ffffff; border-bottom: 1px solid #dde3f1")
 					td
-						Prizm Logo
-				tr
-					td
-						p
+						div(style='width: 100%; text-align: left')
+							img(src="http://www.prizmapp.com/images/logo.png"
+									alt="Prizm"
+									style="margin: 24px 0px 24px 24px; height: 47px; width: 116px;")
+				tr(style="background-color: #ffffff")
+					td(style="height: 174px; vertical-align: middle, width: 100%; text-align: center; color: #25689a")
+						p(style="font-size: 26px; color: #25689a; margin-top: 44px;")
 							| We think you'll like this Insight
-						p
-							a(href='#{insight.link}')
+						p(style="+proxima-fofont-size: 22px; font-weight: light; width: 420px; margin: 5px auto; color: #25689a;")
+							a(href='#{insight.link}' style='color: #25689a; text-decoration: none;')
 								| #{insight.title}
-				tr
+				tr(style="background-color: #ffffff vertical-align: left")
 					td
-						img(src='#{creator.profile_photo_url}')
-					td
-						p
+						div(style='border: 1px solid black; border-radius: 50%, width: 100px; height 100px; background-image: url(#{creator.profile_photo_url})' )
+							//- img(src='#{creator.profile_photo_url}')
+						p(style='font-size: 14px; font-weight: light; margin: 5px;color: #25689a; text-transform: uppercase;')
 							| #{creator.name}
-				tr
+				tr(style="background-color: #ffffff")
 					td
-						img(src='#{insight.file_path')
-				tr
-					td
-						each hashTag in insight.hash_tags
-							hashTag
-				tr
+						img(src='#{insight.file_path}' style='width: 600px; height: 600px;')
+						//- img(src='https://s3.amazonaws.com/higheraltitude.prizm.insights/5d100da0-77fa-11e4-88f3-cffc1ea62722-insight.jpg')
+				tr(style="background-color: #ffffff")
+					td(style='margin-left: 24px; margin-right: 24px; background-color: #25689a')
+						- each hashTag in insight.hash_tags
+							p hashTag
+				tr(style="background-color: #ffffff")
 					td
 						p
 							a(href='')
 								| On a Mobile Device?
 						p
 							| Checkout this Insight in Prizm
-				tr
+				tr(style="background-color: #ffffff")
 					td
-						| Open Prizm
+						div(style='background-color: #25689a')
+							| Open Prizm
 				tr(style='background-color: #ffffff')
 					td(style='text-align: center; padding: 20px;')
 						p(style='font-size: 14px; color: #25689a;') FOLLOW PRIZM
@@ -61,4 +67,38 @@ html
 						style='text-decoration: none; margin-left: 5px;')
 							img(src='http://www.prizmapp.com/images/instagram.png'
 							style='height: 32px; width: 32px;'
-							alt='Instagram') 
+							alt='Instagram')
+						<tr style="background-color: #ffffff">
+				tr(style='background-color: #ffffff border-top: 1px solid #dde3f1')
+					td(style="background-color: #ffffff; padding: 40px; vertical-align: middle, width: 100%; text-align: center; color: #ffffff;")
+						p(style="font-size: 10px; color: #25689a; padding: 24px;")
+							| You have received this email because you signed up for an account on Prizm with the email address: 
+							a(href='mailto:#{target.email}' style="color: #25689a; text-decoration: none")
+								| #{target.email}. 
+							| We respect your privacy and hope that you enjoy these messages. If you would no longer like to  receive these emails, you can safely and easily unsubscribe below.
+						p(style='color: #25689a; font-size: 14px;')
+							a(href='<<unsub>>' 
+								style='color: #25689a; text-decoration: none; font-size: 10px;')
+								| Unsubscribe | 
+							a(href='http://www.prizmapp.com/privacy' 
+								style='color: #25689a; text-decoration: none; font-size: 10px;')
+								| Privacy Policy
+				tr(style='background-color: #ffffff')
+					td(style='padding: 10px 0px')
+						p(style='font-size: 10px color: #25689a;')
+							| Copyright &copy; 2014 Higher Altitude, Inc. All rights reserved.
+
+mixin proxima-font
+style
+	.proxima { 
+		font-family: 'proxima_nova_ltlight';
+		  src: url('/fonts/ProximaNova-Light-webfont.eot');
+		  src: url('/fonts/ProximaNova-Light-webfont.eot?#iefix') 
+		          format('embedded-opentype'),
+		       url('/fonts/ProximaNova-Light-webfont.woff') format('woff'),
+		       url('/fonts/ProximaNova-Light-webfont.ttf') format('truetype'),
+		       url('/fonts/ProximaNova-Light-webfont.svg#proxdffdaia83a#LKJF')
+		           format('svg');
+	  font-weight: normal;
+	  font-style: normal;
+	}
