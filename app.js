@@ -20,6 +20,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/routes');
 var adminRoute = require('./routes/admin');
+// var helpers = require('./lib/helpers');
 
 
 var app = express();
