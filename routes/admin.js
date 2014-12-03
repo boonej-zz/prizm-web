@@ -109,6 +109,22 @@ router.get('/insights/:id', utils.auth, function (req, res) {
   });
 });
 
+router.get('/posts', utils.auth, function(req,res){
+  Post
+  .aggregate()
+  .group({_id: '$external_provider', count: {'$sum' :1}})
+  .exec(function(err, results){
+    if (err) console.log(err);
+    var data = [];
+    _.each(results, function(result, index, list){
+      if (!result._id) result._id = 'standard';
+      data.push([result._id, result.count]);
+    });
+    console.log(data);
+    res.render('post_chart', {results: data, title: 'Posts'});
+  });
+});
+
 router.get('/interests/graph', utils.auth, function(req, res) {
   User
   .aggregate()
