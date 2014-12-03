@@ -31,6 +31,7 @@ var validateEmail = require('../utils').validateEmail;
 var uuid = require('../utils').generateUUID;
 var aws = require('aws-sdk');
 var _ = require('underscore');
+var helpers = require('../lib/helpers');
 
 var AWS_ACCESS_KEY = 'AKIAJ656TNM2SYQUMHCA';
 var AWS_SECRET_KEY = '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'; 
@@ -167,11 +168,13 @@ var sendInsightToUser = function(insight, user, next){
             new Push('activity', activity, function(result){
               //console.log("logging result of push"+JSON.stringify(result));
             });
+            helpers.mail.sendInsightEmail(it);
             next();
           }
         });
       });
     } else {
+      helpers.mail.sendInsightEmail(it);
       next();
     }
   });
