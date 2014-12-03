@@ -11,7 +11,6 @@ var opts = {
   rejectUnauthorized: false
 };
 
-// var db = require('./db/db');
 var models = require('./models');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -20,7 +19,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/routes');
 var adminRoute = require('./routes/admin');
-// var helpers = require('./lib/helpers');
 
 
 var app = express();
