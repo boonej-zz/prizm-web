@@ -41,7 +41,6 @@ router.get('/', function(req, res){
   res.send(200);
 });
 
-
 /* Insights */
 
 router.get('/insights', utils.auth, function (req, res) {
@@ -254,9 +253,38 @@ router.post('/insights/:id', utils.auth, function (req, res) {
   });
  });
 
+/** Email Subscription **/
+router.get('/unsubscribe/:id', function(req, res) {
+  var email = req.params.id;
+  helpers.mail.unsubscribeUserByEmail(email, function(err, user) {
+    if (err) {
+      console.log(err);
+      res.status(500).send({error: 'There was an error trying to unsubscribe ' + 
+                            'the following email address: ' + user.email});
+    }
+    if (user) {
+      res.status(200).send({success: user.email + ' has been unsubscribed from' +
+                            ' future Prizm emails'});
+    }
+  })
+})
+
+router.get('/subscribe/:id', function(req, res) {
+  var email = req.params.id;
+  helpers.mail.subscribeUserByEmail(email, function(err, user) {
+    if (err) {
+      console.log(err);
+      res.status(500).send({error: 'There was an error trying to resubscribe ' + 
+                            'the following email address: ' + user.email});
+    }
+    if (user) {
+      res.status(200).send({success: user.email + ' has been resubscribed to' +
+                            ' future Prizm emails'});
+    }
+  })
+})
+
 /** S3 Upload **/
-
-
 
 router.get('/sign_s3', function(req, res){
     aws.config.update({accessKeyId: AWS_ACCESS_KEY , secretAccessKey: AWS_SECRET_KEY });
