@@ -61,13 +61,9 @@ router.get('/insights', utils.auth, function (req, res) {
 });
 
 router.post('/insights', utils.auth, function (req, res) {
-  var hashTags = req.param('hashTags').replace(/ /g, '');
+  var hashTags = req.param('hashTags').replace(/(^\s+|\s+$)/g, '');
+  hashTags = hashTags.replace(/#/g, '');
   hashTags = hashTags.split(',');
-  _.each(hashTags, function(tag, idx, list){
-    if (tag.charAt(0) == '#') {
-      tag = tag.substring(1);
-    }
-  });
   var insight = new Insight({
     creator: ObjectId(req.param('creator')),
     title: req.param('title'),
