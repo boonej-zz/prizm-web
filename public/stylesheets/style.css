@@ -55,6 +55,12 @@
   display: none;
 }
 
+.anchor {
+  background: url('/images/placeholder.png') no-repeat;
+  position: relative;
+  top: -75px;
+}
+
 /** STANDARD ELEMENTS **/
 
 body {
@@ -86,6 +92,13 @@ a {
   background: url('/images/logo.png') no-repeat;
   background-size: 176px 72px;
   background-position: left bottom;
+}
+
+#navbar {
+  position: fixed;
+  top: 0px;
+  background-color: #EEF0F4;
+  z-index: 1000;
 }
 
 .nav-top {
@@ -133,10 +146,15 @@ a {
 
 /** HOME **/
 
+#home-block {
+  margin-top: 75px;
+}
+
 .home {
 	clear: both;
-	height: 658px;
+	height: 584px;
 	float: left;
+  margin-top: 75px;
 }
 
 .home > h2 {
@@ -186,7 +204,7 @@ p.sign-up-desc {
 }
 
 #home-phone {
-  height: 598px;
+  height: 599px;
   width: 490px;
   margin-top: 60px;
   margin-right: -10px;
@@ -224,7 +242,7 @@ p.sign-up-desc {
 
 /** ABOUT **/
 
-#about {
+#about-block {
 	height: 634px;
 }
 
@@ -242,7 +260,7 @@ p.sign-up-desc {
 
 /** INSIGHTS **/
 
-#insight {
+#insight-block {
 	height: 640px;
 }
 
@@ -260,7 +278,7 @@ p.sign-up-desc {
 
 /** MISSION **/
 
-#mission {
+#mission-block {
 	height: 640px;
 }
 
