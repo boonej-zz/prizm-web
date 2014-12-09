@@ -47,6 +47,45 @@ $(function(){
     }
   });
 });
+
+$(window).scroll(function(){
+  var scrolled_val = $(document).scrollTop().valueOf();
+  var about = $('a[href="#about"]').parent()
+  var insight = $('a[href="#insight"]').parent()
+  var mission = $('a[href="#mission"]').parent()
+  if (scrolled_val < 658) {
+    console.log("HOME");
+    $('.menu-button').toggleClass('selected', false);
+  }
+  else if (scrolled_val > 658 && scrolled_val < 1292) {
+    console.log("ABOUT")
+    if (about.hasClass('selected')) {
+      return;
+    }
+    else {
+      $('.menu-button').toggleClass('selected', false);
+      about.toggleClass('selected');
+    }
+  }
+  else if (scrolled_val > 1292 && scrolled_val < 1932) {
+    if (insight.hasClass('selected')) {
+      return;
+    }
+    else {
+      $('.menu-button').toggleClass('selected', false);
+      insight.toggleClass('selected');
+    }
+  }
+  else if (scrolled_val > 1932) {
+    if (mission.hasClass('selected')) {
+      return;
+    }
+    else {
+      $('.menu-button').toggleClass('selected', false);
+      mission.toggleClass('selected');
+    }
+  }
+})
 /*
 $(function() {
   var input_element = document.getElementById("interest-selection");
