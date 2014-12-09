@@ -4,15 +4,6 @@ mixin legal
     a#facebook.contact-button(href='https://www.facebook.com/prizmapp')
     a#twitter.contact-button(href='https://www.twitter.com/beprizmatic')
     a#instagram.contact-button(href='https://www.instagram.com/beprizmatic')
-  span.legal-span
-    | Copyright &copy; 2014 Prizm Powered by
-    a.underline(href='http://www.higheraltitude.co') Higher Altitude, Inc.
-    | - 
-    a.underline(href='/privacy') Privacy Policy
-    | -
-    a.underline(href='/terms') Terms of Service
-    | -
-    a.underline(href='https://www.prizmapp.desk.com') Support
   span.mixpanelbadge
     a(href='https://mixpanel.com/f/partner')
       img(src='//cdn.mxpnl.com/site_media/images/partner/badge_light.png'
@@ -27,6 +18,15 @@ mixin legal
         p
           img(alt='Clicky' width='1' height='1'
               src='//in.getclicky.com/100784552ns.gif')
+  span.legal-span.wrap
+    | Copyright &copy; 2014 Prizm Powered by
+    a.underline(href='http://www.higheraltitude.co') Higher Altitude, Inc.
+    | - 
+    a.underline(href='/privacy') Privacy Policy
+    | -
+    a.underline(href='/terms') Terms of Service
+    | -
+    a.underline(href='https://www.prizmapp.desk.com') Support
 
 doctype html
 html
@@ -49,16 +49,22 @@ html
         .menu
           if (selected == 'about')
             span(class='menu-button selected')
-              a(href='/about') About
+              a(href='#about-block') About
           else
             span.menu-button
-              a(href='/about') About
+              a(href='#about-block') About
           if (selected == 'insight')
             span(class='menu-button selected')
-              a(href='/insight') Insight
+              a(href='#insight-block') Insight
           else
             span.menu-button
-              a(href='/insight') Insight
+              a(href='#insight-block') Insight
+          if (selected == 'mission')
+            span(class='menu-button selected')
+              a(href='#mission-block') Mission
+          else
+            span.menu-button
+              a(href='#mission-block') Mission
           span(class='menu-button')
             a(href='http://beprizmatic.com') Blog
           span(class='menu-button')
@@ -66,13 +72,15 @@ html
         button(id='menu-button' onclick='prizm.menuClicked()')
 
     block content
+    p.legal
+      mixin legal
       
-    if (selected == 'home')
-      p.legal
-        mixin legal
-    else
-      p.legal-block
-        mixin legal
+    //- if (selected == 'home')
+    //-   p.legal
+    //-     mixin legal
+    //- else
+    //-   p.legal-block
+    //-     mixin legal
      
     
 
