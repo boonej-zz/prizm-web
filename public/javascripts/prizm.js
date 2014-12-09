@@ -57,7 +57,7 @@ $(window).scroll(function(){
     console.log("HOME");
     $('.menu-button').toggleClass('selected', false);
   }
-  else if (scrolled_val > 658 && scrolled_val < 1292) {
+  else if (scrolled_val > 658 && scrolled_val < 992) {
     console.log("ABOUT")
     if (about.hasClass('selected')) {
       return;
@@ -67,7 +67,7 @@ $(window).scroll(function(){
       about.toggleClass('selected');
     }
   }
-  else if (scrolled_val > 1292 && scrolled_val < 1932) {
+  else if (scrolled_val > 1292 && scrolled_val < 1532) {
     if (insight.hasClass('selected')) {
       return;
     }
