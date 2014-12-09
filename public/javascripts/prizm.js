@@ -35,6 +35,18 @@ var prizm = {
                 window.location = baseURL;
               }
 };
+
+$(function(){
+  $('.menu-button').click(function(){
+    if ($(this).hasClass('selected')) {
+      return;
+    }
+    else {
+      $('.menu-button').toggleClass('selected', false);
+      $(this).toggleClass('selected');
+    }
+  });
+});
 /*
 $(function() {
   var input_element = document.getElementById("interest-selection");
