@@ -20,6 +20,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/routes');
 var adminRoute = require('./routes/admin');
 
+var herokuHostname = 'safe-lake-1236.herokuapp.com';
 
 var app = express();
 https.createServer(opts, app).listen(4433);
@@ -28,7 +29,10 @@ app.use(function(req, res, next){
   var protocol = req.protocol;
   var hostname = req.headers.host;
   var originalUrl = req.originalUrl;
-  if (protocol == 'http'){
+  if (hostname == herokuHostname) {
+    next();
+  }
+  else if (protocol == 'http'){
     res.redirect('https://' + hostname + originalUrl);
   } else {
     next();
