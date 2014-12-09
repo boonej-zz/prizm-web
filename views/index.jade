@@ -1,8 +1,8 @@
-extends layout 
+extends layout
 
 block content
-  .wrap
-    .body
+  #home-block.full-width
+    .wrap
       .home
         h2.column
           | Capture and share personal inspirations and achievements as they
@@ -10,12 +10,52 @@ block content
         p.sign-up-desc
           | Click below to download Prizm.
         a(id='sign-up'
-        href='https://itunes.apple.com/us/app/prizm-app/id903458597?mt=8&uo=4"'
-        target='itunes_store')
+          href='https://itunes.apple.com/us/app/prizm-app/id903458597?mt=8&uo=4"'
+          target='itunes_store')
         a(id='android' href='#')
-      #phone  
+      #home-phone.phone
     .overlay
       p
         span.column
           | Prizm is a visual journal that learns your interests and connects 
           | you to new opportunities.
+  #about.full-width.blue-background
+    .wrap
+      .about.right
+        h2 About
+        p.column
+          | Prizm is a mobile app that helps you collect your inspirations and
+          | achievements in one place, kind of like a journal and a trophy case
+          | combined. Your Prizm reflects who you are by bringing the posts you 
+          | choose from apps like Instagram and Twitter together with posts you
+          | create inside of Prizm. Colleges and companies want to see who you are
+          | beyond what's on paper. Prizm is your chance to show people what 
+          | you're all about.
+      #about-phone.phone.left
+  #insight.full-width
+    .wrap
+      .insight.left
+        h2 Insights
+        p.column
+          | As Prizm gets to know you based on your selected interests, posts, hashtags
+          | and who you're following, it will send periodic insights that we hope will
+          | spark your interest. It could be info about a college that might be a good
+          | fit for you, tips from someone at the top of their game, or a possible career
+          | to explore.
+      #insight-phone.phone.right
+  #mission.full-width.blue-background
+    .wrap
+      .mission.right
+        h2 Mission
+        p.column
+          | We developed Prizm as a tool to help you connect the dots between
+          | where you are now and where you want to be. We believe that exploring
+          | your interests today can spur choices for the future.
+        h2 The Result
+        p.column 
+          | Prizm is a positive mobile community where you can be uniquely you
+          | and discover how your interests and achievements match up different
+          | colleges, military, community organizations, and career paths.
+      #mission-phone.phone.left
+
+
