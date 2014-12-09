@@ -42,29 +42,29 @@ html
          content='app-id=903458597, app-argument=prizmapp://open')
     block head
   body
-    div(class='wrap')
-      .nav-top
+    #navbar.full-width
+      .nav-top.wrap
         h1#logo(onclick='prizm.goHome()')
           span.hidden Prizm
         .menu
           if (selected == 'about')
             span(class='menu-button selected')
-              a(href='#about-block') About
+              a(href='#about') About
           else
             span.menu-button
-              a(href='#about-block') About
+              a(href='#about') About
           if (selected == 'insight')
             span(class='menu-button selected')
-              a(href='#insight-block') Insight
+              a(href='#insight') Insight
           else
             span.menu-button
-              a(href='#insight-block') Insight
+              a(href='#insight') Insight
           if (selected == 'mission')
             span(class='menu-button selected')
-              a(href='#mission-block') Mission
+              a(href='#mission') Mission
           else
             span.menu-button
-              a(href='#mission-block') Mission
+              a(href='#mission') Mission
           span(class='menu-button')
             a(href='http://beprizmatic.com') Blog
           span(class='menu-button')
