@@ -50,8 +50,11 @@ router.get('/insights', utils.auth, function (req, res) {
       console.log(err)
       res.status(500).send({ error: err });
     };
+    var users = [];
     if (docs) {
-      users = docs
+      users = _.sortBy(docs, function(item){
+        return item.name;
+      });
     };
     var fileName = uuid('insight') + '.jpg';
     res.render('insightsform', {title: 'Prizm App | Insights', selected: 'none',
