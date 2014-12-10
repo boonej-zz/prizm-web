@@ -54,11 +54,9 @@ $(window).scroll(function(){
   var insight = $('a[href="#insight"]').parent()
   var mission = $('a[href="#mission"]').parent()
   if (scrolled_val < 658) {
-    console.log("HOME");
     $('.menu-button').toggleClass('selected', false);
   }
   else if (scrolled_val > 658 && scrolled_val < 992) {
-    console.log("ABOUT")
     if (about.hasClass('selected')) {
       return;
     }
