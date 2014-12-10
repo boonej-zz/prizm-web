@@ -61,15 +61,20 @@ moment.locale('en', {
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Prizm App', selected:'home', bodyId: 'body-home' });
+
 });
 
 router.get('/about', function(req, res) {
-  res.render('about', { title: 'Prizm App | About', selected:'about' });
+  res.redirect('/#about');
 });
 
 router.get('/insight', function(req, res) {
-  res.render('insight', { title: 'Prizm App | Insight', selected:'insight' });
+  res.redirect('/#insight');
 });
+
+router.get('/mission', function(req, res) {
+  res.redirect('/#mission');
+})
 
 router.get('/terms', function(req, res) {
   res.render('terms', { title: 'Prizm App | Legal', selected:'none'});
