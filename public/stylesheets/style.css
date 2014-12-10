@@ -430,3 +430,10 @@ p.sign-up-desc {
   width: 400px;
   background-size: 400px 680px;
 }
+
+/** PARTNER **/
+
+#partner {
+  margin-top: 75px;
+  padding-top: 1px;
+}
