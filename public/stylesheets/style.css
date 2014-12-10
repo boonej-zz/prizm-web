@@ -44,11 +44,11 @@
 }
 
 .right {
-	float: right;
+  float: right;
 }
 
 .left {
-	float: left
+  float: left
 }
 
 .hidden {
@@ -151,9 +151,9 @@ a {
 }
 
 .home {
-	clear: both;
-	height: 584px;
-	float: left;
+  clear: both;
+  height: 584px;
+  float: left;
   margin-top: 75px;
 }
 
@@ -243,7 +243,7 @@ p.sign-up-desc {
 /** ABOUT **/
 
 #about-block {
-	height: 634px;
+  height: 634px;
 }
 
 .about.right {
@@ -261,7 +261,7 @@ p.sign-up-desc {
 /** INSIGHTS **/
 
 #insight-block {
-	height: 640px;
+  height: 640px;
 }
 
 .insight.left {
@@ -279,7 +279,7 @@ p.sign-up-desc {
 /** MISSION **/
 
 #mission-block {
-	height: 640px;
+  height: 640px;
 }
 
 .mission.right {
@@ -367,4 +367,66 @@ p.sign-up-desc {
 
 #terms p, ul, h2, h3{
   width: 600px;
+}
+
+/** LUMINARY **/
+
+#luminary-qoute {
+  margin-top: 75px;
+}
+
+.luminary-block {
+  height: 670px
+}
+
+.full a:hover {
+  text-decoration: underline;
+  z-index: 1000;
+}
+
+.bordered {
+  margin-top: 150px;
+  margin-bottom: 75px;
+  border-top: 1px solid #a2aed5;
+  border-bottom: 1px solid #a2aed5;
+}
+
+.full {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 1.2em;
+}
+
+.quote {
+  font-size: 1.6em;
+}
+
+.tagline {
+  font-size: 1.3em;
+  width: 400px;
+}
+
+#lum-section-1 {
+  margin-top: 150px;
+}
+
+#lum-section-2 {
+  margin-top: 150px;
+}
+
+#luminary-phone1 {
+  background: url('/images/lphone2.png') no-repeat;
+  height: 680px;
+  width: 400px;
+  background-size: 400px 680px;
+}
+
+#luminary-phone2 {
+  background: url('/images/lphone1.png') no-repeat;
+  height: 680px;
+  width: 400px;
+  background-size: 400px 680px;
 }
