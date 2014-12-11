@@ -50,9 +50,9 @@ $(function(){
 
 $(window).scroll(function(){
   var scrolled_val = $(document).scrollTop().valueOf();
-  var about = $('a[href="#about"]').parent()
-  var insight = $('a[href="#insight"]').parent()
-  var mission = $('a[href="#mission"]').parent()
+  var about = $('a[href="/#about"]').parent()
+  var insight = $('a[href="/#insight"]').parent()
+  var mission = $('a[href="/#mission"]').parent()
   if (scrolled_val < 658) {
     $('.menu-button').toggleClass('selected', false);
   }
