@@ -8,8 +8,16 @@
     margin: 0 auto;
   }
 
- 
+  .column {
+    width: 300px;
+  }
+
+  .right, .left {
+    float: none;
+  }
+
   /** NAVIGATION BAR **/
+
   #menu-button {
     display: block;
     float: right;
@@ -60,9 +68,15 @@
     background-size: 88px 36px;
   }
 
-  .body h2 {
+  /** HOME **/
+  
+  #home-block {
+    height: 460px;
+  }
+
+  .home > h2 {
     font-size: 18px;
-    margin-top: 36px;
+    margin-top: -48px;
     width: 300px;
   }
 
@@ -89,10 +103,7 @@
     display: block;
   }
 
-  #body-home {
-  }
-
-  #phone {
+  #home-phone {
     position: absolute;
     top: 120px;
     height: 325px;
@@ -116,6 +127,12 @@
   .overlay p .column {
     margin-top: 7px;
   }
+  
+  .overlay .column {
+    width: 300px;
+  }
+
+  /** FOOTER **/
 
   .legal {
     top: 645px;
@@ -126,186 +143,82 @@
     width: 300px;
   }
 
-  .column {
-    width: 300px;
+  .legal-block {
+    top: 10px;
+    margin: 20px auto;
   }
 
-  /** INFORMATION FORM **/
-  #info-form {
-    width: 290px;
-    border-radius: 2px;
-  }
-
-  .form-header {
-    height: 70px;
-  }
-
-  .form-header > h1 {
-    height: 70px; 
-    background-size: 84px 20px; 
-  }
-
-  .form-instructions {
-    height: 60px;
-  }
-
-  .form-section p {
-    font-size: 17px;
-    margin-top: 20px;
-  }
-  
-  .form-section label {
-    font-size: 14px;
-    margin-left: 10px;
-  }
-
-  .form-section input {
-    height: 60px;
-    line-height: 18px;
-    font-weight: normal;
-    color: #666;
-  }
-
-  .form-section > input.input-block {
-    margin: 0;
-    border: none;
-    height: 58px;
-    width: 150px;  
-    font-size: 14px;
-    vertical-align: middle;
-  }
-
-  #info-form #send {
-    right: 70px;
-   
-
-  }
-
-
-  .form-section ::-webkit-input-placeholder {
-    font-size: 14px;
-    font-weight: normal;
-    vertical-align: middle;
-  }
-
-
-  input[type="radio"] {
-    border: none;
-    border-radius: 0;
-    -webkit-appearance: none;
-    appearance: none;
-    margin-top: 22px;
-    background: url(/images/radio.png) no-repeat;
-    width: 23px;
-    height: 20px;
-    background-size: 20px 20px;
-  }
-
-  input[type="radio"]:checked {
-    -webkit-appearance: none;
-    appearance: none;
-    background: url(/images/radio-checked.png) no-repeat;
-    background-size: 22px 20px;
-  }
-
-  .radio-label {
-    display: inline-block;
-    height: 44px;
-    line-height: 44px;
-    font-size: 14px;
-    vertical-align: middle;
-    margin: -15px 10px 0px 10px;
-  }
-
-  #male-label, #female-label {
-    margin-top: -15px;
-  }
-
-  button.close {
-    height: 14px;
-    width: 14px;
-    background-size: 14px 14px;
-    background-repeat: no-repeat;
-    margin: 0 10px 0 0;
-    padding: 0;
-  }
-
-  p.form-confirm-text {
-    margin: 10px 10px 30px 10px;
-    font-size: 17px;
-  }
-
-  p.form-confirm-close {
-    margin: 30px 30px 60px 30px;
-    font-size: 17px;
-  }
 
   /** TERMS PAGE **/
   #terms p, ul, h2, h3 {
-    
+    width: 300px;
   }
 
   #terms p.full {
     width: 310px;
   } 
 
-  /** ABOUT PAGE **/
+  /** ABOUT **/
   #about-block {
-    height: 900px;
+    height: 930px;
   }
-  #about-block p {
+  
+  #insight-block {
+    height: 800px
+  }
+  
+  #mission-block {
+    height: 930px;
+  }
+
+  #about-block p, #mission-block p, #insight-block p {
     width: 300px;
     font-size: 16px;
     line-height: 20px;
-    margin-left: 0;
+    margin: 0px auto;
   }
 
-  .about-left {
+  .about {
     width: 300px;
     padding: 40px 0 40px 0;
   }
   
-  #about-phone1, #about-phone2 {
-    height: 540px;
+  .insight, .mission {
     width: 300px;
-    position: relative;
-    top: 20px;
-    margin-left: 0px;
-    padding: 0;
-    background-size: 300px 540px;
+    padding: 0px 0 40px 0;
   }
 
-  #about-phone1 {
-    top: -550px;
-    height: 550px;
-    width: 278px;
-    background-size: 278px 550px;
+  .insight.left {
+    margin: 0px auto;
   }
   
-  #about-mission, #about-result {
-    margin-top: -540px;
+  .mission.right {
+    margin: 0px auto;
+  }
+  
+  .phone {
+    height: 540px;
+    width: 278px;
+    position: relative;
+    top: 20px;
+    padding: 0px;
+    background-size: 278px 540px;
+  }
+
+  #about-phone, #insight-phone, #mission-phone {
+    top: -20px;
+    height: 530px;
+    width: 278px;
+    background-size: 278px 530px;
+    margin: 0px auto;
+  }
+  
+  #mission-block, #insight-block {
+    margin-top: 0px;
     float: none;
     padding-top: 20px;
     padding-bottom: 20px;
   } 
-
-  #about-result {
-    margin-top: 20px;
-  }
-
-  .top-500 {
-    margin-top: 20px;
-  }
-
-  .legal-block {
-    top: 10px;
-    margin: 20px auto;
-  }
-
-  /** TERMS AND PRIVACY **/
-  #terms p, ul, h3, h3 {
-    width: 300px;
-  }
 
   /** LUMINARY PAGE **/
   
@@ -397,10 +310,119 @@
     margin-left: 70px;
     z-index: -1000;
     top: 65px;
-}
+  }
   
-}
 
-#post-card #sign-up {
-  width: 135px;
+  #post-card #sign-up {
+    width: 135px;
+  }
+
+  /** INFORMATION FORM **/
+  #info-form {
+    width: 290px;
+    border-radius: 2px;
+  }
+
+  .form-header {
+    height: 70px;
+  }
+
+  .form-header > h1 {
+    height: 70px; 
+    background-size: 84px 20px; 
+  }
+
+  .form-instructions {
+    height: 60px;
+  }
+
+  .form-section p {
+    font-size: 17px;
+    margin-top: 20px;
+  }
+  
+  .form-section label {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .form-section input {
+    height: 60px;
+    line-height: 18px;
+    font-weight: normal;
+    color: #666;
+  }
+
+  .form-section > input.input-block {
+    margin: 0;
+    border: none;
+    height: 58px;
+    width: 150px;  
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  #info-form #send {
+    right: 70px;
+   
+
+  }
+
+  .form-section ::-webkit-input-placeholder {
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: middle;
+  }
+
+  input[type="radio"] {
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: 22px;
+    background: url(/images/radio.png) no-repeat;
+    width: 23px;
+    height: 20px;
+    background-size: 20px 20px;
+  }
+
+  input[type="radio"]:checked {
+    -webkit-appearance: none;
+    appearance: none;
+    background: url(/images/radio-checked.png) no-repeat;
+    background-size: 22px 20px;
+  }
+
+  .radio-label {
+    display: inline-block;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    vertical-align: middle;
+    margin: -15px 10px 0px 10px;
+  }
+
+  #male-label, #female-label {
+    margin-top: -15px;
+  }
+
+  button.close {
+    height: 14px;
+    width: 14px;
+    background-size: 14px 14px;
+    background-repeat: no-repeat;
+    margin: 0 10px 0 0;
+    padding: 0;
+  }
+
+  p.form-confirm-text {
+    margin: 10px 10px 30px 10px;
+    font-size: 17px;
+  }
+
+  p.form-confirm-close {
+    margin: 30px 30px 60px 30px;
+    font-size: 17px;
+  }
+
 }
