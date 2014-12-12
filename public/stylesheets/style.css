@@ -187,15 +187,15 @@ p.sign-up-desc {
 }
 
 #android {
-  top: 50px;
   display: inline-block;
   margin-top: 30px;
+  margin-left: 20px;
   font-size: 17px;
   font-weight: bold;
   letter-spacing: -1px;
   background: url('/images/google.png') no-repeat;
-  background-size: 135px 40px;
-  width: 135px;
+  background-size: 120px 40px;
+  width: 120px;
   height: 40px;
   color: #FFF;
   font-weight: bold;
