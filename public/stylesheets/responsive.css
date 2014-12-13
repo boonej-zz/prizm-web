@@ -63,15 +63,19 @@
   }
 
   #logo {
-    height: 60px;
+    height: 36px;
     width: 88px;
-    background-size: 88px 36px;
+    margin-top: 24px;
   }
 
   /** HOME **/
   
   #home-block {
     height: 460px;
+  }
+
+  .home {
+    height: 524px;
   }
 
   .home > h2 {
@@ -160,7 +164,7 @@
 
   /** ABOUT **/
   #about-block {
-    height: 930px;
+    height: 1050px;
   }
   
   #insight-block {
