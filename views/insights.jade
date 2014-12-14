@@ -49,6 +49,8 @@ block content
         label(for='program-code') Enter a Program Code:
         div.ui-widget
           input#program-code(name='programCode')
+        p Select to send Insight to all Prizm users:
+          input#all-users(type='checkbox' name='allUsers')
         #insight-target
           input(type='submit' value='Send')
         input#interest-count(type='hidden' name='numberOfInterests')

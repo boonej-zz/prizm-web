@@ -226,12 +226,18 @@ var processUsersByInterests = function(interests, next){
   }); 
 };
 
+var processAllUsers = function(next) {
+  User.find(function(err, users) {
+    next(err, users);
+  });
+};
 
 router.post('/insights/:id', utils.auth, function (req, res) {
   var insightId = req.params.id;
   var interestsCount = req.param('numberOfInterests');
   var individualUser = req.param('individualUser');
   var programCode = req.param('programCode');
+  var allUsers = req.param('allUsers');
   Insight.findOne({_id: insightId}, function(err, insight){
     if(individualUser){
       processSingleUserByEmail(individualUser, function(err, user)  {
@@ -260,7 +266,25 @@ router.post('/insights/:id', utils.auth, function (req, res) {
           });
         });
       });
-    }else {
+    } else if (allUsers) {
+      processAllUsers(function(err, users) {
+        _.each(users, function(user, index, list) {
+          sendInsightToUser(insight, user, function(err) {
+            if (!(index == (list.length - 1))) {
+              if (err) console.log(err);
+            }
+            else {
+              if (err) {
+              console.log(err);
+                res.send(500);
+              } else {
+                res.send(200);
+              };
+            };
+          });
+        });
+      });
+    } else {
       var interests = _.isArray(req.param('interest'))?req.param('interest'):[req.param('interest')];
       var userArray = [];
       var i = 0;
