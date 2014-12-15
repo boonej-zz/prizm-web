@@ -26,7 +26,7 @@ block content
             if (post.external_provider)
               p
                 | Post via #{post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1)}
-        #post-image-area(style="background-image:url('#{post.file_path}')")
+        #post-image-area(style="background-image:url('https://#{post.file_path.substr(7)}')")
           #post-footer
             span#tags #{tags}
       p#download-text Download the Prizm app!
