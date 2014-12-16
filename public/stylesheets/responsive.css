@@ -273,11 +273,11 @@
     width: 300px;
   }
   
- #luminary h2 {
+  #luminary h2 {
     width: 300px;
   } 
   
-  .card-wrap {
+  .post-wrap {
     width: 300px;
   }
 
@@ -285,11 +285,19 @@
     width: 300px;
   }
   
- #card {
+  #post {
    margin: 45px auto;
+   width: 300px;
   } 
- #card, #card-header, #post-footer, #download-text, #post-footer, #tags {
+
+  #poar, #post-header, #post-footer, #post-footer, #tags {
   width: 280px; 
+  margin: 0px auto;
+  }
+
+  #post-card p.sign-up-desc {
+    width: 300px;
+    margin-top: 100px;
   }
 
   #tags {
@@ -304,6 +312,7 @@
     height: 280px;
     width: 280px;
     background-size: 280px 280px;
+    margin: 0px auto;
   }
 
   #time-line {
@@ -316,11 +325,6 @@
     top: 65px;
   }
   
-
-  #post-card #sign-up {
-    width: 135px;
-  }
-
   /** INFORMATION FORM **/
   #info-form {
     width: 290px;
