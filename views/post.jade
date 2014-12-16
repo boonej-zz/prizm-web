@@ -12,16 +12,15 @@ block head
 
 block content
   .wrap
-    .card-wrap
-      #time-line
-      #card
-        #card-header
-          #card-profile-image(style="background-image:url('#{post.creator.profile_photo_url}')")
+    .post-wrap
+      #post
+        #post-header
+          #post-profile-image(style="background-image:url('https://#{post.creator.profile_photo_url.substr(7)}')")
           p #{post.creator.name}
             br
             span#clock-image
             span#time #{ago}
-          #card-header-right
+          #post-header-right
             #category-icon(style="background-image: url('/images/#{category}.png')")
             if (post.external_provider)
               p
@@ -29,7 +28,7 @@ block content
         #post-image-area(style="background-image:url('https://#{post.file_path.substr(7)}')")
           #post-footer
             span#tags #{tags}
-      p#download-text Download the Prizm app!
+      p.sign-up-desc Download the Prizm app!
       a#sign-up(target='itunes_store', 
                 href='https://itunes.apple.com/us/app/prizm-app/id903458597?mt=8&uo=4')
       a#android(href='#')
