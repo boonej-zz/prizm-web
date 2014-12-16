@@ -455,6 +455,16 @@ p.sign-up-desc {
 
 /** POSTS **/
 
+#time-line {
+  position: absolute;
+  height: 150%;
+  width: 10px;
+  background-color: #f5f6f8;
+  margin-left: 315px;
+  z-index: -1000;
+  top: 75px;
+}
+
 .post-wrap {
   width: 890px;
   margin: 0 auto;
