@@ -32,6 +32,7 @@ var uuid = require('../utils').generateUUID;
 var aws = require('aws-sdk');
 var _ = require('underscore');
 var helpers = require('../lib/helpers');
+var emailSubjects = require('../lib/helpers/mail').emailSubjects;
 
 var AWS_ACCESS_KEY = 'AKIAJ656TNM2SYQUMHCA';
 var AWS_SECRET_KEY = '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'; 
@@ -90,6 +91,7 @@ router.post('/insights', utils.auth, function (req, res) {
 
 router.get('/insights/:id', utils.auth, function (req, res) {
   var success = req.query.success;
+  var subjects = emailSubjects;
   Insight.findOne({_id: ObjectId(req.params.id)}, function (err, insight) {
     if (err) {
       console.log(err);
@@ -106,7 +108,8 @@ router.get('/insights/:id', utils.auth, function (req, res) {
                                 insight: insight,
                                 creator: creator,
                                 interests: interests,
-                                success: success
+                                success: success,
+                                subjects: subjects
           });
         });
       });
@@ -157,7 +160,7 @@ router.get('/interests/graph', utils.auth, function(req, res) {
     
 });
 
-var sendInsightToUser = function(insight, user, next){
+var sendInsightToUser = function(insight, user, subjectIndex, next){
   console.log('sending insight to user');
   InsightTarget.findOne({creator: insight.creator, target: user._id, insight: insight._id}, function(err, it){
     if (err) {
@@ -191,13 +194,13 @@ var sendInsightToUser = function(insight, user, next){
             new Push('activity', activity, function(result){
               //console.log("logging result of push"+JSON.stringify(result));
             });
-            helpers.mail.sendInsightEmail(it);
+            helpers.mail.sendInsightEmail(it, subjectIndex);
             next();
           }
         });
       });
     } else {
-      helpers.mail.sendInsightEmail(it);
+      helpers.mail.sendInsightEmail(it, subjectIndex);
       next();
     }
   });
@@ -238,6 +241,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
   var individualUser = req.param('individualUser');
   var programCode = req.param('programCode');
   var allUsers = req.param('allUsers');
+  var subjectIndex = req.param('subject');
   Insight.findOne({_id: insightId}, function(err, insight){
     if(individualUser){
       processSingleUserByEmail(individualUser, function(err, user)  {
@@ -248,7 +252,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
           if (err) {
             res.send(500);
           }
-          sendInsightToUser(insight, user, function(err){
+          sendInsightToUser(insight, user, subjectIndex, function(err){
             if (err) {
               console.log(err);
               res.send(500);
@@ -261,7 +265,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
     } else if (programCode) {
       processUsersByProgramCode(programCode, function(err, users){
         _.each(users, function(user, index, list){
-          sendInsightToUser(insight, user, function(err){
+          sendInsightToUser(insight, user, subjectIndex, function(err){
             if (err) console.log(err);
           });
         });
@@ -269,7 +273,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
     } else if (allUsers) {
       processAllUsers(function(err, users) {
         _.each(users, function(user, index, list) {
-          sendInsightToUser(insight, user, function(err) {
+          sendInsightToUser(insight, user, subjectIndex, function(err) {
             if (!(index == (list.length - 1))) {
               if (err) console.log(err);
             }
@@ -291,7 +295,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
       processUsersByInterests(interests, function(err, users){
         console.log('processed ' + users.length + ' users');
         _.each(users, function(user, index, list){
-          sendInsightToUser(insight, user, function(err){
+          sendInsightToUser(insight, user, subjectIndex, function(err){
             if (err) console.log(err);
           });
         });
