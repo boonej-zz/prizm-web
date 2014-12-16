@@ -68,6 +68,13 @@
     margin-top: 24px;
   }
 
+  #alt-logo {
+    height: 36px;
+    width: 88px;
+    margin-top: 24px;
+    background-size: 88px 36px;
+  }
+
   /** HOME **/
   
   #home-block {
