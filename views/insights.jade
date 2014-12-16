@@ -42,6 +42,10 @@ block content
         select(name='interest' id='interest-selection' size='#{interests.length}' multiple='multiple')
           each interest in interests
             option(name='interest' value='#{interest._id}')= interest.text
+        p Select Insight Subject Line:
+        select(name='subject' id='subject-selection')
+          each subject, index in subjects
+            option(name='subject' value='#{index}')= subject
         p Select Individual to Target:
         div.ui-widget
           input#user(name='individualUser')
