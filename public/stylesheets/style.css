@@ -386,24 +386,65 @@ p.sign-up-desc {
 
 /** LUMINARY **/
 
-#luminary-qoute {
+#luminary-quote {
   margin-top: 75px;
+  text-align: center;
 }
 
-.luminary-block {
-  height: 670px
+#quote {
+  width: 850px;
+  margin: 0px auto;
 }
 
-.full a:hover {
+#quote-avatar {
+  background-image: url('/images/quote-avatar.png');
+  background-size: 90px 118px;
+  background-position: -9px -5px;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 128px;
+  float: left;
+  clear: right;
+}
+
+.quote-main {
+  font-size: 1.9em;
+  letter-spacing: 5px;
+  margin-top: 158px;
+  float: right;
+  clear: right;
+}
+
+.quote-credit {
+  margin-top: -24px;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  float: right;
+}
+
+.tagline {
+  padding-top: 48px;
+  padding-bottom: 12px;
+  margin: 150px auto;
+  font-size: 1.3em;
+  width: 360px;
+  clear: both;
+  border-bottom: 1px #4e70b7 solid
+}
+
+.section.left {
+  margin-left: 48px;
+}
+
+.section.right {
+  margin-right: 48px;
+}
+
+/* .full a:hover {
   text-decoration: underline;
   z-index: 1000;
-}
-
-.bordered {
-  margin-top: 150px;
-  margin-bottom: 75px;
-  border-top: 1px solid #a2aed5;
-  border-bottom: 1px solid #a2aed5;
 }
 
 .full {
@@ -413,37 +454,55 @@ p.sign-up-desc {
   padding-top: 20px;
   padding-bottom: 20px;
   font-size: 1.2em;
+} */
+
+#luminary-block1 {
+  height: 610px;
 }
 
-.quote {
-  font-size: 1.6em;
+#luminary-block2 {
+  height: 510px;
 }
 
-.tagline {
-  font-size: 1.3em;
-  width: 400px;
+#luminary-block3 {
+  height: 645px;
+  margin-bottom: 180px;
 }
 
 #lum-section-1 {
-  margin-top: 150px;
+  margin-top: 190px;
 }
 
 #lum-section-2 {
-  margin-top: 150px;
+  margin-top: 120px;
+}
+
+#lum-section-3 {
+  margin-top: 120px;
 }
 
 #luminary-phone1 {
-  background: url('/images/lphone2.png') no-repeat;
-  height: 680px;
+  margin-top: 150px;
+  background: url('/images/luminary-phone1.png') no-repeat;
+  height: 460px;
   width: 400px;
-  background-size: 400px 680px;
+  background-size: 400px 740px;
 }
 
 #luminary-phone2 {
-  background: url('/images/lphone1.png') no-repeat;
-  height: 680px;
+  margin-top: 75px;
+  background: url('/images/luminary-phone2.png') no-repeat;
+  height: 560px;
   width: 400px;
-  background-size: 400px 680px;
+  background-size: 400px 740px;
+}
+
+#luminary-phone3 {
+  margin-top: 75px;
+  background: url('/images/luminary-phone3.png') no-repeat;
+  height: 570px;
+  width: 400px;
+  background-size: 400px 740px;
 }
 
 /** PARTNER **/
@@ -581,4 +640,105 @@ p.sign-up-desc {
 #post-card #android {
   margin: 10px auto 5px;
   display: block;
+}
+
+/** INSTITUTIONS **/
+
+#institution-header {
+  height: 300px;
+  background-size: 600px;
+  text-align: center;
+}
+
+#avatar-header {
+  text-align: center;
+}
+
+#avatar-header img {
+  margin-top: 48px;
+  width: 60px;
+  height: 60px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
+.institution-name {
+  width: 100%;
+  text-align: center;
+}
+
+#location-icon {
+  margin: 0px auto;
+  height: 25px;
+  width: 19px;
+  background-image: url('/images/location.png');
+  background-size: 19px 25px;
+  display: inline-block;
+}
+
+.location {
+  font-size: 20px;
+  display: inline-block;
+  margin-left: 6px;
+  margin-top: 0px;
+  vertical-align: top;
+}
+
+#institution-posts {
+  background-color: #F5F6FA;
+}
+
+.post {
+  margin: 38px;
+  width: 320px;
+  height: 376px;
+  background-color: #FBFCFF;
+  border: 1px #d4daea solid;
+  display: inline-block;
+}
+
+.post-image img {
+  width: 100%;
+}
+
+.like-icon {
+  background-image: url('/images/like_heart.png');
+  width: 24px;
+  height: 20px;
+  background-size: 24px 20px;
+  display: inline-block;
+  margin: 14px 1px 12px 12px;
+  float: left;
+}
+
+.likes {
+  display: inline-block;
+  margin: 14px 2px auto;
+  float: left
+}
+
+.comment-icon {
+  background-image: url('/images/comment.png');
+  width: 24px;
+  height: 20px;
+  background-size: 24px 20px;
+  display: inline-block;
+  margin: 14px 1px 12px 20px;
+  float: left
+}
+
+.comments {
+  display: inline-block;
+  margin: 14px 2px auto;
+  float: left
+}
+
+.share-icon {
+  background-image: url('/images/post_share.png');
+  background-size: 24px 24px;
+  width: 24px;
+  height: 24px;
+  float: right;
+  display: inline-block;
+  margin: 11px 12px 12px 0px;
 }

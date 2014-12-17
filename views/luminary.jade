@@ -3,47 +3,66 @@ extends layout
 block content
   #luminary-quote.full-width
     .wrap
-      .bordered.text-box
-        p.quote
-          | Young people need models, not critics
-          br
-          em - Coach John Wooden, UCLA
-        p.tagline
-          | We are looking for role models in all fields to engage with students on Prizm.
-  .luminary-block.full-width
+      #quote
+        #quote-avatar
+        p.quote-main
+          | "Young people need models, not critics."
+        p.quote-credit
+          | - Coach John Wooden
+      p.tagline
+        | We are looking for role models in all fields to engage with students on Prizm.
+  #luminary-block1.full-width.blue-background
     .wrap
       #lum-section-1.section.left
         h2 What is Prizm?
         p.text-box.column
-          | Prizm is a mobile app that helps students learn about 
-          | themselves and connect the dots between where they are now and where they want 
-          | to be. At the same time, Prizm provides a mobile platform for organizations to
-          | present engaging, original content to students who are actively looking for a 
-          | worthwhile post-high school experience. We consider Prizm to be a social 
-          | discovery tool complementary to current social networks because students and 
-          | partners can seamlessly leverage content from Instagram and Twitter.
+          | Prizm is a mobile app that helps students learn about themselves and
+          | connect the dots between where they are now and where they want to 
+          | be. At the same time, Prizm provides a mobile platform for 
+          | organizations and colleges to present engaging, original content to 
+          | students who are actively looking for a worthwhile post-high school 
+          | experience. 
       #luminary-phone1.phone.right
-  .luminary-block.full-width
+  #luminary-block2.full-width
     .wrap
       #lum-section-2.section.right
+        h2 What does a Luminary do?<br>I don't have a lot of free time.
+        p.text-box.column
+          | Of course Luminaries are busy people. They’re recognized as experts
+          | in their field for a reason. They hustle. They work hard. They 
+          | inspire. Luminaries on Prizm provide students with both inspiration 
+          | and a concrete example of what hard work can bring. Teens want to 
+          | know what it takes to get where they want to be. Luminaries on Prizm
+          | can help connect the dots. 
+          | <br><br>
+          | We ask Luminaries for two things that will take less than 10 minutes per day: 
+          | <br><br>
+          | 1. Post to your Prizm account (you can seamlessly leverage your 
+          | Twitter and Instagram posts- ask us how).
+          | <br><br>
+          | 2.Work with us to approve “Insights” in your area of expertise that 
+          | will be sent to students on your behalf.
+      #luminary-phone2.phone.left
+  #luminary-block3.full-width.blue-background
+    .wrap
+      #lum-section-3.section.left
         h2 Why Prizm?
         p.text-box.column
-          | We began this project because we saw firsthand how the world has changed with 
-          | the adoption of mobile devices. The way people— especially teens— communicate
-          | and relate to each other has fundamentally changed in the past 10 years, and 
-          | large organizations from colleges and universities to big brands are still working
-          | to capitalize on this shift.
-        h2
-        p.text-box.column
-          | We recognize that today’s teens are looking to express themselves, have their 
-          | voices heard, and be inspired while looking for help turning aspirations into 
-          | actionable goals. Luminaries on the Prizm platform will provide students with
-          | both inspiration and a concrete example of what hard work can bring. Teens want
-          | to know what it takes to get where they want to be. Luminaries on Prizm can help
-          | connect the dots.
-      #luminary-phone2.phone.left
+          | We began this project because we saw firsthand how the world has 
+          | changed with the adoption of mobile devices. The way people— 
+          | especially teens— communicate and relate to each other has fundamentally
+          | changed in the past 10 years, and large organizations from colleges
+          | and universities to big brands are still working to capitalize on this shift.
+          | <br><br>
+          | We recognize that today’s teens are looking to express themselves, 
+          | have their voices heard, and be inspired while looking for help turning 
+          | aspirations into actionable goals. 
+          | <br><br>
+          | Join others at the top of their games as a Luminary on Prizm and 
+          | help show students the wide variety of opportunities out there for them!
+      #luminary-phone3.phone.right
   .full-width
     .wrap
-      p.full.bordered
-        | If you'd like more information, please contact us at 
-        a(href="mailto:info@prizmapp.com" target="_top") info@prizmapp.com
+      //- p.full.bordered
+      //-   | If you'd like more information, please contact us at 
+      //-   a(href="mailto:info@prizmapp.com" target="_top") info@prizmapp.com
