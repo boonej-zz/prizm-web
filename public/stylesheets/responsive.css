@@ -298,17 +298,15 @@
     width: 300px;
   }
   
-  #luminary-phone2, #luminary-phone3 {
-    height: 514px;
-    width: 280px;
-  }
-  
   #luminary-phone1, #luminary-phone2, #luminary-phone3 {
     margin: 0px auto;
     background-size: 280px 514px;
     height: 380px;
     width: 280px;
+    padding: relative;
+    bottom: 0px;
   }
+
 
   .full {
     width: 300px;
