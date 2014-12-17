@@ -22,7 +22,9 @@ var rejectMail = fs.readFileSync(path.join(__dirname +
 var acceptMail = fs.readFileSync(path.join(__dirname +
       '/../views/accept_mail.jade'), 'utf8');
 var adminBody = fs.readFileSync(path.join(__dirname + 
-      '/../views/adminMail.ejs'), 'utf8'); 
+      '/../views/adminMail.ejs'), 'utf8');
+var postFeed = fs.readFileSync(path.join(__dirname +
+      '/../views/post_feed.jade'), 'utf8');
 var adminEmail = 'info@prizmapp.com';
 var ObjectId = require('mongoose').Types.ObjectId;
 var moment = require('moment');
@@ -275,15 +277,23 @@ router.get('/users/:id/institutions', function(req, res){
   });
 });
 
+/** Institution Pages **/
+
 router.get('/institution/:id', function(req, res) {
   var id = req.params.id;
   User.findOne({type: "institution_verified", _id: ObjectId(id)}, function(err, institution) {
+  // var name = req.params.name;
+  // User.findOne({type: "institution_verified", namespace: name}, function(err, institution) {
     if (err) {
       console.log(err);
       res.send(401);
     }
-    else {
-      Post.find({creator: ObjectId(institution._id)}, function(err, posts) {
+    else if (institution) {
+      Post
+      .find({creator: ObjectId(institution._id)})
+      .sort({ create_date: -1, _id: -1 })
+      .limit(20)
+      .exec(function(err, posts) {
         if (err) {
           console.log(err);
           res.render('institution', { institution: institution,
@@ -296,7 +306,39 @@ router.get('/institution/:id', function(req, res) {
                                       posts: posts });
         }
       });
-    };
+    }
+    else {
+      res.send(404);
+    }
+  });
+});
+
+router.get('/content/:id?', function userIdHandler(req, res) {
+  var creator = req.param('creator');
+  var lastPost = req.param('lastPost');
+  var limit = 20;
+  Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
+    if (err) {
+      console.log(err);
+      res.send(401);
+    }
+    else {
+      Post
+      .find({creator: ObjectId(creator)})
+      .where('create_date').lt(post.create_date)
+      .sort({create_date: -1, _id: -1})
+      .limit(limit)
+      .exec(function(err, posts) {
+        if (err) {
+          console.log(err);
+          res.send(401);
+        }
+        else {
+          var content = jade.render(postFeed, {posts: posts});
+          res.send(content);
+        }
+      });
+    }
   });
 });
 
