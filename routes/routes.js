@@ -275,4 +275,29 @@ router.get('/users/:id/institutions', function(req, res){
   });
 });
 
+router.get('/institution/:id', function(req, res) {
+  var id = req.params.id;
+  User.findOne({type: "institution_verified", _id: ObjectId(id)}, function(err, institution) {
+    if (err) {
+      console.log(err);
+      res.send(401);
+    }
+    else {
+      Post.find({creator: ObjectId(institution._id)}, function(err, posts) {
+        if (err) {
+          console.log(err);
+          res.render('institution', { institution: institution,
+                                      noPosts: true,
+                                      posts: [] });
+        }
+        else {
+          res.render('institution', { institution: institution,
+                                      noPosts: false,
+                                      posts: posts });
+        }
+      });
+    };
+  });
+});
+
 module.exports = router;
