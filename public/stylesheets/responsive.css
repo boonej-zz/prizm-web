@@ -237,38 +237,77 @@
     width: 300px;
     font-size: 0.9em;
   }
-
-  .bordered {
-    margin: 40px 0px;
-    width: 300px;
+  
+  #quote {
+   width: 300px;
+   margin: 0px auto;
   }
 
-  .quote {
-    font-size: 1em;
-  }  
+  #quote-avatar {
+    background-image: url('/images/quote-avatar.png');
+    background-size: 90px 118px;
+    background-position: -9px -5px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 48px;
+    float: none;
+    clear: none;
+  }
+
+  .quote-main {
+    font-size: 1.9em;
+    letter-spacing: 4px;
+    margin-top: 24px;
+    float: none;
+    clear: none;
+  }
+
+  .quote-credit {
+    margin-top: -24px;
+    font-size: .8em;
+    letter-spacing: 0px;
+    text-align: right;
+    float: none;
+  }
 
   .tagline {
     font-size: 0.9em;
     width: 270px;
+    margin: 20px auto;
+  }
+  
+  #luminary-block1 {
+    height: 700px;
+    margin-top: 52px;
+  }
+  
+  #luminary-block2 {
+    height: 972px;
+  }
+  
+  #luminary-block3 {
+    height: 926px;
+    margin-bottom: 0px;
   }
 
-  #lum-section-1, #lum-section-2 {
-    top: 0px;
-    height: auto;
-    margin-left: 0px;
+  #lum-section-1, #lum-section-2, #lum-section-3 {
+    margin: 0px auto;
+    padding-top: 24px;
     width: 300px;
   }
   
-  #luminary-phone1, #luminary-phone2 {
+  #luminary-phone2, #luminary-phone3 {
     height: 514px;
     width: 280px;
   }
-
-  #luminary-phone1, #luminary-phone2 {
-    position: relative;
-    top: 20px;
-    margin-left: 15px;
+  
+  #luminary-phone1, #luminary-phone2, #luminary-phone3 {
+    margin: 0px auto;
     background-size: 280px 514px;
+    height: 380px;
+    width: 280px;
   }
 
   .full {
@@ -284,11 +323,8 @@
     width: 300px;
   } 
   
+  /** POST **/
   .post-wrap {
-    width: 300px;
-  }
-
-  .card-wrap > .nav-top {
     width: 300px;
   }
   
