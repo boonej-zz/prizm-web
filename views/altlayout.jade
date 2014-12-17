@@ -43,11 +43,11 @@ html
          content='app-id=903458597, app-argument=prizmapp://open')
     block head
     
-    body(id='#{bodyId}')
-    div(class='wrap')
-      .nav-top
-        h1#alt-logo(onclick='prizm.goHome()')
-          span.hidden Prizm
+    body
+      div(class='wrap')
+        .nav-top
+          h1#alt-logo(onclick='prizm.goHome()')
+            span.hidden Prizm
         
     block content
     p.legal
