@@ -314,6 +314,14 @@
     width: 300px;
   }
   
+  .section.left {
+    margin: 0px auto;
+  }
+  
+  .section.right {
+    margin: 0px auto;
+  }
+  
   #luminary h2 {
     width: 300px;
   } 
