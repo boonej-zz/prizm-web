@@ -210,8 +210,6 @@
   .phone {
     height: 540px;
     width: 278px;
-    position: relative;
-    top: 20px;
     padding: 0px;
     background-size: 278px 540px;
   }
@@ -308,6 +306,7 @@
     background-size: 280px 514px;
     height: 380px;
     width: 280px;
+    padding-top: 20px;
   }
 
   .full {
