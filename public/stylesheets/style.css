@@ -32,9 +32,13 @@
 }
 
 .blue-background {
-  background-color: #4e70b7;
+  background-color: #314991;
   opacity: 1;
   color: #FFF;
+}
+
+.gray-background {
+  background-color: #e4e5ea;
 }
 
 .phone {
@@ -68,7 +72,7 @@
   font-size: 1.3em;
   width: 360px;
   clear: both;
-  border-bottom: 1px #4e70b7 solid
+  border-bottom: 1px #314991 solid
 }
 
 .section.left {
@@ -89,7 +93,7 @@ body {
   padding: 0;
   border: none;
   font-weight: normal;
-  background-color: #EEF0F4;
+  background-color: #e4e5ea;
 }
 
 a {
@@ -122,7 +126,7 @@ a {
 #navbar {
   position: fixed;
   top: 0px;
-  background-color: #EEF0F4;
+  background-color: #e4e5ea;
   z-index: 1000;
 }
 
@@ -130,7 +134,7 @@ a {
     height: 75px;
     width: 1200px;
     border-bottom: 1px #d4daea solid;
-    background-color: #EEF0F4;
+    background-color: #e4e5ea;
 }
 
 .nav-top h1 {
@@ -339,7 +343,7 @@ p.sign-up-desc {
   text-transform: uppercase;
   text-align: center;
   vertical-align: middle;
-  background-color: #EEF0F4;
+  background-color: #e4e5ea;
 }
 
 .legal-span {

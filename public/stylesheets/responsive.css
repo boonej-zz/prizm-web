@@ -16,10 +16,6 @@
     float: none;
   }
 
-  .normal-background {
-    background-color: #EEF0F4;
-  }
-
   /** NAVIGATION BAR **/
 
   #menu-button {
@@ -44,7 +40,7 @@
     top: 64px;
     width: 300px;
     height: auto;
-    background-color: #EEF0F4;
+    background-color: #e4e5ea;
     z-index: 1;
   }
 
