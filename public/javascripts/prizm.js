@@ -33,7 +33,10 @@ var prizm = {
                }, 
   goHome:     function(){
                 window.location = baseURL;
-              }
+              },
+  mailTo: function(){
+            window.location = 'mailto:info@prizmapp.com';
+          }
 };
 
 $(function(){
