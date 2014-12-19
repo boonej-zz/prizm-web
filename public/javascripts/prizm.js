@@ -35,7 +35,7 @@ var prizm = {
                 window.location = baseURL;
               },
   mailTo: function(){
-            window.location = 'mailto:info@prizmapp.com';
+            window.location = 'mailto:info@prizmapp.com?subject=Find out more';
           }
 };
 
