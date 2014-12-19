@@ -16,10 +16,6 @@
     float: none;
   }
 
-  .normal-background {
-    background-color: #EEF0F4;
-  }
-
   /** NAVIGATION BAR **/
 
   #menu-button {
@@ -44,7 +40,7 @@
     top: 64px;
     width: 300px;
     height: auto;
-    background-color: #EEF0F4;
+    background-color: #e4e5ea;
     z-index: 1;
   }
 
@@ -327,7 +323,63 @@
   
   #luminary h2 {
     width: 300px;
-  } 
+  }
+  
+  /** PARTNER **/
+  
+  #header-title {
+    font-size: 18px;
+    margin-top: -48px;
+    width: 300px;
+  }
+  
+  #find-out-more {
+   margin-bottom: 50px;
+  }
+  
+  #partner-section-1, #partner-section-2, #partner-section-3 {
+    margin: 0px auto;
+   padding-top: 24px;
+   width: 300px;
+  }
+  
+  #partner-block-1 {
+    height: 660px;
+  }
+
+  #partner-block-2 {
+    height: 1045px;
+  }
+
+  #partner-block-3 {
+    height: 819px;
+  }
+  
+  #partner-phone-1 {
+    margin-top: 25px;
+    background: url('/images/partner-phone1.png') no-repeat;
+    height: 382px;
+    width: 280px;
+    background-size: 280px 473px;
+  }
+
+
+  #partner-phone-2 {
+    margin-top: 25px;
+    background: url('/images/partner-phone2.png') no-repeat;
+    height: 399px;
+    width: 308px;
+    background-size: 308px 490px;
+  }
+
+
+  #partner-phone-3 {
+    margin-top: 25px;
+    background: url('/images/partner-phone3.png') no-repeat;
+    height: 399px;
+    width: 280px;
+    background-size: 280px 516px;
+  }
   
   /** POST **/
   .post-wrap {

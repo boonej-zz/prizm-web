@@ -1,48 +1,63 @@
 extends layout
 
 block content
-  #partner.full-width
+  #partner-header.full-width.gray-background
     .wrap
-      p
-        | We are looking for education, military, community organizations, foundations
-        | and corporate partners to engage with students on Prizm.
-      h2 What is Prizm?
-      p.text-box
-        | Prizm is a mobile app that helps students learn about 
-        | themselves and connect the dots between where they are now and where they want 
-        | to be. At the same time, Prizm provides a mobile platform for organizations to
-        | present engaging, original content to students who are actively looking for a 
-        | worthwhile post-high school experience. We consider Prizm to be a social 
-        | discovery tool complementary to current social networks because students and 
-        | partners can seamlessly leverage content from Instagram and Twitter.
-      h2 Why Prizm?
-      p
-        | We began this project because we saw firsthand how the world has changed with 
-        | the adoption of mobile devices. The way people— especially teens— communicate
-        | and relate to each other has fundamentally changed in the past 10 years, and
-        | large organizations from colleges and universities to big brands are still
-        | working to capitalize on this shift.
-      p
-        | We use a 3 Cs model of engagement to make Prizm interesting to both students
-        | and partners:
-      ul.bullet
-        li
-          | Content - Students are coming to Prizm specifically to collect inspirations
-          | and capture personal achievements and interests on their phones. They are
-          | looking for original, engaging content from you that could relate to one of
-          | their interests and hopefully become a goal, like attending your school or
-          | working at your company.
-        li
-          | Context - Your content won’t get lost in a string of party selfies and food
-          | photos. Students on Prizm are actively exploring their next move in life and
-          | want to learn about where they might fit in, whether it’s college, military
-          | or a summer internship.
-        li
-          | Community - Students on Prizm are inspired by fellow students and Luminaries,
-          | who are special members of the Prizm community that give advice about their
-          | specific areas of expertise. A partner’s role in the community is to present
-          | engaging content and find Luminaries to affiliate with their organization,
-          | whether it’s a distinguished alum or an employee with an interesting job.
-      p.full.bordered
-        | If you’d like more information, please contact us at 
-        a(href='mailto:info@prizmapp.com' target='_top') info@prizmapp.com
+      h2#header-title
+          | Capture your members’ experiences and inspirations in a private, mobile community. 
+      p.tagline
+        | We are looking for organizations that<br>serve teens to partner with us on Prizm.
+      #find-out-more.blue-background(onclick='prizm.mailTo()')
+        p
+          | FIND OUT MORE
+  #partner-block-1.full-width.blue-background
+    .wrap
+      #partner-section-1.section.left
+        h2 What is Prizm?
+        p.text-box.column
+          | Prizm is a mobile app that allows organizations and their student 
+          | members to connect and share with each other securely. At the same 
+          | time, Prizm helps students explore and learn about new opportunities
+          | based on their interests via curated, digestible content called 
+          | “Insights” sent by Luminaries, colleges and companies looking for
+          | interns.
+      #partner-phone-1.phone.right
+  #partner-block-2.full-width.gray-background
+    .wrap
+      #partner-section-2.section.right
+        h2 Custom app without the hassle.
+        p.text-box.column
+          | Organizations have the opportunity to create a private experience 
+          | through the use of a unique program code in Prizm. This gives 
+          | organizations the feeling of a customized app without having to 
+          | worry about any of the testing, coding or bug fixes.
+        h2 You can use the private, custom<br>experience in several ways:
+        p.text-box.column
+          | • Customize screens with your organization’s brand color.<br>
+          | • Send native mobile push notifications just to members.<br>
+          | • Send short survey questions and easily compile results.<br>
+          | • Send Insights with your content from your leadership.
+          | <br><br>
+          | Organization leadership will also have access to dashboards that 
+          | show student interests, trending topics and hashtags within the 
+          | membership, and levels of member engagement.
+      #partner-phone-2.section.left
+  #partner-block-3.full-width.blue-background
+    .wrap
+      #partner-section-3.section.left
+        h2 Why Prizm?
+        p.text-box.column
+          | We began this project because we saw firsthand how the world has 
+          | changed with the adoption of mobile devices. The way people— especially
+          | teens— communicate and relate to each other has fundamentally 
+          | changed in the past 10 years. We know that community organizations 
+          | have a unique challenge in trying to engage their teen members 
+          | beyond the scheduled weekly activity. Our goal is to help teens stay
+          | connected to their clubs and organizations while learning about 
+          | future opportunities like college and internships.
+      #partner-phone-3.phone.right
+  .full-width.gray-background
+    .wrap
+ 
+ 
+

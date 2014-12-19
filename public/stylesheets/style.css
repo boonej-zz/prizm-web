@@ -32,9 +32,13 @@
 }
 
 .blue-background {
-  background-color: #4e70b7;
+  background-color: #314991;
   opacity: 1;
   color: #FFF;
+}
+
+.gray-background {
+  background-color: #e4e5ea;
 }
 
 .phone {
@@ -61,6 +65,24 @@
   top: -75px;
 }
 
+.tagline {
+  padding-top: 48px;
+  padding-bottom: 12px;
+  margin: 150px auto;
+  font-size: 1.3em;
+  width: 360px;
+  clear: both;
+  border-bottom: 1px #314991 solid
+}
+
+.section.left {
+  margin-left: 48px;
+}
+
+.section.right {
+  margin-right: 48px;
+}
+
 /** STANDARD ELEMENTS **/
 
 body {
@@ -71,7 +93,7 @@ body {
   padding: 0;
   border: none;
   font-weight: normal;
-  background-color: #EEF0F4;
+  background-color: #e4e5ea;
 }
 
 a {
@@ -104,7 +126,7 @@ a {
 #navbar {
   position: fixed;
   top: 0px;
-  background-color: #EEF0F4;
+  background-color: #e4e5ea;
   z-index: 1000;
 }
 
@@ -112,7 +134,7 @@ a {
     height: 75px;
     width: 1200px;
     border-bottom: 1px #d4daea solid;
-    background-color: #EEF0F4;
+    background-color: #e4e5ea;
 }
 
 .nav-top h1 {
@@ -321,7 +343,7 @@ p.sign-up-desc {
   text-transform: uppercase;
   text-align: center;
   vertical-align: middle;
-  background-color: #EEF0F4;
+  background-color: #e4e5ea;
 }
 
 .legal-span {
@@ -424,38 +446,6 @@ p.sign-up-desc {
   float: right;
 }
 
-.tagline {
-  padding-top: 48px;
-  padding-bottom: 12px;
-  margin: 150px auto;
-  font-size: 1.3em;
-  width: 360px;
-  clear: both;
-  border-bottom: 1px #4e70b7 solid
-}
-
-.section.left {
-  margin-left: 48px;
-}
-
-.section.right {
-  margin-right: 48px;
-}
-
-/* .full a:hover {
-  text-decoration: underline;
-  z-index: 1000;
-}
-
-.full {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 1.2em;
-} */
-
 #luminary-block1 {
   height: 610px;
 }
@@ -507,9 +497,85 @@ p.sign-up-desc {
 
 /** PARTNER **/
 
-#partner {
+#partner-header {
   margin-top: 75px;
-  padding-top: 1px;
+  text-align: center;
+}
+
+#header-title {
+  font-weight: normal;
+  font-size: 38px;
+  padding-top: 120px;
+  margin: 0px auto;
+  width: 800px;
+}
+
+#partner-header .tagline {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#find-out-more {
+  display: table;
+  margin: 0px auto;
+  margin-top: 48px;
+  margin-bottom: 100px;
+  width: 160px;
+  cursor: pointer;
+}
+
+#find-out-more p {
+  display: block
+}
+
+#partner-block-1 {
+  height: 640px;
+}
+
+#partner-block-2 {
+  height: 645px;
+}
+
+#partner-block-3 {
+  height: 645px;
+}
+
+#partner-section-1 {
+  margin-top: 200px;
+}
+
+#partner-section-2 {
+  margin-top: 90px;
+}
+
+#partner-section-3 {
+  margin-top: 125px
+}
+
+#partner-phone-1 {
+  margin-top: 75px;
+  background: url('/images/partner-phone1.png') no-repeat;
+  height: 565px;
+  width: 400px;
+  background-size: 400px 697px;
+}
+
+
+#partner-phone-2 {
+  margin-top: 75px;
+  background: url('/images/partner-phone2.png') no-repeat;
+  height: 570px;
+  width: 440px;
+  background-size: 440px 700px;
+}
+
+
+#partner-phone-3 {
+  margin-top: 75px;
+  background: url('/images/partner-phone3.png') no-repeat;
+  height: 570px;
+  width: 400px;
+  background-size: 400px 737px;
 }
 
 /** POSTS **/

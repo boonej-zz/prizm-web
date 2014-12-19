@@ -33,7 +33,10 @@ var prizm = {
                }, 
   goHome:     function(){
                 window.location = baseURL;
-              }
+              },
+  mailTo: function(){
+            window.location = 'mailto:info@prizmapp.com?subject=Find out more';
+          }
 };
 
 $(function(){
@@ -50,40 +53,43 @@ $(function(){
 
 $(window).scroll(function(){
   var scrolled_val = $(document).scrollTop().valueOf();
-  var about = $('a[href="/#about"]').parent()
-  var insight = $('a[href="/#insight"]').parent()
-  var mission = $('a[href="/#mission"]').parent()
-  if (scrolled_val < 658) {
-    $('.menu-button').toggleClass('selected', false);
-  }
-  else if (scrolled_val > 658 && scrolled_val < 992) {
-    if (about.hasClass('selected')) {
-      return;
-    }
-    else {
+  var currentPageIsHome = document.getElementById("home-block");
+  if (currentPageIsHome) {
+    var about = $('a[href="/#about"]').parent()
+    var insight = $('a[href="/#insight"]').parent()
+    var mission = $('a[href="/#mission"]').parent()
+    if (scrolled_val < 658) {
       $('.menu-button').toggleClass('selected', false);
-      about.toggleClass('selected');
+    }
+    else if (scrolled_val > 658 && scrolled_val < 992) {
+      if (about.hasClass('selected')) {
+        return;
+      }
+      else {
+        $('.menu-button').toggleClass('selected', false);
+        about.toggleClass('selected');
+      }
+    }
+    else if (scrolled_val > 1292 && scrolled_val < 1532) {
+      if (insight.hasClass('selected')) {
+        return;
+      }
+      else {
+        $('.menu-button').toggleClass('selected', false);
+        insight.toggleClass('selected');
+      }
+    }
+    else if (scrolled_val > 1932) {
+      if (mission.hasClass('selected')) {
+        return;
+      }
+      else {
+        $('.menu-button').toggleClass('selected', false);
+        mission.toggleClass('selected');
+      }
     }
   }
-  else if (scrolled_val > 1292 && scrolled_val < 1532) {
-    if (insight.hasClass('selected')) {
-      return;
-    }
-    else {
-      $('.menu-button').toggleClass('selected', false);
-      insight.toggleClass('selected');
-    }
-  }
-  else if (scrolled_val > 1932) {
-    if (mission.hasClass('selected')) {
-      return;
-    }
-    else {
-      $('.menu-button').toggleClass('selected', false);
-      mission.toggleClass('selected');
-    }
-  }
-})
+});
 
 $(function() {
   $('a[href*=#]:not([href=#])').click(function() {
