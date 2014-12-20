@@ -279,29 +279,31 @@ router.get('/users/:id/institutions', function(req, res){
 
 /** Institution Pages **/
 
-router.get('/institution/:id', function(req, res) {
+router.get('/organization/:id', function(req, res) {
   var id = req.params.id;
-  User.findOne({type: "institution_verified", _id: ObjectId(id)}, function(err, institution) {
+  User.findOne({type: "institution_verified", _id: ObjectId(id)}, function(err, organization) {
+// router.get('/:name', function(req, res) {
   // var name = req.params.name;
-  // User.findOne({type: "institution_verified", namespace: name}, function(err, institution) {
+  // User.findOne({type: "institution_verified", namespace: name}, function(err, organization) {
     if (err) {
       console.log(err);
       res.send(401);
     }
-    else if (institution) {
+    else if (organization) {
+      console.log(organization[1])
       Post
-      .find({creator: ObjectId(institution._id)})
+      .find({creator: ObjectId(organization._id)})
       .sort({ create_date: -1, _id: -1 })
       .limit(20)
       .exec(function(err, posts) {
         if (err) {
           console.log(err);
-          res.render('institution', { institution: institution,
+          res.render('organization', { organization: organization,
                                       noPosts: true,
                                       posts: [] });
         }
         else {
-          res.render('institution', { institution: institution,
+          res.render('organization', { organization: organization,
                                       noPosts: false,
                                       posts: posts });
         }
