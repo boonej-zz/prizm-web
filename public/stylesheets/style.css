@@ -41,6 +41,10 @@
   background-color: #e4e5ea;
 }
 
+.gray-font {
+  color: #B9C2D5;
+}
+
 .phone {
   height: 700px;
   width: 350px;
@@ -710,10 +714,12 @@ p.sign-up-desc {
 
 /** INSTITUTIONS **/
 
-#institution-header {
-  height: 300px;
-  background-size: 600px;
+#organization-header {
+  margin-top: 109px;
+  height: 272px;
   text-align: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 #avatar-header {
@@ -728,7 +734,7 @@ p.sign-up-desc {
   border-radius: 50%;
 }
 
-.institution-name {
+.organization-name {
   width: 100%;
   text-align: center;
 }
@@ -750,18 +756,23 @@ p.sign-up-desc {
   vertical-align: top;
 }
 
-#institution-posts {
-  background-color: #F5F6FA;
+#organization-posts {
+  background-color: #eef0f4;
+  padding-bottom: 68px;
 }
 
 .post {
-  margin: 38px;
+  margin-top: 68px;
+  margin-right: 39px;
+  margin-left: 39px;
   width: 320px;
-  height: 376px;
+  height: 372px;
   background-color: #FBFCFF;
   border: 1px #d4daea solid;
   display: inline-block;
 }
+
+
 
 .post-image img {
   width: 100%;
