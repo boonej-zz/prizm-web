@@ -1,5 +1,6 @@
 var serial = require('serializer');
 var utils = require('../utils');
+var _ = require('underscore');
 
 var mongoose = require('mongoose');
 
@@ -81,5 +82,16 @@ userSchema.methods.hashPassword = function(){
   }
   return false;
 };
+
+userSchema.methods.validatePassword = function(password) {
+  var user_salt = this.createUserSalt();
+  var hashed_password = utils.prismEncrypt(password, user_salt);
+  if (_.isEqual(this.password, hashed_password)) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
 
 mongoose.model('User', userSchema);
