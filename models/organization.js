@@ -1,5 +1,5 @@
 var mongoose          = require('mongoose'),
-    utils             = require(process.env.PRISM_HOME + 'utils'),
+    // utils             = require(process.env.PRISM_HOME + 'utils'),
     User              = mongoose.model('User'),
     ObjectId          = mongoose.Schema.Types.ObjectId;
 
