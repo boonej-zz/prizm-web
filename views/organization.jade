@@ -4,7 +4,7 @@ block head
     $(window).scroll(function() {
       if($(window).scrollTop() == $(document).height() - $(window).height()) {
         var lastPost = $('#organization-posts').children().last().attr('id');
-        var creator = '#{organization.id}'
+        var creator = '#{organization.owner}'
         $.ajax({ url: '/content/?creator=' + creator + '&lastPost=' + lastPost,
           success: function(html) {
             if(html) {
@@ -18,14 +18,14 @@ block head
 block content
   #organization-block.full-width.gray-font
     .wrap
-      #organization-header(style="background-image: url('https://#{organization.cover_photo_url.substr(7)}')")
+      #organization-header(style="background-image: url('https://#{organization.welcome_image_url.substr(7)}')")
         #avatar-header
-          img(src='https://#{organization.profile_photo_url.substr(7)}')
+          img(src='https://#{organization.logo_url.substr(7)}')
         h2.organization-name
           | #{organization.name}
         #location-icon
         p.location
-          | #{organization.city}, #{organization.state}
+          //- | #{organization.city}, #{organization.state}
       #organization-posts
         if (noPosts)
           #no-posts
