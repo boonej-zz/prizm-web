@@ -8,6 +8,7 @@ var User = mongoose.model('User');
 var Insight = mongoose.model('Insight');
 var InsightTarget = mongoose.model('InsightTarget');
 var Interest = mongoose.model('Interest');
+var Organization = mongoose.model('Organization');
 var Push = require('../classes/push_notification');
 var config = require('../config');
 var mandrill = require('node-mandrill')(config.mandrill.client_secret);
@@ -279,18 +280,14 @@ router.get('/users/:id/institutions', function(req, res){
 
 /** Institution Pages **/
 
-router.get('/organization/:id', function(req, res) {
-  var id = req.params.id;
-  User.findOne({type: "institution_verified", _id: ObjectId(id)}, function(err, organization) {
-// router.get('/:name', function(req, res) {
-  // var name = req.params.name;
-  // User.findOne({type: "institution_verified", namespace: name}, function(err, organization) {
+router.get('/:name', function(req, res) {
+  var name = req.params.name;
+  Organization.findOne({namespace: name}, function(err, organization) {
     if (err) {
       console.log(err);
       res.send(401);
     }
     else if (organization) {
-      console.log(organization[1])
       Post
       .find({creator: ObjectId(organization._id)})
       .sort({ create_date: -1, _id: -1 })
@@ -342,6 +339,34 @@ router.get('/content/:id?', function userIdHandler(req, res) {
       });
     }
   });
+});
+
+router.post('/login', function(req, res) {
+  var email = req.param('email');
+  var password = req.param('password')
+  if (validateEmail(email)) {
+    User.findOne({email: email, active: true}, function(err, user) {
+      if (err) {
+        console.log(err);
+        res.send(401)
+      }
+      else if (user) {
+        console.log(user.validatePassword(password));
+        if (user.validatePassword(password)) {
+          res.send({Success: "Login successful"});
+        }
+        else {
+          res.send({Error: "Invalid password"});
+        }
+      }
+      else {
+        res.send({Error: "User not found"});
+      }
+    });
+  }
+  else {
+    res.send({Error: "Invalid email address"});
+  }
 });
 
 module.exports = router;
