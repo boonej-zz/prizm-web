@@ -105,6 +105,80 @@ $(function() {
     }
   });
 });
+
+var isScrolledIntoView = function(elem) {
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+
+/* dot nav */
+$(function(){
+  $(window).bind('scroll',function(e){
+    redrawDotNav();
+  });
+
+  function redrawDotNav(){
+    var scrolled_val = $(document).scrollTop().valueOf();
+    console.log(scrolled_val);
+    var lumSideNav2 = $('a[href="#what-is-prizm"]').parent()
+    var lumSideNav3 = $('a[href="#what-does-a-luminary-do"]').parent()
+    var lumSideNav4 = $('a[href="#why-prizm"]').parent()
+
+    if (scrolled_val > 403 && scrolled_val < 827) {
+      if (lumSideNav2.hasClass('active')) {
+        return
+      }
+      else {
+        $('.dotNav li').toggleClass('active', false);
+        lumSideNav2.toggleClass('active');
+      }
+    }
+    else if ((scrolled_val > 900 && scrolled_val < 1462)) {
+      if (lumSideNav3.hasClass('active')) {
+        return
+      }
+      else {
+        $('.dotNav li').toggleClass('active', false);
+        lumSideNav3.toggleClass('active');
+      }
+    }
+    else if (scrolled_val > 1562) {
+      if (lumSideNav4.hasClass('active')) {
+        return
+      }
+      else {
+        $('.dotNav li').toggleClass('active', false);
+        lumSideNav4.toggleClass('active');
+      }
+    }
+  }
+});
+
+/* get clicks working */
+$(function(){
+  $('.dotNav li').click(function(){
+    var id = $(this).find('a').attr("href"),
+        posi,
+        ele,
+        padding = $('.navbar-fixed-top').height();
+    
+    ele = $(id);
+    posi = ($(ele).offset()||0).top - padding;
+    
+    $('html, body').animate({scrollTop:posi}, 'slow');
+    
+    return false;
+  });
+});
+
+
+/* end dot nav */
 /*
 $(function() {
   var input_element = document.getElementById("interest-selection");
