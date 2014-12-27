@@ -75,6 +75,11 @@
     background-size: 88px 36px;
   }
 
+  /** SIDE NAVIATION **/
+  .dotNav {
+    display: none;
+  }
+
   /** HOME **/
   
   #home-block {
