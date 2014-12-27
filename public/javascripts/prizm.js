@@ -111,8 +111,78 @@ $(function() {
     }
   });
 });
+var isScrolledIntoView = function(elem) {
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
 
-/*
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+
+
+/* side nav class toggle */
+$(function(){
+  $(window).bind('scroll',function(e){
+    redrawDotNav();
+  });
+
+  function redrawDotNav(){
+    var scrolled_val = $(document).scrollTop().valueOf();
+    var sideNav2    = $('a[href="#what-is-prizm"]').parent()
+    var sideNav3_1  = $('a[href="#what-does-a-luminary-do"]').parent()
+    var sideNav3_2  = $('a[href="#custom-app"]').parent()
+    var sideNav4    = $('a[href="#why-prizm"]').parent()
+
+    if (scrolled_val > 403 && scrolled_val < 827) {
+      if (sideNav2.hasClass('active')) {
+        return
+      }
+      else {
+        $('.dotNav li').toggleClass('active', false);
+        sideNav2.toggleClass('active');
+      }
+    }
+    else if ((scrolled_val > 900 && scrolled_val < 1462)) {
+      if (sideNav3_1.hasClass('active') || sideNav3_2.hasClass('active')) {
+        return
+      }
+      else {
+        $('.dotNav li').toggleClass('active', false);
+        sideNav3_1.toggleClass('active');
+        sideNav3_2.toggleClass('active');
+      }
+    }
+    else if (scrolled_val > 1562) {
+      if (sideNav4.hasClass('active')) {
+        return
+      }
+      else {
+        $('.dotNav li').toggleClass('active', false);
+        sideNav4.toggleClass('active');
+      }
+    }
+  }
+});
+
+/* side navigation scrolling */
+$(function(){
+  $('.dotNav li').click(function(){
+    var id = $(this).find('a').attr("href"),
+        posi,
+        ele,
+        padding = $('.navbar-fixed-top').height();
+    
+    ele = $(id);
+    posi = ($(ele).offset()||0).top - padding;
+    
+    $('html, body').animate({scrollTop:posi}, 'slow');
+    
+    return false;
+  });
+});
+
 $(function() {
   var input_element = document.getElementById("interest-selection");
   input_element.onchange = interestCount;
