@@ -280,48 +280,19 @@ router.get('/users/:id/institutions', function(req, res){
 
 /** Institution Pages **/
 
-router.get('/:name', function(req, res) {
-  var name = req.params.name;
-  Organization.findOne({namespace: name}, function(err, organization) {
-    if (err) {
-      console.log(err);
-      res.send(401);
-    }
-    else if (organization) {
-      Post
-      .find({creator: ObjectId(organization._id)})
-      .sort({ create_date: -1, _id: -1 })
-      .limit(20)
-      .exec(function(err, posts) {
-        if (err) {
-          console.log(err);
-          res.render('organization', { organization: organization,
-                                      noPosts: true,
-                                      posts: [] });
-        }
-        else {
-          res.render('organization', { organization: organization,
-                                      noPosts: false,
-                                      posts: posts });
-        }
-      });
-    }
-    else {
-      res.send(404);
-    }
-  });
-});
-
-router.get('/content/:id?', function userIdHandler(req, res) {
+router.get('/content/:id?', function (req, res) {
   var creator = req.param('creator');
   var lastPost = req.param('lastPost');
+  console.log("Creator: " + creator);
+  console.log("Last post: " + lastPost);
   var limit = 20;
   Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
     if (err) {
       console.log(err);
-      res.send(401);
+      res.send(404);
     }
-    else {
+    if (post) {
+      console.log(post);
       Post
       .find({creator: ObjectId(creator)})
       .where('create_date').lt(post.create_date)
@@ -330,7 +301,7 @@ router.get('/content/:id?', function userIdHandler(req, res) {
       .exec(function(err, posts) {
         if (err) {
           console.log(err);
-          res.send(401);
+          res.send(404);
         }
         else {
           var content = jade.render(postFeed, {posts: posts});
@@ -341,32 +312,78 @@ router.get('/content/:id?', function userIdHandler(req, res) {
   });
 });
 
-router.post('/login', function(req, res) {
-  var email = req.param('email');
-  var password = req.param('password')
-  if (validateEmail(email)) {
-    User.findOne({email: email, active: true}, function(err, user) {
-      if (err) {
-        console.log(err);
-        res.send(401)
-      }
-      else if (user) {
-        console.log(user.validatePassword(password));
-        if (user.validatePassword(password)) {
-          res.send({Success: "Login successful"});
+router.get('/:name', function(req, res) {
+  var name = req.params.name;
+  Organization.findOne({namespace: name}, function(err, organization) {
+    if (err) {
+      console.log(err);
+      res.send(404);
+    }
+    else if (organization) {
+      console.log("Organization name: " + organization.name);
+      console.log("Organization owner: " + organization.owner);
+      User.findOne({_id: ObjectId(organization.owner)}, function(err, owner) {
+        if (err) {
+          console.log(err);
+          res.send(404);
         }
-        else {
-          res.send({Error: "Invalid password"});
+        if (owner) {
+          console.log(owner.first_name);
+          console.log(owner._id);
+          Post
+          .find({creator: ObjectId(owner._id)})
+          .sort({ create_date: -1, _id: -1 })
+          .limit(20)
+          .exec(function(err, posts) {
+            if (err) {
+              console.log(err);
+              res.render('organization', {organization: organization,
+                                          owner: owner,
+                                          noPosts: true,
+                                          posts: [] });
+            }
+            else {
+              res.render('organization', {organization: organization,
+                                          owner: owner,
+                                          noPosts: false,
+                                          posts: posts });
+            }
+          });
         }
-      }
-      else {
-        res.send({Error: "User not found"});
-      }
-    });
-  }
-  else {
-    res.send({Error: "Invalid email address"});
-  }
+      });
+    }
+    else {
+      res.send(404);
+    }
+  });
 });
+
+// router.post('/login', function(req, res) {
+//   var email = req.param('email');
+//   var password = req.param('password')
+//   if (validateEmail(email)) {
+//     User.findOne({email: email, active: true}, function(err, user) {
+//       if (err) {
+//         console.log(err);
+//         res.send(401)
+//       }
+//       else if (user) {
+//         console.log(user.validatePassword(password));
+//         if (user.validatePassword(password)) {
+//           res.send({Success: "Login successful"});
+//         }
+//         else {
+//           res.send({Error: "Invalid password"});
+//         }
+//       }
+//       else {
+//         res.send({Error: "User not found"});
+//       }
+//     });
+//   }
+//   else {
+//     res.send({Error: "Invalid email address"});
+//   }
+// });
 
 module.exports = router;

@@ -24,6 +24,12 @@
   clear: both;
 }
 
+.wrap-organization {
+  margin: 0 auto;
+  width: 1136px;
+  clear: both;
+}
+
 .column {
   width: 560px;
   display: inline-block;
@@ -39,10 +45,6 @@
 
 .gray-background {
   background-color: #e4e5ea;
-}
-
-.gray-font {
-  color: #B9C2D5;
 }
 
 .phone {
@@ -712,24 +714,64 @@ p.sign-up-desc {
   display: block;
 }
 
-/** INSTITUTIONS **/
+/** ORGANIZATIONS **/
+
+#organization-navbar {
+  float: right;
+}
+
+#avatar-navbar {
+  float: left;
+}
+
+#avatar-navbar img {
+  margin-top: 24px;
+  width: 40px;
+  height: 40px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
+#navbar-name {
+  display: inline-block;
+  float: right;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 38px;
+  margin-left: 24px;
+  margin-right: 16px;
+}
 
 #organization-header {
   margin-top: 109px;
   height: 272px;
   text-align: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  color: whitesmoke;
 }
+
+#organization-header h2 {
+  font-weight: 100;
+  font-size: 32px;}
+
+.background-tile {
+  height: 142px;
+  width: 142px;
+  background-size: 142px 142px;
+  float: left;
+  padding: 0px;
+  margin: 0px auto;
+}
+
 
 #avatar-header {
   text-align: center;
 }
 
 #avatar-header img {
-  margin-top: 48px;
-  width: 60px;
-  height: 60px;
+  margin-top: 24px;
+  width: 80px;
+  height: 80px;
   border: 2px #d4daea solid;
   border-radius: 50%;
 }
@@ -745,7 +787,7 @@ p.sign-up-desc {
   width: 19px;
   background-image: url('/images/location.png');
   background-size: 19px 25px;
-  display: inline-block;
+  display: none;
 }
 
 .location {
@@ -754,17 +796,19 @@ p.sign-up-desc {
   margin-left: 6px;
   margin-top: 0px;
   vertical-align: top;
+  font-weight: 100;
 }
 
 #organization-posts {
   background-color: #eef0f4;
   padding-bottom: 68px;
+  color: #B6B8D2;
 }
 
 .post {
   margin-top: 68px;
-  margin-right: 39px;
-  margin-left: 39px;
+  margin-right: 28px;
+  margin-left: 28px;
   width: 320px;
   height: 372px;
   background-color: #FBFCFF;
@@ -775,7 +819,8 @@ p.sign-up-desc {
 
 
 .post-image img {
-  width: 100%;
+  width: 320px;
+  height: 320px;
 }
 
 .like-icon {
