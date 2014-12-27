@@ -39,6 +39,9 @@ var prizm = {
           }
 };
 
+
+
+/** NAVIGATION BAR **/
 $(function(){
   $('.menu-button').click(function(){
     if ($(this).hasClass('selected')) {
@@ -49,6 +52,9 @@ $(function(){
       $(this).toggleClass('selected');
     }
   });
+  $('#navbar-name').click(function(){
+    $('#organization-menu').toggleClass('hidden');
+  })
 });
 
 $(window).scroll(function(){
@@ -106,21 +112,6 @@ $(function() {
   });
 });
 
-$(window).scroll(function()
-{
-  if($(window).scrollTop() == $(document).height() - $(window).height()) {
-    var lastPost = $('#institution-posts').children().last().attr('id');
-    var creator = $('#institution-posts').attr('id');
-    // $('div#loadmoreajaxloader').show();
-    // $.ajax({ url: "loadmore.php", success: function(html) {
-    //   if(html) {
-    //       $("#postswrapper").append(html);
-    //       $('div#loadmoreajaxloader').hide();
-    //   }
-    // }
-    // });
-  }
-});
 /*
 $(function() {
   var input_element = document.getElementById("interest-selection");

@@ -22,6 +22,16 @@ block navbar
       img(src='https://#{organization.logo_url.substr(7)}')
     #navbar-name
       | #{organization.name}
+    #organization-menu.hidden
+      ul
+        li
+          a(href="#") View Profile
+        li
+          a(href="#") Edit Profile
+        li
+          a(href="#") Log Out
+
+
 
 
 block content
