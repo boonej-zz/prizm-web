@@ -1,7 +1,20 @@
+mixin sidenav
+  .dotNav
+    ul
+      li
+        a(href='#partner-home')
+      li
+        a(href='#what-is-prizm')
+      li
+        a(href='#custom-app')
+      li
+        a(href='#why-prizm')
+
 extends layout
 
 block content
   #partner-header.full-width.gray-background
+    #partner-home.anchor
     .wrap
       h2#header-title
           | Capture your members’ experiences and inspirations in a private, mobile community. 
@@ -11,6 +24,7 @@ block content
         p
           | FIND OUT MORE
   #partner-block-1.full-width.blue-background
+    #what-is-prizm.anchor
     .wrap
       #partner-section-1.section.left
         h2 What is Prizm?
@@ -22,7 +36,9 @@ block content
           | “Insights” sent by Luminaries, colleges and companies looking for
           | interns.
       #partner-phone-1.phone.right
+    mixin sidenav
   #partner-block-2.full-width.gray-background
+    #custom-app.anchor
     .wrap
       #partner-section-2.section.right
         h2 Custom app without the hassle.
@@ -42,7 +58,9 @@ block content
           | show student interests, trending topics and hashtags within the 
           | membership, and levels of member engagement.
       #partner-phone-2.section.left
+    mixin sidenav
   #partner-block-3.full-width.blue-background
+    #why-prizm.anchor
     .wrap
       #partner-section-3.section.left
         h2 Why Prizm?
@@ -56,6 +74,7 @@ block content
           | connected to their clubs and organizations while learning about 
           | future opportunities like college and internships.
       #partner-phone-3.phone.right
+    mixin sidenav
   .full-width.gray-background
     .wrap
  

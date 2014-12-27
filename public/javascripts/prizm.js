@@ -125,42 +125,43 @@ $(function(){
 
   function redrawDotNav(){
     var scrolled_val = $(document).scrollTop().valueOf();
-    console.log(scrolled_val);
-    var lumSideNav2 = $('a[href="#what-is-prizm"]').parent()
-    var lumSideNav3 = $('a[href="#what-does-a-luminary-do"]').parent()
-    var lumSideNav4 = $('a[href="#why-prizm"]').parent()
+    var sideNav2    = $('a[href="#what-is-prizm"]').parent()
+    var sideNav3_1  = $('a[href="#what-does-a-luminary-do"]').parent()
+    var sideNav3_2  = $('a[href="#custom-app"]').parent()
+    var sideNav4    = $('a[href="#why-prizm"]').parent()
 
     if (scrolled_val > 403 && scrolled_val < 827) {
-      if (lumSideNav2.hasClass('active')) {
+      if (sideNav2.hasClass('active')) {
         return
       }
       else {
         $('.dotNav li').toggleClass('active', false);
-        lumSideNav2.toggleClass('active');
+        sideNav2.toggleClass('active');
       }
     }
     else if ((scrolled_val > 900 && scrolled_val < 1462)) {
-      if (lumSideNav3.hasClass('active')) {
+      if (sideNav3_1.hasClass('active') || sideNav3_2.hasClass('active')) {
         return
       }
       else {
         $('.dotNav li').toggleClass('active', false);
-        lumSideNav3.toggleClass('active');
+        sideNav3_1.toggleClass('active');
+        sideNav3_2.toggleClass('active');
       }
     }
     else if (scrolled_val > 1562) {
-      if (lumSideNav4.hasClass('active')) {
+      if (sideNav4.hasClass('active')) {
         return
       }
       else {
         $('.dotNav li').toggleClass('active', false);
-        lumSideNav4.toggleClass('active');
+        sideNav4.toggleClass('active');
       }
     }
   }
 });
 
-/* get clicks working */
+/* side navigation */
 $(function(){
   $('.dotNav li').click(function(){
     var id = $(this).find('a').attr("href"),

@@ -173,17 +173,14 @@ a {
   text-transform: uppercase;
 }
 
-/** SIDE NAV **/
+/** SIDE NAVIGATION **/
 
 .dotNav {
   position: relative;
-  top: -60%;
+  top: -55%;
   left: -7%;
   z-index: 5;
   padding: 7px;
-  /* padding-top: 12px; */
-
-  /* width: 0px; */
   height: 0px;
   float: right;
   clear: right;
