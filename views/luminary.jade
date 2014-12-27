@@ -1,7 +1,30 @@
+mixin sidenav
+  //- #side-navbar
+  //-   .side-navbar
+  //-     span.circle-button
+  //-       a(href='/#lum-home')
+  //-     span.circle-button
+  //-       a(href='/#what-is-prizm')
+  //-     span.circle-button
+  //-       a(href='/#what-does-a-luminary-do')
+  //-     span.circle-button
+  //-       a(href='/#why-prizm')
+  .dotNav
+    ul
+      li
+        a(href='#lum-home')
+      li
+        a(href='#what-is-prizm')
+      li
+        a(href='#what-does-a-luminary-do')
+      li
+        a(href='#why-prizm')
+
 extends layout
 
 block content
   #luminary-quote.full-width.gray-background
+    #lum-home.anchor
     .wrap
       #quote
         #quote-avatar
@@ -11,7 +34,9 @@ block content
           | - Coach John Wooden
       p.tagline
         | We are looking for role models in all<br>fields to engage with students on Prizm.
+    //- mixin sidenav
   #luminary-block1.full-width.blue-background
+    #what-is-prizm.anchor
     .wrap
       #lum-section-1.section.left
         h2 What is Prizm?
@@ -23,7 +48,9 @@ block content
           | students who are actively looking for a worthwhile post-high school 
           | experience. 
       #luminary-phone1.phone.right
+    mixin sidenav
   #luminary-block2.full-width.gray-background
+    #what-does-a-luminary-do.anchor
     .wrap
       #lum-section-2.section.right
         h2 What does a Luminary do?<br>I don't have a lot of free time.
@@ -43,7 +70,9 @@ block content
           | 2. Work with us to approve “Insights” in your area of expertise that 
           | will be sent to students on your behalf.
       #luminary-phone2.phone.left
+    mixin sidenav
   #luminary-block3.full-width.blue-background
+    #why-prizm.anchor
     .wrap
       #lum-section-3.section.left
         h2 Why Prizm?
@@ -61,6 +90,7 @@ block content
           | Join others at the top of their games as a Luminary on Prizm and 
           | help show students the wide variety of opportunities out there for them!
       #luminary-phone3.phone.right
+    mixin sidenav
   .full-width.gray-background
     .wrap
       //- p.full.bordered
