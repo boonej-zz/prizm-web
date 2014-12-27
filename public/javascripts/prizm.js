@@ -39,6 +39,9 @@ var prizm = {
           }
 };
 
+
+
+/** NAVIGATION BAR **/
 $(function(){
   $('.menu-button').click(function(){
     if ($(this).hasClass('selected')) {
@@ -49,6 +52,9 @@ $(function(){
       $(this).toggleClass('selected');
     }
   });
+  $('#navbar-name').click(function(){
+    $('#organization-menu').toggleClass('hidden');
+  })
 });
 
 $(window).scroll(function(){
@@ -105,7 +111,6 @@ $(function() {
     }
   });
 });
-
 var isScrolledIntoView = function(elem) {
     var docViewTop = $(window).scrollTop();
     var docViewBottom = docViewTop + $(window).height();
@@ -117,7 +122,7 @@ var isScrolledIntoView = function(elem) {
 }
 
 
-/* dot nav */
+/* side nav class toggle */
 $(function(){
   $(window).bind('scroll',function(e){
     redrawDotNav();
@@ -161,7 +166,7 @@ $(function(){
   }
 });
 
-/* side navigation */
+/* side navigation scrolling */
 $(function(){
   $('.dotNav li').click(function(){
     var id = $(this).find('a').attr("href"),
@@ -178,9 +183,6 @@ $(function(){
   });
 });
 
-
-/* end dot nav */
-/*
 $(function() {
   var input_element = document.getElementById("interest-selection");
   input_element.onchange = interestCount;

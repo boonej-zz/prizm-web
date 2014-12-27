@@ -1,5 +1,5 @@
 var mongoose          = require('mongoose'),
-    utils             = require(process.env.PRISM_HOME + 'utils'),
+    // utils             = require(process.env.PRISM_HOME + 'utils'),
     User              = mongoose.model('User'),
     ObjectId          = mongoose.Schema.Types.ObjectId;
 
@@ -12,8 +12,9 @@ var organizationSchema = new mongoose.Schema({
   modify_date         : {type: Date, default: null, required: false},
   members             : {type: Array, default: []},
   welcome_image_url   : {type: String, default: null},
-  logo_url            : {type: String, default: null}
-
+  logo_url            : {type: String, default: null},
+  owner               : {type: ObjectId, ref: 'User', required: true},
+  namespace           : {type: String, default: null}
 });
 
 organizationSchema.pre('save', function(next){

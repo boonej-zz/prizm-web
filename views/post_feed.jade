@@ -1,0 +1,12 @@
+each post in posts
+  .post(id='#{post.id}' date='#{post.create_date}')
+    .post-image
+      img(src='https://#{post.file_path.substr(7)}')
+    .post-footer
+      .like-icon
+      p.likes
+        | #{post.likes_count}
+      .comment-icon
+      p.comments
+        | #{post.comments_count}
+      .share-icon

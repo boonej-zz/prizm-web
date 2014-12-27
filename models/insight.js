@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var insightSchema = new mongoose.Schema({
-  creator         : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+  creator         : {type: ObjectId, ref: 'User', required: true},
   create_date     : {type: Date, default: null, required: false, index: true},
   title           : {type: String, default: null, required: true},
   text            : {type: String, default: null, required: true}, 

@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var postSchema = new mongoose.Schema({
-  _id                 : {type: mongoose.Schema.Types.ObjectId, required:true},
+  _id                 : {type: ObjectId, required:true},
   text                : {type: String, default: null},
   category            : {type: String, required:true},
   create_date         : {type: Date, default:null, index: true},
@@ -11,7 +12,7 @@ var postSchema = new mongoose.Schema({
   location_name       : {type: String, default: null},
   location_longitude  : {type: Number, default: 0},
   location_latitude   : {type: Number, default: 0},
-  creator             : {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  creator             : {type: ObjectId, ref: 'User'},
   status              : {type: String, default: 'active'},
   file_path           : {type: String, default: ''},
   likes_count         : {type: Number, default: 0},

@@ -24,6 +24,12 @@
   clear: both;
 }
 
+.wrap-organization {
+  margin: 0 auto;
+  width: 1136px;
+  clear: both;
+}
+
 .column {
   width: 560px;
   display: inline-block;
@@ -754,27 +760,111 @@ p.sign-up-desc {
   display: block;
 }
 
-/** INSTITUTIONS **/
+/** ORGANIZATIONS **/
 
-#institution-header {
-  height: 300px;
-  background-size: 600px;
+#organization-navbar {
+  float: right;
+}
+
+#avatar-navbar {
+  float: left;
+}
+
+#avatar-navbar img {
+  margin-top: 24px;
+  width: 40px;
+  height: 40px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
+#navbar-name {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 38px;
+  margin-left: 24px;
+  margin-right: 16px;
+}
+
+#organization-menu {
+  margin-top: -4px;
+  position: fixed;
+  top: 75px; 
+  right: 195px;
+  background: #FBFCFF;
+  width: 120px;
+  border-radius: 10px;
+}
+
+#organization-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 12px 15px;
+  border-color: #FFFFFF transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  top: -10px;
+  left: 12px;
+}
+
+#organization-menu ul {
+  margin: 0px auto;
+  width: 120px;
+  float: left;
+  padding: 0px;
   text-align: center;
 }
+
+#organization-menu li {
+  list-style: none;
+  border-bottom: 1px #d4daea solid;
+  padding: 12px;
+}
+
+#organization-menu li:last-child {
+  border: none;
+}
+
+#organization-header {
+  margin-top: 109px;
+  height: 272px;
+  text-align: center;
+  background-repeat: no-repeat;
+  color: whitesmoke;
+}
+
+#organization-header h2 {
+  font-weight: 100;
+  font-size: 32px;}
+
+.background-tile {
+  height: 142px;
+  width: 142px;
+  background-size: 142px 142px;
+  float: left;
+  padding: 0px;
+  margin: 0px auto;
+}
+
 
 #avatar-header {
   text-align: center;
 }
 
 #avatar-header img {
-  margin-top: 48px;
-  width: 60px;
-  height: 60px;
+  margin-top: 24px;
+  width: 80px;
+  height: 80px;
   border: 2px #d4daea solid;
   border-radius: 50%;
 }
 
-.institution-name {
+.organization-name {
   width: 100%;
   text-align: center;
 }
@@ -785,7 +875,7 @@ p.sign-up-desc {
   width: 19px;
   background-image: url('/images/location.png');
   background-size: 19px 25px;
-  display: inline-block;
+  display: none;
 }
 
 .location {
@@ -794,23 +884,31 @@ p.sign-up-desc {
   margin-left: 6px;
   margin-top: 0px;
   vertical-align: top;
+  font-weight: 100;
 }
 
-#institution-posts {
-  background-color: #F5F6FA;
+#organization-posts {
+  background-color: #eef0f4;
+  padding-bottom: 68px;
+  color: #B6B8D2;
 }
 
 .post {
-  margin: 38px;
+  margin-top: 68px;
+  margin-right: 28px;
+  margin-left: 28px;
   width: 320px;
-  height: 376px;
+  height: 372px;
   background-color: #FBFCFF;
   border: 1px #d4daea solid;
   display: inline-block;
 }
 
+
+
 .post-image img {
-  width: 100%;
+  width: 320px;
+  height: 320px;
 }
 
 .like-icon {
