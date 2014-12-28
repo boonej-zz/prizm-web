@@ -308,7 +308,6 @@
     width: 280px;
   }
 
-
   .full {
     width: 300px;
     font-size: 0.67em;
@@ -432,6 +431,7 @@
   }
   
   /** INFORMATION FORM **/
+
   #info-form {
     width: 290px;
     border-radius: 2px;
@@ -478,8 +478,6 @@
 
   #info-form #send {
     right: 70px;
-   
-
   }
 
   .form-section ::-webkit-input-placeholder {
@@ -538,5 +536,49 @@
     margin: 30px 30px 60px 30px;
     font-size: 17px;
   }
+  /** Organizations **/
+
+  .wrap-organization {
+    width: 100%;
+  }
+
+  #avatar-navbar img {
+    margin-top: 24px;
+    margin-right: 6px;
+    width: 30px;
+    height: 30px;
+  }
+
+  #navbar-name {
+    display: none;
+  }
+
+  #organization-header {
+    height: 200px;
+  }
+
+  #avatar-header img {
+    width: 40px;
+    height: 40px
+  }
+
+  #organization-header h2 {
+    font-size: 24px;
+  }
+
+  .location {
+    font-size: 18px;
+  }
+
+  #organization-posts {
+    text-align: center;
+  }
+
+  .post {
+    height
+    width: 300px;
+    margin-top: 0px auto;
+  }
 
 }
+
