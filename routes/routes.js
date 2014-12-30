@@ -140,6 +140,46 @@ router.post('/', function(req, res) {
   res.send('success'); 
 });
 
+/** Posts **/
+
+router.get('/posts/', function(req, res) {
+  if (req.accepts('application/json')) {
+    var creator = req.get('creator');
+    var lastPost = req.get('lastPost');
+    var limit = req.get('limit');
+    if (limit == undefined) {
+      limit = 20;
+    }
+    Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
+      if (err) {
+        console.log(err);
+        res.status(400).send({ error: err });
+      }
+      if (post) {
+        console.log(post);
+        Post
+        .find({creator: ObjectId(creator)})
+        .where('create_date').lt(post.create_date)
+        .sort({create_date: -1, _id: -1})
+        .limit(limit)
+        .exec(function(err, posts) {
+          if (err) {
+            console.log(err);
+            res.status(500).send({ error: err});
+          }
+          else {
+            var content = jade.render(postFeed, {posts: posts});
+            res.status(200).send(content);
+          }
+        });
+      }
+    });
+  }
+  else {
+    res.status(404).send({ error: "Resource not found."});
+  }
+})
+
 router.get('/posts/:id', function(req, res){
   var id = req.params.id;
   Post.findOne({_id: new ObjectId(id)})
@@ -281,79 +321,45 @@ router.get('/users/:id/institutions', function(req, res){
 /** Organization Pages **/
 
 router.get('/:name', function(req, res) {
-  if (req.accepts('html')) {
-    var name = req.params.name;
-    Organization.findOne({namespace: name}, function(err, organization) {
-      if (err) {
-        console.log(err);
-        res.send(404);
-      }
-      else if (organization) {
-        User.findOne({_id: ObjectId(organization.owner)}, function(err, owner) {
-          if (err) {
-            console.log(err);
-            res.send(404);
-          }
-          if (owner) {
-            Post
-            .find({creator: ObjectId(owner._id)})
-            .sort({ create_date: -1, _id: -1 })
-            .limit(20)
-            .exec(function(err, posts) {
-              if (err) {
-                console.log(err);
-                res.render('organization', {organization: organization,
-                                            owner: owner,
-                                            noPosts: true,
-                                            posts: [] });
-              }
-              else {
-                res.render('organization', {organization: organization,
-                                            owner: owner,
-                                            noPosts: false,
-                                            posts: posts });
-              }
-            });
-          }
-        });
-      }
-      else {
-        res.send(404);
-      }
-    });
-  }
-  else if (req.accepts('application/json')) {
-    var creator = req.get('creator');
-    var lastPost = req.get('lastPost');
-    var limit = req.get('limit');
-    if (limit == undefined) {
-      limit = 20;
+  var name = req.params.name;
+  Organization.findOne({namespace: name}, function(err, organization) {
+    if (err) {
+      console.log(err);
+      res.send(404);
     }
-    Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
-      if (err) {
-        console.log(err);
-        res.status(400).send({ error: err });
-      }
-      if (post) {
-        console.log(post);
-        Post
-        .find({creator: ObjectId(creator)})
-        .where('create_date').lt(post.create_date)
-        .sort({create_date: -1, _id: -1})
-        .limit(limit)
-        .exec(function(err, posts) {
-          if (err) {
-            console.log(err);
-            res.status(204).send({ success: "No more posts available"});
-          }
-          else {
-            var content = jade.render(postFeed, {posts: posts});
-            res.status(200).send(content);
-          }
-        });
-      }
-    });
-  }
+    else if (organization) {
+      User.findOne({_id: ObjectId(organization.owner)}, function(err, owner) {
+        if (err) {
+          console.log(err);
+          res.send(404);
+        }
+        if (owner) {
+          Post
+          .find({creator: ObjectId(owner._id)})
+          .sort({ create_date: -1, _id: -1 })
+          .limit(20)
+          .exec(function(err, posts) {
+            if (err) {
+              console.log(err);
+              res.render('organization', {organization: organization,
+                                          owner: owner,
+                                          noPosts: true,
+                                          posts: [] });
+            }
+            else {
+              res.render('organization', {organization: organization,
+                                          owner: owner,
+                                          noPosts: false,
+                                          posts: posts });
+            }
+          });
+        }
+      });
+    }
+    else {
+      res.send(404);
+    }
+  });
 });
 
 module.exports = router;

@@ -7,7 +7,7 @@ block head
         var lastPost = $('#organization-posts').children().last().attr('id');
         var creator = '#{organization.owner}'
         $.ajax({
-          url: window.location.pathname,
+          url: './posts/',
           headers: {
             'Accept' : 'application/json',
             'creator' : creator,
