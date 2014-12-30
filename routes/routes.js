@@ -99,47 +99,6 @@ router.get('/download', function(req, res){
   res.render('download', { title: 'Prizm App | Download', selected: 'none'});
 });
 
-router.post('/', function(req, res) {
-  var data = req.body;
-  var record = new Record(data);
-  if (validateEmail(record.email)){
-    record.save();
-    var name = record.name.split(' ');
-    var first = name.length > 0?name[0]:'Friend';
-    var messageBody = ejs.render(mail, {first: first});
-    mandrill(mandrillEndpointSend, {
-      message: {
-                  to: [{email: record.email}],
-                  from_email: 'info@prizmapp.com',
-                  subject: 'Thank you for your interest!',
-                  html: messageBody 
-               }   
-      }, function(err, response) {
-        if (err) {
-          console.log('MANDRILL ERROR RETURNED: ' + JSON.stringify(err));
-
-        }else {
-         var adminText = ejs.render(adminBody, {user: record});
-         mandrill(mandrillEndpointSend, {
-         message: {
-                  to: [{email: adminEmail}],
-                  from_email: 'info@prizmapp.com',
-                  subject: 'Prizm Private Beta Request',
-                  html: adminText
-               }
-         }, function(err, response) {
-            if (err) {
-              console.log('MANDRILL ERROR RETURNED: ' + JSON.stringify(err));
-          }
-    });
-
-        }
-      }
-    );
-     }
-  res.send('success'); 
-});
-
 /** Posts **/
 
 router.get('/posts/', function(req, res) {
