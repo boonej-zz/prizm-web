@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var _posts = require('../controllers/posts');
 var _users = require('../controllers/users');
+var _organizations = require('../controllers/organizations');
 var Activity = mongoose.model('Activity');
 var Record = mongoose.model('Record');
 var Post = mongoose.model('Post');
@@ -112,46 +113,6 @@ router.get('/users/:id/institutions', _users.institutionApproval);
 
 /** Organization Pages **/
 
-router.get('/:name', function(req, res) {
-  var name = req.params.name;
-  Organization.findOne({namespace: name}, function(err, organization) {
-    if (err) {
-      console.log(err);
-      res.send(404);
-    }
-    else if (organization) {
-      User.findOne({_id: ObjectId(organization.owner)}, function(err, owner) {
-        if (err) {
-          console.log(err);
-          res.send(404);
-        }
-        if (owner) {
-          Post
-          .find({creator: ObjectId(owner._id)})
-          .sort({ create_date: -1, _id: -1 })
-          .limit(20)
-          .exec(function(err, posts) {
-            if (err) {
-              console.log(err);
-              res.render('organization', {organization: organization,
-                                          owner: owner,
-                                          noPosts: true,
-                                          posts: [] });
-            }
-            else {
-              res.render('organization', {organization: organization,
-                                          owner: owner,
-                                          noPosts: false,
-                                          posts: posts });
-            }
-          });
-        }
-      });
-    }
-    else {
-      res.send(404);
-    }
-  });
-});
+router.get('/:name', _organizations.fetchOrganizationByName);
 
 module.exports = router;
