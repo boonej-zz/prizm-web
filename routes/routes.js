@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var _posts = require('../controllers/posts');
+var _users = require('../controllers/users');
 var Activity = mongoose.model('Activity');
 var Record = mongoose.model('Record');
 var Post = mongoose.model('Post');
@@ -101,183 +102,13 @@ router.get('/download', function(req, res){
 });
 
 /* Posts */
-router.get('/posts/', _posts.postFeed);
+router.get('/posts/', _posts.fetchPosts);
 router.get('/posts/:id', _posts.singlePost)
-// router.get('/posts/', function(req, res) {
-//   if (req.accepts('application/json')) {
-//     var creator = req.get('creator');
-//     var lastPost = req.get('lastPost');
-//     var limit = req.get('limit');
-//     if (limit == undefined) {
-//       limit = 20;
-//     }
-//     Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
-//       if (err) {
-//         console.log(err);
-//         res.status(400).send({ error: err });
-//       }
-//       if (post) {
-//         console.log(post);
-//         Post
-//         .find({creator: ObjectId(creator)})
-//         .where('create_date').lt(post.create_date)
-//         .sort({create_date: -1, _id: -1})
-//         .limit(limit)
-//         .exec(function(err, posts) {
-//           if (err) {
-//             console.log(err);
-//             res.status(500).send({ error: err});
-//           }
-//           else {
-//             var content = jade.render(postFeed, {posts: posts});
-//             res.status(200).send(content);
-//           }
-//         });
-//       }
-//     });
-//   }
-//   else {
-//     res.status(404).send({ error: "Resource not found."});
-//   }
-// })
 
-// router.get('/posts/:id', function(req, res){
-//   var id = req.params.id;
-//   Post.findOne({_id: new ObjectId(id)})
-//   .populate('creator')
-//   .exec(function(err, post){
-//     if (err) {
-//       res.send(err);
-//     } else {
-//     var tags = '';
-//     for (var i = 0; i != post.hash_tags.length; ++i ) {
-//       if (i < 3) {
-//         tags = tags + '#' + post.hash_tags[i] + ' ';
-//       } else if (i == 3) {
-//         tags = tags + '...';
-//       }
-//     }
-//     var now = moment();
-//     var create = moment(post.create_date);
-//     var diff = now.diff(create);
-//     diff = diff/1000;
-//     console.log(post.external_provider);
-//     var string = '';
-//     if (diff < 60) {
-//       string = 'now';
-//     } if (diff < 3600) {
-//       var mins = Math.floor(diff / 60);
-//       string = mins + 'm';
-//     } else if (diff < 60 * 60 * 24) {
-//       var hours = Math.floor(diff/(60*60));
-//       string = hours + 'h';
-//     } else {
-//       var days = Math.floor(diff/(60*60*24));
-//       if (days < 7) {
-//         string = days + 'd';
-//       } else {
-//         var weeks = Math.floor(days/7);
-//         string = weeks + 'w';
-//       }
-//     }
-//     res.render('post', {bodyId: 'post-card', post: post, tags: tags, ago: string, category: post.category
-    
-//     });}
-//   });
-// });
-
-router.get('/users/:id/password', function(req, res){
-  var id = req.params.id;
-  var resetKey = req.query.reset_key;
-  User.findOne({_id: new ObjectId(id)}, function(err, user){
-    if (err) {
-      console.log(err);
-      res.render('reset', {success: false});
-    }
-    if (user) {
-      if (user.reset_key && user.reset_key == resetKey && user.password_reset) {
-        user.password = user.password_reset;
-        if (user.hashPassword()){
-          user.password_reset = null;
-          user.reset_key = null;
-          user.reset_date = null;
-          user.save(function(err,result){
-            if (err) {
-              res.render('reset', {success: false});
-            } else {
-              res.render('reset', {success: true});
-            }
-          });
-        } else {
-          res.render('reset', {success: false});
-        }
-      } else {
-        res.render('reset', {success: false});
-      } 
-    } else {
-      res.render('reset', {success: false});
-    }
-  }); 
-});
-
-router.get('/users', utils.auth, function(req, res){
-  var limit = req.query.limit || 50;
-  if (req.query.name) {
-    var search = new RegExp(req.query.name, 'i');
-    User.find({name: search}).limit(limit).exec(function(err, users) {
-      if (err) {
-        res.send(500);
-      }
-      res.send(users);
-    });
-  }
-});
-
-router.get('/users/:id/institutions', function(req, res){
-  var id = req.params.id;
-  var approval = req.query.approval;
-  var review_key = req.query.review_key;
-  User.findOne({_id: new ObjectId(id)}, function(err, user){
-    if (err) {
-      console.log(err);
-      res.send(401);
-    }
-    if (user.review_key == review_key && user.type == 'institution'){
-      var html = '';
-      var subject = '';
-      if (approval == 'yes') {
-        user.type = 'institution_verified';
-        user.review_key = null;
-        user.save();
-        subject = 'You have been approved!';
-        html = jade.render(acceptMail, {user: user});
-      } else if (approval == 'no') {
-        user.type = 'user';
-        user.review_key = null;
-        user.save();
-        subject = 'Thank you for your interest.';
-        html = jade.render(rejectMail,  {user: user}); 
-      }
-      console.log(user.email);
-      mandrill(mandrillEndpointSend, {
-        message: {
-                  to: [{email: user.email}],
-                  from_email: 'info@prizmapp.com',
-                  subject: subject,
-                  html: html
-               }   
-       }, function(err, response) {
-         if (err) {
-           console.log(response);
-            res.render('error', err);
-         }
-        res.render('approve_deny');
-       });
-    } else {
-      res.render('error', err); 
-    }
-  });
-});
+/* Users */
+router.get('/users/:id/password', _users.passwordReset);
+router.get('/users', utils.auth, _users.fetchUsers);
+router.get('/users/:id/institutions', _users.institutionApproval);
 
 /** Organization Pages **/
 
