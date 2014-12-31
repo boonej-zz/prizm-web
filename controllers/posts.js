@@ -1,3 +1,4 @@
+// Post Controller
 var express   = require('express');
 var router    = express.Router();
 var mongoose  = require('mongoose');
@@ -32,7 +33,7 @@ moment.locale('en', {
   } 
 });
 
-exports.postFeed = function(req, res) {
+exports.fetchPosts = function(req, res) {
   if (req.accepts('application/json')) {
     var creator = req.get('creator');
     var lastPost = req.get('lastPost');
