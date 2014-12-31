@@ -183,6 +183,7 @@ $(function(){
   });
 });
 
+/*
 $(function() {
   var input_element = document.getElementById("interest-selection");
   input_element.onchange = interestCount;
