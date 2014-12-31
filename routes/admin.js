@@ -218,13 +218,16 @@ var processUserByProgramCode = function(programCode, next){
   });
 };
 
-var processUsersByInterests = function(interests, next){
+var processUsersWithInterestsAndOptions = function(interests, options, next){
   var params = [];
   _.each(interests, function(interest, index, list){
     params.push(ObjectId(interest));
   });
-  console.log(params);
-  User.find({interests: {$elemMatch: {_id: {$in: params}}}}, function(err, users){
+  if (interests) {
+    options.interests = {$elemMatch: {_id: {$in: params}}};
+  }
+  User.find(options, function(err, users){
+    if (err) console.log(err);
     next(err, users);
   }); 
 };
@@ -290,9 +293,20 @@ router.post('/insights/:id', utils.auth, function (req, res) {
       });
     } else {
       var interests = _.isArray(req.param('interest'))?req.param('interest'):[req.param('interest')];
+      var gender = req.param('gender').toLowerCase();
+      var startAge = Number(req.param('startingAge'));
+      var endAge = Number(req.param('endingAge'));
+      var options = {};
+      if (gender != 'all') {
+        options.gender = gender
+      }
+      options.age = {$gte: startAge, $lte: endAge};
+      
+      options.active = true;
       var userArray = [];
       var i = 0;
-      processUsersByInterests(interests, function(err, users){
+      processUsersWithInterestsAndOptions(interests, options,
+          function(err, users){
         console.log('processed ' + users.length + ' users');
         _.each(users, function(user, index, list){
           sendInsightToUser(insight, user, subjectIndex, function(err){
