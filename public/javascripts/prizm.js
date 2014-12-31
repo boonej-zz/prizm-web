@@ -183,6 +183,18 @@ $(function(){
   });
 });
 
+/* Organization Header Slider */
+$(function(){
+  $('#org-first').click(function(){
+    $('.slider').css('left', '0%');
+  })
+  $('#org-middle').click(function(){
+    $('.slider').css('left', '-33.33%');
+  })
+  $('#org-last').click(function(){
+    $('.slider').css('left', '-66.66%');
+  })
+})
 /*
 $(function() {
   var input_element = document.getElementById("interest-selection");

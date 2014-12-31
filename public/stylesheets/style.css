@@ -199,7 +199,6 @@ a {
 
 .dotNav ul {
   list-style: none;
-  /* margin:0; */
   width: 0px;
   margin: 0px auto;
 }
@@ -459,8 +458,7 @@ p.sign-up-desc {
 
 /** TERMS **/
 
-#terms p, ul, h2, h3{
-  width: 600px;
+li#org-first{
 }
 
 /** LUMINARY **/
@@ -841,6 +839,7 @@ p.sign-up-desc {
   text-align: center;
   background-repeat: no-repeat;
   color: whitesmoke;
+  overflow: hidden;
 }
 
 #organization-header h2 {
@@ -863,12 +862,73 @@ p.sign-up-desc {
     background: rgba(57, 80, 109, .75);
 }
 
-#org-header-section1 {
-    position: relative;
-  
-    width: 100%;
-    height: 100%;
-    z-index: 500;
+.organization-info {
+    font-size: 18px;
+    width: 600px;
+
+    height: 130px;
+    margin: 0px auto;
+    padding-top: 64px;
+}
+
+.organization-website {
+    /* position: relative; */
+
+    /* bottom: 10px; */
+}
+
+.slider {
+  position: relative;
+  width: 33.33%;
+  height: 284px;
+  z-index: 500;
+  /* display: inline-block; */
+  float: left;
+  margin: 0px auto;
+  padding: 0px;
+  /* clear: right; */
+}
+
+.slider-container {
+  height: 284px;
+  width: 300%;
+}
+
+.slider-nav {
+  position: relative;
+  bottom: 54px;
+  z-index: 5;
+  padding: 7px;
+  height: 0px;
+  width: 200px;
+  margin: 0px auto;
+  z-index: 1000;
+}
+
+.slider-nav ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.slider-nav li {
+  position: relative;
+  background: none repeat scroll 0 0 #aaaaaa;
+  border-radius: 15px 15px 15px 15px;
+  cursor: pointer;
+  height: 12px;
+  margin: 0px 5px 0px 5px;
+  width: 12px;
+  display: inline-block;
+}
+
+.slider-nav li.active {
+  background-color: #e4e5ea;
+  background-image: -moz-linear-gradient(center top , #FFFFFF, #EEEEEE);
+  background-repeat: repeat-x;
+}
+
+.slider-nav li:hover {
+  background: none repeat scroll 0 0 #EEEEEE;
 }
 
 .background-tile {
