@@ -15,8 +15,7 @@ var acceptMail  = fs.readFileSync(path.join(__dirname +
 var mandrill    = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 
-
-
+// User Methods
 exports.passwordReset = function(req, res){
   var id = req.params.id;
   var resetKey = req.query.reset_key;

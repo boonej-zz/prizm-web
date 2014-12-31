@@ -1,4 +1,4 @@
-// Post Controller
+// Posts Controller
 var express   = require('express');
 var router    = express.Router();
 var mongoose  = require('mongoose');
@@ -11,6 +11,7 @@ var jade      = require('jade');
 var postFeed  = fs.readFileSync(path.join(__dirname +
                 '/../views/post_feed.jade'), 'utf8');
 
+// Posts Configuration
 moment.relativeTimeThreshold('d', 6);
 moment.relativeTimeThreshold('M', 52);
 
@@ -33,6 +34,8 @@ moment.locale('en', {
   } 
 });
 
+
+// Posts Methods
 exports.fetchPosts = function(req, res) {
   if (req.accepts('application/json')) {
     var creator = req.get('creator');
