@@ -6,13 +6,13 @@ var ObjectId      = require('mongoose').Types.ObjectId;
 var User          = mongoose.model('User');
 var Post          = mongoose.model('Post');
 var Organization  = mongoose.model('Organization');
-var config        = require('../config');
-var jade          = require('jade');
-var fs            = require('fs');
-var path          = require('path');
+// var config        = require('../config');
+// var jade          = require('jade');
+// var fs            = require('fs');
+// var path          = require('path');
 
 // Organizations Methods
-exports.fetchOrganizationByName = function(req, res) {
+exports.displayOrganizationByName = function(req, res) {
   var name = req.params.name;
   Organization.findOne({namespace: name}, function(err, organization) {
     if (err) {

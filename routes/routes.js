@@ -56,7 +56,6 @@ router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);
 
 /** Organization Pages **/
-
-router.get('/:name', _organizations.fetchOrganizationByName);
+router.get('/:name', _organizations.displayOrganization);
 
 module.exports = router;
