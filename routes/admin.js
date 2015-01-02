@@ -311,7 +311,7 @@ var fixUser = function (user, next){
   });
 
 };
-
+/*
 router.get('/users/fix', function(req, res){
   console.log('finding users');
   User.find(function(err, users){
@@ -323,6 +323,7 @@ router.get('/users/fix', function(req, res){
   }); 
   res.send(200);
 });
+*/
 
 router.post('/insights/:id', utils.auth, function (req, res) {
   var insightId = req.params.id;
