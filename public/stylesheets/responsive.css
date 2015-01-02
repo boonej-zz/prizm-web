@@ -542,6 +542,18 @@
     width: 100%;
   }
 
+  #image-header {
+    display: none;
+  }
+
+  #image-header-overlay {
+    display: none;
+  }
+
+  .slider-nav {
+    display: none;
+  }
+
   #avatar-navbar img {
     margin-top: 24px;
     margin-right: 6px;

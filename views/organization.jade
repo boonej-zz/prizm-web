@@ -44,18 +44,32 @@ block content
   #organization-block.full-width.gray-font
     .wrap-organization
       #organization-header(style="background-image: url('images/organization_header.png')")
-        //- if (posts.length > 15)
-        //-   #dynamic-header
-        //-     each post, i in posts
-        //-       if (i < 16)
-        //-         .background-tile(style="background-image: url('https://#{post.file_path.substr(7)}')")
-        #avatar-header
-          img(src='https://#{organization.logo_url.substr(7)}')
-        h2.organization-name
-          | #{organization.name}
-        #location-icon
-        p.location
-          | #{owner.city}, #{owner.state}
+        if (posts.length > 15)
+          #image-header-overlay
+          #image-header
+            each post, i in posts
+              if (i < 16)
+                .background-tile(style="background-image: url('https://#{post.file_path.substr(7)}')")
+        .slider-container
+          #org-header-section1.slider
+            #avatar-header
+              img(src='https://#{organization.logo_url.substr(7)}')
+            h2.organization-name
+              | #{organization.name}
+            #location-icon
+            p.location
+              | #{owner.city}, #{owner.state}
+          #org-header-section2.slider
+            p.organization-info
+              | #{owner.info}
+            p.organization-website
+              | #{owner.website}
+          #org-header-section3.slider
+        .slider-nav
+          ul
+            li#org-first
+            li#org-middle
+            li#org-last
       #organization-posts
         if (noPosts)
           #no-posts
