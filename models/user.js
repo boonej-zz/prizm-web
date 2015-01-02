@@ -96,6 +96,7 @@ userSchema.methods.validatePassword = function(password) {
   }
 }
 
+/**
 userSchema.post('init', function(user){
   var birthday = user.birthday?user.birthday.split('-'):false;
   if (birthday && birthday.length == 3) {
@@ -108,5 +109,6 @@ userSchema.post('init', function(user){
     }
   }
 });
+*/
 
 mongoose.model('User', userSchema);
