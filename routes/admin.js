@@ -218,13 +218,16 @@ var processUserByProgramCode = function(programCode, next){
   });
 };
 
-var processUsersByInterests = function(interests, next){
+var processUsersWithInterestsAndOptions = function(interests, options, next){
   var params = [];
   _.each(interests, function(interest, index, list){
     params.push(ObjectId(interest));
   });
-  console.log(params);
-  User.find({interests: {$elemMatch: {_id: {$in: params}}}}, function(err, users){
+  if (interests) {
+    options.interests = {$elemMatch: {_id: {$in: params}}};
+  }
+  User.find(options, function(err, users){
+    if (err) console.log(err);
     next(err, users);
   }); 
 };
@@ -235,6 +238,67 @@ var processAllUsers = function(next) {
   });
 };
 
+var fixUser = function (user, next){
+  Activity.find({$or: [{from: user._id}, 
+  {to: user._id}], action: 'follow'}, function(err, activities){
+    _.each(activities, function(activity, idx, list){
+      var verb = 'unknown'; 
+      if (activity.from.equals(user._id)){
+        verb = 'following';
+      } else if (activity.to.equals(user._id)){
+        verb = 'followers';
+      }
+      var actObj = activity.toObject();
+      if (verb === 'following') {
+        var location = _.find(user.following, function(item){
+          return activity.to.equals(ObjectId(item._id));
+        });
+        if (location === undefined) {
+          location = {
+            _id: actObj.to,
+            date: actObj.create_date
+          };
+          user.following.push(location);
+          user.following_count = user.following.length;
+        } else {
+          console.log('did not edit');
+        } 
+      } else if (verb === 'followers') {
+        var location = _.find(user.followers, function(item){
+          return activity.from.equals(ObjectId(item._id));
+        });
+        if (location === undefined){
+          location = {
+            _id: actObj.from,
+            date: actObj.create_date
+          };
+          user.followers.push(location);
+          user.followers_count = user.followers.length;
+          user.save();
+        } else {
+          console.log('did not edit');
+        }
+      }
+      
+      //console.log(user.name + ': ' + verb);
+    });
+    next();
+  });
+
+};
+/*
+router.get('/users/fix', function(req, res){
+  console.log('finding users');
+  User.find(function(err, users){
+    _.each(users, function(user, index, list){
+      fixUser(user, function(err){
+        if (err) console.log(err);
+      });
+    }); 
+  }); 
+  res.send(200);
+});
+*/
 router.post('/insights/:id', utils.auth, function (req, res) {
   var insightId = req.params.id;
   var interestsCount = req.param('numberOfInterests');
@@ -290,9 +354,20 @@ router.post('/insights/:id', utils.auth, function (req, res) {
       });
     } else {
       var interests = _.isArray(req.param('interest'))?req.param('interest'):[req.param('interest')];
+      var gender = req.param('gender').toLowerCase();
+      var startAge = Number(req.param('startingAge'));
+      var endAge = Number(req.param('endingAge'));
+      var options = {};
+      if (gender != 'all') {
+        options.gender = gender
+      }
+      options.age = {$gte: startAge, $lte: endAge};
+      
+      options.active = true;
       var userArray = [];
       var i = 0;
-      processUsersByInterests(interests, function(err, users){
+      processUsersWithInterestsAndOptions(interests, options,
+          function(err, users){
         console.log('processed ' + users.length + ' users');
         _.each(users, function(user, index, list){
           sendInsightToUser(insight, user, subjectIndex, function(err){
@@ -363,5 +438,7 @@ router.get('/sign_s3', function(req, res){
         } 
     });
 });
+
+
 
 module.exports = router;

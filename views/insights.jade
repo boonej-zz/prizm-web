@@ -3,7 +3,6 @@ extends altlayout
 block head
   link(rel='stylesheet' href='/stylesheets/jquery.css' type='text/css')
   script(type='text/javascript').
-    
     $(function(){
       var success = '#{success}';
       if (success == 'true') {
@@ -38,23 +37,41 @@ block content
       p Insight Path: #{insight.file_path}
     .insight.action
       form(method='post')
-        p Select Interests to Target:
-        select(name='interest' id='interest-selection' size='#{interests.length}' multiple='multiple')
-          each interest in interests
-            option(name='interest' value='#{interest._id}')= interest.text
-        p Select Insight Subject Line:
-        select(name='subject' id='subject-selection')
+        label(for = 'subject') Select Insight Subject Line:
+        select(name='subject' id='subject')
           each subject, index in subjects
             option(name='subject' value='#{index}')= subject
-        p Select Individual to Target:
+        fieldset
+          legend Filters
+          label(for = 'interest-selection') 
+            | Select Interests to Target:
+            br
+          select(name='interest' id='interest-selection' 
+            size='#{interests.length}' multiple='multiple')
+            each interest in interests
+              option(name='interest' value='#{interest._id}')= interest.text
+          br
+          label(for='start-age') Starting Age:
+          input(type='text', value='13', name='startingAge')
+          br
+          label(for='ending-age') Ending Age:
+          input(type='text', value='100', name='endingAge')
+          br
+          label(for='gender') Gender:
+          select(name='gender' id='gender')
+            option(name='gender', value='all') All
+            option(name='gender', value='female') Female
+            option(name='gender', value='male') Male
+
+        label(for='user') Select User to Target:
         div.ui-widget
           input#user(name='individualUser')
-        br
         label(for='program-code') Enter a Program Code:
         div.ui-widget
           input#program-code(name='programCode')
         p Select to send Insight to all Prizm users:
           input#all-users(type='checkbox' name='allUsers')
+
         #insight-target
           input(type='submit' value='Send')
         input#interest-count(type='hidden' name='numberOfInterests')

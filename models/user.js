@@ -1,10 +1,12 @@
 var serial = require('serializer');
 var utils = require('../utils');
 var _ = require('underscore');
+var moment = require('moment');
 
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
+  age                   : {type: Number, default: 0},
   name                  : {type: String, default: ''},
   first_name            : {type: String, required: true},
   last_name             : {type: String, default: ''},
@@ -93,5 +95,20 @@ userSchema.methods.validatePassword = function(password) {
     return false;
   }
 }
+
+
+userSchema.pre('save', function(next){
+  var birthday = this.birthday?this.birthday.split('-'):false;
+  if (birthday && birthday.length == 3) {
+    birthday = [birthday[2], birthday[0] - 1, birthday[1]];
+    birthday = moment(birthday);
+    diff = moment().diff(birthday, 'years');
+    if (diff != this.age) {
+      this.age = diff;
+    }
+  }
+  next();
+});
+
 
 mongoose.model('User', userSchema);
