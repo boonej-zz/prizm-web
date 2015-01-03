@@ -238,6 +238,31 @@ var processAllUsers = function(next) {
   });
 };
 
+var fixUser2 = function(user, next){
+  var following = user.following;
+  var followers = user.followers;
+  _.each(following, function(item, idx, list){
+    if (typeof(item._id == 'Object')){
+      item._id = item._id.toString();
+      item.date = item.date.toString();
+      user.following.set(idx,item);
+    }
+  });
+  _.each(followers, function(item, idx, list){
+    if (typeof(item._id == 'Object')){
+      item._id = item._id.toString();
+      item.date = item.date.toString();
+      user.followers.set(idx, item);
+    }
+  });
+  user.followers_count = user.followers.length;
+  user.following_count = user.following.length;
+  user.save(function(err, result){
+    console.log(err);
+  });
+  next();
+}
+
 var fixUser = function (user, next){
   Activity.find({$or: [{from: user._id}, 
   {to: user._id}], action: 'follow'}, function(err, activities){
@@ -291,7 +316,7 @@ router.get('/users/fix', function(req, res){
   console.log('finding users');
   User.find(function(err, users){
     _.each(users, function(user, index, list){
-      fixUser(user, function(err){
+      fixUser2(user, function(err){
         if (err) console.log(err);
       });
     }); 
@@ -299,6 +324,7 @@ router.get('/users/fix', function(req, res){
   res.send(200);
 });
 */
+
 router.post('/insights/:id', utils.auth, function (req, res) {
   var insightId = req.params.id;
   var interestsCount = req.param('numberOfInterests');
