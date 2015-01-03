@@ -10,5 +10,6 @@ exports.user          = require('./user');
 exports.interest      = require('./interest');
 exports.insightTarget = require('./insight_target');
 exports.organization  = require('./organization');
+exports.trust         = require('./trust');
 
 mongoose.connect(mongoURI);
