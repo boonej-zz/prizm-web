@@ -8,6 +8,8 @@ var config      = require('../config');
 var jade        = require('jade');
 var fs          = require('fs');
 var path        = require('path');
+var _           = require('underscore');
+var _trusts     = require('../controllers/trusts');
 var rejectMail  = fs.readFileSync(path.join(__dirname +
                   '/../views/reject_mail.jade'), 'utf8');
 var acceptMail  = fs.readFileSync(path.join(__dirname +
@@ -108,3 +110,34 @@ exports.institutionApproval = function(req, res){
     }
   });
 };
+
+exports.getTrustedLuminariesForUserId = function(userId, next) {
+  var trustedUserIds = [];
+  _trusts.findTrustsByUserId(userId, function(err, trusts) {
+    if (err) {
+      next(err);
+    }
+    if (trusts) {
+      _.each(trusts, function(trust, index, list) {
+        trustedUserIds.push(trust.to);
+      });
+      console.log("These are the trusted users: " + trustedUserIds);
+      User
+      .find({_id: { $in: trustedUserIds}})
+      .where('subtype').equals('luminary')
+      .exec(function(err, users) {
+        if (err) {
+          next(err);
+        }
+        if (users) {
+          console.log(users);
+          next(null, users);
+        }
+        else {
+          next({error: "UserId has not trusted Luminaries"});
+        }
+      });
+    }
+    else({error: "UserId has no trusts"});
+  });
+}
