@@ -27,17 +27,16 @@ block navbar
     #avatar-navbar
       img(src='https://#{organization.logo_url.substr(7)}')
     #navbar-name
-      | #{organization.name}
-    #organization-menu.hidden
-      ul
-        li
-          a(href="#") View Profile
-        li
-          a(href="#") Edit Profile
-        li
-          a(href="#") Log Out
-
-
+      p
+        | #{organization.name}
+      #organization-menu.hidden
+        ul
+          li
+            a(href="#") View Profile
+          li
+            a(href="#") Edit Profile
+          li
+            a(href="#") Log Out
 
 
 block content
@@ -56,7 +55,6 @@ block content
               img(src='https://#{organization.logo_url.substr(7)}')
             h2.organization-name
               | #{organization.name}
-            #location-icon
             p.location
               | #{owner.city}, #{owner.state}
           #org-header-section2.slider
@@ -65,6 +63,18 @@ block content
             p.organization-website
               | #{owner.website}
           #org-header-section3.slider
+            .luminary-icon
+              p
+                | Luminary
+            - var defaultImage = "background-image: url('https://prizmapp.dev:4433/images/default_profile_image.png')"
+            - for (var i = 0; i < 3; i++)
+                .luminary-card
+                  .luminary-image(style=luminaries[i] ? "background-image: url('https://#{luminaries[i].profile_photo_url.substr(7)}')" : defaultImage
+                                  class=luminaries[i] ? 'rounded-image' : '')
+                  .luminary-name
+                    p
+                      if (luminaries[i])
+                        | #{luminaries[i].name}
         .slider-nav
           ul
             li#org-first

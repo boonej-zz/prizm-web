@@ -785,11 +785,14 @@ li#org-first{
   cursor: pointer;
   display: inline-block;
   float: right;
-  font-size: 16px;
-  text-transform: uppercase;
-  margin-top: 38px;
+  margin-top: 26px;
   margin-left: 24px;
   margin-right: 16px;
+}
+
+#navbar-name p {
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 #organization-menu {
@@ -871,22 +874,14 @@ li#org-first{
     padding-top: 64px;
 }
 
-.organization-website {
-    /* position: relative; */
-
-    /* bottom: 10px; */
-}
-
 .slider {
   position: relative;
   width: 33.33%;
   height: 284px;
   z-index: 500;
-  /* display: inline-block; */
   float: left;
   margin: 0px auto;
   padding: 0px;
-  /* clear: right; */
 }
 
 .slider-container {
@@ -982,6 +977,47 @@ li#org-first{
   color: #B6B8D2;
 }
 
+.luminary-icon {
+  background-image: url('/images/luminary_icon.png');
+  background-size: 19px 36px;
+  height: 36px;
+  width: 19px;
+  position: relative;
+  top: 10px;
+  left: 350px;
+}
+
+.luminary-icon p {
+    margin-left: 24px;
+
+    padding-top: 8px;
+    font-size: 19px;
+}
+
+.luminary-card {
+    margin-top: 24px;
+    width: 171px;
+    height: 125px;
+    display: inline-block;
+}
+
+.rounded-image {
+    border-radius: 50px;
+}
+
+.luminary-image {
+    background-size: 94px;
+
+    height: 94px;
+    width: 94px;
+    margin: 0px auto;
+    clear: both;
+}
+
+.luminary-name {
+  
+}
+
 .post {
   margin-top: 68px;
   margin-right: 28px;
@@ -992,8 +1028,6 @@ li#org-first{
   border: 1px #d4daea solid;
   display: inline-block;
 }
-
-
 
 .post-image img {
   width: 320px;
