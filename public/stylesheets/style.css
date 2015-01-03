@@ -13,8 +13,6 @@
 
 /** GLOBAL STYLE MODIFIERS **/
 
-
-
 .full-width {
   width: 100%;
   clear: both;
@@ -1006,16 +1004,11 @@ li#org-first{
 }
 
 .luminary-image {
-    background-size: 94px;
-
+    background-size: 94px 95px;
+    background-repeat: no-repeat;
     height: 94px;
-    width: 94px;
+    width: 95px;
     margin: 0px auto;
-    clear: both;
-}
-
-.luminary-name {
-  
 }
 
 .post {

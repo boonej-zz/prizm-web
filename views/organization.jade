@@ -66,7 +66,7 @@ block content
             .luminary-icon
               p
                 | Luminary
-            - var defaultImage = "background-image: url('https://prizmapp.dev:4433/images/default_profile_image.png')"
+            - var defaultImage = "background-image: url('images/default_profile_image.png')"
             - for (var i = 0; i < 3; i++)
                 .luminary-card
                   .luminary-image(style=luminaries[i] ? "background-image: url('https://#{luminaries[i].profile_photo_url.substr(7)}')" : defaultImage
