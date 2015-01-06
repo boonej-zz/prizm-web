@@ -52,8 +52,9 @@ block content
         .slider-container
           #org-header-section1.slider
             #avatar-header
-              img(src='https://#{organization.logo_url.substr(7)'
-              + '||owner.profile_photo_url}')
+              img(src='https://#{organization.logo_url?'
+              + 'organization.logo_url.substr(7):'
+              + 'owner.profile_photo_url}')
             h2.organization-name
               | #{organization.name}
             p.location
