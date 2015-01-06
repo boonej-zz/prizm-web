@@ -26,7 +26,7 @@ block head
 block navbar
   #organization-navbar
     #avatar-navbar
-      img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url}')
+      img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url.substr(7)}')
     #navbar-name
       p
         | #{organization.name}
@@ -52,7 +52,7 @@ block content
         .slider-container
           #org-header-section1.slider
             #avatar-header
-              img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url}')
+              img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url.substr(7)}')
             h2.organization-name
               | #{organization.name}
             p.location
