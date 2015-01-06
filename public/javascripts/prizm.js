@@ -174,24 +174,6 @@ $(function() {
   });
 });
 
-/* Organization Page */
-$(function(){
-  $('#org-first').click(function(){
-    $('.slider').animate({left: '0%'}, 600);
-    $('.slider-nav li').toggleClass('active', false);
-    $('#org-first').toggleClass('active')
-  })
-  $('#org-middle').click(function(){
-    $('.slider').animate({left: '-33.33%'}, 600);
-    $('.slider-nav li').toggleClass('active', false);
-    $('#org-middle').toggleClass('active')
-  })
-  $('#org-last').click(function(){
-    $('.slider').animate({left: '-66.66%'}, 600);
-    $('.slider-nav li').toggleClass('active', false);
-    $('#org-last').toggleClass('active');
-  })
-})
 /*
 $(function() {
   var input_element = document.getElementById("interest-selection");
