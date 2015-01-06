@@ -27,6 +27,7 @@
 .top75 {
   margin-top: 75px;
 }
+
 .wrap-organization {
   margin: 0 auto;
   width: 1136px;
@@ -229,15 +230,10 @@ a {
 
 /** HOME **/
 
-#home-block {
-  margin-top: 75px;
-}
-
 .home {
   clear: both;
   height: 584px;
   float: left;
-  margin-top: 75px;
 }
 
 .home > h2 {
@@ -345,7 +341,6 @@ p.sign-up-desc {
 #about-phone {
   background-image: url(/images/phone-about.png);
   height: 559px;
-  margin-top: 75px;
   margin-left: 48px;
 }
 
@@ -363,7 +358,6 @@ p.sign-up-desc {
 #insight-phone {
   background-image: url(/images/phone-insight.png);
   height: 565px;
-  margin-top: 75px;
   margin-right: 48px
 }
 
@@ -381,7 +375,6 @@ p.sign-up-desc {
 #mission-phone {
   background-image: url(/images/phone-mission.png);
   height: 565px;
-  margin-top: 75px;
   margin-left: 48px;
 }
 
@@ -462,7 +455,6 @@ li#org-first{
 /** LUMINARY **/
 
 #luminary-quote {
-  margin-top: 75px;
   text-align: center;
 }
 
@@ -533,7 +525,6 @@ li#org-first{
 }
 
 #luminary-phone2 {
-  margin-top: 75px;
   background: url('/images/luminary-phone2.png') no-repeat;
   height: 560px;
   width: 400px;
@@ -541,7 +532,6 @@ li#org-first{
 }
 
 #luminary-phone3 {
-  margin-top: 75px;
   background: url('/images/luminary-phone3.png') no-repeat;
   height: 570px;
   width: 400px;
@@ -551,7 +541,6 @@ li#org-first{
 /** PARTNER **/
 
 #partner-header {
-  margin-top: 75px;
   text-align: center;
 }
 
@@ -606,7 +595,6 @@ li#org-first{
 }
 
 #partner-phone-1 {
-  margin-top: 75px;
   background: url('/images/partner-phone1.png') no-repeat;
   height: 565px;
   width: 400px;
@@ -615,7 +603,6 @@ li#org-first{
 
 
 #partner-phone-2 {
-  margin-top: 75px;
   background: url('/images/partner-phone2.png') no-repeat;
   height: 570px;
   width: 440px;
@@ -624,7 +611,6 @@ li#org-first{
 
 
 #partner-phone-3 {
-  margin-top: 75px;
   background: url('/images/partner-phone3.png') no-repeat;
   height: 570px;
   width: 400px;
