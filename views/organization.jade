@@ -26,9 +26,7 @@ block head
 block navbar
   #organization-navbar
     #avatar-navbar
-      img(src='https://#{organization.logo_url?'
-      + 'organization.logo_url.substr(7):
-      + 'owner.profile_photo_url}')
+      img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url}')
     #navbar-name
       p
         | #{organization.name}
