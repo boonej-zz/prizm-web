@@ -97,32 +97,7 @@ $(window).scroll(function(){
   }
 });
 
-$(function() {
-  $('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top
-        }, 600);
-        return false;
-      }
-    }
-  });
-});
-var isScrolledIntoView = function(elem) {
-    var docViewTop = $(window).scrollTop();
-    var docViewBottom = docViewTop + $(window).height();
-
-    var elemTop = $(elem).offset().top;
-    var elemBottom = elemTop + $(elem).height();
-
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-}
-
-
-/* side nav class toggle */
+/* Luminary and Patner Side Nav */
 $(function(){
   $(window).bind('scroll',function(e){
     redrawDotNav();
@@ -166,7 +141,7 @@ $(function(){
   }
 });
 
-/* side navigation scrolling */
+/* Animated Scrolling For Side Navigation */
 $(function(){
   $('.dotNav li').click(function(){
     var id = $(this).find('a').attr("href"),
@@ -183,16 +158,38 @@ $(function(){
   });
 });
 
-/* Organization Header Slider */
+/* Home Page Animated Scrolling */
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 600);
+        return false;
+      }
+    }
+  });
+});
+
+/* Organization Page */
 $(function(){
   $('#org-first').click(function(){
-    $('.slider').css('left', '0%');
+    $('.slider').animate({left: '0%'}, 600);
+    $('.slider-nav li').toggleClass('active', false);
+    $('#org-first').toggleClass('active')
   })
   $('#org-middle').click(function(){
-    $('.slider').css('left', '-33.33%');
+    $('.slider').animate({left: '-33.33%'}, 600);
+    $('.slider-nav li').toggleClass('active', false);
+    $('#org-middle').toggleClass('active')
   })
   $('#org-last').click(function(){
-    $('.slider').css('left', '-66.66%');
+    $('.slider').animate({left: '-66.66%'}, 600);
+    $('.slider-nav li').toggleClass('active', false);
+    $('#org-last').toggleClass('active');
   })
 })
 /*
