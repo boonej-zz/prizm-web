@@ -52,6 +52,35 @@ exports.passwordReset = function(req, res){
   }); 
 };
 
+exports.shortPasswordReset = function(req, res){
+  var email = req.body.email || false;
+  var password = req.body.password || false;
+  console.log(email + ':' + password);
+  User.findOne({email: email}, function(err, user){
+    if (err) {
+      console.log(err);
+      res.render('reset', {success: false});
+    }
+    if (user && password){
+      user.password = password;
+      if (user.hashPassword()){
+        user.save(function(err, result){
+          if (err) {
+            res.render('reset', {success: false});
+          } else {
+            res.render('reset', {success: true});
+          }
+        });
+      } else {
+        res.render('reset',{success: false});
+      }
+    } else {
+      console.log('missing user or password');
+      res.render('reset', {success: false});
+    }
+  });
+};
+
 exports.fetchUsers = function(req, res){
   var limit = req.query.limit || 50;
   if (req.query.name) {

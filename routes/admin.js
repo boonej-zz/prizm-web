@@ -33,6 +33,7 @@ var aws = require('aws-sdk');
 var _ = require('underscore');
 var helpers = require('../lib/helpers');
 var emailSubjects = require('../lib/helpers/mail').emailSubjects;
+var _users = require('../controllers/users');
 
 var AWS_ACCESS_KEY = 'AKIAJ656TNM2SYQUMHCA';
 var AWS_SECRET_KEY = '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'; 
@@ -87,6 +88,14 @@ router.post('/insights', utils.auth, function (req, res) {
       res.redirect('/insights/' + insight.id);
     }
   });
+});
+
+router.get('/passwordreset', utils.auth, function(req, res){
+  res.render('passwordreset');
+});
+
+router.post('/passwordreset', utils.auth, function(req, res){
+  _users.shortPasswordReset(req, res);
 });
 
 router.get('/insights/:id', utils.auth, function (req, res) {
