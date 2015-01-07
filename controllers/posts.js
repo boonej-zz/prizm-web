@@ -117,3 +117,18 @@ exports.singlePost = function(req, res) {
     });}
   });
 }
+
+exports.getPostsForProfileByUserId = function(user_id, next) {
+  Post
+    .find({creator: ObjectId(user_id)})
+    .sort({ create_date: -1, _id: -1 })
+    .limit(20)
+    .exec(function(err, posts) {
+      if (err) {
+        next(err);
+      }
+      else {
+        next(null, posts);
+      }
+    });
+  }
