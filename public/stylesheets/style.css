@@ -382,9 +382,7 @@ p.sign-up-desc {
 
 .legal {
   margin: 0;
-  padding: 0;
-  height: 300px;
-  width: 100%;
+  padding: 1px;
   margin: 0 auto;
   font-size: .6em;
   text-transform: uppercase;
@@ -396,6 +394,7 @@ p.sign-up-desc {
 .legal-span {
   display: inline-block;
   margin-top: 50px;
+  margin-bottom: 24px;
   padding-top: 12px;
   border-top: 1px solid #D4DAEA;
 }
@@ -501,7 +500,6 @@ li#org-first{
 
 #luminary-block3 {
   height: 645px;
-  margin-bottom: 180px;
 }
 
 #lum-section-1 {

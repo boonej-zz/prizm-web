@@ -1,32 +1,33 @@
 mixin legal
-  span.social
-    span#follow-prizm FOLLOW PRIZM
-    a#facebook.contact-button(href='https://www.facebook.com/prizmapp')
-    a#twitter.contact-button(href='https://www.twitter.com/beprizmatic')
-    a#instagram.contact-button(href='https://www.instagram.com/beprizmatic')
-  span.legal-span
-    | Copyright &copy; 2014 Prizm Powered by
-    a.underline(href='http://www.higheraltitude.co') Higher Altitude, Inc.
-    | - 
-    a.underline(href='/privacy') Privacy Policy
-    | -
-    a.underline(href='/terms') Terms of Service
-    | -
-    a.underline(href='https://www.prizmapp.desk.com') Support
-  span.mixpanelbadge
-    a(href='https://mixpanel.com/f/partner')
-      img(src='//cdn.mxpnl.com/site_media/images/partner/badge_light.png'
-          alt='Mobile Analytics')
-      script(src='//static.getclicky.com/js'
-             type='text/javascript')
-      script(type='text/javascript').
-        try { 
-         clicky.init(100784552)
-         } catch(e){}
-      noscript
-        p
-          img(alt='Clicky' width='1' height='1'
-              src='//in.getclicky.com/100784552ns.gif')
+  .legal
+    span.social
+      span#follow-prizm FOLLOW PRIZM
+      a#facebook.contact-button(href='https://www.facebook.com/prizmapp')
+      a#twitter.contact-button(href='https://www.twitter.com/beprizmatic')
+      a#instagram.contact-button(href='https://www.instagram.com/beprizmatic')
+    span.legal-span
+      | Copyright &copy; 2014 Prizm Powered by
+      a.underline(href='http://www.higheraltitude.co') Higher Altitude, Inc.
+      | - 
+      a.underline(href='/privacy') Privacy Policy
+      | -
+      a.underline(href='/terms') Terms of Service
+      | -
+      a.underline(href='https://www.prizmapp.desk.com') Support
+    span.mixpanelbadge
+      a(href='https://mixpanel.com/f/partner')
+        img(src='//cdn.mxpnl.com/site_media/images/partner/badge_light.png'
+            alt='Mobile Analytics')
+        script(src='//static.getclicky.com/js'
+               type='text/javascript')
+        script(type='text/javascript').
+          try { 
+           clicky.init(100784552)
+           } catch(e){}
+        noscript
+          p
+            img(alt='Clicky' width='1' height='1'
+                src='//in.getclicky.com/100784552ns.gif')
 
 doctype html
 html
@@ -51,8 +52,7 @@ html
           block navbar
         
     block content
-    p.legal
-      mixin legal
+    mixin legal
      
     
 
