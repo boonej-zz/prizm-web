@@ -11,6 +11,7 @@ var fs          = require('fs');
 var path        = require('path');
 var _           = require('underscore');
 var _trusts     = require('../controllers/trusts');
+var _posts      = require('../controllers/posts');
 var rejectMail  = fs.readFileSync(path.join(__dirname +
                   '/../views/reject_mail.jade'), 'utf8');
 var acceptMail  = fs.readFileSync(path.join(__dirname +
@@ -185,9 +186,10 @@ exports.handleLogin = function(req, res, next) {
       return res.redirect('/login')
     }
     req.logIn(user, function(err) {
-      if (err) { return next(err); }
-
-      return res.redirect('/testLogin');
+      if (err) { 
+        return next(err); 
+      }
+      return res.redirect('/profile');
     });
   })(req, res, next);
 };
@@ -196,3 +198,32 @@ exports.handleLogout = function(req, res) {
   req.logout();
   req.redirect('/login');
 };
+
+// User Profile Methods
+exports.displayProfile = function(req, res) {
+  if (req.isAuthenticated()) {
+    var id = req.user.id
+    User.findOne({_id: ObjectId(id)}, function(err, user) {
+      if (err) {
+        res.send(400);
+      }
+      if (user) {
+        _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+          if (err) {
+            posts = [];
+          }
+          res.render('profile/profile', {
+            user: user,
+            posts: posts
+          });
+        });
+      }
+      else {
+        res.status(400).send({error: "User can not be found"})
+      }
+    });
+  }
+  else {
+    res.redirect('/login');
+  }
+}
