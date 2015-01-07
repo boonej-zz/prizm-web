@@ -55,6 +55,77 @@ router.get('/users/:id/password', _users.passwordReset);
 router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);
 
+/* PASSPORT */
+// var LocalStrategy = require('passport-local').Strategy;
+// var mongoose    = require('mongoose');
+// var User        = mongoose.model('User');
+
+// passport.use(new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'password'
+//   },
+//   function(email, password, done) {
+//     User.findOne({ email: email }, function(err, user) {
+//       if (err) { return done(err); }
+//       if (!user) {
+//         return done(null, false, { message: 'Incorrect username.' });
+//       }
+//       if (!user.validatePassword(password)) {
+//         return done(null, false, { message: 'Incorrect password.' });
+//       }
+//       return done(null, user);
+//     });
+//   }
+// ));
+
+// passport.serializeUser(function(user, done) {
+//   done(null, user.email);
+// });
+
+// passport.deserializeUser(function(email, done) {
+//   User.findOne( { email: email } , function (err, user) {
+//     done(err, user);
+//   });
+// });
+
+router.get('/login', _users.displayLogin);
+router.post('/login', _users.handleLogin);
+router.get('/logout', _users.handleLogout);
+
+
+// router.get('/login', function(req, res) {
+//   res.render('login');
+// });
+// router.post('/login', function(req, res, next) {
+//   passport.authenticate('local', function(err, user, info) {
+//     if (err) { return next(err) }
+//     if (!user) {
+//       req.session.messages =  [info.message];
+//       return res.redirect('/login')
+//     }
+//     req.logIn(user, function(err) {
+//       if (err) { return next(err); }
+
+//       return res.redirect('/testLogin');
+//     });
+//   })(req, res, next);
+// });
+
+router.get('/testLogin', function(req, res) {
+  if (req.isAuthenticated()) {
+    res.send(req.user);
+  }
+  else {
+    res.send("NOPE!" + req.user);
+  }
+});
+
+// router.get('/logout', function(req, res) {
+//   req.logout();
+//   res.redirect('/login');
+// })
+
+
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
 

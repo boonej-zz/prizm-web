@@ -5,6 +5,7 @@ var mongoose    = require('mongoose');
 var ObjectId    = require('mongoose').Types.ObjectId;
 var User        = mongoose.model('User');
 var config      = require('../config');
+var passport    = require('passport');
 var jade        = require('jade');
 var fs          = require('fs');
 var path        = require('path');
@@ -170,3 +171,28 @@ exports.getTrustedLuminariesForUserId = function(userId, next) {
     else({error: "UserId has no trusts"});
   });
 }
+
+// User Authentication Methods
+exports.displayLogin = function(req, res) {
+  res.render('login');
+};
+
+exports.handleLogin = function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err) }
+    if (!user) {
+      req.session.messages =  [info.message];
+      return res.redirect('/login')
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+
+      return res.redirect('/testLogin');
+    });
+  })(req, res, next);
+};
+
+exports.handleLogout = function(req, res) {
+  req.logout();
+  req.redirect('/login');
+};

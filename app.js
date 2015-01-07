@@ -17,10 +17,12 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var routes = require('./routes/routes');
 var adminRoute = require('./routes/admin');
 
 var herokuHostname = 'safe-lake-1236.herokuapp.com';
+var passport = require('passport');
 
 var app = express();
 https.createServer(opts, app).listen(4433);
@@ -50,6 +52,15 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'prizm',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Passport Authentication
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(subdomain('admin', adminRoute));
 
