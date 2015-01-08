@@ -174,6 +174,14 @@ exports.getTrustedLuminariesForUserId = function(userId, next) {
 }
 
 // User Authentication Methods
+
+exports.authRequired = function (req, res, next) {
+  if (req.isAuthenticated()) {
+   return next(); 
+ }
+  res.redirect('/login')
+}
+
 exports.displayLogin = function(req, res) {
   res.render('login');
 };
@@ -201,29 +209,25 @@ exports.handleLogout = function(req, res) {
 
 // User Profile Methods
 exports.displayProfile = function(req, res) {
-  if (req.isAuthenticated()) {
-    var id = req.user.id
-    User.findOne({_id: ObjectId(id)}, function(err, user) {
-      if (err) {
-        res.send(400);
-      }
-      if (user) {
-        _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
-          if (err) {
-            posts = [];
-          }
-          res.render('profile/profile', {
-            user: user,
-            posts: posts
-          });
+  var id = req.user.id
+  User.findOne({_id: ObjectId(id)}, function(err, user) {
+    if (err) {
+      res.send(400);
+    }
+    if (user) {
+      _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+        if (err) {
+          posts = [];
+        }
+        res.render('profile/profile', {
+          user: user,
+          posts: posts
         });
-      }
-      else {
-        res.status(400).send({error: "User can not be found"})
-      }
-    });
-  }
-  else {
-    res.redirect('/login');
-  }
+      });
+    }
+    else {
+      res.status(400).send({error: "User can not be found"})
+    }
+  });
 }
+

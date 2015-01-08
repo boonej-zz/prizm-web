@@ -59,7 +59,7 @@ router.get('/login', _users.displayLogin);
 router.post('/login', _users.handleLogin);
 router.get('/logout', _users.handleLogout);
 
-router.get('/profile', _users.displayProfile);
+router.get('/profile', _users.authRequired, _users.displayProfile);
 
 router.get('/testLogin', function(req, res) {
   if (req.isAuthenticated()) {
