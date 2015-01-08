@@ -21,6 +21,10 @@
   font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
  }
 
+ body a {
+  color: #334b8f;
+ }
+
 .btn-default,
 .btn-primary,
 .btn-success,
@@ -86,14 +90,18 @@
   background-image: none;
 }
 .btn-primary {
-  background-image: -webkit-linear-gradient(top, #314991 0%, #265a88 100%);
-  background-image:      -o-linear-gradient(top, #314991 0%, #265a88 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#337ab7), to(#265a88));
-  background-image:         linear-gradient(to bottom, #314991 0%, #265a88 100%);
+  background-image: -webkit-linear-gradient(top, #334b8f 0%, #265a88 100%);
+  background-image:      -o-linear-gradient(top, #334b8f 0%, #265a88 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#334b8f), to(#265a88));
+  background-image:         linear-gradient(to bottom, #334b8f 0%, #265a88 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff265a88', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
   border-color: #245580;
+  border-radius: 0px;
+  text-transform: uppercase;
+  font-weight: 900;
+  height: 54px;
 }
 .btn-primary:hover,
 .btn-primary:focus {
@@ -229,12 +237,30 @@
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
   background-color: #2e6da4;
-  background-image: -webkit-linear-gradient(top, #337ab7 0%, #2e6da4 100%);
-  background-image:      -o-linear-gradient(top, #337ab7 0%, #2e6da4 100%);
+  background-image: -webkit-linear-gradient(top, #334b8f 0%, #2e6da4 100%);
+  background-image:      -o-linear-gradient(top, #334b8f 0%, #2e6da4 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#337ab7), to(#2e6da4));
-  background-image:         linear-gradient(to bottom, #337ab7 0%, #2e6da4 100%);
+  background-image:         linear-gradient(to bottom, #334b8f 0%, #2e6da4 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff2e6da4', GradientType=0);
   background-repeat: repeat-x;
+}
+.form-control {
+  color: #334b8f;
+  background-color: #f8f8f8;
+  border: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+}
+.form-control::-moz-placeholder {
+  color: #334b8f; 
+}
+.form-control:-ms-input-placeholder {
+  color: #334b8f; 
+}
+.form-control::-webkit-input-placeholder { 
+  color: #334b8f; 
 }
 .navbar-default {
   background-image: -webkit-linear-gradient(top, #fff 0%, #f8f8f8 100%);
