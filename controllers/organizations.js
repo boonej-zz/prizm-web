@@ -53,3 +53,17 @@ exports.displayOrganization = function(req, res) {
     }
   });
 }
+
+exports.getNamespaceByOwnerId = function(owner_id, next) {
+  Organization.findOne({owner: ObjectId(owner_id)}, function(err, organization) {
+    if (err) {
+      next(err);
+    }
+    if (organization) {
+      next(null, organization.namespace);
+    }
+    else {
+      next(null, false);
+    }
+  });
+};

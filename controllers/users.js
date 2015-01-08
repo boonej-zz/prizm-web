@@ -12,6 +12,7 @@ var path        = require('path');
 var _           = require('underscore');
 var _trusts     = require('../controllers/trusts');
 var _posts      = require('../controllers/posts');
+var _organizations = require('../controllers/organizations');
 var rejectMail  = fs.readFileSync(path.join(__dirname +
                   '/../views/reject_mail.jade'), 'utf8');
 var acceptMail  = fs.readFileSync(path.join(__dirname +
@@ -142,6 +143,8 @@ exports.institutionApproval = function(req, res){
   });
 };
 
+// User Partner Methods (Organizations)
+
 exports.getTrustedLuminariesForUserId = function(userId, next) {
   var trustedUserIds = [];
   _trusts.findTrustsByUserId(userId, function(err, trusts) {
@@ -197,7 +200,16 @@ exports.handleLogin = function(req, res, next) {
       if (err) { 
         return next(err); 
       }
-      return res.redirect('/profile');
+      if (user.type == 'institution_verified') {
+        _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
+          if (namespace) {
+            return res.redirect('/' + namespace);
+          }
+        });
+      }
+      else {
+        return res.redirect('/profile');
+      }
     });
   })(req, res, next);
 };
