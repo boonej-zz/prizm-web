@@ -196,7 +196,7 @@ exports.handleLogin = function(req, res, next) {
 
 exports.handleLogout = function(req, res) {
   req.logout();
-  req.redirect('/login');
+  res.redirect('/login');
 };
 
 // User Profile Methods
