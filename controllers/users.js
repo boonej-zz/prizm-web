@@ -5,11 +5,14 @@ var mongoose    = require('mongoose');
 var ObjectId    = require('mongoose').Types.ObjectId;
 var User        = mongoose.model('User');
 var config      = require('../config');
+var passport    = require('passport');
 var jade        = require('jade');
 var fs          = require('fs');
 var path        = require('path');
 var _           = require('underscore');
 var _trusts     = require('../controllers/trusts');
+var _posts      = require('../controllers/posts');
+var _organizations = require('../controllers/organizations');
 var rejectMail  = fs.readFileSync(path.join(__dirname +
                   '/../views/reject_mail.jade'), 'utf8');
 var acceptMail  = fs.readFileSync(path.join(__dirname +
@@ -140,6 +143,8 @@ exports.institutionApproval = function(req, res){
   });
 };
 
+// User Partner Methods (Organizations)
+
 exports.getTrustedLuminariesForUserId = function(userId, next) {
   var trustedUserIds = [];
   _trusts.findTrustsByUserId(userId, function(err, trusts) {
@@ -170,3 +175,71 @@ exports.getTrustedLuminariesForUserId = function(userId, next) {
     else({error: "UserId has no trusts"});
   });
 }
+
+// User Authentication Methods
+
+exports.authRequired = function (req, res, next) {
+  if (req.isAuthenticated()) {
+   return next(); 
+ }
+  res.redirect('/login')
+}
+
+exports.displayLogin = function(req, res) {
+  res.render('login');
+};
+
+exports.handleLogin = function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err) }
+    if (!user) {
+      req.session.messages =  [info.message];
+      return res.redirect('/login')
+    }
+    req.logIn(user, function(err) {
+      if (err) { 
+        return next(err); 
+      }
+      if (user.type == 'institution_verified') {
+        _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
+          if (namespace) {
+            return res.redirect('/' + namespace);
+          }
+        });
+      }
+      else {
+        return res.redirect('/profile');
+      }
+    });
+  })(req, res, next);
+};
+
+exports.handleLogout = function(req, res) {
+  req.logout();
+  res.redirect('/login');
+};
+
+// User Profile Methods
+exports.displayProfile = function(req, res) {
+  var id = req.user.id
+  User.findOne({_id: ObjectId(id)}, function(err, user) {
+    if (err) {
+      res.send(400);
+    }
+    if (user) {
+      _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+        if (err) {
+          posts = [];
+        }
+        res.render('profile/profile', {
+          user: user,
+          posts: posts
+        });
+      });
+    }
+    else {
+      res.status(400).send({error: "User can not be found"})
+    }
+  });
+}
+

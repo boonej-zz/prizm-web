@@ -7,6 +7,7 @@ var User          = mongoose.model('User');
 var Post          = mongoose.model('Post');
 var Organization  = mongoose.model('Organization');
 var _users        = require('../controllers/users');
+var _posts        = require('../controllers/posts');
 // var config        = require('../config');
 // var jade          = require('jade');
 // var fs            = require('fs');
@@ -29,27 +30,23 @@ exports.displayOrganization = function(req, res) {
         if (owner) {
           console.log(owner.id);
           _users.getTrustedLuminariesForUserId(owner.id, function(err, luminaries) {
-            Post
-            .find({creator: ObjectId(owner._id)})
-            .sort({ create_date: -1, _id: -1 })
-            .limit(20)
-            .exec(function(err, posts) {
-              console.log(luminaries);
+            if (err) {
+              luminaries = [];
+            }
+            _posts.getPostsForProfileByUserId(owner.id, function(err, posts) {
+              console.log(posts);
               if (err) {
-                console.log(err);
-                res.render('organization', {organization: organization,
-                                            owner: owner,
-                                            luminaries: luminaries,
-                                            noPosts: true,
-                                            posts: [] });
+                posts = [];
               }
-              else {
-                res.render('organization', {organization: organization,
-                                            luminaries: luminaries,
-                                            owner: owner,
-                                            noPosts: false,
-                                            posts: posts });
+              if (req.isAuthenticated()) {
+                var auth = true
               }
+              res.render('organization', {
+                auth: auth,
+                organization: organization,
+                luminaries: luminaries,
+                owner: owner,
+                posts: posts });
             });
           });
         }
@@ -60,3 +57,17 @@ exports.displayOrganization = function(req, res) {
     }
   });
 }
+
+exports.getNamespaceByOwnerId = function(owner_id, next) {
+  Organization.findOne({owner: ObjectId(owner_id)}, function(err, organization) {
+    if (err) {
+      next(err);
+    }
+    if (organization) {
+      next(null, organization.namespace);
+    }
+    else {
+      next(null, false);
+    }
+  });
+};

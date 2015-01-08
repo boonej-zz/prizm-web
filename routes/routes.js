@@ -55,6 +55,21 @@ router.get('/users/:id/password', _users.passwordReset);
 router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);
 
+router.get('/login', _users.displayLogin);
+router.post('/login', _users.handleLogin);
+router.get('/logout', _users.handleLogout);
+
+router.get('/profile', _users.authRequired, _users.displayProfile);
+
+router.get('/testLogin', function(req, res) {
+  if (req.isAuthenticated()) {
+    res.send(req.user);
+  }
+  else {
+    res.send("NOPE!" + req.user);
+  }
+});
+
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
 

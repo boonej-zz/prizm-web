@@ -52,9 +52,6 @@ $(function(){
       $(this).toggleClass('selected');
     }
   });
-  $('#navbar-name').click(function(){
-    $('#organization-menu').toggleClass('hidden');
-  })
 });
 
 $(window).scroll(function(){

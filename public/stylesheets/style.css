@@ -28,7 +28,7 @@
   margin-top: 75px;
 }
 
-.wrap-organization {
+.wrap-profile {
   margin: 0 auto;
   width: 1136px;
   clear: both;
@@ -382,9 +382,7 @@ p.sign-up-desc {
 
 .legal {
   margin: 0;
-  padding: 0;
-  height: 300px;
-  width: 100%;
+  padding: 1px;
   margin: 0 auto;
   font-size: .6em;
   text-transform: uppercase;
@@ -396,6 +394,7 @@ p.sign-up-desc {
 .legal-span {
   display: inline-block;
   margin-top: 50px;
+  margin-bottom: 24px;
   padding-top: 12px;
   border-top: 1px solid #D4DAEA;
 }
@@ -501,7 +500,6 @@ li#org-first{
 
 #luminary-block3 {
   height: 645px;
-  margin-bottom: 180px;
 }
 
 #lum-section-1 {
@@ -749,8 +747,9 @@ li#org-first{
 
 /** ORGANIZATIONS **/
 
-#organization-navbar {
+#profile-navbar {
   float: right;
+  cursor: pointer;
 }
 
 #avatar-navbar {
@@ -766,7 +765,6 @@ li#org-first{
 }
 
 #navbar-name {
-  cursor: pointer;
   display: inline-block;
   float: right;
   margin-top: 26px;
@@ -779,17 +777,16 @@ li#org-first{
   text-transform: uppercase;
 }
 
-#organization-menu {
+#profile-menu {
   margin-top: -4px;
   position: fixed;
   top: 75px; 
-  right: 195px;
   background: #FBFCFF;
   width: 120px;
   border-radius: 10px;
 }
 
-#organization-menu:after {
+#profile-menu:after {
   content: '';
   position: absolute;
   border-style: solid;
@@ -802,7 +799,7 @@ li#org-first{
   left: 12px;
 }
 
-#organization-menu ul {
+#profile-menu ul {
   margin: 0px auto;
   width: 120px;
   float: left;
@@ -810,17 +807,17 @@ li#org-first{
   text-align: center;
 }
 
-#organization-menu li {
+#profile-menu li {
   list-style: none;
   border-bottom: 1px #d4daea solid;
   padding: 12px;
 }
 
-#organization-menu li:last-child {
+#profile-menu li:last-child {
   border: none;
 }
 
-#organization-header {
+#profile-header {
   margin-top: 109px;
   height: 284px;
   text-align: center;
@@ -829,33 +826,9 @@ li#org-first{
   overflow: hidden;
 }
 
-#organization-header h2 {
+#profile-header h2 {
   font-weight: 100;
   font-size: 32px;
-}
-
-#image-header {
-    width: 1136px;
-    height: 284px;
-    position: absolute;
-}
-
-#image-header-overlay {
-    height: 284px;
-  
-    width: 1136px;
-    position: absolute;
-    z-index: 500;
-    background: rgba(57, 80, 109, .75);
-}
-
-.organization-info {
-    font-size: 18px;
-    width: 600px;
-
-    height: 130px;
-    margin: 0px auto;
-    padding-top: 64px;
 }
 
 .slider {
@@ -910,16 +883,6 @@ li#org-first{
   background: none repeat scroll 0 0 #EEEEEE;
 }
 
-.background-tile {
-  height: 142px;
-  width: 142px;
-  background-size: 142px 142px;
-  float: left;
-  padding: 0px;
-  margin: 0px auto;
-}
-
-
 #avatar-header {
   text-align: center;
 }
@@ -932,12 +895,12 @@ li#org-first{
   border-radius: 50%;
 }
 
-.organization-name {
+.profile-name {
   width: 100%;
   text-align: center;
 }
 
-#location-icon {
+#profile-location-icon {
   margin: 0px auto;
   height: 25px;
   width: 19px;
@@ -946,7 +909,7 @@ li#org-first{
   display: none;
 }
 
-.location {
+.profile-location {
   font-size: 20px;
   display: inline-block;
   margin-left: 6px;
@@ -955,34 +918,10 @@ li#org-first{
   font-weight: 100;
 }
 
-#organization-posts {
+#profile-posts {
   background-color: #eef0f4;
   padding-bottom: 68px;
   color: #B6B8D2;
-}
-
-.luminary-icon {
-  background-image: url('/images/luminary_icon.png');
-  background-size: 19px 36px;
-  height: 36px;
-  width: 19px;
-  position: relative;
-  top: 10px;
-  left: 350px;
-}
-
-.luminary-icon p {
-    margin-left: 24px;
-
-    padding-top: 8px;
-    font-size: 19px;
-}
-
-.luminary-card {
-    margin-top: 24px;
-    width: 171px;
-    height: 125px;
-    display: inline-block;
 }
 
 .rounded-image {
@@ -1053,4 +992,58 @@ li#org-first{
   float: right;
   display: inline-block;
   margin: 11px 12px 12px 0px;
+}
+
+#image-header {
+  width: 1136px;
+  height: 284px;
+  position: absolute;
+}
+
+#image-header-overlay {
+  height: 284px;
+  width: 1136px;
+  position: absolute;
+  z-index: 500;
+  background: rgba(57, 80, 109, .75);
+}
+
+.profile-info {
+  font-size: 18px;
+  width: 600px;
+  height: 130px;
+  margin: 0px auto;
+  padding-top: 64px;
+}
+
+.background-tile {
+  height: 142px;
+  width: 142px;
+  background-size: 142px 142px;
+  float: left;
+  padding: 0px;
+  margin: 0px auto;
+}
+
+.luminary-icon {
+  background-image: url('/images/luminary_icon.png');
+  background-size: 19px 36px;
+  height: 36px;
+  width: 19px;
+  position: relative;
+  top: 10px;
+  left: 350px;
+}
+
+.luminary-icon p {
+  margin-left: 24px;
+  padding-top: 8px;
+  font-size: 19px;
+}
+
+.luminary-card {
+  margin-top: 24px;
+  width: 171px;
+  height: 125px;
+  display: inline-block;
 }

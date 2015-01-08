@@ -1,0 +1,64 @@
+extends ../altlayout
+
+block head
+  script(src='/javascripts/profile.js' type='text/javascript')
+
+block navbar
+  #profile-navbar
+    #avatar-navbar
+      img(src='https://#{user.profile_photo_url.substr(7)}')
+      #profile-menu.hidden
+        ul
+          li
+            a(href="#") Edit Profile
+          li
+            a(href="/logout") Log Out
+    #navbar-name
+      p
+        | #{user.name}
+
+block content
+  #profile-block.full-width.gray-font
+    .wrap-profile
+      .profile-owner(id='#{user.id}')
+      #profile-header(style="background-image: url('images/profile_header.png')")
+        if (posts.length > 15)
+          #image-header-overlay
+          #image-header
+            each post, i in posts
+              if (i < 16)
+                .background-tile(style='background-image: '
+                + 'url(\'https://#{post.file_path.substr(7)}\')')
+        .slider-container
+          #profile-header-section1.slider
+            #avatar-header
+              img(src='https://#{user.profile_photo_url.substr(7)}')
+            h2.profile-name
+              | #{user.name}
+          #profile-header-section2.slider
+            p.profile-info
+              | #{user.info}
+            p.profile-website
+              | #{user.website}
+          #profile-header-section3.slider
+        .slider-nav
+          ul
+            li#profile-first.active
+            li#profile-middle
+      #profile-posts
+        if (posts.length < 1)
+          #no-posts
+            h2 This profile has not created any posts yet
+        else
+          each post in posts
+            .post(id='#{post.id}')
+              .post-image
+                img(src='https://#{post.file_path.substr(7)}')
+              .post-footer
+                .like-icon
+                p.likes
+                  | #{post.likes_count}
+                .comment-icon
+                p.comments
+                  | #{post.comments_count}
+                .share-icon

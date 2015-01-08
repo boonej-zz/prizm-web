@@ -26,6 +26,9 @@
     "jade": "~1.7.0",
     "basic-auth-connect": "~1.0.0",
     "express-subdomain": "~1.0.2",
-    "mixpanel": "~0.0.20"
+    "mixpanel": "~0.0.20",
+    "passport": "~0.2.1",
+    "passport-local": "~1.0.0",
+    "express-session": "~1.10.0"
   }
 }

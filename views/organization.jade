@@ -1,47 +1,34 @@
 extends altlayout
 
 block head
-  script(src='/javascripts/organization.js' type='text/javascript')
-  //- script(type='text/javascript').
-  //-   $(window).scroll(function() {
-  //-     if($(window).scrollTop() == $(document).height() - $(window).height()) {
-  //-       var lastPost = $('#organization-posts').children().last().attr('id');
-  //-       var creator = '#{organization.owner}'
-  //-       $.ajax({
-  //-         url: './posts/',
-  //-         headers: {
-  //-           'Accept' : 'application/json',
-  //-           'creator' : creator,
-  //-           'lastPost' : lastPost
-  //-         },
-  //-         success: function(html) {
-  //-           if(html) {
-  //-               $("#organization-posts").append(html);
-  //-           }
-  //-         }
-  //-       });
-  //-     }
-  //-   });
+  script(src='/javascripts/profile.js' type='text/javascript')
+
 
 block navbar
-  #organization-navbar
+  #profile-navbar
     #avatar-navbar
       img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url.substr(7)}')
+      #profile-menu.hidden
+        ul
+          if (auth)
+            li
+              a(href='/profile') View Profile
+            li
+              a(href="#") Edit Profile
+            li
+              a(href="/logout") Log Out
+          else
+            li
+              a(href='/login') Log In
     #navbar-name
       p
         | #{organization.name}
-      #organization-menu.hidden
-        ul
-          li
-            a(href="#") Edit Profile
-          li
-            a(href="#") Log Out
 
 block content
-  #organization-block.full-width.gray-font
-    .wrap-organization
-      .organization-owner(id='#{organization.owner}')
-      #organization-header(style="background-image: url('images/organization_header.png')")
+  #profile-block.full-width.gray-font
+    .wrap-profile
+      .profile-owner(id='#{organization.owner}')
+      #profile-header(style="background-image: url('images/profile_header.png')")
         if (posts.length > 15)
           #image-header-overlay
           #image-header
@@ -50,19 +37,19 @@ block content
                 .background-tile(style='background-image: '
                 + 'url(\'https://#{post.file_path.substr(7)}\')')
         .slider-container
-          #org-header-section1.slider
+          #profile-header-section1.slider
             #avatar-header
               img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url.substr(7)}')
-            h2.organization-name
+            h2.profile-name
               | #{organization.name}
-            p.location
+            p.profile-location
               | #{owner.city}, #{owner.state}
-          #org-header-section2.slider
-            p.organization-info
+          #profile-header-section2.slider
+            p.profile-info
               | #{owner.info}
-            p.organization-website
+            p.profile-website
               | #{owner.website}
-          #org-header-section3.slider
+          #profile-header-section3.slider
             .luminary-icon
               p
                 | Luminary
@@ -77,11 +64,11 @@ block content
                         | #{luminaries[i].name}
         .slider-nav
           ul
-            li#org-first.active
-            li#org-middle
-            li#org-last
-      #organization-posts
-        if (noPosts)
+            li#profile-first.active
+            li#profile-middle
+            li#profile-last
+      #profile-posts
+        if (posts.length < 1)
           #no-posts
             h2 This Organization has not created any posts yet
         else
