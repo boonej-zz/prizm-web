@@ -38,7 +38,11 @@ exports.displayOrganization = function(req, res) {
               if (err) {
                 posts = [];
               }
+              if (req.isAuthenticated()) {
+                var auth = true
+              }
               res.render('organization', {
+                auth: auth,
                 organization: organization,
                 luminaries: luminaries,
                 owner: owner,

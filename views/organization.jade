@@ -10,12 +10,16 @@ block navbar
       img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url.substr(7)}')
       #profile-menu.hidden
         ul
-          li
-            a(href='/profile') View Profile
-          li
-            a(href="#") Edit Profile
-          li
-            a(href="/logout") Log Out
+          if (auth)
+            li
+              a(href='/profile') View Profile
+            li
+              a(href="#") Edit Profile
+            li
+              a(href="/logout") Log Out
+          else
+            li
+              a(href='/login') Log In
     #navbar-name
       p
         | #{organization.name}
