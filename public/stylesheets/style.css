@@ -749,6 +749,7 @@ li#org-first{
 
 #profile-navbar {
   float: right;
+  cursor: pointer;
 }
 
 #avatar-navbar {
@@ -764,7 +765,6 @@ li#org-first{
 }
 
 #navbar-name {
-  cursor: pointer;
   display: inline-block;
   float: right;
   margin-top: 26px;
@@ -781,7 +781,6 @@ li#org-first{
   margin-top: -4px;
   position: fixed;
   top: 75px; 
-  right: 195px;
   background: #FBFCFF;
   width: 120px;
   border-radius: 10px;

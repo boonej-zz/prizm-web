@@ -19,8 +19,10 @@ $(window).scroll(function() {
   }
 });
 
-$('#navbar-name').click(function(){
-  $('#profile-menu').toggleClass('hidden');
+$(function(){
+  $('#profile-navbar').click(function(){
+    $('#profile-menu').toggleClass('hidden');
+  });
 });
 
 /* Header side scrolling */

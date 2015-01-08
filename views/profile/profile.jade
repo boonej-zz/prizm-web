@@ -7,15 +7,15 @@ block navbar
   #profile-navbar
     #avatar-navbar
       img(src='https://#{user.profile_photo_url.substr(7)}')
-    #navbar-name
-      p
-        | #{user.name}
       #profile-menu.hidden
         ul
           li
             a(href="#") Edit Profile
           li
             a(href="/logout") Log Out
+    #navbar-name
+      p
+        | #{user.name}
 
 block content
   #profile-block.full-width.gray-font

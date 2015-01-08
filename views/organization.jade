@@ -8,15 +8,15 @@ block navbar
   #profile-navbar
     #avatar-navbar
       img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url.substr(7)}')
-    #navbar-name
-      p
-        | #{organization.name}
       #profile-menu.hidden
         ul
           li
             a(href="#") Edit Profile
           li
             a(href="/logout") Log Out
+    #navbar-name
+      p
+        | #{organization.name}
 
 block content
   #profile-block.full-width.gray-font
