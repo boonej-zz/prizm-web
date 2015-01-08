@@ -77,7 +77,7 @@ userSchema.methods.hashPassword = function(){
   if(this.password) {
     var salt = process.env.PRIZM_SALT;
     var pass = this.password;
-    this.password = _utils.prismEncrypt(this.password, salt);
+    this.password = utils.prismEncrypt(this.password, salt);
     this.pwd_updated = true;
     if (this.password != pass){
       return true;
