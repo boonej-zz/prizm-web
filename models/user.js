@@ -65,7 +65,8 @@ var userSchema = new mongoose.Schema({
   program_code          : {type: String, default: null},
   interests             : {type: Array, default: []},
   insight_count         : {type: Number, default: 0},
-  unsubscribed          : {type: Boolean, default: false}
+  unsubscribed          : {type: Boolean, default: false},
+  pwd_updated           : {type: Boolean, default: false},
 },{ versionKey          : false });
 
 userSchema.methods.createUserSalt = function(){
@@ -73,12 +74,12 @@ userSchema.methods.createUserSalt = function(){
 };
 
 userSchema.methods.hashPassword = function(){
-  if(this.password && this.create_date && this.email){
-    var user_salt = this.createUserSalt();
-    console.log(user_salt);
-    var old_pass = this.password;
-    this.password = utils.prismEncrypt(this.password, user_salt);
-    if(this.password != old_pass && this.password.length > old_pass.length){
+  if(this.password) {
+    var salt = process.env.PRIZM_SALT;
+    var pass = this.password;
+    this.password = _utils.prismEncrypt(this.password, salt);
+    this.pwd_updated = true;
+    if (this.password != pass){
       return true;
     }
   }
@@ -86,14 +87,24 @@ userSchema.methods.hashPassword = function(){
 };
 
 userSchema.methods.validatePassword = function(password) {
-  var user_salt = this.createUserSalt();
-  var hashed_password = utils.prismEncrypt(password, user_salt);
+  var salt = process.env.PRIZM_SALT;
+  var hashed_password = utils.prismEncrypt(password, salt);
   if (_.isEqual(this.password, hashed_password)) {
     return true;
   }
   else {
-    return false;
+    var old_salt = user.createUserSalt();
+    hashed_password = utils.prismEncrypt(password, old_salt);
+    if (_.isEqual(this.password, hashed_password)) {
+      user.password = password;
+      user.pwd_updated = true;
+      if (user.hashPassword()){
+        user.save();
+        return true;
+      }
+    }
   }
+  return false;
 }
 
 
