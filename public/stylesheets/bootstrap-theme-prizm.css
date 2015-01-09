@@ -90,14 +90,11 @@
   background-image: none;
 }
 .btn-primary {
-  background-image: -webkit-linear-gradient(top, #334b8f 0%, #265a88 100%);
-  background-image:      -o-linear-gradient(top, #334b8f 0%, #265a88 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#334b8f), to(#265a88));
-  background-image:         linear-gradient(to bottom, #334b8f 0%, #265a88 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff265a88', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background: #334b8f;
   background-repeat: repeat-x;
-  border-color: #245580;
+  border: none;
   border-radius: 0px;
   text-transform: uppercase;
   font-weight: 900;
