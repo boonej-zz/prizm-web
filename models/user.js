@@ -93,13 +93,13 @@ userSchema.methods.validatePassword = function(password) {
     return true;
   }
   else {
-    var old_salt = user.createUserSalt();
+    var old_salt = this.createUserSalt();
     hashed_password = utils.prismEncrypt(password, old_salt);
     if (_.isEqual(this.password, hashed_password)) {
-      user.password = password;
-      user.pwd_updated = true;
-      if (user.hashPassword()){
-        user.save();
+      this.password = password;
+      this.pwd_updated = true;
+      if (this.hashPassword()){
+        this.save();
         return true;
       }
     }
