@@ -537,9 +537,9 @@
     margin: 30px 30px 60px 30px;
     font-size: 17px;
   }
-  /** Organizations **/
+  /** Profiles **/
 
-  .wrap-organization {
+  .wrap-profile {
     width: 100%;
   }
 
@@ -566,7 +566,7 @@
     display: none;
   }
 
-  #organization-header {
+  #profile-header {
     height: 200px;
   }
 
@@ -575,7 +575,7 @@
     height: 40px
   }
 
-  #organization-header h2 {
+  #profile-header h2 {
     font-size: 24px;
   }
 
@@ -583,7 +583,7 @@
     font-size: 18px;
   }
 
-  #organization-posts {
+  #profile-posts {
     text-align: center;
   }
 
