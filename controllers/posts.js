@@ -53,6 +53,7 @@ exports.fetchPosts = function(req, res) {
         Post
         .find({creator: ObjectId(creator)})
         .where('create_date').lt(post.create_date)
+        .where('status').equals('active')
         .sort({create_date: -1, _id: -1})
         .limit(limit)
         .exec(function(err, posts) {
@@ -121,6 +122,7 @@ exports.singlePost = function(req, res) {
 exports.getPostsForProfileByUserId = function(user_id, next) {
   Post
     .find({creator: ObjectId(user_id)})
+    .where('status').equals('active')
     .sort({ create_date: -1, _id: -1 })
     .limit(20)
     .exec(function(err, posts) {
