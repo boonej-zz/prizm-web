@@ -61,15 +61,6 @@ router.get('/logout', _users.handleLogout);
 
 router.get('/profile', _users.authRequired, _users.displayProfile);
 
-router.get('/testLogin', function(req, res) {
-  if (req.isAuthenticated()) {
-    res.send(req.user);
-  }
-  else {
-    res.send("NOPE!" + req.user);
-  }
-});
-
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
 
