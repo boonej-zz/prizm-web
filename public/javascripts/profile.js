@@ -44,3 +44,14 @@ $(function(){
     $('#profile-last').toggleClass('active');
   });
 });
+
+/* Fix for Navbar (bootstrap modal moves it right 15px) */
+$(function(){
+  $('a[type="button"]').click(function(){
+   $('#navbar').css('padding-right', '15px');
+  });
+  $('#loginModal').on('click', '.modal-backdrop', function () {
+    $('#navbar').css('padding-right', '');
+  });
+});
+
