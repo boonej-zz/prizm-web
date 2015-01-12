@@ -48,10 +48,14 @@ $(function(){
 /* Fix for Navbar (bootstrap modal moves it right 15px) */
 $(function(){
   $('a[type="button"]').click(function(){
-   $('#navbar').css('padding-right', '15px');
+    $('#navbar').css('padding-right', '15px');
+    $('#navbar').slideUp();
   });
   $('#loginModal').on('click', '.modal-backdrop', function () {
-    $('#navbar').css('padding-right', '');
+    $('#navbar').animate({
+      paddingRight: "0px"
+    }, 200);
+    $('#navbar').slideDown();
   });
 });
 
