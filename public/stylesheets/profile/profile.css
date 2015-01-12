@@ -1,0 +1,17 @@
+/* Login Modal */
+.form-signin {
+  margin-top: 0px;
+}
+
+.modal-dialog {
+    width: 380px;
+}
+
+.modal-content {
+    width: 380px;
+    height: 415px;
+}
+
+.modal-body {
+    padding: 0px;
+}

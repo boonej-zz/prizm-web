@@ -1,7 +1,13 @@
 extends ../altlayout
 
 block head
+
   script(src='/javascripts/profile.js' type='text/javascript')
+  script(src='/javascripts/bootstrap.min.js' type='text/javascript')
+  link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+  link(rel='stylesheet', href='/stylesheets/bootstrap-theme-prizm.css')
+  link(rel='stylesheet', href='/stylesheets/login/login.css')
+  link(rel='stylesheet', href='/stylesheets/profile/profile.css')
 
 block navbar
   #profile-navbar
@@ -18,13 +24,17 @@ block navbar
         p
           | #{currentUser.name}
     else
-      a(href='/login') Login
+      #navbar-login
+        a(type='button'
+          data-toggle='modal'
+          data-target='#loginModal')
+          | Login
 
 block content
   #profile-block.full-width.gray-font
     .wrap-profile
       .profile-owner(id='#{user.id}')
-      #profile-header(style="background-image: url('images/profile_header.png')")
+      #profile-header(style="background-image: url('/images/profile_header.png')")
         if (posts.length > 15)
           #image-header-overlay
           #image-header
@@ -65,3 +75,13 @@ block content
                 p.comments
                   | #{post.comments_count}
                 .share-icon
+  // Login Modal
+  div(class='modal fade'
+      id='loginModal'
+      tabIndex='-1'
+      role='dialog'
+      aria-labelledby='loginModalLabel')
+    .modal-dialog
+      .modal-content
+        .modal-body
+          include ../login/login_form
