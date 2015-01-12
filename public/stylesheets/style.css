@@ -752,9 +752,10 @@ li#org-first{
   cursor: pointer;
 }
 
-#profile-navbar a {
+#navbar-login a {
+  font-size: 18px;
   float: right;
-  margin-top: 50px;
+  margin-top: 48px;
   margin-right: 16px;
 }
 
