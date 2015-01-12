@@ -745,11 +745,17 @@ li#org-first{
   display: block;
 }
 
-/** ORGANIZATIONS **/
+/** Profiles **/
 
 #profile-navbar {
   float: right;
   cursor: pointer;
+}
+
+#profile-navbar a {
+  float: right;
+  margin-top: 50px;
+  margin-right: 16px;
 }
 
 #avatar-navbar {

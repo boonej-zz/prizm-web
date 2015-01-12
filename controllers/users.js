@@ -186,7 +186,7 @@ exports.authRequired = function (req, res, next) {
 }
 
 exports.displayLogin = function(req, res) {
-  res.render('login');
+  res.render('login/login');
 };
 
 exports.handleLogin = function(req, res, next) {
@@ -232,6 +232,39 @@ exports.displayProfile = function(req, res) {
           posts = [];
         }
         res.render('profile/profile', {
+          auth: true,
+          currentUser: req.user,
+          user: user,
+          posts: posts
+        });
+      });
+    }
+    else {
+      res.status(400).send({error: "User can not be found"})
+    }
+  });
+}
+
+exports.displayProfileById = function(req, res) {
+  var id = req.params.id
+  var auth = false
+  var currentUser = {};
+  if (req.isAuthenticated()) {
+    auth = true;
+    currentUser = req.user;
+  }
+  User.findOne({_id: ObjectId(id)}, function(err, user) {
+    if (err) {
+      res.send(400);
+    }
+    if (user) {
+      _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+        if (err) {
+          posts = [];
+        }
+        res.render('profile/profile', {
+          auth: auth,
+          currentUser: currentUser,
           user: user,
           posts: posts
         });

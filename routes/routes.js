@@ -60,6 +60,7 @@ router.post('/login', _users.handleLogin);
 router.get('/logout', _users.handleLogout);
 
 router.get('/profile', _users.authRequired, _users.displayProfile);
+router.get('/profile/:id', _users.displayProfileById)
 
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);

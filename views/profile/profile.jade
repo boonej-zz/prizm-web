@@ -5,17 +5,20 @@ block head
 
 block navbar
   #profile-navbar
-    #avatar-navbar
-      img(src='https://#{user.profile_photo_url.substr(7)}')
-      #profile-menu.hidden
-        ul
-          li
-            a(href="#") Edit Profile
-          li
-            a(href="/logout") Log Out
-    #navbar-name
-      p
-        | #{user.name}
+    if (auth)
+      #avatar-navbar
+        img(src='https://#{currentUser.profile_photo_url.substr(7)}')
+        #profile-menu.hidden
+          ul
+            li
+              a(href="#") Edit Profile
+            li
+              a(href="/logout") Log Out
+      #navbar-name
+        p
+          | #{currentUser.name}
+    else
+      a(href='/login') Login
 
 block content
   #profile-block.full-width.gray-font
