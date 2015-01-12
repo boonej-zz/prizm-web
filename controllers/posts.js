@@ -37,6 +37,9 @@ moment.locale('en', {
 
 // Posts Methods
 exports.fetchPosts = function(req, res) {
+  if (req.accepts('html')) {
+    res.status(406).send({ error: "Not acceptable"});
+  }
   if (req.accepts('application/json')) {
     var creator = req.get('creator');
     var lastPost = req.get('lastPost');
@@ -70,7 +73,7 @@ exports.fetchPosts = function(req, res) {
     });
   }
   else {
-    res.status(404).send({ error: "Resource not found."});
+    res.status(406).send({ error: "Not acceptable"});
   }
 };
 
