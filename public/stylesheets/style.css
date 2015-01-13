@@ -51,6 +51,10 @@
   background-color: #e4e5ea;
 }
 
+.white-background {
+  background-color: #EEF0F4;
+}
+
 .phone {
   height: 700px;
   width: 350px;
@@ -780,6 +784,7 @@ li#org-first{
 }
 
 #navbar-name p {
+  margin-top: 8px;
   font-size: 16px;
   text-transform: uppercase;
 }

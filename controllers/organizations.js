@@ -16,6 +16,12 @@ var _posts        = require('../controllers/posts');
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
   var name = req.params.name;
+  var auth = false;
+  var currentUser = {};
+  if (req.isAuthenticated()) {
+    auth = true;
+    currentUser = req.user;
+  }
   Organization.findOne({namespace: name}, function(err, organization) {
     if (err) {
       console.log(err);
@@ -28,21 +34,17 @@ exports.displayOrganization = function(req, res) {
           res.send(404);
         }
         if (owner) {
-          console.log(owner.id);
           _users.getTrustedLuminariesForUserId(owner.id, function(err, luminaries) {
             if (err) {
               luminaries = [];
             }
             _posts.getPostsForProfileByUserId(owner.id, function(err, posts) {
-              console.log(posts);
               if (err) {
                 posts = [];
               }
-              if (req.isAuthenticated()) {
-                var auth = true
-              }
               res.render('organization', {
                 auth: auth,
+                currentUser: currentUser,
                 organization: organization,
                 luminaries: luminaries,
                 owner: owner,

@@ -18,7 +18,6 @@ exports.findTrustsByUserId = function(userId, next) {
           next(err);
         }
         if (trusts) {
-          console.log("These are the trusts:\n" + trusts);
           next(null, trusts);
         }
       });
