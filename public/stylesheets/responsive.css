@@ -16,6 +16,10 @@
     float: none;
   }
 
+  .top75 {
+    margin-top: 64px;
+  }
+
   /** NAVIGATION BAR **/
 
   #menu-button {
@@ -73,6 +77,10 @@
     width: 88px;
     margin-top: 24px;
     background-size: 88px 36px;
+  }
+
+  #navbar-login a {
+    margin-top: 32px
   }
 
   /** SIDE NAVIATION **/
@@ -591,6 +599,16 @@
     height
     width: 300px;
     margin-top: 0px auto;
+    margin-top: 68px; 
+    margin-right: 28px; 
+    margin-left: 28px; 
+    width: 322px; 
+    height: 372px;
+  }
+
+  .post-image img {
+    width: 320px;
+    height: 320px;
   }
 
 }

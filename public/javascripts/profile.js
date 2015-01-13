@@ -58,7 +58,7 @@ $(function(){
       paddingRight: "0px"
     }, 150);
     $('#navbar').animate({
-      marginRight: ""
+      marginLeft: ""
     }, 150);
     $('#navbar').slideDown(200);
   });
