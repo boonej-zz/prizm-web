@@ -5,7 +5,7 @@ var mongoose  = require('mongoose');
 var ObjectId  = require('mongoose').Types.ObjectId;
 var Post      = mongoose.model('Post');
 var _         = require('underscore');
-var _time   = require('../lib/helpers/date_time');
+var _time     = require('../lib/helpers/date_time');
 var fs        = require('fs');
 var path      = require('path');
 var jade      = require('jade');
@@ -43,6 +43,7 @@ exports.fetchPosts = function(req, res) {
             res.status(500).send({ error: err});
           }
           else {
+            posts = _time.addTimeSinceFieldToPosts(posts);
             var content = jade.render(postFeed, {posts: posts});
             res.status(200).send(content);
           }
