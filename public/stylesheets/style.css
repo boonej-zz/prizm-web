@@ -247,7 +247,7 @@ a {
 }
 
 p.sign-up-desc {
-  margin: 100px;
+  margin-top: 100px;
   margin-bottom: 30px;
   font-size: 22px;
   width: 340px;
@@ -277,8 +277,8 @@ p.sign-up-desc {
   font-weight: bold;
   letter-spacing: -1px;
   background: url('/images/google.png') no-repeat;
-  background-size: 120px 40px;
-  width: 120px;
+  background-size: 135px 40px;
+  width: 135px;
   height: 40px;
   color: #FFF;
   font-weight: bold;
@@ -638,7 +638,7 @@ li#org-first{
 
 #post {
   width: 378px;
-  margin: 156px auto;
+  margin: 156px auto 0px auto;
   font-weight: 200;
   letter-spacing: 1px;
 }
@@ -733,9 +733,8 @@ li#org-first{
 }
 
 #post-card p.sign-up-desc {
-  width: 500px;
-  margin: 0px auto;
   font-size: 20px;
+  margin: 30px auto 30px auto;
   text-align: center;
 }
 
