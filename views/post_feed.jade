@@ -10,3 +10,6 @@ each post in posts
       p.comments
         | #{post.comments_count}
       .share-icon
+      .time
+        #clock-image
+        #time #{post.time_since}

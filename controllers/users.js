@@ -10,6 +10,7 @@ var jade        = require('jade');
 var fs          = require('fs');
 var path        = require('path');
 var _           = require('underscore');
+var _time       = require('../lib/helpers/date_time');
 var _trusts     = require('../controllers/trusts');
 var _posts      = require('../controllers/posts');
 var _organizations = require('../controllers/organizations');
@@ -231,6 +232,7 @@ exports.displayProfile = function(req, res) {
         if (err) {
           posts = [];
         }
+        posts = _time.addTimeSinceFieldToPosts(posts);
         res.render('profile/profile', {
           auth: true,
           currentUser: req.user,
@@ -262,6 +264,7 @@ exports.displayProfileById = function(req, res) {
         if (err) {
           posts = [];
         }
+        posts = _time.addTimeSinceFieldToPosts(posts);
         res.render('profile/profile', {
           auth: auth,
           currentUser: currentUser,

@@ -8,10 +8,7 @@ var Post          = mongoose.model('Post');
 var Organization  = mongoose.model('Organization');
 var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
-// var config        = require('../config');
-// var jade          = require('jade');
-// var fs            = require('fs');
-// var path          = require('path');
+var _time         = require('../lib/helpers/date_time');
 
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
@@ -42,6 +39,7 @@ exports.displayOrganization = function(req, res) {
               if (err) {
                 posts = [];
               }
+              posts = _time.addTimeSinceFieldToPosts(posts);
               res.render('organization', {
                 auth: auth,
                 currentUser: currentUser,
