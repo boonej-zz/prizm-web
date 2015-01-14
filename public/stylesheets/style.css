@@ -996,14 +996,30 @@ li#org-first{
   float: left
 }
 
+.time {
+  display: inline-block;
+  float: right;
+  margin: 11px 12px 0px 0px;
+}
+
+.time #clock-image {
+  display: inline-block;
+  margin: 3px auto;
+}
+
+.time #time {
+  display: inline-block;
+  margin-left: 3px;
+  vertical-align: super;
+}
+
 .share-icon {
   background-image: url('/images/post_share.png');
   background-size: 24px 24px;
   width: 24px;
   height: 24px;
-  float: right;
   display: inline-block;
-  margin: 11px 12px 12px 0px;
+  margin: 9px 12px 12px 120px;
 }
 
 #image-header {
