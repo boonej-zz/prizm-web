@@ -44,12 +44,12 @@ html
          content='app-id=903458597, app-argument=prizmapp://open')
     block head
     
-    body
-      #navbar.full-width
-        .nav-top.wrap
-          h1#alt-logo(onclick='prizm.goHome()')
-            span.hidden Prizm
-          block navbar
+  body(id='#{bodyId}')
+    #navbar.full-width
+      .nav-top.wrap
+        h1#alt-logo(onclick='prizm.goHome()')
+          span.hidden Prizm
+        block navbar
         
     block content
     mixin legal
