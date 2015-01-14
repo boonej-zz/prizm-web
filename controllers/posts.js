@@ -2,37 +2,15 @@
 var express   = require('express');
 var router    = express.Router();
 var mongoose  = require('mongoose');
-var moment    = require('moment');
 var ObjectId  = require('mongoose').Types.ObjectId;
 var Post      = mongoose.model('Post');
+var _         = require('underscore');
+var _time   = require('../lib/helpers/date_time');
 var fs        = require('fs');
 var path      = require('path');
 var jade      = require('jade');
 var postFeed  = fs.readFileSync(path.join(__dirname +
                 '/../views/post_feed.jade'), 'utf8');
-
-// Posts Configuration
-moment.relativeTimeThreshold('d', 6);
-moment.relativeTimeThreshold('M', 52);
-
-moment.locale('en', {
-  relativeTime: {
-    past: "%s",
-    s:  "%ds",
-    m:  "%dm",
-    mm: "%dm",
-    h:  "%dh",
-    hh: "%dh",
-    d:  "%dd",
-    dd: "%dd",
-    M:  "4w",
-    MM: function(number, withoutSuffix, key, isFuture){
-      return number*4 + 'w';
-    },
-    y:  "%dy",
-    yy: "%dy"
-  } 
-});
 
 
 // Posts Methods
@@ -93,30 +71,8 @@ exports.singlePost = function(req, res) {
         tags = tags + '...';
       }
     }
-    var now = moment();
-    var create = moment(post.create_date);
-    var diff = now.diff(create);
-    diff = diff/1000;
-    console.log(post.external_provider);
-    var string = '';
-    if (diff < 60) {
-      string = 'now';
-    } if (diff < 3600) {
-      var mins = Math.floor(diff / 60);
-      string = mins + 'm';
-    } else if (diff < 60 * 60 * 24) {
-      var hours = Math.floor(diff/(60*60));
-      string = hours + 'h';
-    } else {
-      var days = Math.floor(diff/(60*60*24));
-      if (days < 7) {
-        string = days + 'd';
-      } else {
-        var weeks = Math.floor(days/7);
-        string = weeks + 'w';
-      }
-    }
-    res.render('post', {bodyId: 'post-card', post: post, tags: tags, ago: string, category: post.category
+    var ago = _time.postTimeSinceFormatter(post.create_date);
+    res.render('post', {bodyId: 'post-card', post: post, tags: tags, ago: ago, category: post.category
     
     });}
   });
