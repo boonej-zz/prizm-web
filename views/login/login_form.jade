@@ -1,0 +1,31 @@
+form(action='/login' method='post' class='form-signin')
+  h4(class="form-signin-heading")
+    | Log In
+  label(for='inputEmail' class='sr-only')
+    | Email address
+  input(type='email'
+        name='email'
+        id='inputEmail'
+        class='form-control'
+        placeholder='Email address'
+        required)
+  label(for='inputPassword' class='sr-only')
+    | Password
+  input(type='password'
+        name='password'
+        id='inputPassword'
+        class='form-control'
+        placeholder='Password'
+        required)
+  button(class='btn btn-lg btn-primary btn-block' type='submit')
+    | Log in
+  div.checkbox
+    label
+      input(type='checkbox'
+            name='rememberMe'
+            id='rememberMe'
+            class='form-control')
+      | Remember Me
+  div.link
+    a(href='#')
+      | Forgot password?

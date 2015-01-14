@@ -37,6 +37,9 @@ moment.locale('en', {
 
 // Posts Methods
 exports.fetchPosts = function(req, res) {
+  if (req.accepts('html')) {
+    res.status(406).send({ error: "Not acceptable"});
+  }
   if (req.accepts('application/json')) {
     var creator = req.get('creator');
     var lastPost = req.get('lastPost');
@@ -53,6 +56,7 @@ exports.fetchPosts = function(req, res) {
         Post
         .find({creator: ObjectId(creator)})
         .where('create_date').lt(post.create_date)
+        .where('status').equals('active')
         .sort({create_date: -1, _id: -1})
         .limit(limit)
         .exec(function(err, posts) {
@@ -69,7 +73,7 @@ exports.fetchPosts = function(req, res) {
     });
   }
   else {
-    res.status(404).send({ error: "Resource not found."});
+    res.status(406).send({ error: "Not acceptable"});
   }
 };
 
@@ -121,6 +125,7 @@ exports.singlePost = function(req, res) {
 exports.getPostsForProfileByUserId = function(user_id, next) {
   Post
     .find({creator: ObjectId(user_id)})
+    .where('status').equals('active')
     .sort({ create_date: -1, _id: -1 })
     .limit(20)
     .exec(function(err, posts) {
