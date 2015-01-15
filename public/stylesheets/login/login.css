@@ -2,15 +2,30 @@
   background-color: #EEF0F4;
 }
 
+.back {
+  display: none;
+}
+
 .form-signin {
-  max-height: 415px;
+  height: 465px;
   max-width: 380px;
-  padding: 40px 0px 40px 0px;
+  padding: 0px 0px 40px 0px;
   margin-top: 120px;
   margin-bottom: 120px;
   margin-left: auto;
   margin-right: auto;
   background: white;
+}
+
+.form-signin-header h4 {
+  margin-top: 0px;
+}
+
+.form-signin-header {
+  background-color: #e4e5ea;
+  height: 80px;
+  border-bottom: 1px solid #b8c0d8;
+  margin-bottom: 36px;
 }
 
 .form-signin .form-signin-heading,
@@ -20,6 +35,15 @@
   text-transform: uppercase;
   font-weight: 900;
   color: #334b8f;
+}
+
+.form-signin-heading {
+  padding: 30px;
+}
+
+.form-signin p {
+  text-align: center;
+  font-weight: 900;
 }
 
 .form-signin .checkbox {
@@ -46,7 +70,22 @@
 }
 
 .form-signin .btn {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
+  width: 120px;
+}
+
+.go {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.log-in {
+  margin: 20px 22px 60px 48px;
+}
+
+.sign-up {
+  margin: 20px 48px 60px 22px;
 }
 
 .form-signin .form-control:focus {
@@ -55,6 +94,7 @@
 
 .form-signin input[type="email"] {
   margin-bottom: 3px;
+  margin-top: 72px;
   height: 54px;
   background: url(../../images/login/email_icon.png) no-repeat left center;
   background-size: 26px 16px;
@@ -75,6 +115,47 @@
 
 .form-signin input[type="checkbox"] {
   margin-top: 3px;
+}
+
+.form-signin label {
+  font-size: 16px
+}
+
+.form-signin a {
+  font-size: 16px
+}
+
+.facebook-login img {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  float: left;
+  margin: 20px 0px 20px 84px;
+}
+
+.twitter-login img {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  margin: 20px 0px 20px 84px;
+}
+
+.underline-left {
+  border-bottom: 1px solid;
+  width: 120px;
+  float: left;
+  margin: 10px 15px 24px 48px;
+}
+
+.underline-middle {
+  float: left
+}
+
+.underline-right {
+  border-bottom: 1px solid;
+  width: 120px;
+  float: left;
+  margin: 10px 48px 24px 15px;
 }
 
 @media screen and (max-width:500px) {

@@ -171,6 +171,14 @@ $(function() {
   });
 });
 
+/* Login */
+$(function() {
+  $('input[value="Log In"]').click(function() {
+    $('.front').css('display', 'none');
+    $('.back').css('display', 'inherit');
+  });
+});
+
 /*
 $(function() {
   var input_element = document.getElementById("interest-selection");
