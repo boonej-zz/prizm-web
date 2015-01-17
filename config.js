@@ -49,7 +49,9 @@ passport.use(new TwitterStrategy({
   function(token, tokenSecret, profile, done) {
     console.log('Profile ID: ' + profile.id);
     User.findOne({provider: 'twitter', provider_id: profile.id}, function(err, user) {
-      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
       done(null, user);
     });
   }

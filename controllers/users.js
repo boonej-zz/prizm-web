@@ -251,7 +251,7 @@ exports.handleFacebookLogin = function(req, res, next) {
 
 exports.handleTwitterLogin = function(req, res, next) {
   // Check to determine if this is orginal auth call to facebook or callback
-  if (!req.query.code) {
+  if (!req.query.oauth_token) {
     // If callback query 'code' is not present request facebook authorization
     passport.authenticate('twitter')(req, res, next);
   }
