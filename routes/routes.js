@@ -7,6 +7,9 @@ var _posts    = require('../controllers/posts');
 var _users    = require('../controllers/users');
 var _organizations = require('../controllers/organizations');
 
+var config      = require('../config');
+var passport    = require('passport');
+
 
 /* Website */
 router.get('/', function(req, res) {
@@ -55,10 +58,14 @@ router.get('/users/:id/password', _users.passwordReset);
 router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);
 
+/* Authorization */
 router.get('/login', _users.displayLogin);
-router.post('/login', _users.handleLogin);
+router.post('/login', _users.handlePrizmLogin);
+router.get('/login/facebook', _users.handleFacebookLogin);
+router.get('/login/twitter', _users.handleTwitterLogin);
 router.get('/logout', _users.handleLogout);
 
+/* Home */
 router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/:id', _users.displayProfileById)
 

@@ -190,7 +190,7 @@ exports.displayLogin = function(req, res) {
   res.render('login/login');
 };
 
-exports.handleLogin = function(req, res, next) {
+exports.handlePrizmLogin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err) }
     if (!user) {
@@ -213,6 +213,74 @@ exports.handleLogin = function(req, res, next) {
       }
     });
   })(req, res, next);
+};
+
+exports.handleFacebookLogin = function(req, res, next) {
+  // Check to determine if this is orginal auth call to facebook or callback
+  if (!req.query.code) {
+    // If callback query 'code' is not present request facebook authorization
+    passport.authenticate('facebook')(req, res, next);
+  }
+  else {
+    // Handle Facebook callback
+    passport.authenticate('facebook', function(err, user, info) {
+      console.log("User: " + user.email);
+      if (err) { return next(err) }
+      if (!user) {
+        req.session.messages =  [info.message];
+        return res.redirect('/login');
+      }
+      req.logIn(user, function(err) {
+        if (err) { 
+          return next(err); 
+        }
+        if (user.type == 'institution_verified') {
+          _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
+            if (namespace) {
+              return res.redirect('/' + namespace);
+            }
+          });
+        }
+        else {
+          return res.redirect('/profile');
+        }
+      });
+    })(req, res, next);
+  }
+};
+
+exports.handleTwitterLogin = function(req, res, next) {
+  // Check to determine if this is orginal auth call to facebook or callback
+  if (!req.query.code) {
+    // If callback query 'code' is not present request facebook authorization
+    passport.authenticate('twitter')(req, res, next);
+  }
+  else {
+    // Handle Facebook callback
+    passport.authenticate('twitter', function(err, user, info) {
+      console.log("User: " + user.email);
+      if (err) { return next(err) }
+      if (!user) {
+        req.session.messages =  [info.message];
+        return res.redirect('/login');
+      }
+      req.logIn(user, function(err) {
+        if (err) { 
+          return next(err); 
+        }
+        if (user.type == 'institution_verified') {
+          _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
+            if (namespace) {
+              return res.redirect('/' + namespace);
+            }
+          });
+        }
+        else {
+          return res.redirect('/profile');
+        }
+      });
+    })(req, res, next);
+  }
 };
 
 exports.handleLogout = function(req, res) {
