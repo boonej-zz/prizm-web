@@ -163,5 +163,12 @@
   .form-signin {
     margin-top: 24px;
     margin-bottom: 24px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container {
+    padding-right: 0px;
+    padding-left: 0px;
   }
 }
