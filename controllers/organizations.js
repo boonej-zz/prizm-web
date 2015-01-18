@@ -9,6 +9,7 @@ var Organization  = mongoose.model('Organization');
 var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
 var _time         = require('../lib/helpers/date_time');
+var _profile      = require('../lib/helpers/profile');
 
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
@@ -36,16 +37,21 @@ exports.displayOrganization = function(req, res) {
               luminaries = [];
             }
             _posts.getPostsForProfileByUserId(owner.id, function(err, posts) {
+              var headerImages;
               if (err) {
                 posts = [];
+                headerImages = [];
               }
               posts = _time.addTimeSinceFieldToPosts(posts);
+              headerImages = _profile.shufflePostImagesForProfileHeader(posts);
+              console.log(headerImages);
               res.render('organization', {
                 auth: auth,
                 currentUser: currentUser,
                 organization: organization,
                 luminaries: luminaries,
                 owner: owner,
+                headerImages: headerImages,
                 posts: posts });
             });
           });
