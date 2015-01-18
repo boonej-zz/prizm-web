@@ -148,7 +148,8 @@
 }
 
 .underline-middle {
-  float: left
+  float: left;
+  width: 14px;
 }
 
 .underline-right {
