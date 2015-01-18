@@ -334,14 +334,18 @@ exports.displayProfileById = function(req, res) {
     }
     if (user) {
       _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+        var headerImages;
         if (err) {
           posts = [];
+          headerImages = [];
         }
         posts = _time.addTimeSinceFieldToPosts(posts);
+        headerImages =_profile.shufflePostImagesForProfileHeader(posts);
         res.render('profile/profile', {
           auth: auth,
           currentUser: currentUser,
           user: user,
+          headerImages: headerImages,
           posts: posts
         });
       });
