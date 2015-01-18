@@ -44,7 +44,6 @@ exports.displayOrganization = function(req, res) {
               }
               posts = _time.addTimeSinceFieldToPosts(posts);
               headerImages = _profile.shufflePostImagesForProfileHeader(posts);
-              console.log(headerImages);
               res.render('organization', {
                 auth: auth,
                 currentUser: currentUser,
