@@ -13,6 +13,7 @@ var _           = require('underscore');
 var _time       = require('../lib/helpers/date_time');
 var _trusts     = require('../controllers/trusts');
 var _posts      = require('../controllers/posts');
+var _profile    = require('../lib/helpers/profile');
 var _organizations = require('../controllers/organizations');
 var rejectMail  = fs.readFileSync(path.join(__dirname +
                   '/../views/reject_mail.jade'), 'utf8');
@@ -297,14 +298,18 @@ exports.displayProfile = function(req, res) {
     }
     if (user) {
       _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+        var headerImages;
         if (err) {
           posts = [];
+          headerImages = [];
         }
         posts = _time.addTimeSinceFieldToPosts(posts);
+        headerImages =_profile.shufflePostImagesForProfileHeader(posts);
         res.render('profile/profile', {
           auth: true,
           currentUser: req.user,
           user: user,
+          headerImages: headerImages,
           posts: posts
         });
       });

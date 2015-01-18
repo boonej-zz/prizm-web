@@ -34,13 +34,13 @@ block content
     .wrap-profile
       .profile-owner(id='#{user.id}')
       #profile-header(style="background-image: url('/images/profile_header.png')")
-        if (posts.length > 15)
+        if (headerImages.length > 15)
           #image-header-overlay
           #image-header
-            each post, i in posts
+            each headerImage, i in headerImages
               if (i < 16)
                 .background-tile(style='background-image: '
-                + 'url(\'https://#{post.file_path.substr(7)}\')')
+                + 'url(\'https://#{post.substr(7)}\')')
         .slider-container
           #profile-header-section1.slider
             #avatar-header
