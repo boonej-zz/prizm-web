@@ -55,7 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'prizm',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
 // Passport Authentication
