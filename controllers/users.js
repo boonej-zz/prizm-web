@@ -225,7 +225,6 @@ exports.handleFacebookLogin = function(req, res, next) {
   else {
     // Handle Facebook callback
     passport.authenticate('facebook', function(err, user, info) {
-      console.log("User: " + user.email);
       if (err) { return next(err) }
       if (!user) {
         req.session.messages =  [info.message];
@@ -251,15 +250,14 @@ exports.handleFacebookLogin = function(req, res, next) {
 };
 
 exports.handleTwitterLogin = function(req, res, next) {
-  // Check to determine if this is orginal auth call to facebook or callback
+  // Check to determine if this is orginal auth call to twitter or callback
   if (!req.query.oauth_token) {
-    // If callback query 'code' is not present request facebook authorization
+    // If callback query 'code' is not present request twitter authorization
     passport.authenticate('twitter')(req, res, next);
   }
   else {
-    // Handle Facebook callback
+    // Handle Twitter callback
     passport.authenticate('twitter', function(err, user, info) {
-      console.log("User: " + user.email);
       if (err) { return next(err) }
       if (!user) {
         req.session.messages =  [info.message];
