@@ -295,7 +295,7 @@ exports.displayProfile = function(req, res) {
       res.send(400);
     }
     if (user) {
-      _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+      _posts.getPostsForProfileByUserId(user.id, true, true, function(err, posts) {
         var headerImages;
         if (err) {
           posts = [];
@@ -322,16 +322,21 @@ exports.displayProfileById = function(req, res) {
   var id = req.params.id
   var auth = false
   var currentUser = {};
+  var isCurrent = false;
+  var isTrust = false;
   if (req.isAuthenticated()) {
     auth = true;
     currentUser = req.user;
+    if (req.params.id == currentUser._id.toString()){
+      isCurrent = true;
+    }
   }
   User.findOne({_id: ObjectId(id)}, function(err, user) {
     if (err) {
       res.send(400);
     }
     if (user) {
-      _posts.getPostsForProfileByUserId(user.id, function(err, posts) {
+      _posts.getPostsForProfileByUserId(user.id, isCurrent, isTrust, function(err, posts) {
         var headerImages;
         if (err) {
           posts = [];

@@ -78,11 +78,23 @@ exports.singlePost = function(req, res) {
     });}
   });
 }
-
-exports.getPostsForProfileByUserId = function(user_id, next) {
+// This kind of thing should probably go into the model - JB
+exports.getPostsForProfileByUserId = function(user_id, is_current, is_trust, next) {
+  criteria = {
+    creator: ObjectId(user_id),
+    status: 'active'
+  }; 
+  if (!is_current) {
+    console.log('not current');
+    criteria.category = {$ne: 'personal'};
+    if (!is_trust){
+      criteria.$and = [{scope: {$ne: 'private'}}, {scope: {$ne: 'trust'}}];
+    } else {
+      criteria.scope = {$ne: 'private'};
+    }
+  } 
   Post
-    .find({creator: ObjectId(user_id)})
-    .where('status').equals('active')
+    .find(criteria)
     .sort({ create_date: -1, _id: -1 })
     .limit(20)
     .exec(function(err, posts) {
