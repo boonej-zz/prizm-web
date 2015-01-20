@@ -16,6 +16,8 @@ exports.displayOrganization = function(req, res) {
   var name = req.params.name;
   var auth = false;
   var currentUser = {};
+  var isCurrent = false;
+  var isTrust = false;
   if (req.isAuthenticated()) {
     auth = true;
     currentUser = req.user;
@@ -32,11 +34,14 @@ exports.displayOrganization = function(req, res) {
           res.send(404);
         }
         if (owner) {
+          if (currentUser.id == owner.id) {
+            isCurrent = true;
+          }
           _users.getTrustedLuminariesForUserId(owner.id, function(err, luminaries) {
             if (err) {
               luminaries = [];
             }
-            _posts.getPostsForProfileByUserId(owner.id, function(err, posts) {
+            _posts.getPostsForProfileByUserId(owner.id, isCurrent, isTrust, function(err, posts) {
               var headerImages;
               if (err) {
                 posts = [];
