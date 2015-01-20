@@ -166,7 +166,6 @@ exports.getTrustedLuminariesForUserId = function(userId, next) {
           next(err);
         }
         if (users) {
-          console.log(users);
           next(null, users);
         }
         else {
