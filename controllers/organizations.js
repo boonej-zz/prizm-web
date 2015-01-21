@@ -34,9 +34,6 @@ exports.displayOrganization = function(req, res) {
           res.send(404);
         }
         if (owner) {
-          if (currentUser.id == owner.id) {
-            isCurrent = true;
-          }
           _users.getTrustedLuminariesForUserId(owner.id, function(err, luminaries) {
             if (err) {
               luminaries = [];

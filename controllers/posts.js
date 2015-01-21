@@ -10,8 +10,7 @@ var fs        = require('fs');
 var path      = require('path');
 var jade      = require('jade');
 var postFeed  = fs.readFileSync(path.join(__dirname +
-                '/../views/post_feed.jade'), 'utf8');
-
+                '/../views/posts/post_feed.jade'), 'utf8');
 
 // Posts Methods
 exports.fetchPosts = function(req, res) {
@@ -21,9 +20,12 @@ exports.fetchPosts = function(req, res) {
   if (req.accepts('application/json')) {
     var creator = req.get('creator');
     var lastPost = req.get('lastPost');
-    var limit = req.get('limit');
-    if (limit == undefined) {
-      limit = 20;
+    var isCurrent = false;
+    var isTrust = false;
+    if (req.isAuthenticated()) {
+      if (req.user.id == creator) {
+        isCurrent = true;
+      }
     }
     Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
       if (err) {
@@ -31,12 +33,23 @@ exports.fetchPosts = function(req, res) {
         res.status(400).send({ error: err });
       }
       if (post) {
+        criteria = {
+          creator: ObjectId(creator),
+          status: 'active',
+          create_date: {$lt: post.create_date}
+        }
+        if (!isCurrent) {
+          criteria.category = {$ne: 'personal'};
+          if (!isTrust){
+            criteria.$and = [{scope: {$ne: 'private'}}, {scope: {$ne: 'trust'}}];
+          } else {
+            criteria.scope = {$ne: 'private'};
+          }
+        } 
         Post
-        .find({creator: ObjectId(creator)})
-        .where('create_date').lt(post.create_date)
-        .where('status').equals('active')
+        .find(criteria)
         .sort({create_date: -1, _id: -1})
-        .limit(limit)
+        .limit(21)
         .exec(function(err, posts) {
           if (err) {
             console.log(err);
@@ -73,7 +86,7 @@ exports.singlePost = function(req, res) {
       }
     }
     var ago = _time.postTimeSinceFormatter(post.create_date);
-    res.render('post', {bodyId: 'post-card', post: post, tags: tags, ago: ago, category: post.category
+    res.render('posts/post', {bodyId: 'post-card', post: post, tags: tags, ago: ago, category: post.category
     
     });}
   });
@@ -96,7 +109,7 @@ exports.getPostsForProfileByUserId = function(user_id, is_current, is_trust, nex
   Post
     .find(criteria)
     .sort({ create_date: -1, _id: -1 })
-    .limit(20)
+    .limit(21)
     .exec(function(err, posts) {
       if (err) {
         next(err);

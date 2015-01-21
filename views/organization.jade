@@ -4,6 +4,7 @@ block head
   script(src='/javascripts/profile.js' type='text/javascript')
 
 block content
+  #organization
   #profile-block.full-width.gray-font
     .wrap-profile
       .profile-owner(id='#{organization.owner}')
@@ -18,7 +19,7 @@ block content
         .slider-container
           #profile-header-section1.slider
             #avatar-header
-              img(src='https://#{organization.logo_url?organization.logo_url.substr(7):owner.profile_photo_url.substr(7)}')
+              img(src='https://#{owner.profile_photo_url.substr(7)}')
             h2.profile-name
               | #{organization.name}
             p.profile-location
@@ -51,18 +52,4 @@ block content
           #no-posts
             h2 This Organization has not created any posts yet
         else
-          each post in posts
-            .post(id='#{post.id}')
-              .post-image
-                img(src='https://#{post.file_path.substr(7)}')
-              .post-footer
-                .like-icon
-                p.likes
-                  | #{post.likes_count}
-                .comment-icon
-                p.comments
-                  | #{post.comments_count}
-                .share-icon
-                .time
-                  #clock-image
-                  #time #{post.time_since}
+          include posts/post_feed

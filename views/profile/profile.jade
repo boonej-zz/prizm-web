@@ -36,18 +36,4 @@ block content
           #no-posts
             h2 This profile has not created any posts yet
         else
-          each post in posts
-            .post(id='#{post.id}')
-              .post-image
-                img(src='https://#{post.file_path.substr(7)}')
-              .post-footer
-                .like-icon
-                p.likes
-                  | #{post.likes_count}
-                .comment-icon
-                p.comments
-                  | #{post.comments_count}
-                .share-icon
-                .time
-                  #clock-image
-                  #time #{post.time_since}
+          include ../posts/post_feed

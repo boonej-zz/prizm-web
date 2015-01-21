@@ -1,5 +1,5 @@
 each post in posts
-  .post(id='#{post.id}' date='#{post.create_date}')
+  .post(id='#{post.id}')
     .post-image
       img(src='https://#{post.file_path.substr(7)}')
     .post-footer
