@@ -4,7 +4,7 @@ $(window).scroll(function() {
     var lastPost = $('#profile-posts').children().last().attr('id');
     var creator = $('.profile-owner').attr('id');
     $.ajax({
-      url: './posts/',
+      url: '/posts/',
       headers: {
         'Accept' : 'application/json',
         'creator' : creator,
@@ -33,7 +33,6 @@ $(function(){
     $('#profile-first').toggleClass('active');
   });
   $('#profile-middle').click(function(){
-    console.log("CLICKED")
     $('.slider').animate({left: '-33.33%'}, 600);
     $('.slider-nav li').toggleClass('active', false);
     $('#profile-middle').toggleClass('active');
