@@ -4,6 +4,7 @@ var router      = express.Router();
 var mongoose    = require('mongoose');
 var ObjectId    = require('mongoose').Types.ObjectId;
 var User        = mongoose.model('User');
+var Post        = mongoose.model('Post');
 var config      = require('../config');
 var passport    = require('passport');
 var jade        = require('jade');
@@ -12,7 +13,7 @@ var path        = require('path');
 var _           = require('underscore');
 var _time       = require('../lib/helpers/date_time');
 var _trusts     = require('../controllers/trusts');
-var _posts      = require('../controllers/posts');
+// var _posts      = require('../controllers/posts');
 var _profile    = require('../lib/helpers/profile');
 var _organizations = require('../controllers/organizations');
 var rejectMail  = fs.readFileSync(path.join(__dirname +
@@ -294,7 +295,7 @@ exports.displayProfile = function(req, res) {
       res.send(400);
     }
     if (user) {
-      _posts.getPostsForProfileByUserId(user.id, true, true, function(err, posts) {
+      Post.findPostsForProfileByUserId(user.id, true, true, function(err, posts) {
         var headerImages;
         if (err) {
           posts = [];
@@ -335,7 +336,7 @@ exports.displayProfileById = function(req, res) {
       res.send(400);
     }
     if (user) {
-      _posts.getPostsForProfileByUserId(user.id, isCurrent, isTrust, function(err, posts) {
+      Post.findPostsForProfileByUserId(user.id, isCurrent, isTrust, function(err, posts) {
         var headerImages;
         if (err) {
           posts = [];

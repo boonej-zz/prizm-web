@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
+var mongoose      = require('mongoose');
+var ObjectId      = require('mongoose').Types.ObjectId;
+var ObjectIdType  = mongoose.Schema.Types.ObjectId;
 
 var postSchema = new mongoose.Schema({
-  _id                 : {type: ObjectId, required:true},
+  _id                 : {type: ObjectIdType, required:true},
   text                : {type: String, default: null},
   category            : {type: String, required:true},
   create_date         : {type: Date, default:null, index: true},
@@ -12,7 +13,7 @@ var postSchema = new mongoose.Schema({
   location_name       : {type: String, default: null},
   location_longitude  : {type: Number, default: 0},
   location_latitude   : {type: Number, default: 0},
-  creator             : {type: ObjectId, ref: 'User'},
+  creator             : {type: ObjectIdType, ref: 'User'},
   status              : {type: String, default: 'active'},
   file_path           : {type: String, default: ''},
   likes_count         : {type: Number, default: 0},
@@ -35,5 +36,33 @@ var postSchema = new mongoose.Schema({
   scope_modify_date   : {type: Date, default: null},
   accolade_target     : {type: String, default: null}
 }, { versionKey: false});
+
+postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, is_trust, next) {
+  criteria = {
+    creator: ObjectId(user_id),
+    status: 'active'
+  };
+  if (!is_current) {
+    console.log('not current');
+    criteria.category = {$ne: 'personal'};
+    if (!is_trust){
+      criteria.$and = [{scope: {$ne: 'private'}}, {scope: {$ne: 'trust'}}];
+    } else {
+      criteria.scope = {$ne: 'private'};
+    }
+  }
+  this.model('Post')
+    .find(criteria)
+    .sort({ create_date: -1, _id: -1 })
+    .limit(21)
+    .exec(function(err, posts) {
+      if (err) {
+        next(err);
+      }
+      else {
+        next(null, posts);
+      }
+    });
+};
 
 mongoose.model('Post', postSchema);
