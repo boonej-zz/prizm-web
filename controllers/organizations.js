@@ -38,7 +38,7 @@ exports.displayOrganization = function(req, res) {
             if (err) {
               luminaries = [];
             }
-            _posts.getPostsForProfileByUserId(owner.id, isCurrent, isTrust, function(err, posts) {
+            _posts.getPostsForProfileByUserId(owner.id, false, false, function(err, posts) {
               var headerImages;
               if (err) {
                 posts = [];
