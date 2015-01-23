@@ -2,6 +2,19 @@ var mongoose      = require('mongoose');
 var ObjectId      = require('mongoose').Types.ObjectId;
 var ObjectIdType  = mongoose.Schema.Types.ObjectId;
 
+var commentSchema = new mongoose.Schema({
+  text                : { type: String, default: null, required: true },
+  creator             : { type: ObjectIdType, ref: 'User'},
+  create_date         : { type: Date, default: Date.now() },
+  likes               : [],
+  likes_count         : {type: Number, default: 0},
+  tags                : {type: Array, default: []},
+  hash_tags           : {type: Array, default: []},
+  tags_count          : {type: Number, default: 0},
+  hash_tags_count     : {type: Number, default: 0},
+  status              : {type: String, default: 'active'}
+});
+
 var postSchema = new mongoose.Schema({
   _id                 : {type: ObjectIdType, required:true},
   text                : {type: String, default: null},
@@ -20,7 +33,7 @@ var postSchema = new mongoose.Schema({
   comments_count      : {type: Number, default: 0},
   tags_count          : {type: Number, default: 0},
   tags                : {type: Array, default: []},
-  // comments            : [commentSchema],
+  comments            : [commentSchema],
   likes               : {type: Array, default: []},
   hash_tags           : [String],
   hash_tags_count     : {type: Number, default: 0},
@@ -36,6 +49,8 @@ var postSchema = new mongoose.Schema({
   scope_modify_date   : {type: Date, default: null},
   accolade_target     : {type: String, default: null}
 }, { versionKey: false});
+
+
 
 postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, is_trust, next) {
   criteria = {
