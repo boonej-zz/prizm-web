@@ -4,14 +4,230 @@
 }
 
 .modal-dialog {
-    width: 380px;
+  width: 380px;
 }
 
 .modal-content {
-    width: 380px;
-    height: 465px;
+  width: 380px;
+  height: 465px;
 }
 
 .modal-body {
-    padding: 0px;
+  padding: 0px;
+}
+
+/* Single Post Modal */
+.modal-dialog.post-modal {
+    width: 1200px;
+
+}
+
+.modal-content.post-modal {
+    width: 100%;
+
+    height: auto;
+}
+
+.modal-body.post-modal {
+
+}
+
+.post-modal-left {
+    width: 55%;
+    /* height: auto; */
+    display: inline-block;
+}
+
+.post-modal-left img {
+  width: 100%;
+  height: auto;
+}
+
+.post-modal-right {
+  width: 45%;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+}
+
+.comments-header {
+  height: 96px;
+  background: #E4E5EA;
+}
+
+.post-creator-avatar {
+  display: inline-block;
+  padding: 16px;
+}
+
+.post-modal-avatar {
+  height: 64px;
+  width: 64px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
+.post-creator-name {
+  display:inline-block;
+  font-size: 20px
+}
+
+.post-comments {
+  width: 100%;
+  text-align: center;
+  background: #f3f5f7;
+}
+
+.post-comments p {
+  font-size: 20px;
+}
+
+.comment-container {
+  width: 100%;
+  height: 112px;
+  display: table-header-group;
+}
+
+.commenter-avatar {
+  display: table-cell;
+  width: 96px;
+  height: 112px;
+  padding: 12px 16px 0px 16px;
+}
+
+.commenter-name {
+  /* display: table-row-group; */
+  position: relative;
+  top: -11px;
+  font-size: 18px;
+}
+
+.comment-text {
+  /* display: table-row-group; */
+  position: relative;
+  top: -10px;
+}
+
+.comment-info {
+  /* display: table-row-group; */
+  position: relative;
+  top: 4px;
+}
+
+.comment-info #clock-image {
+    display: inline-block;
+
+}
+
+.comment-info #time {
+    display: inline-block;
+
+}
+
+.comment-info .like-icon {
+    display: inline-block;
+
+    float: none;
+    margin: 0px;
+    width: 16px;
+    height: 13px;
+    background-size: 16px 13px;
+}
+
+.comment-likes {
+    display: inline-block;
+
+}
+
+.comment-likes-count {
+    display: inline-block;
+  
+}
+
+#like .like-icon {
+    display: inline-block;
+    width: 16px;
+  
+    height: 13px;
+    background-size: 16px 13px;
+}
+
+.comments-footer {
+  height: 68px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+}
+
+.comments-like {
+    display: inline-block;
+    height: 68px;
+    width: 68px;
+    background: #E4E5EA;
+}
+
+.comments-like .like-icon {
+  float: none;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  margin: 0px auto;
+  background-repeat: no-repeat;
+  background-position: 22px 24px;
+}
+
+.comments-post {
+    display: inline-block;
+
+    width: 87%;
+    height: 68px;
+}
+
+.comment-post {
+    display: inline-block;
+  
+    width: 100%;
+    background: #f3f5f7;
+    padding-right: 12px;
+}
+
+form #inputComment {
+  float: left;
+  width: 400px;
+  height: 68px;
+  padding-left: 50px;
+  padding-bottom: 2px;
+  background: inherit;
+  background-image: url('/images/posts/write_comment.png');
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position-x: 14px;
+  background-position-y: 23px;
+  box-shadow: none;
+  color: #b8b8d3;
+  font-size: 16px;
+}
+
+#inputComment::-webkit-input-placeholder {
+    color: #babad5;
+}
+#inputComment::-moz-placeholder {
+    color: #babad5;
+}
+#inputComment:-ms-input-placeholder {
+    color: #babad5;
+}
+
+
+.post-button {
+  display: inline-block;
+  float: right;
+  height: 24px;
+  width: 48px;
+  margin: 22px auto;
+  border-radius: 12px;
+  color: #babad5;
+  text-shadow: none;
+  font-size: 16px;
 }

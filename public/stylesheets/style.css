@@ -1013,7 +1013,7 @@ li#org-first{
   vertical-align: super;
 }
 
-.share-icon {
+.action-icon {
   background-image: url('/images/post_share.png');
   background-size: 24px 24px;
   width: 24px;

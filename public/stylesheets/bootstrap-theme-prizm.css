@@ -65,7 +65,7 @@ body a {
   background-image: none;
 }
 .btn-default {
-  text-shadow: 0 1px 0 #fff;
+/*  text-shadow: 0 1px 0 #fff;
   background-image: -webkit-linear-gradient(top, #fff 0%, #e0e0e0 100%);
   background-image:      -o-linear-gradient(top, #fff 0%, #e0e0e0 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e0e0e0));
@@ -74,7 +74,12 @@ body a {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
   border-color: #dbdbdb;
-  border-color: #ccc;
+  border-color: #ccc;*/
+  text-shadow: 0 1px 0 #fff;
+  background-image: none;
+  background-repeat: repeat-x;
+  border: none;
+  background-color: #ededf1;
 }
 .btn-default:hover,
 .btn-default:focus {
