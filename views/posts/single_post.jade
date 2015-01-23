@@ -1,14 +1,49 @@
-.post(id='#{post.id}')
-  .post-image
-    img(src='https://#{post.file_path.substr(7)}')
-  .post-footer
-    .like-icon
-    p.likes
-      | #{post.likes_count}
-    .comment-icon
-    p.comments
-      | #{post.comments_count}
-    .share-icon
-    .time
+.post-modal(id='#{post.id}')
+  .post-modal-left
+    .post-image
+      img(src='https://#{post.file_path.substr(7)}')
+  .post-modal-right
+    .comments-header
+      .post-creator-avatar
+        img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+            class='post-modal-avatar')
+      .post-creator-name
+        | #{post.creator.name}
       #clock-image
-      #time #{post.time_since}
+        | #{post.time_since}
+    .post-comments
+      p.comments-title
+        | Comments
+    .comment-scroll
+      each comment, i in post.comments
+        .comment-container
+          .commenter-avatar
+            img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+                class='post-modal-avatar')
+          .commenter-name
+            | #{post.comments[i].creator.name}
+          .comment-text
+            | #{post.comments[i].text}
+          .comment-info
+            #clock-image
+            #time
+              | #{post.comments[i].time_since}
+            .comment-likes
+              | - Like
+            .like-icon
+            .comment-likes-count
+              | #{post.comments[i].likes_count}
+    .comments-footer
+      .comments-like
+        .like-icon
+      .comments-post
+        form(action='/post/#{post.id}' method='post' class='comment-post')
+          label(for='inputComment' class='sr-only')
+          input(type='text'
+                id='inputComment'
+                name='comment'
+                class='form-control'
+                placeholder='Write a comment...'
+                required)
+          button(class='btn btn-xs btn-default post-button' type='submit')
+            | Post
