@@ -301,7 +301,7 @@ exports.displayProfile = function(req, res) {
           posts = [];
           headerImages = [];
         }
-        posts = _time.addTimeSinceFieldToPosts(posts);
+        posts = _time.addTimeSinceFieldToObjects(posts);
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
         res.render('profile/profile', {
           auth: true,
@@ -342,7 +342,7 @@ exports.displayProfileById = function(req, res) {
           posts = [];
           headerImages = [];
         }
-        posts = _time.addTimeSinceFieldToPosts(posts);
+        posts = _time.addTimeSinceFieldToObjects(posts);
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
         res.render('profile/profile', {
           auth: auth,
