@@ -125,6 +125,8 @@ var singlePostJadeRequest = function(req, res) {
     .exec(function(err, post) {
       if (err) { res.status(500).send({error: err}); }
       if (post) {
+        post.time_since = _time.timeSinceFormatter(post.create_date);
+        post.comments = _time.addTimeSinceFieldToObjects(post.comments);
         var content = jade.render(singlePost, {post: post});
         res.status(200).send(content);
       }
