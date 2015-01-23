@@ -19,25 +19,51 @@ $(window).scroll(function() {
   }
 });
 
+/* Show Post Modal */
+$(function() {
+  $('.action-icon').click(function() {
+    var postID = $(this).parents('.post').attr('id');
+    $.ajax({
+      url: '/posts/' + postID,
+      headers: {
+        'Accept': 'application/jade'
+      },
+      success: function(html) {
+        if (html) {
+          $('#post-display').append(html);
+        }
+      }
+    });
+  });
+});
+
+/* Dismiss Post Modal */
 $(function(){
+  $('#postModal').on('click', '.modal-backdrop', function() {
+    $('#post-display').empty();
+  });
+})
+
+/* Toggle Profile Menu */
+$(function() {
   $('#profile-navbar').click(function(){
     $('#profile-menu').toggleClass('hidden');
   });
 });
 
 /* Header side scrolling */
-$(function(){
-  $('#profile-first').click(function(){
+$(function() {
+  $('#profile-first').click(function() {
     $('.slider').animate({left: '0%'}, 600);
     $('.slider-nav li').toggleClass('active', false);
     $('#profile-first').toggleClass('active');
   });
-  $('#profile-middle').click(function(){
+  $('#profile-middle').click(function() {
     $('.slider').animate({left: '-33.33%'}, 600);
     $('.slider-nav li').toggleClass('active', false);
     $('#profile-middle').toggleClass('active');
   });
-  $('#profile-last').click(function(){
+  $('#profile-last').click(function() {
     $('.slider').animate({left: '-66.66%'}, 600);
     $('.slider-nav li').toggleClass('active', false);
     $('#profile-last').toggleClass('active');
@@ -45,14 +71,14 @@ $(function(){
 });
 
 /* Fix for Navbar (bootstrap modal moves it right 15px) */
-$(function(){
-  $('a[type="button"]').click(function(){
+$(function() {
+  $('a[type="button"]').click(function() {
     $('#navbar').css('padding-right', '15px');
     $('#navbar').slideUp(function(){
       $('#navbar').css('margin-left', '7px');
     });
   });
-  $('#loginModal').on('click', '.modal-backdrop', function () {
+  $('#loginModal').on('click', '.modal-backdrop', function() {
     $('#navbar').animate({
       paddingRight: "0px"
     }, 150);
