@@ -6,10 +6,10 @@ each post in posts
       .like-icon
       p.likes
         | #{post.likes_count}
-      .comment-icon
+      .comment-icon(type='button' data-toggle='modal' data-target='#postModal')
       p.comments
         | #{post.comments_count}
-      .share-icon
+      .action-icon
       .time
         #clock-image
         #time #{post.time_since}
