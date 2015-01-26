@@ -21,7 +21,9 @@ $(window).scroll(function() {
 
 /* Show Post Modal */
 $(function() {
-  $('.action-icon').click(function() {
+  $('.comment-icon').click(function() {
+    $('body').css('overflow','hidden');
+    $('body').css('position','fixed');
     var postID = $(this).parents('.post').attr('id');
     $.ajax({
       url: '/posts/' + postID,
