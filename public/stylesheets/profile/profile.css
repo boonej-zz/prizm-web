@@ -26,14 +26,17 @@
     width: 100%;
 
     height: auto;
+    border-radius: 0px;
+    border: 0px;
 }
 
 .modal-body.post-modal {
+    height: 100%;
 
 }
 
 .post-modal-left {
-    width: 55%;
+    width: 660px;
     /* height: auto; */
     display: inline-block;
 }
@@ -44,7 +47,7 @@
 }
 
 .post-modal-right {
-  width: 45%;
+  width: 540px;
   height: 100%;
   display: inline-block;
   position: absolute;
@@ -54,6 +57,14 @@
 .comments-header {
   height: 96px;
   background: #E4E5EA;
+}
+
+.comments-header #clock-image {
+    position: relative;
+  
+    right: 140px;
+    top: 18px;
+    padding-left: 20px;
 }
 
 .post-creator-avatar {
@@ -81,10 +92,11 @@
 
 .post-comments p {
   font-size: 20px;
+  margin: 0px;
 }
 
 .comment-container {
-  width: 100%;
+  max-width: 100%;
   height: 112px;
   display: table-header-group;
 }
@@ -118,18 +130,21 @@
 .comment-info #clock-image {
     display: inline-block;
 
+    margin-right: 4px;
 }
 
 .comment-info #time {
     display: inline-block;
 
+    margin-right: 8px;
+    vertical-align: text-bottom;
 }
 
 .comment-info .like-icon {
     display: inline-block;
 
     float: none;
-    margin: 0px;
+    margin: 0px 4px 0px 0px;
     width: 16px;
     height: 13px;
     background-size: 16px 13px;
@@ -138,11 +153,14 @@
 .comment-likes {
     display: inline-block;
 
+    margin-right: 4px;
+    vertical-align: text-bottom;
 }
 
 .comment-likes-count {
     display: inline-block;
   
+    vertical-align: text-bottom;
 }
 
 #like .like-icon {
@@ -151,6 +169,12 @@
   
     height: 13px;
     background-size: 16px 13px;
+}
+
+.comment-scroll {
+    overflow-y: auto;
+  
+    height: 467px;
 }
 
 .comments-footer {
@@ -180,7 +204,7 @@
 .comments-post {
     display: inline-block;
 
-    width: 87%;
+    width: 471px;
     height: 68px;
 }
 
@@ -230,4 +254,80 @@ form #inputComment {
   color: #babad5;
   text-shadow: none;
   font-size: 16px;
+}
+
+@media screen and (max-width:500px) {
+  .modal-body.post-modal {
+    height: 100%;
+  }
+  .modal-content.post-modal{
+    height: 100%
+  }
+  .modal-dialog.post-modal {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+  
+    position: absolute;
+}
+
+  .post-modal-left {
+    display: none;
+  }
+
+  .post-modal-right {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.comment-scroll {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  position: absolute;
+  top: 64px;
+  bottom: 68px;
+}
+
+.comments-header {
+  display: none;
+}
+
+.post-comments {
+  height: 64px;
+  position: absolute;
+  top: 0px;
+}
+
+p.comments-title {
+  font-size: 24px;
+  padding-top: 12px
+}
+
+.comments-like {
+  display: none;
+}
+
+.comments-post {
+  width: 100%;
+}
+
+.comment-post {
+  padding: 0px;
+  position: relative;
+  bottom: 0px;
+}
+
+.modal-open .modal {
+  overflow-y: hidden;
+  position: fixed;
+}
+
+form #inputComment {
+  width: 80%;
+}
+.post-button {
+  margin-right: 16px;
+}
 }

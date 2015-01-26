@@ -672,6 +672,7 @@ li#org-first{
   width: 16px;
   height: 15px;
   background: url('/images/clock.png');
+  background-repeat: no-repeat;
   display: inline-block;
 }
 
