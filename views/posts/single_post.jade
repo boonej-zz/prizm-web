@@ -29,7 +29,7 @@
             #time
               | #{post.comments[i].time_since}
             .comment-likes
-              | - Like
+              | -&nbsp;&nbsp;Like
             .like-icon
             .comment-likes-count
               | #{post.comments[i].likes_count}
@@ -37,7 +37,7 @@
       .comments-like
         .like-icon
       .comments-post
-        form(action='/post/#{post.id}' method='post' class='comment-post')
+        form(action='/posts/#{post.id}' method='get' class='comment-post')
           label(for='inputComment' class='sr-only')
           input(type='text'
                 id='inputComment'
