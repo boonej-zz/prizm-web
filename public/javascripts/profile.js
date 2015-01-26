@@ -21,9 +21,10 @@ $(window).scroll(function() {
 
 /* Show Post Modal */
 $(function() {
-  $('.comment-icon').click(function() {
+  $('#profile-posts').on('click', '.comment-icon', function() {
     // $('body').css('overflow','hidden');
     // $('body').css('position','fixed');
+    $('#post-display').empty();
     var postID = $(this).parents('.post').attr('id');
     $.ajax({
       url: '/posts/' + postID,
