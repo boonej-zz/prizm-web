@@ -375,6 +375,9 @@ exports.displayMembers = function(req, res) {
   if (req.user.type == 'user') {
     res.redirect('/profile');
   }
+  if (req.user.type == 'institution_pending') {
+    res.status(400).send({error: 'Status is still pending'});
+  }
   if (req.user.type == 'institution_verified') {
     Organization
       .getOrganizationByOwnerId(req.user.id, function(err, organization) {
@@ -392,17 +395,6 @@ exports.displayMembers = function(req, res) {
             else {
               res.send(organization.members);
             }
-          // Organization
-          //   .findOne({_id: ObjectId(organization.id)})
-          //   .populate({path: 'members', model: 'User'})
-          //   .exec(function(err, organization) {
-              // if (err) {
-              //   res.status(500).send({error: err});
-              // }
-              // else {
-              //   res.send(organization.members);
-          //     }
-          //   });
           });
         }
       });
