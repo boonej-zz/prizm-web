@@ -65,9 +65,10 @@ router.get('/login/facebook', _users.handleFacebookLogin);
 router.get('/login/twitter', _users.handleTwitterLogin);
 router.get('/logout', _users.handleLogout);
 
-/* Home */
-router.get('/profile', _users.authRequired, _users.displayProfile);
+/* Profiles */
+router.get('/profile', _users.basicAuthRequired, _users.displayProfile);
 router.get('/profile/:id', _users.displayProfileById)
+// router.get('/profile/:id/memebers', _users.partnerAuthRequired)
 
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
