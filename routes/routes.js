@@ -66,9 +66,9 @@ router.get('/login/twitter', _users.handleTwitterLogin);
 router.get('/logout', _users.handleLogout);
 
 /* Profiles */
-router.get('/profile', _users.basicAuthRequired, _users.displayProfile);
+router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/:id', _users.displayProfileById)
-// router.get('/profile/:id/memebers', _users.partnerAuthRequired)
+router.get('/profile/:id/members', _users.authRequired, _users.displayMembers);
 
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
