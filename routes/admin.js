@@ -182,15 +182,16 @@ router.get('/interests/graph', utils.auth, function(req, res) {
         item.total = item.male + item.female + item.unknown;
         dataArray.push(item);  
       });
+      
       dataArray = _.sortBy(dataArray, function(result){
         return -(result.total);
       });
+      
       var data = [];
       data.push( ['Gender', 'Male', 'Female', 'Unknown']);
       _.each(dataArray, function(item, idx, list){
         data.push([item.name, item.male, item.female, item.unknown]);
       });
-      console.log(data);
       User.count({active: true}, function(err, c){
         res.render('interest_graph', {results: results, title: 'Interests',
         count: c, data: data});

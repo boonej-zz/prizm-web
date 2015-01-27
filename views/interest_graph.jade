@@ -15,7 +15,12 @@ block head
         height: !{30 * data.length},
         width: 1200,
         legend: {position: 'top', maxLines: 3},
-        backgroundColor: '#E4E5EA'
+        backgroundColor: '#E4E5EA',
+        hAxis: {
+          textStyle: {
+            fontSize: 12
+          }
+        }
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
       chart.draw(data, options);
