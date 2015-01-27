@@ -385,22 +385,30 @@ exports.displayMembers = function(req, res) {
           res.redirect('/profile');
         }
         else {
-          Organization
-            .findOne({_id: ObjectId(organization.id)})
-            .populate({path: 'members', model: 'User'})
-            .exec(function(err, organization) {
-              if (err) {
+          organization.getOrganizationMembers(function(err, organization) {
+            if (err) {
                 res.status(500).send({error: err});
-              }
-              else {
-                res.send(organization.members);
-              }
-            });
+            }
+            else {
+              res.send(organization.members);
+            }
+          // Organization
+          //   .findOne({_id: ObjectId(organization.id)})
+          //   .populate({path: 'members', model: 'User'})
+          //   .exec(function(err, organization) {
+              // if (err) {
+              //   res.status(500).send({error: err});
+              // }
+              // else {
+              //   res.send(organization.members);
+          //     }
+          //   });
+          });
         }
       });
   }
   else {
     res.status(400).send({error: 'User is unknown type'});
   }
-}
+};
 
