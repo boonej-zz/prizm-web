@@ -66,7 +66,7 @@ var themeSchema = new mongoose.Schema({
   text_color          : {type: String, default: null},
   create_date         : {type: Date, default: null},
   modify_date         : {type: Date, default: null},
-  organization        : {type: ObjectId, ref: 'Organization', required: true}
+  organization        : {type: ObjectIdType, ref: 'Organization', required: true}
 });
 
 themeSchema.pre('save', function(next){
