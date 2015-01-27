@@ -18,7 +18,9 @@ var insightSchema = new mongoose.Schema({
 }); 
 
 insightSchema.pre('save', function(next){
-  this.create_date = Date.now();
+  if (!this.create_date){
+    this.create_date = Date.now();
+  }
   next();
 });
 
