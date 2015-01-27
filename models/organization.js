@@ -1,19 +1,19 @@
-var mongoose          = require('mongoose'),
-    // utils             = require(process.env.PRISM_HOME + 'utils'),
-    User              = mongoose.model('User'),
-    ObjectId          = mongoose.Schema.Types.ObjectId;
+var mongoose          = require('mongoose');
+var User              = mongoose.model('User');
+var ObjectId          = require('mongoose').Types.ObjectId;
+var ObjectIdType      = mongoose.Schema.Types.ObjectId;
 
 var organizationSchema = new mongoose.Schema({
   code                : {type: String, default: null, required: true, 
                           index: true},
-  theme               : {type: ObjectId, ref: 'Theme', required: false},
+  theme               : {type: ObjectIdType, ref: 'Theme', required: false},
   name                : {type: String, default: null, required: true},
   create_date         : {type: Date, default: null, required: false},
   modify_date         : {type: Date, default: null, required: false},
   members             : {type: Array, default: []},
   welcome_image_url   : {type: String, default: null},
   logo_url            : {type: String, default: null},
-  owner               : {type: ObjectId, ref: 'User', required: true},
+  owner               : {type: ObjectIdType, ref: 'User', required: true},
   namespace           : {type: String, default: null}
 });
 
@@ -50,6 +50,14 @@ organizationSchema.statics.canResolve = function(){
     {members: {identifier: '_id', model: 'User'}},
     {theme: {identifier: 'code', model: 'Theme'}}
   ];
+}
+
+organizationSchema.statics.getOrganizationByOwnerId = function(user_id, next) {
+  this.model('Organization')
+    .findOne({owner: ObjectId(user_id)})
+    .exec(function(err, organization) {
+      next(err, organization);
+    });
 }
 
 var themeSchema = new mongoose.Schema({
