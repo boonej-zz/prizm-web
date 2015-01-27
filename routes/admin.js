@@ -153,7 +153,7 @@ router.get('/interests/graph', utils.auth, function(req, res) {
     Interest.find({}, function(err, interests){
       var dataObject = {};
       _.each(results, function(result, index, list){
-        dataObject[result._id.interest] = dataObject[result._id.interest]?dataObject[result._id.interest]:{};
+        dataObject[result._id.interest] = dataObject[result._id.interest]?dataObject[result._id.interest]:{male: 0, female: 0, unknown: 0, total: 0};
         if (result._id.gender == 'male') {
           dataObject[result._id.interest].male = result.count;
         } else if (result._id.gender =='female'){
@@ -161,12 +161,15 @@ router.get('/interests/graph', utils.auth, function(req, res) {
         } else {
           dataObject[result._id.interest].unknown = result.count;
         }
-        //dataObject[result._id.interests][result._id.gender] = result.count;
-        var interest = _.find(interests, function(it){
-          return String(it._id).indexOf(String(result._id.interest)) != -1;
-        });
-        if (interest) {
-          dataObject[result._id.interest].name = interest.text;
+        dataObject[result._id.interest].total += result.count;
+
+        if (!dataObject[result._id.interest].name){
+          var interest = _.find(interests, function(it){
+            return String(it._id).indexOf(String(result._id.interest)) != -1;
+          });
+          if (interest) {
+            dataObject[result._id.interest].name = interest.text;
+          }
         }
       });
       var dataArray = [];
@@ -175,15 +178,14 @@ router.get('/interests/graph', utils.auth, function(req, res) {
         return -(result.male + result.female + result.unknown);
       });
       */
+     /** 
       _.each(dataObject, function(item, idx, list){
-        item.male = item.male || 0;
-        item.female = item.female || 0;
-        item.unknown = item.unknown || 0;
-        item.total = item.male + item.female + item.unknown;
         dataArray.push(item);  
       });
+      **/
       
-      dataArray = _.sortBy(dataArray, function(result){
+      
+      dataArray = _.sortBy(dataObject, function(result){
         return -(result.total);
       });
       
