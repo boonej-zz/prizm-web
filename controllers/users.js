@@ -180,12 +180,23 @@ exports.getTrustedLuminariesForUserId = function(userId, next) {
 
 // User Authentication Methods
 
-exports.authRequired = function (req, res, next) {
+exports.basicAuthRequired = function (req, res, next) {
   if (req.isAuthenticated()) {
    return next(); 
  }
   res.redirect('/login')
 }
+
+exports.partnerAuthRequired = function(req, res, next) {
+  if (req.isAuthenticated() && req.user == 'institution_verified') {
+    return next();
+  }
+  else {
+    res.status(400).send({error: 'User is not a verified partner'})
+  }
+}
+
+// User Profile Methods
 
 exports.displayLogin = function(req, res) {
   res.render('login/login');
