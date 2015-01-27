@@ -2,22 +2,38 @@ extends layouts/app_layout
 
 block head
   link(rel='stylesheet' type='text/css' href='/stylesheets/graph.css')
-  script(type='text/javascript' src='/javascripts/horizBarChart.js')
+  script(type='text/javascript' src='https://www.google.com/jsapi')
   script(type='text/javascript').
-    $(document).ready(function(){
-      $('.chart').horizBarChart({
-        selector: '.bar',
-        speed: 1000
-      });
-    });
+    google.load('visualization', '1', {packages:['corechart']});
+    google.setOnLoadCallback(drawChart);
+    function drawChart(){
+      var raw = !{JSON.stringify(data)};
+      var data = google.visualization.arrayToDataTable(raw);
+      var options = {
+        title: 'Interests By Gender',
+        isStacked: true,
+        height: !{30 * data.length},
+        width: 1200,
+        legend: {position: 'top', maxLines: 3},
+        backgroundColor: '#E4E5EA',
+        hAxis: {
+          textStyle: {
+            fontSize: 12
+          }
+        },
+        vAxis: {
+          textStyle: {
+            fontSize: 12
+          }
+        }
+      };
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
 block content
   .wrap.top75
-    p 
-      strong Active Users: 
-      | #{count}
-    ul.chart
-      for result in results
-        li(title='#{result.text}')
-          span.bar(data-number='#{result.count}')
-          span.number= result.count
+    h2 Total Users: #{count}
+    #chart_div
+   
+
 

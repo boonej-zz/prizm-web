@@ -146,23 +146,57 @@ router.get('/interests/graph', utils.auth, function(req, res) {
   User
   .aggregate()
   .unwind('interests')
-  .group({_id: '$interests._id', count: {'$sum': 1}})
+  .group({_id: {interest: '$interests._id', gender: '$gender'}
+    , gender: {'$sum': 1}, count: {'$sum': 1}})
   .exec(function(err, results){
+    console.log(results);
     Interest.find({}, function(err, interests){
+      var dataObject = {};
       _.each(results, function(result, index, list){
-        var interest = _.find(interests, function(it){
-          return String(it._id).indexOf(String(result._id)) != -1;
-        });
-        if (interest) {
-          result.text = interest.text;
+        dataObject[result._id.interest] = dataObject[result._id.interest]?dataObject[result._id.interest]:{male: 0, female: 0, unknown: 0, total: 0};
+        if (result._id.gender == 'male') {
+          dataObject[result._id.interest].male = result.count;
+        } else if (result._id.gender =='female'){
+          dataObject[result._id.interest].female = result.count;
+        } else {
+          dataObject[result._id.interest].unknown = result.count;
+        }
+        dataObject[result._id.interest].total += result.count;
+
+        if (!dataObject[result._id.interest].name){
+          var interest = _.find(interests, function(it){
+            return String(it._id).indexOf(String(result._id.interest)) != -1;
+          });
+          if (interest) {
+            dataObject[result._id.interest].name = interest.text;
+          }
         }
       });
-      results = _.sortBy(results, function(result){
-        return -result.count
+      var dataArray = [];
+     /** 
+      dataObject = _.sortBy(dataObject, function(result){
+        return -(result.male + result.female + result.unknown);
+      });
+      */
+     /** 
+      _.each(dataObject, function(item, idx, list){
+        dataArray.push(item);  
+      });
+      **/
+      
+      
+      dataArray = _.sortBy(dataObject, function(result){
+        return -(result.total);
+      });
+      
+      var data = [];
+      data.push( ['Gender', 'Male', 'Female', 'Unknown']);
+      _.each(dataArray, function(item, idx, list){
+        data.push([item.name, item.male, item.female, item.unknown]);
       });
       User.count({active: true}, function(err, c){
         res.render('interest_graph', {results: results, title: 'Interests',
-        count: c});
+        count: c, data: data});
       });
     });  
   });
