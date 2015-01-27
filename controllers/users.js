@@ -1,26 +1,26 @@
 // Users Controller
-var express     = require('express');
-var router      = express.Router();
-var mongoose    = require('mongoose');
-var ObjectId    = require('mongoose').Types.ObjectId;
-var User        = mongoose.model('User');
-var Post        = mongoose.model('Post');
-var config      = require('../config');
-var passport    = require('passport');
-var jade        = require('jade');
-var fs          = require('fs');
-var path        = require('path');
-var _           = require('underscore');
-var _time       = require('../lib/helpers/date_time');
-var _trusts     = require('../controllers/trusts');
-// var _posts      = require('../controllers/posts');
-var _profile    = require('../lib/helpers/profile');
+var express       = require('express');
+var router        = express.Router();
+var mongoose      = require('mongoose');
+var ObjectId      = require('mongoose').Types.ObjectId;
+var User          = mongoose.model('User');
+var Post          = mongoose.model('Post');
+var Organization  = mongoose.model('Organization');
+var config        = require('../config');
+var passport      = require('passport');
+var jade          = require('jade');
+var fs            = require('fs');
+var path          = require('path');
+var _             = require('underscore');
+var _time         = require('../lib/helpers/date_time');
+var _trusts       = require('../controllers/trusts');
+var _profile      = require('../lib/helpers/profile');
 var _organizations = require('../controllers/organizations');
-var rejectMail  = fs.readFileSync(path.join(__dirname +
-                  '/../views/reject_mail.jade'), 'utf8');
-var acceptMail  = fs.readFileSync(path.join(__dirname +
-                  '/../views/accept_mail.jade'), 'utf8');
-var mandrill    = require('node-mandrill')(config.mandrill.client_secret);
+var rejectMail    = fs.readFileSync(path.join(__dirname +
+                    '/../views/reject_mail.jade'), 'utf8');
+var acceptMail    = fs.readFileSync(path.join(__dirname +
+                    '/../views/accept_mail.jade'), 'utf8');
+var mandrill      = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 
 // User Methods
@@ -180,23 +180,22 @@ exports.getTrustedLuminariesForUserId = function(userId, next) {
 
 // User Authentication Methods
 
-exports.basicAuthRequired = function (req, res, next) {
+exports.authRequired = function (req, res, next) {
   if (req.isAuthenticated()) {
    return next(); 
  }
   res.redirect('/login')
 }
 
-exports.partnerAuthRequired = function(req, res, next) {
-  if (req.isAuthenticated() && req.user == 'institution_verified') {
-    return next();
-  }
-  else {
-    res.status(400).send({error: 'User is not a verified partner'})
-  }
-}
-
-// User Profile Methods
+// exports.partnerAuthRequired = function(req, res, next) {
+//   if (req.isAuthenticated() && req.user == 'institution_verified') {
+//     return next();
+//   }
+//   else {
+//     // res.status(400).send({error: 'User is not a verified partner'})
+//     res.redirect('/login');
+//   }
+// }
 
 exports.displayLogin = function(req, res) {
   res.render('login/login');
@@ -368,5 +367,40 @@ exports.displayProfileById = function(req, res) {
       res.status(400).send({error: "User can not be found"})
     }
   });
+}
+
+// User Members Methods
+exports.displayMembers = function(req, res) {
+  // We may want to display differet pages if they pending verification
+  if (req.user.type == 'user') {
+    res.redirect('/profile');
+  }
+  if (req.user.type == 'institution_verified') {
+    Organization
+      .getOrganizationByOwnerId(req.user.id, function(err, organization) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (!organization) {
+          res.redirect('/profile');
+        }
+        else {
+          Organization
+            .findOne({_id: ObjectId(organization.id)})
+            .populate({path: 'members', model: 'User'})
+            .exec(function(err, organization) {
+              if (err) {
+                res.status(500).send({error: err});
+              }
+              else {
+                res.send(organization.members);
+              }
+            });
+        }
+      });
+  }
+  else {
+    res.status(400).send({error: 'User is unknown type'});
+  }
 }
 
