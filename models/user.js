@@ -2,8 +2,14 @@ var serial = require('serializer');
 var utils = require('../utils');
 var _ = require('underscore');
 var moment = require('moment');
-
 var mongoose = require('mongoose');
+var ObjectId          = require('mongoose').Types.ObjectId;
+var ObjectIdType      = mongoose.Schema.Types.ObjectId;
+
+var orgStatusSchema = new mongoose.Schema({
+  organization          : {type: ObjectIdType, ref: 'Organization', required: true},
+  status                : {type: String, default: 'pending', required: true}
+})
 
 var userSchema = new mongoose.Schema({
   age                   : {type: Number, default: 0},
@@ -67,6 +73,7 @@ var userSchema = new mongoose.Schema({
   insight_count         : {type: Number, default: 0},
   unsubscribed          : {type: Boolean, default: false},
   pwd_updated           : {type: Boolean, default: false},
+  org_status            : [orgStatusSchema],
 },{ versionKey          : false });
 
 userSchema.methods.createUserSalt = function(){
