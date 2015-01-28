@@ -4,7 +4,7 @@ block head
   link(rel='stylesheet' type='text/css' href='/stylesheets/graph.css')
   script(type='text/javascript' src='https://www.google.com/jsapi')
   script(type='text/javascript').
-    google.load('visualization', '1', {packages:['corechart']});
+    google.load('visualization', '1.1', {packages:['corechart']});
     google.setOnLoadCallback(drawChart);
     function drawChart(){
       var raw = !{JSON.stringify(data)};
@@ -12,6 +12,11 @@ block head
       var data = google.visualization.arrayToDataTable(raw);
       var view = new google.visualization.DataView(data);
       var options = {
+        axes: {
+          x: {
+            0: {side: 'top', label: 'Users'}
+          }
+        },
         title: 'Interests By Gender',
         annotations: {
           alwaysOutside: true,
