@@ -137,7 +137,6 @@ router.get('/posts', utils.auth, function(req,res){
       if (!result._id) result._id = 'standard';
       data.push([result._id, result.count]);
     });
-    console.log(data);
     res.render('post_chart', {results: data, title: 'Posts'});
   });
 });
@@ -149,7 +148,6 @@ router.get('/interests/graph', utils.auth, function(req, res) {
   .group({_id: {interest: '$interests._id', gender: '$gender'}
     , gender: {'$sum': 1}, count: {'$sum': 1}})
   .exec(function(err, results){
-    console.log(results);
     Interest.find({}, function(err, interests){
       var dataObject = {};
       _.each(results, function(result, index, list){
@@ -190,9 +188,22 @@ router.get('/interests/graph', utils.auth, function(req, res) {
       });
       
       var data = [];
-      data.push( ['Gender', 'Male', 'Female', 'Unknown']);
+      data.push( [
+          'Gender', 
+          'Male', 
+          'Female',  
+          'Unknown',
+          {type: 'string', role: 'annotation'}
+          ]
+          );
       _.each(dataArray, function(item, idx, list){
-        data.push([item.name, item.male, item.female, item.unknown]);
+        data.push([
+          item.name, 
+          item.male,
+          item.female,
+          item.unknown,
+          String(item.total)
+          ]);
       });
       User.count({active: true}, function(err, c){
         res.render('interest_graph', {results: results, title: 'Interests',

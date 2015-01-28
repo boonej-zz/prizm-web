@@ -8,11 +8,25 @@ block head
     google.setOnLoadCallback(drawChart);
     function drawChart(){
       var raw = !{JSON.stringify(data)};
+      var height = raw.length * 50;
       var data = google.visualization.arrayToDataTable(raw);
+      var view = new google.visualization.DataView(data);
       var options = {
         title: 'Interests By Gender',
+        annotations: {
+          alwaysOutside: true,
+          textStyle: {
+            color: '#333333'
+          }
+        },
         isStacked: true,
-        height: !{30 * data.length},
+        fontSize: 12,
+        focusTarget: 'category',
+        chartArea: {
+          top: 100
+        },
+        // theme: 'maximized',
+        height: height,
         width: 1200,
         legend: {position: 'top', maxLines: 3},
         backgroundColor: '#E4E5EA',
@@ -28,7 +42,7 @@ block head
         }
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
+      chart.draw(view, options);
     }
 block content
   .wrap.top75
