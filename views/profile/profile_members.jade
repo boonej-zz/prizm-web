@@ -1,51 +1,35 @@
 extends ../layouts/app_layout
 
 block head
-  script(src='/javascripts/profile.js' type='text/javascript')
+  script(src='/javascripts/profile/dashboard.js' type='text/javascript')
+  script(src='/javascripts/jquery.search.min.js' type='text/javascript')
+  link(rel='stylesheet', href='/stylesheets/profile/dashboard.css')
 
 block content
-  #members-block.full-width.top75
-    .wrap
-      .row
-        .members-header.col-lg-12
-          h2 Members
-      .row.members-tabs
-        ul.nav-tabs.col-lg-6
-          li(role='presentation' class='active col-lg-3')
-            | Approved Members ()
-          li(role='presentation' class='col-lg-3')
-            | Pending Members
-      .row.search
-        .col-lg-3.col-lg-offest-5
-          input(type="search"
-                id="search"
-                value=""
-                class="form-control"
-                placeholder="Search members")
-      .row
-        .col-lg-8
-          table.table.table-striped.members-table
-            thead
-              tr
-                th
-                  | Name
-                th
-                  | Status
-                th
-                  | Date
-                th
-                  | Action
-            tbody
-              each member in members
-                tr
-                  th
-                    | #{member.name}
-                  th
-                    | #{member.org_status}
-                  th
-                    | #{member.create_date}
-                  th
-                    | Various Actions
-
-
-
+  .container.top75
+    .row
+      .members-header.col-sm-12
+        h2 Members
+    .row
+      .members-tabs.col-sm-8
+        ul.nav.nav-tabs.nav-justified(role='tablist' id='members-tab')
+          li(role='presentation' class='active')
+            a(href='#active'
+              data-toggle='tab')
+              | Approved Members (#{members.length})
+          li(role='presentation' class='')
+            a(href='#pending'
+              data-toggle='tab')
+              | Pending Members
+    .row.search
+      .col-sm-3.col-sm-offest-5
+        input(type="search"
+              id="search"
+              value=""
+              class="form-control"
+              placeholder="Search members")
+    .row
+      #active-members
+        include profile_members_active
+      #pending-members(style='display: none')
+        include profile_members_pending
