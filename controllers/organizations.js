@@ -10,7 +10,8 @@ var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
 var _time         = require('../lib/helpers/date_time');
 var _profile      = require('../lib/helpers/profile');
-
+var Mixpanel      = require('mixpanel');
+var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
   var name = req.params.name;
@@ -33,6 +34,7 @@ exports.displayOrganization = function(req, res) {
           console.log(err);
           res.send(404);
         }
+        mixpanel.track('Organization Viewed', owner.mixpanelProperties());
         if (owner) {
           _users.getTrustedLuminariesForUserId(owner.id, function(err, luminaries) {
             if (err) {
