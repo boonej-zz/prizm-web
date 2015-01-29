@@ -8,7 +8,8 @@ var ObjectIdType      = mongoose.Schema.Types.ObjectId;
 
 var orgStatusSchema = new mongoose.Schema({
   organization          : {type: ObjectIdType, ref: 'Organization', required: true},
-  status                : {type: String, default: 'pending', required: true}
+  status                : {type: String, default: 'pending', required: true},
+  create_date           : {type: Date, default: Date.now()}
 })
 
 var userSchema = new mongoose.Schema({
@@ -73,7 +74,7 @@ var userSchema = new mongoose.Schema({
   insight_count         : {type: Number, default: 0},
   unsubscribed          : {type: Boolean, default: false},
   pwd_updated           : {type: Boolean, default: false},
-  org_status            : [orgStatusSchema],
+  org_status            : [orgStatusSchema]
 },{ versionKey          : false });
 
 userSchema.methods.createUserSalt = function(){
@@ -113,6 +114,12 @@ userSchema.methods.validatePassword = function(password) {
   }
   return false;
 }
+
+userSchema.statics.findOrganizationMembers = function(filters, next) {
+  this.model('User').find({'org_status': {$elemMatch: filters}}, function(err, users) {
+    next(err, users);
+  });
+};
 
 
 userSchema.pre('save', function(next){

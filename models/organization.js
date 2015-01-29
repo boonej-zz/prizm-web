@@ -60,18 +60,6 @@ organizationSchema.statics.getOrganizationByOwnerId = function(user_id, next) {
     });
 }
 
-organizationSchema.methods.getOrganizationMembers = function(next) {
-  var options = [
-    {path: 'members', model: 'User'}
-  ];
-  this.model('Organization')
-    .findOne({owner: this.owner})
-    .populate(options)
-    .exec(function(err, organization) {
-      next(err, organization);
-    }); 
-}
-
 var themeSchema = new mongoose.Schema({
   background_url      : {type: String, default: null},
   dominant_color      : {type: String, default: null},
