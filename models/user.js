@@ -112,7 +112,25 @@ userSchema.methods.validatePassword = function(password) {
     }
   }
   return false;
-}
+};
+
+userSchema.methods.mixpanelProperties = function(){
+  return {
+    $name: this.name,
+    $first_name: this.first_name,
+    $last_name: this.last_name,
+    $create: this.date_created,
+    $email: this.email,
+    Birthday: this.birthday,
+    Age: this.age,
+    Gender: this.gender,
+    Origin: this.city || 'unknown',
+    State: this.state || 'unknown',
+    Zip: this.zip || 'unknown',
+    'Total Posts': this.posts_count || 0,
+    Interests: this.interests
+  };
+};
 
 
 userSchema.pre('save', function(next){

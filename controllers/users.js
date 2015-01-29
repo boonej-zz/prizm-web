@@ -22,6 +22,8 @@ var acceptMail    = fs.readFileSync(path.join(__dirname +
                     '/../views/accept_mail.jade'), 'utf8');
 var mandrill      = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
+var Mixpanel = require('mixpanel');
+var mixpanel = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 
 // User Methods
 exports.passwordReset = function(req, res){
@@ -44,6 +46,7 @@ exports.passwordReset = function(req, res){
               res.render('reset', {success: false});
             } else {
               res.render('reset', {success: true});
+              mixpanel.track('Password Reset', user.mixpanelProperties());
             }
           });
         } else {
@@ -198,6 +201,7 @@ exports.authRequired = function (req, res, next) {
 // }
 
 exports.displayLogin = function(req, res) {
+  mixpanel.track('Login Page loaded');
   res.render('login/login');
 };
 
@@ -210,8 +214,10 @@ exports.handlePrizmLogin = function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { 
+        mixpanel.track('Login Failure');
         return next(err); 
       }
+      mixpanel.track('Login Success', user.mixpanelProperties());
       if (user.type == 'institution_verified') {
         _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
           if (namespace) {
@@ -242,8 +248,10 @@ exports.handleFacebookLogin = function(req, res, next) {
       }
       req.logIn(user, function(err) {
         if (err) { 
+          mixpanel.track('Login Failure');
           return next(err); 
         }
+        mixpanel.track('Login Success', user.mixpanelProperties());
         if (user.type == 'institution_verified') {
           _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
             if (namespace) {
@@ -268,15 +276,18 @@ exports.handleTwitterLogin = function(req, res, next) {
   else {
     // Handle Twitter callback
     passport.authenticate('twitter', function(err, user, info) {
-      if (err) { return next(err) }
+      if (err) { 
+        return next(err) }
       if (!user) {
         req.session.messages =  [info.message];
         return res.redirect('/login');
       }
       req.logIn(user, function(err) {
-        if (err) { 
+        if (err) {
+          mixpanel.track('Login Failure'); 
           return next(err); 
         }
+        mixpanel.track('Login Success', user.mixpanelProperties());
         if (user.type == 'institution_verified') {
           _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
             if (namespace) {
@@ -294,6 +305,7 @@ exports.handleTwitterLogin = function(req, res, next) {
 
 exports.handleLogout = function(req, res) {
   req.logout();
+  mixpanel.track('Logout success');
   res.redirect('/login');
 };
 
@@ -305,6 +317,7 @@ exports.displayProfile = function(req, res) {
       res.send(400);
     }
     if (user) {
+      mixpanel.track('Profile Viewed', user.mixpanelProperties());
       Post.findPostsForProfileByUserId(user.id, true, true, function(err, posts) {
         var headerImages;
         if (err) {
@@ -346,6 +359,14 @@ exports.displayProfileById = function(req, res) {
       res.send(400);
     }
     if (user) {
+      User.findOne({_id: currentUser._id}, function(err, cu){
+        var props = {};
+        if (cu){
+          props = cu.mixpanelProperties();
+        }
+        props.viewedProfileFor = user.email;
+        mixpanel.track('Profile Viewed', props);
+      });
       Post.findPostsForProfileByUserId(user.id, isCurrent, isTrust, function(err, posts) {
         var headerImages;
         if (err) {
@@ -379,6 +400,7 @@ exports.displayMembers = function(req, res) {
     res.status(400).send({error: 'Status is still pending'});
   }
   if (req.user.type == 'institution_verified') {
+    mixpanel.track('Org Members Viewed', {organization: req.user.name});
     Organization
       .getOrganizationByOwnerId(req.user.id, function(err, organization) {
         if (err) {
