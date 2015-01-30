@@ -1,0 +1,23 @@
+.col-sm-12
+  table.table.table-striped.members-table
+    thead
+      tr
+        th
+          | Name
+        th
+          | Status
+        th
+          | Date
+        th
+          | Action
+    tbody
+      each member in members
+        tr
+          th
+            | #{member.name}
+          th
+            | Pending
+          th
+            | #{member.create_date}
+          th
+            | Various Actions

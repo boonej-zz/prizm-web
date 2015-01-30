@@ -12,6 +12,7 @@ var _time         = require('../lib/helpers/date_time');
 var _profile      = require('../lib/helpers/profile');
 var Mixpanel      = require('mixpanel');
 var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
   var name = req.params.name;

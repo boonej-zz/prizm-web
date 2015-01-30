@@ -1,7 +1,4 @@
-.container {
-  background-color: #EEF0F4;
-}
-
+/* Login Form */
 .back {
   display: none;
 }
@@ -157,6 +154,24 @@
   width: 120px;
   float: left;
   margin: 10px 48px 24px 15px;
+}
+
+/* Login Modal */
+.modal-body .form-signin {
+  margin-top: 0px;
+}
+
+.modal-dialog {
+  width: 380px;
+}
+
+.modal-content {
+  width: 380px;
+  height: 465px;
+}
+
+.modal-body {
+  padding: 0px;
 }
 
 @media screen and (max-width:500px) {
