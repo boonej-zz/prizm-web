@@ -36,7 +36,23 @@ var prizm = {
               },
   mailTo: function(){
             window.location = 'mailto:info@prizmapp.com?subject=Find out more';
-          }
+          },
+  showModal: function(e){
+    var target = e.target;
+    var postID = $(target).parents('.post').attr('id');
+    $.ajax({
+      url: '/posts/' + postID,
+      headers: {
+        'Accept': 'application/jade'
+      },
+      success: function(html) {
+        if (html) {
+          $('#post-display').html(html);
+          $('#postModal').modal();
+        }
+      }
+    });
+  }
 };
 
 

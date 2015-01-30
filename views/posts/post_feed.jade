@@ -1,12 +1,12 @@
 each post in posts
   .post(id='#{post.id}')
-    .post-image
+    .post-image(onclick='prizm.showModal(event)')
       img(src='https://#{post.file_path.substr(7)}')
     .post-footer
       .like-icon
       p.likes
         | #{post.likes_count}
-      .comment-icon(type='button' data-toggle='modal' data-target='#postModal')
+      .comment-icon(type='button' onclick='prizm.showModal(event)')
       p.comments
         | #{post.comments_count}
       .action-icon

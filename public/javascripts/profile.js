@@ -20,6 +20,7 @@ $(window).scroll(function() {
 });
 
 /* Show Post Modal */
+/*
 $(function() {
   $('#profile-posts').on('click', '.comment-icon', function() {
     // $('body').css('overflow','hidden');
@@ -38,6 +39,7 @@ $(function() {
     });
   });
 });
+*/
 
 /* Dismiss Post Modal */
 $(function(){
