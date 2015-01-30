@@ -24,6 +24,7 @@ exports.fetchPosts = function(req, res) {
     var lastPost = req.get('lastPost');
     var isCurrent = false;
     var isTrust = false;
+    
     if (req.isAuthenticated()) {
       if (req.user.id == creator) {
         isCurrent = true;
@@ -132,4 +133,5 @@ var singlePostJadeRequest = function(req, res) {
       }
     }); 
 }
+
 

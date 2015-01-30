@@ -217,6 +217,7 @@ exports.handlePrizmLogin = function(req, res, next) {
         mixpanel.track('Login Failure');
         return next(err); 
       }
+     
       mixpanel.track('Login Success', user.mixpanelProperties());
       if (user.type == 'institution_verified') {
         _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
@@ -426,3 +427,25 @@ exports.displayMembers = function(req, res) {
   }
 };
 
+var fetchHomeFeed = function(user, params, next){
+  var limit = params.limit || 25;
+  var skip = params.skip || 0;
+  user.fetchHomeFeedCriteria(function(err, criteria){
+    Post
+    .find(criteria)
+    .sort({create_date: -1, _id: -1})
+    .populate({
+      path: 'creator',
+      select: User.basicFields()
+    })
+    .populate({
+      path: 'comments.creator',
+      select: User.basicFields()
+    })
+    .skip(skip)
+    .limit(limit)
+    .exec(function(err, results){
+      next(err, results);
+    });
+  });
+}
