@@ -133,6 +133,16 @@ userSchema.methods.mixpanelProperties = function(){
   };
 };
 
+userSchema.methods.userBelongsToOrganization = function(org_id) {
+  var match = false;
+  _.each(this.org_status, function(org_status) {
+    if (org_id == org_status.organization) {
+      match = true
+    }
+  })
+  return match;
+};
+
 userSchema.statics.findOrganizationMembers = function(filters, next) {
   this.model('User').find({'org_status': {$elemMatch: filters}}, function(err, users) {
     next(err, users);
