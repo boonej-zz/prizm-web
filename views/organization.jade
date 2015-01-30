@@ -2,6 +2,7 @@ extends layouts/app_layout
 
 block head
   script(src='/javascripts/profile.js' type='text/javascript')
+  link(rel='stylesheet', href='/stylesheets/profile/profile.css')
 
 block content
   #organization
@@ -53,11 +54,7 @@ block content
             h2 This Organization has not created any posts yet
         else
           include posts/post_feed
-  div(class='modal fade'
-      id='postModal'
-      tabIndex='-1'
-      role='dialog'
-      aria-labelledby='postModalLabel')
+  div#postModal.modal.fade(tabIndex='-1' role='dialog' aria-labelledby='postModalLabel') 
     .modal-dialog.post-modal
       .modal-content.post-modal
         #post-display.modal-body.post-modal
