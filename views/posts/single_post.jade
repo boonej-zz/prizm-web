@@ -6,7 +6,7 @@
     .comments-header
       .post-creator-avatar
         img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-            class='post-modal-avatar')
+            class='prizm-avatar-sm')
       .post-creator-name
         | #{post.creator.name}
       #clock-image
@@ -19,7 +19,7 @@
         .comment-container
           .commenter-avatar
             img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
-                class='post-modal-avatar')
+                class='prizm-avatar-sm')
           .commenter-name
             | #{post.comments[i].creator.name}
           .comment-text

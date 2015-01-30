@@ -1,0 +1,11 @@
+/* Navigation Bar */
+.topnav-offset {
+  margin-top: 75px;
+}
+
+.prizm-avatar-sm {
+  height: 64px;
+  width: 64px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}

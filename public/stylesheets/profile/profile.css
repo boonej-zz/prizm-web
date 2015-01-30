@@ -54,13 +54,6 @@
   padding: 16px;
 }
 
-.post-modal-avatar {
-  height: 64px;
-  width: 64px;
-  border: 2px #d4daea solid;
-  border-radius: 50%;
-}
-
 .post-creator-name {
   display:inline-block;
   font-size: 20px
