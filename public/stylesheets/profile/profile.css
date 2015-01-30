@@ -1,21 +1,3 @@
-/* Login Modal */
-.form-signin {
-  margin-top: 0px;
-}
-
-.modal-dialog {
-  width: 380px;
-}
-
-.modal-content {
-  width: 380px;
-  height: 465px;
-}
-
-.modal-body {
-  padding: 0px;
-}
-
 /* Single Post Modal */
 .modal-dialog.post-modal {
     width: 1200px;
