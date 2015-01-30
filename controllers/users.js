@@ -1,26 +1,30 @@
 // Users Controller
-var express       = require('express');
-var router        = express.Router();
-var mongoose      = require('mongoose');
-var ObjectId      = require('mongoose').Types.ObjectId;
-var User          = mongoose.model('User');
-var Post          = mongoose.model('Post');
-var Organization  = mongoose.model('Organization');
-var config        = require('../config');
-var passport      = require('passport');
-var jade          = require('jade');
-var fs            = require('fs');
-var path          = require('path');
-var _             = require('underscore');
-var _time         = require('../lib/helpers/date_time');
-var _trusts       = require('../controllers/trusts');
-var _profile      = require('../lib/helpers/profile');
-var _organizations = require('../controllers/organizations');
-var rejectMail    = fs.readFileSync(path.join(__dirname +
-                    '/../views/reject_mail.jade'), 'utf8');
-var acceptMail    = fs.readFileSync(path.join(__dirname +
-                    '/../views/accept_mail.jade'), 'utf8');
-var mandrill      = require('node-mandrill')(config.mandrill.client_secret);
+var express         = require('express');
+var router          = express.Router();
+var mongoose        = require('mongoose');
+var ObjectId        = require('mongoose').Types.ObjectId;
+var User            = mongoose.model('User');
+var Post            = mongoose.model('Post');
+var Organization    = mongoose.model('Organization');
+var config          = require('../config');
+var passport        = require('passport');
+var jade            = require('jade');
+var fs              = require('fs');
+var path            = require('path');
+var _               = require('underscore');
+var _time           = require('../lib/helpers/date_time');
+var _trusts         = require('../controllers/trusts');
+var _profile        = require('../lib/helpers/profile');
+var _organizations  = require('../controllers/organizations');
+var activeMembers   = fs.readFileSync(path.join(__dirname +
+                      '/../views/profile/profile_members_active.jade'), 'utf8');
+var pendingMembers  = fs.readFileSync(path.join(__dirname +
+                      '/../views/profile/profile_members_pending.jade'), 'utf8');
+var rejectMail      = fs.readFileSync(path.join(__dirname +
+                      '/../views/reject_mail.jade'), 'utf8');
+var acceptMail      = fs.readFileSync(path.join(__dirname +
+                      '/../views/accept_mail.jade'), 'utf8');
+var mandrill        = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 var Mixpanel = require('mixpanel');
 var mixpanel = Mixpanel.init(process.env.MIXPANEL_TOKEN);
@@ -149,6 +153,41 @@ exports.institutionApproval = function(req, res){
   });
 };
 
+exports.updateOrgStatus = function(req, res) {
+  var org_id = req.get('org');
+  var status = req.get('status');
+  if (req.isAuthenticated()) {
+    User.findOne({_id: req.params.id}, function(err, user) {
+      if (err) { 
+        res.status(500).send(err);
+      }
+      if (user) {
+        if (user.userBelongsToOrganization(org_id)) {
+          User.findOneAndUpdate({
+            _id: user.id,
+            org_status: {$elemMatch: { organization: org_id}}
+          },
+          {
+            $set: {'org_status.$.status': status}
+          },
+          function(err, user) {
+            res.status(200).send({message: 'User org_status updated'});
+          });
+        }
+        else {
+          res.status(400).send({error: 'User does not have org_status with organization'});
+        }
+      }
+      else {
+        res.status(400).send({error: 'User not found'});
+      }
+    });
+  }
+  else {
+    res.status(401).send({error: 'User must be authenticated, can not process request'});
+  }
+}
+
 // User Partner Methods (Organizations)
 
 exports.getTrustedLuminariesForUserId = function(userId, next) {
@@ -189,16 +228,6 @@ exports.authRequired = function (req, res, next) {
  }
   res.redirect('/login')
 }
-
-// exports.partnerAuthRequired = function(req, res, next) {
-//   if (req.isAuthenticated() && req.user == 'institution_verified') {
-//     return next();
-//   }
-//   else {
-//     // res.status(400).send({error: 'User is not a verified partner'})
-//     res.redirect('/login');
-//   }
-// }
 
 exports.displayLogin = function(req, res) {
   mixpanel.track('Login Page loaded');
@@ -391,38 +420,107 @@ exports.displayProfileById = function(req, res) {
 }
 
 // User Members Methods
+
 exports.displayMembers = function(req, res) {
-  // We may want to display differet pages if they pending verification
-  if (req.user.type == 'user') {
-    res.redirect('/profile');
+  if (req.accepts('html')) {
+    membersHTMLRequest(req, res);
   }
-  if (req.user.type == 'institution_pending') {
-    res.status(400).send({error: 'Status is still pending'});
+  else if (req.accepts('application/jade')) {
+    membersJADERequest(req, res);
   }
-  if (req.user.type == 'institution_verified') {
-    mixpanel.track('Org Members Viewed', {organization: req.user.name});
-    Organization
-      .getOrganizationByOwnerId(req.user.id, function(err, organization) {
-        if (err) {
-          res.status(500).send({error: err});
-        }
-        if (!organization) {
-          res.redirect('/profile');
-        }
-        else {
-          organization.getOrganizationMembers(function(err, organization) {
-            if (err) {
-                res.status(500).send({error: err});
-            }
-            else {
-              res.send(organization.members);
-            }
-          });
-        }
-      });
-  }
-  else {
-    res.status(400).send({error: 'User is unknown type'});
+  else if (req.accepts('application/json')) {
+    console.log("SI");
+    membersJSONRequest(req, res);
   }
 };
+
+var membersHTMLRequest = function(req, res) {
+    // We may want to display differet pages if they pending verification
+    if (req.user.type == 'user') {
+      res.redirect('/profile');
+    }
+    if (req.user.type == 'institution_pending') {
+      res.status(400).send({error: 'Status is still pending'});
+    }
+    if (req.user.type == 'institution_verified') {
+      mixpanel.track('Org Members Viewed', {organization: req.user.name});
+      Organization
+        .getOrganizationByOwnerId(req.params.id, function(err, organization) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          if (!organization) {
+            res.redirect('/profile');
+          }
+          else {
+            User.findOrganizationMembers({organization: organization.id, status: 'active'}, function(err, members) {
+              if (err) {
+                  res.status(500).send({error: err});
+              }
+              else {
+                res.render('profile/profile_members', {members: members});
+              }
+            });
+          }
+        });
+    }
+    else {
+      res.status(400).send({error: 'User is unknown type'});
+    }
+};
+
+var membersJADERequest = function(req, res) {
+  var status = req.get('memberStatus');
+  if (status == 'active') {
+    memberList = activeMembers;
+  }
+  else if (status == 'pending') {
+    memberList = pendingMembers;
+  }
+  Organization
+    .getOrganizationByOwnerId(req.params.id, function(err, organization) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (!organization) {
+        res.status(404).send({error: 'Invalid Organization ID'});
+      }
+      else {
+        User.findOrganizationMembers({
+          organization: organization.id,
+          status: status
+        }, function(err, members) {
+          if (err) {
+              res.status(500).send({error: err});
+          }
+          else {
+            var content = jade.render(memberList, {members: members})
+            res.send(content);
+          }
+        });
+      }
+    });    
+}
+
+var membersJSONRequest = function(req, res) {
+  Organization
+    .getOrganizationByOwnerId(req.params.id, function(err, organization) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (!organization) {
+        res.status(404).send({error: 'Invalid Organization ID'});
+      }
+      else {
+        User.findOrganizationMembers({organization: organization.id}, function(err, organization) {
+          if (err) {
+              res.status(500).send({error: err});
+          }
+          else {
+            res.send(organization);
+          }
+        });
+      }
+    });
+}
 
