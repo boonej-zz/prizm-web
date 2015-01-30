@@ -1,6 +1,6 @@
 .post-modal(id='#{post.id}')
   .post-modal-left
-    .post-image
+    .post-image(onclick='prizm.dismissModal(event)')
       img(src='https://#{post.file_path.substr(7)}')
   .post-modal-right
     .comments-header

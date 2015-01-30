@@ -52,6 +52,10 @@ var prizm = {
         }
       }
     });
+  },
+  dismissModal: function(e){
+    $('#post-display').empty();
+    $('#postModal').modal('hide');
   }
 };
 
