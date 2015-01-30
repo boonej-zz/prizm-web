@@ -1,5 +1,6 @@
 /* Members Page */
 $(function(){
+  // Handle Members Active/Pending Tab Toggle
   $('li a[href="#pending"]').click(function(){
     var request = $.ajax({
       type: 'GET',
