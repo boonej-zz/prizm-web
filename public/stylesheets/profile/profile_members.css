@@ -1,0 +1,159 @@
+h2 {
+  color: black;
+  font-weight: 900;
+}
+
+li a {
+  font-weight: 900;
+}
+
+.members-header {
+  background: url('/images/profile/members_header_icon.png') no-repeat;
+  background-size: 48px;
+  background-position: 15px 12px;
+  padding-left: 68px;
+  padding-bottom: 16px;
+}
+
+input[type=search] {
+  background-image: url('/images/profile/members_search.png');
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position-y: 9px;
+  background-position-x: 12px;
+  padding-left: 30px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+#search::-webkit-input-placeholder {
+    color: #808080;
+}
+#search::-moz-placeholder {
+    color: #808080;
+}
+#search:-ms-input-placeholder {
+    color: #808080;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+  vertical-align: middle;
+}
+
+table {
+  background: #fff;
+  color: black;
+}
+
+.table>thead {
+  border-left: 1px solid #e4e5ea;
+  border-right: 1px solid #e4e5ea;
+}
+
+.table>thead>tr:last-of-type>th {
+  border-bottom: none !important
+}
+
+table>thead>tr:last-of-type>th {
+  padding-top: 24px
+}
+
+.table>tbody {
+  border: 1px solid #e4e5ea;
+}
+
+.table>tbody>tr {
+  border-bottom: hidden;
+  border-top: hidden;
+}
+
+.member-action {
+  cursor: pointer;
+  width: 26px;
+  height: 22px;
+  display: -webkit-inline-box;
+  margin-right: 100px;
+}
+
+.member-action:last-of-type {
+  margin-right: 0px
+}
+
+.member-action.restrict {
+  background: url('/images/profile/members_warning.png') no-repeat;
+  background-size: 26px 22px;
+}
+
+.member-action.remove {
+  background: url('/images/profile/members_delete.png') no-repeat;
+  background-size: 22px 22px;
+}
+
+.member-action.view {
+  background: url('/images/profile/members_arrow.png') no-repeat;
+  background-size: 13px 22px;
+}
+
+.member-action.approve {
+  background: url('/images/profile/members_approve.png') no-repeat;
+  background-size: 22px 22px;  
+}
+
+.member-action.deny {
+  background: url('/images/profile/members_delete.png') no-repeat;
+  background-size: 22px 22px;
+}
+
+.restrict-menu {
+  position: relative; 
+  left: 38px;
+  background: #fff;
+  width: 164px;
+  height: 86px;
+  border: 1px #e4e5ea solid;
+}
+
+.restrict-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 9px 8px 9px 0;
+  border-color: transparent #FFFFFF;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -8px;
+  top: 2px;
+}
+
+.restrict-menu:before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 9px 8px 9px 0;
+  border-color: transparent #e4e5ea ;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: -9px;
+  top: 2px;
+}
+
+.restrict-menu ul {
+  margin: 0px auto;
+  /* width: 120px; */
+  /* float: left; */
+  padding: 14px;
+  text-align: left;
+}
+
+.restrict-menu li {
+  list-style: none;
+  /* border-bottom: 1px #d4daea solid; */
+  padding: 5px;
+}
+
+.restrict-menu a {
+  color: black;
+  text-decoration: none;
+}

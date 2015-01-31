@@ -1,27 +1,39 @@
-.col-sm-12
+.col-sm-10.col-sm-offset-1
   table.table.table-striped.members-table
     thead
       tr
         th
+        th
+        th
+        th
+        th
+          input(type="search"
+                id="search"
+                value=""
+                class="form-control"
+                placeholder="Find by Name or email")
+      tr
+        th.col-sm-1
         th
           | Name
         th
           | Status
         th
           | Date
-        th
+        th.col-sm-4
           | Action
     tbody
       each member in members
         tr
-          th
+          td
             img(src='https://#{member.profile_photo_url.substr(7)}'
                 class='prizm-avatar-sm')
-          th
+          td
             | #{member.name}
-          th
+          td
             | Pending
-          th
+          td
             | #{member.create_date}
-          th
-            | Various Actions
+          td
+            .member-action.approve(onclick='members.approve("#{member.id}")')
+            .member-action.deny

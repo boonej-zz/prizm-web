@@ -5,28 +5,24 @@ block head
   link(rel='stylesheet' href='/stylesheets/profile/profile_members.css')
 
 block content
+  #organization(data='#{organization.id}')
   .container.topnav-offset
     .row
-      .members-header.col-sm-12
+      .members-header.col-sm-10.col-sm-offset-1
         h2 Members
     .row
-      .members-tabs.col-sm-8
+      .members-tabs.col-sm-8.col-sm-offset-1
         ul.nav.nav-tabs.nav-justified(role='tablist' id='members-tab')
           li(role='presentation' class='active')
             a(href='#active'
-              data-toggle='tab')
-              | Approved Members (#{members.length})
+              data-toggle='tab'
+              onclick='members.activeTab()')
+              | Approved Members
           li(role='presentation' class='')
             a(href='#pending'
-              data-toggle='tab')
+              data-toggle='tab'
+              onclick='members.pendingTab()')
               | Pending Members
-    .row.search
-      .col-sm-3.col-sm-offest-5
-        input(type="search"
-              id="search"
-              value=""
-              class="form-control"
-              placeholder="Search members")
     .row
       #active-members
         include profile_members_active
