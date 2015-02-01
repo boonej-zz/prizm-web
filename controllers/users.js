@@ -155,26 +155,6 @@ exports.institutionApproval = function(req, res){
   });
 };
 
-exports.getSingleUser = function(req, res) {
-  var id = req.params.id
-  if (req.accepts('html')) {
-    res.redirect('/profile/' + id);
-  }
-  else if (req.accepts('application/jade')) {
-    User.findOne({_id: ObjectId(id)}, function(err, user) {
-      if (err) {
-        res.status(500).send({error: err});
-      };
-      if (user) {
-        var content = jade.render(memberCard, {member: user})
-      }
-      else {
-        res.status(400).send({error: 'User is not found'});
-      }
-    })
-  }
-}
-
 exports.updateOrgStatus = function(req, res) {
   var org_id = req.get('org');
   var status = req.get('status');
