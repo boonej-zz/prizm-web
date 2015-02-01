@@ -1,12 +1,10 @@
 /* Single Post Modal */
 .modal-dialog.post-modal {
     width: 1200px;
-
 }
 
 .modal-content.post-modal {
     width: 100%;
-
     height: auto;
     border-radius: 0px;
     border: 0px;
@@ -14,12 +12,10 @@
 
 .modal-body.post-modal {
     height: 100%;
-
 }
 
 .post-modal-left {
     width: 660px;
-    /* height: auto; */
     display: inline-block;
 }
 
@@ -42,11 +38,10 @@
 }
 
 .comments-header #clock-image {
-    position: relative;
-  
-    right: 122px;
-    top: 18px;
-    padding-left: 20px;
+  position: relative;
+  right: 122px;
+  top: 18px;
+  padding-left: 20px;
 }
 
 .post-creator-avatar {
@@ -84,72 +79,62 @@
 }
 
 .commenter-name {
-  /* display: table-row-group; */
   position: relative;
   top: -11px;
   font-size: 18px;
 }
 
 .comment-text {
-  /* display: table-row-group; */
   position: relative;
   top: -10px;
 }
 
 .comment-info {
-  /* display: table-row-group; */
   position: relative;
   top: 4px;
 }
 
 .comment-info #clock-image {
-    display: inline-block;
-
-    margin-right: 4px;
+  display: inline-block;
+  margin-right: 4px;
 }
 
 .comment-info #time {
-    display: inline-block;
-
-    margin-right: 8px;
-    vertical-align: text-bottom;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: text-bottom;
 }
 
 .comment-info .like-icon {
-    display: inline-block;
-
-    float: none;
-    margin: 0px 4px 0px 0px;
-    width: 16px;
-    height: 13px;
-    background-size: 16px 13px;
+  display: inline-block;
+  float: none;
+  margin: 0px 4px 0px 0px;
+  width: 16px;
+  height: 13px;
+  background-size: 16px 13px;
 }
 
 .comment-likes {
-    display: inline-block;
-
-    margin-right: 4px;
-    vertical-align: text-bottom;
+  display: inline-block;
+  margin-right: 4px;
+  vertical-align: text-bottom;
 }
 
 .comment-likes-count {
-    display: inline-block;
-  
-    vertical-align: text-bottom;
+  display: inline-block;
+  vertical-align: text-bottom;
 }
 
 #like .like-icon {
-    display: inline-block;
-    width: 16px;
-  
-    height: 13px;
-    background-size: 16px 13px;
+  display: inline-block;
+  width: 16px;
+  height: 13px;
+  background-size: 16px 13px;
 }
 
 .comment-scroll {
-    overflow-y: auto;
-  
-    height: 467px;
+  overflow-y: auto;
+  height: 467px;
 }
 
 .comments-footer {
@@ -160,10 +145,10 @@
 }
 
 .comments-like {
-    display: inline-block;
-    height: 68px;
-    width: 68px;
-    background: #E4E5EA;
+  display: inline-block;
+  height: 68px;
+  width: 68px;
+  background: #E4E5EA;
 }
 
 .comments-like .like-icon {
@@ -177,18 +162,16 @@
 }
 
 .comments-post {
-    display: inline-block;
-
-    width: 471px;
-    height: 68px;
+  display: inline-block;
+  width: 471px;
+  height: 68px;
 }
 
 .comment-post {
-    display: inline-block;
-  
-    width: 100%;
-    background: #f3f5f7;
-    padding-right: 12px;
+  display: inline-block;
+  width: 100%;
+  background: #f3f5f7;
+  padding-right: 12px;
 }
 
 form #inputComment {
@@ -218,7 +201,6 @@ form #inputComment {
     color: #babad5;
 }
 
-
 .post-button {
   display: inline-block;
   float: right;
@@ -242,67 +224,55 @@ form #inputComment {
     width: 100%;
     height: 100%;
     margin: 0px;
-  
     position: absolute;
-}
-
+  }
   .post-modal-left {
     display: none;
   }
-
   .post-modal-right {
     width: 100%;
     height: 100%;
     position: absolute;
-}
-
-.comment-scroll {
-  width: 100%;
-  height: auto;
-  background: #fff;
-  position: absolute;
-  top: 64px;
-  bottom: 68px;
-}
-
-.comments-header {
-  display: none;
-}
-
-.post-comments {
-  height: 64px;
-  position: absolute;
-  top: 0px;
-}
-
-p.comments-title {
-  font-size: 24px;
-  padding-top: 12px
-}
-
-.comments-like {
-  display: none;
-}
-
-.comments-post {
-  width: 100%;
-}
-
-.comment-post {
-  padding: 0px;
-  position: relative;
-  bottom: 0px;
-}
-
-.modal-open .modal {
-  overflow-y: hidden;
-  position: fixed;
-}
-
-form #inputComment {
-  width: 80%;
-}
-.post-button {
-  margin-right: 16px;
-}
+  }
+  .comment-scroll {
+    width: 100%;
+    height: auto;
+    background: #fff;
+    position: absolute;
+    top: 64px;
+    bottom: 68px;
+  }
+  .comments-header {
+    display: none;
+  }
+  .post-comments {
+    height: 64px;
+    position: absolute;
+    top: 0px;
+  }
+  p.comments-title {
+    font-size: 24px;
+    padding-top: 12px
+  }
+  .comments-like {
+    display: none;
+  }
+  .comments-post {
+    width: 100%;
+  }
+  .comment-post {
+    padding: 0px;
+    position: relative;
+    bottom: 0px;
+  }
+  .modal-open .modal {
+    overflow-y: hidden;
+    position: fixed;
+  }
+  form #inputComment {
+    width: 80%;
+  }
+  .post-button {
+    margin-right: 16px;
+  }
 }

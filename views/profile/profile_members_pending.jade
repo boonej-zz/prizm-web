@@ -33,7 +33,7 @@
           td
             | Pending
           td
-            | #{member.create_date}
-          td
-            .member-action.approve(onclick='members.approve("#{member.id}")')
-            .member-action.deny
+            | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
+          td(data='#{member.id}')
+            .member-action.approve(onclick='members.approve(event)')
+            .member-action.deny(onClick='members.remove(event)')

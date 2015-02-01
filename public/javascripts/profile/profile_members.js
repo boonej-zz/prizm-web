@@ -2,7 +2,8 @@
 
 var members = {
   // Member Action Methods
-  approve: function(member_id) {
+  approve: function(e) {
+    var member_id = $(e.target).parents('td').attr('data');
     var organization = $('#organization').attr('data');
     $.ajax({
       type: 'POST',
@@ -19,7 +20,8 @@ var members = {
       }
     });
   },
-  reject: function(member_id) {
+  reject: function(e) {
+    var member_id = $(e.target).parents('td').attr('data');
     var organization = $('#organization').attr('data');
     $.ajax({
       type: 'POST',
@@ -35,7 +37,8 @@ var members = {
       }
     });
   },
-  remove: function(member_id) {
+  remove: function(e) {
+    var member_id = $(e.target).parents('td').attr('data');
     var organization = $('#organization').attr('data');
     $.ajax({
       type: 'POST',
@@ -52,11 +55,10 @@ var members = {
     });
   },
 
-  showMemberCard: function(e) {
-    var memberId = $(e.target).parents('td').attr('data');
-    var memberSelector = '.member-card[data=' + memberId + ']';
-    console.log(memberId);
-    var target = $(memberSelector);
+  showCard: function(e) {
+    var member_id = $(e.target).parents('td').attr('data');
+    var member_selector = '.member-card[data=' + member_id + ']';
+    var target = $(member_selector);
     target.removeClass('hidden');
     $('#memberCard').modal();
   },
@@ -125,7 +127,6 @@ var members = {
         'memberStatus': 'pending'
       },
       success: function(json) {
-        console.log("Pending count: " + json.length);
         $('a[href="#pending"]').text("Pending Members (" + json.length + ")");
       }
     })
@@ -152,7 +153,8 @@ $(function(){
   $('#memberCard').on('click', '.modal-backdrop', function() {
     $('.member-card').not('hidden').addClass('hidden');
   });
-  $('.restrict').on('click', function(){
+  // Toggle Restrict Menu
+  $('#active-members').on('click', '.restrict', function(){
     $(this).find('.restrict-menu').toggleClass('hidden');
   });
 });

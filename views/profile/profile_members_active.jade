@@ -33,7 +33,7 @@
           td
             | Member
           td
-            | #{member.create_date}
+            | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')
             .member-action.restrict
               .restrict-menu.hidden
@@ -42,6 +42,6 @@
                     a(href="#restrict") Restrict this account
                   li
                     a(href="#disable") Disable account
-            .member-action.remove
-            .member-action.view(onClick='members.showMemberCard(event)')
+            .member-action.remove(onClick='members.remove(event)')
+            .member-action.view(onClick='members.showCard(event)')
 include profile_members_card
