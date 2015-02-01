@@ -20,8 +20,8 @@ var activeMembers   = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_active.jade'), 'utf8');
 var pendingMembers  = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_pending.jade'), 'utf8');
-var memberCard      = fs.readFileSync(path.join(__dirname +
-                      '/../views/profile/profile_members_card.jade'), 'utf8');
+var memberCardPath  = path.join(__dirname, '/../views/profile/profile_members_card.jade')
+var memberCard      = fs.readFileSync(memberCardPath, 'utf8');
 var rejectMail      = fs.readFileSync(path.join(__dirname +
                       '/../views/reject_mail.jade'), 'utf8');
 var acceptMail      = fs.readFileSync(path.join(__dirname +
@@ -518,7 +518,10 @@ var membersJADERequest = function(req, res) {
               res.status(500).send({error: err});
           }
           else {
-            var content = jade.render(memberList, {members: members})
+            var content = jade.render(memberList, {
+              filename: memberCardPath,
+              members: members
+            });
             res.send(content);
           }
         });
