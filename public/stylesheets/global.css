@@ -3,9 +3,33 @@
   margin-top: 75px;
 }
 
+/* Avatars */
 .prizm-avatar-sm {
   height: 64px;
   width: 64px;
   border: 2px #d4daea solid;
   border-radius: 50%;
+}
+
+.prizm-avatar-md {
+  height: 96px;
+  width: 96px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
+.prizm-avatar-lg {
+  height: 128px;
+  width: 128px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
+/* Icons */
+
+.location-icon {
+  height: 13px;
+  width: 10px;
+  background-image: url('/images/icons/location_icon.png');
+  background-size: 10px 13px;
 }

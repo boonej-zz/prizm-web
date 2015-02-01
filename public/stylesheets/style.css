@@ -913,15 +913,6 @@ li#org-first{
   text-align: center;
 }
 
-#profile-location-icon {
-  margin: 0px auto;
-  height: 25px;
-  width: 19px;
-  background-image: url('/images/location.png');
-  background-size: 19px 25px;
-  display: none;
-}
-
 .profile-location {
   font-size: 20px;
   display: inline-block;
