@@ -80,4 +80,8 @@ postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, i
     });
 };
 
+postSchema.methods.findPostsForHomeFeed = function(criteria, next){
+  
+};
+
 mongoose.model('Post', postSchema);

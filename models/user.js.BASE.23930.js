@@ -8,8 +8,7 @@ var ObjectIdType      = mongoose.Schema.Types.ObjectId;
 
 var orgStatusSchema = new mongoose.Schema({
   organization          : {type: ObjectIdType, ref: 'Organization', required: true},
-  status                : {type: String, default: 'pending', required: true},
-  create_date           : {type: Date, default: Date.now()}
+  status                : {type: String, default: 'pending', required: true}
 })
 
 var userSchema = new mongoose.Schema({
@@ -74,13 +73,8 @@ var userSchema = new mongoose.Schema({
   insight_count         : {type: Number, default: 0},
   unsubscribed          : {type: Boolean, default: false},
   pwd_updated           : {type: Boolean, default: false},
-  org_status            : [orgStatusSchema]
+  org_status            : [orgStatusSchema],
 },{ versionKey          : false });
-
-userSchema.statics.basicFields = function(){
-  return '_id name first_name last_name profile_photo_url type active subtype';
-}
-
 
 userSchema.methods.createUserSalt = function(){
   return serial.stringify(this._id+this.create_date.valueOf()+this.email);
@@ -136,60 +130,6 @@ userSchema.methods.mixpanelProperties = function(){
     'Total Posts': this.posts_count || 0,
     Interests: this.interests
   };
-};
-
-userSchema.methods.userBelongsToOrganization = function(org_id) {
-  var match = false;
-  _.each(this.org_status, function(org_status) {
-    if (org_id == org_status.organization) {
-      match = true
-    }
-  })
-  return match;
-};
-userSchema.methods.fetchHomeFeedCriteria = function(next){
-  var following = _.pluck(this.following, '_id');
-  var Trust = mongoose.model('Trust');
-  var user = this;
-  Trust.find({
-    status: 'accepted',
-    $or: [
-      {to: user._id},
-      {from: user._id}
-    ]
-  }, function(err, trusts){
-    var trustArray = [];
-    if (err) {
-      console.log(err);
-      next(err);
-    }
-    else {
-      if (_.has(trusts, 'length')){
-        _.each(trusts, function(trust, idx, list){
-          if (trust.to === user._id){
-            trustArray.push(trust.from);
-          } else {
-            trustArray.push(trust.to);
-          }
-        });
-      }
-      var criteria = {
-        $or: [
-          {scope: 'public', status: 'active', creator: {$in: following}},
-          {scope: {$in: ['trust', 'public']}, status: 'active', creator: {$in: trustArray}},
-          {creator: this._id, status: 'active'}
-        ],
-        is_flagged: false
-      };
-      next(null, criteria);
-    }
-  });
-}
-
-userSchema.statics.findOrganizationMembers = function(filters, next) {
-  this.model('User').find({'org_status': {$elemMatch: filters}}, function(err, users) {
-    next(err, users);
-  });
 };
 
 

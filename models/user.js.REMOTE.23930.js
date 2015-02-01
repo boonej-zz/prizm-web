@@ -77,11 +77,6 @@ var userSchema = new mongoose.Schema({
   org_status            : [orgStatusSchema]
 },{ versionKey          : false });
 
-userSchema.statics.basicFields = function(){
-  return '_id name first_name last_name profile_photo_url type active subtype';
-}
-
-
 userSchema.methods.createUserSalt = function(){
   return serial.stringify(this._id+this.create_date.valueOf()+this.email);
 };
@@ -147,44 +142,6 @@ userSchema.methods.userBelongsToOrganization = function(org_id) {
   })
   return match;
 };
-userSchema.methods.fetchHomeFeedCriteria = function(next){
-  var following = _.pluck(this.following, '_id');
-  var Trust = mongoose.model('Trust');
-  var user = this;
-  Trust.find({
-    status: 'accepted',
-    $or: [
-      {to: user._id},
-      {from: user._id}
-    ]
-  }, function(err, trusts){
-    var trustArray = [];
-    if (err) {
-      console.log(err);
-      next(err);
-    }
-    else {
-      if (_.has(trusts, 'length')){
-        _.each(trusts, function(trust, idx, list){
-          if (trust.to === user._id){
-            trustArray.push(trust.from);
-          } else {
-            trustArray.push(trust.to);
-          }
-        });
-      }
-      var criteria = {
-        $or: [
-          {scope: 'public', status: 'active', creator: {$in: following}},
-          {scope: {$in: ['trust', 'public']}, status: 'active', creator: {$in: trustArray}},
-          {creator: this._id, status: 'active'}
-        ],
-        is_flagged: false
-      };
-      next(null, criteria);
-    }
-  });
-}
 
 userSchema.statics.findOrganizationMembers = function(filters, next) {
   this.model('User').find({'org_status': {$elemMatch: filters}}, function(err, users) {

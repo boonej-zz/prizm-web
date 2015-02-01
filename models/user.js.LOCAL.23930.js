@@ -8,8 +8,7 @@ var ObjectIdType      = mongoose.Schema.Types.ObjectId;
 
 var orgStatusSchema = new mongoose.Schema({
   organization          : {type: ObjectIdType, ref: 'Organization', required: true},
-  status                : {type: String, default: 'pending', required: true},
-  create_date           : {type: Date, default: Date.now()}
+  status                : {type: String, default: 'pending', required: true}
 })
 
 var userSchema = new mongoose.Schema({
@@ -74,7 +73,7 @@ var userSchema = new mongoose.Schema({
   insight_count         : {type: Number, default: 0},
   unsubscribed          : {type: Boolean, default: false},
   pwd_updated           : {type: Boolean, default: false},
-  org_status            : [orgStatusSchema]
+  org_status            : [orgStatusSchema],
 },{ versionKey          : false });
 
 userSchema.statics.basicFields = function(){
@@ -138,15 +137,6 @@ userSchema.methods.mixpanelProperties = function(){
   };
 };
 
-userSchema.methods.userBelongsToOrganization = function(org_id) {
-  var match = false;
-  _.each(this.org_status, function(org_status) {
-    if (org_id == org_status.organization) {
-      match = true
-    }
-  })
-  return match;
-};
 userSchema.methods.fetchHomeFeedCriteria = function(next){
   var following = _.pluck(this.following, '_id');
   var Trust = mongoose.model('Trust');
@@ -185,12 +175,6 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
     }
   });
 }
-
-userSchema.statics.findOrganizationMembers = function(filters, next) {
-  this.model('User').find({'org_status': {$elemMatch: filters}}, function(err, users) {
-    next(err, users);
-  });
-};
 
 
 userSchema.pre('save', function(next){
