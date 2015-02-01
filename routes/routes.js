@@ -57,6 +57,7 @@ router.get('/posts/:id', _posts.singlePost)
 router.get('/users/:id/password', _users.passwordReset);
 router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);
+router.get('/users/:id', _users.getSingleUser);
 router.post('/users/:id', _users.authRequired, _users.updateOrgStatus);
 
 /* Authorization */

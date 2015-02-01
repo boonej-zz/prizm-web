@@ -20,6 +20,8 @@ var activeMembers   = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_active.jade'), 'utf8');
 var pendingMembers  = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_pending.jade'), 'utf8');
+var memberCard      = fs.readFileSync(path.join(__dirname +
+                      '/../views/profile/profile_members_card.jade'), 'utf8');
 var rejectMail      = fs.readFileSync(path.join(__dirname +
                       '/../views/reject_mail.jade'), 'utf8');
 var acceptMail      = fs.readFileSync(path.join(__dirname +
@@ -153,6 +155,26 @@ exports.institutionApproval = function(req, res){
   });
 };
 
+exports.getSingleUser = function(req, res) {
+  var id = req.params.id
+  if (req.accepts('html')) {
+    res.redirect('/profile/' + id);
+  }
+  else if (req.accepts('application/jade')) {
+    User.findOne({_id: ObjectId(id)}, function(err, user) {
+      if (err) {
+        res.status(500).send({error: err});
+      };
+      if (user) {
+        var content = jade.render(memberCard, {member: user})
+      }
+      else {
+        res.status(400).send({error: 'User is not found'});
+      }
+    })
+  }
+}
+
 exports.updateOrgStatus = function(req, res) {
   var org_id = req.get('org');
   var status = req.get('status');
@@ -186,7 +208,7 @@ exports.updateOrgStatus = function(req, res) {
   else {
     res.status(401).send({error: 'User must be authenticated, can not process request'});
   }
-}
+};
 
 // User Partner Methods (Organizations)
 
@@ -435,38 +457,40 @@ exports.displayMembers = function(req, res) {
 };
 
 var membersHTMLRequest = function(req, res) {
-    // We may want to display differet pages if they pending verification
-    if (req.user.type == 'user') {
-      res.redirect('/profile');
-    }
-    if (req.user.type == 'institution_pending') {
-      res.status(400).send({error: 'Status is still pending'});
-    }
-    if (req.user.type == 'institution_verified') {
-      mixpanel.track('Org Members Viewed', {organization: req.user.name});
-      Organization
-        .getOrganizationByOwnerId(req.params.id, function(err, organization) {
-          if (err) {
-            res.status(500).send({error: err});
-          }
-          if (!organization) {
-            res.redirect('/profile');
-          }
-          else {
-            User.findOrganizationMembers({organization: organization.id, status: 'active'}, function(err, members) {
-              if (err) {
-                  res.status(500).send({error: err});
-              }
-              else {
-                res.render('profile/profile_members', {members: members});
-              }
-            });
-          }
-        });
-    }
-    else {
-      res.status(400).send({error: 'User is unknown type'});
-    }
+  // We may want to display differet pages if they pending verification
+  if (req.user.type == 'user') {
+    res.redirect('/profile');
+  }
+  if (req.user.type == 'institution_pending') {
+    res.status(400).send({error: 'Status is still pending'});
+  }
+  if (req.user.type == 'institution_verified') {
+    mixpanel.track('Org Members Viewed', {organization: req.user.name});
+    Organization
+      .getOrganizationByOwnerId(req.params.id, function(err, organization) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (!organization) {
+          res.redirect('/profile');
+        }
+        else {
+          User.findOrganizationMembers({organization: organization.id, status: 'active'}, function(err, members) {
+            if (err) {
+                res.status(500).send({error: err});
+            }
+            else {
+              res.render('profile/profile_members', {
+                organization: organization,
+                members: members});
+            }
+          });
+        }
+      });
+  }
+  else {
+    res.status(400).send({error: 'User is unknown type'});
+  }
 };
 
 var membersJADERequest = function(req, res) {
@@ -503,6 +527,11 @@ var membersJADERequest = function(req, res) {
 }
 
 var membersJSONRequest = function(req, res) {
+  var status = req.get('memberStatus');
+  var criteria = {};
+  if (status) {
+    criteria.status = status;
+  }
   Organization
     .getOrganizationByOwnerId(req.params.id, function(err, organization) {
       if (err) {
@@ -512,7 +541,8 @@ var membersJSONRequest = function(req, res) {
         res.status(404).send({error: 'Invalid Organization ID'});
       }
       else {
-        User.findOrganizationMembers({organization: organization.id}, function(err, organization) {
+        criteria.organization = organization.id;
+        User.findOrganizationMembers(criteria, function(err, organization) {
           if (err) {
               res.status(500).send({error: err});
           }

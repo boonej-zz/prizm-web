@@ -52,6 +52,15 @@ var members = {
     });
   },
 
+  showMemberCard: function(e) {
+    var memberId = $(e.target).parents('td').attr('data');
+    var memberSelector = '.member-card[data=' + memberId + ']';
+    console.log(memberId);
+    var target = $(memberSelector);
+    target.removeClass('hidden');
+    $('#memberCard').modal();
+  },
+
   // Member Page Controls
   activeTab: function() {
     var request = $.ajax({
@@ -120,6 +129,16 @@ var members = {
         $('a[href="#pending"]').text("Pending Members (" + json.length + ")");
       }
     })
+  },
+
+  // Member Card Methods
+  showCardBack: function(){
+    $('.front-member').addClass('hidden');
+    $('.back-member').removeClass('hidden');
+  },
+  showCardFront: function(){
+    $('.back-member').addClass('hidden');
+    $('.front-member').removeClass('hidden'); 
   }
 };
 
@@ -128,7 +147,11 @@ $(function(){
   // Get Active and Pending Tab Counts
   members.updateActiveCount();
   members.updatePendingCount();
-
+  // Find currently displayed member card and toggle hidden class when 
+  // modal is dismissed
+  $('#memberCard').on('click', '.modal-backdrop', function() {
+    $('.member-card').not('hidden').addClass('hidden');
+  });
   $('.restrict').on('click', function(){
     $(this).find('.restrict-menu').toggleClass('hidden');
   });

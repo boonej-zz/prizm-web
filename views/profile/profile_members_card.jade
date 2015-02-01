@@ -1,0 +1,50 @@
+div(class='modal fade'
+    id='memberCard'
+    tabIndex='-1'
+    role='dialog'
+    aria-labelledby='memberCardLabel')
+  .modal-dialog.member
+    .modal-content.member
+      .modal-body.member
+        each member in members
+          .member-card.hidden(data='#{member.id}')
+            .front-member
+              .member-info-top
+                .card-icon(onclick='members.showCardBack()')
+                .member-avatar
+                  img(src='https://#{member.profile_photo_url.substr(7)}'
+                      class='prizm-avatar-lg')
+                .member-name
+                  | #{member.name}
+                .member-email
+                  | #{member.email}
+                .member-birthday
+                  | DOB:
+                  strong
+                    |  #{member.birthday}
+                .location-icon
+                .member-location
+                  | #{member.city}
+              .member-info-bottom
+                .member-circle
+                  | Followers
+                  br
+                  | #{member.followers_count}
+                .member-circle
+                  | Following
+                  br
+                  | #{member.following_count}
+                .member-circle
+                  | Posts
+                  br
+                  | #{member.posts_count}
+            .back-member.hidden
+              .interests-header
+                .card-icon(onclick='members.showCardFront()')
+                h2 Interests
+              .interests-container
+                ul
+                  each interest in member.interests
+                    li.interests
+                      | #{interest.text}
+

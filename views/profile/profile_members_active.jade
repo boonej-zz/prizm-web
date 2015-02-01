@@ -34,7 +34,7 @@
             | Member
           td
             | #{member.create_date}
-          td
+          td(data='#{member.id}')
             .member-action.restrict
               .restrict-menu.hidden
                 ul
@@ -43,4 +43,5 @@
                   li
                     a(href="#disable") Disable account
             .member-action.remove
-            .member-action.view
+            .member-action.view(onClick='members.showMemberCard(event)')
+include profile_members_card
