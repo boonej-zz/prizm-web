@@ -133,11 +133,12 @@ router.get('/posts', utils.auth, function(req,res){
   .exec(function(err, results){
     if (err) console.log(err);
     var data = [];
+    data.push(['Provider', 'Count']);
     _.each(results, function(result, index, list){
       if (!result._id) result._id = 'standard';
       data.push([result._id, result.count]);
     });
-    res.render('post_chart', {results: data, title: 'Posts'});
+    res.render('posts/post_chart', {results: data, title: 'Posts'});
   });
 });
 
