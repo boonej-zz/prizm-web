@@ -3,6 +3,84 @@
   margin-top: 75px;
 }
 
+#profile-navbar {
+  float: right;
+  cursor: pointer;
+}
+
+#navbar-login a {
+  font-size: 18px;
+  float: right;
+  margin-top: 48px;
+  margin-right: 16px;
+}
+
+#avatar-navbar {
+  float: left;
+}
+
+#avatar-navbar img {
+  margin-top: 24px;
+  width: 40px;
+  height: 40px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
+#navbar-name {
+  display: inline-block;
+  float: right;
+  margin-top: 26px;
+  margin-left: 24px;
+  margin-right: 16px;
+}
+
+#navbar-name p {
+  margin-top: 8px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+#profile-menu {
+  margin-top: -4px;
+  position: fixed;
+  top: 75px; 
+  background: #FBFCFF;
+  width: 120px;
+  border-radius: 10px;
+}
+
+#profile-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 12px 15px;
+  border-color: #FFFFFF transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  top: -10px;
+  left: 12px;
+}
+
+#profile-menu ul {
+  margin: 0px auto;
+  width: 120px;
+  float: left;
+  padding: 0px;
+  text-align: center;
+}
+
+#profile-menu li {
+  list-style: none;
+  border-bottom: 1px #d4daea solid;
+  padding: 12px;
+}
+
+#profile-menu li:last-child {
+  border: none;
+}
+
 /* Avatars */
 .prizm-avatar-sm {
   height: 64px;
