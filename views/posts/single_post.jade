@@ -1,49 +1,50 @@
-.post-modal(id='#{post.id}')
-  .post-modal-left
-    .post-image(onclick='prizm.dismissModal(event)')
-      img(src='https://#{post.file_path.substr(7)}')
-  .post-modal-right
-    .comments-header
-      .post-creator-avatar
-        img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-            class='prizm-avatar-sm')
-      .post-creator-name
-        | #{post.creator.name}
-      #clock-image
-        | #{post.time_since}
-    .post-comments
-      p.comments-title
-        | Comments
-    .comment-scroll
-      each comment, i in post.comments
-        .comment-container
-          .commenter-avatar
-            img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
-                class='prizm-avatar-sm')
-          .commenter-name
-            | #{post.comments[i].creator.name}
-          .comment-text
-            | #{post.comments[i].text}
-          .comment-info
-            #clock-image
-            #time
-              | #{post.comments[i].time_since}
-            .comment-likes
-              | -&nbsp;&nbsp;Like
-            .like-icon
-            .comment-likes-count
-              | #{post.comments[i].likes_count}
-    .comments-footer
-      .comments-like
-        .like-icon
-      .comments-post
-        form(action='/posts/#{post.id}' method='get' class='comment-post')
-          label(for='inputComment' class='sr-only')
-          input(type='text'
-                id='inputComment'
-                name='comment'
-                class='form-control'
-                placeholder='Write a comment...'
-                required)
-          button(class='btn btn-xs btn-default post-button' type='submit')
-            | Post
+.container(id='#{post.id}')
+  .row
+    .col-sm-7.col-xs-12.no-padding
+      .post-image(onclick='prizm.dismissModal(event)')
+        img(src='https://#{post.file_path.substr(7)}')
+    .col-sm-5.col-xs-12.no-padding.absolute-height
+      .comments-header
+        .post-modal-avatar
+          img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+              class='prizm-avatar-sm')
+        .avatar-name
+          | #{post.creator.name}
+        #clock-image
+          | #{post.time_since}
+      .post-comments
+        p.comments-title
+          | Comments
+      .comment-scroll
+        each comment, i in post.comments
+          .comment-container
+            .post-modal-avatar
+              img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+                  class='prizm-avatar-sm')
+            .avatar-name
+              | #{post.comments[i].creator.name}
+            .comment-text
+              | #{post.comments[i].text}
+            .comment-info
+              #clock-image
+              #time
+                | #{post.comments[i].time_since}
+              .comment-likes
+                | -&nbsp;&nbsp;Like
+              .like-icon
+              .comment-likes-count
+                | #{post.comments[i].likes_count}
+      .comments-footer
+        .comments-like
+          img(src='/images/like_heart.png')
+        .comments-post
+          form(action='/posts/#{post.id}' method='get' class='comment-post')
+            label(for='inputComment' class='sr-only')
+            input(type='text'
+                  id='inputComment'
+                  name='comment'
+                  class='form-control'
+                  placeholder='Write a comment...'
+                  required)
+            button(class='btn btn-xs btn-default post-button' type='submit')
+              | Post

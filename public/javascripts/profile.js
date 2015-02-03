@@ -19,28 +19,6 @@ $(window).scroll(function() {
   }
 });
 
-/* Show Post Modal */
-/*
-$(function() {
-  $('#profile-posts').on('click', '.comment-icon', function() {
-    // $('body').css('overflow','hidden');
-    // $('body').css('position','fixed');
-    var postID = $(this).parents('.post').attr('id');
-    $.ajax({
-      url: '/posts/' + postID,
-      headers: {
-        'Accept': 'application/jade'
-      },
-      success: function(html) {
-        if (html) {
-          $('#post-display').html(html);
-        }
-      }
-    });
-  });
-});
-*/
-
 /* Dismiss Post Modal */
 $(function(){
   $('#postModal').on('click', '.modal-backdrop', function() {

@@ -161,11 +161,11 @@
   margin-top: 0px;
 }
 
-.modal-dialog {
+#loginModal > .modal-dialog {
   width: 380px;
 }
 
-.modal-content {
+#loginModal > .modal-content {
   width: 380px;
   height: 465px;
 }

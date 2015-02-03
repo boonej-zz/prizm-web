@@ -50,7 +50,11 @@ block content
             h2 This Organization has not created any posts yet
         else
           include posts/post_feed
-  div#postModal.modal.fade(tabIndex='-1' role='dialog' aria-labelledby='postModalLabel') 
-    .modal-dialog.post-modal
-      .modal-content.post-modal
-        #post-display.modal-body.post-modal
+  div#postModal.modal.fade(
+      tabIndex='-1'
+      role='dialog'
+      aria-labelledby='postModalLabel')
+    .container.no-padding
+      .modal-dialog
+        .modal-content
+          #post-display.modal-body
