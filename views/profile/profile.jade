@@ -18,16 +18,12 @@ block content
                   img(src='https://#{headerImage.substr(7)}')
         .slider-container
           #profile-header-section1.slider
-            #avatar-header
-              img(src='https://#{user.profile_photo_url.substr(7)}'
-                  class='prizm-avatar-md')
-            h1
-              | #{user.name}
+            img(src='https://#{user.profile_photo_url.substr(7)}'
+                class='prizm-avatar-md')
+            h1 #{user.name}
           #profile-header-section2.slider
-            h4
-              | #{user.info}
-            h5
-              | #{user.website}
+            h4 #{user.info}
+            h5 #{user.website}
           #profile-header-section3.slider
         .slider-nav
           ul

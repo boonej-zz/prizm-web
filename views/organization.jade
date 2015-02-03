@@ -5,52 +5,48 @@ block head
   link(rel='stylesheet', href='/stylesheets/profile/profile.css')
 
 block content
-  #organization
-  #profile-block.full-width.gray-font
-    .wrap-profile
+  .container.topnav-offset
+    .row
       .profile-owner(id='#{organization.owner}')
-      #profile-header(style="background-image: url('images/profile_header.png')")
+      .col-sm-12#profile-header
         if (headerImages.length > 15)
-          #image-header-overlay
-          #image-header
+          .background-tile-container
+            .background-tile-overlay
             each headerImage, i in headerImages
               if (i < 16)
-                .background-tile(style='background-image: '
-                + 'url(\'https://#{headerImage.substr(7)}\')')
+                .background-tile
+                  img(src='https://#{headerImage.substr(7)}')
         .slider-container
           #profile-header-section1.slider
-            #avatar-header
-              img(src='https://#{owner.profile_photo_url.substr(7)}')
-            h2.profile-name
-              | #{organization.name}
-            p.profile-location
-              | #{owner.city}, #{owner.state}
+            img(src='https://#{owner.profile_photo_url.substr(7)}'
+                class='prizm-avatar-md')
+            h1 #{organization.name}
+            h4 #{owner.city}, #{owner.state}
           #profile-header-section2.slider
-            p.profile-info
-              | #{owner.info}
-            p.profile-website
-              | #{owner.website}
+            h4 #{owner.info}
+            h5 #{owner.website}
           #profile-header-section3.slider
             .luminary-icon
               p
                 | Luminary
-            - var defaultImage = "background-image: url('images/default_profile_image.png')"
+            - var defaultImage = '/images/profile/profile_default_avatar.png'
             - for (var i = 0; i < 3; i++)
                 .luminary-card
-                  .luminary-image(style=luminaries[i] ? "background-image: url('https://#{luminaries[i].profile_photo_url.substr(7)}')" : defaultImage
-                                  class=luminaries[i] ? 'rounded-image' : '')
-                  .luminary-name
-                    p
-                      if (luminaries[i])
-                        | #{luminaries[i].name}
+                  img(src=luminaries[i] ? 'https://#{luminaries[i].profile_photo_url.substr(7)}' : defaultImage
+                      class='prizm-avatar-md')
+                  h4
+                    if (luminaries[i])
+                      | #{luminaries[i].name}
+                    else
+                      | &nbsp;
         .slider-nav
           ul
             li#profile-first.active
             li#profile-middle
             li#profile-last
-      #profile-posts
+    .row.profile-posts-container
         if (posts.length < 1)
-          #no-posts
+          .col-sm-12
             h2 This Organization has not created any posts yet
         else
           include posts/post_feed
