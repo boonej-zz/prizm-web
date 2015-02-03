@@ -1,21 +1,23 @@
 extends ../layouts/app_layout
-var dataSet = []
-each result in results
-  dataSet.push([result[0], result[1]]);
 block head
   script(type='text/javascript' src='https://www.google.com/jsapi') 
   script(type='text/javascript').
     google.load('visualization', '1.0', {'packages':['corechart']}); 
     google.setOnLoadCallback(drawChart);
     function drawChart(){
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Source');
-      data.addColumn('number', 'Posts');
-      
-      data.addRows(dataSet);
-      var options = {'title':'How Much Pizza I Ate Last Night',
-                      'width':400,
-                      'height':300};
+      var raw = !{JSON.stringify(results)};
+      var data = new google.visualization.arrayToDataTable(raw);
+       
+      var options = {
+                  title:'Posts By Provider',
+                  width: 600,
+                  height: 400,
+                  backgroundColor: '#E4E5EA',
+                  chartArea: {
+                    top: 175
+                  }
+                      
+                      };
       var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }
