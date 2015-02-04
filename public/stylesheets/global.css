@@ -110,4 +110,13 @@
   width: 10px;
   background-image: url('/images/icons/location_icon.png');
   background-size: 10px 13px;
+  background-repeat: no-repeat;
+}
+
+.clock-icon {
+  height: 15px;
+  width: 15px;
+  background-image: url('/images/icons/clock_icon.png');
+  background-size: 15px;
+  background-repeat: no-repeat;
 }

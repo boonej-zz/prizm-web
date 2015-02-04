@@ -5,12 +5,12 @@ each post in posts
         img(src='https://#{post.file_path.substr(7)}')
       .post-footer
         .like-icon
-        p.likes
+        p.icon-text
           | #{post.likes_count}
         .comment-icon(type='button' onclick='prizm.showModal(event)')
-        p.comments
+        p.icon-text
           | #{post.comments_count}
+        p.time-text
+         | #{post.time_since}
+        .clock-icon
         .action-icon
-        .time
-          #clock-image
-          #time #{post.time_since}

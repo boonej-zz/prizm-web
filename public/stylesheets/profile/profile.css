@@ -150,7 +150,13 @@
   float: left;
 }
 
-.likes {
+.icon-text {
+  display: inline-block;
+  margin: 14px 2px auto;
+  float: left
+}
+
+.time-text {
   display: inline-block;
   margin: 14px 2px auto;
   float: left
@@ -166,27 +172,15 @@
   float: left
 }
 
-.comments {
-  display: inline-block;
-  margin: 14px 2px auto;
-  float: left
-}
-
-.time {
-  display: inline-block;
-  float: right;
-  margin: 11px 21px 0px 0px;
-}
-
-.time #clock-image {
-  display: inline-block;
+.clock-icon {
+  /* display: inline-block; */
   margin: 3px auto;
+  float: right;
 }
 
-.time #time {
-  display: inline-block;
-  margin-left: 3px;
-  vertical-align: super;
+
+.clock-icon + .icon-text {
+  float: right
 }
 
 .action-icon {
@@ -194,7 +188,7 @@
   background-size: 24px 24px;
   width: 24px;
   height: 24px;
-  display: inline-block;
+  /* display: inline-block; */
   margin: 9px 15px 12px 10px;
   float: right;
 }
