@@ -158,9 +158,8 @@
 
 .time-text {
   display: inline-block;
-  margin: 14px 2px auto;
-  float: left
-}
+  margin: 14px 15px 0px 2px;
+  float: right;}
 
 .comment-icon {
   background-image: url('/images/comment.png');
@@ -173,8 +172,7 @@
 }
 
 .clock-icon {
-  /* display: inline-block; */
-  margin: 3px auto;
+  margin: 15px 2px 0px 2px;
   float: right;
 }
 
@@ -188,7 +186,6 @@
   background-size: 24px 24px;
   width: 24px;
   height: 24px;
-  /* display: inline-block; */
   margin: 9px 15px 12px 10px;
   float: right;
 }
