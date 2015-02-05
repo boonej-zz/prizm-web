@@ -14,9 +14,13 @@
         | #{post.creator.name}
       #clock-image
         | #{post.time_since}
+    if post.text
+      p.post-text(style='width: 100%; padding: 10px;')
+          | !{post.formattedText}
     .post-comments
       p.comments-title
         | Comments
+  
     .comment-scroll
       each comment, i in post.comments
         .comment-container
