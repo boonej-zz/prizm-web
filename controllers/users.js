@@ -342,7 +342,7 @@ exports.handleLogout = function(req, res) {
 };
 
 // User Profile Methods
-exports.displayProfile = function(req, res) {
+exports.displayHomeFeed = function(req, res) {
   var id = req.user.id
   User.findOne({_id: ObjectId(id)}, function(err, user) {
     if (err) {
@@ -350,21 +350,29 @@ exports.displayProfile = function(req, res) {
     }
     if (user) {
       mixpanel.track('Profile Viewed', user.mixpanelProperties());
-      Post.findPostsForProfileByUserId(user.id, true, true, function(err, posts) {
-        var headerImages;
+      user.fetchHomeFeedCriteria(function(err, criteria) {
         if (err) {
-          posts = [];
-          headerImages = [];
+          res.status(500).send({error: err});
         }
-        posts = _time.addTimeSinceFieldToObjects(posts);
-        headerImages =_profile.shufflePostImagesForProfileHeader(posts);
-        res.render('profile/profile', {
-          auth: true,
-          currentUser: req.user,
-          user: user,
-          headerImages: headerImages,
-          posts: posts
-        });
+        else {
+          console.log("Criteria: " + criteria);
+          Post.find(criteria, function(err, posts) {
+            var headerImages;
+            if (err) {
+              posts = [];
+              headerImages = [];
+            }
+            posts = _time.addTimeSinceFieldToObjects(posts);
+            headerImages =_profile.shufflePostImagesForProfileHeader(posts);
+            res.render('profile/profile_home', {
+              auth: true,
+              currentUser: req.user,
+              user: user,
+              headerImages: headerImages,
+              posts: posts
+            });
+          });
+        }
       });
     }
     else {

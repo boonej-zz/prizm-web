@@ -1,0 +1,48 @@
+extends ../layouts/app_layout
+
+block head
+  script(src='/javascripts/profile.js' type='text/javascript')
+  link(rel='stylesheet', href='/stylesheets/profile/profile.css')
+
+block content
+  .container.topnav-offset
+    .row 
+      .profile-owner(id='#{user.id}')
+      .col-sm-12#profile-header
+        if (headerImages.length > 15)
+          .background-tile-container
+            .background-tile-overlay
+            each headerImage, i in headerImages
+              if (i < 16)
+                .background-tile
+                  img(src='https://#{headerImage.substr(7)}')
+        .slider-container
+          #profile-header-section1.slider
+            img(src='https://#{user.profile_photo_url.substr(7)}'
+                class='prizm-avatar-md')
+            h1 #{user.name}
+          #profile-header-section2.slider
+            h4 #{user.info}
+            h5 #{user.website}
+          #profile-header-section3.slider
+        .slider-nav
+          ul
+            li#profile-first.active
+            li#profile-middle
+    .row
+      each post in posts
+        .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3.col-xs-12
+          .post(id='#{post.id}')
+            .post-image(onclick='prizm.showModal(event)')
+              img(src='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}')
+            .post-footer
+              .like-icon
+              p.icon-text
+                | #{post.likes_count}
+              .comment-icon(type='button' onclick='prizm.showModal(event)')
+              p.icon-text
+                | #{post.comments_count}
+              p.time-text
+               | #{post.time_since}
+              .clock-icon
+              .action-icon
