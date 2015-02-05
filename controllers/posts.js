@@ -4,6 +4,7 @@ var router      = express.Router();
 var mongoose    = require('mongoose');
 var ObjectId    = require('mongoose').Types.ObjectId;
 var Post        = mongoose.model('Post');
+var User        = mongoose.model('User');
 var _           = require('underscore');
 var _time       = require('../lib/helpers/date_time');
 var fs          = require('fs');
@@ -113,6 +114,31 @@ var singlePostHTMLRequest = function(req, res) {
   });
 }
 
+var replaceTagsFromUserList = function(string, userList){
+  var ps = '<a class="tag-link" href="/profile/';
+  var pm = '">@';
+  var pe = '</a>';
+  var newString = string;
+  var match = string.match(/@\S{24}/g); 
+  if (match && match.length > 0){
+    console.log('matching');
+    _.each(match, function(tag, idx, list){
+      console.log(tag);
+      if (tag && tag.length > 0){
+        var uid = tag.substr(1);
+        var mu = _.find(userList, function(user){
+          return String(user._id) == uid;
+        });
+        if (mu) {
+          var replace = ps + String(mu._id) + pm + mu.name + pe;
+          newString = newString.replace(tag, replace);
+        }
+      }
+    });
+  }
+  return newString;
+};
+
 var singlePostJadeRequest = function(req, res) {
   var id =  req.params.id;
   var options = [
@@ -126,10 +152,27 @@ var singlePostJadeRequest = function(req, res) {
     .exec(function(err, post) {
       if (err) { res.status(500).send({error: err}); }
       if (post) {
+        var ps = '<a class="tag-link" href="/profile/';
+        var pm = '">@';
+        var pe = '</a>';
         post.time_since = _time.timeSinceFormatter(post.create_date);
         post.comments = _time.addTimeSinceFieldToObjects(post.comments);
-        var content = jade.render(singlePost, {post: post});
-        res.status(200).send(content);
+        User.resolvePostTags(post, function(err, users){
+          console.log('resolved post tags');
+          if (users && users.length > 0) {
+            if (post.text){
+              post.formattedText = replaceTagsFromUserList(post.text, users);
+            }
+
+            _.each(post.comments, function(comment, idx, list){
+              var commentText = replaceTagsFromUserList(comment.text, users);
+              comment.formattedText = commentText;
+            });
+          } 
+          var content = jade.render(singlePost, {post: post});
+          res.status(200).send(content);
+        });
+        
       }
     }); 
 }

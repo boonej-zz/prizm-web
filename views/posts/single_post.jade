@@ -5,8 +5,11 @@
   .post-modal-right
     .comments-header
       .post-creator-avatar
-        img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+        if post.creator.profile_photo_url
+          img(src='https://#{post.creator.profile_photo_url.substr(7)}'
             class='prizm-avatar-sm')
+        else
+          img(src='/images/default-profile.png' class='prizm-avatar-sm')
       .post-creator-name
         | #{post.creator.name}
       #clock-image
@@ -18,12 +21,15 @@
       each comment, i in post.comments
         .comment-container
           .commenter-avatar
-            img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+            if post.comments[i].creator.profile_photo_url
+              img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
                 class='prizm-avatar-sm')
+            else
+              img(src='/images/default-profile.png' class='prizm-avatar-sm')
           .commenter-name
             | #{post.comments[i].creator.name}
           .comment-text
-            | #{post.comments[i].text}
+            | !{post.comments[i].formattedText}
           .comment-info
             #clock-image
             #time

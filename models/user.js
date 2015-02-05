@@ -206,5 +206,28 @@ userSchema.pre('save', function(next){
   next();
 });
 
+/**
+ * Takes a comment and resolves all user IDs present in the list and 
+ * returns the reformatted string. 
+ */
+userSchema.statics.resolvePostTags = function(post, next){
+  console.log('resolving post tags');
+  var postText = post.text || '';
+  var commentText = _.pluck(post.comments, 'text');
+  commentText.push(postText);
+  var userArray = [];
+  _.each(commentText, function(comment, idx, list){
+    var match = comment.match(/@\S{24}/g);  
+    if (match) {
+      _.each(match, function(item, idx, list){
+        userArray.push(item.substr(1));  
+      });
+    }
+  });
+  this.model('User').find({_id: {$in: userArray}}, '_id name', function(err, users){
+    next(err, users);
+  });
+};
+
 
 mongoose.model('User', userSchema);
