@@ -31,7 +31,7 @@ block content
             li#profile-middle
     .row
       each post in posts
-        .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3.col-xs-12
+        .col-md-4.col-md-offset-4.col-xs-6.col-xs-offset-3.col-mob-12
           .post(id='#{post.id}')
             .post-image(onclick='prizm.showModal(event)')
               img(src='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}')
