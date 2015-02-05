@@ -141,10 +141,6 @@
 }
 
 .like-icon {
-  background-image: url('/images/like_heart.png');
-  width: 24px;
-  height: 20px;
-  background-size: 24px 20px;
   display: inline-block;
   margin: 14px 1px 12px 15px;
   float: left;

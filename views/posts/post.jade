@@ -22,7 +22,7 @@ block content
             span#clock-image
             span#time #{ago}
           #post-header-right
-            #category-icon(style="background-image: url('/images/#{category}.png')")
+            #category-icon(style="background-image: url('/images/icons/#{category}_icon.png')")
             if (post.external_provider)
               p
                 | Post via #{post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1)}

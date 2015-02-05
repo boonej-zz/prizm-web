@@ -82,6 +82,13 @@
 }
 
 /* Avatars */
+.prizm-avatar-xs {
+  height: 40px;
+  width: 40px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
 .prizm-avatar-sm {
   height: 64px;
   width: 64px;
@@ -105,6 +112,14 @@
 
 /* Icons */
 
+.like-icon {
+  background-image: url('/images/icons/like_icon.png');
+  width: 24px;
+  height: 20px;
+  background-size: 24px 20px;
+  background-repeat: no-repeat;
+}
+
 .location-icon {
   height: 13px;
   width: 10px;
@@ -118,5 +133,12 @@
   width: 15px;
   background-image: url('/images/icons/clock_icon.png');
   background-size: 15px;
+  background-repeat: no-repeat;
+}
+
+.category-icon {
+  height: 23px;
+  width: 23px;
+  background-size: 23px;
   background-repeat: no-repeat;
 }
