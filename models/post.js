@@ -1,6 +1,9 @@
+require('./user.js');
 var mongoose      = require('mongoose');
 var ObjectId      = require('mongoose').Types.ObjectId;
 var ObjectIdType  = mongoose.Schema.Types.ObjectId;
+var _ = require('underscore');
+var User = mongoose.model('User');
 
 var commentSchema = new mongoose.Schema({
   text                : { type: String, default: null, required: true },
@@ -14,6 +17,7 @@ var commentSchema = new mongoose.Schema({
   hash_tags_count     : {type: Number, default: 0},
   status              : {type: String, default: 'active'}
 });
+
 
 var postSchema = new mongoose.Schema({
   _id                 : {type: ObjectIdType, required:true},
@@ -83,5 +87,12 @@ postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, i
 postSchema.methods.findPostsForHomeFeed = function(criteria, next){
   
 };
+
+postSchema.post('init', function(post){
+  _.each(post.comments, function(comment, idx, list){
+    comment.formattedText = comment.text;
+  });
+});
+
 
 mongoose.model('Post', postSchema);

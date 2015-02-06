@@ -38,6 +38,15 @@ var _users = require('../controllers/users');
 var AWS_ACCESS_KEY = 'AKIAJ656TNM2SYQUMHCA';
 var AWS_SECRET_KEY = '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'; 
 var S3_BUCKET = 'higheraltitude.prizm.insights'; 
+var AWS = require('aws-sdk');
+var gm = require('gm');
+var mime = require('mime');
+var multiparty = require('multiparty');
+
+AWS.config.update({
+  accessKeyId: AWS_ACCESS_KEY,
+  secretAccessKey: AWS_SECRET_KEY
+});
 
 router.get('/', function(req, res){
   res.send(200);
@@ -66,29 +75,73 @@ router.get('/insights', utils.auth, function (req, res) {
 });
 
 router.post('/insights', utils.auth, function (req, res) {
-  var hashTags = req.param('hashTags').replace(/(^\s+|\s+$)/g, '');
-  hashTags = hashTags.replace(/#/g, '');
-  hashTags = hashTags.split(',');
-  var insight = new Insight({
-    creator: ObjectId(req.param('creator')),
-    title: req.param('title'),
-    text: req.param('text'),
-    file_path: req.param('filePath'),
-    link: req.param('link'),
-    link_title: req.param('linkTitle'),
-    hash_tags: hashTags
+  var s3 = new AWS.S3();
+  var form = new multiparty.Form();
+  form.parse(req, function(err, fields, files){
+    var width = Number(fields.width);
+    var height = Number(fields.height);
+    var x1 = Number(fields.x1);
+    var y1 = Number(fields.y1);
+    var hashTags = String(fields.hashTags).replace(/(^\s+|\s+$)/g, '');
+    hashTags = hashTags.replace(/#/g, '');
+    hashTags = hashTags.split(',');
+    var insight = new Insight({
+      creator: ObjectId(String(fields.creator)),
+      title: String(fields.title),
+      text: String(fields.text),
+      link: String(fields.link),
+      link_title: String(fields.linkTitle),
+      hash_tags: hashTags
+    });
+    var fileName = String(insight._id) + '.jpg';
+
+
+    if (files){
+      var fa = files.image;
+      if (fa){
+        var file;
+        for (var i=0; file = fa[i]; ++i) {
+          gm(file.path)
+            .crop(width, height, x1, y1)
+            .resize(600, 600)
+            .stream(function(err, stdout, stderr){
+              var buf = new Buffer('');
+              stdout.on('data', function(data){
+                buf = Buffer.concat([buf, data]);
+              });
+              stdout.on('end', function(data){
+                var data = {
+                  Bucket: 'higheraltitude.prizm.insights',
+                  Key: fileName,
+                  Body: buf,
+                  ContentType: mime.lookup(fileName),
+                  ACL: 'public-read'
+                };
+                s3.putObject(data, function(err, result){
+                  if (err) console.log(err);
+                  insight.file_path = 
+                   'https://s3.amazonaws.com/higheraltitude.prizm.insights/' + 
+                    fileName;
+                  insight.save(function (err, insight){
+                    if (err) {
+                      console.log(err);
+                      res.status(500).send({ error: err });
+                    }
+                    if (insight) {
+                      console.log(insight);
+                      res.redirect('/insights/' + insight.id);
+                    }
+
+                  });
+                });
+              });
+            }); 
+        }
+      }
+    }  
   });
-  insight.save( function (err, insight) {
-    if (err) {
-      console.log(err);
-      res.status(500).send({ error: err });
-    }
-    if (insight) {
-      console.log(insight);
-      res.redirect('/insights/' + insight.id);
-    }
+  
   });
-});
 
 router.get('/passwordreset', utils.auth, function(req, res){
   res.render('passwordreset');

@@ -6,12 +6,18 @@
     .col-sm-5.col-xs-12.no-padding.absolute-height
       .comments-header
         .post-modal-avatar
-          img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+          if post.creator.profile_photo_url
+            img(src='https://#{post.creator.profile_photo_url.substr(7)}'
               class='prizm-avatar-sm')
+          else
+            img(src='/images/default-profile.png' class='prizm-avatar-sm')
         .avatar-name
           | #{post.creator.name}
         #clock-image
           | #{post.time_since}
+      if post.text
+        p.post-text(style='width: 100%; padding: 10px;')
+            | !{post.formattedText}
       .post-comments
         p.comments-title
           | Comments
@@ -19,8 +25,11 @@
         each comment, i in post.comments
           .comment-container
             .post-modal-avatar
-              img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+              if post.comments[i].creator.profile_photo_url
+                img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
                   class='prizm-avatar-sm')
+              else
+                img(src='/images/default-profile.png' class='prizm-avatar-sm')
             .avatar-name
               | #{post.comments[i].creator.name}
             .comment-text
@@ -36,7 +45,7 @@
                 | #{post.comments[i].likes_count}
       .comments-footer
         .comments-like
-          img(src='/images/like_heart.png')
+          img(src='/images/icons/like_icon.png')
         .comments-post
           form(action='/posts/#{post.id}' method='get' class='comment-post')
             label(for='inputComment' class='sr-only')
