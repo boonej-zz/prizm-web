@@ -3,6 +3,10 @@
   margin-top: 75px;
 }
 
+.cursor {
+  cursor: pointer;
+}
+
 #profile-navbar {
   float: right;
   cursor: pointer;
