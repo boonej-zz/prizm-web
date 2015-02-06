@@ -128,6 +128,7 @@
   background-color: #FBFCFF;
   border: 1px #d4daea solid;
   margin-top: 30px;
+  position: relative;
 }
 
 .post-image img {
@@ -142,7 +143,7 @@
 
 .like-icon {
   display: inline-block;
-  margin: 14px 1px 12px 15px;
+  margin: 10px 1px 12px 15px;
   float: left;
 }
 
@@ -158,12 +159,9 @@
   float: right;}
 
 .comment-icon {
-  background-image: url('/images/comment.png');
-  width: 24px;
-  height: 20px;
-  background-size: 24px 20px;
+  /* background-size: 22px; */
   display: inline-block;
-  margin: 14px 1px 12px 20px;
+  margin: 11px 2px 0px 20px;
   float: left
 }
 
@@ -178,11 +176,11 @@
 }
 
 .action-icon {
-  background-image: url('/images/post_share.png');
-  background-size: 24px 24px;
-  width: 24px;
-  height: 24px;
-  margin: 9px 15px 12px 10px;
+  /* background-image: url('/images/post_share.png'); */
+  /* background-size: 24px; */
+  /* width: 24px; */
+  /* height: 24px; */
+  margin: 10px 15px 12px 10px;
   float: right;
 }
 
@@ -278,8 +276,8 @@
   float: none;
   margin: 0px 4px 0px 0px;
   width: 16px;
-  height: 13px;
-  background-size: 16px 13px;
+  height: 15px;
+  background-size: 16px;
 }
 
 .comment-likes {
@@ -349,7 +347,7 @@ form #inputComment {
   padding-left: 50px;
   padding-bottom: 2px;
   background: inherit;
-  background-image: url('/images/posts/write_comment.png');
+  background-image: url('/images/icons/write_icon.png');
   background-size: 22px;
   background-repeat: no-repeat;
   background-position-x: 14px;
