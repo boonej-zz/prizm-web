@@ -352,16 +352,9 @@ exports.displayHomeFeed = function(req, res) {
       mixpanel.track('Profile Viewed', user.mixpanelProperties());
       fetchHomeFeed(user, function(err, posts) {
         posts = _time.addTimeSinceFieldToObjects(posts);
-        // var post = posts
-        // console.log(typeof post);
-        // post.time_since = '2hrs'
-        // post.external_provider = 'Facebook';
-        // console.log("Posts: " + post);
-        // console.log("Time since: " + post.time_since);
         res.render('profile/profile_home', {
           auth: true,
           currentUser: req.user,
-          // user: user,
           posts: posts
         });
       });
