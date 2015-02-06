@@ -159,7 +159,6 @@
   float: right;}
 
 .comment-icon {
-  /* background-size: 22px; */
   display: inline-block;
   margin: 11px 2px 0px 20px;
   float: left
@@ -176,10 +175,6 @@
 }
 
 .action-icon {
-  /* background-image: url('/images/post_share.png'); */
-  /* background-size: 24px; */
-  /* width: 24px; */
-  /* height: 24px; */
   margin: 10px 15px 12px 10px;
   float: right;
 }

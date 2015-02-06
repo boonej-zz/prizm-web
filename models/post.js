@@ -84,10 +84,6 @@ postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, i
     });
 };
 
-postSchema.methods.findPostsForHomeFeed = function(criteria, next){
-  
-};
-
 postSchema.post('init', function(post){
   _.each(post.comments, function(comment, idx, list){
     comment.formattedText = comment.text;

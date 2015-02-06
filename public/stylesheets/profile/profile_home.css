@@ -24,9 +24,6 @@
   margin: 0px;
   font-weight: 900;
   position: relative;
-  /* top: 0px; */
-  /* float: left; */
-  /* clear: left; */
 }
 
 .time-since {
@@ -34,25 +31,17 @@
   font-size: 20px;
   line-height: 100%;
   position: initial;
-  /* float: left; */
-  /* clear: both; */
 }
 
-.time-since p {
-  /* padding-left: 22px
- */}
-
 .time-since .clock-icon {
-    float: left;
-  
-    height: 18px;
-    width: 18px;
-    margin: 1px 2px 0px 0px;
-    background-size: 18px;
+  float: left;
+  height: 18px;
+  width: 18px;
+  margin: 1px 2px 0px 0px;
+  background-size: 18px;
 }
 
 .category-icon {
-  /* float: right; */
   position: absolute;
   top: 18px;
   right: 30px;
@@ -73,7 +62,6 @@
 .post-footer {
   height: 69px;
   padding: 18px 15px;
-  /* color: #b7c2d4; */
   font-size: 28px;
 }
 
@@ -82,26 +70,22 @@
 }
 
 .like-icon {
-    margin: 0px 12px 0px 0px;
-  
-    background-size: 36px;
-    width: 36px;
-    height: 36px;
+  margin: 0px 12px 0px 0px;
+  background-size: 36px;
+  width: 36px;
+  height: 36px;
 }
 
 .comment-icon {
-    margin: 2px 12px 0px 27px;
-    width: 36px;
-  
-    height: 36px;
-    background-size: 36px;
+  margin: 2px 12px 0px 27px;
+  width: 36px;
+  height: 36px;
+  background-size: 36px;
 }
 
 .repost-icon {
   position: absolute;
   right: 45%;
-  /* left: 50%; */
-  /* z-index: 500; */
   background-size: 40px;
   width: 40px;
   height: 40px;
@@ -113,12 +97,10 @@
 .action-icon {
   position: absolute;
   right: 20%;
-  /* bottom: 38px; */
   margin: 0px;
   background-size: 34px;
   width: 34px;
   height: 34px;
-  /* margin-right: 48px; */
 }
 
 .location-icon {
@@ -127,14 +109,10 @@
   height: 34px;
   width: 34px;
   position: absolute; 
-  /* bottom: 38px; */
   right: 15px;
 }
 
 .comment-drawer {
-  /* border-left: 1px #d4daea solid; */
-  /* border-right: 1px #d4daea solid; */
-  /* border-bottom: 1px #d4daea solid; */
   background-color: #F3F5F7;
   display: none;
 }
@@ -159,53 +137,46 @@
 .post-comments-avatar {
     width: 10%;
     float: left;
-    /* height: 100%; */
 }
 
 .avatar-name {
-    width: 90%;
-
-    font-size: 22px;
-    font-weight: 900;
-    color: #7e7e7f;
-    float: none;
-    position: relative;
-    top: 0px;
-    /* left: 10%; */
+  width: 90%;
+  font-size: 22px;
+  font-weight: 900;
+  color: #7e7e7f;
+  float: none;
+  position: relative;
+  top: 0px;
 }
 
 .comment-text {
-    width: 90%;
-
-    font-size: 18px;
-    font-weight: 900;
-    color: #7e7e7f;
-    float: none;
+  width: 90%;
+  font-size: 18px;
+  font-weight: 900;
+  color: #7e7e7f;
+  float: none;
 }
 
 .comment-info {
-    width: 90%;
-  
-    color: #7e7e7f;
-    float: none;
-    margin-left: 10%;
+  width: 90%;
+  color: #7e7e7f;
+  float: none;
+  margin-left: 10%;
 }
 
 .comments-post {
-    width: 100%;
-
+  width: 100%;
 }
 
 form #inputComment {
-    height: 46px;
-
-    background-position-x: 15px; 
-    background-position-y: 12px;
+  height: 46px;
+  background-position-x: 15px; 
+  background-position-y: 12px;
 }
 
 .post-button {
-    margin: 12px 15px 0px 0px;
-    width: auto;
+  margin: 12px 15px 0px 0px;
+  width: auto;
 }
 
 @media screen and (max-width:500px) {
