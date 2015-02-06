@@ -111,20 +111,43 @@
 }
 
 /* Icons */
+.action-icon {
+  background-image: url('/images/icons/action_icon.png');
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.comment-icon {
+  background-image: url('/images/icons/comment_icon.png');
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
 
 .like-icon {
   background-image: url('/images/icons/like_icon.png');
   width: 24px;
-  height: 20px;
-  background-size: 24px 20px;
+  height: 24px;
+  background-size: 24px;
   background-repeat: no-repeat;
 }
 
 .location-icon {
-  height: 13px;
-  width: 10px;
+  height: 24px;
+  width: 24px;
   background-image: url('/images/icons/location_icon.png');
-  background-size: 10px 13px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.repost-icon {
+  background-image: url('/images/icons/repost_icon.png');
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
   background-repeat: no-repeat;
 }
 
