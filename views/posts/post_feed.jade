@@ -7,7 +7,9 @@ each post in posts
         .like-icon
         p.icon-text
           | #{post.likes_count}
-        .comment-icon(type='button' onclick='prizm.showModal(event)')
+        .comment-icon(type='button'
+                      class='cursor'
+                      onclick='prizm.showModal(event)')
         p.icon-text
           | #{post.comments_count}
         p.time-text
