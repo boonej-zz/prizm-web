@@ -126,6 +126,7 @@
   border-right: 1px #d4daea solid;
   border-bottom: 1px #d4daea solid;
   background-color: #F3F5F7;
+  display: none;
 }
 
 .post-comments {

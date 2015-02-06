@@ -1,7 +1,7 @@
 extends ../layouts/app_layout
 
 block head
-  script(src='/javascripts/profile.js' type='text/javascript')
+  script(src='/javascripts/profile/profile_home.js' type='text/javascript')
   link(rel='stylesheet', href='/stylesheets/profile/profile.css')
   link(rel='stylesheet', href='/stylesheets/profile/profile_home.css')
 
@@ -32,13 +32,15 @@ block content
               .like-icon
               p.icon-text
                 | #{post.likes_count}
-              .comment-icon(type='button' onclick='prizm.showModal(event)')
+              .comment-icon(type='button'
+                            prizm-data='#{post.id}'
+                            onclick='home.toggleComments(event)')
               p.icon-text
                 | #{post.comments_count}
               .repost-icon
               .action-icon
               .location-icon
-          .comment-drawer
+          .comment-drawer(prizm-data='#{post.id}')
             .post-comments
               p.comments-title
                 | Comments
