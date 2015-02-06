@@ -318,18 +318,18 @@
   display: inline-block;
   float: left;
   height: 100%;
-  width: 15%;
+  width: 14%;
   background: #E4E5EA;
   padding: 20px;
 }
 
 .comments-like img {
-  height: 100%;
+  width: 100%;
 }
 
 .comments-post {
   display: inline-block;
-  width: 85%;
+  width: 86%;
   height: 100%;
 }
 
