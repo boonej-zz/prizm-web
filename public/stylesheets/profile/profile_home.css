@@ -1,3 +1,11 @@
+.background-column {
+  background-color: #f4f5f7;
+  padding-right: 30px;
+  padding-left: 30px;
+  border-left: 1px solid #D0D2D6;
+  border-right: 1px solid #D0D2D6;
+  padding-bottom: 30px;
+}
 .post {
   color: #b7c2d4;
 }
@@ -46,7 +54,7 @@
 .category-icon {
   /* float: right; */
   position: absolute;
-  top: 51px;
+  top: 18px;
   right: 30px;
   background-size: 26px;
   width: 26px;
@@ -56,7 +64,7 @@
 .post-via {
   position: absolute;
   right: 30px;
-  top: 74px;
+  top: 46px;
   color: #b7c2d4;
   font-size: 17px;
   font-weight: 900;
@@ -90,8 +98,10 @@
 }
 
 .repost-icon {
-  position: relative;
-  z-index: 500;
+  position: absolute;
+  right: 45%;
+  /* left: 50%; */
+  /* z-index: 500; */
   background-size: 40px;
   width: 40px;
   height: 40px;
@@ -102,8 +112,8 @@
 
 .action-icon {
   position: absolute;
-  right: 124px;
-  bottom: 18px;
+  right: 20%;
+  /* bottom: 38px; */
   margin: 0px;
   background-size: 34px;
   width: 34px;
@@ -112,19 +122,19 @@
 }
 
 .location-icon {
-  /* display: inline-block; */
+  float: right;
   background-size: 34px;
   height: 34px;
   width: 34px;
   position: absolute; 
-  bottom: 18px;
-  right: 30px;
+  /* bottom: 38px; */
+  right: 15px;
 }
 
 .comment-drawer {
-  border-left: 1px #d4daea solid;
-  border-right: 1px #d4daea solid;
-  border-bottom: 1px #d4daea solid;
+  /* border-left: 1px #d4daea solid; */
+  /* border-right: 1px #d4daea solid; */
+  /* border-bottom: 1px #d4daea solid; */
   background-color: #F3F5F7;
   display: none;
 }
@@ -135,6 +145,7 @@
   font-weight: 900;
   background-color: #eef0f4;
   border-bottom: 1px #d4daea solid;
+  border-top: 1px #d4daea solid;
 }
 
 .comment-container {
@@ -194,6 +205,16 @@ form #inputComment {
 
 .post-button {
     margin: 12px 15px 0px 0px;
-  
     width: auto;
+}
+
+@media screen and (max-width:500px) {
+  .background-column {
+    background-color: #f4f5f7;
+    padding-right: inherit;
+    padding-left: inherit;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 30px;
+  }
 }
