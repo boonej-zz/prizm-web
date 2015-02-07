@@ -44,7 +44,7 @@
 .category-icon {
   position: absolute;
   top: 18px;
-  right: 30px;
+  right: 15px;
   background-size: 26px;
   width: 26px;
   height: 26px;
@@ -52,7 +52,7 @@
 
 .post-via {
   position: absolute;
-  right: 30px;
+  right: 15px;
   top: 46px;
   color: #b7c2d4;
   font-size: 17px;
