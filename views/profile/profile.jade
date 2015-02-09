@@ -29,6 +29,24 @@ block content
           ul
             li#profile-first.active
             li#profile-middle
+    .row.profile-info
+      .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
+        ul
+          li
+            | Followers
+            | <br>
+            strong
+              | #{user.followers_count}
+          li
+            | Following
+            | <br>
+            strong
+              | #{user.following_count}
+          li
+            | Posts
+            | <br>
+            strong
+              | #{user.posts_count}
     .row.profile-posts-container
         if (posts.length < 1)
           .col-sm-12

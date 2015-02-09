@@ -42,6 +42,28 @@
   background: rgba(57, 80, 109, .75);
 }
 
+.luminary-icon {
+  background-image: url('/images/icons/luminary_icon.png');
+  background-size: 19px 36px;
+  height: 36px;
+  width: 19px;
+  position: relative;
+  left: 25.5%;
+}
+
+.luminary-icon p {
+  margin-left: 24px;
+  padding-top: 8px;
+  font-size: 19px;
+}
+
+.luminary-card {
+  margin-top: 15px;
+  width: 20%;
+  height: 108px;
+  display: inline-block;
+}
+
 .slider {
   position: relative;
   width: 33.33%;
@@ -94,33 +116,44 @@
   background: none repeat scroll 0 0 #EEEEEE;
 }
 
+.profile-info  {
+  background-color: #fff
+}
+
+.profile-info ul {
+    padding: 0px;
+    list-style: none;
+    text-align: center;
+    background: #fbfbfc;
+    color: #818284;
+    border: 1px #d1d1d2 solid;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.25em;
+}
+
+.profile-info li {
+    list-style: none;
+    display: inline-block;
+    width: 33%;
+}
+
+.profile-info li:first-child {
+  border-right: 1px #d1d1d2 solid;
+}
+
+.profile-info li:last-child {
+  border-left: 1px #d1d1d2 solid;
+}
+
 .profile-posts-container {
   background-color: #eef0f4;
   padding-bottom: 30px;
   color: #B6B8D2;
-}
-
-
-.luminary-icon {
-  background-image: url('/images/icons/luminary_icon.png');
-  background-size: 19px 36px;
-  height: 36px;
-  width: 19px;
-  position: relative;
-  left: 25.5%;
-}
-
-.luminary-icon p {
-  margin-left: 24px;
-  padding-top: 8px;
-  font-size: 19px;
-}
-
-.luminary-card {
-  margin-top: 15px;
-  width: 20%;
-  height: 108px;
-  display: inline-block;
 }
 
 .post {
@@ -408,5 +441,9 @@ form #inputComment {
 
   .slider {
     padding: 15px;
+  }
+  .profile-info ul {
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
