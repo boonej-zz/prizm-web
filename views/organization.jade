@@ -44,6 +44,24 @@ block content
             li#profile-first.active
             li#profile-middle
             li#profile-last
+    .row.profile-info
+      .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
+        ul
+          li
+            | Followers
+            | <br>
+            strong
+              | #{owner.followers_count}
+          li
+            | Following
+            | <br>
+            strong
+              | #{owner.following_count}
+          li
+            | Posts
+            | <br>
+            strong
+              | #{owner.posts_count}
     .row.profile-posts-container
         if (posts.length < 1)
           .col-sm-12
