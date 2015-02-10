@@ -1,4 +1,22 @@
-/* Navigation Bar */
+@font-face { 
+ font-family: 'proxima_nova_ltlight';
+  src: url('/fonts/ProximaNova-Light-webfont.eot');
+  src: url('/fonts/ProximaNova-Light-webfont.eot?#iefix') 
+          format('embedded-opentype'),
+       url('/fonts/ProximaNova-Light-webfont.woff') format('woff'),
+       url('/fonts/ProximaNova-Light-webfont.ttf') format('truetype'),
+       url('/fonts/ProximaNova-Light-webfont.svg#proxdffdaia83a#LKJF')
+           format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  color: #2443A1;
+  background-color: #e4e5ea;
+}
+
 .topnav-offset {
   margin-top: 75px;
 }
@@ -43,46 +61,6 @@
   margin-top: 8px;
   font-size: 16px;
   text-transform: uppercase;
-}
-
-#profile-menu {
-  margin-top: -4px;
-  position: fixed;
-  top: 75px; 
-  background: #FBFCFF;
-  width: 120px;
-  border-radius: 10px;
-}
-
-#profile-menu:after {
-  content: '';
-  position: absolute;
-  border-style: solid;
-  border-width: 0 12px 15px;
-  border-color: #FFFFFF transparent;
-  display: block;
-  width: 0;
-  z-index: 1;
-  top: -10px;
-  left: 12px;
-}
-
-#profile-menu ul {
-  margin: 0px auto;
-  width: 120px;
-  float: left;
-  padding: 0px;
-  text-align: center;
-}
-
-#profile-menu li {
-  list-style: none;
-  border-bottom: 1px #d4daea solid;
-  padding: 12px;
-}
-
-#profile-menu li:last-child {
-  border: none;
 }
 
 /* Avatars */
@@ -143,6 +121,22 @@
   height: 24px;
   width: 24px;
   background-image: url('/images/icons/location_icon.png');
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.menu-icon {
+  height: 24px;
+  width: 24px;
+  background-image: url('/images/icons/menu_icon.png');
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.plus-icon {
+  height: 24px;
+  width: 24px;
+  background-image: url('/images/icons/plus_icon.png');
   background-size: 24px;
   background-repeat: no-repeat;
 }
