@@ -26,13 +26,6 @@ $(function(){
   });
 })
 
-/* Toggle Profile Menu */
-$(function() {
-  $('#profile-navbar').click(function(){
-    $('#profile-menu').toggleClass('hidden');
-  });
-});
-
 /* Header side scrolling */
 $(function() {
   $('#profile-first').click(function() {
@@ -55,19 +48,12 @@ $(function() {
 /* Fix for Navbar (bootstrap modal moves it right 15px) */
 $(function() {
   $('a[type="button"]').click(function() {
-    $('#navbar').css('padding-right', '15px');
-    $('#navbar').slideUp(function(){
-      $('#navbar').css('margin-left', '7px');
-    });
+    $('.navbar-default').css('padding-right', '15px');
+    $('.navbar-default').slideUp(200);
   });
   $('#loginModal').on('click', '.modal-backdrop', function() {
-    $('#navbar').animate({
-      paddingRight: "0px"
-    }, 150);
-    $('#navbar').animate({
-      marginLeft: ""
-    }, 150);
-    $('#navbar').slideDown(200);
+    $('.navbar-default').css('padding-right', '0px');
+    $('.navbar-default').slideDown(200);
   });
 });
 
