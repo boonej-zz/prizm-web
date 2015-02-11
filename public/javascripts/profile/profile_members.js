@@ -64,15 +64,18 @@ var members = {
   },
 
   // Member Page Controls
-  activeTab: function() {
+  activeTab: function() { 
+    var $this = this;
     var request = $.ajax({
       type: 'GET',
       url: window.location.pathname,
       headers: {
         'Accept': 'application/jade',
-        'memberStatus': 'active'
+        'memberStatus': 'active',
+        'content-type': 'application/jade',
       },
       success: function(html) {
+        members.updateActiveCount();
         if (html) {
           $('#active-members').html(html);
         }
@@ -85,24 +88,25 @@ var members = {
   },
 
   pendingTab: function() {
+    var $this = this;
     var request = $.ajax({
       type: 'GET',
       url: window.location.pathname,
       headers: {
         'Accept': 'application/jade',
-        'memberStatus': 'pending'
+        'memberStatus': 'pending',
+        'content-type': 'application/jade'
       },
       success: function(html) {
+        members.updatePendingCount();
         if (html) {
           $('#pending-members').html(html);
         }
+        $('#active-members').hide();
+        $('#pending-members').fadeIn();
       }
     });
-    request.done(function(){
-      $('#active-members').hide();
-      $('#pending-members').fadeIn();
-    });
-  },
+   },
 
   updateActiveCount: function(){
     $.ajax({
@@ -110,6 +114,7 @@ var members = {
       url: window.location.pathname,
       headers: {
         'Accept': 'application/json',
+        'content-type': 'application/json',
         'memberStatus': 'active'
       },
       success: function(json) {
@@ -124,10 +129,12 @@ var members = {
       url: window.location.pathname,
       headers: {
         'Accept': 'application/json',
+        'content-type': 'application/json',
         'memberStatus': 'pending'
       },
       success: function(json) {
-        $('a[href="#pending"]').text("Pending Members (" + json.length + ")");
+        var count = json.length;
+        $('a[href="#pending"]').text("Pending Members (" + count + ")");
       }
     })
   },

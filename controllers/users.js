@@ -421,6 +421,7 @@ exports.displayMembers = function(req, res) {
     membersHTMLRequest(req, res);
   }
   else if (req.accepts('application/jade')) {
+    console.log('Jade request');
     membersJADERequest(req, res);
   }
   else if (req.accepts('application/json')) {
@@ -477,9 +478,11 @@ var membersJADERequest = function(req, res) {
   Organization
     .getOrganizationByOwnerId(req.params.id, function(err, organization) {
       if (err) {
+        console.log(err);
         res.status(500).send({error: err});
       }
       if (!organization) {
+        console.log('no organization');
         res.status(404).send({error: 'Invalid Organization ID'});
       }
       else {
@@ -488,6 +491,7 @@ var membersJADERequest = function(req, res) {
           status: status
         }, function(err, members) {
           if (err) {
+              console.log(err);
               res.status(500).send({error: err});
           }
           else {
@@ -503,6 +507,7 @@ var membersJADERequest = function(req, res) {
 }
 
 var membersJSONRequest = function(req, res) {
+  console.log('In JSON request');
   var status = req.get('memberStatus');
   var criteria = {};
   if (status) {
@@ -511,19 +516,24 @@ var membersJSONRequest = function(req, res) {
   Organization
     .getOrganizationByOwnerId(req.params.id, function(err, organization) {
       if (err) {
+        console.log('error');
         res.status(500).send({error: err});
       }
       if (!organization) {
+        console.log('no organization');
         res.status(404).send({error: 'Invalid Organization ID'});
       }
       else {
         criteria.organization = organization.id;
-        User.findOrganizationMembers(criteria, function(err, organization) {
+        User.findOrganizationMembers(criteria, function(err, members) {
+          console.log(members.length);
+          console.log('found members');
           if (err) {
+            console.log(err);
               res.status(500).send({error: err});
           }
           else {
-            res.send(organization);
+            res.send(members);
           }
         });
       }
