@@ -95,38 +95,39 @@ html
     block content
 
     block settings
-      .settings
-        .settings-menu-button(onclick='nav.toggleSettings()')
-        .settings-menu
-          ul
-            li.home-button.settings-icon
-              a(href='#')
-                | Home
-            li.activity-button.settings-icon
-              a(href='#')
-                | Activity
-            li.insights-button.settings-icon
-              a(href='#')
-                | Insights
-            li.surveys-button.settings-icon
-              a(href='#')
-                | Surveys
-          ul Admin
-            li.stats-button.settings-icon
-              a(href='#')
-                | Stats
-            li.settings-button.settings-icon
-              a(href='#')
-                | Settings
-            li.members-button.settings-icon
-              a(href='#')
-                | Members
-            li.billing-button.settings-icon
-              a(href='#')
-                | Billing
-            li.invite-button.settings-icon
-              a(href='#')
-                | Invite
+      if (auth)
+        .settings
+          .settings-menu-button(onclick='nav.toggleSettings()')
+          .settings-menu
+            ul
+              li.home-button.settings-icon
+                a(href='/profile')
+                  | Home
+              li.activity-button.settings-icon
+                a(href='#')
+                  | Activity
+              li.insights-button.settings-icon
+                a(href='#')
+                  | Insights
+              li.surveys-button.settings-icon
+                a(href='#')
+                  | Surveys
+            ul Admin
+              li.stats-button.settings-icon
+                a(href='#')
+                  | Stats
+              li.settings-button.settings-icon
+                a(href='#')
+                  | Settings
+              li.members-button.settings-icon
+                a(href='profile/#{currentUser.id}/members')
+                  | Members
+              li.billing-button.settings-icon
+                a(href='#')
+                  | Billing
+              li.invite-button.settings-icon
+                a(href='#')
+                  | Invite
     mixin legal
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
