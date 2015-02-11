@@ -342,7 +342,7 @@ exports.handleLogout = function(req, res) {
 };
 
 // User Profile Methods
-exports.displayProfile = function(req, res) {
+exports.displayHomeFeed = function(req, res) {
   var id = req.user.id
   User.findOne({_id: ObjectId(id)}, function(err, user) {
     if (err) {
@@ -350,25 +350,17 @@ exports.displayProfile = function(req, res) {
     }
     if (user) {
       mixpanel.track('Profile Viewed', user.mixpanelProperties());
-      Post.findPostsForProfileByUserId(user.id, true, true, function(err, posts) {
-        var headerImages;
-        if (err) {
-          posts = [];
-          headerImages = [];
-        }
+      fetchHomeFeed(user, function(err, posts) {
         posts = _time.addTimeSinceFieldToObjects(posts);
-        headerImages =_profile.shufflePostImagesForProfileHeader(posts);
-        res.render('profile/profile', {
+        res.render('profile/profile_home', {
           auth: true,
           currentUser: req.user,
-          user: user,
-          headerImages: headerImages,
           posts: posts
         });
       });
     }
     else {
-      res.status(400).send({error: "User can not be found"})
+      res.status(400).send({error: "User can not be found"});
     }
   });
 }
@@ -539,6 +531,9 @@ var membersJSONRequest = function(req, res) {
 }
 
 var fetchHomeFeed = function(user, params, next){
+  if (typeof params === 'function') {
+    next = params;
+  }
   var limit = params.limit || 25;
   var skip = params.skip || 0;
   user.fetchHomeFeedCriteria(function(err, criteria){

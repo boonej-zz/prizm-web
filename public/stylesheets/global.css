@@ -1,6 +1,28 @@
-/* Navigation Bar */
+@font-face { 
+ font-family: 'proxima_nova_ltlight';
+  src: url('/fonts/ProximaNova-Light-webfont.eot');
+  src: url('/fonts/ProximaNova-Light-webfont.eot?#iefix') 
+          format('embedded-opentype'),
+       url('/fonts/ProximaNova-Light-webfont.woff') format('woff'),
+       url('/fonts/ProximaNova-Light-webfont.ttf') format('truetype'),
+       url('/fonts/ProximaNova-Light-webfont.svg#proxdffdaia83a#LKJF')
+           format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  color: #2443A1;
+  background-color: #e4e5ea;
+}
+
 .topnav-offset {
   margin-top: 75px;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 #profile-navbar {
@@ -41,47 +63,14 @@
   text-transform: uppercase;
 }
 
-#profile-menu {
-  margin-top: -4px;
-  position: fixed;
-  top: 75px; 
-  background: #FBFCFF;
-  width: 120px;
-  border-radius: 10px;
-}
-
-#profile-menu:after {
-  content: '';
-  position: absolute;
-  border-style: solid;
-  border-width: 0 12px 15px;
-  border-color: #FFFFFF transparent;
-  display: block;
-  width: 0;
-  z-index: 1;
-  top: -10px;
-  left: 12px;
-}
-
-#profile-menu ul {
-  margin: 0px auto;
-  width: 120px;
-  float: left;
-  padding: 0px;
-  text-align: center;
-}
-
-#profile-menu li {
-  list-style: none;
-  border-bottom: 1px #d4daea solid;
-  padding: 12px;
-}
-
-#profile-menu li:last-child {
-  border: none;
-}
-
 /* Avatars */
+.prizm-avatar-xs {
+  height: 40px;
+  width: 40px;
+  border: 2px #d4daea solid;
+  border-radius: 50%;
+}
+
 .prizm-avatar-sm {
   height: 64px;
   width: 64px;
@@ -104,10 +93,73 @@
 }
 
 /* Icons */
+.action-icon {
+  background-image: url('/images/icons/action_icon.png');
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.comment-icon {
+  background-image: url('/images/icons/comment_icon.png');
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.like-icon {
+  background-image: url('/images/icons/like_icon.png');
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
 
 .location-icon {
-  height: 13px;
-  width: 10px;
+  height: 24px;
+  width: 24px;
   background-image: url('/images/icons/location_icon.png');
-  background-size: 10px 13px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.menu-icon {
+  height: 24px;
+  width: 24px;
+  background-image: url('/images/icons/menu_icon.png');
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.plus-icon {
+  height: 24px;
+  width: 24px;
+  background-image: url('/images/icons/plus_icon.png');
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.repost-icon {
+  background-image: url('/images/icons/repost_icon.png');
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+
+.clock-icon {
+  height: 15px;
+  width: 15px;
+  background-image: url('/images/icons/clock_icon.png');
+  background-size: 15px;
+  background-repeat: no-repeat;
+}
+
+.category-icon {
+  height: 23px;
+  width: 23px;
+  background-size: 23px;
+  background-repeat: no-repeat;
 }

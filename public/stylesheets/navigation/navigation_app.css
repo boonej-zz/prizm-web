@@ -1,0 +1,111 @@
+.navbar-header {
+  height: 75px;
+  text-align: center;
+  font-size: 38px;
+  padding-top: 12px;
+}
+
+.menu-icon {
+  width: 36px;
+  height: 36px;
+  background-size: 36px;
+  position: absolute;
+  left: 0px;
+  top: 18px;
+}
+
+.plus-icon {
+  width: 36px;
+  height: 36px;
+  background-size: 36px;
+  position: absolute;
+  right: 0px;
+  top: 18px;
+}
+
+.avatar-menu {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  right: 16%;
+  top: 16px;
+  font-size: 14px;
+}
+
+.tool-tip {
+  background-image: url('/images/icons/tool_tip_icon.png');
+  background-size: 9px;
+  width: 9px;
+  height: 9px;
+  position: relative;
+  left: 44px;
+  bottom: 28px;
+}
+
+.user-menu {
+  position: absolute; 
+  left: 60%;
+  background: #FBFCFF;
+  width: 120px;
+  border-radius: 4px;
+  display: none;
+}
+
+.user-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 12px 15px;
+  border-color: #FFFFFF transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  top: -10px;
+  left: 12px;
+}
+
+.user-menu ul {
+  margin: 0px auto;
+  width: 100%;
+  float: left;
+  padding: 0px;
+  text-align: center;
+}
+
+.user-menu li {
+  list-style: none;
+  border-bottom: 1px #d4daea solid;
+  padding: 12px;
+}
+
+.user-menu li:last-child {
+  border: none;
+}
+
+.rotated {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.login-button {
+  width: 120px;
+  font-size: 20px;
+  padding-top: 6px;
+}
+
+@media screen and (max-width: 500px) {
+  .user-menu {
+    position: fixed;
+    top: 75px;
+    right: 0px;
+    left: 0px;
+    width: auto;
+    border-radius: 0px;
+  }
+
+  .user-menu:after {
+    display: none;
+  }
+}

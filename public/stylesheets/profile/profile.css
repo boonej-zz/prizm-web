@@ -42,6 +42,28 @@
   background: rgba(57, 80, 109, .75);
 }
 
+.luminary-icon {
+  background-image: url('/images/icons/luminary_icon.png');
+  background-size: 19px 36px;
+  height: 36px;
+  width: 19px;
+  position: relative;
+  left: 25.5%;
+}
+
+.luminary-icon p {
+  margin-left: 24px;
+  padding-top: 8px;
+  font-size: 19px;
+}
+
+.luminary-card {
+  margin-top: 15px;
+  width: 20%;
+  height: 108px;
+  display: inline-block;
+}
+
 .slider {
   position: relative;
   width: 33.33%;
@@ -94,33 +116,44 @@
   background: none repeat scroll 0 0 #EEEEEE;
 }
 
+.profile-info  {
+  background-color: #fff
+}
+
+.profile-info ul {
+    padding: 0px;
+    list-style: none;
+    text-align: center;
+    background: #fbfbfc;
+    color: #818284;
+    border: 1px #d1d1d2 solid;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.25em;
+}
+
+.profile-info li {
+    list-style: none;
+    display: inline-block;
+    width: 33%;
+}
+
+.profile-info li:first-child {
+  border-right: 1px #d1d1d2 solid;
+}
+
+.profile-info li:last-child {
+  border-left: 1px #d1d1d2 solid;
+}
+
 .profile-posts-container {
   background-color: #eef0f4;
   padding-bottom: 30px;
   color: #B6B8D2;
-}
-
-
-.luminary-icon {
-  background-image: url('/images/icons/luminary_icon.png');
-  background-size: 19px 36px;
-  height: 36px;
-  width: 19px;
-  position: relative;
-  left: 25.5%;
-}
-
-.luminary-icon p {
-  margin-left: 24px;
-  padding-top: 8px;
-  font-size: 19px;
-}
-
-.luminary-card {
-  margin-top: 15px;
-  width: 20%;
-  height: 108px;
-  display: inline-block;
 }
 
 .post {
@@ -128,6 +161,7 @@
   background-color: #FBFCFF;
   border: 1px #d4daea solid;
   margin-top: 30px;
+  position: relative;
 }
 
 .post-image img {
@@ -141,122 +175,86 @@
 }
 
 .like-icon {
-  background-image: url('/images/like_heart.png');
-  width: 24px;
-  height: 20px;
-  background-size: 24px 20px;
   display: inline-block;
-  margin: 14px 1px 12px 15px;
+  margin: 10px 1px 12px 15px;
   float: left;
 }
 
-.likes {
+.icon-text {
   display: inline-block;
   margin: 14px 2px auto;
   float: left
 }
+
+.time-text {
+  display: inline-block;
+  margin: 14px 15px 0px 2px;
+  float: right;}
 
 .comment-icon {
-  background-image: url('/images/comment.png');
-  width: 24px;
-  height: 20px;
-  background-size: 24px 20px;
   display: inline-block;
-  margin: 14px 1px 12px 20px;
+  margin: 11px 2px 0px 20px;
   float: left
 }
 
-.comments {
-  display: inline-block;
-  margin: 14px 2px auto;
-  float: left
-}
-
-.time {
-  display: inline-block;
+.clock-icon {
+  margin: 15px 2px 0px 2px;
   float: right;
-  margin: 11px 21px 0px 0px;
 }
 
-.time #clock-image {
-  display: inline-block;
-  margin: 3px auto;
-}
 
-.time #time {
-  display: inline-block;
-  margin-left: 3px;
-  vertical-align: super;
+.clock-icon + .icon-text {
+  float: right
 }
 
 .action-icon {
-  background-image: url('/images/post_share.png');
-  background-size: 24px 24px;
-  width: 24px;
-  height: 24px;
-  display: inline-block;
-  margin: 9px 15px 12px 10px;
+  margin: 10px 15px 12px 10px;
   float: right;
 }
 
 /* Single Post Modal */
-.modal-dialog.post-modal {
-    width: 1200px;
-}
-
-.modal-content.post-modal {
-    width: 100%;
-    height: auto;
-    border-radius: 0px;
-    border: 0px;
-}
-
-.modal-body.post-modal {
-    height: 100%;
-}
-
-.post-modal-left {
-    width: 660px;
-    display: inline-block;
-}
-
-.post-modal-left img {
+.container > .modal-dialog {
   width: 100%;
-  height: auto;
 }
 
-.post-modal-right {
-  width: 540px;
-  height: 100%;
-  display: inline-block;
-  position: absolute;
-  top: 0px;
+.no-padding {
+  padding: 0px;
+}
+
+.absolute-height {
+  background: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .comments-header {
-  height: 96px;
+  width: 100%;
   background: #E4E5EA;
+  padding: 15px;
+  position: absolute;
+  height: 96px;
+  display: inline-flex;
 }
 
 .comments-header #clock-image {
-  position: relative;
-  right: 122px;
-  top: 18px;
+  top: 39px;
+  position: absolute;
+  left: 21.5%;
   padding-left: 20px;
 }
 
-.post-creator-avatar {
-  display: inline-block;
-  padding: 16px;
-}
-
-.post-creator-name {
-  display:inline-block;
-  font-size: 20px
+.post-modal-avatar {
+  width: 20%;
+  float: left;
 }
 
 .post-comments {
   width: 100%;
+  height: 28px;
+  position: absolute;
+  top: 96px;
   text-align: center;
   background: #f3f5f7;
 }
@@ -269,25 +267,20 @@
 .comment-container {
   max-width: 100%;
   height: 112px;
-  display: table-header-group;
+  display: block;
+  padding: 15px;
 }
 
-.commenter-avatar {
-  display: table-cell;
-  width: 96px;
-  height: 112px;
-  padding: 12px 16px 0px 16px;
-}
-
-.commenter-name {
-  position: relative;
-  top: -11px;
+.avatar-name {
+  width: 80%;
   font-size: 18px;
+  float: right;
 }
 
 .comment-text {
-  position: relative;
-  top: -10px;
+  width: 80%;
+  display: inline-block;
+  float: right;
 }
 
 .comment-info {
@@ -311,8 +304,8 @@
   float: none;
   margin: 0px 4px 0px 0px;
   width: 16px;
-  height: 13px;
-  background-size: 16px 13px;
+  height: 15px;
+  background-size: 16px;
 }
 
 .comment-likes {
@@ -334,8 +327,12 @@
 }
 
 .comment-scroll {
+  background: white;
   overflow-y: auto;
-  height: 467px;
+  width: 100%;
+  position: absolute;
+  top: 124px;
+  bottom: 68px;
 }
 
 .comments-footer {
@@ -347,42 +344,38 @@
 
 .comments-like {
   display: inline-block;
-  height: 68px;
-  width: 68px;
+  float: left;
+  height: 100%;
+  width: 14%;
   background: #E4E5EA;
+  padding: 20px;
 }
 
-.comments-like .like-icon {
-  float: none;
-  height: 100%;
+.comments-like img {
   width: 100%;
-  display: inline-block;
-  margin: 0px auto;
-  background-repeat: no-repeat;
-  background-position: 22px 24px;
 }
 
 .comments-post {
   display: inline-block;
-  width: 471px;
-  height: 68px;
+  width: 86%;
+  height: 100%;
 }
 
 .comment-post {
   display: inline-block;
   width: 100%;
+  height: 100%;
   background: #f3f5f7;
-  padding-right: 12px;
 }
 
 form #inputComment {
   float: left;
-  width: 400px;
+  width: 85%;
   height: 68px;
   padding-left: 50px;
   padding-bottom: 2px;
   background: inherit;
-  background-image: url('/images/posts/write_comment.png');
+  background-image: url('/images/icons/write_icon.png');
   background-size: 22px;
   background-repeat: no-repeat;
   background-position-x: 14px;
@@ -403,10 +396,8 @@ form #inputComment {
 }
 
 .post-button {
-  display: inline-block;
   float: right;
-  height: 24px;
-  width: 48px;
+  width: 15%;
   margin: 22px auto;
   border-radius: 12px;
   color: #babad5;
@@ -419,92 +410,40 @@ form #inputComment {
   #profile-header {
     height: 200px;
   }
+
   .background-tile {
     width: 20%;
   }
-.luminary-icon {
-  background-size: 13px 27px;
-  height: 27px;
-  width: 13px;
-  left: 11.5%;
-}
-.luminary-icon p {
-  margin-left: 20px;
-  padding-top: 4px;
-  font-size: 16px;
-}
 
-.luminary-card {
-  margin-top: 6px;
-  width: 28%;
-  display: inline-block;
-}
+  .luminary-icon {
+    background-size: 13px 27px;
+    height: 27px;
+    width: 13px;
+    left: 11.5%;
+  }
+
+  .luminary-icon p {
+    margin-left: 20px;
+    padding-top: 4px;
+    font-size: 16px;
+  }
+
+  .luminary-card {
+    margin-top: 6px;
+    width: 28%;
+    display: inline-block;
+  }
+
   .post {
     margin-left: 15px;
     margin-right: 15px;
   }
+
   .slider {
     padding: 15px;
   }
-  .modal-body.post-modal {
-    height: 100%;
-  }
-  .modal-content.post-modal{
-    height: 100%
-  }
-  .modal-dialog.post-modal {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    position: absolute;
-  }
-  .post-modal-left {
-    display: none;
-  }
-  .post-modal-right {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-  .comment-scroll {
-    width: 100%;
-    height: auto;
-    background: #fff;
-    position: absolute;
-    top: 64px;
-    bottom: 68px;
-  }
-  .comments-header {
-    display: none;
-  }
-  .post-comments {
-    height: 64px;
-    position: absolute;
-    top: 0px;
-  }
-  p.comments-title {
-    font-size: 24px;
-    padding-top: 12px
-  }
-  .comments-like {
-    display: none;
-  }
-  .comments-post {
-    width: 100%;
-  }
-  .comment-post {
-    padding: 0px;
-    position: relative;
-    bottom: 0px;
-  }
-  .modal-open .modal {
-    overflow-y: hidden;
-    position: fixed;
-  }
-  form #inputComment {
-    width: 80%;
-  }
-  .post-button {
-    margin-right: 16px;
+  .profile-info ul {
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
