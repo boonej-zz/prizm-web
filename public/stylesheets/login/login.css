@@ -159,6 +159,7 @@
 /* Login Modal */
 .modal-body .form-signin {
   margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 #loginModal > .modal-dialog {
