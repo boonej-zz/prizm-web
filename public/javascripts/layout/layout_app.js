@@ -9,5 +9,9 @@ var nav = {
     else {
       menu.slideToggle();
     }
+  },
+
+  toggleSettings: function() {
+    $('.settings').toggleClass('settings-visable');
   }
-} 
+}
