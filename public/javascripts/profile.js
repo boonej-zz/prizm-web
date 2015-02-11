@@ -1,7 +1,7 @@
 /* Fetch posts for endless scrolling */
 $(window).scroll(function() {
   if($(window).scrollTop() == $(document).height() - $(window).height()) {
-    var lastPost = $('#profile-posts').children().last().attr('id');
+    var lastPost = $('.profile-posts-container').children().children().last().attr('id');
     var creator = $('.profile-owner').attr('id');
     $.ajax({
       url: '/posts/',
@@ -12,7 +12,7 @@ $(window).scroll(function() {
       },
       success: function(html) {
         if(html) {
-            $("#profile-posts").append(html);
+            $(".profile-posts-container").append(html);
         }
       }
     });
