@@ -89,6 +89,7 @@ postSchema.methods.findPostsForHomeFeed = function(criteria, next){
 };
 
 postSchema.post('init', function(post){
+  post.formattedText = post.text;
   _.each(post.comments, function(comment, idx, list){
     comment.formattedText = comment.text;
   });
