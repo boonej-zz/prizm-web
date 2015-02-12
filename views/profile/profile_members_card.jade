@@ -4,8 +4,8 @@ div(class='modal fade'
     role='dialog'
     aria-labelledby='memberCardLabel')
   .modal-dialog.member
-    .modal-content.member
-      .modal-body.member
+    .modal-content
+      .modal-body
         each member in members
           .member-card.hidden(data='#{member.id}')
             .front-member
