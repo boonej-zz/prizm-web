@@ -17,55 +17,21 @@ var singlePost  = fs.readFileSync(path.join(__dirname +
 
 // Posts Methods
 exports.fetchPosts = function(req, res) {
+  var feedType = req.get('feedType');
+
   if (req.accepts('html')) {
-    res.status(406).send({ error: "Not acceptable"});
+    res.status(406).send({ error: "html request unacceptable"});
   }
-  if (req.accepts('application/json')) {
-    var creator = req.get('creator');
-    var lastPost = req.get('lastPost');
-    var isCurrent = false;
-    var isTrust = false;
-    if (req.isAuthenticated()) {
-      if (req.user.id == creator) {
-        isCurrent = true;
-      }
+  if (req.accepts('application/jade')) {
+    if (feedType == 'profile') {
+      profilePostFeed(req, res);
     }
-    Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
-      if (err) {
-        console.log(err);
-        res.status(400).send({ error: err });
-      }
-      if (post) {
-        criteria = {
-          creator: ObjectId(creator),
-          status: 'active',
-          create_date: {$lt: post.create_date}
-        }
-        if (!isCurrent) {
-          criteria.category = {$ne: 'personal'};
-          if (!isTrust){
-            criteria.$and = [{scope: {$ne: 'private'}}, {scope: {$ne: 'trust'}}];
-          } else {
-            criteria.scope = {$ne: 'private'};
-          }
-        } 
-        Post
-        .find(criteria)
-        .sort({create_date: -1, _id: -1})
-        .limit(21)
-        .exec(function(err, posts) {
-          if (err) {
-            console.log(err);
-            res.status(500).send({ error: err});
-          }
-          else {
-            posts = _time.addTimeSinceFieldToObjects(posts);
-            var content = jade.render(postFeed, {posts: posts});
-            res.status(200).send(content);
-          }
-        });
-      }
-    });
+    else if (feedType == 'members') {
+      organizationMembersFeed(req, res);
+    }
+    else {
+      res.status(406).send({ error: "feedType unacceptable"});
+    }
   }
   else {
     res.status(406).send({ error: "Not acceptable"});
@@ -174,6 +140,103 @@ var singlePostJadeRequest = function(req, res) {
         
       }
     }); 
+};
+
+/* Fetch Post Request Types */
+
+var profilePostFeed = function(req, res) {
+  var creator = req.get('creator');
+  var lastPost = req.get('lastPost');
+  var isCurrent = false;
+  var isTrust = false;
+  if (req.isAuthenticated()) {
+    if (req.user.id == creator) {
+      isCurrent = true;
+    }
+  }
+  Post.findOne({_id: ObjectId(lastPost)}, function(err, post) {
+    if (err) {
+      console.log(err);
+      res.status(400).send({ error: err });
+    }
+    if (post) {
+      criteria = {
+        creator: ObjectId(creator),
+        status: 'active',
+        create_date: {$lt: post.create_date}
+      }
+      if (!isCurrent) {
+        criteria.category = {$ne: 'personal'};
+        if (!isTrust){
+          criteria.$and = [{scope: {$ne: 'private'}}, {scope: {$ne: 'trust'}}];
+        } else {
+          criteria.scope = {$ne: 'private'};
+        }
+      } 
+      Post
+      .find(criteria)
+      .sort({create_date: -1, _id: -1})
+      .limit(21)
+      .exec(function(err, posts) {
+        if (err) {
+          console.log(err);
+          res.status(500).send({ error: err});
+        }
+        else {
+          posts = _time.addTimeSinceFieldToObjects(posts);
+          var content = jade.render(postFeed, {posts: posts});
+          res.status(200).send(content);
+        }
+      });
+    }
+  });
+}
+
+var organizationMembersFeed = function(req, res) {
+  var orgID = req.get('orgID');
+  var lastPost = req.get('lastPost');
+  var members = [];
+  var criteria = {
+    creator: {$in: members},
+    status: 'active',
+    category: {$ne: 'personal'},
+    scope: {$ne: 'private'}
+  }
+  if (lastPost) {
+    var query = Post.findOne({_id: ObjectId(lastPost)});
+    query.select('create_date');
+    query.exec(function(err, post) {
+      if (err) { 
+        res.status(500).send({error: err}); 
+      }
+      else {
+        criteria.create_date = {$lt: post.create_date}
+      }
+    });
+  }
+  User.findOrganizationMembers({
+    organization: orgID,
+    status: 'active'
+  }, function(err, users) {
+    if (err) { 
+      res.status(500).send({error: err}); 
+    }
+    else {
+      _.each(users, function(user) {
+        members.push(user.id);
+      });
+      Post.find(criteria, function(err, posts) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        else {
+          posts = _time.addTimeSinceFieldToObjects(posts);
+          var content = jade.render(postFeed, {posts: posts});
+          res.status(200).send(content);
+        }
+      })
+    }
+  });
 }
 
 

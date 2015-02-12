@@ -39,8 +39,6 @@ var prizm = {
           }
 };
 
-
-
 /** NAVIGATION BAR **/
 $(function(){
   $('.menu-button').click(function(){

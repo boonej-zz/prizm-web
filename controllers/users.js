@@ -342,6 +342,33 @@ exports.handleLogout = function(req, res) {
 };
 
 // User Profile Methods
+
+var fetchHomeFeed = function(user, params, next){
+  if (typeof params === 'function') {
+    next = params;
+  }
+  var limit = params.limit || 25;
+  var skip = params.skip || 0;
+  user.fetchHomeFeedCriteria(function(err, criteria){
+    Post
+    .find(criteria)
+    .sort({create_date: -1, _id: -1})
+    .populate({
+      path: 'creator',
+      select: User.basicFields()
+    })
+    .populate({
+      path: 'comments.creator',
+      select: User.basicFields()
+    })
+    .skip(skip)
+    .limit(limit)
+    .exec(function(err, results){
+      next(err, results);
+    });
+  });
+};
+
 exports.displayHomeFeed = function(req, res) {
   var id = req.user.id
   User.findOne({_id: ObjectId(id)}, function(err, user) {
@@ -505,7 +532,7 @@ var membersJADERequest = function(req, res) {
         });
       }
     });    
-}
+};
 
 var membersJSONRequest = function(req, res) {
   var status = req.get('memberStatus');
@@ -535,30 +562,4 @@ var membersJSONRequest = function(req, res) {
         });
       }
     });
-}
-
-var fetchHomeFeed = function(user, params, next){
-  if (typeof params === 'function') {
-    next = params;
-  }
-  var limit = params.limit || 25;
-  var skip = params.skip || 0;
-  user.fetchHomeFeedCriteria(function(err, criteria){
-    Post
-    .find(criteria)
-    .sort({create_date: -1, _id: -1})
-    .populate({
-      path: 'creator',
-      select: User.basicFields()
-    })
-    .populate({
-      path: 'comments.creator',
-      select: User.basicFields()
-    })
-    .skip(skip)
-    .limit(limit)
-    .exec(function(err, results){
-      next(err, results);
-    });
-  });
-}
+};

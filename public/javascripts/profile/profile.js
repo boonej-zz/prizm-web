@@ -3,12 +3,20 @@ $(window).scroll(function() {
   if($(window).scrollTop() == $(document).height() - $(window).height()) {
     var lastPost = $('.profile-posts-container').children().children().last().attr('id');
     var creator = $('.profile-owner').attr('id');
+    var feedType;
+    if ($('#membersToggle').attr('data-toggle') == 'on') {
+      feedType = 'members';
+    }
+    else {
+      feedType = 'profile';
+    }
     $.ajax({
       url: '/posts/',
       headers: {
-        'Accept' : 'application/json',
+        'Accept' : 'application/jade',
         'creator' : creator,
-        'lastPost' : lastPost
+        'lastPost' : lastPost,
+        'feedType' : feedType
       },
       success: function(html) {
         if(html) {
@@ -27,6 +35,7 @@ var profile = {
     $('.slider-nav li').toggleClass('active', false);
     $(target).toggleClass('active');
   },
+
   showModal: function(e){
     var target = e.target;
     var postID = $(target).parents('.post').attr('id');
@@ -43,10 +52,12 @@ var profile = {
       }
     });
   },
+
   dismissModal: function(e){
     $('#post-display').empty();
     $('#postModal').modal('hide');
   },
+
   nextPost: function(e, direction) {
     var target = e.target;
     var currentPostId = $(target).parent().attr('id');
@@ -73,6 +84,44 @@ var profile = {
     request.done(function(){
       $('#post-display').html(nextPost);
     });
+  },
+
+  toggleMembersPosts: function() {
+    var posts;
+    var organization = $('.organization').attr('id');
+    var state        = $('#membersToggle').attr('data-toggle');
+    var currentPosts = $('.members-posts-container').children().children('.post');
+    var hasPosts     = currentPosts.length > 0 ? true : false;
+
+    var initialRequest = $.ajax({
+      url: '/posts/',
+      headers: {
+        'Accept': 'application/jade',
+        'orgID': organization,
+        'feedType': 'members'
+      },
+      success: function(html) {
+        if (html) {
+          posts = html;
+        }
+      }
+    });
+
+    if (state == 'off') {
+      if (hasPosts == false) {
+        initialRequest.done(function(){
+          $('.members-posts-container').html(posts);
+        })
+      }
+      $('.profile-posts-container').hide();
+      $('.members-posts-container').fadeIn();
+      $('#membersToggle').attr('data-toggle', 'on');
+    }
+    if (state == 'on') {
+      $('.members-posts-container').hide();
+      $('.profile-posts-container').fadeIn();
+      $('#membersToggle').attr('data-toggle', 'off');
+    }
   }
 }
 

@@ -118,6 +118,8 @@
 
 .profile-info  {
   background-color: #fff
+;
+  /* height: 76px; */
 }
 
 .profile-info ul {
@@ -150,7 +152,32 @@
   border-left: 1px #d1d1d2 solid;
 }
 
+#membersToggle {
+  margin: 19px 0px;
+  position: absolute;
+}
+
+.toggle-label {
+    position: absolute;
+  
+    left: 83px;
+    margin: 29px 0px 29px 15px;
+    font-size: 18px;
+    line-height: 1em;
+}
+
+#membersToggle > .toggle-switch {
+  background: #134b9f;
+}
+
 .profile-posts-container {
+  background-color: #eef0f4;
+  padding-bottom: 30px;
+  color: #B6B8D2;
+}
+
+.members-posts-container {
+  display: none;
   background-color: #eef0f4;
   padding-bottom: 30px;
   color: #B6B8D2;

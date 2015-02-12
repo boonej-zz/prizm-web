@@ -8,6 +8,7 @@ block content
   .container.topnav-offset
     .row
       .profile-owner(id='#{organization.owner}')
+      .organization(id='#{organization.id}')
       .col-sm-12#profile-header
         if (headerImages.length > 15)
           .background-tile-container
@@ -45,7 +46,14 @@ block content
             li(onClick='profile.slideHeader(event, 1)')
             li(onClick='profile.slideHeader(event, 2)')
     .row.profile-info
-      .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
+      .col-mob-2
+        .toggle-container(data-toggle='off' 
+                          id='membersToggle'
+                          onClick='profile.toggleMembersPosts()')
+          .toggle-switch
+        .toggle-label
+          | Members
+      .col-mob-10.col-xs-offset-4.col-xs-6.col-md-offset-6.col-md-4
         ul
           li
             | Followers
@@ -62,12 +70,15 @@ block content
             | <br>
             strong
               | #{owner.posts_count}
-    .row.profile-posts-container(onScroll='profile.infiniteScroll()')
+    .row.profile-posts-container
         if (posts.length < 1)
           .col-sm-12
             h2 This Organization has not created any posts yet
         else
           include posts/post_feed
+    .row.members-posts-container
+      .col-sm-12
+        h2 This Organization has not created any posts yet
   div#postModal.modal.fade(
       tabIndex='-1'
       role='dialog'
