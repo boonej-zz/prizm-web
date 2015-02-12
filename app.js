@@ -31,10 +31,13 @@ app.use(function(req, res, next){
   var protocol = req.protocol;
   var hostname = req.headers.host;
   var originalUrl = req.originalUrl;
+  // fix hostname for twitter redirect
+  if (hostname == 'www.prizmapp.com'){
+    hostname = 'prizmapp.com';
+  }
   if (hostname == herokuHostname) {
     next();
-  }
-  else if (protocol == 'http'){
+  } else if (protocol == 'http'){
     res.redirect('https://' + hostname + originalUrl);
   } else {
     next();
