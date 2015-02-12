@@ -17,8 +17,17 @@ var nav = {
 
 var login = {
   displayForm: function() {
-    console.log("Called!");
     $('.front').css('display', 'none');
     $('.back').css('display', 'inherit');
   }
 };
+
+/* Fix for Navbar (bootstrap modal moves it right 15px) */
+$(function() {
+  $('body').on('show.bs.modal', function() {
+    $('.navbar-default').css('right', '15px');
+  });
+  $('body').on('hidden.bs.modal', function() {
+    $('.navbar-default').css('right', '0px');
+  });
+});

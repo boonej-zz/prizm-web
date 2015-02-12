@@ -76,13 +76,3 @@ var profile = {
   }
 }
 
-/* Fix for Navbar (bootstrap modal moves it right 15px) */
-$(function() {
-  $('body').on('show.bs.modal', function() {
-    $('.navbar-default').css('right', '15px');
-  });
-  $('body').on('hidden.bs.modal', function() {
-    $('.navbar-default').css('right', '0px');
-  });
-});
-
