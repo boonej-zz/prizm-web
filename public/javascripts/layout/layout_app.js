@@ -15,7 +15,7 @@ var nav = {
   }
 };
 
-var profile = {
+var login = {
   displayForm: function() {
     console.log("Called!");
     $('.front').css('display', 'none');

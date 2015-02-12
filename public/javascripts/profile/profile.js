@@ -20,6 +20,13 @@ $(window).scroll(function() {
 });
 
 var profile = {
+  slideHeader: function(e, multiple) {
+    var target = e.target;
+    var leftAmount = multiple * 33.33 * -1;
+    $('.slider').animate({left: leftAmount + '%'}, 600);
+    $('.slider-nav li').toggleClass('active', false);
+    $(target).toggleClass('active');
+  },
   showModal: function(e){
     var target = e.target;
     var postID = $(target).parents('.post').attr('id');
@@ -69,41 +76,13 @@ var profile = {
   }
 }
 
-/* Dismiss Post Modal */
-$(function(){
-  $('#postModal').on('click', '.modal-backdrop', function() {
-    $('#post-display').empty();
-  });
-})
-
-/* Header side scrolling */
-$(function() {
-  $('#profile-first').click(function() {
-    $('.slider').animate({left: '0%'}, 600);
-    $('.slider-nav li').toggleClass('active', false);
-    $('#profile-first').toggleClass('active');
-  });
-  $('#profile-middle').click(function() {
-    $('.slider').animate({left: '-33.33%'}, 600);
-    $('.slider-nav li').toggleClass('active', false);
-    $('#profile-middle').toggleClass('active');
-  });
-  $('#profile-last').click(function() {
-    $('.slider').animate({left: '-66.66%'}, 600);
-    $('.slider-nav li').toggleClass('active', false);
-    $('#profile-last').toggleClass('active');
-  });
-});
-
 /* Fix for Navbar (bootstrap modal moves it right 15px) */
 $(function() {
-  $('a[type="button"]').click(function() {
-    $('.navbar-default').css('padding-right', '15px');
-    $('.navbar-default').slideUp(200);
+  $('body').on('show.bs.modal', function() {
+    $('.navbar-default').css('right', '15px');
   });
-  $('#loginModal').on('click', '.modal-backdrop', function() {
-    $('.navbar-default').css('padding-right', '0px');
-    $('.navbar-default').slideDown(200);
+  $('body').on('hidden.bs.modal', function() {
+    $('.navbar-default').css('right', '0px');
   });
 });
 
