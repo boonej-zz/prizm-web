@@ -4,13 +4,13 @@ div(class='modal fade'
     role='dialog'
     aria-labelledby='memberCardLabel')
   .modal-dialog.member
-    .modal-content.member
-      .modal-body.member
+    .modal-content
+      .modal-body
         each member in members
           .member-card.hidden(data='#{member.id}')
             .front-member
               .member-info-top
-                .card-icon(onclick='members.showCardBack()')
+                .card-icon.cursor(onclick='members.showCardBack()')
                 .member-avatar
                   img(src='https://#{member.profile_photo_url.substr(7)}'
                       class='prizm-avatar-lg')

@@ -156,99 +156,113 @@ table>thead>tr:last-of-type>th {
 }
 
 /* Member Card Modal */
+.modal-dialog.member {
+  width: 386px;
+}
 .member-info-top {
   text-align: center;
   background-color: #f8f8f8;
-  height: 368px
+  height: 330px;
+  border-bottom: 1px solid #e3e5e9;
 }
 
 .card-icon {
   background: url('/images/profile/members_card_icon.png');
-  background-size: 36px;
+  background-size: 30px;
   background-repeat: no-repeat;
-  background-position-x: 12px;
-  background-position-y: 12px;
-  width: 36px;
-  height: 36px;
-  padding: 30px;
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  right: 15px;
+  top: 15px;
 }
 
 .member-avatar {
-  margin-bottom: 28px;
+  padding-top: 40px;
 }
 
 .member-name {
   color: black;
-  font-size: 22px;
+  font-size: 20px;
   width: 80%;
   margin: auto;
+  font-weight: 900;
+  padding-top: 12px;
 }
 
 .member-email {
-  color: #808080;
-  font-size: 22px;
+  color: #acacac;
+  font-size: 19px;
   width: 80%;
   margin: auto;
-  border-bottom: 1px solid #d4daea;
+  border-bottom: 1px solid #e3e5e9;
   padding-bottom: 6px;
+  font-weight: 900;
 }
 
 .member-birthday {
   color: black;
-  font-size: 20px;
-  margin-top: 12px;
+  font-size: 19px;
+  margin-top: 18px;
+  margin-bottom: 3px;
+  font-weight: 500;
 }
 
 .member-info-top > .location-icon {
   display:inline-block;
   margin-right: 4px;
+  height: 12px;
+  width:  12px;
+  background-size: 12px;
 }
 
 .member-location {
-  color: #808080;
-  font-size: 22px;
+  color: #acacac;
+  font-size: 20px;
   display: inline-block;
   margin-bottom: 12px;
+  font-weight: 900;
 }
 
 .member-info-bottom {
   background: white;
-  height: 124px;
+  height: 172px;
 }
 
 .member-circle {
-  height: 96px;
-  width: 96px;
+  height: 100px;
+  width: 100px;
   background: #f8f8f8;
-  border: 2px #e3e5e9 solid;
+  border: 3px #e3e5e9 solid;
   border-radius: 50%;
-  color: #808080;
+  color: #acacac;
   display: inline-block;
   padding-top: 28px;
   text-align: center;
   font-weight: 800;
   font-size: 18px;
-  margin-top: 14px;
-  margin-left: 14px;
-  margin-right: 14px;
+  line-height: 1.2;
+  margin-top: 35px;
+  margin-left: 26px;
+  margin-right: -10px;
 }
 
 .interests-header {
   text-align: center;
   background: #f8f8f8;
-  height: 69px;
+  height: 60px;
 }
 
 .interests-header > .card-icon {
   float: right;
-  margin-top: 6px;
 }
 
 .interests-header > h2 {
   display: inline-block;
-  padding-left: 60px;
   font-weight: 100;
   color: #2443A1;
+  margin-bottom: 0px;
+  margin-top: 15px;
 }
 
 .interests-container {

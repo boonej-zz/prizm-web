@@ -1,7 +1,7 @@
 extends layouts/layout_app
 
 block head
-  script(src='/javascripts/profile.js' type='text/javascript')
+  script(src='/javascripts/profile/profile.js' type='text/javascript')
   link(rel='stylesheet', href='/stylesheets/profile/profile.css')
 
 block content
@@ -17,15 +17,15 @@ block content
                 .background-tile
                   img(src='https://#{headerImage.substr(7)}')
         .slider-container
-          #profile-header-section1.slider
+          .slider
             img(src='https://#{owner.profile_photo_url.substr(7)}'
                 class='prizm-avatar-md')
             h1 #{organization.name}
             h4 #{owner.city}, #{owner.state}
-          #profile-header-section2.slider
+          .slider
             h4 #{owner.info}
             h5 #{owner.website}
-          #profile-header-section3.slider
+          .slider
             .luminary-icon
               p
                 | Luminary
@@ -41,9 +41,9 @@ block content
                       | &nbsp;
         .slider-nav
           ul
-            li#profile-first.active
-            li#profile-middle
-            li#profile-last
+            li.active(onClick='profile.slideHeader(event, 0)')
+            li(onClick='profile.slideHeader(event, 1)')
+            li(onClick='profile.slideHeader(event, 2)')
     .row.profile-info
       .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
         ul
@@ -62,7 +62,7 @@ block content
             | <br>
             strong
               | #{owner.posts_count}
-    .row.profile-posts-container
+    .row.profile-posts-container(onScroll='profile.infiniteScroll()')
         if (posts.length < 1)
           .col-sm-12
             h2 This Organization has not created any posts yet

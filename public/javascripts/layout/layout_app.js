@@ -9,5 +9,16 @@ var nav = {
     else {
       menu.slideToggle();
     }
+  },
+  toggleSettings: function() {
+    $('.settings').toggleClass('settings-visable');
   }
-} 
+};
+
+var login = {
+  displayForm: function() {
+    console.log("Called!");
+    $('.front').css('display', 'none');
+    $('.back').css('display', 'inherit');
+  }
+};

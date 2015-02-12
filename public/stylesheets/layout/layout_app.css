@@ -1,3 +1,4 @@
+/* Navigation Bar */
 .navbar-header {
   height: 75px;
   text-align: center;
@@ -98,6 +99,7 @@
 .login-button a:hover {
   text-decoration: none;
 }
+
 @media screen and (max-width: 500px) {
   .user-menu {
     position: fixed;
@@ -112,3 +114,122 @@
     display: none;
   }
 }
+
+/* Settings Menu */
+.settings {
+  width:454px;
+  background-color: #3c485e;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: -454px;
+  z-index: 1250;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  padding-left: 179px;
+  -webkit-transition: all 500ms cubic-bezier(0.115, 0, 0.150, 1); /* older webkit */
+  -webkit-transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+     -moz-transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+       -o-transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+          transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); /* custom */
+
+  -webkit-transition-timing-function: cubic-bezier(0.115, 0, 0.150, 1); /* older webkit */
+  -webkit-transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+     -moz-transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+       -o-transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+          transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); /* custom */
+}
+
+.settings a {
+  color: #ffffff
+}
+
+.settings ul {
+  width: 250px;
+  list-style: none;
+  padding: 14px 0px 23px 110px;
+}
+
+.settings li {
+  padding-left: 165px;
+  margin: 18px 0px 3px -130px;
+}
+
+.settings li:hover {
+  background-color: #3e6a9e;
+}
+
+.settings-menu-button {
+  background-image: url('/images/icons/menu_icon_white.png');
+  background-size: 40px;
+  width: 40px;
+  height: 40px;
+  margin-top: 18px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.settings-menu {
+  margin-top: 80px;
+}
+
+.settings-visable {
+  left: -179px;
+  -webkit-transition: all 500ms cubic-bezier(0.115, 0, 0.150, 1); /* older webkit */
+  -webkit-transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+     -moz-transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+       -o-transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+          transition: all 500ms cubic-bezier(0.115, -0.005, 0.150, 1.650); /* custom */
+
+  -webkit-transition-timing-function: cubic-bezier(0.115, 0, 0.150, 1); /* older webkit */
+  -webkit-transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+     -moz-transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+       -o-transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); 
+          transition-timing-function: cubic-bezier(0.115, -0.005, 0.150, 1.650); /* custom */
+}
+
+.settings-icon {
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position-x: 132px;
+  background-position-y: 2px;
+}
+
+.home-button {
+  background-image: url('/images/settings/settings_home.png');
+}
+
+.activity-button {
+  background-image: url('/images/settings/settings_activity.png');
+}
+
+.insights-button {
+  background-image: url('/images/settings/settings_insights.png');
+}
+
+.surveys-button {
+  background-image: url('/images/settings/settings_survey.png');
+}
+
+.stats-button {
+  background-image: url('/images/settings/settings_stats.png');
+}
+
+.settings-button {
+  background-image: url('/images/settings/settings_settings.png');
+}
+
+.members-button {
+  background-image: url('/images/settings/settings_members.png');
+}
+
+.billing-button {
+  background-image: url('/images/settings/settings_billing.png');
+}
+
+.invite-button {
+  background-image: url('/images/settings/settings_invite.png');
+}
+

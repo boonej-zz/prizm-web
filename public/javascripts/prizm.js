@@ -36,27 +36,7 @@ var prizm = {
               },
   mailTo: function(){
             window.location = 'mailto:info@prizmapp.com?subject=Find out more';
-          },
-  showModal: function(e){
-    var target = e.target;
-    var postID = $(target).parents('.post').attr('id');
-    $.ajax({
-      url: '/posts/' + postID,
-      headers: {
-        'Accept': 'application/jade'
-      },
-      success: function(html) {
-        if (html) {
-          $('#post-display').html(html);
-          $('#postModal').modal();
-        }
-      }
-    });
-  },
-  dismissModal: function(e){
-    $('#post-display').empty();
-    $('#postModal').modal('hide');
-  }
+          }
 };
 
 
@@ -190,26 +170,5 @@ $(function() {
     }
   });
 });
-
-/* Login */
-$(function() {
-  $('input[value="Log In"]').click(function() {
-    $('.front').css('display', 'none');
-    $('.back').css('display', 'inherit');
-  });
-});
-
-/*
-$(function() {
-  var input_element = document.getElementById("interest-selection");
-  input_element.onchange = interestCount;
-});
-
-function interestCount() {
-  var numberOfSelectedInterests = $('#interest-selection :selected').length;
-  var interest_number = document.getElementById("interest-count");
-  interest_number.value = numberOfSelectedInterests;
-}
-*/
 
 

@@ -221,6 +221,39 @@
   padding: 0px;
 }
 
+.dismiss {
+    background-image: url('/images/posts/dismiss.png');
+
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+    position: absolute;
+    top: -26px;
+    right: 5px;
+}
+
+.next-post-right {
+    background-image: url('/images/posts/arrow_right.png');
+  
+    width: 40px;
+    height: 40px;
+    background-size: 40px;
+    position: absolute;
+    top: 50%;
+    right: -50px;
+}
+
+.next-post-left {
+    background-image: url('/images/posts/arrow_left.png');
+  
+    width: 40px;
+    height: 40px;
+    background-size: 40px;
+    position: absolute;
+    top: 50%;
+    left: -50px;
+}
+
 .absolute-height {
   background: white;
   position: fixed;
