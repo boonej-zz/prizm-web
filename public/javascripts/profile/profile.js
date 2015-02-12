@@ -19,6 +19,56 @@ $(window).scroll(function() {
   }
 });
 
+var profile = {
+  showModal: function(e){
+    var target = e.target;
+    var postID = $(target).parents('.post').attr('id');
+    $.ajax({
+      url: '/posts/' + postID,
+      headers: {
+        'Accept': 'application/jade'
+      },
+      success: function(html) {
+        if (html) {
+          $('#post-display').html(html);
+          $('#postModal').modal();
+        }
+      }
+    });
+  },
+  dismissModal: function(e){
+    $('#post-display').empty();
+    $('#postModal').modal('hide');
+  },
+  nextPost: function(e, direction) {
+    var target = e.target;
+    var currentPostId = $(target).parent().attr('id');
+    var profilePostElement = $('#' + currentPostId).parent();
+    var nextPostId;
+    var nextPost;
+    if (direction == 'left') {
+      nextPostId = profilePostElement.prev().children('.post').attr('id');
+    }
+    if (direction == 'right') {
+      nextPostId = profilePostElement.next().children('.post').attr('id');
+    }
+    var request = $.ajax({
+      url: '/posts/' + nextPostId,
+      headers: {
+        'Accept': 'application/jade'
+      },
+      success: function(html) {
+        if (html) {
+          nextPost = html
+        }
+      }
+    });
+    request.done(function(){
+      $('#post-display').html(nextPost);
+    });
+  }
+}
+
 /* Dismiss Post Modal */
 $(function(){
   $('#postModal').on('click', '.modal-backdrop', function() {

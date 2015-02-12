@@ -1,7 +1,10 @@
 .container(id='#{post.id}')
+  .dismiss.cursor(onclick='profile.dismissModal(event)')
+  .next-post-left.cursor(onclick='profile.nextPost(event, "left")')
+  .next-post-right.cursor(onclick='profile.nextPost(event, "right")')
   .row
     .col-sm-7.col-xs-12.no-padding
-      .post-image(onclick='prizm.dismissModal(event)')
+      .post-image(onclick='profile.dismissModal(event)')
         img(src='https://#{post.file_path.substr(7)}')
     .col-sm-5.col-xs-12.no-padding.absolute-height
       .comments-header
