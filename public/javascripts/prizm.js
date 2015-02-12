@@ -171,25 +171,4 @@ $(function() {
   });
 });
 
-/* Login */
-$(function() {
-  $('input[value="Log In"]').click(function() {
-    $('.front').css('display', 'none');
-    $('.back').css('display', 'inherit');
-  });
-});
-
-/*
-$(function() {
-  var input_element = document.getElementById("interest-selection");
-  input_element.onchange = interestCount;
-});
-
-function interestCount() {
-  var numberOfSelectedInterests = $('#interest-selection :selected').length;
-  var interest_number = document.getElementById("interest-count");
-  interest_number.value = numberOfSelectedInterests;
-}
-*/
-
 

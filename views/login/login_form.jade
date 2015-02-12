@@ -15,7 +15,10 @@
     p.underline-middle
       | or
     .underline-right
-    input(class='btn btn-lg btn-primary log-in' value='Log In' type='button')
+    input(class='btn btn-lg btn-primary log-in'
+          value='Log In'
+          type='button'
+          onClick='profile.displayForm()')
     button(class='btn btn-lg btn-primary sign-up' type='input')
       | Sign Up
     div.checkbox
