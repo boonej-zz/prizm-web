@@ -421,17 +421,16 @@ exports.displayMembers = function(req, res) {
     membersHTMLRequest(req, res);
   }
   else if (req.accepts('application/jade')) {
-    console.log('Jade request');
     membersJADERequest(req, res);
   }
   else if (req.accepts('application/json')) {
-    console.log("SI");
     membersJSONRequest(req, res);
   }
 };
 
 var membersHTMLRequest = function(req, res) {
   // We may want to display differet pages if they pending verification
+  var currentUser = req.user;
   if (req.user.type == 'user') {
     res.redirect('/profile');
   }
@@ -455,6 +454,8 @@ var membersHTMLRequest = function(req, res) {
             }
             else {
               res.render('profile/profile_members', {
+                auth: true,
+                currentUser: currentUser,
                 organization: organization,
                 members: members});
             }
@@ -507,7 +508,6 @@ var membersJADERequest = function(req, res) {
 }
 
 var membersJSONRequest = function(req, res) {
-  console.log('In JSON request');
   var status = req.get('memberStatus');
   var criteria = {};
   if (status) {
@@ -520,14 +520,11 @@ var membersJSONRequest = function(req, res) {
         res.status(500).send({error: err});
       }
       if (!organization) {
-        console.log('no organization');
         res.status(404).send({error: 'Invalid Organization ID'});
       }
       else {
         criteria.organization = organization.id;
         User.findOrganizationMembers(criteria, function(err, members) {
-          console.log(members.length);
-          console.log('found members');
           if (err) {
             console.log(err);
               res.status(500).send({error: err});
