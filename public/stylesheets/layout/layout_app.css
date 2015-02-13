@@ -246,5 +246,77 @@
   .plus-icon {
     right: 15px;
   }
-  
+}
+
+/* Footer */
+
+.legal {
+  font-size: .6em;
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 80px;
+}
+
+.social {
+  /* margin-top: 80px; */ 
+  display: block;
+  /* width: 100%; */
+  /* text-align: center; */
+}
+
+#follow-prizm {
+  color: #8698C5;
+  font-size: 1.2em;
+  margin: 0 auto 20px auto;
+  display: block;
+  width: 160px;
+  height: 2em;
+  border-bottom: 1px solid #8698C5;
+}
+
+.legal-span {
+  display: inline-block;
+  margin-top: 50px;
+  margin-bottom: 24px;
+  padding-top: 12px;
+  border-top: 1px solid #D4DAEA;
+}
+
+#twitter, #instagram, #facebook {
+  background-size: 32px 32px;
+  /* display: inline-block; */
+}
+
+#twitter {
+  background-image: url('/images/twitter.png');
+}
+
+#facebook {
+  background-image: url('/images/facebook.png');
+}
+
+#instagram {
+  background-image: url('/images/instagram.png');
+}
+
+
+.contact-button {
+  width: 32px;
+  height: 32px;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: inline-block;
+  background-repeat: none;
+}
+
+.mixpanelbadge {
+  display: block;
+  margin: 36px auto;
+}
+
+@media screen and (max-width:500px) {
+  .legal-span {
+    width: 80%;
+  }
 }
