@@ -16,7 +16,7 @@ var nav = {
   },
 
   goToHomeFeed: function(){
-    window.location = baseURL + '/profile';
+    window.location = baseURL;
   }
 };
 
@@ -38,7 +38,7 @@ $(function() {
 });
 
 /* Add current field to .user-menu based of window location */
-$(function(){
-  var location = window.location.pathname;
-  $('a[href="' + location + '"]').addClass('current');
-});
+// $(function(){
+//   var location = window.location.pathname;
+//   $('a[href="' + location + '"]').addClass('current');
+// });

@@ -258,7 +258,7 @@ exports.handlePrizmLogin = function(req, res, next) {
         });
       }
       else {
-        return res.redirect('/profile');
+        return res.redirect('/');
       }
     });
   })(req, res, next);
@@ -292,7 +292,7 @@ exports.handleFacebookLogin = function(req, res, next) {
           });
         }
         else {
-          return res.redirect('/profile');
+          return res.redirect('/');
         }
       });
     })(req, res, next);
@@ -328,7 +328,7 @@ exports.handleTwitterLogin = function(req, res, next) {
           });
         }
         else {
-          return res.redirect('/profile');
+          return res.redirect('/');
         }
       });
     })(req, res, next);
