@@ -258,7 +258,7 @@ exports.handlePrizmLogin = function(req, res, next) {
         });
       }
       else {
-        return res.redirect('/');
+        return res.redirect('/profile');
       }
     });
   })(req, res, next);
@@ -292,7 +292,7 @@ exports.handleFacebookLogin = function(req, res, next) {
           });
         }
         else {
-          return res.redirect('/');
+          return res.redirect('/profile');
         }
       });
     })(req, res, next);
@@ -328,7 +328,7 @@ exports.handleTwitterLogin = function(req, res, next) {
           });
         }
         else {
-          return res.redirect('/');
+          return res.redirect('/profile');
         }
       });
     })(req, res, next);
@@ -371,7 +371,7 @@ var fetchHomeFeed = function(user, params, next){
 
 exports.displayHomeFeed = function(req, res) {
   if (!req.user) {
-    res.render('index', { title: 'Prizm App', selected:'home', bodyId: 'body-home' });
+    
   }
   else {
     var id = req.user.id
@@ -464,7 +464,7 @@ var membersHTMLRequest = function(req, res) {
   // We may want to display differet pages if they pending verification
   var currentUser = req.user;
   if (req.user.type == 'user') {
-    res.redirect('/');
+    res.redirect('/profile');
   }
   if (req.user.type == 'institution_pending') {
     res.status(400).send({error: 'Status is still pending'});
@@ -477,7 +477,7 @@ var membersHTMLRequest = function(req, res) {
           res.status(500).send({error: err});
         }
         if (!organization) {
-          res.redirect('/');
+          res.redirect('/profile');
         }
         else {
           User.findOrganizationMembers({organization: organization.id, status: 'active'}, function(err, members) {
