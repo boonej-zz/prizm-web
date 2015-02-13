@@ -1,0 +1,173 @@
+#post-card p.sign-up-desc {
+  font-size: 20px;
+  margin: 30px auto 30px auto;
+  text-align: center;
+}
+
+#post-card #sign-up {
+  margin: 20px auto 5px;
+  display: block;
+}
+
+#post-card #android {
+  margin: 10px auto 5px;
+  display: block;
+}
+
+.post-wrap {
+  width: 890px;
+  margin: 0 auto;
+}
+
+#time-line {
+  position: absolute;
+  height: 628px;
+  width: 10px;
+  background-color: #f5f6f8;
+  margin-left: 315px;
+  z-index: -1000;
+  top: 75px;
+}
+#post {
+  width: 378px;
+  margin: 156px auto 0px auto;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+#post-header {
+  width: 378px;
+  height: 56px;
+  background: url('/images/card-header.png') no-repeat;
+}
+
+#post-header > p {
+  color: rgba(255, 255, 255, 0.6);
+  float: left;
+  margin-top: 13px;
+  line-height: 1.3em;
+  position: absolute;
+  margin-left: 57px;
+}
+
+#post-profile-image {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+  border-radius: 20px;
+  float: left;
+  margin: 6px 8px;
+  border: 1px solid #8989a3;
+}
+
+#clock-image {
+  width: 16px;
+  height: 15px;
+  background: url('/images/clock.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+#time {
+  font-size: 14px;
+}
+
+#post-header-right {
+  float: right;
+  margin-right: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#post-header-right p {
+  float: right;
+  margin-top: 3px;
+  clear: right;
+  font-weight: 100;
+}
+
+#category-icon {
+  width: 22px;
+  height: 22px;
+  background-size: 22px 22px;
+  float: right;
+  clear: none;
+  margin-top: 10px;
+}
+
+#post-image-area {
+  height: 378px;
+  width: 378px;
+  background-size: 378px 378px;
+  margin-bottom: 120px;
+}
+
+#post-footer {
+  position: relative;
+  height: 22px;
+  width: 378px;
+  top: 356px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 2px;
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+#tags {
+  display: inline-block;
+  width: 378px;
+  text-align: center;
+}
+
+@media screen and (max-width:500px) {
+  #post-card p.sign-up-desc {
+    width: 300px;
+    margin-top: 100px;
+  }
+
+  .post-wrap {
+    width: 300px;
+  }
+
+  #time-line {
+    position: absolute;
+    height: 485px;
+    width: 10px;
+    background-color: #f5f6f8;
+    margin-left: 70px;
+    z-index: -1000;
+    top: 65px;
+  }
+
+  #post {
+   margin-top: 120px;
+   width: 300px;
+  } 
+
+  #post-header, #post-footer, #post-footer, #tags {
+  width: 280px; 
+  margin: 0px auto;
+  }
+
+  #post-image-area {
+    height: 280px;
+    width: 280px;
+    background-size: 280px 280px;
+    margin: 0px auto;
+  }
+
+  #tags {
+    margin-top: -8px;
+  }
+
+  #post-footer {
+    top: 258px;
+  }
+}

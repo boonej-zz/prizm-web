@@ -1,6 +1,7 @@
 extends ../layouts/layout_app
 
 block head
+  link(rel='stylesheet', href='/stylesheets/posts/post_twitter_card.css')
   meta(property='twitter:card' content='photo')
   meta(property='twitter:site' content='@beprizmatic')
   meta(property='twitter:description' content='#{post.creator.name}')

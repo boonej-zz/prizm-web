@@ -72,7 +72,7 @@ var singlePostHTMLRequest = function(req, res) {
         }
       }
       var ago = _time.timeSinceFormatter(post.create_date);
-      res.render('posts/post', {
+      res.render('posts/post_twitter_card', {
         bodyId: 'post-card', post: post, tags: tags, ago: ago, category: post.category
       });
     }
