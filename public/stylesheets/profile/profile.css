@@ -502,8 +502,47 @@ form #inputComment {
   .slider {
     padding: 15px;
   }
+
   .profile-info ul {
     margin-left: 15px;
     margin-right: 15px;
   }
+
+  #postModal .modal-dialog {
+    position: fixed;
+  
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    margin: 0px;
+}
+
+  .comments-header {
+    display: none;
+  }
+
+  .post-comments {
+    height: 64px;
+    top: 0px;
+  }
+
+  .post-comments > p {
+    margin: 18px auto;
+  }
+
+  .back-button {
+    background-image: url('/images/profile/members_arrow.png');
+    background-size: 18px;
+    background-repeat: no-repeat;
+    height: 31px;
+    width: 18px;
+    -webkit-transform: rotate(180deg);
+       -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
 }

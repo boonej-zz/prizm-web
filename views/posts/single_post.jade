@@ -3,10 +3,10 @@
   .next-post-left.cursor(onclick='profile.nextPost(event, "left")')
   .next-post-right.cursor(onclick='profile.nextPost(event, "right")')
   .row
-    .col-sm-7.col-xs-12.no-padding
+    .col-sm-7.col-mob-12.no-padding
       .post-image(onclick='profile.dismissModal(event)')
         img(src='https://#{post.file_path.substr(7)}')
-    .col-sm-5.col-xs-12.no-padding.absolute-height
+    .col-sm-5.col-mob-12.no-padding.absolute-height
       .comments-header
         .post-modal-avatar
           if post.creator.profile_photo_url
@@ -22,6 +22,7 @@
         p.post-text(style='width: 100%; padding: 10px;')
             | !{post.formattedText}
       .post-comments
+        .back-button(onclick='profile.dismissModal(event)')
         p.comments-title
           | Comments
       .comment-scroll
