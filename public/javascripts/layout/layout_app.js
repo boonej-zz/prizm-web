@@ -10,8 +10,13 @@ var nav = {
       menu.slideToggle();
     }
   },
+
   toggleSettings: function() {
     $('.settings').toggleClass('settings-visable');
+  },
+
+  goToHomeFeed: function(){
+    window.location = baseURL + '/profile';
   }
 };
 

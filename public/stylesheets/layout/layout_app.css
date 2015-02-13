@@ -2,8 +2,13 @@
 .navbar-header {
   height: 75px;
   text-align: center;
-  font-size: 38px;
   padding-top: 12px;
+}
+
+.navbar-title {
+  font-size: 38px;
+  width: 100px;
+  margin: auto;
 }
 
 .menu-icon {
@@ -233,3 +238,13 @@
   background-image: url('/images/settings/settings_invite.png');
 }
 
+@media screen and (max-width:500px) {
+  .menu-icon {
+    left: 15px;
+  }
+
+  .plus-icon {
+    right: 15px;
+  }
+  
+}

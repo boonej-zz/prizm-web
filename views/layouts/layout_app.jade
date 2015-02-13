@@ -57,7 +57,8 @@ html
         .container
           .row
             .navbar-header.col-mob-12
-              | Prizm
+              .navbar-title.cursor(onclick='nav.goToHomeFeed()')
+                | Prizm
               if (auth)
                 .menu-icon(onclick='nav.toggleSettings()')
                 .plus-icon
