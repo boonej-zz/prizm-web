@@ -258,7 +258,7 @@ exports.handlePrizmLogin = function(req, res, next) {
         });
       }
       else {
-        return res.redirect('/profile');
+        return res.redirect('/');
       }
     });
   })(req, res, next);
@@ -292,7 +292,7 @@ exports.handleFacebookLogin = function(req, res, next) {
           });
         }
         else {
-          return res.redirect('/profile');
+          return res.redirect('/');
         }
       });
     })(req, res, next);
@@ -328,7 +328,7 @@ exports.handleTwitterLogin = function(req, res, next) {
           });
         }
         else {
-          return res.redirect('/profile');
+          return res.redirect('/');
         }
       });
     })(req, res, next);
@@ -370,26 +370,31 @@ var fetchHomeFeed = function(user, params, next){
 };
 
 exports.displayHomeFeed = function(req, res) {
-  var id = req.user.id
-  User.findOne({_id: ObjectId(id)}, function(err, user) {
-    if (err) {
-      res.send(400);
-    }
-    if (user) {
-      mixpanel.track('Profile Viewed', user.mixpanelProperties());
-      fetchHomeFeed(user, function(err, posts) {
-        posts = _time.addTimeSinceFieldToObjects(posts);
-        res.render('profile/profile_home', {
-          auth: true,
-          currentUser: req.user,
-          posts: posts
+  if (!req.user) {
+    res.render('index', { title: 'Prizm App', selected:'home', bodyId: 'body-home' });
+  }
+  else {
+    var id = req.user.id
+    User.findOne({_id: ObjectId(id)}, function(err, user) {
+      if (err) {
+        res.send(400);
+      }
+      if (user) {
+        mixpanel.track('Profile Viewed', user.mixpanelProperties());
+        fetchHomeFeed(user, function(err, posts) {
+          posts = _time.addTimeSinceFieldToObjects(posts);
+          res.render('profile/profile_home', {
+            auth: true,
+            currentUser: req.user,
+            posts: posts
+          });
         });
-      });
-    }
-    else {
-      res.status(400).send({error: "User can not be found"});
-    }
-  });
+      }
+      else {
+        res.status(400).send({error: "User can not be found"});
+      }
+    });
+  }
 }
 
 exports.displayProfileById = function(req, res) {
@@ -459,7 +464,7 @@ var membersHTMLRequest = function(req, res) {
   // We may want to display differet pages if they pending verification
   var currentUser = req.user;
   if (req.user.type == 'user') {
-    res.redirect('/profile');
+    res.redirect('/');
   }
   if (req.user.type == 'institution_pending') {
     res.status(400).send({error: 'Status is still pending'});
@@ -472,7 +477,7 @@ var membersHTMLRequest = function(req, res) {
           res.status(500).send({error: err});
         }
         if (!organization) {
-          res.redirect('/profile');
+          res.redirect('/');
         }
         else {
           User.findOrganizationMembers({organization: organization.id, status: 'active'}, function(err, members) {

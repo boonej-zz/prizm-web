@@ -12,23 +12,6 @@ var passport    = require('passport');
 
 
 /* Website */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Prizm App', selected:'home', bodyId: 'body-home' });
-
-});
-
-router.get('/about', function(req, res) {
-  res.redirect('/#about');
-});
-
-router.get('/insight', function(req, res) {
-  res.redirect('/#insight');
-});
-
-router.get('/mission', function(req, res) {
-  res.redirect('/#mission');
-})
-
 router.get('/terms', function(req, res) {
   res.render('terms', { title: 'Prizm App | Legal', selected:'none'});
 });
@@ -67,7 +50,8 @@ router.get('/login/twitter', _users.handleTwitterLogin);
 router.get('/logout', _users.handleLogout);
 
 /* Profiles */
-router.get('/profile', _users.authRequired, _users.displayHomeFeed);
+router.get('/', _users.displayHomeFeed);
+// router.get('/profile', _users.authRequired, _users.displayHomeFeed);
 router.get('/profile/:id', _users.displayProfileById)
 router.get('/profile/:id/members', _users.authRequired, _users.displayMembers);
 
