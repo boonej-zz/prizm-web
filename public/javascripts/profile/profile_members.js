@@ -79,7 +79,8 @@ var members = {
   },
 
   // Member Page Controls
-  activeTab: function() { 
+  activeTab: function() {
+    var organization = $('#organization').attr('data');
     var $this = this;
     var request = $.ajax({
       type: 'GET',
@@ -88,6 +89,7 @@ var members = {
         'Accept': 'application/jade',
         'memberStatus': 'active',
         'content-type': 'application/jade',
+        'org': organization
       },
       success: function(html) {
         members.updateActiveCount();
@@ -103,6 +105,7 @@ var members = {
   },
 
   pendingTab: function() {
+    var organization = $('#organization').attr('data');
     var $this = this;
     var request = $.ajax({
       type: 'GET',
@@ -110,7 +113,8 @@ var members = {
       headers: {
         'Accept': 'application/jade',
         'memberStatus': 'pending',
-        'content-type': 'application/jade'
+        'content-type': 'application/jade',
+        'org': organization
       },
       success: function(html) {
         members.updatePendingCount();
@@ -124,13 +128,15 @@ var members = {
    },
 
   updateActiveCount: function(){
+    var organization = $('#organization').attr('data');
     $.ajax({
       type: 'GET',
       url: window.location.pathname,
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',
-        'memberStatus': 'active'
+        'memberStatus': 'active',
+        'org': organization
       },
       success: function(json) {
         $('a[href="#active"]').text("Approved Members (" + json.length + ")");
@@ -139,13 +145,15 @@ var members = {
   },
 
   updatePendingCount: function(){
+    var organization = $('#organization').attr('data');
     $.ajax({
       type: 'GET',
       url: window.location.pathname,
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',
-        'memberStatus': 'pending'
+        'memberStatus': 'pending',
+        'org': organization
       },
       success: function(json) {
         var count = json.length;

@@ -472,7 +472,7 @@ var membersHTMLRequest = function(req, res) {
   if (req.user.type == 'institution_verified') {
     mixpanel.track('Org Members Viewed', {organization: req.user.name});
     Organization
-      .getOrganizationByOwnerId(req.params.id, function(err, organization) {
+      .getOrganizationByOwnerId(req.user.id, function(err, organization) {
         if (err) {
           res.status(500).send({error: err});
         }
@@ -502,14 +502,14 @@ var membersHTMLRequest = function(req, res) {
 
 var membersJADERequest = function(req, res) {
   var status = req.get('memberStatus');
+  var org = req.get('org');
   if (status == 'active') {
     memberList = activeMembers;
   }
   else if (status == 'pending') {
     memberList = pendingMembers;
   }
-  Organization
-    .getOrganizationByOwnerId(req.params.id, function(err, organization) {
+  Organization.findOne({_id: ObjectId(org)}, function(err, organization) {
       if (err) {
         console.log(err);
         res.status(500).send({error: err});
@@ -540,13 +540,13 @@ var membersJADERequest = function(req, res) {
 };
 
 var membersJSONRequest = function(req, res) {
+  var org = req.get('org');
   var status = req.get('memberStatus');
   var criteria = {};
   if (status) {
     criteria.status = status;
   }
-  Organization
-    .getOrganizationByOwnerId(req.params.id, function(err, organization) {
+  Organization.findOne({_id: ObjectId(org)}, function(err, organization) {
       if (err) {
         console.log('error');
         res.status(500).send({error: err});

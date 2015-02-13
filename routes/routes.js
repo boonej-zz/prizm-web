@@ -59,8 +59,9 @@ router.get('/logout', _users.handleLogout);
 
 /* Profiles */
 router.get('/profile', _users.authRequired, _users.displayHomeFeed);
+router.get('/profile/members', _users.authRequired, _users.displayMembers);
 router.get('/profile/:id', _users.displayProfileById)
-router.get('/profile/:id/members', _users.authRequired, _users.displayMembers);
+// router.get('/profile/:id/members', _users.authRequired, _users.displayMembers);
 
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
