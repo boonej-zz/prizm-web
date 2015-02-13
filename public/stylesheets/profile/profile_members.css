@@ -151,8 +151,8 @@ table>thead>tr:last-of-type>th {
 }
 
 .restrict-menu a {
-  color: black;
   text-decoration: none;
+  font-weight: normal;
 }
 
 /* Member Card Modal */
