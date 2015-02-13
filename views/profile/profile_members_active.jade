@@ -35,7 +35,7 @@
           td
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')
-            .member-action.restrict
+            .member-action.restrict(onClick='members.toggleRestrictMenu(event)')
               .restrict-menu.hidden
                 ul
                   li

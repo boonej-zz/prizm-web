@@ -55,6 +55,21 @@ var members = {
     });
   },
 
+  toggleRestrictMenu: function(e) {
+    var target = e.target;
+    var targetHidden = $(target).children('.restrict-menu').hasClass('hidden');
+    if (targetHidden) {
+      console.log("menu hidden");
+      $('.restrict-menu').addClass('hidden');
+      $(target).children('.restrict-menu').toggleClass('hidden');
+    }
+    else {
+      console.log("menu visable");
+      $(target).children('.restrict-menu').toggleClass('hidden');
+    }
+
+  },
+
   showCard: function(e) {
     var member_id = $(e.target).parents('td').attr('data');
     var member_selector = '.member-card[data=' + member_id + ']';
@@ -160,8 +175,12 @@ $(function(){
   $('#memberCard').on('click', '.modal-backdrop', function() {
     $('.member-card').not('hidden').addClass('hidden');
   });
-  // Toggle Restrict Menu
-  $('#active-members').on('click', '.restrict', function(){
-    $(this).find('.restrict-menu').toggleClass('hidden');
+  // Dismiss restrict menu
+  $(document).mouseup(function (e) {
+      var container = $('.member-action');
+      // If the target is not the container or the child of the container
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+          $('.restrict-menu').addClass('hidden');
+      }
   });
 });
