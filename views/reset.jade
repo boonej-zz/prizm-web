@@ -1,8 +1,10 @@
 extends layouts/layout_app
 
 block content
-  .wrap.topnav-offset
-    if (success)
-      h2 Your password was reset successfully.
-    else
-      h2 There was a problem reseting your password.
+  .container
+    .row
+      .col-mob-12.topnav-offset
+        if (success)
+          h2 Your password was reset successfully.
+        else
+          h2 There was a problem reseting your password.

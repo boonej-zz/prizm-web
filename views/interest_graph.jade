@@ -51,9 +51,11 @@ block head
       chart.draw(view, options);
     }
 block content
-  .wrap.topnav-offset
-    h2 Total Users: #{count}
-    #chart_div
+  .container
+    .row
+      .col-mob-12.topnav-offset
+        h2 Total Users: #{count}
+        #chart_div
    
 
 

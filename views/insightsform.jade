@@ -9,42 +9,44 @@ block head
   link(rel='stylesheet' type='text/css' href='/stylesheets/imgareaselect-default.css')
 
 block content
-  .wrap.insight.topnav-offset
-    form(method='post' enctype='multipart/form-data')
-      input#x1(type='hidden' name='x1')
-      input#x2(type='hidden' name='x2')
-      input#y1(type='hidden' name='y1')
-      input#y2(type='hidden' name='y2')
-      input#width(type='hidden' name='width')
-      input#height(type='hidden' name='height')
-      .insight.create
-        .insight.creator
-          span Creator:
-          select(name='creator')
-            each user in users
-              option(value='#{user.id}')= user.name
-        .insight.title
-          label(for='insightTitle') Title:
-          input#insightTitle(type='text' name='title')
-        .insight.text
-          label(for='insightText') Text:
-          br
-          textarea#insightText(type='text' cols='45' rows='6' name='text')
-        .insight.file-path
-          label#status(for='insight-image-upload') Please select a file
-          input#insight-image-upload(type='file' 
-          name='image' onchange='Upload.fileSelect(event)')
-          output#preview(style='border: 1px solid #666; width: 800px')
-          input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
-          input#insight-file-path(type='hidden' name='filePath' value='')
-        .insight.link
-          label(for='insight-link-title') Link Title:
-          input#insight-link-title(type='text' name='linkTitle')
-        .insight.link
-          label(for='insight-link') Link:
-          input#insight-link(type='text' name='link')
-        .insight.hash-tags
-          label(for='insight-hash-tags') Hash Tags:
-          input#insight-hash-tags(type='text' name='hashTags')
-      #submit-insight
-        button#submit Send
+  .container
+    .row
+      .col-mob-12.insight.topnav-offset
+        form(method='post' enctype='multipart/form-data')
+          input#x1(type='hidden' name='x1')
+          input#x2(type='hidden' name='x2')
+          input#y1(type='hidden' name='y1')
+          input#y2(type='hidden' name='y2')
+          input#width(type='hidden' name='width')
+          input#height(type='hidden' name='height')
+          .insight.create
+            .insight.creator
+              span Creator:
+              select(name='creator')
+                each user in users
+                  option(value='#{user.id}')= user.name
+            .insight.title
+              label(for='insightTitle') Title:
+              input#insightTitle(type='text' name='title')
+            .insight.text
+              label(for='insightText') Text:
+              br
+              textarea#insightText(type='text' cols='45' rows='6' name='text')
+            .insight.file-path
+              label#status(for='insight-image-upload') Please select a file
+              input#insight-image-upload(type='file' 
+              name='image' onchange='Upload.fileSelect(event)')
+              output#preview(style='border: 1px solid #666; width: 800px')
+              input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
+              input#insight-file-path(type='hidden' name='filePath' value='')
+            .insight.link
+              label(for='insight-link-title') Link Title:
+              input#insight-link-title(type='text' name='linkTitle')
+            .insight.link
+              label(for='insight-link') Link:
+              input#insight-link(type='text' name='link')
+            .insight.hash-tags
+              label(for='insight-hash-tags') Hash Tags:
+              input#insight-hash-tags(type='text' name='hashTags')
+          #submit-insight
+            button#submit Send
