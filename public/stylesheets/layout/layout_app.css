@@ -53,7 +53,7 @@
   left: 60%;
   background: #FBFCFF;
   width: 120px;
-  border-radius: 4px;
+  border-radius: 2px;
   display: none;
 }
 
@@ -70,6 +70,18 @@
   left: 12px;
 }
 
+.user-menu a {
+  color: #656772;
+}
+
+.user-menu a:hover {
+  color: #2443a1;
+}
+
+.user-menu .current {
+  color: rgba(36, 67, 161, .6);
+}
+
 .user-menu ul {
   margin: 0px auto;
   width: 100%;
@@ -80,7 +92,7 @@
 
 .user-menu li {
   list-style: none;
-  border-bottom: 1px #d4daea solid;
+  border-bottom: 1px #e4e5ea solid;
   padding: 12px;
 }
 

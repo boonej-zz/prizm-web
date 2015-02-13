@@ -36,3 +36,9 @@ $(function() {
     $('.navbar-default').css('right', '0px');
   });
 });
+
+/* Add current field to .user-menu based of window location */
+$(function(){
+  var location = window.location.pathname;
+  $('a[href="' + location + '"]').addClass('current');
+});
