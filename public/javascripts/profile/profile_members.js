@@ -81,7 +81,6 @@ var members = {
   // Member Page Controls
   activeTab: function() {
     var organization = $('#organization').attr('data');
-    var $this = this;
     var request = $.ajax({
       type: 'GET',
       url: window.location.pathname,
@@ -96,17 +95,14 @@ var members = {
         if (html) {
           $('#active-members').html(html);
         }
+        $('#pending-members').hide();
+        $('#active-members').fadeIn();
       }
-    });
-    request.done(function(){
-      $('#pending-members').hide();
-      $('#active-members').fadeIn();
-    });   
+    });  
   },
 
   pendingTab: function() {
     var organization = $('#organization').attr('data');
-    var $this = this;
     var request = $.ajax({
       type: 'GET',
       url: window.location.pathname,
