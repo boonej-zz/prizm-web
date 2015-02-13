@@ -17,6 +17,10 @@ body {
   background-color: #e4e5ea;
 }
 
+body a:hover {
+  text-decoration: none;
+}
+
 .topnav-offset {
   margin-top: 75px;
 }
