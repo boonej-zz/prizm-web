@@ -371,7 +371,11 @@ var fetchHomeFeed = function(user, params, next){
 
 exports.displayHomeFeed = function(req, res) {
   if (!req.user) {
-    
+    res.render('index', {
+      title: 'Prizm App',
+      selected:'home',
+      bodyId: 'body-home'
+    });
   }
   else {
     var id = req.user.id
@@ -396,6 +400,37 @@ exports.displayHomeFeed = function(req, res) {
     });
   }
 }
+
+exports.displayProfile = function(req, res) {
+  var id = req.user.id
+  User.findOne({_id: ObjectId(id)}, function(err, user) {
+    if (err) {
+      res.send(400);
+    }
+    if (user) {
+      mixpanel.track('Profile Viewed', user.mixpanelProperties());
+      Post.findPostsForProfileByUserId(user.id, true, true, function(err, posts) {
+        var headerImages;
+        if (err) {
+          posts = [];
+          headerImages = [];
+        }
+        posts = _time.addTimeSinceFieldToObjects(posts);
+        headerImages =_profile.shufflePostImagesForProfileHeader(posts);
+        res.render('profile/profile', {
+          auth: true,
+          currentUser: req.user,
+          user: user,
+          headerImages: headerImages,
+          posts: posts
+        });
+      });
+    }
+    else {
+      res.status(400).send({error: "User can not be found"})
+    }
+  });
+};
 
 exports.displayProfileById = function(req, res) {
   var id = req.params.id
