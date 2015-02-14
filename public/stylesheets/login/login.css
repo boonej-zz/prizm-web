@@ -1,4 +1,8 @@
 /* Login Form */
+#login {
+  background-color: #eef0f4;
+}
+
 .back {
   display: none;
 }

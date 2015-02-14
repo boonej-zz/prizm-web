@@ -233,7 +233,7 @@ exports.authRequired = function (req, res, next) {
 
 exports.displayLogin = function(req, res) {
   mixpanel.track('Login Page loaded');
-  res.render('login/login');
+  res.render('login/login', {bodyId: 'login'});
 };
 
 exports.handlePrizmLogin = function(req, res, next) {

@@ -1,4 +1,5 @@
 /* Navigation Bar */
+
 .navbar-header {
   height: 75px;
   text-align: center;
@@ -115,21 +116,6 @@
 
 .login-button a:hover {
   text-decoration: none;
-}
-
-@media screen and (max-width: 500px) {
-  .user-menu {
-    position: fixed;
-    top: 75px;
-    right: 0px;
-    left: 0px;
-    width: auto;
-    border-radius: 0px;
-  }
-
-  .user-menu:after {
-    display: none;
-  }
 }
 
 /* Settings Menu */
@@ -250,17 +236,12 @@
   background-image: url('/images/settings/settings_invite.png');
 }
 
-@media screen and (max-width:500px) {
-  .menu-icon {
-    left: 15px;
-  }
-
-  .plus-icon {
-    right: 15px;
-  }
-}
-
 /* Footer */
+
+.footer {
+  background-color: #e4e5ea;
+  width: 100%;
+}
 
 .legal {
   font-size: .6em;
@@ -271,10 +252,7 @@
 }
 
 .social {
-  /* margin-top: 80px; */ 
   display: block;
-  /* width: 100%; */
-  /* text-align: center; */
 }
 
 #follow-prizm {
@@ -297,7 +275,6 @@
 
 #twitter, #instagram, #facebook {
   background-size: 32px 32px;
-  /* display: inline-block; */
 }
 
 #twitter {
@@ -328,6 +305,16 @@
 }
 
 @media screen and (max-width:500px) {
+  /* Navbar */
+  .menu-icon {
+    left: 15px;
+  }
+
+  .plus-icon {
+    right: 15px;
+  }
+
+  /* Footer */
   .legal-span {
     width: 80%;
   }
