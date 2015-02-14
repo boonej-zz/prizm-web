@@ -80,7 +80,7 @@ var singlePostHTMLRequest = function(req, res) {
 }
 
 var replaceTagsFromUserList = function(string, userList){
-  var ps = '<a class="tag-link" href="/profile/';
+  var ps = '<a class="tag-link" href="/profiles/';
   var pm = '">@';
   var pe = '</a>';
   var newString = string;
@@ -117,7 +117,7 @@ var singlePostJadeRequest = function(req, res) {
     .exec(function(err, post) {
       if (err) { res.status(500).send({error: err}); }
       if (post) {
-        var ps = '<a class="tag-link" href="/profile/';
+        var ps = '<a class="tag-link" href="/profiles/';
         var pm = '">@';
         var pe = '</a>';
         post.time_since = _time.timeSinceFormatter(post.create_date);

@@ -54,7 +54,7 @@ router.get('/logout', _users.handleLogout);
 /* Profiles */
 router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/members', _users.authRequired, _users.displayMembers);
-router.get('/profile/:id', _users.displayProfileById);
+router.get('/profiles/:id', _users.displayProfileById);
 
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
