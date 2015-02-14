@@ -16,7 +16,7 @@ var nav = {
   },
 
   goToHomeFeed: function(){
-    window.location = baseURL;
+    window.location = baseURL + '/';
   }
 };
 
