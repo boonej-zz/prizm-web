@@ -384,10 +384,11 @@ exports.displayHomeFeed = function(req, res) {
         res.send(400);
       }
       if (user) {
-        mixpanel.track('Profile Viewed', user.mixpanelProperties());
+        mixpanel.track('Home Feed Viewed', user.mixpanelProperties());
         fetchHomeFeed(user, function(err, posts) {
           posts = _time.addTimeSinceFieldToObjects(posts);
           res.render('profile/profile_home', {
+            bodyId: 'home-feed',
             auth: true,
             currentUser: req.user,
             posts: posts

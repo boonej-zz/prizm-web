@@ -179,6 +179,10 @@ form #inputComment {
   width: auto;
 }
 
+#home-feed > .container {
+  background-color: #EFF1F4;
+}
+
 @media screen and (max-width:500px) {
   .background-column {
     background-color: #f4f5f7;
