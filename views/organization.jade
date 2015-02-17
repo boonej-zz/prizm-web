@@ -47,12 +47,13 @@ block content
             li(onClick='profile.slideHeader(event, 2)')
     .row.profile-info
       .col-mob-2
-        .toggle-container(data-toggle='off' 
+        if showMembers
+          .toggle-container(data-toggle='off' 
                           id='membersToggle'
                           onClick='profile.toggleMembersPosts()')
-          .toggle-switch
-        .toggle-label
-          | Members
+            .toggle-switch
+          .toggle-label
+            | Members
       .col-mob-10.col-xs-offset-4.col-xs-6.col-md-offset-6.col-md-4
         ul
           li

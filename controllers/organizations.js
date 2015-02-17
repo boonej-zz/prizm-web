@@ -47,6 +47,7 @@ exports.displayOrganization = function(req, res) {
                 posts = [];
                 headerImages = [];
               }
+              var showMembers = String(currentUser._id) == String(owner._id);
               posts = _time.addTimeSinceFieldToObjects(posts);
               headerImages = _profile.shufflePostImagesForProfileHeader(posts);
               res.render('organization', {
@@ -56,7 +57,9 @@ exports.displayOrganization = function(req, res) {
                 luminaries: luminaries,
                 owner: owner,
                 headerImages: headerImages,
-                posts: posts });
+                posts: posts,
+                showMembers: showMembers
+              });
             });
           });
         }
