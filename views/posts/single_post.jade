@@ -34,7 +34,7 @@
             .avatar-name
               | #{post.creator.name}
             .comment-text
-              | #{post.formattedText}
+              | !{post.formattedText}
             .comment-info
               #clock-image
               #time
@@ -57,7 +57,7 @@
             .avatar-name
               | #{post.comments[i].creator.name}
             .comment-text
-              | #{post.comments[i].formattedText}
+              | !{post.comments[i].formattedText}
             .comment-info
               #clock-image
               #time
