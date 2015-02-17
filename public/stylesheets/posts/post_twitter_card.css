@@ -1,3 +1,35 @@
+#sign-up {
+  top: 50px;
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  background: url('/images/app_store.png') no-repeat;
+  width: 135px;
+  height: 40px;
+  background-size: 135px 40px;
+  color: #FFF;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+#android {
+  display: inline-block;
+  margin-top: 30px;
+  margin-left: 20px;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  background: url('/images/google.png') no-repeat;
+  background-size: 135px 40px;
+  width: 135px;
+  height: 40px;
+  color: #FFF;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
 #post-card p.sign-up-desc {
   font-size: 20px;
   margin: 30px auto 30px auto;
