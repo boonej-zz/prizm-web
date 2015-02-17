@@ -18,14 +18,33 @@
           | #{post.creator.name}
         #clock-image
           | #{post.time_since}
-      if post.text
-        p.post-text(style='width: 100%; padding: 10px;')
-            | !{post.formattedText}
       .post-comments
         .back-button(onclick='profile.dismissModal(event)')
         p.comments-title
           | Comments
       .comment-scroll
+        if post.text
+          .comment-container
+            .post-modal-avatar
+              if post.creator.profile_photo_url
+                img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                class='prizm-avatar-sm')
+              else
+                img(src='/images/profile/profile_default_avatar.png')
+            .avatar-name
+              | #{post.creator.name}
+            .comment-text
+              | #{post.formattedText}
+            .comment-info
+              #clock-image
+              #time
+                | #{post.time_since}
+              .comment-likes
+                | -&nbsp;&nbsp;Like
+              .like-icon
+              .comment-likes-count
+                | #{post.likes_count}
+
         each comment, i in post.comments
           .comment-container
             .post-modal-avatar
@@ -38,7 +57,7 @@
             .avatar-name
               | #{post.comments[i].creator.name}
             .comment-text
-              | #{post.comments[i].text}
+              | #{post.comments[i].formattedText}
             .comment-info
               #clock-image
               #time

@@ -306,6 +306,9 @@
 }
 
 .post-modal-avatar {
+  position: relative;
+  top: 0px;
+  bottom: 0px;
   width: 20%;
   float: left;
 }
@@ -346,7 +349,10 @@
 .comment-info {
   position: relative;
   top: 4px;
+  clear: right;
+  margin-left: 20%;
 }
+
 
 .comment-info #clock-image {
   display: inline-block;
