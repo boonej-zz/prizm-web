@@ -3,6 +3,10 @@
   background-color: #eef0f4;
 }
 
+#login .login-button {
+  display: none;
+}
+
 .back {
   display: none;
 }
