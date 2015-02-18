@@ -46,5 +46,5 @@ $(function() {
 //   $('a[href="' + location + '"]').addClass('current');
 // });
 $(function() {
-  $('img.lazy').lazyload({event: 'readyForImages'});
+  $('img.lazy').lazyload();
 });

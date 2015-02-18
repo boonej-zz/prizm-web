@@ -21,7 +21,7 @@ $(window).scroll(function() {
       success: function(html) {
         if(html) {
             $(".profile-posts-container").append(html);
-            $('img.lazy').lazyload({threshold: 100});
+            $('img.lazy').lazyload();
         }
       }
     });
