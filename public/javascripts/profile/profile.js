@@ -48,7 +48,6 @@ var profile = {
         if (html) {
           $('#post-display').html(html);
           $('#postModal').modal();
-          // $('.navbar').css('right', '0px');
         }
       }
     });
