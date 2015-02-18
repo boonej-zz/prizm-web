@@ -3,6 +3,7 @@ var uuid = require('node-uuid');
 var crypto = require('crypto');
 var express = require('express');
 var basicAuth = require('basic-auth-connect');
+var _ = require('underscore');
 
 exports.auth = basicAuth(function(user, pass, next){
   var result = (user === 'beprizmatic' && pass === '@pple4Life');
@@ -26,3 +27,26 @@ exports.generateUUID = function(suffix) {
 	return uuid.v1() + '-' + suffix;
 }
 
+exports.replaceTagsFromUserList = function(string, userList){
+  console.log(userList);
+  var ps = '<a class="tag-link" href="/profiles/';
+  var pm = '">@';
+  var pe = '</a>';
+  var newString = string;
+  var match = string.match(/@\S{24}/g); 
+  if (match && match.length > 0){
+    _.each(match, function(tag, idx, list){
+      if (tag && tag.length > 0){
+        var uid = tag.substr(1);
+        var mu = _.find(userList, function(user){
+          return String(user._id) == uid;
+        });
+        if (mu) {
+          var replace = ps + String(mu._id) + pm + mu.name + pe;
+          newString = newString.replace(tag, replace);
+        }
+      }
+    });
+  }
+  return newString;
+};

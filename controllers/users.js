@@ -16,6 +16,7 @@ var _time           = require('../lib/helpers/date_time');
 var _trusts         = require('../controllers/trusts');
 var _profile        = require('../lib/helpers/profile');
 var _organizations  = require('../controllers/organizations');
+var _utils          = require('../utils.js');
 var activeMembers   = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_active.jade'), 'utf8');
 var pendingMembers  = fs.readFileSync(path.join(__dirname +
@@ -387,11 +388,28 @@ exports.displayHomeFeed = function(req, res) {
         mixpanel.track('Home Feed Viewed', user.mixpanelProperties());
         fetchHomeFeed(user, function(err, posts) {
           posts = _time.addTimeSinceFieldToObjects(posts);
-          res.render('profile/profile_home', {
-            bodyId: 'home-feed',
-            auth: true,
-            currentUser: req.user,
-            posts: posts
+          var done = 0;
+          _.each(posts, function(post, idx, list){
+            User.resolvePostTags(post, function(err, users){
+              if (users && users.length > 0){
+                if (post.text) {
+                  post.formattedText = _utils.replaceTagsFromUserList(post.text, users);
+                }
+                _.each(post.comments, function(comment, idx, list){
+                  comment.formattedText = _utils.replaceTagsFromUserList(comment.text, users);
+                });
+              }
+              done += 1;
+              if (done == list.length){
+                res.render('profile/profile_home', {
+                  bodyId: 'home-feed',
+                  auth: true,
+                  currentUser: req.user,
+                  posts: posts
+                });
+              }
+            });
+            
           });
         });
       }
@@ -401,6 +419,7 @@ exports.displayHomeFeed = function(req, res) {
     });
   }
 }
+
 
 exports.displayProfile = function(req, res) {
   var id = req.user.id
