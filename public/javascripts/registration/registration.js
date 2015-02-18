@@ -9,6 +9,10 @@ var reg = {
   partnerForm: function() {
     $('#individual-form').hide();
     $('#partner-form').fadeIn();
+  },
+
+  section2: function() {
+    $('.section').toggleClass('section-2');
   }
 
   // registerUser: function(event){
@@ -40,7 +44,8 @@ $(function(){
       url: window.location,
       data: user,
       success: function(response) {
-        $('section').addClass('section-1');
+        console.log("Success");
+        $('.section').addClass('section-1');
       },
       error: function(jqXHR, textStatus, errorThrown) {
         $('.message').html(jqXHR.responseText);
@@ -50,10 +55,10 @@ $(function(){
   });
 });
 
-$(function(){
-  $('body').on('click', function(){
-    console.log("CLICK");
-    $('.section').toggleClass('section-1');
-  })
-})
+// $(function(){
+//   $('body').on('click', function(){
+//     console.log("CLICK");
+//     $('.section').toggleClass('section-1');
+//   })
+// })
 
