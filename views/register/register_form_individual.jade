@@ -1,0 +1,78 @@
+form(action='/register' method='post' class='form-register')
+  label(for='inputFirstName' class='sr-only')
+    | First Name
+  input(type='text'
+        name='firstName'
+        id='inputFirstName'
+        class='form-control'
+        placeholder='First Name'
+        required)
+  label(for='inputLastName' class='sr-only')
+    | Last Name
+  input(type='text'
+        name='LastName'
+        id='inputLastName'
+        class='form-control'
+        placeholder='Last Name'
+        required)
+  label(for='inputEmail' class='sr-only')
+    | Email address
+  input(type='email'
+        name='email'
+        id='inputEmail'
+        class='form-control'
+        placeholder='Email address'
+        required)
+  label(for='inputPassword' class='sr-only')
+    | Password
+  input(type='password'
+        name='password'
+        id='inputPassword'
+        class='form-control'
+        placeholder='Password'
+        required)
+  label(for='inputConfirmPassword' class='sr-only')
+    | Confirm Password
+  input(type='password'
+        name='confirmPassword'
+        id='inputConfirmPassword'
+        class='form-control'
+        placeholder='Confirm Password'
+        required)
+  .radio-inline
+    label
+      input(type='radio'
+            name='gender'
+            value='male')
+      | Male
+  .radio-inline
+    label
+      input(type='radio'
+            name='gender'
+            value='female')
+      | Female
+  .radio-inline
+    label
+      input(type='radio'
+            name='gender'
+            value='unkown')
+      | Rather Not Say
+  label(for='inputDOB' class='sr-only')
+    | DOB
+  input(type='date'
+        name='DOB'
+        id='inputDOB'
+        class='form-control'
+        placeholder='Date of birth'
+        required)
+  label(for='inputProgramCode' class='sr-only')
+    | Program Code
+  input(type='text'
+        name='programCode'
+        id='inputProgramCode'
+        class='form-control'
+        placeholder='Program Code'
+        required)
+  button(class='btn btn-lg btn-primary btn-block'
+        type='link')
+    | Next

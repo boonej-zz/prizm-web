@@ -603,3 +603,8 @@ var membersJSONRequest = function(req, res) {
       }
     });
 };
+
+/* Registration */
+exports.registerNewUser = function registerNewUser(req, res) {
+  res.render('register/register');
+}

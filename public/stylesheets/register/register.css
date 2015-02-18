@@ -1,0 +1,12 @@
+.register-card {
+  background-color: #fff;
+  text-align: center;
+}
+
+input {
+  margin: 10px 0px;
+}
+
+#partner-form {
+  display: none;
+}

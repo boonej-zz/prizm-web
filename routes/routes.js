@@ -56,6 +56,9 @@ router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/members', _users.authRequired, _users.displayMembers);
 router.get('/profiles/:id', _users.displayProfileById);
 
+/* Registration */
+router.get('/register', _users.registerNewUser);
+
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
 
