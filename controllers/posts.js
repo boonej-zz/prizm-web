@@ -225,16 +225,18 @@ var organizationMembersFeed = function(req, res) {
       _.each(users, function(user) {
         members.push(user.id);
       });
-      Post.find(criteria, function(err, posts) {
-        if (err) {
-          res.status(500).send({error: err});
-        }
-        else {
-          posts = _time.addTimeSinceFieldToObjects(posts);
-          var content = jade.render(postFeed, {posts: posts});
-          res.status(200).send(content);
-        }
-      })
+      Post.find(criteria)
+        .sort({create_date: -1})
+        .exec(function(err, posts) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          else {
+            posts = _time.addTimeSinceFieldToObjects(posts);
+            var content = jade.render(postFeed, {posts: posts});
+            res.status(200).send(content);
+          }
+        });
     }
   });
 }

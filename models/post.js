@@ -4,6 +4,7 @@ var ObjectId      = require('mongoose').Types.ObjectId;
 var ObjectIdType  = mongoose.Schema.Types.ObjectId;
 var _ = require('underscore');
 var User = mongoose.model('User');
+var _utils = require('../utils');
 
 var commentSchema = new mongoose.Schema({
   text                : { type: String, default: null, required: true },

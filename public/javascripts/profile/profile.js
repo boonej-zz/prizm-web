@@ -21,6 +21,7 @@ $(window).scroll(function() {
       success: function(html) {
         if(html) {
             $(".profile-posts-container").append(html);
+            $('img.lazy').lazyload({threshold: 100});
         }
       }
     });
@@ -112,6 +113,8 @@ var profile = {
       if (hasPosts == false) {
         initialRequest.done(function(){
           $('.members-posts-container').html(posts);
+          
+          $('img.lazy').lazyload({threshold: 100});
         })
       }
       $('.profile-posts-container').hide();
