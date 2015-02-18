@@ -48,6 +48,7 @@ var profile = {
         if (html) {
           $('#post-display').html(html);
           $('#postModal').modal();
+          $('.navbar').css('right', '0px');
         }
       }
     });
@@ -97,6 +98,7 @@ var profile = {
       url: '/posts/',
       headers: {
         'Accept': 'application/jade',
+        'Content-type': 'application/jade',
         'orgID': organization,
         'feedType': 'members'
       },

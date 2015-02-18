@@ -5,6 +5,7 @@ block head
   link(rel='stylesheet', href='/stylesheets/profile/profile.css')
 
 block content
+  input.organization(type='hidden' id='#{organizationId}')
   .container.topnav-offset
     .row 
       .profile-owner(id='#{user.id}')
@@ -30,6 +31,14 @@ block content
             li.active(onClick='profile.slideHeader(event, 0)')
             li(onClick='profile.slideHeader(event, 1)')
     .row.profile-info
+      .col-mob-2
+        if showMembers
+          .toggle-container(data-toggle='off' 
+                          id='membersToggle'
+                          onClick='profile.toggleMembersPosts()')
+            .toggle-switch
+          .toggle-label
+            | Members
       .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
         ul
           li
@@ -53,6 +62,9 @@ block content
             h2 This profile has not created any posts yet
         else
           include ../posts/post_feed
+    .row.members-posts-container
+      .col-sm-12
+        h2 This Organization has not created any posts yet.
   div#postModal.modal.fade(
       tabIndex='-1'
       role='dialog'

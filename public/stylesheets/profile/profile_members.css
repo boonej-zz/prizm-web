@@ -9,9 +9,9 @@ li a {
 
 .members-header {
   background: url('/images/profile/members_header_icon.png') no-repeat;
-  background-size: 48px;
-  background-position: 15px 12px;
-  padding-left: 68px;
+  background-size: 24px 24px;
+  background-position: 24px 24px;
+  padding-left: 50px;
   padding-bottom: 16px;
 }
 

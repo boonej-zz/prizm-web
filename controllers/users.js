@@ -384,10 +384,11 @@ exports.displayHomeFeed = function(req, res) {
         res.send(400);
       }
       if (user) {
-        mixpanel.track('Profile Viewed', user.mixpanelProperties());
+        mixpanel.track('Home Feed Viewed', user.mixpanelProperties());
         fetchHomeFeed(user, function(err, posts) {
           posts = _time.addTimeSinceFieldToObjects(posts);
           res.render('profile/profile_home', {
+            bodyId: 'home-feed',
             auth: true,
             currentUser: req.user,
             posts: posts
@@ -417,13 +418,34 @@ exports.displayProfile = function(req, res) {
         }
         posts = _time.addTimeSinceFieldToObjects(posts);
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
-        res.render('profile/profile', {
-          auth: true,
-          currentUser: req.user,
-          user: user,
-          headerImages: headerImages,
-          posts: posts
-        });
+        var showMembers = false;
+        if (user.type == 'institution_verified' ) {
+          showMembers = true;
+          Organization.findOne({owner: id}, function(err, org){
+            if (err) {
+              showMembers = false;
+            }
+            res.render('profile/profile', {
+              auth: true,
+              currentUser: req.user,
+              user: user,
+              headerImages: headerImages,
+              posts: posts,
+              showMembers: showMembers,
+              organizationId: org._id
+            });
+
+          });
+        } else {
+          res.render('profile/profile', {
+            auth: true,
+            currentUser: req.user,
+            user: user,
+            headerImages: headerImages,
+            posts: posts,
+            showMembers: showMembers
+          });
+        }
       });
     }
     else {
@@ -466,13 +488,35 @@ exports.displayProfileById = function(req, res) {
         }
         posts = _time.addTimeSinceFieldToObjects(posts);
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
-        res.render('profile/profile', {
-          auth: auth,
-          currentUser: currentUser,
-          user: user,
-          headerImages: headerImages,
-          posts: posts
-        });
+        var showMembers = false;
+        if (String(currentUser._id) == String(user._id) && 
+          currentUser.type == 'institution_verified'){
+          showMembers = true;
+          Organization.findOne({owner: currentUser._id}, function(err, org){
+            if (err){
+              showMembers = false;
+            }
+            res.render('profile/profile', {
+              auth: auth,
+              currentUser: currentUser,
+              user: user,
+              organizationId: org._id,
+              showMembers: showMembers,
+              headerImages: headerImages,
+              posts: posts
+            });
+          });
+        } else {
+
+          res.render('profile/profile', {
+            auth: auth,
+            currentUser: currentUser,
+            user: user,
+            headerImages: headerImages,
+            posts: posts,
+            showMembers: showMembers
+          });
+        }
       });
     }
     else {
