@@ -29,7 +29,7 @@ block content
                 .post-via
                   | Post Via #{post.external_provider}
             .post-image(onclick='prizm.showModal(event)')
-              img(src='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}')
+              img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}')
             .post-footer
               .like-icon
               p.icon-text

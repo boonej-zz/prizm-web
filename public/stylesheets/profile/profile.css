@@ -191,6 +191,12 @@
   position: relative;
 }
 
+.post-image {
+  min-height: 50px;
+  width: 100%;
+  height: 100%;
+}
+
 .post-image img {
   width: 100%;
   height: 100%;

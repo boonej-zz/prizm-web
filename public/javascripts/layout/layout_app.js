@@ -45,3 +45,6 @@ $(function() {
 //   var location = window.location.pathname;
 //   $('a[href="' + location + '"]').addClass('current');
 // });
+$(function() {
+  $('img.lazy').lazyload({event: 'readyForImages'});
+});
