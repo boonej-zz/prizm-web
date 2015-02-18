@@ -203,6 +203,10 @@ userSchema.pre('save', function(next){
       this.age = diff;
     }
   }
+  if (!this.create_date) {
+    this.create_date = Date.now();
+  }
+  this.modify_date = Date.now();
   next();
 });
 

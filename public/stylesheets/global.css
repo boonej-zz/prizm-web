@@ -33,6 +33,10 @@ body a:hover {
   background-color: #eef0f4;
 }
 
+.white {
+  background-color: #fff;
+}
+
 /* Avatars */
 .prizm-avatar-xs {
   height: 40px;

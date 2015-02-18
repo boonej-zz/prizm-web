@@ -16,6 +16,7 @@ var _time           = require('../lib/helpers/date_time');
 var _trusts         = require('../controllers/trusts');
 var _profile        = require('../lib/helpers/profile');
 var _organizations  = require('../controllers/organizations');
+var validateEmail   = require('../utils').validateEmail;
 var activeMembers   = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_active.jade'), 'utf8');
 var pendingMembers  = fs.readFileSync(path.join(__dirname +
@@ -649,6 +650,117 @@ var membersJSONRequest = function(req, res) {
 };
 
 /* Registration */
-exports.registerNewUser = function registerNewUser(req, res) {
-  res.render('register/register');
+exports.displayRegistration = function(req, res) {
+  res.render('registration/registration', {
+    bodyId: 'registration'
+  });
+}
+
+exports.registerNewUser = function(req, res) {
+  var userType = req.body.userType;
+  if (!userType) {
+    res.status(400).send({error: 'User type undefined'});
+  }
+  if (userType == 'individual') {
+    registerIndividual(req, res);
+  }
+  if (userType == 'partner') {
+    registerPartner(req, res);
+  }
+};
+
+// Registration Methods
+
+var validateRegistrationRequest = function(req, res,  next) {
+  var userEmail = req.body.email;
+  if (validateEmail(userEmail)) {
+    User.findOne({email: userEmail}, function(err, user) {
+      if (err) {
+        res.render('registration/registration', {
+          error: err
+        });
+      }
+      if (user) {
+        res.render('registration/registration', {
+          error: 'This email address has already been registered'
+        });
+      }
+      else {
+        if (req.body.password != req.body.confirmPassword) {
+          res.render('registration/registration', {
+            error: 'Passwords do not match'
+          });
+        }
+        else {
+          next();
+        }
+      }
+    });
+  }
+  else {
+    res.render('registration/registration', {
+      error: 'Invalid Email Address'
+    });
+  }
+};
+
+var registerIndividual = function(req, res) {
+  validateRegistrationRequest(req, res, function() {
+    var newUser = new User({
+      first_name: req.body.firstName,
+      last_name: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      gender: req.body.gender,
+      birthday: req.body.birthday,
+    });
+    if (req.body.programCode) {
+      newUser.programe_code = req.body.programCode;
+    }
+    if (newUser.hashPassword()) {
+      newUser.save(function(err, user) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (user) {
+          res.send(user);
+        }
+      });
+    }
+    else {
+      res.render('registration/registration', {
+        error: 'There was an error trying to create account'
+      });
+    }
+  });
+};
+
+var registerPartner = function(req, res) {
+  validateRegistrationRequest(req, res, function() {
+    var newUser = new User({
+      first_name: req.body.name,
+      type: 'institution_pending',
+      subtype: req.body.type,
+      email: req.body.email,
+      password: req.body.password,
+      zipcode: req.body.zipCode,
+      phone_number: req.body.phone,
+      website: req.body.webSite
+    });
+    if (newUser.hashPassword()) {
+      newUser.save(function(err, user) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (user) {
+          res.send(user);
+        }
+      });
+    }
+    else {
+      res.render('registration/registration', {
+        error: 'There was an error trying to create account'
+      });
+    }
+  });
 }
