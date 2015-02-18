@@ -47,6 +47,28 @@ block content
               .post-comments
                 p.comments-title
                   | Comments
+              if post.text
+                .comment-container
+                  .post-comments-avatar
+                    if post.creator.profile_photo_url
+                      img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                        class='prizm-avatar-xs')
+                    else
+                      img(src='/images/profile/profile_default_avatar.png'
+                        class='prizm-avatar-xs')
+                  .avatar-name
+                    | #{post.creator.name}
+                  .comment-text
+                    | !{post.formattedText}
+                  .comment-info
+                    #clock-image
+                    #time
+                      | #{post.time_since} ago
+                    .comment-likes
+                      | -&nbsp;&nbsp;Like
+                    .like-icon
+                    .comment-likes-count
+                      | #{post.likes_count}
               each comment, i in post.comments
                 .comment-container
                   .post-comments-avatar
@@ -59,7 +81,7 @@ block content
                   .avatar-name
                     | #{post.comments[i].creator.name}
                   .comment-text
-                    | #{post.comments[i].text}
+                    | !{post.formattedText}
                   .comment-info
                     #clock-image
                     #time
