@@ -677,8 +677,9 @@ exports.displayRegistration = function(req, res) {
 
 exports.registerNewUser = function(req, res) {
   var userType = req.body.userType;
+  console.log("User Type: " + userType);
   if (!userType) {
-    res.status(400).send({error: 'User type undefined'});
+    res.status(400).send('User type undefined');
   }
   if (userType == 'individual') {
     registerIndividual(req, res);
@@ -691,35 +692,30 @@ exports.registerNewUser = function(req, res) {
 // Registration Methods
 
 var validateRegistrationRequest = function(req, res,  next) {
+  console.log("Validating request...")
+  console.log(JSON.stringify(req.body));
   var userEmail = req.body.email;
   if (validateEmail(userEmail)) {
     User.findOne({email: userEmail}, function(err, user) {
       if (err) {
-        res.render('registration/registration', {
-          error: err
-        });
+        res.status(500).send({error: err});
       }
       if (user) {
-        res.render('registration/registration', {
-          error: 'This email address has already been registered'
-        });
+        res.status(400).send({error: '!This email address has already been registered'}).end();
       }
       else {
         if (req.body.password != req.body.confirmPassword) {
-          res.render('registration/registration', {
-            error: 'Passwords do not match'
-          });
+          res.status(400).send({error: 'Passwords do not match'});
         }
         else {
+          console.log("IS NEXT GETTING CALLED?");
           next();
         }
       }
     });
   }
   else {
-    res.render('registration/registration', {
-      error: 'Invalid Email Address'
-    });
+    res.status(400).send({error: 'Invalid Email Address'});
   }
 };
 
@@ -742,14 +738,12 @@ var registerIndividual = function(req, res) {
           res.status(500).send({error: err});
         }
         if (user) {
-          res.send(user);
+          res.status(200).send(user);
         }
       });
     }
     else {
-      res.render('registration/registration', {
-        error: 'There was an error trying to create account'
-      });
+      res.status(500).send({error: 'There was an error trying to create account'});
     }
   });
 };
@@ -772,14 +766,12 @@ var registerPartner = function(req, res) {
           res.status(500).send({error: err});
         }
         if (user) {
-          res.send(user);
+          res.status(200).send(user);
         }
       });
     }
     else {
-      res.render('registration/registration', {
-        error: 'There was an error trying to create account'
-      });
+      res.status(500).send({error: 'There was an error trying to create account'});
     }
   });
-}
+};
