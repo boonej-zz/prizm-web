@@ -55,8 +55,10 @@ html
     block head
     
   body(id='#{bodyId}')
+    .overlay(onclick='nav.toggleSettings()')
     block navbar
       .navbar.navbar-default.navbar-fixed-top
+        .overlay(onclick='nav.toggleSettings()')
         .container
           .row
             .navbar-header.col-mob-12

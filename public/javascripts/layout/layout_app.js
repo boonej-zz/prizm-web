@@ -31,6 +31,7 @@ var nav = {
     $('.settings').toggleClass('settings-visable');
     $('body').toggleClass('body-push');
     $('.navbar').toggleClass('body-push');
+    $('.overlay').toggle();
   },
 
   goToHomeFeed: function(){

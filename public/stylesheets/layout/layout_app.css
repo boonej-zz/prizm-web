@@ -19,6 +19,7 @@ body {
 }
 /* Navigation Bar */
 .navbar {
+  z-index: 50;
   -webkit-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
   -moz-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
   -o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
@@ -161,6 +162,7 @@ body {
   -moz-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
   -o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
   transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
+
 }
 
 .settings a {
@@ -177,10 +179,11 @@ body {
   padding-left: 165px;
   margin: 18px 0px 3px -130px;
 }
-
+/**
 .settings li:hover {
   background-color: #3e6a9e;
 }
+  **/
 
 .settings-menu-button {
   background-image: url('/images/icons/menu_icon_white.png');
@@ -313,6 +316,18 @@ body {
 .mixpanelbadge {
   display: block;
   margin: 36px auto;
+}
+
+/** Overlay **/
+.overlay {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: -500px;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
 }
 
 @media screen and (max-width:500px) {
