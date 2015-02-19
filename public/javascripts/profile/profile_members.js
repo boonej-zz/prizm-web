@@ -74,6 +74,7 @@ var members = {
     var member_id = $(e.target).parents('td').attr('data');
     var member_selector = '.member-card[data=' + member_id + ']';
     var target = $(member_selector);
+    $('.member-card').addClass('hidden');
     target.removeClass('hidden');
     $('#memberCard').modal();
   },
