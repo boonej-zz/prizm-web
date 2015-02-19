@@ -38,32 +38,29 @@ body a:hover {
 }
 
 /* Avatars */
+.prizm-avatar-xs, .prizm-avatar-sm, .prizm-avatar-md, .prizm-avatar-lg {
+  border: 1px #d4daea solid;
+  border-radius: 50%;
+}
+
 .prizm-avatar-xs {
   height: 40px;
   width: 40px;
-  border: 2px #d4daea solid;
-  border-radius: 50%;
 }
 
 .prizm-avatar-sm {
   height: 64px;
   width: 64px;
-  border: 2px #d4daea solid;
-  border-radius: 50%;
 }
 
 .prizm-avatar-md {
   height: 96px;
   width: 96px;
-  border: 2px #d4daea solid;
-  border-radius: 50%;
 }
 
 .prizm-avatar-lg {
   height: 128px;
   width: 128px;
-  border: 2px #d4daea solid;
-  border-radius: 50%;
 }
 
 /* Icons */
