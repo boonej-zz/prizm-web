@@ -41,6 +41,7 @@ body a:hover {
 .prizm-avatar-xs, .prizm-avatar-sm, .prizm-avatar-md, .prizm-avatar-lg {
   border: 1px #d4daea solid;
   border-radius: 50%;
+  background-color: #d4daea;
 }
 
 .prizm-avatar-xs {

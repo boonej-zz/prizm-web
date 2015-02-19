@@ -1,3 +1,19 @@
+$(document).ready(function(){
+  $(document).mouseup(function(e){
+    var container = $('.user-menu');
+    var toggleMenu = $('.tool-tip');
+    if (!container.is(e.target) && container.has(e.target).length === 0
+      && toggleMenu.hasClass('rotated')){
+      if ($(window).width() > 500) {
+        container.toggle();
+      } else {
+        container.slideToggle(); 
+      }
+      $('.tool-tip').toggleClass('rotated');
+    }
+  });
+});
+
 var nav = {
   toggleMenu: function() {
     var windowWidth = $(window).width();
