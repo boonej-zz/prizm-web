@@ -322,11 +322,13 @@ body {
   display: none;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.4);
-  top: 0;
+  top: -500px;
   left: -500px;
   right: 0;
   bottom: 0;
   z-index: 5000;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 @media screen and (max-width:500px) {
