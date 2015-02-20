@@ -168,8 +168,12 @@ body {
   display: inline-block;
   margin-top: 3px;
   margin-bottom: 3px;
-  color: #ffffff;
+  color: #b2b6bd;
   font-weight: 100;
+}
+
+.settings a:hover {
+  color: #ffffff;
 }
 
 .settings ul {
@@ -214,7 +218,7 @@ body {
   background-size: 16px;
   background-repeat: no-repeat;
   background-position-x: 132px;
-  background-position-y: 6px;
+  background-position-y: 5px;
 }
 
 .home-button {
