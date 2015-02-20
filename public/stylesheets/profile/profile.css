@@ -1,4 +1,10 @@
 /* Profile Page */
+
+ul#feed {
+  list-style: none;
+  text-indent: 0;
+}
+
 #profile-header {
   margin-top: 30px;
   text-align: center;

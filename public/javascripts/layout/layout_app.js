@@ -32,7 +32,7 @@ var nav = {
   toggleSettings: function() {
     $('.settings').toggleClass('settings-visable');
     $('body').toggleClass('body-push');
-    $('.navbar').toggleClass('body-push');
+    $('.navbar-header').toggleClass('body-push');
     $('.overlay').toggle();
   },
 

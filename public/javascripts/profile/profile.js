@@ -28,6 +28,14 @@ $(window).scroll(function() {
   }
 });
 
+$(document).ready(function(){
+  new AnimOnScroll(document.getElementById('feed'), {
+    minDuration: 0.4,
+    maxDuration: 0.7,
+    viewPortFactor: 0.2
+  });
+});
+
 var profile = {
   slideHeader: function(e, multiple) {
     var target = e.target;

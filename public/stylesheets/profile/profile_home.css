@@ -6,8 +6,23 @@
   border-right: 1px solid #D0D2D6;
   padding-bottom: 30px;
 }
-.post {
+
+ul#feed {
+  perspective: 1300px;
+}
+
+ul#feed li {
   color: #b7c2d4;
+  transform-style: preserve-3d;
+}
+
+ul#feed li animate {
+  transform: translateZ(400px) translateY(300px) rotateX(-90deg);
+  animation: fallPerspective .8s ease-in-out forwards;
+}
+
+@keyframes fallPerspective {
+  100% { transform: translateZ(0px) translateY(opx) rotateX(0deg); opacity: 1;}
 }
 
 .post-header {
