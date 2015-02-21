@@ -3,32 +3,23 @@ body {
   overflow-x: hidden;
   position: relative;
   left: 0px;
-  -webkit-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  -moz-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
-  -o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
-  transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
+  transition: all 200ms linear; 
 }
 
 
 .body-push {
-  left: 304px;
-  -webkit-transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715);
-     -moz-transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715); 
-       -o-transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715); 
-          transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715); 
+  left: 284px;
+  transition: all 200ms linear; 
 }
+
+
 /* Navigation Bar */
-.navbar {
-  -webkit-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  -moz-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
-  -o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
-  transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
-}
 
 .navbar-header {
   height: 75px;
   text-align: center;
   padding-top: 12px;
+  transition: all 200ms linear; 
 }
 
 .navbar-title {
@@ -157,16 +148,18 @@ body {
   font-weight: 900;
   letter-spacing: 1px;
   padding-left: 179px;
-  -webkit-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  -moz-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
-  -o-transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
-  transition: all 500ms cubic-bezier(0.39, 0.575, 0.565, 1); 
+  transition: all 200ms linear; 
 
 }
 
 .settings a {
-  color: #ffffff
+  display: inline-block;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-weight: 100;
+  color: inherit;
 }
+
 
 .settings ul {
   width: 250px;
@@ -174,15 +167,18 @@ body {
   padding: 14px 0px 23px 110px;
 }
 
-.settings li {
+.settings li { 
   padding-left: 165px;
   margin: 18px 0px 3px -130px;
+  color: #b2b6bd;
 }
-/**
+
+
 .settings li:hover {
   background-color: #3e6a9e;
+  color: #ffffff;
 }
-  **/
+ 
 
 .settings-menu-button {
   background-image: url('/images/icons/menu_icon_white.png');
@@ -200,53 +196,90 @@ body {
 
 .settings-visable {
   left: -179px;
- -webkit-transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715);
-     -moz-transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715); 
-       -o-transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715); 
-          transition: all 500ms cubic-bezier(0.47, 0, 0.745, 0.715); 
+  transition: all 200ms linear; 
 }
 
 .settings-icon {
-  background-size: 16px;
   background-repeat: no-repeat;
   background-position-x: 132px;
-  background-position-y: 2px;
+  background-position-y: 6px;
+  background-size: 14px;
 }
 
 .home-button {
   background-image: url('/images/settings/settings_home.png');
 }
 
+.home-button:hover {
+  background-image: url('/images/settings/settings_home_selected.png');
+}
+
 .activity-button {
+  background-size: 11px 16px;
   background-image: url('/images/settings/settings_activity.png');
 }
 
+.activity-button:hover {
+  background-image: url('/images/settings/settings_activity_selected.png');
+}
+
 .insights-button {
+  background-position-y: 7px;
   background-image: url('/images/settings/settings_insights.png');
 }
 
+.insights-button:hover {
+  background-image: url('/images/settings/settings_insights_selected.png');
+}
+
+
 .surveys-button {
+  background-position-y: 8px;
   background-image: url('/images/settings/settings_survey.png');
+}
+
+.surveys-button:hover {
+  background-image: url('/images/settings/settings_survey_selected.png');
 }
 
 .stats-button {
   background-image: url('/images/settings/settings_stats.png');
 }
 
+.stats-button:hover {
+  background-image: url('/images/settings/settings_stats_selected.png');
+}
+
 .settings-button {
   background-image: url('/images/settings/settings_settings.png');
+}
+
+.settings-button:hover {
+  background-image: url('/images/settings/settings_settings_selected.png');
 }
 
 .members-button {
   background-image: url('/images/settings/settings_members.png');
 }
 
+.members-button:hover {
+  background-image: url('/images/settings/settings_members_selected.png');
+}
+
 .billing-button {
   background-image: url('/images/settings/settings_billing.png');
 }
 
+.billing-button:hover {
+  background-image: url('/images/settings/settings_billing_selected.png');
+}
+
 .invite-button {
   background-image: url('/images/settings/settings_invite.png');
+}
+
+.invite-button:hover {
+  background-image: url('/images/settings/settings_invite_selected.png');
 }
 
 /* Footer */

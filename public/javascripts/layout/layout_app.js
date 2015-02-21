@@ -2,14 +2,16 @@ $(document).ready(function(){
   $(document).mouseup(function(e){
     var container = $('.user-menu');
     var toggleMenu = $('.tool-tip');
-    if (!container.is(e.target) && container.has(e.target).length === 0
-      && toggleMenu.hasClass('rotated')){
-      if ($(window).width() > 500) {
-        container.toggle();
-      } else {
-        container.slideToggle(); 
+    if (!$(e.target).parents('.avatar-menu').length) {
+      if (toggleMenu.hasClass('rotated')){
+        if ($(window).width() > 500) {
+          container.toggle();
+        } else {
+          container.slideToggle(); 
+        }
+        $('.tool-tip').toggleClass('rotated');
       }
-      $('.tool-tip').toggleClass('rotated');
+
     }
   });
 });
@@ -30,7 +32,7 @@ var nav = {
   toggleSettings: function() {
     $('.settings').toggleClass('settings-visable');
     $('body').toggleClass('body-push');
-    $('.navbar').toggleClass('body-push');
+    $('.navbar-header').toggleClass('body-push');
     $('.overlay').toggle();
   },
 

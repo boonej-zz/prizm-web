@@ -1,4 +1,19 @@
 /* Profile Page */
+
+ul#feed {
+  list-style: none;
+  text-indent: 0;
+}
+
+ul .post {
+  opacity: 0;
+}
+
+ul .post.shown {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
 #profile-header {
   margin-top: 30px;
   text-align: center;
