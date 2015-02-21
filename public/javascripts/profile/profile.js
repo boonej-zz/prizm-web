@@ -1,4 +1,35 @@
 /* Fetch posts for endless scrolling */
+function elementInViewport(el){
+  var top = el.offsetTop;
+  var left = el.offsetLeft;
+  var width = el.offsetWidth;
+  var height = el.offsetHeight;
+
+  while (el.offsetParent) {
+    el = el.offsetParent;
+    top += el.offsetTop;
+    left += el.offsetLeft;
+  }
+  if (left >= window.pageXOffset &&
+      top <= (window.pageYOffset + window.innerHeight) &&
+      left <= (window.pageXOffset + window.innerWidth) ){
+    return true;
+  }
+  return false;
+ };
+
+function animatePosts() {
+  var posts = $('.post');
+
+  var post;
+  for (i = 0; post = posts[i]; ++i){
+    if (elementInViewport(post)){
+      $(post).addClass('shown');
+    }
+  }
+}
+$(document).ready(function(){
+  animatePosts();
 $(window).scroll(function() {
   if($(window).scrollTop() == $(document).height() - $(window).height()) {
     var lastPost = $('.profile-posts-container').children().children().last().attr('id');
@@ -26,15 +57,10 @@ $(window).scroll(function() {
       }
     });
   }
-});
-
-$(document).ready(function(){
-  new AnimOnScroll(document.getElementById('feed'), {
-    minDuration: 0.4,
-    maxDuration: 0.7,
-    viewPortFactor: 0.2
+  animatePosts();
   });
 });
+
 
 var profile = {
   slideHeader: function(e, multiple) {
