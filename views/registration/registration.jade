@@ -8,7 +8,7 @@ block content
   .container.topnav-offset.light-grey
     .row
       .col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3.registration
-        .registration-card
+        .registration-card(data-user-id='')
           .section.section-animate
             .message
               h2 Join Prizm Today!
@@ -37,4 +37,16 @@ block content
                   onClick='reg.section2()')
               | Next
           .section.section-animate
+            .interests-header
+                .card-icon(onclick='members.showCardFront()')
+                h2 What are you interested in?
+              .interests-container
+                | Please choose 3 or more categories and we'll share some good
+                | stuff with you
+                ul
+                  include registration_interests
+              button(class='btn btn-lg btn-primary btn-block disabled'
+                     id='save-interests-button'
+                     onClick='reg.saveInterests()')
+                | Next
           .section.section-animate

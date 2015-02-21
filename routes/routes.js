@@ -59,6 +59,7 @@ router.get('/profiles/:id', _users.displayProfileById);
 /* Registration */
 router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
+router.put('/register', _users.updateNewUser);
 
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);

@@ -1,0 +1,11 @@
+each interest in interests
+  li(class='interests' 
+     data-interest='#{interest.id}'
+     onClick='reg.interestSelect(event)')
+    | #{interest.text}
+  if (interest.subinterests.length > 0)
+    each subinterest in interest.subinterests
+      li(class='interests subinterest hidden #{interest.id}' 
+         data-interest='#{subinterest.id}'
+         onClick='reg.interestSelect(event)')
+        | #{subinterest.text}

@@ -6,6 +6,7 @@ var ObjectId        = require('mongoose').Types.ObjectId;
 var User            = mongoose.model('User');
 var Post            = mongoose.model('Post');
 var Organization    = mongoose.model('Organization');
+var Interest         = mongoose.model('Interest');
 var config          = require('../config');
 var passport        = require('passport');
 var jade            = require('jade');
@@ -670,8 +671,17 @@ var membersJSONRequest = function(req, res) {
 
 /* Registration */
 exports.displayRegistration = function(req, res) {
-  res.render('registration/registration', {
-    bodyId: 'registration'
+  Interest
+    .find({is_subinterest: false})
+    .populate('subinterests')
+    .exec(function(err, interests) {
+      if (err) {
+        var interests = [];
+      }
+      res.render('registration/registration', {
+        bodyId: 'registration',
+        interests: interests
+      });
   });
 }
 
@@ -689,6 +699,41 @@ exports.registerNewUser = function(req, res) {
   }
 };
 
+exports.updateNewUser = function(req, res) {
+  var userId = req.body.userId;
+  var interestsArray = req.body.interests;
+  if (interestsArray) {
+    Interest.find({_id: {$in: interestsArray}}, function(err, interests) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (interests) {
+        var update = {
+          $push: {
+            interests: {
+              $each: interests
+            }
+          }
+        };
+        User.findOneAndUpdate({_id: userId}, update, function(err, user) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          if (user) {
+            res.status(200).send(user);
+          }
+          else {
+            res.status(400).send({error: 'Invalide user id'});
+          }
+        })
+      }
+      else {
+        res.send(400).send({error: 'Selected interests could not be found'});
+      }
+    })
+  }
+}
+
 // Registration Methods
 
 var validateRegistrationRequest = function(req, res,  next) {
@@ -701,14 +746,13 @@ var validateRegistrationRequest = function(req, res,  next) {
         res.status(500).send({error: err});
       }
       if (user) {
-        res.status(400).send({error: '!This email address has already been registered'}).end();
+        res.status(400).send({error: 'This email address has already been registered'});
       }
       else {
         if (req.body.password != req.body.confirmPassword) {
           res.status(400).send({error: 'Passwords do not match'});
         }
         else {
-          console.log("IS NEXT GETTING CALLED?");
           next();
         }
       }
