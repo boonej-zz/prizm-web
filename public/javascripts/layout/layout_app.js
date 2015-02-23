@@ -45,6 +45,9 @@ var login = {
   displayForm: function() {
     $('.front').css('display', 'none');
     $('.back').css('display', 'inherit');
+  },
+  register: function() {
+    window.location = baseURL + '/register';
   }
 };
 
