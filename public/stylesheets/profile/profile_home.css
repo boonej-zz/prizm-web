@@ -9,6 +9,7 @@
 
 ul#feed {
   perspective: 1300px;
+  padding: 0px;
 }
 
 ul#feed li {
@@ -43,7 +44,7 @@ ul#feed li animate {
 
 .time-since {
   color: #b7c2d4;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 100%;
   position: initial;
 }
@@ -206,5 +207,86 @@ form #inputComment {
     border-left: none;
     border-right: none;
     padding-bottom: 30px;
+  }
+
+  .post-header {
+    padding: 10px;
+  }
+
+  .post-header p {
+    margin-bottom: 0px;
+  }
+
+  .post-header h3 {
+    font-size: 20px;
+  }
+
+  .category-icon {
+    top: 10px;
+    right: 10px;
+  }
+
+  .time-since {
+    font-size: 15px;
+  }
+
+  .time-since .clock-icon {
+    height: 15px;
+    width: 15px;
+    background-size: 15px;
+    margin: 0px 2px 0px 0px;
+  }
+
+  .post-footer {
+    padding: 10px;
+    font-size: 20px;
+    height: 50px;
+  }
+
+  .icon-text {
+    margin: 0px;
+  }
+
+  .like-icon {
+    margin: 0px 6px 0px 0px;
+    background-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .comment-icon {
+    margin: 1px 6px 0px 14px;
+    width: 28px;
+    height: 28px;
+    background-size: 28px;
+  }
+
+  .repost-icon {
+    position: absolute;
+    right: 45%;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-top: -1px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .action-icon {
+    position: absolute;
+    right: 20%;
+    margin: 0px;
+    background-size: 26px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .location-icon {
+    float: right;
+    background-size: 28px;
+    height: 28px;
+    width: 28px;
+    position: absolute; 
+    right: 10px;
   }
 }
