@@ -30,32 +30,32 @@ exports.displayOrganization = function(req, res) {
       res.send(404);
     }
     else if (organization) {
-      User.findOne({_id: ObjectId(organization.owner)}, function(err, owner) {
+      User.findOne({_id: ObjectId(organization.owner)}, function(err, user) {
         if (err) {
           console.log(err);
           res.send(404);
         }
-        mixpanel.track('Organization Viewed', owner.mixpanelProperties());
-        if (owner) {
-          _users.getTrustedLuminariesForUserId(owner.id, function(err, luminaries) {
+        mixpanel.track('Organization Viewed', user.mixpanelProperties());
+        if (user) {
+          _users.getTrustedLuminariesForUserId(user.id, function(err, luminaries) {
             if (err) {
               luminaries = [];
             }
-            Post.findPostsForProfileByUserId(owner.id, false, false, function(err, posts) {
+            Post.findPostsForProfileByUserId(user.id, false, false, function(err, posts) {
               var headerImages;
               if (err) {
                 posts = [];
                 headerImages = [];
               }
-              var showMembers = String(currentUser._id) == String(owner._id);
+              var showMembers = String(currentUser._id) == String(user._id);
               posts = _time.addTimeSinceFieldToObjects(posts);
               headerImages = _profile.shufflePostImagesForProfileHeader(posts);
-              res.render('organization', {
+              res.render('profile/profile', {
                 auth: auth,
                 currentUser: currentUser,
                 organization: organization,
                 luminaries: luminaries,
-                owner: owner,
+                user: user,
                 headerImages: headerImages,
                 posts: posts,
                 showMembers: showMembers

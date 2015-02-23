@@ -201,7 +201,7 @@ exports.updateOrgStatus = function(req, res) {
 
 // User Partner Methods (Organizations)
 
-exports.getTrustedLuminariesForUserId = function(userId, next) {
+function getTrustedLuminariesForUserId(userId, next) {
   var trustedUserIds = [];
   _trusts.findTrustsByUserId(userId, function(err, trusts) {
     if (err) {
@@ -431,6 +431,7 @@ exports.displayHomeFeed = function(req, res) {
 
 exports.displayProfile = function(req, res) {
   var id = req.user.id
+  var showMembers = false;
   User.findOne({_id: ObjectId(id)}, function(err, user) {
     if (err) {
       res.send(400);
@@ -445,23 +446,29 @@ exports.displayProfile = function(req, res) {
         }
         posts = _time.addTimeSinceFieldToObjects(posts);
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
-        var showMembers = false;
         if (user.type == 'institution_verified' ) {
-          showMembers = true;
-          Organization.findOne({owner: id}, function(err, org){
+          Organization.findOne({owner: id}, function(err, organization){
             if (err) {
-              showMembers = false;
+              organization = false;
             }
-            res.render('profile/profile', {
-              auth: true,
-              currentUser: req.user,
-              user: user,
-              headerImages: headerImages,
-              posts: posts,
-              showMembers: showMembers,
-              organizationId: org._id
-            });
-
+            showMembers = true;
+            getTrustedLuminariesForUserId(id, function(err, luminaries) {
+              if (err) {
+                luminaries = [];
+              }
+              else {
+                res.render('profile/profile', {
+                  auth: true,
+                  currentUser: req.user,
+                  user: user,
+                  headerImages: headerImages,
+                  showMembers: showMembers,
+                  posts: posts,
+                  organization: organization,
+                  luminaries: luminaries
+                });
+              }
+            })
           });
         } else {
           res.render('profile/profile', {
@@ -469,8 +476,10 @@ exports.displayProfile = function(req, res) {
             currentUser: req.user,
             user: user,
             headerImages: headerImages,
+            showMembers: showMembers,
             posts: posts,
-            showMembers: showMembers
+            organization: false,
+            luminaries: false
           });
         }
       });
@@ -519,29 +528,36 @@ exports.displayProfileById = function(req, res) {
         if (String(currentUser._id) == String(user._id) && 
           currentUser.type == 'institution_verified'){
           showMembers = true;
-          Organization.findOne({owner: currentUser._id}, function(err, org){
+          Organization.findOne({owner: currentUser._id}, function(err, organization){
             if (err){
               showMembers = false;
             }
-            res.render('profile/profile', {
-              auth: auth,
-              currentUser: currentUser,
-              user: user,
-              organizationId: org._id,
-              showMembers: showMembers,
-              headerImages: headerImages,
-              posts: posts
+            getTrustedLuminariesForUserId(user._id, function(err, luminaries) {
+              if (err) {
+                luminaries= [];
+              }
+              res.render('profile/profile', {
+                auth: auth,
+                currentUser: currentUser,
+                user: user,
+                showMembers: showMembers,
+                headerImages: headerImages,
+                posts: posts,
+                organization: organization,
+                luminaries: luminaries
+              });
             });
           });
         } else {
-
           res.render('profile/profile', {
             auth: auth,
             currentUser: currentUser,
             user: user,
             headerImages: headerImages,
+            showMembers: showMembers,
             posts: posts,
-            showMembers: showMembers
+            organization: false,
+            luminaries: false
           });
         }
       });
@@ -954,4 +970,4 @@ var updatePhoto = function (req, res) {
   });
 }
 
-
+exports.getTrustedLuminariesForUserId = getTrustedLuminariesForUserId

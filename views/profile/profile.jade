@@ -1,3 +1,21 @@
+mixin profileInfo
+  ul
+    li
+      | Followers
+      | <br>
+      strong
+        | #{user.followers_count}
+    li
+      | Following
+      | <br>
+      strong
+        | #{user.following_count}
+    li
+      | Posts
+      | <br>
+      strong
+        | #{user.posts_count}
+
 extends ../layouts/layout_app
 
 block head
@@ -5,10 +23,10 @@ block head
   link(rel='stylesheet', href='/stylesheets/profile/profile.css')
 
 block content
-  input.organization(type='hidden' id='#{organizationId}')
   .container.topnav-offset
     .row 
       .profile-owner(id='#{user.id}')
+      .organization(id='#{organization.id}')
       .col-sm-12#profile-header
         if (headerImages.length > 15)
           .background-tile-container
@@ -21,41 +39,49 @@ block content
           .slider
             img(src='https://#{user.profile_photo_url.substr(7)}'
                 class='prizm-avatar-md')
-            h1 #{user.name}
+            if organization
+              h1 #{organization.name}
+              h4 #{user.city}, #{user.state}
+            else
+              h1 #{user.name}
           .slider
             h4 #{user.info}
             h5 #{user.website}
           .slider
+            if organization
+              .luminary-icon
+                p
+                  | Luminary
+              - var defaultImage = '/images/profile/profile_default_avatar.png'
+              - for (var i = 0; i < 3; i++)
+                  .luminary-card
+                    img(src=luminaries[i] ? 'https://#{luminaries[i].profile_photo_url.substr(7)}' : defaultImage
+                        class='prizm-avatar-md')
+                    h4
+                      if (luminaries[i])
+                        | #{luminaries[i].name}
+                      else
+                        | &nbsp;
         .slider-nav
           ul
             li.active(onClick='profile.slideHeader(event, 0)')
             li(onClick='profile.slideHeader(event, 1)')
+            if organization
+              li(onClick='profile.slideHeader(event, 2)')
     .row.profile-info
-      .col-mob-2
-        if showMembers
-          .toggle-container(data-toggle='off' 
-                          id='membersToggle'
-                          onClick='profile.toggleMembersPosts()')
-            .toggle-switch
-          .toggle-label
-            | Members
-      .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
-        ul
-          li
-            | Followers
-            | <br>
-            strong
-              | #{user.followers_count}
-          li
-            | Following
-            | <br>
-            strong
-              | #{user.following_count}
-          li
-            | Posts
-            | <br>
-            strong
-              | #{user.posts_count}
+      if showMembers
+        .col-mob-2
+            .toggle-container(data-toggle='off' 
+                            id='membersToggle'
+                            onClick='profile.toggleMembersPosts()')
+              .toggle-switch
+            .toggle-label
+              | Members
+        .col-mob-10.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
+          mixin profileInfo
+      else
+        .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
+          mixin profileInfo
     .row.profile-posts-container
         if (posts.length < 1)
           .col-sm-12
@@ -64,7 +90,7 @@ block content
           include ../posts/post_feed
     .row.members-posts-container
       .col-sm-12
-        h2 This Organization has not created any posts yet.
+        h2 Members have not created any posts yet.
   div#postModal.modal.fade(
       tabIndex='-1'
       role='dialog'
