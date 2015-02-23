@@ -50,7 +50,7 @@ body {
   height: 40px;
   width: 40px;
   position: absolute;
-  right: 16%;
+  right: 20%;
   top: 16px;
   font-size: 14px;
 }
@@ -62,7 +62,7 @@ body {
   height: 9px;
   position: relative;
   left: 44px;
-  bottom: 28px;
+  bottom: 24px;
 }
 
 .user-menu {
@@ -372,6 +372,23 @@ body {
 
   .plus-icon {
     right: 15px;
+  }
+
+  .avatar-menu {
+    right: 20%;
+  }
+
+  .user-menu {
+    position: fixed;
+    top: 75px;
+    right: 0px;
+    left: 0px;
+    width: auto;
+    border-radius: 0px;
+  }
+  
+  .user-menu:after {
+    display: none;
   }
 
   /* Footer */
