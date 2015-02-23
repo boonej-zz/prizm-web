@@ -48,8 +48,11 @@ var reg = {
     });
     console.log(interests);
     $.ajax({
-      type: 'PUT',
+      type: 'POST',
       url: window.location,
+      headers: {
+        dataType: 'interests'
+      },
       data: {
         'interests': interests, 
         'userId': userId
@@ -57,7 +60,8 @@ var reg = {
       success: function(response) {
         $('.section').addClass('section-3');
       },
-    })
+    });
+    return false;
   },
 
   section2: function() {
@@ -66,6 +70,10 @@ var reg = {
 
   section4: function() {
     $('.section').toggleClass('section-4');
+  },
+
+  section5: function() {
+    $('.section').toggleClass('section-5')
   },
 
   nextToFollow: function(direction) {
@@ -102,7 +110,6 @@ var reg = {
   },
 
   followUser: function(e, userToFollow) {
-    console.log("CLICK!");
     var target = e.target;
     var isFollowing = $(target).data('isFollowing');
     var userId = $('.registration-card').data('userId');
@@ -110,8 +117,11 @@ var reg = {
     console.log("Is following? - " + isFollowing);
 
     $.ajax({
-      type: 'PUT',
+      type: 'POST',
       url: window.location,
+      headers: {
+        dataType: 'following'
+      },
       data: {
         'userToFollow': userToFollow,
         'isFollowing': isFollowing,
@@ -131,6 +141,7 @@ var reg = {
         });
       }
     });
+    return false;
   }
 
 
@@ -154,11 +165,11 @@ var reg = {
   // }
 }
 
-$(function(){
-  $('body').on('click', function(){
-    $('.section').addClass('section-1');
-  })
-})
+// $(function(){
+//   $('body').on('click', function(){
+//     $('.section').addClass('section-1');
+//   })
+// })
 
 $(function(){
   var offset = 75;
@@ -179,6 +190,9 @@ $(function(){
     $.ajax({
       type: 'POST',
       url: window.location,
+      headers: {
+        dataType: 'user'
+      },
       data: user,
       success: function(user) {
         $('.registration-card').attr('data-user-id', user._id);
@@ -186,6 +200,36 @@ $(function(){
       },
       error: function(jqXHR) {
         $('.message').html(jqXHR.responseText);
+      }
+    });
+    return false;
+  });
+});
+
+
+$(function(){
+  $('.form-photo').submit(function(event){
+
+    var formData = new FormData($(this)[0]);
+    var userId = $('.registration-card').data('userId');
+    console.log(userId);
+
+    formData.append("userId", 666);
+    console.log(formData);
+    $.ajax({
+      type: 'POST',
+      url: window.location,
+      contentType: false,
+      processType: false,
+      data: formData,
+      // beforeSend: function(jqXHR) {
+      //   jqXHR.setRequestHeader('dataType', 'photo');
+      // },
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(jqXHR) {
+        console.log(jqXHR.responseText);
       }
     });
     return false;

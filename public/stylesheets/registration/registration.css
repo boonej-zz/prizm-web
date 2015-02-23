@@ -1,5 +1,5 @@
 .registration {
-  background: #fff;
+  /* background: #fff; */
   padding-left: 0px;
   padding-right: 0px;
   overflow-x: hidden;
@@ -11,15 +11,40 @@
 
 }
 
-/* Sections */
-
 input {
   margin: 10px 0px;
 }
 
+/* Sign Up Forms */
+
 #partner-form {
   display: none;
 }
+
+#registration .message {
+  width: 80%;
+  margin: auto;
+  padding-bottom: 24px
+}
+
+#registration .nav-pills {
+  width: 80%;
+  margin: auto;
+}
+
+#registration form {
+  width: 80%;
+  margin: auto
+}
+
+#registration .btn-block {
+  width: 80%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sections */
 
 .section-animate {
 -webkit-transition: all 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000); 
@@ -34,9 +59,11 @@ input {
 }
 
 .section {
+  background: #fff;
   width: 16.66666666%;
-  height: 100%;
-  padding: 15px;
+  margin: 30px 0px;
+  height: 625px;
+  padding: 15px 15px 45px 15px;
   /* padding-left: 15px; */
   /* padding-right: 15px; */
   float: left;
@@ -46,7 +73,7 @@ input {
 }
 
 .section-1 {
-  left: -50%;
+  left: -16.66666667%;
 }
 
 .section-2 {
@@ -64,6 +91,8 @@ input {
 .section-5 {
   left: -83.33333333%;
 }
+
+/* Interests */
 
 .interests-header {
   text-align: center;
@@ -85,16 +114,20 @@ input {
 
 .interests-container {
   /* background: #3A495E; */
-  height: 400px;
-  color: whitesmoke;
-  width: 75%;
-  margin: 0px auto;
+  height: 366px;
+  /* color: whitesmoke; */
+  width: 80%;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
 }
 
 .interests-container ul {
   list-style: none;
   padding: 6px;
   font-size: 21px;
+  color: whitesmoke;;
 }
 
 .interests-container li {
@@ -111,10 +144,11 @@ input {
   background: rgba(94,107,125, 0.5) !important;
 }
 
-/* Who To Follow Cards */
+/* Follow */
 .user-card-container {
   position: relative;
   left: 0px;
+  margin-top: 30px;
   -webkit-transition: all 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000); 
    -moz-transition: all 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000); 
      -o-transition: all 400ms cubic-bezier(0.420, 0.000, 0.580, 1.000); 
@@ -253,4 +287,39 @@ input {
   /* margin-top: 14px; */
   /* margin-left: 10px; */
   /* margin-right: -10px; */
+}
+
+/* Photo */
+
+#preview {
+    border: 1px solid #666;
+  
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+
+.btn-upload {
+    position: absolute;
+
+    right: 142px;
+    bottom: 100px;
+    width: 102px;
+}
+
+.btn-take {
+    position: absolute; 
+    left: 142px; 
+    bottom: 100px;
+
+    width: 102px;
+}
+
+.btn-skip {
+    position: relative;
+  
+    top: 76px;
+    width: 102px;
+    /* left: 50%; */
+    /* right: 50%; */
 }
