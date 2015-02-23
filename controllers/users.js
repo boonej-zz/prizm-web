@@ -26,13 +26,19 @@ var pendingMembers  = fs.readFileSync(path.join(__dirname +
 var memberCardPath  = path.join(__dirname, '/../views/profile/profile_members_card.jade')
 var memberCard      = fs.readFileSync(memberCardPath, 'utf8');
 var rejectMail      = fs.readFileSync(path.join(__dirname +
-                      '/../views/reject_mail.jade'), 'utf8');
+                      '/../views/mail/reject_mail.jade'), 'utf8');
 var acceptMail      = fs.readFileSync(path.join(__dirname +
-                      '/../views/accept_mail.jade'), 'utf8');
+                      '/../views/mail/accept_mail.jade'), 'utf8');
+var welcomeMail     = fs.readFileSync(path.join(__dirname + 
+                      '/../views/mail/welcome_mail.jade'), 'utf8');
 var mandrill        = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
-var Mixpanel = require('mixpanel');
-var mixpanel = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+var Mixpanel        = require('mixpanel');
+var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+var AWS = require('aws-sdk');
+var gm = require('gm');
+var mime = require('mime');
+var multiparty = require('multiparty');
 
 // User Methods
 exports.passwordReset = function(req, res){
@@ -694,30 +700,45 @@ exports.displayRegistration = function(req, res) {
 };
 
 exports.registerNewUser = function(req, res) {
-  var userType = req.body.userType;
-  console.log("User Type: " + userType);
-  if (!userType) {
-    res.status(400).send('User type undefined');
+  var dataType = req.get('dataType');
+  console.log("dataType: " + dataType);
+  if (dataType == 'user') {
+    var userType = req.body.userType;
+    console.log(JSON.stringify(req.body));
+    if (!userType) {
+      res.status(400).send('User type undefined');
+    }
+    else if (userType == 'individual') {
+      registerIndividual(req, res);
+    }
+    else if (userType == 'partner') {
+      registerPartner(req, res);
+    }
   }
-  if (userType == 'individual') {
-    registerIndividual(req, res);
+  else if (dataType == 'interests') {
+    updateInterests(req, res);
   }
-  if (userType == 'partner') {
-    registerPartner(req, res);
+  else if (dataType == 'following') {
+    updateFollowing(req, res);
+  }
+  else if (req.query.dataType == 'photo'){
+    updatePhoto(req, res);
   }
 };
 
-exports.updateNewUser = function(req, res) {
-  var userId = req.body.userId;
-  var interestsArray = req.body.interests;
-  var userToFollow = req.body.userToFollow;
-  if (interestsArray) {
-    updateInterests(req, res);
-  };
-  if (userToFollow) {
-    updateFollowing(req, res);
-  }
-}
+// exports.updateNewUser = function(req, res) {
+//   console.log("Updating..");
+//   console.log(JSON.stringify(req.body));
+//   var userId = req.body.userId;
+//   var interestsArray = req.body.interests;
+//   var userToFollow = req.body.userToFollow;
+//   if (interestsArray) {
+//     updateInterests(req, res);
+//   };
+//   if (userToFollow) {
+//     updateFollowing(req, res);
+//   }
+// }
 
 // Registration Methods
 
@@ -796,6 +817,22 @@ var registerPartner = function(req, res) {
         }
         if (user) {
           res.status(200).send(user);
+          var html = jade.render(welcomeMail, {user: user});
+          mandrill(mandrillEndpointSend, {
+            message: {
+              to: [{email: user.email}],
+              from_email: 'info@prizmapp.com',
+              from_name: 'Prizm',
+              subject: 'Welcome to Prizm!',
+              html: html
+            }
+          }, function (err, res) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log('email sent');
+            }
+          });
         }
       });
     }
@@ -806,6 +843,8 @@ var registerPartner = function(req, res) {
 };
 
 var updateInterests = function(req, res) {
+  var interestsArray = req.body.interests;
+  var userId = req.body.userId;
   Interest.find({_id: {$in: interestsArray}}, function(err, interests) {
     if (err) {
       res.status(500).send({error: err});
@@ -841,3 +880,78 @@ var updateFollowing = function(req, res) {
   // logic over to web app
   res.status(200).end();
 }
+
+var updatePhoto = function (req, res) {
+  console.log("Uploading photo");
+  var s3 = new AWS.S3();
+  var form = new multiparty.Form();
+
+  form.parse(req, function (err, fields, files) {
+    console.log(fields);
+    console.log(files);
+    var width = Number(fields.width);
+    var height = Number(fields.height);
+    var x1 = Number(fields.x1);
+    var y1 = Number(fields.y1);
+    var userId = String(fields.userId);
+    var fileName = userId + '_profile.jpg';
+    var profilePhotoUrl = 'https://s3.amazonaws.com/higheraltitude.prism' +
+                          '/profile/' + fileName
+    if (files) {
+      var fa = files.image;
+      if (fa) {
+        var file;
+        for (var i = 0; file = fa[i]; ++i) {
+          gm(file.path)
+            .crop(width, height, x1, y1)
+            .resize(600, 600)
+            .stream(function (err, stdout, stderr) {
+              var buf = new Buffer('');
+              stdout.on('data', function (data) {
+                buf = Buffer.concat([buf, data]);
+              });
+              stdout.on('end', function (data) {
+                var data = {
+                  Bucket: 'higheraltitude.prizm.insights',
+                  Key: 'profile/' + fileName,
+                  Body: buf,
+                  ContentType: mime.lookup(fileName),
+                  ACL: 'public-read'
+                };
+                // s3.putObject(data, function (err, result) {
+                //   if (err) console.log(err);
+                //   console.log(result);
+                //   console.log(
+                //     'https://s3.amazonaws.com/higheraltitude.prism/profile/' +
+                //     fileName)
+                //   User.findOneAndUpdate({
+                //     _id: ObjectId(userId)
+                //   }, {
+                //     profile_photo_url: profilePhotoUrl
+                //   }, function (err, user) {
+                //     if (err) res.status(500)
+                //       .send({
+                //         error: err
+                //       });
+                //     if (user) {
+                //       res.status(200)
+                //         .send({
+                //           sucess: 'Profile picture updated'
+                //         });
+                //     } else {
+                //       res.status(400)
+                //         .send({
+                //           error: 'Unable to validate user Id'
+                //         });
+                //     }
+                //   });
+                // });
+              });
+            });
+        }
+      }
+    }
+  });
+}
+
+
