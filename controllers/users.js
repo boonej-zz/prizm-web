@@ -928,40 +928,40 @@ var updatePhoto = function (req, res) {
               });
               stdout.on('end', function (data) {
                 var data = {
-                  Bucket: 'higheraltitude.prizm.insights',
+                  Bucket: 'higheraltitude.prism',
                   Key: 'profile/' + fileName,
                   Body: buf,
                   ContentType: mime.lookup(fileName),
                   ACL: 'public-read'
                 };
-                // s3.putObject(data, function (err, result) {
-                //   if (err) console.log(err);
-                //   console.log(result);
-                //   console.log(
-                //     'https://s3.amazonaws.com/higheraltitude.prism/profile/' +
-                //     fileName)
-                //   User.findOneAndUpdate({
-                //     _id: ObjectId(userId)
-                //   }, {
-                //     profile_photo_url: profilePhotoUrl
-                //   }, function (err, user) {
-                //     if (err) res.status(500)
-                //       .send({
-                //         error: err
-                //       });
-                //     if (user) {
-                //       res.status(200)
-                //         .send({
-                //           sucess: 'Profile picture updated'
-                //         });
-                //     } else {
-                //       res.status(400)
-                //         .send({
-                //           error: 'Unable to validate user Id'
-                //         });
-                //     }
-                //   });
-                // });
+                s3.putObject(data, function (err, result) {
+                  if (err) console.log(err);
+                  console.log(result);
+                  console.log(
+                    'https://s3.amazonaws.com/higheraltitude.prism/profile/' +
+                    fileName)
+                  User.findOneAndUpdate({
+                    _id: ObjectId(userId)
+                  }, {
+                    profile_photo_url: profilePhotoUrl
+                  }, function (err, user) {
+                    if (err) res.status(500)
+                      .send({
+                        error: err
+                      });
+                    if (user) {
+                      res.status(200)
+                        .send({
+                          sucess: 'Profile picture updated'
+                        });
+                    } else {
+                      res.status(400)
+                        .send({
+                          error: 'Unable to validate user Id'
+                        });
+                    }
+                  });
+                });
               });
             });
         }

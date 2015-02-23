@@ -197,6 +197,8 @@ $(function(){
       success: function(user) {
         $('.registration-card').attr('data-user-id', user._id);
         $('.section').addClass('section-1');
+        // Hack - need to append 'data-user-id' attr to photo upload
+        $('#userId').attr('value', user._id);
       },
       error: function(jqXHR) {
         $('.message').html(jqXHR.responseText);
@@ -209,24 +211,16 @@ $(function(){
 
 $(function(){
   $('.form-photo').submit(function(event){
-
     var formData = new FormData($(this)[0]);
-    var userId = $('.registration-card').data('userId');
-    console.log(userId);
-
-    formData.append("userId", 666);
-    console.log(formData);
     $.ajax({
       type: 'POST',
       url: window.location,
       contentType: false,
       processType: false,
       data: formData,
-      // beforeSend: function(jqXHR) {
-      //   jqXHR.setRequestHeader('dataType', 'photo');
-      // },
-      success: function(response) {
+      success: function() {
         console.log(response);
+        $('.section').addClass('section-5');
       },
       error: function(jqXHR) {
         console.log(jqXHR.responseText);
