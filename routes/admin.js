@@ -16,14 +16,6 @@ var ejs = require('ejs');
 var jade = require('jade');
 var fs = require('fs');
 var path = require('path');
-var mail = fs.readFileSync(path.join(__dirname + '/../lib/mail.ejs'), 'utf8');
-var rejectMail = fs.readFileSync(path.join(__dirname +
-      '/../views/reject_mail.jade'), 'utf8');
-var acceptMail = fs.readFileSync(path.join(__dirname +
-      '/../views/accept_mail.jade'), 'utf8');
-var adminBody = fs.readFileSync(path.join(__dirname + 
-      '/../views/adminMail.ejs'), 'utf8'); 
-var adminEmail = 'info@prizmapp.com';
 var ObjectId = require('mongoose').Types.ObjectId;
 var moment = require('moment');
 var utils = require('../utils');
