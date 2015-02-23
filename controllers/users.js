@@ -380,7 +380,7 @@ var fetchHomeFeed = function(user, params, next){
 
 exports.displayHomeFeed = function(req, res) {
   if (!req.user) {
-    res.render('index', {
+    res.render('site/index', {
       title: 'Prizm App',
       selected:'home',
       bodyId: 'body-home'

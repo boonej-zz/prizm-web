@@ -15,23 +15,23 @@ var passport    = require('passport');
 router.get('/', _users.displayHomeFeed);
 
 router.get('/terms', function(req, res) {
-  res.render('terms', { title: 'Prizm App | Legal', selected:'none'});
+  res.render('site/terms', { title: 'Prizm App | Legal', selected:'none'});
 });
 
 router.get('/privacy', function(req, res){
-  res.render('privacy', { title: 'Prizm App | Privacy', selected:'none'});
+  res.render('site/privacy', { title: 'Prizm App | Privacy', selected:'none'});
 });
 
 router.get('/partner', function(req, res){
-  res.render('partner', { title: 'Prizm App | Partners', selected: 'none'});
+  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none'});
 });
 
 router.get('/luminary', function(req, res){
-  res.render('luminary', { title: 'Prizm App | Luminary', selected: 'none'});
+  res.render('site/luminary', { title: 'Prizm App | Luminary', selected: 'none'});
 });
 
 router.get('/download', function(req, res){
-  res.render('download', { title: 'Prizm App | Download', selected: 'none'});
+  res.render('site/download', { title: 'Prizm App | Download', selected: 'none'});
 });
 
 /* Posts */
