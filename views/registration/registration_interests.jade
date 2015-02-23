@@ -1,11 +1,22 @@
-each interest in interests
-  li(class='interests' 
-     data-interest='#{interest.id}'
-     onClick='reg.interestSelect(event)')
-    | #{interest.text}
-  if (interest.subinterests.length > 0)
-    each subinterest in interest.subinterests
-      li(class='interests subinterest hidden #{interest.id}' 
-         data-interest='#{subinterest.id}'
-         onClick='reg.interestSelect(event)')
-        | #{subinterest.text}
+.interests-header
+    .card-icon(onclick='members.showCardFront()')
+    h2 What are you interested in?
+  .interests-container
+    | Please choose 3 or more categories and we'll share some good
+    | stuff with you
+    ul
+      each interest in interests
+        li(class='interests' 
+           data-interest='#{interest.id}'
+           onClick='reg.interestSelect(event)')
+          | #{interest.text}
+        if (interest.subinterests.length > 0)
+          each subinterest in interest.subinterests
+            li(class='interests subinterest hidden #{interest.id}' 
+               data-interest='#{subinterest.id}'
+               onClick='reg.interestSelect(event)')
+              | #{subinterest.text}
+  button(class='btn btn-lg btn-primary btn-block disabled'
+         id='save-interests-button'
+         onClick='reg.saveInterests()')
+    | Next

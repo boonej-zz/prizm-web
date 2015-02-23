@@ -678,12 +678,20 @@ exports.displayRegistration = function(req, res) {
       if (err) {
         var interests = [];
       }
-      res.render('registration/registration', {
-        bodyId: 'registration',
-        interests: interests
-      });
-  });
-}
+      User
+        .find({subtype: 'luminary', posts_count: {$gt: 4}})
+        .exec(function(err, usersToFollow) {
+          if (err) {
+            var users = [];
+          }
+          res.render('registration/registration', {
+            bodyId: 'registration',
+            interests: interests,
+            usersToFollow: usersToFollow
+          });
+        });
+    });
+};
 
 exports.registerNewUser = function(req, res) {
   var userType = req.body.userType;
@@ -702,35 +710,12 @@ exports.registerNewUser = function(req, res) {
 exports.updateNewUser = function(req, res) {
   var userId = req.body.userId;
   var interestsArray = req.body.interests;
+  var userToFollow = req.body.userToFollow;
   if (interestsArray) {
-    Interest.find({_id: {$in: interestsArray}}, function(err, interests) {
-      if (err) {
-        res.status(500).send({error: err});
-      }
-      if (interests) {
-        var update = {
-          $push: {
-            interests: {
-              $each: interests
-            }
-          }
-        };
-        User.findOneAndUpdate({_id: userId}, update, function(err, user) {
-          if (err) {
-            res.status(500).send({error: err});
-          }
-          if (user) {
-            res.status(200).send(user);
-          }
-          else {
-            res.status(400).send({error: 'Invalide user id'});
-          }
-        })
-      }
-      else {
-        res.send(400).send({error: 'Selected interests could not be found'});
-      }
-    })
+    updateInterests(req, res);
+  };
+  if (userToFollow) {
+    updateFollowing(req, res);
   }
 }
 
@@ -819,3 +804,40 @@ var registerPartner = function(req, res) {
     }
   });
 };
+
+var updateInterests = function(req, res) {
+  Interest.find({_id: {$in: interestsArray}}, function(err, interests) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (interests) {
+      var update = {
+        $push: {
+          interests: {
+            $each: interests
+          }
+        }
+      };
+      User.findOneAndUpdate({_id: userId}, update, function(err, user) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (user) {
+          res.status(200).send(user);
+        }
+        else {
+          res.status(400).send({error: 'Invalide user id'});
+        }
+      })
+    }
+    else {
+      res.send(400).send({error: 'Selected interests could not be found'});
+    }
+  });
+}
+
+var updateFollowing = function(req, res) {
+  // Need to decide is we want to make API to API call or move following
+  // logic over to web app
+  res.status(200).end();
+}

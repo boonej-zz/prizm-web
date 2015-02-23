@@ -62,7 +62,77 @@ var reg = {
 
   section2: function() {
     $('.section').toggleClass('section-2');
+  },
+
+  section4: function() {
+    $('.section').toggleClass('section-4');
+  },
+
+  nextToFollow: function(direction) {
+    var regExp          = new RegExp(/[^-\d\.]/g);
+    var ucc             = $('.user-card-container');
+    var widthValue      = ucc.css('width');
+    var width           = parseInt(widthValue.replace(regExp, ''));
+    var cardInfo        = ucc.data()
+    var cardCount       = cardInfo.cardCount;
+    var cardPosition    = cardInfo.cardPosition;
+    var maxCardPosition = cardCount - 1;
+    var leftPosition    = 0;
+
+    if (direction == 'left' && cardPosition != 0) {
+      cardPosition--;
+    }
+
+    if (direction == 'right' && cardPosition != maxCardPosition) {
+      cardPosition++;
+    }
+
+    leftPosition = cardPosition * -410;
+
+    var style = {
+      left: leftPosition + 'px'
+    }
+
+    var data = {
+      cardPosition: cardPosition
+    }
+
+    ucc.data(data);
+    ucc.css(style);
+  },
+
+  followUser: function(e, userToFollow) {
+    console.log("CLICK!");
+    var target = e.target;
+    var isFollowing = $(target).data('isFollowing');
+    var userId = $('.registration-card').data('userId');
+
+    console.log("Is following? - " + isFollowing);
+
+    $.ajax({
+      type: 'PUT',
+      url: window.location,
+      data: {
+        'userToFollow': userToFollow,
+        'isFollowing': isFollowing,
+        'userId': userId
+      },
+      success: function() {
+        if (isFollowing) {
+          $(target).attr('data-is-following', false);
+          $(target).data('isFollowing', false);
+        }
+        else {
+          $(target).attr('data-is-following', true);
+          $(target).data("isFollowing", true);
+        }
+        $(target).text(function() {
+          return $(target).data('isFollowing') ? 'Following' : 'Follow';
+        });
+      }
+    });
   }
+
 
   // registerUser: function(event){
   //   event.preventDefault();
@@ -84,11 +154,23 @@ var reg = {
   // }
 }
 
-// $(function(){
-//   $('body').on('click', function(){
-//     $('.section').addClass('section-1');
-//   })
-// })
+$(function(){
+  $('body').on('click', function(){
+    $('.section').addClass('section-1');
+  })
+})
+
+$(function(){
+  var offset = 75;
+  var container = $('.user-card-container');
+  var numberOfFollowCards = container.data('cardCount');
+  var containerWidth = numberOfFollowCards * 410 + offset;
+  var style = {
+    width: containerWidth + 'px',
+    paddingLeft: offset + 'px'
+  }
+  $(container).css(style);
+})
 
 $(function(){
   $('.form-register').submit(function(){
@@ -99,7 +181,6 @@ $(function(){
       url: window.location,
       data: user,
       success: function(user) {
-        console.log(user._id);
         $('.registration-card').attr('data-user-id', user._id);
         $('.section').addClass('section-1');
       },

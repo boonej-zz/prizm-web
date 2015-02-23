@@ -1,0 +1,38 @@
+h2 Suggested People To Follow
+  .next-user-left(onClick='reg.nextToFollow("left")')
+  .next-user-right(onClick='reg.nextToFollow("right")')
+  .user-card-container(data-card-count="#{usersToFollow.length}"
+                       data-card-position='0')
+    each user in usersToFollow
+      .user-card
+        .user-info-top
+          .user-follow
+            button(class='btn btn-sm btn-primary'
+                   onClick='reg.followUser(event, "#{user.id}")'
+                   data-is-following='false'
+                   type='link')
+              | Follow
+          .user-avatar
+            img(src='https://#{user.profile_photo_url.substr(7)}'
+                class='prizm-avatar-lg')
+          .user-name
+            | #{user.name}
+          .location-icon
+          .user-location
+            | #{user.city}
+        .user-info-bottom
+          .user-circle
+            | Followers
+            br
+            | #{user.followers_count}
+          .user-circle
+            | Following
+            br
+            | #{user.following_count}
+          .user-circle
+            | Posts
+            br
+            | #{user.posts_count}
+  button(class='btn btn-lg btn-primary btn-block'
+         onClick='reg.section4()')
+    | Skip

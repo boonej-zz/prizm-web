@@ -1,6 +1,12 @@
 extends ../layouts/layout_app
 
 block head
+  script(type='text/javascript' src='/javascripts/jquery.imgareaselect.min.js')
+  script(type='text/javascript' src='/javascripts/upload.js')
+  script(type='text/javascript').
+    Upload.fileAreaId = 'insight-image-upload';
+    Upload.infoAreaId = 'preview';
+  link(rel='stylesheet' type='text/css' href='/stylesheets/imgareaselect-default.css')
   script(src='/javascripts/registration/registration.js' type='text/javascript')
   link(rel='stylesheet', href='/stylesheets/registration/registration.css')
 
@@ -37,16 +43,14 @@ block content
                   onClick='reg.section2()')
               | Next
           .section.section-animate
-            .interests-header
-                .card-icon(onclick='members.showCardFront()')
-                h2 What are you interested in?
-              .interests-container
-                | Please choose 3 or more categories and we'll share some good
-                | stuff with you
-                ul
-                  include registration_interests
-              button(class='btn btn-lg btn-primary btn-block disabled'
-                     id='save-interests-button'
-                     onClick='reg.saveInterests()')
-                | Next
+            include registration_interests
           .section.section-animate
+            include registration_follow
+          .section.section-animate
+            include registration_photo
+          .section.section-animate
+            h2 Congratulations!
+            | You are read to start sharing your Prizm
+            a(class='btn btn-lg btn-primary btn-block'
+              href='/login')
+              | Get Started!
