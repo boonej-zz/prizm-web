@@ -32,6 +32,8 @@ var Upload = {
               y1: 0,
               x2: 100,
               y2: 100,
+              imageHeight: img.naturalHeight,
+              imageWidth: img.naturalWidth,
               onSelectEnd: function(img, selection){
                 var fields = ['x1', 'x2', 'y1', 'y2', 'width', 'height'];
                 var field;
