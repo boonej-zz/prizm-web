@@ -118,14 +118,10 @@ var reg = {
 
     $.ajax({
       type: 'POST',
-      url: window.location,
+      url: '/profiles/' + userToFollow + '/following',
       headers: {
-        dataType: 'following'
-      },
-      data: {
-        'userToFollow': userToFollow,
-        'isFollowing': isFollowing,
-        'userId': userId
+        newUser: true,
+        follower: userId
       },
       success: function() {
         if (isFollowing) {
@@ -165,11 +161,13 @@ var reg = {
   // }
 }
 
-// $(function(){
-//   $('body').on('click', function(){
-//     $('.section').addClass('section-1');
-//   })
-// })
+/**
+ * Set the width of the container of the suggested followers based
+ * the number of suggested followers
+ *
+ * The offest is padding on the container to ensure the first card
+ * appears in the center of the parent div
+ */
 
 $(function(){
   var offset = 75;
@@ -218,7 +216,7 @@ $(function(){
       contentType: false,
       processType: false,
       data: formData,
-      success: function() {
+      success: function(response) {
         console.log(response);
         $('.section').addClass('section-5');
       },

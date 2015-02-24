@@ -15,6 +15,10 @@ input {
   margin: 10px 0px;
 }
 
+output {
+  padding: 0px;
+}
+
 /* Sign Up Forms */
 
 #partner-form {
@@ -293,10 +297,17 @@ input {
 
 #preview {
     border: 1px solid #666;
-  
     width: 300px;
     height: 300px;
     margin: auto;
+}
+
+#preview img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
 }
 
 .btn-upload {
