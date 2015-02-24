@@ -233,5 +233,199 @@ userSchema.statics.resolvePostTags = function(post, next){
   });
 };
 
+/**
+ * Takes a user ID and creates a follower entry for current user
+ **/
+userSchema.methods.addFollower = function(follower_id, next) {
+  var User = this.model('User');
+  var userId = this._id;
+  var followDate  = Date.now();
+  var followerCount;
+  var followerObject = {};
+
+  function updateFollowers (next) {
+
+    var update = {
+      $addToSet: {
+        followers: followerObject
+      }
+    };
+
+    var criteria = {
+      _id: userId,
+      followers: {
+        $elemMatch: {
+          _id: follower_id
+        }
+      }
+    };
+    console.log('Checking if ' + follower_id + " is following " + userId);
+    User.findOne(criteria, function(err, user) {
+      if (user) {
+        next('Already following');
+      }
+      else {
+        console.log('Updating followers with: ' + update);
+        User.findOneAndUpdate({_id: userId}, update, function(err, user) {
+          if (err) {
+            next(err);
+          }
+          if (user) {
+            next(null, user);
+          }
+          else {
+            next('User Id no longer valid');
+          }
+        });    
+      }
+    });
+  };
+
+  function updateFollowersCount(next) {
+    
+    console.log('Updating followers count..');
+    User.findOne({_id: userId}, function(err, user) {
+      if (err) next(err);
+      if (user) {
+        console.log(user.email);
+        followersCount = user.followers.length;
+        console.log('followers count is ' + followersCount);
+        User.update({_id: userId}, {followers_count: followersCount}, function(err, user) {
+          if (err) next(err);
+          if (user) {
+            next(null, user);
+          }
+        });
+      }
+    });
+  };
+
+  User.find({_id: ObjectId(follower_id)}, function(err, user) {
+    console.log('Valid follower id');
+    if (err) next(err);
+    if (user) {
+      followerObject._id = follower_id;
+      followerObject.date = followDate;
+      console.log(followerObject._id);
+      console.log(followerObject.date);
+
+      updateFollowers(function(err, user) {
+        if (err) next(err);
+        if (user) {
+          updateFollowersCount(function(err, user) {
+            if (err) next(err);
+            else {
+              next(null, user);
+            }
+          });
+        }
+        else {
+          next(err);
+        }
+      }); 
+    }
+    else {
+      next('Invalid follower_id');
+    }
+  });
+};
+
+/**
+ * Takes a user ID and creates a following entry for current user
+ **/
+
+userSchema.methods.addFollowing = function(following_id, next) {
+  var User = this.model('User');
+  var userId = this._id;
+  var followDate  = Date.now();
+  var followingCount;
+  var followingObject = {};
+
+  function updatefollowing (next) {
+
+    var update = {
+      $addToSet: {
+        following: followingObject
+      }
+    };
+
+    var criteria = {
+      _id: userId,
+      following: {
+        $elemMatch: {
+          _id: following_id
+        }
+      }
+    };
+    console.log('Checking if ' + following_id + " is following " + userId);
+    User.findOne(criteria, function(err, user) {
+      if (user) {
+        next('Already following');
+      }
+      else {
+        console.log('Updating following with: ' + update);
+        User.findOneAndUpdate({_id: userId}, update, function(err, user) {
+          if (err) {
+            next(err);
+          }
+          if (user) {
+            next(null, user);
+          }
+          else {
+            next('User Id no longer valid');
+          }
+        });    
+      }
+    });
+  };
+
+  function updatefollowingCount(next) {
+    
+    console.log('Updating following count..');
+    User.findOne({_id: userId}, function(err, user) {
+      if (err) next(err);
+      if (user) {
+        console.log(user.email);
+        followingCount = user.following.length;
+        console.log('following count is ' + followingCount);
+        User.update({_id: userId}, {following_count: followingCount}, function(err, user) {
+          if (err) next(err);
+          if (user) {
+            next(null, user);
+          }
+        });
+      }
+    });
+  };
+
+  User.find({_id: ObjectId(following_id)}, function(err, user) {
+    console.log('Valid following id');
+    if (err) next(err);
+    if (user) {
+      followingObject._id = following_id;
+      followingObject.date = followDate;
+      console.log(followingObject._id);
+      console.log(followingObject.date);
+
+      updatefollowing(function(err, user) {
+        if (err) next(err);
+        if (user) {
+          updatefollowingCount(function(err, user) {
+            if (err) next(err);
+            else {
+              next(null, user);
+            }
+          });
+        }
+        else {
+          next(err);
+        }
+      }); 
+    }
+    else {
+      next('Invalid following_id');
+    }
+  });
+};
 
 mongoose.model('User', userSchema);

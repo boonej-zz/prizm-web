@@ -5,6 +5,7 @@ var utils     = require('../utils');
 var _         = require('underscore');
 var _posts    = require('../controllers/posts');
 var _users    = require('../controllers/users');
+var _follow   = require('../controllers/follow');
 var _organizations = require('../controllers/organizations');
 
 var config      = require('../config');
@@ -56,9 +57,33 @@ router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/members', _users.authRequired, _users.displayMembers);
 router.get('/profiles/:id', _users.displayProfileById);
 
+/* Follow */
+// router.get('/profiles/:id/following', _users.displayFollowing);
+// router.get('/profiles/:id/followers', _users.displayFollowers);
+router.post('/profiles/:id/following', _follow.followUserId);
+
 /* Registration */
 router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
+
+router.post('/paramTest', function(req, res) {
+  // var param = req.get();
+  var newUser = req.get('newUser');
+  var follower; 
+
+  console.log('endpoint reached');
+  // console.log(req.get());
+
+  if (newUser) {
+    console.log('we have a new user! - ' + newUser);
+  }
+
+  if (req.get('newUser') == true) {
+    console.log('New user is true!');
+    follower = req.get('follower');
+  }
+
+});
 
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);

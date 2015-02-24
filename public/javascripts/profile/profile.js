@@ -160,6 +160,20 @@ var profile = {
       $('.profile-posts-container').fadeIn();
       $('#membersToggle').attr('data-toggle', 'off');
     }
+  },
+  followUser: function() {
+    var profileId = $('.profile-owner').attr('id');
+
+    $.ajax({
+      url: '/profiles/' + profileId + '/following',
+      type: 'POST',
+      success: function(response) {
+        console.log('Success: ' + response)
+      },
+      error: function(response) {
+        console.log('Error: ' + response)
+      },
+    })
   }
 }
 
