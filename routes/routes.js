@@ -66,25 +66,6 @@ router.post('/profiles/:id/following', _follow.followUserId);
 router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
 
-router.post('/paramTest', function(req, res) {
-  // var param = req.get();
-  var newUser = req.get('newUser');
-  var follower; 
-
-  console.log('endpoint reached');
-  // console.log(req.get());
-
-  if (newUser) {
-    console.log('we have a new user! - ' + newUser);
-  }
-
-  if (req.get('newUser') == true) {
-    console.log('New user is true!');
-    follower = req.get('follower');
-  }
-
-});
-
 /** Organization Pages **/
 router.get('/:name', _organizations.displayOrganization);
 
