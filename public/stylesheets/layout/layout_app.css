@@ -5,7 +5,19 @@ body {
   left: 0px;
   transition: all 200ms linear; 
 }
-
+/* Preloader */
+body:after {
+  display: none;
+  content: url('/images/settings/activity_icon_selected@2x.png')
+           url('/images/settings/creditcard_icon_selected@2x.png')
+           url('/images/settings/graph_icon_selected@2x.png')
+           url('/images/settings/home_icon_selected@2x.png')
+           url('/images/settings/insights_icon_selected@2x.png')
+           url('/images/settings/members_icon_selected@2x.png')
+           url('/images/settings/settings_icon_selected@2x.png')
+           url('/images/settings/survey_icon_selected@2x.png')
+           url('/images/settings/useradd_icon_selected@2x.png');
+}
 
 .body-push {
   left: 284px;
@@ -153,9 +165,6 @@ body {
   overflow-y: auto;
 
 }
-.preloader {
-  display: none;
-}
 
 .settings a {
   display: inline-block;
@@ -215,7 +224,7 @@ body {
   background-image: url('/images/settings/home_icon@2x.png');
 }
 
-#home-button, .home-button:hover {
+.home-button:hover {
   background-image: url('/images/settings/home_icon_selected@2x.png');
 }
 
@@ -224,7 +233,7 @@ body {
   background-image: url('/images/settings/activity_icon@2x.png');
 }
 
-#activity-button, .activity-button:hover {
+.activity-button:hover {
   background-image: url('/images/settings/activity_icon_selected@2x.png');
 }
 
@@ -233,7 +242,7 @@ body {
   background-image: url('/images/settings/insights_icon@2x.png');
 }
 
-#insights-button, .insights-button:hover {
+.insights-button:hover {
   background-image: url('/images/settings/insights_icon_selected@2x.png');
 }
 
@@ -243,7 +252,7 @@ body {
   background-image: url('/images/settings/survey_icon@2x.png');
 }
 
-#surveys-button, .surveys-button:hover {
+.surveys-button:hover {
   background-image: url('/images/settings/survey_icon_selected@2x.png');
 }
 
@@ -251,7 +260,7 @@ body {
   background-image: url('/images/settings/graph_icon@2x.png');
 }
 
-#stats-button, .stats-button:hover {
+.stats-button:hover {
   background-image: url('/images/settings/graph_icon_selected@2x.png');
 }
 
@@ -259,7 +268,7 @@ body {
   background-image: url('/images/settings/settings_icon@2x.png');
 }
 
-#settings-button, .settings-button:hover {
+.settings-button:hover {
   background-image: url('/images/settings/settings_icon_selected@2x.png');
 }
 
@@ -267,7 +276,7 @@ body {
   background-image: url('/images/settings/members_icon@2x.png');
 }
 
-#members-button, .members-button:hover {
+.members-button:hover {
   background-image: url('/images/settings/members_icon_selected@2x.png');
 }
 
@@ -275,7 +284,7 @@ body {
   background-image: url('/images/settings/creditcard_icon@2x.png');
 }
 
-#billing-button, .billing-button:hover {
+.billing-button:hover {
   background-image: url('/images/settings/creditcard_icon_selected@2x.png');
 }
 
@@ -283,7 +292,7 @@ body {
   background-image: url('/images/settings/useradd_icon@2x.png');
 }
 
-#invite-button, .invite-button:hover {
+.invite-button:hover {
   background-image: url('/images/settings/useradd_icon_selected@2x.png');
 }
 
