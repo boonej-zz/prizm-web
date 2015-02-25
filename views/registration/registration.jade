@@ -14,7 +14,9 @@ block content
   .container.topnav-offset.light-grey
     .row
       .col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3.registration
-        .registration-card(data-user-id='')
+        .registration-card(data-user-id='' 
+                           data-number-of-sections='5'
+                           data-current-section='0')
           .section.section-animate
             .message
               h2 Join Prizm Today!
@@ -40,7 +42,7 @@ block content
             img(src='/images/profile/profile_header.png'
                 style='width: 100%; height: 300px; margin-top: 30px; margin-bottom: 30px;')
             button(class='btn btn-lg btn-primary btn-block'
-                  onClick='reg.section2()')
+                  onClick='reg.nextSection()')
               | Next
           .section.section-animate
             include registration_interests

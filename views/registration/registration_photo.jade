@@ -3,9 +3,8 @@
     h2 Customize
   | Add Photo to your Prizm
   form(class='form-photo'
-       action='/register?dataType=photo'
        method='post' enctype='multipart/form-data')
-    input#userId(type='hidden' name='userId' value='666')
+    input#userId(type='hidden' name='userId' value='')
     input#x1(type='hidden' name='x1')
     input#x2(type='hidden' name='x2')
     input#y1(type='hidden' name='y1')
@@ -15,15 +14,16 @@
     label#status(for='insight-image-upload') Please select a file
     input#photo-image-upload(type='file' 
     name='image' onchange='Upload.fileSelect(event)')
-    output#preview
+    output#preview(onChange='alert("photo")')
     input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
     button(class='btn btn-lg btn-primary btn-upload'
+           onClick='reg.uploadPhoto()'
            type='submit')
       | Upload
   button(class='btn btn-lg btn-primary btn-take'
-         type='submit')
+         type='button')
     | Take
   button(class='btn btn-lg btn-primary btn-skip'
-         onClick='reg.section5()'
+         onClick='reg.nextSection()'
          type='submit')
     | Skip
