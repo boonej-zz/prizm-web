@@ -10,6 +10,7 @@ body {
 .body-push {
   left: 284px;
   transition: all 200ms linear; 
+  overflow: hidden;
 }
 
 
@@ -149,6 +150,7 @@ body {
   letter-spacing: 1px;
   padding-left: 179px;
   transition: all 200ms linear; 
+  overflow-y: auto;
 
 }
 
@@ -360,8 +362,6 @@ body {
   right: 0;
   bottom: 0;
   z-index: 5000;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 @media screen and (max-width:500px) {
