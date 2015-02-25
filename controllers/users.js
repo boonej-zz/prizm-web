@@ -786,6 +786,11 @@ var validateRegistrationRequest = function(req, res,  next) {
 };
 
 var registerIndividual = function(req, res) {
+  var birthday = new Date(req.body.birthday);
+  if (birthday){
+    birthday = String(birthday.getMonth() + 1) + '-' + String(birthday.getDate())
+      + '-' + String(birthday.getFullYear());
+  }
   validateRegistrationRequest(req, res, function() {
     var newUser = new User({
       first_name: req.body.firstName,
@@ -793,7 +798,7 @@ var registerIndividual = function(req, res) {
       email: req.body.email,
       password: req.body.password,
       gender: req.body.gender,
-      birthday: req.body.birthday,
+      birthday: birthday,
     });
     if (req.body.programCode) {
       newUser.programe_code = req.body.programCode;
