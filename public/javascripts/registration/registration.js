@@ -1,6 +1,32 @@
 /* Register Page */
 
 var reg = {
+  nextSection: function() {
+    var rc                = $('.registration-card');
+    var numberOfSections  = rc.data('numberOfSections');
+    var currentSection    = rc.data('currentSection');
+    var sectionElem       = $('.section')
+    var sectionOffset     = -16.66666667;
+    var nextSection       = 0;
+    var leftPosition      = 0;
+
+    numberOfSections = parseInt(numberOfSections);
+    currentSection = parseInt(currentSection);
+    nextSection = currentSection + 1;
+    if (nextSection > numberOfSections) {
+      return false;
+    }
+    leftPosition = nextSection * sectionOffset;
+    data = {
+      currentSection: nextSection
+    }
+    style = {
+      left: leftPosition + '%'
+    }
+    rc.data(data);
+    sectionElem.css(style);
+  },
+
   individualForm: function() {
     $('#partner-form').hide();
     $('#individual-form').fadeIn();
@@ -58,22 +84,10 @@ var reg = {
         'userId': userId
       },
       success: function(response) {
-        $('.section').addClass('section-3');
+        reg.nextSection();
       },
     });
     return false;
-  },
-
-  section2: function() {
-    $('.section').toggleClass('section-2');
-  },
-
-  section4: function() {
-    $('.section').toggleClass('section-4');
-  },
-
-  section5: function() {
-    $('.section').toggleClass('section-5')
   },
 
   nextToFollow: function(direction) {
@@ -138,27 +152,53 @@ var reg = {
       }
     });
     return false;
+  },
+
+  registerUser: function(e) {
+    $('.form-register').submit(function(){
+      thisForm = "#" + $(this).parent().attr('id') + " form";
+      var user = $(thisForm).serialize();
+      $.ajax({
+        type: 'POST',
+        url: window.location,
+        headers: {
+          dataType: 'user'
+        },
+        data: user,
+        success: function(user) {
+          $('.registration-card').attr('data-user-id', user._id);
+          reg.nextSection();
+          // Hack - need to append 'data-user-id' attr to photo upload
+          $('#userId').attr('value', user._id);
+        },
+        error: function(jqXHR) {
+          $('.message').html(jqXHR.responseText);
+        }
+      });
+      return false;
+    });
+  },
+
+  uploadPhoto: function() {
+    $('.form-photo').submit(function(){
+      var formData = new FormData($(this)[0]);
+      alert(formData);
+      $.ajax({
+        type: 'POST',
+        url: window.location + '/?dataType=photo',
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function(response) {
+          reg.nextSection();
+        },
+        error: function(jqXHR) {
+          console.log(jqXHR.responseText);
+        }
+      });
+      return false;
+    });
   }
-
-
-  // registerUser: function(event){
-  //   event.preventDefault();
-  //   console.log("YES");
-  //   var user = $('form').serialize();
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: window.location,
-  //     data: user,
-  //     success: function(response) {
-  //       alert('Success');
-  //       // console.log(response);
-  //     },
-  //     error: function(response) {
-  //       alert('Error');
-  //       $('.message').html(response.error);
-  //     }
-  //   });
-  // }
 }
 
 /**
@@ -180,50 +220,3 @@ $(function(){
   }
   $(container).css(style);
 })
-
-$(function(){
-  $('.form-register').submit(function(){
-    thisForm = "#" + $(this).parent().attr('id') + " form";
-    var user = $(thisForm).serialize();
-    $.ajax({
-      type: 'POST',
-      url: window.location,
-      headers: {
-        dataType: 'user'
-      },
-      data: user,
-      success: function(user) {
-        $('.registration-card').attr('data-user-id', user._id);
-        $('.section').addClass('section-1');
-        // Hack - need to append 'data-user-id' attr to photo upload
-        $('#userId').attr('value', user._id);
-      },
-      error: function(jqXHR) {
-        $('.message').html(jqXHR.responseText);
-      }
-    });
-    return false;
-  });
-});
-
-
-$(function(){
-  $('.form-photo').submit(function(event){
-    var formData = new FormData($(this)[0]);
-    $.ajax({
-      type: 'POST',
-      url: window.location,
-      contentType: false,
-      processType: false,
-      data: formData,
-      success: function(response) {
-        console.log(response);
-        $('.section').addClass('section-5');
-      },
-      error: function(jqXHR) {
-        console.log(jqXHR.responseText);
-      }
-    });
-    return false;
-  });
-});

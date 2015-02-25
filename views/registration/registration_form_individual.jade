@@ -79,5 +79,6 @@ form(action='/register' method='post' class='form-register' id='individual-form'
         value='individual'
         class='hidden')
   button(class='btn btn-lg btn-primary btn-block'
-        type='submit')
+         onClick="reg.registerUser(event)"
+         type='submit')
     | Next
