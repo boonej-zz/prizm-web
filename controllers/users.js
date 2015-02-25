@@ -824,7 +824,6 @@ var registerPartner = function(req, res) {
     var newUser = new User({
       first_name: req.body.name,
       type: 'institution_pending',
-      subtype: req.body.type,
       email: req.body.email,
       password: req.body.password,
       zipcode: req.body.zipCode,
