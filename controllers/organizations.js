@@ -84,3 +84,103 @@ exports.getNamespaceByOwnerId = function(owner_id, next) {
     }
   });
 };
+
+var verifyOrgCode = function(req, res) {
+
+  var code = req.get('data');
+  console.log('verifying... ' + code);
+  Organization.findOne({code: code}, function(err, org) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (org) {
+      res.status(403).send({
+        error: 'The code entered is currently in use by another organization'
+      });
+    }
+    else {
+      console.log("avail!");
+      res.status(200).send({
+        success: 'Code is available',
+        code: code
+      });
+    }
+  });
+}
+
+var verifyOrgNamespace = function(req, res) {
+
+  var namespace = req.get('data');
+  Organization.findOne({namespace: namespace}, function(err, org) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (org) {
+      console.log(org);
+      res.status(403).send({
+        error: 'The desired namespace is currently in use by another organization'
+      });
+    }
+    else {
+      res.status(200).send({
+        success: 'Namespace is available',
+        namespace: namespace
+      });
+    }
+  });
+}
+
+exports.displayOrgRegistration = function(req, res) {
+  if (req.accepts('html')) {
+    res.render('registration/registration_org', {
+      bodyId: 'payments'
+    });
+  }
+  if (req.accepts('application/json')) {
+    console.log('req accepts json...');
+    console.log(req.get('action'));
+    if (req.get('action') == 'checkCode') {
+      verifyOrgCode(req, res);
+    }
+    if (req.get('action') == 'checkNamespace') {
+      verifyOrgNamespace(req, res);
+    }
+  }
+}
+
+exports.createOrg = function (req, res) {
+  var owner = req.params.id;
+  var code = req.get('code');
+  var namespace = req.get('namespace')
+  // var welcomeImage = req.get('welcomeImage')
+  // var theme = req.get('theme');
+
+  User.findOne({_id: owner}, function(err, owner) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (owner) {
+      org = new Organization({
+        owner: owner,
+        namespace: namespace,
+        code: code,
+        name: owner.name ? owner.name : owner.first_name,
+        // welcome_image_url: welcomeImage,
+        // them: ObjectId(them),
+      });
+      org.save(function(err, org) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (org) {
+          res.status(200).send({success: org});
+        }
+      });
+    }
+    else {
+      res.status(400).send({error: 'Invalid user id'});
+    }
+  });
+}
+
+
