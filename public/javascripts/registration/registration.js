@@ -182,7 +182,6 @@ var reg = {
   uploadPhoto: function() {
     $('.form-photo').submit(function(){
       var formData = new FormData($(this)[0]);
-      alert(formData);
       $.ajax({
         type: 'POST',
         url: window.location + '/?dataType=photo',

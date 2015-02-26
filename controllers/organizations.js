@@ -10,6 +10,7 @@ var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
 var _time         = require('../lib/helpers/date_time');
 var _profile      = require('../lib/helpers/profile');
+var _image        = require('../lib/helpers/image');
 var Mixpanel      = require('mixpanel');
 var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 
@@ -130,7 +131,29 @@ var verifyOrgNamespace = function(req, res) {
   });
 }
 
+exports.uploadPhoto = function (req, res) {
+  if (req.accepts('application/json')) {
+    console.log('json req...')
+  }
+  console.log("action: " +req.get('action'));
+  console.log("Uploading photo...");
+  var userId = req.params.id;
+  console.log(userId);
+  _image.uploadPhoto(req, res, userId, function(err, url) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (url) {
+      res.status(200).send({
+        success: 'Uploaded successfully',
+        url: url
+      });
+    }
+  });
+}
+
 exports.displayOrgRegistration = function(req, res) {
+  var action = req.get('action');
   if (req.accepts('html')) {
     res.render('registration/registration_org', {
       bodyId: 'payments'
@@ -139,23 +162,38 @@ exports.displayOrgRegistration = function(req, res) {
   if (req.accepts('application/json')) {
     console.log('req accepts json...');
     console.log(req.get('action'));
-    if (req.get('action') == 'checkCode') {
+    if (action == 'checkCode') {
       verifyOrgCode(req, res);
     }
-    if (req.get('action') == 'checkNamespace') {
+    if (action == 'checkNamespace') {
       verifyOrgNamespace(req, res);
     }
   }
 }
 
-exports.createOrg = function (req, res) {
-  var owner = req.params.id;
+exports.postOrg = function (req, res) {
+  var action = req.query.action;
+  var userId = req.params.id;
+  if (action == 'uploadPhoto') {
+    _image.uploadImage(req, res, userId, function(err, url) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (url) {
+        res.status(200).send({
+          success: 'Uploaded successfully',
+          url: url
+        });
+      }
+    });
+  }
+  if (action == 'createOrg') {
   var code = req.get('code');
-  var namespace = req.get('namespace')
-  // var welcomeImage = req.get('welcomeImage')
+  var namespace = req.get('namespace');
+  var welcomeImage = req.get('welcomeImage')
   // var theme = req.get('theme');
 
-  User.findOne({_id: owner}, function(err, owner) {
+  User.findOne({_id: userId}, function(err, owner) {
     if (err) {
       res.status(500).send({error: err});
     }
@@ -181,6 +219,7 @@ exports.createOrg = function (req, res) {
       res.status(400).send({error: 'Invalid user id'});
     }
   });
+  }
 }
 
 

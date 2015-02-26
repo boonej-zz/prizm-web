@@ -1,0 +1,140 @@
+extends ../layouts/layout_app
+
+block head
+  script(type='text/javascript' src='/javascripts/jquery.imgareaselect.min.js')
+  script(type='text/javascript' src='/javascripts/upload.js')
+  script(type='text/javascript').
+    Upload.fileAreaId = 'insight-image-upload';
+    Upload.infoAreaId = 'preview';
+  link(rel='stylesheet' type='text/css' href='/stylesheets/imgareaselect-default.css')
+  script(type='text/javascript' src='https://js.stripe.com/v2/')
+  script(type='text/javascript' src='/javascripts/registration/registration_org.js')
+  link(rel='stylesheet', href='/stylesheets/registration/registration_org.css')
+
+block content
+  .container.topnav-offset.light-grey
+    .row
+      .col-mob-12
+        .row
+          .payment-card-container(data-number-of-sections='8'
+                                  data-current-section='0')
+            input#org-creation-info(type='hidden')
+            .section
+              .col-mob-6
+                h2 Start Connecting with your members today!
+                h4 $1/month per member
+                ul
+                  li Customize your organization
+                  li Send insights to your members
+                  li Communicate to your members with push notifacations
+                  li Send surveys
+                  li Curate and share your members posts
+                  li Access to sick ass dashboard
+
+                button(class='btn btn-primary'
+                       onclick='org.nextSection()')
+                  | Start Trail &#62
+                p
+                  | Get a free 2 week trial when you customize Prizm
+                  | Questions? Contact us!
+                  a(href='mailto:info@prizmapp.com')
+                    | info@prizmapp.com
+              .col-mob-6(style='background-color: aliceblue; height: 100%;')
+                  h1 IMG
+            .section
+              .col-mob-6
+                h2 Checkout
+                .radio
+                  label
+                    input(type='radio'
+                          name='radio')
+                    | Annual Billing
+                .radio
+                  label
+                    input(type='radio'
+                          name='radio')
+                    | Monthly Billing
+                button(class='btn btn-primary'
+                       onclick='org.nextSection()')
+                 | Add payment method
+              .col-mob-6(style='background-color: aliceblue; height: 100%;')
+                  h1 IMG
+            .section
+              include registration_payment_form
+            .section
+              .col-mob-6
+                h2 Customize the experience
+                p
+                  | Choose the program code to share your ogranization app
+                  | access with members
+                form#check-code
+                  .form-group
+                    label(for='inputCode') Must be at least 3 characters
+                      input#inputCode.form-control(type='text' required)
+                  button.btn.btn-default(
+                    type='submit' onclick='org.verifyOrgCode()') Check Code
+                .message-code
+                button#code-confirm.btn.btn-primary.disabled(
+                  onclick='org.nextSection()')
+                 | Confirm
+              .col-mob-6(style='background-color: aliceblue; height: 100%;')
+                  h1 IMG
+            .section
+              .col-mob-6
+                h2 How would you like your name to appear?
+                form#check-namespace.form-inline
+                  .form-group
+                    label(for='inputNamespace') prizmapp.com/
+                      input#inputNamespace.form-control(type='text' required)
+                  button.btn.btn-default(
+                    type='submit' onclick='org.verifyNamespace()') Check name
+                .message-namespace
+                button#namespace-confirm.btn.btn-primary.disabled(
+                  onclick='org.nextSection()')
+                 | Confirm
+              .col-mob-6(style='background-color: aliceblue; height: 100%;')
+                  h1 IMG
+            .section
+              .col-mob-6
+                h2 Select your themes!
+                p
+                  | Themes go here
+                button.btn.btn-primary(onclick='org.nextSection()') Next
+              .col-mob-6(style='background-color: aliceblue; height: 100%;')
+                  h1 IMG
+            .section
+              .col-mob-6
+                h2 create a welcome photo
+                form(class='form-photo'
+                     method='' enctype='multipart/form-data')
+                  input#x1(type='hidden' name='x1')
+                  input#x2(type='hidden' name='x2')
+                  input#y1(type='hidden' name='y1')
+                  input#y2(type='hidden' name='y2')
+                  input#width(type='hidden' name='width')
+                  input#height(type='hidden' name='height')
+                  label#status(for='insight-image-upload') Please select a file
+                  input#photo-image-upload(type='file' 
+                  name='image' onchange='Upload.fileSelect(event)')
+                  output#preview
+                  input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
+                  button(class='btn btn-lg btn-primary btn-photo'
+                         onClick='org.uploadPhoto()'
+                         type='submit')
+                    | Upload
+                  .message-photo
+                button.btn.btn-primary(onclick='org.createOrg()') 
+                  | Create Organization   
+                .message-create 
+              .col-mob-6(style='background-color: aliceblue; height: 100%;')
+                  h1 IMG
+            .section
+              .col-mob-6
+                h2 Congrats
+                p
+                  | You are all ready to start sharing your code 
+                  | with your prizm users
+                h4 coming soon
+              .col-mob-6(style='background-color: aliceblue; height: 100%;')
+                  h1 IMG
+
