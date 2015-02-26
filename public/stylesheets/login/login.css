@@ -137,7 +137,7 @@
   height: 54px;
   background: url(../../images/login/password_icon.png) no-repeat left center;
   background-size: 22px 28px;
-  background-color: #F8F8F8;
+  background-color: #F8F8F8 !important;
   background-position-x: 20px;
   padding-left: 62px;
 }
