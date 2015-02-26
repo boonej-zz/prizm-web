@@ -29,8 +29,8 @@ block content
               if (post.external_provider)
                 .post-via
                   | Post Via #{post.external_provider}
-            .post-image(onclick='prizm.showModal(event)')
-              img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}')
+            .post-image(onclick='home.toggleComments(event)' prizm-data='#{post.id}')
+              img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}' prizm-data='#{post.id}')
             .post-footer
               .like-icon
               p.icon-text
@@ -62,14 +62,6 @@ block content
                   .comment-text
                     | !{post.formattedText}
                   .comment-info
-                    #clock-image
-                    #time
-                      | #{post.time_since} ago
-                    .comment-likes
-                      | -&nbsp;&nbsp;Like
-                    .like-icon
-                    .comment-likes-count
-                      | #{post.likes_count}
               each comment, i in post.comments
                 .comment-container
                   .post-comments-avatar

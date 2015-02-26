@@ -36,15 +36,7 @@
             .comment-text
               | !{post.formattedText}
             .comment-info
-              #clock-image
-              #time
-                | #{post.time_since}
-              .comment-likes
-                | -&nbsp;&nbsp;Like
-              .like-icon
-              .comment-likes-count
-                | #{post.likes_count}
-
+                            
         each comment, i in post.comments
           .comment-container
             .post-modal-avatar

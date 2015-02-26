@@ -72,12 +72,11 @@ var reg = {
         interests.push(interestId);
       }
     });
-    console.log(interests);
     $.ajax({
       type: 'POST',
       url: window.location,
       headers: {
-        dataType: 'interests'
+        dataType: 'interests',
       },
       data: {
         'interests': interests, 

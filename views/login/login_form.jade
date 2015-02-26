@@ -37,7 +37,7 @@
     p#message
       span.error
       | That password is incorrect. Please try again.
-  form(action='/login' method='post' class='form-signin')
+  form(action='/login' method='post' class='form-signin' autocomplete='off')
     .form-signin-header
       h4(class="form-signin-heading")
         | Log In
@@ -49,6 +49,7 @@
           class='form-control'
           placeholder='Email address'
           required)
+    #email-icon
     label(for='inputPassword' class='sr-only')
       | Password
     input(type='password'
@@ -57,6 +58,7 @@
           class='form-control'
           placeholder='Password'
           required)
+    #password-icon
     button(class='btn btn-lg btn-primary btn-block go' type='submit')
       | Go
     div.checkbox
