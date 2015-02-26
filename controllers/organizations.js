@@ -154,20 +154,25 @@ exports.uploadPhoto = function (req, res) {
 
 exports.displayOrgRegistration = function(req, res) {
   var action = req.get('action');
-  if (req.accepts('html')) {
-    res.render('registration/registration_org', {
-      bodyId: 'payments'
-    });
+  if (req.user.type == 'institution_verified') {
+    if (req.accepts('html')) {
+      res.render('registration/registration_org', {
+        bodyId: 'payments'
+      });
+    }
+    if (req.accepts('application/json')) {
+      console.log('req accepts json...');
+      console.log(req.get('action'));
+      if (action == 'checkCode') {
+        verifyOrgCode(req, res);
+      }
+      if (action == 'checkNamespace') {
+        verifyOrgNamespace(req, res);
+      }
+    }
   }
-  if (req.accepts('application/json')) {
-    console.log('req accepts json...');
-    console.log(req.get('action'));
-    if (action == 'checkCode') {
-      verifyOrgCode(req, res);
-    }
-    if (action == 'checkNamespace') {
-      verifyOrgNamespace(req, res);
-    }
+  else {
+    res.send('Partner account must be verified before proceeding');
   }
 }
 
