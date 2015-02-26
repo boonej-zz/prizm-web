@@ -125,7 +125,7 @@
   margin-bottom: 3px;
   margin-top: 72px;
   height: 54px;
-  background: url(../../images/login/email_icon.png) no-repeat left center;
+  background: url('/images/login/email_icon.png') no-repeat left center;
   background-size: 26px 16px;
   background-color: #F8F8F8;
   background-position-x: 18px;
@@ -144,7 +144,7 @@
   padding-left: 62px;
 }
 
-input:-webkit-autofill {
+input:-webkit-autofill, input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 50px #F8F8F8 inset;
 }
 

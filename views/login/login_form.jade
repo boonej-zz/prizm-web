@@ -37,7 +37,7 @@
     p#message
       span.error
       | That password is incorrect. Please try again.
-  form(action='/login' method='post' class='form-signin')
+  form(action='/login' method='post' class='form-signin' autocomplete='off')
     .form-signin-header
       h4(class="form-signin-heading")
         | Log In
