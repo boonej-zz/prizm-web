@@ -10,14 +10,3 @@ block content
     .row
       .col-mob-12
         include login_form
-  script(type='text/javascript').
-    var _interval = window.setInterval(function(){
-      var autofills = $('input:-webkit-autofill');
-      if (autofills.length > 0) {
-        window.clearInterval(_interval);
-        autofills.each(function(){
-          var clone = $(this).clone(true, true);
-          $(this).after(clone).remove();
-        });
-      }
-    }, 20);
