@@ -242,7 +242,8 @@ exports.authRequired = function (req, res, next) {
 
 exports.displayLogin = function(req, res) {
   mixpanel.track('Login Page loaded');
-  res.render('login/login', {bodyId: 'login'});
+  var failure = req.query.failure;
+  res.render('login/login', {bodyId: 'login', failure: failure});
 };
 
 exports.handlePrizmLogin = function(req, res, next) {
@@ -250,7 +251,7 @@ exports.handlePrizmLogin = function(req, res, next) {
     if (err) { return next(err) }
     if (!user) {
       req.session.messages =  [info.message];
-      return res.redirect('/login')
+      return res.redirect('/login?failure=true')
     }
     req.logIn(user, function(err) {
       if (err) { 
@@ -786,6 +787,11 @@ var validateRegistrationRequest = function(req, res,  next) {
 };
 
 var registerIndividual = function(req, res) {
+  var birthday = new Date(req.body.birthday);
+  if (birthday){
+    birthday = String(birthday.getMonth() + 1) + '-' + String(birthday.getDate())
+      + '-' + String(birthday.getFullYear());
+  }
   validateRegistrationRequest(req, res, function() {
     var newUser = new User({
       first_name: req.body.firstName,
@@ -793,7 +799,7 @@ var registerIndividual = function(req, res) {
       email: req.body.email,
       password: req.body.password,
       gender: req.body.gender,
-      birthday: req.body.birthday,
+      birthday: birthday,
     });
     if (req.body.programCode) {
       newUser.programe_code = req.body.programCode;
@@ -819,7 +825,6 @@ var registerPartner = function(req, res) {
     var newUser = new User({
       first_name: req.body.name,
       type: 'institution_pending',
-      subtype: req.body.type,
       email: req.body.email,
       password: req.body.password,
       zipcode: req.body.zipCode,

@@ -28,6 +28,7 @@ block head
       });
     });
 
+
 block content
   .container
     .row
@@ -39,10 +40,15 @@ block content
           p Insight Path: #{insight.file_path}
         .insight.action
           form(method='post')
-            label(for = 'subject') Select Insight Subject Line:
-            select(name='subject' id='subject')
-              each subject, index in subjects
-                option(name='subject' value='#{index}')= subject
+            fieldset
+              legend Subject
+              label(for = 'subject') Choose a subject:
+              select(name='subject' id='subject' onchange='prizm.insightSubjectChange(event)')
+                each subject, index in subjects
+                  option(name='subject' value='#{index}')= subject
+              div(id='insightSubject')
+                label(for='subjectOther') Or enter your own:
+                input(type='text' id='subjectOther' name='subject-other')
             fieldset
               legend Filters
               label(for = 'interest-selection') 

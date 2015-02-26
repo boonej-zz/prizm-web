@@ -36,7 +36,9 @@ var prizm = {
               },
   mailTo: function(){
             window.location = 'mailto:info@prizmapp.com?subject=Find out more';
-          }
+          },
+  insightSubjectChange: function(e){
+                        }
 };
 
 /** NAVIGATION BAR **/

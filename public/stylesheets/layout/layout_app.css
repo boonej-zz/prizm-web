@@ -5,11 +5,23 @@ body {
   left: 0px;
   transition: all 200ms linear; 
 }
-
+/* Preloader */
+body:after {
+  content: url('/images/settings/activity_icon_selected@2x.png')
+           url('/images/settings/creditcard_icon_selected@2x.png')
+           url('/images/settings/graph_icon_selected@2x.png')
+           url('/images/settings/home_icon_selected@2x.png')
+           url('/images/settings/insights_icon_selected@2x.png')
+           url('/images/settings/members_icon_selected@2x.png')
+           url('/images/settings/settings_icon_selected@2x.png')
+           url('/images/settings/survey_icon_selected@2x.png')
+           url('/images/settings/useradd_icon_selected@2x.png');
+}
 
 .body-push {
   left: 284px;
   transition: all 200ms linear; 
+  overflow: hidden;
 }
 
 
@@ -149,6 +161,7 @@ body {
   letter-spacing: 1px;
   padding-left: 179px;
   transition: all 200ms linear; 
+  overflow-y: auto;
 
 }
 
@@ -207,79 +220,79 @@ body {
 }
 
 .home-button {
-  background-image: url('/images/settings/settings_home.png');
+  background-image: url('/images/settings/home_icon@2x.png');
 }
 
 .home-button:hover {
-  background-image: url('/images/settings/settings_home_selected.png');
+  background-image: url('/images/settings/home_icon_selected@2x.png');
 }
 
 .activity-button {
   background-size: 11px 16px;
-  background-image: url('/images/settings/settings_activity.png');
+  background-image: url('/images/settings/activity_icon@2x.png');
 }
 
 .activity-button:hover {
-  background-image: url('/images/settings/settings_activity_selected.png');
+  background-image: url('/images/settings/activity_icon_selected@2x.png');
 }
 
 .insights-button {
   background-position-y: 7px;
-  background-image: url('/images/settings/settings_insights.png');
+  background-image: url('/images/settings/insights_icon@2x.png');
 }
 
 .insights-button:hover {
-  background-image: url('/images/settings/settings_insights_selected.png');
+  background-image: url('/images/settings/insights_icon_selected@2x.png');
 }
 
 
 .surveys-button {
   background-position-y: 8px;
-  background-image: url('/images/settings/settings_survey.png');
+  background-image: url('/images/settings/survey_icon@2x.png');
 }
 
 .surveys-button:hover {
-  background-image: url('/images/settings/settings_survey_selected.png');
+  background-image: url('/images/settings/survey_icon_selected@2x.png');
 }
 
 .stats-button {
-  background-image: url('/images/settings/settings_stats.png');
+  background-image: url('/images/settings/graph_icon@2x.png');
 }
 
 .stats-button:hover {
-  background-image: url('/images/settings/settings_stats_selected.png');
+  background-image: url('/images/settings/graph_icon_selected@2x.png');
 }
 
 .settings-button {
-  background-image: url('/images/settings/settings_settings.png');
+  background-image: url('/images/settings/settings_icon@2x.png');
 }
 
 .settings-button:hover {
-  background-image: url('/images/settings/settings_settings_selected.png');
+  background-image: url('/images/settings/settings_icon_selected@2x.png');
 }
 
 .members-button {
-  background-image: url('/images/settings/settings_members.png');
+  background-image: url('/images/settings/members_icon@2x.png');
 }
 
 .members-button:hover {
-  background-image: url('/images/settings/settings_members_selected.png');
+  background-image: url('/images/settings/members_icon_selected@2x.png');
 }
 
 .billing-button {
-  background-image: url('/images/settings/settings_billing.png');
+  background-image: url('/images/settings/creditcard_icon@2x.png');
 }
 
 .billing-button:hover {
-  background-image: url('/images/settings/settings_billing_selected.png');
+  background-image: url('/images/settings/creditcard_icon_selected@2x.png');
 }
 
 .invite-button {
-  background-image: url('/images/settings/settings_invite.png');
+  background-image: url('/images/settings/useradd_icon@2x.png');
 }
 
 .invite-button:hover {
-  background-image: url('/images/settings/settings_invite_selected.png');
+  background-image: url('/images/settings/useradd_icon_selected@2x.png');
 }
 
 /* Footer */
@@ -360,8 +373,6 @@ body {
   right: 0;
   bottom: 0;
   z-index: 5000;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 @media screen and (max-width:500px) {

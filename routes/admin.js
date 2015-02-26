@@ -260,7 +260,7 @@ router.get('/interests/graph', utils.auth, function(req, res) {
     
 });
 
-var sendInsightToUser = function(insight, user, subjectIndex, next){
+var sendInsightToUser = function(insight, user, subjectIndex, optionalSubject, next){
   console.log('sending insight to user');
   InsightTarget.findOne({creator: insight.creator, target: user._id, insight: insight._id}, function(err, it){
     if (err) {
@@ -294,7 +294,7 @@ var sendInsightToUser = function(insight, user, subjectIndex, next){
             new Push('activity', activity, function(result){
               //console.log("logging result of push"+JSON.stringify(result));
             });
-            helpers.mail.sendInsightEmail(it, subjectIndex);
+            helpers.mail.sendInsightEmail(it, subjectIndex, optionalSubject);
             next();
           }
         });
@@ -432,6 +432,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
   var programCode = req.param('programCode');
   var allUsers = req.param('allUsers');
   var subjectIndex = req.param('subject');
+  var subject = req.param('subject-other');
   Insight.findOne({_id: insightId}, function(err, insight){
     if(individualUser){
       processSingleUserByEmail(individualUser, function(err, user)  {
@@ -442,7 +443,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
           if (err) {
             res.send(500);
           }
-          sendInsightToUser(insight, user, subjectIndex, function(err){
+          sendInsightToUser(insight, user, subjectIndex, subject, function(err){
             if (err) {
               console.log(err);
               res.send(500);
@@ -455,7 +456,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
     } else if (programCode) {
       processUsersByProgramCode(programCode, function(err, users){
         _.each(users, function(user, index, list){
-          sendInsightToUser(insight, user, subjectIndex, function(err){
+          sendInsightToUser(insight, user, subjectIndex, subject, function(err){
             if (err) console.log(err);
           });
         });
@@ -463,7 +464,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
     } else if (allUsers) {
       processAllUsers(function(err, users) {
         _.each(users, function(user, index, list) {
-          sendInsightToUser(insight, user, subjectIndex, function(err) {
+          sendInsightToUser(insight, user, subjectIndex, subject, function(err) {
             if (!(index == (list.length - 1))) {
               if (err) console.log(err);
             }
@@ -496,7 +497,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
           function(err, users){
         console.log('processed ' + users.length + ' users');
         _.each(users, function(user, index, list){
-          sendInsightToUser(insight, user, subjectIndex, function(err){
+          sendInsightToUser(insight, user, subjectIndex, subject, function(err){
             if (err) console.log(err);
           });
         });

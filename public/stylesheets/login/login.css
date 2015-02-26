@@ -22,6 +22,30 @@
   background: white;
 }
 
+#message {
+  width: 380px;
+  height: 64px;
+  line-height: 64px;
+  border: 1px solid #e4e5ea;
+  border-left: 4px solid red;
+  margin: 32px auto -96px auto;
+}
+
+#message.hidden {
+  display: none;
+}
+
+#message .error {
+  display: inline-block;
+  float: left;
+  width: 64px;
+  height: 64px;
+  background: url('/images/warning_icon@2x.png');
+  background-size: 20px 17px; 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .form-signin-header h4 {
   margin-top: 0px;
 }
