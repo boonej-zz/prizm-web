@@ -7,7 +7,6 @@ body {
 }
 /* Preloader */
 body:after {
-  display: none;
   content: url('/images/settings/activity_icon_selected@2x.png')
            url('/images/settings/creditcard_icon_selected@2x.png')
            url('/images/settings/graph_icon_selected@2x.png')

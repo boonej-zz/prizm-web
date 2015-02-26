@@ -33,6 +33,10 @@
       a(href='#')
         | Forgot password?
 .back
+  if failure
+    p#message
+      span.error
+      | That password is incorrect. Please try again.
   form(action='/login' method='post' class='form-signin')
     .form-signin-header
       h4(class="form-signin-heading")
@@ -64,3 +68,7 @@
     div.link
       a(href='#')
         | Forgot password?
+  
+  if failure
+    script(type='text/javascript').
+      login.displayForm();

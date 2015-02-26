@@ -242,7 +242,8 @@ exports.authRequired = function (req, res, next) {
 
 exports.displayLogin = function(req, res) {
   mixpanel.track('Login Page loaded');
-  res.render('login/login', {bodyId: 'login'});
+  var failure = req.query.failure;
+  res.render('login/login', {bodyId: 'login', failure: failure});
 };
 
 exports.handlePrizmLogin = function(req, res, next) {
@@ -250,7 +251,7 @@ exports.handlePrizmLogin = function(req, res, next) {
     if (err) { return next(err) }
     if (!user) {
       req.session.messages =  [info.message];
-      return res.redirect('/login')
+      return res.redirect('/login?failure=true')
     }
     req.logIn(user, function(err) {
       if (err) { 
