@@ -733,6 +733,7 @@ exports.registerNewUser = function(req, res) {
     }
   }
   else if (dataType == 'interests') {
+    console.log('in interests block');
     updateInterests(req, res);
   }
   else if (dataType == 'following') {
@@ -864,17 +865,20 @@ var registerPartner = function(req, res) {
 };
 
 var updateInterests = function(req, res) {
+  console.log('iterating in interests');
   var interestsArray = req.body.interests;
   var userId = req.body.userId;
   Interest.find({_id: {$in: interestsArray}}, function(err, interests) {
+
     if (err) {
       res.status(500).send({error: err});
     }
     if (interests) {
+     var intArray = _.pluck(interests, '_id');
       var update = {
         $push: {
           interests: {
-            $each: interests
+            $each: intArray
           }
         }
       };
