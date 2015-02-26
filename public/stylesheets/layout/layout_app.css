@@ -24,6 +24,11 @@ body:after {
   overflow: hidden;
 }
 
+input:-webkit-autofill {
+  background-color: inherit;
+  background-image: inherit;
+  color: inherit;
+}
 
 /* Navigation Bar */
 
