@@ -34,7 +34,13 @@ router.get('/download', function(req, res){
 });
 
 /* Posts */
-router.get('/posts/', _posts.fetchPosts);
+router.get('/posts', function(req, res){
+  if (req.get('feedType') == 'home'){
+    _users.displayHomeFeed(req, res);
+  } else {
+    _posts.fetchPosts(req, res);
+  }
+});
 router.get('/posts/:id', _posts.singlePost)
 
 /* Users */

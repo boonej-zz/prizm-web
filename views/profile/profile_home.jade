@@ -8,7 +8,7 @@ block head
 
 block content
   .container.topnav-offset
-    ul#feed.row
+    ul#feed.row.infinite-feed
       each post in posts
         li.col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3.background-column 
           .post(id='#{post.id}')

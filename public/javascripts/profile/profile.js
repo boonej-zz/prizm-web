@@ -31,30 +31,32 @@ function animatePosts() {
 $(document).ready(function(){
   animatePosts();
 $(window).scroll(function() {
-  if($(window).scrollTop() == $(document).height() - $(window).height()) {
-    var lastPost = $('.profile-posts-container').children().children().last().attr('id');
+  if($(window).scrollTop() >= $(document).height() - $(window).height()) {
+    var lastPost = $('.post').last().attr('id');
     var creator = $('.profile-owner').attr('id');
     var feedType;
     if ($('#membersToggle').attr('data-toggle') == 'on') {
       feedType = 'members';
     }
-    else {
+    else if (document.URL.indexOf('profile') > -1){
       feedType = 'profile';
+    } else {
+      feedType = 'home';
     }
     $.ajax({
-      url: '/posts/',
+      method: 'GET',
+      url: '/posts',
       headers: {
+        'Content-type': 'application/jade',
         'Accept' : 'application/jade',
         'creator' : creator,
         'lastPost' : lastPost,
         'feedType' : feedType
       },
-      success: function(html) {
-        if(html) {
-            $(".profile-posts-container").append(html);
-            $('img.lazy').lazyload();
-        }
-      }
+    })
+    .done(function(html){
+      $(".infinite-feed").append(html);
+      $('img.lazy').lazyload();
     });
   }
   animatePosts();

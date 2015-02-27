@@ -145,8 +145,10 @@ var singlePostJadeRequest = function(req, res) {
 /* Fetch Post Request Types */
 
 var profilePostFeed = function(req, res) {
+  console.log('in post feed');
   var creator = req.get('creator');
   var lastPost = req.get('lastPost');
+  console.log(lastPost);
   var isCurrent = false;
   var isTrust = false;
   if (req.isAuthenticated()) {
@@ -183,6 +185,7 @@ var profilePostFeed = function(req, res) {
           res.status(500).send({ error: err});
         }
         else {
+          console.log(posts);
           posts = _time.addTimeSinceFieldToObjects(posts);
           var content = jade.render(postFeed, {posts: posts});
           res.status(200).send(content);
