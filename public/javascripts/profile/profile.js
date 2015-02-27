@@ -28,16 +28,11 @@ function animatePosts() {
     }
   }
 }
-
-var listening = true;
-
 $(document).ready(function(){
   animatePosts();
   var listening = true;
 $(window).scroll(function() {
-  if (listening){
   if($(window).scrollTop() >= $(document).height() - $(window).height()) {
-    listening = false;
     var lastPost = $('.post').last().attr('id');
     var creator = $('.profile-owner').attr('id');
     var feedType;
@@ -63,12 +58,10 @@ $(window).scroll(function() {
     .done(function(html){
       $(".infinite-feed").append(html);
       $('img.lazy').lazyload();
-      listening = true;
     });
   }
   animatePosts();
   });
-  }
 });
 
 
