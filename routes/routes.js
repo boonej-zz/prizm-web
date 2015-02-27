@@ -35,8 +35,8 @@ router.get('/download', function(req, res){
 
 /* Posts */
 router.get('/posts/', _posts.fetchPosts);
-router.get('/posts/:id', _posts.singlePost)
-router.post('/posts/:id/like', _posts.likePost');
+router.get('/posts/:id', _posts.singlePost);
+router.post('/posts/:id/like', _posts.likePost);
 
 /* Users */
 router.get('/users/:id/password', _users.passwordReset);
