@@ -359,7 +359,11 @@ var fetchHomeFeed = function(user, params, next){
   }
   var limit = params.limit || 25;
   var skip = params.skip || 0;
+  var latest = params.latest || false;
   user.fetchHomeFeedCriteria(function(err, criteria){
+    if (latest) {
+      criteria.create_date = {$lt: latest};
+    }
     Post
     .find(criteria)
     .sort({create_date: -1, _id: -1})
@@ -388,14 +392,17 @@ exports.displayHomeFeed = function(req, res) {
     });
   }
   else {
-    var id = req.user.id
+    var id = req.user.id;
+    var lastPost = req.get('lastPost');
+    console.log(lastPost);
     User.findOne({_id: ObjectId(id)}, function(err, user) {
       if (err) {
         res.send(400);
       }
       if (user) {
         mixpanel.track('Home Feed Viewed', user.mixpanelProperties());
-        fetchHomeFeed(user, function(err, posts) {
+        var fetch = function(req, res, latest){
+          fetchHomeFeed(user, {latest: latest}, function(err, posts) {
           posts = _time.addTimeSinceFieldToObjects(posts);
           var done = 0;
           _.each(posts, function(post, idx, list){
@@ -410,17 +417,35 @@ exports.displayHomeFeed = function(req, res) {
               }
               done += 1;
               if (done == list.length){
-                res.render('profile/profile_home', {
-                  bodyId: 'home-feed',
-                  auth: true,
-                  currentUser: req.user,
-                  posts: posts
-                });
+                if (latest) {
+                  res.render('profile/profile_feed.jade', {
+                    posts: posts 
+                  });
+                  
+                } else {
+                  res.render('profile/profile_home', {
+                    bodyId: 'home-feed',
+                    auth: true,
+                    currentUser: req.user,
+                    posts: posts
+                  });
+              }
               }
             });
             
           });
-        });
+        });};
+        if (lastPost) {
+          Post.findOne({_id: lastPost}, function(err, post){
+            if (post){
+              fetch(req, res, post.create_date);
+            } else {
+              fetch(req, res, false);
+            }
+          });
+        } else {
+          fetch(req, res, false);
+        }
       }
       else {
         res.status(400).send({error: "User can not be found"});

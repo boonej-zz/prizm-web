@@ -1,15 +1,4 @@
-extends ../layouts/layout_app
-
-block head
-  script(src='/javascripts/profile/profile.js' type='text/javascript')
-  script(src='/javascripts/profile/profile_home.js' type='text/javascript')
-  link(rel='stylesheet', href='/stylesheets/profile/profile.css')
-  link(rel='stylesheet', href='/stylesheets/profile/profile_home.css')
-
-block content
-  .container.topnav-offset
-    ul#feed.row.infinite-feed
-      each post in posts
+each post in posts
         li.col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3.background-column 
           .post(id='#{post.id}')
             .post-header

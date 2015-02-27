@@ -30,35 +30,49 @@ function animatePosts() {
 }
 $(document).ready(function(){
   animatePosts();
+  var listening = true;
 $(window).scroll(function() {
-  if($(window).scrollTop() == $(document).height() - $(window).height()) {
-    var lastPost = $('.profile-posts-container').children().children().last().attr('id');
+  if (listening) {
+  if($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
+    listening = false;
+    var lastPost = $('.post').last().attr('id');
     var creator = $('.profile-owner').attr('id');
     var feedType;
     if ($('#membersToggle').attr('data-toggle') == 'on') {
       feedType = 'members';
     }
-    else {
+    else if (document.URL.indexOf('profile') > -1){
       feedType = 'profile';
+    } else {
+      feedType = 'home';
     }
     $.ajax({
-      url: '/posts/',
+      method: 'GET',
+      url: '/posts',
       headers: {
+        'Content-type': 'application/jade',
         'Accept' : 'application/jade',
         'creator' : creator,
         'lastPost' : lastPost,
         'feedType' : feedType
       },
-      success: function(html) {
-        if(html) {
-            $(".profile-posts-container").append(html);
-            $('img.lazy').lazyload();
-        }
+    })
+    .done(function(html){
+      if (feedType == 'profile') {
+        $('.profile-posts-container').append(html);
+      } else if (feedType == 'members') {
+        $('.member-posts-container').append(html);
+      } else {
+        $('.infinite-feed').append(html);
       }
+      $('img.lazy').lazyload();
+      listening = true;
     });
   }
   animatePosts();
+  }
   });
+  
 });
 
 
