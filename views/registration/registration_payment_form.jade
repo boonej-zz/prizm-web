@@ -1,0 +1,48 @@
+.col-mob-6
+  h2 Checkout
+  form#payment-form(action='https://prizmapp.dev:4433/stripe' method='POST')
+      span.payment-errors
+      .form-row
+        label
+          span Name   
+          input(type='text' size='20' data-stripe='name')
+      .form-row
+        label
+          span Address
+          input(type='text' size='20' data-stripe='address_line_1')
+      .form-row
+        label
+          span City   
+          input(type='text' size='20' data-stripe='address_city')
+        label
+          span State  
+          input(type='text' size='2' data-stripe='address_state') 
+        label
+          span Zip  
+          input(type='text' size='5' data-stripe='address_zip')  
+      .form-row
+        label
+          span Card Number   
+          input(type='text' size='20' data-stripe='number') 
+      .form-row
+        label
+          span CVC   
+          input(type='text' size='3' data-stripe='cvc')   
+      .form-row
+        label
+          span Expiration (MM/YYYY)   
+          input(type='text' size='2' data-stripe='exp-month')  
+        span 
+        input(type='text' size='4' data-stripe='exp-year') 
+      button(type='submit' disabled)
+        | Submit Payment
+  p
+   | We should discuss how we want to handle billing so we can set up
+   | the stripe integration smartly. For now skip to the next screen which would
+   | normally only be available after customer account has been created.
+   | Skip button won't exist once we finalize payments.
+  button(class='btn btn-primary'
+         onclick='org.nextSection()')
+   | Skip
+.col-mob-6(style='background-color: aliceblue; height: 100%;')
+    h1 IMG
