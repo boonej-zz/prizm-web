@@ -209,7 +209,7 @@ var singlePostJadeRequest = function(req, res) {
             });
             post.liked = false;
             _.each(post.likes, function(like, index, listb){
-              if (string(like._id) == string(user._id)){
+              if (String(like._id) == String(user._id)){
                 post.liked = true
               };
             });
