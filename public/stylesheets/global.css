@@ -82,11 +82,18 @@ body a:hover {
 }
 
 .like-icon {
-  background-image: url('/images/icons/like_icon.png');
   width: 24px;
   height: 24px;
   background-size: 24px;
   background-repeat: no-repeat;
+}
+
+.like-icon.liked {
+  background-image: url('/images/icons/heart_full_icon@2x.png');
+} 
+
+.like-icon.not-liked{
+  background-image: url('/images/icons/heart_outline_icon@2x.png');
 }
 
 .location-icon {

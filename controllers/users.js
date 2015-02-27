@@ -378,6 +378,14 @@ var fetchHomeFeed = function(user, params, next){
     .skip(skip)
     .limit(limit)
     .exec(function(err, results){
+      _.each(results, function(post, idx, list){
+        post.liked = false;
+        _.each(post.likes, function(like, index, listb){
+          if (String(like._id) == String(user._id)){
+            post.liked = true
+          };
+        });
+      });
       next(err, results);
     });
   });
@@ -471,6 +479,17 @@ exports.displayProfile = function(req, res) {
           headerImages = [];
         }
         posts = _time.addTimeSinceFieldToObjects(posts);
+        if (req.user) {
+          _.each(posts, function(post, idx, list){
+            post.liked = false;
+            _.each(post.likes, function(like, index, listb){
+              if (String(like._id) == String(req.user._id)){
+                post.liked = true
+              };
+            });
+          });
+        } 
+
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
         if (user.type == 'institution_verified' ) {
           Organization.findOne({owner: id}, function(err, organization){
@@ -549,6 +568,17 @@ exports.displayProfileById = function(req, res) {
           headerImages = [];
         }
         posts = _time.addTimeSinceFieldToObjects(posts);
+        if (req.user) {
+          _.each(posts, function(post, idx, list){
+            post.liked = false;
+            _.each(post.likes, function(like, index, listb){
+              if (String(like._id) == String(req.user._id)){
+                post.liked = true
+              };
+            });
+          });
+        } 
+
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
         var showMembers = false;
         if (String(currentUser._id) == String(user._id) && 

@@ -188,6 +188,43 @@ var profile = {
         console.log('Error: ' + response)
       },
     })
+  },
+  likePost: function(id, e){
+    $.ajax({
+      url: '/posts/' + id + '/like',
+      type: 'POST',
+      success: function(response){
+        if (response == 'added') {
+          var heart = e.target;
+          var count = $(heart).siblings('.likes-count');
+          $(heart).removeClass('not-liked');
+          $(heart).addClass('liked');
+          count = Number(count.html()) + 1;
+          $(heart).siblings('.likes-count').html(count);
+          $(heart).attr('onclick', 'profile.unlikePost("' + id + '", event)');
+        }
+      }
+    });
+   },
+  unlikePost: function(id, e){
+    $.ajax({
+      url: '/posts/' + id + '/unlike',
+      type: 'POST',
+      success: function(response){
+        if (response == 'removed') {
+          var heart = e.target;
+          var count = $(heart).siblings('.likes-count');
+          $(heart).removeClass('liked');
+          $(heart).addClass('not-liked');
+          count = Number(count.html()) - 1;
+          $(heart).siblings('.likes-count').html(count);
+          $(heart).attr('onclick', 'profile.likePost("' + id + '", event)');
+        }
+      }
+    });
+  },
+  showProfile: function(id){
+    window.location = '/profiles/' + id;
   }
 }
 

@@ -14,12 +14,14 @@ block content
           .post(id='#{post.id}')
             .post-header
               if post.creator.profile_photo_url
-                img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-                    class='prizm-avatar-xs')
+                img.cursor(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                  class='prizm-avatar-xs'  
+                  onclick='profile.showProfile("#{post.creator._id}")')
               else
-                img(src='/images/profile/profile_default_avatar.png' 
-                    class='prizm-avatar-sm')
-              h3
+                img.cursor(src='/images/profile/profile_default_avatar.png' 
+                  class='prizm-avatar-sm' 
+                  onclick='profile.showProfile("#{post.creator._id}")')
+              h3.cursor(onclick='profile.showProfile("#{post.creator._id}")')
                 | #{post.creator.name}
               .time-since
                 .clock-icon
@@ -32,8 +34,11 @@ block content
             .post-image(onclick='home.toggleComments(event)' prizm-data='#{post.id}')
               img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}' prizm-data='#{post.id}')
             .post-footer
-              .like-icon
-              p.icon-text
+              if post.liked
+                .like-icon.liked.cursor(onclick='profile.unlikePost("#{post._id}", event)')
+              else
+                .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id}", event)')
+              p.icon-text.likes-count
                 | #{post.likes_count}
               .comment-icon(type='button'
                             class='cursor'

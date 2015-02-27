@@ -14,6 +14,7 @@ var _profile      = require('../lib/helpers/profile');
 var _image        = require('../lib/helpers/image');
 var Mixpanel      = require('mixpanel');
 var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+var _             = require('underscore');
 
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
@@ -51,6 +52,17 @@ exports.displayOrganization = function(req, res) {
               }
               var showMembers = String(currentUser._id) == String(user._id);
               posts = _time.addTimeSinceFieldToObjects(posts);
+              if (req.user) {
+                _.each(posts, function(post, idx, list){
+                  post.liked = false;
+                  _.each(post.likes, function(like, index, listb){
+                    if (String(like._id) == String(req.user._id)){
+                      post.liked = true
+                    };
+                  });
+                });
+              }        
+
               headerImages = _profile.shufflePostImagesForProfileHeader(posts);
               res.render('profile/profile', {
                 auth: auth,
