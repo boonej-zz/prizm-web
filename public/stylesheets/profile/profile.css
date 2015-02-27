@@ -222,7 +222,7 @@ ul .post.shown {
   height: 46px;
 }
 
-.like-icon {
+.like-icon, .empty-heart {
   display: inline-block;
   margin: 10px 1px 12px 15px;
   float: left;

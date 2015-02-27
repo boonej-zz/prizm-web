@@ -5,6 +5,7 @@ var mongoose    = require('mongoose');
 var ObjectId    = require('mongoose').Types.ObjectId;
 var Post        = mongoose.model('Post');
 var User        = mongoose.model('User');
+var Activity    = mongoose.model('Activity');
 var _           = require('underscore');
 var _time       = require('../lib/helpers/date_time');
 var fs          = require('fs');
@@ -16,6 +17,78 @@ var singlePost  = fs.readFileSync(path.join(__dirname +
                   '/../views/posts/single_post.jade'), 'utf8');
 
 // Posts Methods
+
+exports.likePost = function(req, res) {
+  var post = req.params.id;
+  var id = req.user.id;
+  Post.findOne({_id: post}, function(err, post){
+    if (err){
+      res.status(500).send('error');
+    }
+    if (post) {
+      var liked = false;
+      _.each(post.likes, function(like, idx, err){
+        if (String(like._id) == String(id)) {
+          liked = true;
+        }
+      });
+      if (!liked) {
+        post.likes.push({_id: id});
+        post.save(function(err, result){
+          if (err) {
+            res.status(500).send('error');
+          } else {
+            var activity = new Activity({
+              from: ObjectId(id),
+              to:   post.creator,
+              action: 'like',
+              post_id: post._id  
+            });
+            activity.save();
+            res.status(201).send('added');
+          } 
+        });
+      } else {
+        res.status(200).send('ok');
+      }
+    }
+  });
+}
+
+exports.unlikePost = function(req, res){
+  var post = req.params.id;
+  var id = req.user.id;
+  Post.findOne({_id: post}, function(err, post){
+    if (err){
+      res.status(500).send('error');
+    }
+    if (post) {
+      var liked = false;
+      var index = false;
+      _.each(post.likes, function(like, idx, err){
+        if (String(like._id) == String(id)) {
+          liked = true;
+          index = idx;
+        }
+      });
+      if (liked) {
+        post.likes.pull({_id: id});
+        post.save(function(err, result){
+          if (err) {
+            res.status(500).send('error');
+          } else {
+            res.status(200).send('removed');
+          } 
+        });
+      } else {
+        res.status(200).send('ok');
+      }
+    }
+  });
+
+}
+
+
 exports.fetchPosts = function(req, res) {
   var feedType = req.get('feedType');
 
@@ -106,6 +179,7 @@ var replaceTagsFromUserList = function(string, userList){
 
 var singlePostJadeRequest = function(req, res) {
   var id =  req.params.id;
+  var user = req.user;
   var options = [
     { path: 'creator', select: 'name profile_photo_url' },
     { path: 'comments', match: { status: 'active'} },
@@ -133,6 +207,13 @@ var singlePostJadeRequest = function(req, res) {
               var commentText = replaceTagsFromUserList(comment.text, users);
               comment.formattedText = commentText;
             });
+            post.liked = false;
+            _.each(post.likes, function(like, index, listb){
+              if (string(like._id) == string(user._id)){
+                post.liked = true
+              };
+            });
+
           } 
           var content = jade.render(singlePost, {post: post});
           res.status(200).send(content);
@@ -145,12 +226,11 @@ var singlePostJadeRequest = function(req, res) {
 /* Fetch Post Request Types */
 
 var profilePostFeed = function(req, res) {
-  console.log('in post feed');
   var creator = req.get('creator');
   var lastPost = req.get('lastPost');
-  console.log(lastPost);
   var isCurrent = false;
   var isTrust = false;
+  var user = req.user;
   if (req.isAuthenticated()) {
     if (req.user.id == creator) {
       isCurrent = true;
@@ -185,8 +265,18 @@ var profilePostFeed = function(req, res) {
           res.status(500).send({ error: err});
         }
         else {
-          console.log(posts);
           posts = _time.addTimeSinceFieldToObjects(posts);
+          if (user) {
+            _.each(posts, function(post, idx, list){
+              post.liked = false;
+              _.each(post.likes, function(like, index, listb){
+                if (String(like._id) == String(user._id)){
+                  post.liked = true
+                };
+              });
+            });
+          }
+          
           var content = jade.render(postFeed, {posts: posts});
           res.status(200).send(content);
         }
@@ -236,6 +326,17 @@ var organizationMembersFeed = function(req, res) {
           }
           else {
             posts = _time.addTimeSinceFieldToObjects(posts);
+            if (req.user) {
+              _.each(posts, function(post, idx, list){
+                post.liked = false;
+                _.each(post.likes, function(like, index, listb){
+                  if (String(like._id) == String(req.user._id)){
+                    post.liked = true
+                  };
+                });
+              });
+            }
+
             var content = jade.render(postFeed, {posts: posts});
             res.status(200).send(content);
           }

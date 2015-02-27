@@ -42,6 +42,8 @@ router.get('/posts', function(req, res){
   }
 });
 router.get('/posts/:id', _posts.singlePost)
+router.post('/posts/:id/like', _posts.likePost);
+router.post('/posts/:id/unlike', _posts.unlikePost);
 
 /* Users */
 router.get('/users/:id/password', _users.passwordReset);
