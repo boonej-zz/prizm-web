@@ -89,11 +89,11 @@ body a:hover {
 }
 
 .like-icon.liked {
-  background-image: url('/images/icons/like_icon.png');
+  background-image: url('/images/icons/heart_full_icon@2x.png');
 } 
 
 .like-icon.not-liked{
-  background-image: url('/images/icons/action_heart@2x.png');
+  background-image: url('/images/icons/heart_outline_icon@2x.png');
 }
 
 .location-icon {
