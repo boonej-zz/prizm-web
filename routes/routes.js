@@ -70,8 +70,8 @@ router.post('/profiles/:id/following', _follow.followUserId);
 /* Registration */
 router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
-router.get('/register/:id/payments', _users.authRequired, _orgs.displayOrgRegistration);
-router.post('/register/:id/payments', _orgs.updateOrg);
+router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
+router.post('/register/:id', _orgs.updateOrg);
 
 
 /** Organization Pages **/
