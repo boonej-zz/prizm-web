@@ -33,7 +33,7 @@ $(document).ready(function(){
   var listening = true;
 $(window).scroll(function() {
   if (listening) {
-  if($(window).scrollTop() >= $(document).height() - $(window).height()) {
+  if($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
     listening = false;
     var lastPost = $('.post').last().attr('id');
     var creator = $('.profile-owner').attr('id');
