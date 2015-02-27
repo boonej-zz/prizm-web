@@ -241,4 +241,28 @@ var organizationMembersFeed = function(req, res) {
   });
 }
 
+/* Like/Unlike Posts */
+exports.likePost = function(req, res) {
+  var postId = req.params.id;
+  var userId = req.get('userId');
+
+  Post.findOne({_id: postId}, function(err, post) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (post) {
+      post.likePost(userId, function(err, post) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (post) {
+          res.status(200).send({
+            success: 'Post liked',
+            post: post
+          });
+        }
+      });
+    }
+  });
+}
 

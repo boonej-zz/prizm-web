@@ -85,6 +85,165 @@ postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, i
     });
 };
 
+
+/**
+ * Takes userId and callback and will add userId to likes of post
+ * and update the likes_count
+ */
+postSchema.methods.likePost = function(userId, next) {
+  var postId = this._id;
+  var Post = this.model('Post');
+
+  function updateLikes(userId, next) {
+
+    var update = {
+      $addToSet: {
+        likes: userId
+      }
+    };
+    
+    // Create criteria to see if userId already liked this post
+    var criteria = {
+      _id: postId,
+      likes: {
+        $elemMatch: {
+          _id: userId
+        }
+      }
+    };
+
+    // Check if userId already liked post
+    Post.findOne(criteria, function(err, post) {
+      if (err) next(err);
+      if (post) {
+        next('Already liked post');
+      }
+      else {
+        Post.findOneAndUpdate({_id: postId}, update, function(err, post) {
+          if (err) next(err);
+          if (post) {
+            next(null, post);
+          }
+          else {
+            next('Post Id is not longer valid');
+          }
+        });
+      }
+    });
+  }
+
+  function updateLikesCount(next) {
+    var likesCount;
+
+    Post.findOne({_id: userId}, function(err, post) {
+      if (err) next(err);
+      if (post) {
+        likesCount = post.likes.length;
+        Post.update({_id: postId}, {likes_count: likesCount}, function(err, post) {
+          if (err) next(err);
+          if (post) {
+            next(null, post)
+          }
+          else {
+            next('likes_count update unsuccessful');
+          }
+        });
+      }
+    });
+  }
+
+  updateLikes(userId, function(err, post) {
+    if (err) next(err);
+    if (post) {
+      updateLikesCount(function(err, post) {
+        if (err) next(err);
+        else {
+          next(null, post);
+        }
+      });
+    }
+  });
+};
+
+/**
+ * Takes userId and callback and will remove userId from post likes array
+ * and update likes_count
+ */
+postSchema.methods.unlikePost = function(userId, next) {
+  var postId = this._id;
+  var Post = this.model('Post');
+
+  function updateLikes(userId, next) {
+
+    var update = {
+      $pull: {
+        likes: userId
+      }
+    };
+    
+    // Create criteria to see if userId likes post
+    var criteria = {
+      _id: postId,
+      likes: {
+        $elemMatch: {
+          _id: userId
+        }
+      }
+    };
+
+    // Check if userId likes post
+    Post.findOne(criteria, function(err, post) {
+      if (err) next(err);
+      if (!post) {
+        next('Post not liked');
+      }
+      else {
+        Post.findOneAndUpdate({_id: postId}, update, function(err, post) {
+          if (err) next(err);
+          if (post) {
+            next(null, post);
+          }
+          else {
+            next('Post Id is not longer valid');
+          }
+        });
+      }
+    });
+  }
+
+  function updateLikesCount(next) {
+    var likesCount;
+
+    Post.findOne({_id: userId}, function(err, post) {
+      if (err) next(err);
+      if (post) {
+        likesCount = post.likes.length;
+        Post.update({_id: postId}, {likes_count: likesCount}, function(err, post) {
+          if (err) next(err);
+          if (post) {
+            next(null, post)
+          }
+          else {
+            next('likes_count update unsuccessful');
+          }
+        });
+      }
+    });
+  }
+
+  updateLikes(userId, function(err, post) {
+    if (err) next(err);
+    if (post) {
+      updateLikesCount(function(err, post) {
+        if (err) next(err);
+        else {
+          next(null, post);
+        }
+      });
+    }
+  });
+};
+
 postSchema.post('init', function(post){
   post.formattedText = post.text;
   _.each(post.comments, function(comment, idx, list){
