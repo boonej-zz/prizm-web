@@ -8,6 +8,7 @@ var Post          = mongoose.model('Post');
 var Organization  = mongoose.model('Organization');
 var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
+var _stripe       = require('../controllers/stripe');
 var _time         = require('../lib/helpers/date_time');
 var _profile      = require('../lib/helpers/profile');
 var _image        = require('../lib/helpers/image');
@@ -176,9 +177,10 @@ exports.displayOrgRegistration = function(req, res) {
   }
 }
 
-exports.postOrg = function (req, res) {
+exports.updateOrg = function (req, res) {
   var action = req.query.action;
   var userId = req.params.id;
+
   if (action == 'uploadPhoto') {
     _image.uploadImage(req, res, userId, function(err, url) {
       if (err) {
@@ -191,40 +193,57 @@ exports.postOrg = function (req, res) {
         });
       }
     });
-  }
-  if (action == 'createOrg') {
-  var code = req.get('code');
-  var namespace = req.get('namespace');
-  var welcomeImage = req.get('welcomeImage')
-  // var theme = req.get('theme');
+  };
 
-  User.findOne({_id: userId}, function(err, owner) {
-    if (err) {
-      res.status(500).send({error: err});
-    }
-    if (owner) {
-      org = new Organization({
-        owner: owner,
-        namespace: namespace,
-        code: code,
-        name: owner.name ? owner.name : owner.first_name,
-        // welcome_image_url: welcomeImage,
-        // them: ObjectId(them),
-      });
-      org.save(function(err, org) {
-        if (err) {
-          res.status(500).send({error: err});
-        }
-        if (org) {
-          res.status(200).send({success: org});
-        }
-      });
-    }
-    else {
-      res.status(400).send({error: 'Invalid user id'});
-    }
-  });
-  }
+  if (action == 'createStripeAccount') {
+    _stripe.createCustomerAccount(req, res, function(err, customer) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (customer) {
+        res.status(200).send({
+          success: 'Stripe customer account created',
+          customer: customer
+        });
+      }
+    });
+  };
+
+  if (action == 'createOrg') {
+    var code = req.get('code');
+    var namespace = req.get('namespace');
+    var welcomeImage = req.get('welcomeImage');
+    var stripeId = req.get('stripeId');
+    // var theme = req.get('theme');
+
+    User.findOne({_id: userId}, function(err, owner) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (owner) {
+        org = new Organization({
+          owner: owner,
+          namespace: namespace,
+          code: code,
+          name: owner.name ? owner.name : owner.first_name,
+          welcome_image_url: welcomeImage,
+          stripe_id: stripeId
+          // them: ObjectId(them),
+        });
+        org.save(function(err, org) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          if (org) {
+            res.status(200).send({success: org});
+          }
+        });
+      }
+      else {
+        res.status(400).send({error: 'Invalid user id'});
+      }
+    });
+  };
 }
 
 

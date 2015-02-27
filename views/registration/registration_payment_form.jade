@@ -1,6 +1,6 @@
 .col-mob-6
   h2 Checkout
-  form#payment-form(action='https://prizmapp.dev:4433/stripe' method='POST')
+  form#payment-form(action='?action=createStripeAccount' method='POST')
       span.payment-errors
       .form-row
         label
@@ -34,15 +34,15 @@
           input(type='text' size='2' data-stripe='exp-month')  
         span 
         input(type='text' size='4' data-stripe='exp-year') 
-      button(type='submit' disabled)
+      button(type='submit')
         | Submit Payment
   p
-   | We should discuss how we want to handle billing so we can set up
-   | the stripe integration smartly. For now skip to the next screen which would
-   | normally only be available after customer account has been created.
-   | Skip button won't exist once we finalize payments.
-  button(class='btn btn-primary'
+   | Right now submitting payment information creates a saved customer account
+   | in stripe will all the billing information. We will need to create a story
+   | to bill our customers accurately
+  .message-payment
+  button(class='btn btn-primary btn-payment disabled'
          onclick='org.nextSection()')
-   | Skip
+   | Next
 .col-mob-6(style='background-color: aliceblue; height: 100%;')
     h1 IMG

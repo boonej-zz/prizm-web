@@ -101,8 +101,24 @@ var org ={
           $('.message-photo').html(jqXHR.responseText);
         }
       });
-      console.log('false');
       return false;
+    });
+  },
+
+  createStripeAccount: function(e) {
+    var orgInfo = $('#org-creation-info');
+    $('#payment-form').submit(function(){
+      $.ajax({
+        type: 'POST',
+        url: window.location + '?action=createStripeAccount',
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(jqXHR) {
+          $('.message-payment').html(jqXHR.responseText);
+        }
+      });
+      return false
     });
   },
 
@@ -134,7 +150,7 @@ var org ={
 $(function() {
   $('#payment-form').submit(function(event) {
     var $form = $(this);
-
+    console.log('do I see this shit twice?');
     // Disable the submit button to prevent repeated clicks
     $form.find('button').prop('disabled', true);
 
@@ -142,11 +158,34 @@ $(function() {
 
     // Prevent the form from submitting with the default action
     return false;
+    console.log('this');
   });
 });
 
+function resubmitPaymentForm($form){
+  var data = $form.serialize();
+
+  $.ajax({
+    type: 'POST',
+    url: window.location + '?action=createStripeAccount',
+    data: data,
+    success: function(response) {
+      $('.message-payment').html('Payment information saved successfully');
+      $('#payment-form :input').attr('disabled', true);
+      $('.btn-payment').removeClass('disabled');
+      console.log(response.customer.id);
+      orgInfo.data('customerId', response.customer.id)
+    },
+    error: function(jqXHR) {
+      $('.message-payment').html(jqXHR.responseText);
+    }
+  });
+  return false;
+};
+
 function stripeResponseHandler(status, response) {
   var $form = $('#payment-form');
+  var orgInfo = $('#org-creation-info');
 
   if (response.error) {
     // Show the errors on the form
@@ -158,7 +197,8 @@ function stripeResponseHandler(status, response) {
     // Insert the token into the form so it gets submitted to the server
     $form.append($('<input type="hidden" name="stripeToken" />').val(token));
     // and submit
-    $form.get(0).submit();
+    // $form.get(0).submit();
+    resubmitPaymentForm($form);
   }
 };
 
