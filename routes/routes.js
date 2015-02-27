@@ -6,9 +6,9 @@ var _         = require('underscore');
 var _posts    = require('../controllers/posts');
 var _users    = require('../controllers/users');
 var _follow   = require('../controllers/follow');
-var _organizations = require('../controllers/organizations');
-var config      = require('../config');
-var passport    = require('passport');
+var _orgs     = require('../controllers/organizations');
+var config    = require('../config');
+var passport  = require('passport');
 
 /* Website */
 router.get('/', _users.displayHomeFeed);
@@ -70,12 +70,12 @@ router.post('/profiles/:id/following', _follow.followUserId);
 /* Registration */
 router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
-router.get('/register/:id/payments', _users.authRequired, _organizations.displayOrgRegistration);
-router.post('/register/:id/payments', _organizations.postOrg);
+router.get('/register/:id/payments', _users.authRequired, _orgs.displayOrgRegistration);
+router.post('/register/:id/payments', _orgs.updateOrg);
 
 
 /** Organization Pages **/
-router.get('/:name', _organizations.displayOrganization);
+router.get('/:name', _orgs.displayOrganization);
 
 
 module.exports = router;
