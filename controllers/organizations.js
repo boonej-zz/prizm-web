@@ -6,6 +6,7 @@ var ObjectId      = require('mongoose').Types.ObjectId;
 var User          = mongoose.model('User');
 var Post          = mongoose.model('Post');
 var Organization  = mongoose.model('Organization');
+var Theme         = mongoose.model('Theme');
 var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
 var _stripe       = require('../controllers/stripe');
@@ -144,6 +145,18 @@ var verifyOrgNamespace = function(req, res) {
   });
 }
 
+var displayRegistrationPage = function(req, res) {
+  Theme.find(function(err, themes) {
+    if (err) {
+      themes = []
+    }
+    res.render('registration/registration_org', {
+      bodyId: 'payments',
+      themes: themes
+    });
+  });
+}
+
 exports.uploadPhoto = function (req, res) {
   if (req.accepts('application/json')) {
     console.log('json req...')
@@ -169,9 +182,7 @@ exports.displayOrgRegistration = function(req, res) {
   var action = req.get('action');
   if (req.user.type == 'institution_verified') {
     if (req.accepts('html')) {
-      res.render('registration/registration_org', {
-        bodyId: 'payments'
-      });
+      displayRegistrationPage(req, res);
     }
     if (req.accepts('application/json')) {
       console.log('req accepts json...');
@@ -226,7 +237,7 @@ exports.updateOrg = function (req, res) {
     var namespace = req.get('namespace');
     var welcomeImage = req.get('welcomeImage');
     var stripeId = req.get('stripeId');
-    // var theme = req.get('theme');
+    var theme = req.get('theme');
 
     User.findOne({_id: userId}, function(err, owner) {
       if (err) {
@@ -239,8 +250,8 @@ exports.updateOrg = function (req, res) {
           code: code,
           name: owner.name ? owner.name : owner.first_name,
           welcome_image_url: welcomeImage,
+          theme: ObjectId(theme),
           stripe_id: stripeId
-          // them: ObjectId(them),
         });
         org.save(function(err, org) {
           if (err) {

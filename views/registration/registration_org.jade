@@ -96,10 +96,22 @@ block content
                   h1 IMG
             .section
               .col-mob-6
-                h2 Select your themes!
-                p
-                  | Themes go here
-                button.btn.btn-primary(onclick='org.nextSection()') Next
+                h2 Select your theme!
+                if themes
+                  form.form-theme
+                    each theme in themes
+                      .radio          
+                        label.theme(
+                          style='background: rgba(#{theme.dominant_color}'
+                            ) #{theme.background_url}
+                        input.theme(type='radio' name='theme' 
+                                    value='#{theme._id}' required)
+                    .form-row
+                      button#theme-confirm.btn.btn-primary(
+                        type='button' onclick='org.chooseTheme(event)') 
+                       | Choose Theme
+                 .message-theme
+                //- button.btn.btn-primary(onclick='org.nextSection()') Next
               .col-mob-6(style='background-color: aliceblue; height: 100%;')
                   h1 IMG
             .section
@@ -123,8 +135,8 @@ block content
                          type='submit')
                     | Upload
                   .message-photo
-                button.btn.btn-primary(onclick='org.createOrg()') 
-                  | Create Organization   
+                button.btn.btn-primary.btn-create-org.disabled(onclick='org.createOrg()') 
+                  | Create Organization
                 .message-create 
               .col-mob-6(style='background-color: aliceblue; height: 100%;')
                   h1 IMG

@@ -83,6 +83,19 @@ var org ={
     });
   },
 
+  chooseTheme: function(e) {
+    var $form   = $('.form-theme');
+    var theme   = $('input[name=theme]:checked').val();
+    var orgInfo = $('#org-creation-info');
+    if ($form[0].checkValidity()) {
+      orgInfo.data('theme', theme);
+      org.nextSection();
+    }
+    else {
+      $('.message-theme').html('Must choose theme');
+    }
+  },
+
   uploadPhoto: function(){
     var orgInfo = $('#org-creation-info');
     var photoButton = $('.btn-photo');
@@ -96,6 +109,7 @@ var org ={
         data: formData,
         success: function(response) {
           orgInfo.data('welcomeImage', response.url);
+          $('.btn-create-org').removeClass('disabled');
         },
         error: function(jqXHR) {
           $('.message-photo').html(jqXHR.responseText);
@@ -163,8 +177,8 @@ $(function() {
 });
 
 function resubmitPaymentForm($form){
+  var orgInfo = $('#org-creation-info');
   var data = $form.serialize();
-
   $.ajax({
     type: 'POST',
     url: window.location + '?action=createStripeAccount',
