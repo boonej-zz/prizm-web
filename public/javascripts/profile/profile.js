@@ -58,7 +58,13 @@ $(window).scroll(function() {
       },
     })
     .done(function(html){
-      $(".infinite-feed").append(html);
+      if (feedType == 'profile') {
+        $('.profile-posts-container').append(html);
+      } else if (feedType == 'members') {
+        $('.member-posts-container').append(html);
+      } else {
+        $('.infinite-feed').append(html);
+      }
       $('img.lazy').lazyload();
       listening = true;
     });
