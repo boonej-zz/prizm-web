@@ -33,6 +33,7 @@ var listening = true;
 
 $(document).ready(function(){
   animatePosts();
+  var listening = true;
 $(window).scroll(function() {
   if (listening){
   if($(window).scrollTop() >= $(document).height() - $(window).height()) {
