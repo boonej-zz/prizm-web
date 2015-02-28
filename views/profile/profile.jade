@@ -26,7 +26,8 @@ block content
   .container.topnav-offset
     .row 
       .profile-owner(id='#{user.id}')
-      .organization(id='#{organization.id}')
+      if organization
+        .organization(id='#{organization.id}')
       .col-sm-12#profile-header
         if (headerImages.length > 15)
           .background-tile-container
