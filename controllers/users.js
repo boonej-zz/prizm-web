@@ -903,6 +903,7 @@ var registerPartner = function(req, res) {
         }
         if (user) {
           res.status(200).send(user);
+          _mail.sendWelcomeMail(user);
           _mail.sendNewPartnerMail(user);
         }
       });
