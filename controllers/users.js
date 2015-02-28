@@ -259,18 +259,18 @@ exports.handlePrizmLogin = function(req, res, next) {
         mixpanel.track('Login Failure');
         return next(err); 
       }
-     
       mixpanel.track('Login Success', user.mixpanelProperties());
-      if (user.type == 'institution_verified') {
-        _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
-          if (namespace) {
-            return res.redirect('/' + namespace);
-          }
-        });
-      }
-      else {
-        return res.redirect('/');
-      }
+      return res.redirect('/');
+      // if (user.type == 'institution_verified') {
+      //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
+      //     if (namespace) {
+      //       return res.redirect('/' + namespace);
+      //     }
+      //   });
+      // }
+      // else {
+      //   return res.redirect('/');
+      // }
     });
   })(req, res, next);
 };
@@ -295,16 +295,17 @@ exports.handleFacebookLogin = function(req, res, next) {
           return next(err); 
         }
         mixpanel.track('Login Success', user.mixpanelProperties());
-        if (user.type == 'institution_verified') {
-          _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
-            if (namespace) {
-              return res.redirect('/' + namespace);
-            }
-          });
-        }
-        else {
-          return res.redirect('/');
-        }
+        return res.redirect('/');
+        // if (user.type == 'institution_verified') {
+        //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
+        //     if (namespace) {
+        //       return res.redirect('/' + namespace);
+        //     }
+        //   });
+        // }
+        // else {
+        //   return res.redirect('/');
+        // }
       });
     })(req, res, next);
   }
@@ -331,16 +332,17 @@ exports.handleTwitterLogin = function(req, res, next) {
           return next(err); 
         }
         mixpanel.track('Login Success', user.mixpanelProperties());
-        if (user.type == 'institution_verified') {
-          _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
-            if (namespace) {
-              return res.redirect('/' + namespace);
-            }
-          });
-        }
-        else {
-          return res.redirect('/');
-        }
+        return res.redirect('/');
+        // if (user.type == 'institution_verified') {
+        //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
+        //     if (namespace) {
+        //       return res.redirect('/' + namespace);
+        //     }
+        //   });
+        // }
+        // else {
+        //   return res.redirect('/');
+        // }
       });
     })(req, res, next);
   }
