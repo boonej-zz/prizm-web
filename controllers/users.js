@@ -30,8 +30,8 @@ var rejectMail      = fs.readFileSync(path.join(__dirname +
                       '/../views/mail/reject_mail.jade'), 'utf8');
 var acceptMail      = fs.readFileSync(path.join(__dirname +
                       '/../views/mail/accept_mail.jade'), 'utf8');
-var welcomeMail     = fs.readFileSync(path.join(__dirname + 
-                      '/../views/mail/welcome_mail.jade'), 'utf8');
+// var welcomeMail     = fs.readFileSync(path.join(__dirname + 
+//                       '/../views/mail/welcome_mail.jade'), 'utf8');
 var mandrill        = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 var Mixpanel        = require('mixpanel');
@@ -875,22 +875,7 @@ var registerIndividual = function(req, res) {
         if (user) {
           console.log('user saved');
           res.status(200).send(user);
-          var html = jade.render(welcomeMail, {user: user});
-          mandrill(mandrillEndpointSend, {
-            message: {
-              to: [{email: user.email}],
-              from_email: 'info@prizmapp.com',
-              from_name: 'Prizm',
-              subject: 'Welcome to Prizm!',
-              html: html
-            }
-          }, function (err, res) {
-            if (err) {
-              console.log('Error sending welcome email: ' + err);
-            } else {
-              console.log('welcome email sent');
-            }
-          });
+          _mail.sendWelcomeMail(user);
         }
       });
     }
