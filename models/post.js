@@ -98,7 +98,9 @@ postSchema.methods.likePost = function(userId, next) {
 
     var update = {
       $addToSet: {
-        likes: userId
+        likes: {
+          _id: userId
+        }
       }
     };
     
