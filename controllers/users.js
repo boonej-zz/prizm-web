@@ -16,6 +16,7 @@ var _               = require('underscore');
 var _time           = require('../lib/helpers/date_time');
 var _trusts         = require('../controllers/trusts');
 var _profile        = require('../lib/helpers/profile');
+var _mail           = require('../lib/helpers/mail');
 var _organizations  = require('../controllers/organizations');
 var validateEmail   = require('../utils').validateEmail;
 var _utils          = require('../utils.js');
@@ -781,6 +782,7 @@ exports.registerNewUser = function(req, res) {
       res.status(400).send('User type undefined');
     }
     else if (userType == 'individual') {
+      console.log('registering individual...')
       registerIndividual(req, res);
     }
     else if (userType == 'partner') {
@@ -798,20 +800,6 @@ exports.registerNewUser = function(req, res) {
     updatePhoto(req, res);
   }
 };
-
-// exports.updateNewUser = function(req, res) {
-//   console.log("Updating..");
-//   console.log(JSON.stringify(req.body));
-//   var userId = req.body.userId;
-//   var interestsArray = req.body.interests;
-//   var userToFollow = req.body.userToFollow;
-//   if (interestsArray) {
-//     updateInterests(req, res);
-//   };
-//   if (userToFollow) {
-//     updateFollowing(req, res);
-//   }
-// }
 
 // Registration Methods
 
@@ -861,12 +849,31 @@ var registerIndividual = function(req, res) {
       newUser.programe_code = req.body.programCode;
     }
     if (newUser.hashPassword()) {
+      console.log('saving user');
       newUser.save(function(err, user) {
         if (err) {
           res.status(500).send({error: err});
+          console.log('saving user error');
         }
         if (user) {
+          console.log('user saved');
           res.status(200).send(user);
+          var html = jade.render(welcomeMail, {user: user});
+          mandrill(mandrillEndpointSend, {
+            message: {
+              to: [{email: user.email}],
+              from_email: 'info@prizmapp.com',
+              from_name: 'Prizm',
+              subject: 'Welcome to Prizm!',
+              html: html
+            }
+          }, function (err, res) {
+            if (err) {
+              console.log('Error sending welcome email: ' + err);
+            } else {
+              console.log('welcome email sent');
+            }
+          });
         }
       });
     }
@@ -880,7 +887,7 @@ var registerPartner = function(req, res) {
   validateRegistrationRequest(req, res, function() {
     var newUser = new User({
       first_name: req.body.name,
-      type: 'institution_pending',
+      type: 'institution',
       email: req.body.email,
       password: req.body.password,
       zipcode: req.body.zipCode,
@@ -894,22 +901,7 @@ var registerPartner = function(req, res) {
         }
         if (user) {
           res.status(200).send(user);
-          var html = jade.render(welcomeMail, {user: user});
-          mandrill(mandrillEndpointSend, {
-            message: {
-              to: [{email: user.email}],
-              from_email: 'info@prizmapp.com',
-              from_name: 'Prizm',
-              subject: 'Welcome to Prizm!',
-              html: html
-            }
-          }, function (err, res) {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log('email sent');
-            }
-          });
+          _mail.sendNewPartnerMail(user);
         }
       });
     }
