@@ -34,6 +34,7 @@ exports.likePost = function(req, res) {
       });
       if (!liked) {
         post.likes.push({_id: id});
+        post.likes_count += 1;
         post.save(function(err, result){
           if (err) {
             res.status(500).send('error');
@@ -72,11 +73,19 @@ exports.unlikePost = function(req, res){
         }
       });
       if (liked) {
-        post.likes.pull({_id: id});
+        post.likes.splice(index, 1);
+        post.likes_count -= 1;
         post.save(function(err, result){
           if (err) {
             res.status(500).send('error');
           } else {
+            Activity.remove({from: ObjectId(id), 
+              to: post.creator, 
+              post_id: post.id,
+              action: 'like'}, function(err, result){
+                if (err) console.log(err);
+                else console.log('removed activity');
+              }); 
             res.status(200).send('removed');
           } 
         });
@@ -341,31 +350,6 @@ var organizationMembersFeed = function(req, res) {
             res.status(200).send(content);
           }
         });
-    }
-  });
-}
-
-/* Like/Unlike Posts */
-exports.likePost = function(req, res) {
-  var postId = req.params.id;
-  var userId = req.get('userId');
-
-  Post.findOne({_id: postId}, function(err, post) {
-    if (err) {
-      res.status(500).send({error: err});
-    }
-    if (post) {
-      post.likePost(userId, function(err, post) {
-        if (err) {
-          res.status(500).send({error: err});
-        }
-        if (post) {
-          res.status(200).send({
-            success: 'Post liked',
-            post: post
-          });
-        }
-      });
     }
   });
 }
