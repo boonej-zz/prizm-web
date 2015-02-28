@@ -217,6 +217,11 @@ var singlePostJadeRequest = function(req, res) {
               comment.formattedText = commentText;
             });
             post.liked = false;
+            if (String(user._id) == String(post.creator._id)) {
+              post.ownPost = true;
+            } else {
+              post.ownPost = false;
+            }
             _.each(post.likes, function(like, index, listb){
               if (String(like._id) == String(user._id)){
                 post.liked = true
@@ -278,6 +283,11 @@ var profilePostFeed = function(req, res) {
           if (user) {
             _.each(posts, function(post, idx, list){
               post.liked = false;
+              if (String(post.creator._id) == String(user._id)){
+                post.ownPost = true;
+              } else {
+                post.ownPost = false;
+              }
               _.each(post.likes, function(like, index, listb){
                 if (String(like._id) == String(user._id)){
                   post.liked = true
@@ -337,6 +347,11 @@ var organizationMembersFeed = function(req, res) {
             posts = _time.addTimeSinceFieldToObjects(posts);
             if (req.user) {
               _.each(posts, function(post, idx, list){
+                if (String(post.creator._id) == (req.user._id)){
+                  post.ownPost = true;
+                } else {
+                  post.ownPost = false;
+                }
                 post.liked = false;
                 _.each(post.likes, function(like, index, listb){
                   if (String(like._id) == String(req.user._id)){

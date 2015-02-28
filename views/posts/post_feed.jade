@@ -6,10 +6,13 @@ each post in posts
         width=358
         height=358)
       .post-footer
-        if post.liked
-          .like-icon.liked(onclick='profile.unlikePost("#{post._id}", event)')
-        else
-          .like-icon.not-liked(onclick='profile.likePost("#{post._id}", event)')
+        if post.ownPost
+          .like-icon.not-liked
+        else 
+          if post.liked
+            .like-icon.liked(onclick='profile.unlikePost("#{post._id}", event)')
+          else
+            .like-icon.not-liked(onclick='profile.likePost("#{post._id}", event)')
         p.icon-text.likes-count
           | #{post.likes_count}
         .comment-icon(type='button'
