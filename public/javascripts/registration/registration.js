@@ -127,8 +127,6 @@ var reg = {
     var isFollowing = $(target).data('isFollowing');
     var userId = $('.registration-card').data('userId');
 
-    console.log("Is following? - " + isFollowing);
-
     $.ajax({
       type: 'POST',
       url: '/profiles/' + userToFollow + '/following',
@@ -148,6 +146,7 @@ var reg = {
         $(target).text(function() {
           return $(target).data('isFollowing') ? 'Following' : 'Follow';
         });
+        $('.btn-follow-next').text('Done');
       }
     });
     return false;
