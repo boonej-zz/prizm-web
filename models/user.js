@@ -195,6 +195,8 @@ userSchema.statics.findOrganizationMembers = function(filters, next) {
 
 userSchema.pre('save', function(next){
   var birthday = this.birthday?this.birthday.split('-'):false;
+  var name;
+
   if (birthday && birthday.length == 3) {
     birthday = [birthday[2], birthday[0] - 1, birthday[1]];
     birthday = moment(birthday);
@@ -206,6 +208,13 @@ userSchema.pre('save', function(next){
   if (!this.create_date) {
     this.create_date = Date.now();
   }
+  if (this.last_name = '') {
+    name = this.first_name;
+  }
+  else {
+    name = this.first_name + ' ' + this.last_name;
+  }
+  this.name = name;
   this.modify_date = Date.now();
   next();
 });
