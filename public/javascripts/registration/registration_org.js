@@ -1,4 +1,4 @@
-Stripe.setPublishableKey('pk_test_AfVcRGUyvNEikvc0UMyuAWBY');
+Stripe.setPublishableKey('pk_test_df7OuHn4tLSeOPofKF8DUjw0');
 
 var org ={
   nextSection: function() {

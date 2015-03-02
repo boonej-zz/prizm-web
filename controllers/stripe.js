@@ -2,7 +2,7 @@ var express       = require('express');
 var router        = express.Router();
 var mongoose      = require('mongoose');
 var User          = mongoose.model('User');
-var stripe        = require("stripe")("sk_test_HNw8cqTotpAMeUdQv3PA58Cz");
+var stripe        = require("stripe")("sk_test_8LKzLNkqIgdEphX5DZSNCygz");
 
 exports.createCustomerAccount = function(req, res, next) {
   var stripeToken = req.body.stripeToken;
