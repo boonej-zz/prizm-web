@@ -208,7 +208,7 @@ userSchema.pre('save', function(next){
   if (!this.create_date) {
     this.create_date = Date.now();
   }
-  if (this.last_name = '') {
+  if (this.last_name == '') {
     name = this.first_name;
   }
   else {
