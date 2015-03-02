@@ -17,6 +17,7 @@ var _time           = require('../lib/helpers/date_time');
 var _trusts         = require('../controllers/trusts');
 var _profile        = require('../lib/helpers/profile');
 var _mail           = require('../lib/helpers/mail');
+var _image          = require('../lib/helpers/');
 var _organizations  = require('../controllers/organizations');
 var validateEmail   = require('../utils').validateEmail;
 var _utils          = require('../utils.js');
@@ -30,16 +31,10 @@ var rejectMail      = fs.readFileSync(path.join(__dirname +
                       '/../views/mail/reject_mail.jade'), 'utf8');
 var acceptMail      = fs.readFileSync(path.join(__dirname +
                       '/../views/mail/accept_mail.jade'), 'utf8');
-// var welcomeMail     = fs.readFileSync(path.join(__dirname + 
-//                       '/../views/mail/welcome_mail.jade'), 'utf8');
 var mandrill        = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 var Mixpanel        = require('mixpanel');
 var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
-var AWS = require('aws-sdk');
-var gm = require('gm');
-var mime = require('mime');
-var multiparty = require('multiparty');
 
 // User Methods
 exports.passwordReset = function(req, res){
@@ -814,7 +809,8 @@ exports.registerNewUser = function(req, res) {
     updateFollowing(req, res);
   }
   else if (req.query.dataType == 'photo'){
-    updatePhoto(req, res);
+    // updatePhoto(req, res);
+    uploadProfilePhoto(req, res);
   }
 };
 
@@ -948,85 +944,32 @@ var updateInterests = function(req, res) {
       res.send(400).send({error: 'Selected interests could not be found'});
     }
   });
-}
+};
 
 var updateFollowing = function(req, res) {
   // Need to decide is we want to make API to API call or move following
   // logic over to web app
   res.status(200).end();
-}
+};
 
-var updatePhoto = function (req, res) {
-  console.log("Uploading photo");
-  var s3 = new AWS.S3();
-  var form = new multiparty.Form();
+var uploadProfilePhoto = function(req, res) {
+  var userId    = req.query.userId;
+  var imageType = req.query.imageType;
+  var settings  = {}; 
 
-  form.parse(req, function (err, fields, files) {
-    console.log(fields);
-    console.log(files);
-    var width = Number(fields.width);
-    var height = Number(fields.height);
-    var x1 = Number(fields.x1);
-    var y1 = Number(fields.y1);
-    var userId = String(fields.userId);
-    var fileName = userId + '_profile.jpg';
-    var profilePhotoUrl = 'https://s3.amazonaws.com/higheraltitude.prism' +
-                          '/profile/' + fileName
-    if (files) {
-      var fa = files.image;
-      if (fa) {
-        var file;
-        for (var i = 0; file = fa[i]; ++i) {
-          gm(file.path)
-            .crop(width, height, x1, y1)
-            .resize(600, 600)
-            .stream(function (err, stdout, stderr) {
-              var buf = new Buffer('');
-              stdout.on('data', function (data) {
-                buf = Buffer.concat([buf, data]);
-              });
-              stdout.on('end', function (data) {
-                var data = {
-                  Bucket: 'higheraltitude.prism',
-                  Key: 'profile/' + fileName,
-                  Body: buf,
-                  ContentType: mime.lookup(fileName),
-                  ACL: 'public-read'
-                };
-                s3.putObject(data, function (err, result) {
-                  if (err) console.log(err);
-                  console.log(result);
-                  console.log(
-                    'https://s3.amazonaws.com/higheraltitude.prism/profile/' +
-                    fileName)
-                  User.findOneAndUpdate({
-                    _id: ObjectId(userId)
-                  }, {
-                    profile_photo_url: profilePhotoUrl
-                  }, function (err, user) {
-                    if (err) res.status(500)
-                      .send({
-                        error: err
-                      });
-                    if (user) {
-                      res.status(200)
-                        .send({
-                          sucess: 'Profile picture updated'
-                        });
-                    } else {
-                      res.status(400)
-                        .send({
-                          error: 'Unable to validate user Id'
-                        });
-                    }
-                  });
-                });
-              });
-            });
-        }
-      }
+  settings.userId = userId;
+  settings.imageType = imageType;
+
+  _image.uploadImage(req, res, settings, function(err, url) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (url) {
+      res.status(200).send({
+        success: 'Uploaded successfully',
+        url: url
+      });
     }
   });
-}
-
+};
 exports.getTrustedLuminariesForUserId = getTrustedLuminariesForUserId

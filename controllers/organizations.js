@@ -157,26 +157,26 @@ var displayRegistrationPage = function(req, res) {
   });
 }
 
-exports.uploadPhoto = function (req, res) {
-  if (req.accepts('application/json')) {
-    console.log('json req...')
-  }
-  console.log("action: " +req.get('action'));
-  console.log("Uploading photo...");
-  var userId = req.params.id;
-  console.log(userId);
-  _image.uploadPhoto(req, res, userId, function(err, url) {
-    if (err) {
-      res.status(500).send({error: err});
-    }
-    if (url) {
-      res.status(200).send({
-        success: 'Uploaded successfully',
-        url: url
-      });
-    }
-  });
-}
+// exports.uploadPhoto = function (req, res) {
+//   if (req.accepts('application/json')) {
+//     console.log('json req...')
+//   }
+//   console.log("action: " +req.get('action'));
+//   console.log("Uploading photo...");
+//   var userId = req.params.id;
+//   console.log(userId);
+//   _image.uploadPhoto(req, res, userId, function(err, url) {
+//     if (err) {
+//       res.status(500).send({error: err});
+//     }
+//     if (url) {
+//       res.status(200).send({
+//         success: 'Uploaded successfully',
+//         url: url
+//       });
+//     }
+//   });
+// }
 
 exports.displayOrgRegistration = function(req, res) {
   var action = req.get('action');
@@ -205,7 +205,11 @@ exports.updateOrg = function (req, res) {
   var userId = req.params.id;
 
   if (action == 'uploadPhoto') {
-    _image.uploadImage(req, res, userId, function(err, url) {
+    var settings = {
+      userId: userId
+    };
+    
+    _image.uploadImage(req, res, settings, function(err, url) {
       if (err) {
         res.status(500).send({error: err});
       }
@@ -268,5 +272,4 @@ exports.updateOrg = function (req, res) {
     });
   };
 }
-
 
