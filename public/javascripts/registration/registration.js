@@ -179,11 +179,17 @@ var reg = {
   },
 
   uploadPhoto: function() {
+    var userId    = $('.registration-card').data('userId');
+    var imageType = 'profile';
+    var dataType  = 'photo';
+    var queryURL  = '/?dataType=' + dataType + '&imageType=' + imageType +
+                    '&userId=' + userId;
+
     $('.form-photo').submit(function(){
       var formData = new FormData($(this)[0]);
       $.ajax({
         type: 'POST',
-        url: window.location + '/?dataType=photo',
+        url: window.location + queryURL,
         contentType: false,
         processData: false,
         data: formData,
@@ -191,6 +197,7 @@ var reg = {
           reg.nextSection();
         },
         error: function(jqXHR) {
+          $('.message-photo').html(jqXHR.responseText);
           console.log(jqXHR.responseText);
         }
       });
@@ -206,7 +213,6 @@ var reg = {
  * The offest is padding on the container to ensure the first card
  * appears in the center of the parent div
  */
-
 $(function(){
   var offset = 75;
   var container = $('.user-card-container');
@@ -217,4 +223,4 @@ $(function(){
     paddingLeft: offset + 'px'
   }
   $(container).css(style);
-})
+});
