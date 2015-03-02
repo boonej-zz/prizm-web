@@ -30,7 +30,6 @@ var org ={
   verifyOrgCode: function(e) {
     var orgInfo = $('#org-creation-info');
     var confirmButton = $('#code-confirm');
-    console.log(confirmButton);
     var code = $('#inputCode').val();
     $('#check-code').submit(function(){
       $.ajax({
@@ -59,7 +58,6 @@ var org ={
     var orgInfo = $('#org-creation-info');
     var confirmButton = $('#namespace-confirm');
     var namespace = $('#inputNamespace').val();
-    console.log
     $('#check-namespace').submit(function(){
       $.ajax({
         type: 'GET',
@@ -126,7 +124,6 @@ var org ={
         type: 'POST',
         url: window.location + '?action=createStripeAccount',
         success: function(response) {
-          console.log(response);
         },
         error: function(jqXHR) {
           $('.message-payment').html(jqXHR.responseText);
@@ -164,7 +161,7 @@ var org ={
 $(function() {
   $('#payment-form').submit(function(event) {
     var $form = $(this);
-    console.log('do I see this shit twice?');
+
     // Disable the submit button to prevent repeated clicks
     $form.find('button').prop('disabled', true);
 
@@ -172,7 +169,6 @@ $(function() {
 
     // Prevent the form from submitting with the default action
     return false;
-    console.log('this');
   });
 });
 
@@ -187,7 +183,6 @@ function resubmitPaymentForm($form){
       $('.message-payment').html('Payment information saved successfully');
       $('#payment-form :input').attr('disabled', true);
       $('.btn-payment').removeClass('disabled');
-      console.log(response.customer.id);
       orgInfo.data('customerId', response.customer.id)
     },
     error: function(jqXHR) {
