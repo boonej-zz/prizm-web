@@ -15,7 +15,7 @@
     label#status(for='insight-image-upload') Please select a file
     input#photo-image-upload(type='file' 
     name='image' onchange='Upload.fileSelect(event)')
-    output#preview(onChange='alert("photo")')
+    output#preview
     input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
     button(class='btn btn-lg btn-primary btn-upload'
            onClick='reg.uploadPhoto()'
