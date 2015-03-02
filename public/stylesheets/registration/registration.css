@@ -36,7 +36,7 @@ output {
   margin: auto;
 }
 
-#registration form {
+.form-register {
   width: 80%;
   margin: auto
 }
@@ -276,10 +276,12 @@ output {
 /* Photo */
 
 #preview {
-    border: 1px solid #666;
-    width: 300px;
-    height: 300px;
-    margin: auto;
+  border: 1px solid #666;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  background: url('/images/profile/profile_default_avatar.png');
+  background-size: 100%;
 }
 
 #preview img {

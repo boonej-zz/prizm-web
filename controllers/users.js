@@ -844,6 +844,8 @@ var validateRegistrationRequest = function(req, res,  next) {
 };
 
 var registerIndividual = function(req, res) {
+  var defaultProfileUrl = 'https://s3.amazonaws.com/higheraltitude.prism/' +
+                          'default/profile_default_avatar.png';
   var birthday = new Date(req.body.birthday);
   if (birthday){
     birthday = String(birthday.getMonth() + 1) + '-' + String(birthday.getDate())
@@ -857,6 +859,7 @@ var registerIndividual = function(req, res) {
       password: req.body.password,
       gender: req.body.gender,
       birthday: birthday,
+      profile_photo_url: defaultProfileUrl
     });
     if (req.body.programCode) {
       newUser.programe_code = req.body.programCode;
@@ -882,6 +885,8 @@ var registerIndividual = function(req, res) {
 };
 
 var registerPartner = function(req, res) {
+  var defaultProfileUrl = 'https://s3.amazonaws.com/higheraltitude.prism/' +
+                          'default/profile_default_avatar.png';
   validateRegistrationRequest(req, res, function() {
     var newUser = new User({
       first_name: req.body.name,
@@ -891,7 +896,8 @@ var registerPartner = function(req, res) {
       zipcode: req.body.zipCode,
       phone_number: req.body.phone,
       website: req.body.webSite,
-      review_key: _utils.uuid.v1()
+      review_key: _utils.uuid.v1(),
+      profile_photo_url: defaultProfileUrl
     });
     if (newUser.hashPassword()) {
       newUser.save(function(err, user) {
@@ -966,9 +972,23 @@ var uploadProfilePhoto = function(req, res) {
       res.status(500).send({error: err});
     }
     if (url) {
-      res.status(200).send({
-        success: 'Uploaded successfully',
-        url: url
+      User.findOneAndUpdate({
+        _id: userId
+      }, {
+        profile_photo_url: url
+      }, function(err, user) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        if (user) {
+          res.status(200).send({
+            success: 'Uploaded successfully',
+            url: url
+          });        
+        }
+        else {
+          res.status(500).send({error: 'Error saving profile url to user id'});
+        }
       });
     }
   });
