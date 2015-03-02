@@ -50,3 +50,5 @@ exports.replaceTagsFromUserList = function(string, userList){
   }
   return newString;
 };
+
+module.exports.uuid = uuid;

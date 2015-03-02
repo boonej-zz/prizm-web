@@ -890,7 +890,8 @@ var registerPartner = function(req, res) {
       password: req.body.password,
       zipcode: req.body.zipCode,
       phone_number: req.body.phone,
-      website: req.body.webSite
+      website: req.body.webSite,
+      review_key: _utils.uuid.v1()
     });
     if (newUser.hashPassword()) {
       newUser.save(function(err, user) {
