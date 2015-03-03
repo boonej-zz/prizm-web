@@ -36,6 +36,10 @@ input[type=search] {
     color: #808080;
 }
 
+tbody:hover>tr {
+  opacity: 0.5;
+}
+
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
   vertical-align: middle;
 }
@@ -65,6 +69,23 @@ table>thead>tr:last-of-type>th {
 .table>tbody>tr {
   border-bottom: hidden;
   border-top: hidden;
+}
+
+tbody tr:hover td:first-child {
+  background-image: url('/images/profile/members_highlight.png');
+  background-repeat: no-repeat;
+}
+
+tr:hover {
+  opacity: 1.0 !important;
+}
+
+.table-striped>tbody>tr:nth-child(odd):hover {
+background-color: rgba(240, 244, 248, 0.5);
+}
+
+.table-striped>tbody>tr:nth-child(even):hover {
+background-color: rgba(246, 249, 254, 0.5);
 }
 
 .member-action {
@@ -344,4 +365,3 @@ table>thead>tr:last-of-type>th {
   background-color: #5E6B7D;
   border-radius: 6px;
 }
-
