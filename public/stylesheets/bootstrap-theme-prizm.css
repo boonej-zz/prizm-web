@@ -75,11 +75,23 @@ body a {
   background-repeat: repeat-x;
   border-color: #dbdbdb;
   border-color: #ccc;*/
-  text-shadow: 0 1px 0 #fff;
+  
+
+  /* text-shadow: 0 1px 0 #fff; */
   background-image: none;
   background-repeat: repeat-x;
   border: none;
-  background-color: #ededf1;
+  
+
+  background-color: #A8A9AD;
+  
+
+  border-radius: 0px;
+
+  text-shadow: none;
+
+  color: #fff;
+
 }
 .btn-default:hover,
 .btn-default:focus {
@@ -96,6 +108,11 @@ body a {
   background-color: #e0e0e0;
   background-image: none;
 }
+.btn-lg {
+  text-transform: uppercase;
+  font-weight: 900;
+  height: 54px;
+}
 .btn-primary {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff265a88', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -103,9 +120,6 @@ body a {
   background-repeat: repeat-x;
   border: none;
   border-radius: 0px;
-  text-transform: uppercase;
-  font-weight: 900;
-  height: 54px;
 }
 .btn-primary:hover,
 .btn-primary:focus {

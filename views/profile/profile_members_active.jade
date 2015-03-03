@@ -42,6 +42,13 @@
                     a(href="#restrict") Restrict this account
                   li
                     a(href="#disable") Disable account
-            .member-action.remove(onClick='members.remove(event)')
+            .member-action.remove(onClick='members.toggleRemoveMenu(event)')
+              .remove-menu.hidden
+                p Are you sure you want to delete this member?
+                button.btn.btn-default.btn-sm(onClick='members.toggleRemoveMenu(event)')
+                 | Cancel
+                button.btn.btn-primary.btn-sm(onClick='members.remove(event)')
+                 | Delete
+
             .member-action.view(onClick='members.showCard(event)')
 include profile_members_card

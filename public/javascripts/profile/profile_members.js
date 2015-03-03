@@ -59,13 +59,25 @@ var members = {
     var target = e.target;
     var targetHidden = $(target).children('.restrict-menu').hasClass('hidden');
     if (targetHidden) {
-      console.log("menu hidden");
       $('.restrict-menu').addClass('hidden');
       $(target).children('.restrict-menu').toggleClass('hidden');
     }
     else {
       console.log("menu visable");
       $(target).children('.restrict-menu').toggleClass('hidden');
+    }
+  },
+
+  toggleRemoveMenu: function(e) {
+    var target = e.target;
+    var targetHidden = $(target).children('.remove-menu').hasClass('hidden');
+    if (targetHidden) {
+      $('.remove-menu').addClass('hidden');
+      $(target).children('.remove-menu').toggleClass('hidden');
+    }
+    else {
+      console.log("menu visable");
+      $(target).children('.remove-menu').toggleClass('hidden');
     }
 
   },
@@ -185,6 +197,7 @@ $(function(){
       var container = $('.member-action');
       // If the target is not the container or the child of the container
       if (!container.is(e.target) && container.has(e.target).length === 0) {
+          $('.remove-menu').addClass('hidden');
           $('.restrict-menu').addClass('hidden');
       }
   });

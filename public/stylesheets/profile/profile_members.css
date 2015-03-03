@@ -155,6 +155,51 @@ table>thead>tr:last-of-type>th {
   font-weight: normal;
 }
 
+.remove-menu {
+  position: relative; 
+  left: 38px;
+  background: #fff;
+  width: 168px;
+  height: 98px;
+  border: 1px #e4e5ea solid;
+  padding: 10px 12px 0px 12px;
+}
+
+.remove-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 9px 8px 9px 0;
+  border-color: transparent #FFFFFF;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -8px;
+  top: 2px;
+}
+
+.remove-menu:before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 9px 8px 9px 0;
+  border-color: transparent #e4e5ea ;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: -9px;
+  top: 2px;
+}
+
+.remove-menu .btn {
+/*   margin-right: 10px; */
+  width: 61px;
+}
+
+.remove-menu .btn-default {
+  margin-right: 17px;
+}
+
 /* Member Card Modal */
 .modal-dialog.member {
   width: 386px;
