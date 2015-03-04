@@ -75,23 +75,14 @@ body a {
   background-repeat: repeat-x;
   border-color: #dbdbdb;
   border-color: #ccc;*/
-  
-
   /* text-shadow: 0 1px 0 #fff; */
   background-image: none;
   background-repeat: repeat-x;
   border: none;
-  
-
   background-color: #A8A9AD;
-  
-
   border-radius: 0px;
-
   text-shadow: none;
-
   color: #fff;
-
 }
 .btn-default:hover,
 .btn-default:focus {
@@ -123,7 +114,8 @@ body a {
 }
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: #265a88;
+  background-color: #337ab7;
+  opacity: .65;
   background-position: 0 -15px;
 }
 .btn-primary:active,
