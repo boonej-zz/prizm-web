@@ -220,7 +220,7 @@ body:before {
 .settings-menu ul {
   width: 100%;
   list-style: none;
-  padding: 14px 0px 23px 90px;
+  padding: 30px 0px 14px 110px;
 }
 
 
@@ -230,6 +230,9 @@ body:before {
   color: #b2b6bd;
 }
 
+.settings li:hover  {
+  background-color: #333e51;
+}
 
 .settings-menu li:hover, .settings-menu li.selected {
   background-color: #3e6a9e;
@@ -267,7 +270,7 @@ body:before {
   background-image: url('/images/settings/home_icon@2x.png');
 }
 
-.home-button:hover, .home-button.selected {
+.home-button.selected {
   background-image: url('/images/settings/home_icon_selected@2x.png');
 }
 
@@ -276,7 +279,7 @@ body:before {
   background-image: url('/images/settings/activity_icon@2x.png');
 }
 
-.activity-button:hover {
+.activity-button.selected {
   background-image: url('/images/settings/activity_icon_selected@2x.png');
 }
 
@@ -285,7 +288,7 @@ body:before {
   background-image: url('/images/settings/insights_icon@2x.png');
 }
 
-.insights-button:hover {
+.insights-button.selected {
   background-image: url('/images/settings/insights_icon_selected@2x.png');
 }
 
@@ -295,7 +298,7 @@ body:before {
   background-image: url('/images/settings/survey_icon@2x.png');
 }
 
-.surveys-button:hover {
+.surveys-button.selected {
   background-image: url('/images/settings/survey_icon_selected@2x.png');
 }
 
@@ -303,7 +306,7 @@ body:before {
   background-image: url('/images/settings/graph_icon@2x.png');
 }
 
-.stats-button:hover {
+.stats-button.selected {
   background-image: url('/images/settings/graph_icon_selected@2x.png');
 }
 
@@ -311,7 +314,7 @@ body:before {
   background-image: url('/images/settings/settings_icon@2x.png');
 }
 
-.settings-button:hover {
+.settings-button.selected {
   background-image: url('/images/settings/settings_icon_selected@2x.png');
 }
 
@@ -319,7 +322,7 @@ body:before {
   background-image: url('/images/settings/members_icon@2x.png');
 }
 
-.members-button:hover {
+.members-button.selected {
   background-image: url('/images/settings/members_icon_selected@2x.png');
 }
 
@@ -327,7 +330,7 @@ body:before {
   background-image: url('/images/settings/creditcard_icon@2x.png');
 }
 
-.billing-button:hover {
+.billing-button.selected {
   background-image: url('/images/settings/creditcard_icon_selected@2x.png');
 }
 
@@ -335,7 +338,7 @@ body:before {
   background-image: url('/images/settings/useradd_icon@2x.png');
 }
 
-.invite-button:hover {
+.invite-button.selected {
   background-image: url('/images/settings/useradd_icon_selected@2x.png');
 }
 
@@ -343,7 +346,7 @@ body:before {
   background-image: url('/images/settings/calendar_icon@2x.png');
 }
 
-.calendar-button:hover {
+.calendar-button.selected {
   background-image: url('/images/settings/calendar_icon_selected@2x.png');
 }
 
@@ -351,7 +354,7 @@ body:before {
   background-image: url('/images/settings/explore_icon@2x.png');
 }
 
-.explore-button:hover {
+.explore-button.selected {
   background-image: url('/images/settings/explore_icon_selected@2x.png');
 }
 
@@ -359,7 +362,7 @@ body:before {
   background-image: url('/images/settings/message_icon@2x.png');
 }
 
-.message-button:hover {
+.message-button.selected {
   background-image: url('/images/settings/message_icon_selected@2x.png');
 }
 

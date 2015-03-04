@@ -759,7 +759,9 @@ var membersHTMLRequest = function(req, res) {
                 auth: true,
                 currentUser: currentUser,
                 organization: organization,
-                members: members});
+                members: members,
+                title: 'Members'
+              });
             }
           });
         }

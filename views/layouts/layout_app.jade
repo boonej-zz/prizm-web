@@ -143,7 +143,7 @@ html
                 li.settings-button.settings-icon
                   a(href='#')
                     | Settings
-                li.members-button.settings-icon
+                li.members-button.settings-icon(class="#{title == 'Members'?'selected':''}")
                   a(href='/profile/members')
                     | Members
                 li.billing-button.settings-icon
@@ -154,16 +154,17 @@ html
                     | Invite
             else
               each org in currentUser.org_status
-                ul.extended #{org.organization.name}
-                  li.settings-icon.message-button
-                    a(href='#')
-                      | Message
-                  li.settings-icon.calendar-button
-                    a(href='#')
-                      | Calendar
-                  li.settings-icon.surveys-button
-                    a(href='#')
-                      | Survey
+                if org.status == 'active'
+                  ul.extended #{org.organization.name}
+                    li.settings-icon.message-button
+                      a(href='#')
+                        | Message
+                    li.settings-icon.calendar-button
+                      a(href='#')
+                        | Calendar
+                    li.settings-icon.surveys-button
+                      a(href='#')
+                        | Survey
     mixin legal
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
