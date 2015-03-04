@@ -119,7 +119,7 @@ html
                 a(href='#')
                   | Insight
             if (currentUser.type == 'institution_verified')
-              ul Admin
+              ul.extended Admin
                 li.settings-icon.message-button
                   a(href='#')
                     | Message
@@ -146,7 +146,7 @@ html
                     | Invite
             else
               each org in currentUser.org_status
-                ul #{org.organization.name}
+                ul.extended #{org.organization.name}
                   li.settings-icon.message-button
                     a(href='#')
                       | Message

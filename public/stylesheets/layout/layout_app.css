@@ -179,7 +179,11 @@ body:before {
   width: 100%;
   list-style: none;
   padding: 14px 0px 23px 110px;
-  border-bottom: 1px solid #485769;
+}
+
+.settings ul.extended
+{
+  border-top: 1px solid #485769;
 }
 
 .settings li { 
