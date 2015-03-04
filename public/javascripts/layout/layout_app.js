@@ -1,20 +1,3 @@
-// $(document).ready(function(){
-//   $(document).mouseup(function(e){
-//     var container = $('.user-menu');
-//     var toggleMenu = $('.tool-tip');
-//     if (!$(e.target).parents('.avatar-menu').length) {
-//       if (toggleMenu.hasClass('rotated')){
-//         if ($(window).width() > 500) {
-//           container.toggle();
-//         } else {
-//           container.slideToggle(); 
-//         }
-//         $('.tool-tip').toggleClass('rotated');
-//       }
-//     }
-//   });
-// });
-
 var nav = {
   toggleMenu: function(e) {
     var target        = e.target;
