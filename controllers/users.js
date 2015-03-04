@@ -484,7 +484,6 @@ exports.displayHomeFeed = function(req, res) {
   else {
     var id = req.user.id;
     var lastPost = req.get('lastPost');
-    console.log(lastPost);
     User.findOne({_id: ObjectId(id)}, function(err, user) {
       if (err) {
         res.send(400);
@@ -514,6 +513,7 @@ exports.displayHomeFeed = function(req, res) {
                   
                 } else {
                   res.render('profile/profile_home', {
+                    title: 'Home',
                     bodyId: 'home-feed',
                     auth: true,
                     currentUser: req.user,

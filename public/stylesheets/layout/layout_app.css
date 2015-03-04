@@ -118,6 +118,8 @@ body:before {
   float: left;
   padding: 0px;
   text-align: center;
+  font-size: 14px;
+  font-weight: 100;
 }
 
 .user-menu li {
@@ -179,8 +181,6 @@ body:before {
   top: 71px;
 }
 
-.settings-avatar-menu .user-menu:befor {
-}
 .settings-avatar-menu .user-menu:after {
     left: 91px;
 }
@@ -214,25 +214,24 @@ body:before {
   display: inline-block;
   margin-top: 3px;
   margin-bottom: 3px;
-  font-weight: 100;
+  font-weight: 900;
   color: inherit;
 }
-
-
 .settings-menu ul {
-  width: 285px;
+  width: 100%;
   list-style: none;
   padding: 14px 0px 23px 90px;
 }
 
+
 .settings-menu li { 
   padding-left: 165px;
-  margin: 18px 0px 3px -130px;
+  margin: 18px 35px 3px -130px;
   color: #b2b6bd;
 }
 
 
-.settings-menu li:hover {
+.settings-menu li:hover, .settings-menu li.selected {
   background-color: #3e6a9e;
   color: #ffffff;
 }
@@ -268,7 +267,7 @@ body:before {
   background-image: url('/images/settings/home_icon@2x.png');
 }
 
-.home-button:hover {
+.home-button:hover, .home-button.selected {
   background-image: url('/images/settings/home_icon_selected@2x.png');
 }
 
@@ -338,6 +337,30 @@ body:before {
 
 .invite-button:hover {
   background-image: url('/images/settings/useradd_icon_selected@2x.png');
+}
+
+.calendar-button {
+  background-image: url('/images/settings/calendar_icon@2x.png');
+}
+
+.calendar-button:hover {
+  background-image: url('/images/settings/calendar_icon_selected@2x.png');
+}
+
+.explore-button {
+  background-image: url('/images/settings/explore_icon@2x.png');
+}
+
+.explore-button:hover {
+  background-image: url('/images/settings/explore_icon_selected@2x.png');
+}
+
+.message-button {
+  background-image: url('/images/settings/message_icon@2x.png');
+}
+
+.message-button:hover {
+  background-image: url('/images/settings/message_icon_selected@2x.png');
 }
 
 /* Footer */
