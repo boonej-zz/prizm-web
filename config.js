@@ -64,7 +64,11 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(email, done) {
-  User.findOne( { email: email } , function (err, user) {
+  User.findOne( { email: email })
+  .populate({
+    path: 'org_status.organization'
+  })
+  .exec(function (err, user) {
     done(err, user);
   });
 });

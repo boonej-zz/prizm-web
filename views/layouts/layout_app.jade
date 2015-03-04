@@ -36,7 +36,7 @@ mixin legal
 doctype html
 html
   head
-    title= title
+    title Prizm #{title?'| ' + title:''}
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap-theme-prizm.css')
     link(rel='stylesheet', href='/stylesheets/global.css')
@@ -106,20 +106,29 @@ html
         .settings
           .settings-menu
             ul
-              li.home-button.settings-icon
+              li.home-button.settings-icon(class="#{title == 'Home'?'selected':''}")
                 a(href='/')
                   | Home
               li.activity-button.settings-icon
                 a(href='#')
                   | Activity
+              li.explore-button.settings-icon
+                a(href='#')
+                  | Explore 
               li.insights-button.settings-icon
                 a(href='#')
-                  | Insights
-              li.surveys-button.settings-icon
-                a(href='#')
-                  | Surveys
+                  | Insight
             if (currentUser.type == 'institution_verified')
               ul Admin
+                li.settings-icon.message-button
+                  a(href='#')
+                    | Message
+                li.settings-icon.calendar-button
+                  a(href='#')
+                    | Calendar
+                li.settings-icon.surveys-button
+                  a(href='#')
+                    | Survey
                 li.stats-button.settings-icon
                   a(href='#')
                     | Stats
@@ -135,6 +144,18 @@ html
                 li.invite-button.settings-icon
                   a(href='#')
                     | Invite
+            else
+              each org in currentUser.org_status
+                ul #{org.organization.name}
+                  li.settings-icon.message-button
+                    a(href='#')
+                      | Message
+                  li.settings-icon.calendar-button
+                    a(href='#')
+                      | Calendar
+                  li.settings-icon.surveys-button
+                    a(href='#')
+                      | Survey
     mixin legal
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
