@@ -160,7 +160,7 @@ body:before {
   font-size: 16px;
   font-weight: 900;
   letter-spacing: 1px;
-  padding-left: 179px;
+  padding-left: 154px;
   transition: all 200ms linear; 
   overflow-y: auto;
 }
@@ -170,7 +170,7 @@ body:before {
   background-color: #2F394D;
   display: table;
   width: 100%;
-  padding-left: 60px;
+  padding-left: 88px;
   padding-right: 35px;
 }
 
@@ -182,7 +182,7 @@ body:before {
 .settings-avatar-menu .user-menu:befor {
 }
 .settings-avatar-menu .user-menu:after {
-    left: 94px;
+    left: 91px;
 }
 
 .settings-tool-tip {
@@ -220,9 +220,9 @@ body:before {
 
 
 .settings-menu ul {
-  width: 250px;
+  width: 285px;
   list-style: none;
-  padding: 14px 0px 23px 110px;
+  padding: 14px 0px 23px 90px;
 }
 
 .settings-menu li { 
@@ -253,7 +253,7 @@ body:before {
 }
 
 .settings-visable {
-  left: -179px;
+  left: -154px;
   transition: all 200ms linear; 
 }
 
