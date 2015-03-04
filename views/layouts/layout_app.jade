@@ -135,7 +135,7 @@ html
                 li.settings-button.settings-icon
                   a(href='#')
                     | Settings
-                li.members-button.settings-icon
+                li.members-button.settings-icon(class="#{title == 'Members'?'selected':''}")
                   a(href='/profile/members')
                     | Members
                 li.billing-button.settings-icon
