@@ -1,26 +1,38 @@
-$(document).ready(function(){
-  $(document).mouseup(function(e){
-    var container = $('.user-menu');
-    var toggleMenu = $('.tool-tip');
-    if (!$(e.target).parents('.avatar-menu').length) {
-      if (toggleMenu.hasClass('rotated')){
-        if ($(window).width() > 500) {
-          container.toggle();
-        } else {
-          container.slideToggle(); 
-        }
-        $('.tool-tip').toggleClass('rotated');
-      }
-
-    }
-  });
-});
+// $(document).ready(function(){
+//   $(document).mouseup(function(e){
+//     var container = $('.user-menu');
+//     var toggleMenu = $('.tool-tip');
+//     if (!$(e.target).parents('.avatar-menu').length) {
+//       if (toggleMenu.hasClass('rotated')){
+//         if ($(window).width() > 500) {
+//           container.toggle();
+//         } else {
+//           container.slideToggle(); 
+//         }
+//         $('.tool-tip').toggleClass('rotated');
+//       }
+//     }
+//   });
+// });
 
 var nav = {
-  toggleMenu: function() {
-    var windowWidth = $(window).width();
-    var menu = $('.user-menu');
-    $('.tool-tip').toggleClass('rotated');
+  toggleMenu: function(e) {
+    var target        = e.target;
+    var windowWidth   = $(window).width();
+    var settingsMenu  = $(target).parent('.settings-avatar-menu')
+    var navbarMenu    = $(target).parent('.avatar-menu');
+    var menu;
+    var tooltip;
+
+    if (navbarMenu.length) {
+      menu = $(navbarMenu).children('.user-menu');
+      tooltip = $('.tool-tip');
+    }
+    if (settingsMenu.length) {
+      menu = $(settingsMenu).children('.user-menu');
+      tooltip = $('.settings-tool-tip');
+    }
+    $(tooltip).toggleClass('rotated');
     if (windowWidth > 500) {
       menu.toggle();
     }

@@ -163,10 +163,54 @@ body:before {
   padding-left: 179px;
   transition: all 200ms linear; 
   overflow-y: auto;
-
 }
 
-.settings a {
+.settings-avatar-menu {
+  height: 75px;
+  background-color: #2F394D;
+  display: table;
+  width: 100%;
+  padding-left: 60px;
+  padding-right: 28px;
+}
+
+.settings-avatar-menu .user-menu {
+  left: 306px;
+  top: 71px;
+}
+
+.settings-avatar-menu .user-menu:befor {
+}
+.settings-avatar-menu .user-menu:after {
+    left: 94px;
+}
+
+.settings-tool-tip {
+    width: 8px;
+    height: 8px;
+    background: url('/images/settings/tooltip_icon.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 18px;
+    top: 34px;
+}
+
+.settings-avatar-menu .prizm-avatar-xs {
+  height: 25px;
+  width: 25px;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 24px 0px;
+}
+
+.settings-avatar-menu p {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 14px;
+  width: 137px;
+}
+
+.settings-menu a {
   display: inline-block;
   margin-top: 3px;
   margin-bottom: 3px;
@@ -175,20 +219,20 @@ body:before {
 }
 
 
-.settings ul {
+.settings-menu ul {
   width: 250px;
   list-style: none;
   padding: 14px 0px 23px 110px;
 }
 
-.settings li { 
+.settings-menu li { 
   padding-left: 165px;
   margin: 18px 0px 3px -130px;
   color: #b2b6bd;
 }
 
 
-.settings li:hover {
+.settings-menu li:hover {
   background-color: #3e6a9e;
   color: #ffffff;
 }
@@ -205,7 +249,7 @@ body:before {
 }
 
 .settings-menu {
-  margin-top: 80px;
+  margin-top: 50px;
 }
 
 .settings-visable {
@@ -400,6 +444,11 @@ body:before {
   }
   
   .user-menu:after {
+    display: none;
+  }
+
+  /* Settings */
+  .settings-tool-tip {
     display: none;
   }
 

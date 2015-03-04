@@ -32,7 +32,17 @@ mixin legal
                   p
                     img(alt='Clicky' width='1' height='1'
                         src='//in.getclicky.com/100784552ns.gif')
-
+mixin userMenu
+  .user-menu
+    ul
+      li
+        a(href='/profile') View Profile
+      li
+        a(href='#') Edit Profile
+      li
+        a(href='#') Settings
+      li
+        a(href='/logout') Log Out
 doctype html
 html
   head
@@ -69,18 +79,9 @@ html
                 .avatar-menu
                     img(src='https://#{currentUser.profile_photo_url.substr(7)}'
                         class='prizm-avatar-xs'
-                        onclick='nav.toggleMenu()')
-                    .tool-tip(onclick='nav.toggleMenu()')
-                    .user-menu
-                      ul
-                        li
-                          a(href='/profile') View Profile
-                        li
-                          a(href='#') Edit Profile
-                        li
-                          a(href='#') Settings
-                        li
-                          a(href='/logout') Log Out
+                        onclick='nav.toggleMenu(event)')
+                    .tool-tip(onclick='nav.toggleMenu(event)')
+                    mixin userMenu
               else
                 .avatar-menu
                     .login-button.cursor
@@ -104,6 +105,13 @@ html
     block settings
       if (auth)
         .settings
+          .settings-avatar-menu
+            img(src='https://#{currentUser.profile_photo_url.substr(7)}'
+                class='prizm-avatar-xs'
+                onclick='nav.toggleMenu(event)')
+            p(onclick='nav.toggleMenu(event)') #{currentUser.name}
+            .settings-tool-tip(onclick='nav.toggleMenu(event)')
+            mixin userMenu
           .settings-menu
             ul
               li.home-button.settings-icon
