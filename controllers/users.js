@@ -160,19 +160,24 @@ exports.institutionApproval = function(req, res){
   });
 };
 
-exports.updateOrgStatus = function(req, res) {
-  var org_id = req.get('org');
+exports.updateUser = function(req, res) {
+  var action = req.get('action');
+  var orgId = req.get('org');
   var status = req.get('status');
-  if (req.isAuthenticated()) {
-    User.findOne({_id: req.params.id}, function(err, user) {
+  var userType = req.get('memberType')
+  var userId = req.params.id;
+
+  function updateOrgStatus() {
+
+    User.findOne({_id: userId}, function(err, user) {
       if (err) { 
-        res.status(500).send(err);
+        res.status(500).send({error: err});
       }
       if (user) {
-        if (user.userBelongsToOrganization(org_id)) {
+        if (user.userBelongsToOrganization(orgId)) {
           User.findOneAndUpdate({
             _id: user.id,
-            org_status: {$elemMatch: { organization: org_id}}
+            org_status: {$elemMatch: { organization: orgId}}
           },
           {
             $set: {'org_status.$.status': status}
@@ -189,6 +194,80 @@ exports.updateOrgStatus = function(req, res) {
         res.status(400).send({error: 'User not found'});
       }
     });
+  };
+
+  function updateSubType() {
+    // Need to change string of null from request to null value
+    if (userType == 'null') {
+      userType = null;
+    }
+
+    function checkSubtype(user, next) {
+      if (user.subtype == 'luminary') {
+        next('Can not update luminaries subtype');
+      }
+      else {
+        next(null, user);
+      }
+    }
+
+    User.findOne({_id: userId}, function(err, user) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (user) {
+        checkSubtype(user, function(err, user) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          else {
+            User.findOneAndUpdate({
+              _id: userId
+            }, {
+              subtype: userType
+            }, function(err, user) {
+              if (err) {
+                res.status(500).send({error: err});
+              }
+              else {
+                res.status(200).send({message: 'User type updated'});
+              }
+            })
+          }
+        });
+      }
+      else {
+        res.status(500).send({error: 'User Id invalid'});
+      }
+    });
+
+    // User.findOneAndUpdate({
+    //   _id: userId
+    // }, {
+    //   subtype: userType
+    // }, function(err, user) {
+    //   if (err) {
+    //     res.status(500).send({error: err});
+    //   }
+    //   if (user) {
+    //     res.status(200).send({message: 'User type updated'});
+    //   }
+    //   else {
+    //     res.status(500).send({error: 'User Id invalid'});
+    //   }
+    // });
+  }
+
+  if (req.isAuthenticated()) {
+    if (action == 'updateOrgStatus') {
+      updateOrgStatus();
+    }
+    else if (action == 'updateSubtype') {
+      updateSubType();
+    }
+    else {
+      res.status(400).send({error: 'Invalide action'});
+    }
   }
   else {
     res.status(401).send({error: 'User must be authenticated, can not process request'});

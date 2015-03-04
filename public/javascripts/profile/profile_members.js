@@ -3,7 +3,7 @@
 var members = {
   // Member Action Methods
   approve: function(e) {
-    var member_id = $(e.target).parents('td').attr('data');
+    var member_id = $(e.target).parent('td').attr('data');
     var organization = $('#organization').attr('data');
     $.ajax({
       type: 'POST',
@@ -11,7 +11,8 @@ var members = {
       headers:{
         'Accept': 'application/json',
         'org': organization,
-        'status': 'active'
+        'status': 'active',
+        'action': 'updateOrgStatus'
       },
       success: function() {
         members.pendingTab();
@@ -29,7 +30,8 @@ var members = {
       headers:{
         'Accept': 'application/json',
         'org': organization,
-        'status': 'inactive'
+        'status': 'inactive',
+        'action': 'updateOrgStatus'
       },
       success: function() {
         members.pendingTab();
@@ -46,7 +48,8 @@ var members = {
       headers:{
         'Accept': 'application/json',
         'org': organization,
-        'status': 'inactive'
+        'status': 'inactive',
+        'action': 'updateOrgStatus'
       },
       success: function() {
         members.activeTab();
@@ -55,28 +58,99 @@ var members = {
     });
   },
 
+  addAmbassador: function(e) {
+    var member_id     = $(e.target).parents('td').attr('data');
+    var organization  = $('#organization').attr('data');
+
+    $.ajax({
+      type: 'POST',
+      url: '/users/' + member_id,
+      headers:{
+        'Accept': 'application/json',
+        // 'org': organization,
+        // 'status': 'active',
+        'memberType': 'ambassador',
+        'action': 'updateSubtype'
+      },
+      success: function() {
+        members.activeTab();
+      },
+      error: function(jqXHR) {
+        console.log(jqXHR.responseText);
+      }
+    });
+  },
+
+  removeAmbassador: function(e) {
+    var member_id     = $(e.target).parents('td').attr('data');
+    var organization  = $('#organization').attr('data');
+
+    $.ajax({
+      type: 'POST',
+      url: '/users/' + member_id,
+      headers:{
+        'Accept': 'application/json',
+        // 'org': organization,
+        // 'status': 'active',
+        'memberType': 'null',
+        'action': 'updateSubtype'
+      },
+      success: function(response) {
+        console.log("success! - " + response);
+        members.activeTab();
+      },
+      error: function(jqXHR) {
+        console.log(jqXHR.responseText);
+      }
+    });
+  },
+
+  toggleAmbassadorMenu: function(e) {
+    var target = e.target;
+    var targetHidden = $(target).children('.ambassador-menu').hasClass('hidden');
+
+    $('.remove-menu').addClass('hidden');
+    $('.restrict-menu').addClass('hidden');
+
+    if (targetHidden) {
+      $('.ambassador-menu').addClass('hidden');
+      $(target).children('.ambassador-menu').toggleClass('hidden');
+    }
+    else {
+      $(target).children('.ambassador-menu').toggleClass('hidden');
+    }
+  },
+
   toggleRestrictMenu: function(e) {
     var target = e.target;
     var targetHidden = $(target).children('.restrict-menu').hasClass('hidden');
+    
+    $('.remove-menu').addClass('hidden');
+    $('.ambassador-menu').addClass('hidden');
+
     if (targetHidden) {
+      console.log('restrict was hidden - showing now');
       $('.restrict-menu').addClass('hidden');
-      $(target).children('.restrict-menu').toggleClass('hidden');
+      $(target).children('.restrict-menu').removeClass('hidden');
     }
     else {
-      console.log("menu visable");
-      $(target).children('.restrict-menu').toggleClass('hidden');
+      console.log('restrict was visable - hiding now');
+      $('.restrict-menu').addClass('hidden');
     }
   },
 
   toggleRemoveMenu: function(e) {
     var target = e.target;
     var targetHidden = $(target).children('.remove-menu').hasClass('hidden');
+    
+    $('.restrict-menu').addClass('hidden');
+    $('.ambassador-menu').addClass('hidden');
+
     if (targetHidden) {
       $('.remove-menu').addClass('hidden');
       $(target).children('.remove-menu').toggleClass('hidden');
     }
     else {
-      console.log("menu visable");
       $(target).children('.remove-menu').toggleClass('hidden');
     }
 
@@ -192,13 +266,24 @@ $(function(){
   $('#memberCard').on('click', '.modal-backdrop', function() {
     $('.member-card').not('hidden').addClass('hidden');
   });
-  // Dismiss restrict menu
-  $(document).mouseup(function (e) {
-      var container = $('.member-action');
-      // If the target is not the container or the child of the container
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
-          $('.remove-menu').addClass('hidden');
-          $('.restrict-menu').addClass('hidden');
-      }
-  });
+  $(document).mouseup(function(e) {
+    // Hack to dimiss menus unless menu is clicked.
+    var ambassadorMenu  = $('.member-type');
+    var restrictMenu    = $('.member-action .restrict');
+    var removeMenu      = $('.member-action .remove');
+    var target          = e.target;
+
+    if ($(target).is(ambassadorMenu)) {
+      $('.remove-menu').addClass('hidden');
+      $('.restrict-menu').addClass('hidden');
+    }
+    else if ($(target).is(restrictMenu)) {
+      $('.remove-menu').addClass('hidden');
+      $('.ambassador-menu').addClass('hidden');
+    }
+    else if ($(target).is(removeMenu)) {
+      $('.restrict-menu').addClass('hidden');
+      $('.ambassador-menu').addClass('hidden');
+    }
+  })
 });

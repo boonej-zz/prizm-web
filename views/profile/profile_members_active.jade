@@ -16,7 +16,7 @@
         th.col-sm-1
         th
           | Name
-        th
+        th.col-sm-2
           | Status
         th
           | Date
@@ -26,12 +26,25 @@
       each member in members
         tr
           td
+            if member.subtype == 'ambassador'
+              .ambassador-small
             img(src='https://#{member.profile_photo_url.substr(7)}'
                 class='prizm-avatar-sm')
           td
             | #{member.name}
-          td
-            | Member
+          td(data='#{member.id}')
+            .member-type(onclick='members.toggleAmbassadorMenu(event)'
+                         class='#{member.subtype}')
+              if member.subtype == 'ambassador'
+                | Ambassador
+              else
+                | Member
+              .ambassador-menu.hidden
+                ul
+                  li.ambassador
+                    a(onclick='members.addAmbassador(event)') Ambassador
+                  li.member
+                    a(onclick='members.removeAmbassador(event)') Member
           td
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')
