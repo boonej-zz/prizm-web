@@ -171,7 +171,7 @@ body:before {
   display: table;
   width: 100%;
   padding-left: 60px;
-  padding-right: 28px;
+  padding-right: 35px;
 }
 
 .settings-avatar-menu .user-menu {
@@ -191,23 +191,23 @@ body:before {
     background: url('/images/settings/tooltip_icon.png');
     background-repeat: no-repeat;
     position: absolute;
-    right: 18px;
+    right: 26px;
     top: 34px;
 }
 
 .settings-avatar-menu .prizm-avatar-xs {
-  height: 25px;
-  width: 25px;
+  height: 21px;
+  width: 21px;
   display: table-cell;
   vertical-align: middle;
-  margin: 24px 0px;
+  margin: 26px 0px;
 }
 
 .settings-avatar-menu p {
   display: table-cell;
   vertical-align: middle;
   font-size: 14px;
-  width: 137px;
+  width: 130px;
 }
 
 .settings-menu a {
