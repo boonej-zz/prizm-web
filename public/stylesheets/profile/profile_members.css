@@ -30,7 +30,7 @@ input[type=search] {
   background-position-y: 9px;
   background-position-x: 12px;
   padding-left: 30px;
-  margin-top: 6px;
+  /* margin-top: 6px; */
   margin-bottom: 6px;
 }
 
@@ -100,6 +100,49 @@ background-color: rgba(240, 244, 248, 0.5);
 
 .table-striped>tbody>tr:nth-child(even):hover {
 background-color: rgba(246, 249, 254, 0.5);
+}
+
+.btn-new-member {
+  width: 165px;
+  height: 36px;
+  background-color: #3e6a9e;
+  padding-left: 35px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 13px;
+  position: absolute;
+  right: 179px;
+}
+.btn-new-member,
+.btn-new-member:hover,
+.btn-new-member:active,
+.btn-new-member:focus {
+  background-image: url('/images/profile/members_add.png');
+  background-repeat:no-repeat;
+  background-size: 16px;
+  background-position-x: 10px;
+  background-position-y: 9px;
+}
+
+.btn-export {
+  width: 136px;
+  height: 36px;
+  background-color: #3e6a9e;
+  padding-left: 35px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 148px;
+}
+
+.btn-export,
+.btn-export:hover,
+.btn-export:active,
+.btn-export:focus {
+  background-image: url('/images/profile/members_csv.png');
+  background-repeat:no-repeat;
+  background-size: 16px;
+  background-position-x: 10px;
+  background-position-y: 7px;
 }
 
 .member-type.ambassador {

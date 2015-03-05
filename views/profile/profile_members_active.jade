@@ -1,5 +1,5 @@
 .col-sm-10.col-sm-offset-1
-  table.table.table-striped.members-table
+  table.table.table-striped.members-table#active
     thead
       tr
         th
@@ -7,11 +7,10 @@
         th
         th
         th
-          input(type="search"
-                id="search"
-                value=""
-                class="form-control"
-                placeholder="Find by Name or email")
+          button.btn.btn-primary.btn-new-member(
+            onclick='members.addMember()') Add New Member
+          button.btn.btn-primary.btn-export(
+            onclick='members.exportCSV(event)') Export to CSV
       tr
         th.col-sm-1
         th
