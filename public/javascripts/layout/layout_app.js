@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $(document).mouseup(function(e){
-    var container = $('.user-menu');
+    var container = $('.avatar-menu .user-menu');
     var toggleMenu = $('.tool-tip');
     if (!$(e.target).parents('.avatar-menu').length) {
       if (toggleMenu.hasClass('rotated')){
