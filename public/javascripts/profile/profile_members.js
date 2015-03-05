@@ -156,6 +156,10 @@ var members = {
 
   },
 
+  cancelRemoveMenu: function() {
+    $('.remove-menu').addClass('hidden');
+  },
+
   showCard: function(e) {
     var member_id = $(e.target).parents('td').attr('data');
     var member_selector = '.member-card[data=' + member_id + ']';
@@ -284,6 +288,11 @@ $(function(){
     else if ($(target).is(removeMenu)) {
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
+    }
+    else {
+      $('.remove-menu').addClass('hidden');
+      $('.restrict-menu').addClass('hidden');
+      $('.ambassador-menu').addClass('hidden');    
     }
   })
 });
