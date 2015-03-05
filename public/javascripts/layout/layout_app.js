@@ -2,26 +2,32 @@ $(document).ready(function(){
   $(document).mouseup(function(e){
     var container = $('.user-menu');
     var toggleMenu = $('.tool-tip');
-    if (!container.is(e.target) && container.has(e.target).length === 0
-      && toggleMenu.hasClass('rotated')){
-      if ($(window).width() > 500) {
-        container.toggle();
-      } else {
-        container.slideToggle(); 
-      }
-      $('.tool-tip').toggleClass('rotated');
+    if (!$(e.target).parents('.avatar-menu').length) {
+      if (toggleMenu.hasClass('rotated')){
+        if ($(window).width() > 500) {
+          container.toggle();
+        } else {
+          container.slideToggle(); 
+        }
+        $('.tool-tip').toggleClass('rotated');
+      } 
     }
     var settingsMenu = $('.settings .user-menu');
     var settingsToggle = $('.settings-tool-tip');
-    if (!settingsMenu.is(e.target) && settingsMenu.has(e.target).length === 0
-      && settingsToggle.hasClass('rotated')){
-      if ($(window).width() > 500) {
-        settingsMenu.toggle();
-      } else {
-        settingsMenu.slideToggle(); 
+    if (!$(e.target).parents('.settings-avatar-menu').length){
+      if (settingsToggle.hasClass('rotated')){
+        if ($(window).width() > 500) {
+          settingsMenu.toggle();
+        } else {
+          settingsMenu.slideToggle(); 
+        }
+        $('.settings-tool-tip').toggleClass('rotated');
       }
-      $('.settings-tool-tip').toggleClass('rotated');
     }
+  });
+  $('.settings-menu li').mousedown(function(){
+    $('.settings li').removeClass('selected');
+    $(this).addClass('selected');
   });
 });
 
