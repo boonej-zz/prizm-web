@@ -35,15 +35,16 @@
           td(data='#{member.id}')
             .member-type(onclick='members.toggleAmbassadorMenu(event)'
                          class='#{member.subtype}')
-              if member.subtype == 'ambassador'
+              - var type = member.subtype
+              if type == 'ambassador'
                 | Ambassador
               else
                 | Member
               .ambassador-menu.hidden
                 ul
-                  li.ambassador
+                  li.ambassador(class=type=='ambassador' ? 'selected' : '')
                     a(onclick='members.addAmbassador(event)') Ambassador
-                  li.member
+                  li.member(class=type=='ambassador' ? '' : 'selected')
                     a(onclick='members.removeAmbassador(event)') Member
           td
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
@@ -58,7 +59,7 @@
             .member-action.remove(onClick='members.toggleRemoveMenu(event)')
               .remove-menu.hidden
                 p Are you sure you want to delete this member?
-                button.btn.btn-default.btn-sm(onClick='members.toggleRemoveMenu(event)')
+                button.btn.btn-default.btn-sm(onClick='members.cancelRemove()')
                  | Cancel
                 button.btn.btn-primary.btn-sm(onClick='members.remove(event)')
                  | Delete
