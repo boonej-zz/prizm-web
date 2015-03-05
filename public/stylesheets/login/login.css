@@ -104,7 +104,6 @@
 }
 
 .go {
-    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -150,6 +149,7 @@
 
 .form-signin input[type="password"], .form-signin input[type="password"]:-webkit-autofill {
   margin-bottom: 40px;
+  margin-top: -20px;
   height: 54px;
   /*
   background-image: url('/images/login/password_icon.png') !important;
