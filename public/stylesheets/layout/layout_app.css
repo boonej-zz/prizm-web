@@ -186,12 +186,12 @@ body:before {
 }
 
 .settings-tool-tip {
-    width: 8px;
+    width: 5px;
     height: 8px;
     background: url('/images/settings/tooltip_icon.png');
     background-repeat: no-repeat;
-    position: absolute;
-    right: 26px;
+    position: fixed;
+    left: 251px;
     top: 34px;
 }
 
