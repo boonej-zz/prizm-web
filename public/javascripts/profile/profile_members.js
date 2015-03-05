@@ -109,6 +109,7 @@ var members = {
     var target = e.target;
     var targetHidden = $(target).children('.ambassador-menu').hasClass('hidden');
 
+    $(target).toggleClass('selected');
     $('.remove-menu').addClass('hidden');
     $('.restrict-menu').addClass('hidden');
 
@@ -284,15 +285,18 @@ $(function(){
     else if ($(target).is(restrictMenu)) {
       $('.remove-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
+      $('.member-type').removeClass('selected');
     }
     else if ($(target).is(removeMenu)) {
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
+      $('.member-type').removeClass('selected');
     }
     else {
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
-      $('.ambassador-menu').addClass('hidden');    
+      $('.ambassador-menu').addClass('hidden');
+      $('.member-type').removeClass('selected');    
     }
   })
 });
