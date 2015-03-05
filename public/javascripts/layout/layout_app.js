@@ -25,6 +25,10 @@ $(document).ready(function(){
       }
     }
   });
+  $('.settings-menu li').mousedown(function(){
+    $('.settings li').removeClass('selected');
+    $(this).addClass('selected');
+  });
 });
 
 var nav = {

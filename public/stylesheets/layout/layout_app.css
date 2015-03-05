@@ -234,7 +234,7 @@ body:before {
   background-color: #333e51;
 }
 
-.settings-menu li.selected {
+.settings-menu li.selected, .settings-menu li:active {
   background-color: #3e6a9e;
   color: #ffffff;
 }
