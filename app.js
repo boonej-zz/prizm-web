@@ -33,10 +33,12 @@ app.use(function(req, res, next){
   var originalUrl = req.originalUrl;
   var needsRedirect = false;
   // fix hostname for twitter redirect
+  /*
   if (hostname.match(/^www\./) != null){
     hostname = hostname.slice(4);
     needsRedirect = true;
   }
+  */
   if (hostname == herokuHostname) {
     next();
   } else if (protocol == 'http'){
