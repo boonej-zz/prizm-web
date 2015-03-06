@@ -206,6 +206,7 @@ body:before {
   vertical-align: middle;
   font-size: 14px;
   width: 130px;
+  line-height: 15px;
 }
 
 .settings-menu a {

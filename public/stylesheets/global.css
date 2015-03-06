@@ -143,6 +143,32 @@ body a:hover {
   background-repeat: no-repeat;
 }
 
+/* Error Messages */
+
+.error-message {
+  height: 64px;
+
+  display: table;
+  max-width: 100%;
+  border-left: 4px solid #FF716F;
+}
+
+.error-message p {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+span.error {
+  display: inline-block;
+  float: left;
+  width: 64px;
+  height: 64px;
+  background: url('/images/warning_icon@2x.png');
+  background-size: 20px 17px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 /* UI Elements */
 .toggle-container {
     width: 64px;

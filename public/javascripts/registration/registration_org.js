@@ -46,7 +46,8 @@ var org ={
           confirmButton.removeClass('disabled');
         },
         error: function(jqXHR) {
-          $('.message-code').html(jqXHR.responseText);
+          var html = prizm.errorHandler(jqXHR);
+          $('.message-code').html(html);
           confirmButton.addClass('disabled');
         }
       });
@@ -73,7 +74,8 @@ var org ={
           confirmButton.removeClass('disabled');
         },
         error: function(jqXHR) {
-          $('.message-namespace').html(jqXHR.responseText);
+          var html = prizm.errorHandler(jqXHR);
+          $('.message-namespace').html(html);
           confirmButton.addClass('disabled');
         }
       });
@@ -107,10 +109,12 @@ var org ={
         data: formData,
         success: function(response) {
           orgInfo.data('welcomeImage', response.url);
+          $('[class^="imgareaselect"]').css('display', 'none');
           $('.btn-create-org').removeClass('disabled');
         },
         error: function(jqXHR) {
-          $('.message-photo').html(jqXHR.responseText);
+          var html = prizm.errorHandler(jqXHR);
+          $('.message-photo').html(html);
         }
       });
       return false;
@@ -126,7 +130,8 @@ var org ={
         success: function(response) {
         },
         error: function(jqXHR) {
-          $('.message-payment').html(jqXHR.responseText);
+          var html = prizm.errorHandler(jqXHR);
+          $('.message-payment').html(html);
         }
       });
       return false
@@ -151,7 +156,8 @@ var org ={
         org.nextSection();
       },
       error: function(jqXHR) {
-        $('.message-create').html(jqXHR.responseText);
+        var html = prizm.errorHandler(jqXHR);
+        $('.message-create').html(html);
       }
     });
     return false;
@@ -186,7 +192,8 @@ function resubmitPaymentForm($form){
       orgInfo.data('customerId', response.customer.id)
     },
     error: function(jqXHR) {
-      $('.message-payment').html(jqXHR.responseText);
+      var html = prizm.errorHandler(jqXHR);
+      $('.message-payment').html(html);
     }
   });
   return false;
