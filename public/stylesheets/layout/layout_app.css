@@ -160,6 +160,11 @@ body:before {
   overflow-y: auto;
 }
 
+.settings ul.extended
+{
+  border-top: 1px solid #485769;
+}
+
 .settings-avatar-menu {
   height: 75px;
   background-color: #2F394D;
