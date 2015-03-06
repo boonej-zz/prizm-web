@@ -107,6 +107,7 @@ var org ={
         data: formData,
         success: function(response) {
           orgInfo.data('welcomeImage', response.url);
+          $('[class^="imgareaselect"]').css('display', 'none');
           $('.btn-create-org').removeClass('disabled');
         },
         error: function(jqXHR) {

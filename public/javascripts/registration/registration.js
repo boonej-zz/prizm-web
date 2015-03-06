@@ -193,6 +193,7 @@ var reg = {
         processData: false,
         data: formData,
         success: function(response) {
+          $('[class^="imgareaselect"]').css('display', 'none');
           reg.nextSection();
         },
         error: function(jqXHR) {
