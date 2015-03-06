@@ -25,7 +25,7 @@ var herokuHostname = 'safe-lake-1236.herokuapp.com';
 var passport = require('passport');
 
 var app = express();
-if (!req.headers.host == herokuHostname){
+if (!process.ENV.environment != 'staging'){
   https.createServer(opts, app).listen(4433);
 }
 
