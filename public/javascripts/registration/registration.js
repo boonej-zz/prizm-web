@@ -170,7 +170,8 @@ var reg = {
           $('#userId').attr('value', user._id);
         },
         error: function(jqXHR) {
-          $('.message').html(jqXHR.responseText);
+          var html = prizm.errorHandler(jqXHR);
+          $('.message').html(html);
         }
       });
       return false;
@@ -197,8 +198,8 @@ var reg = {
           reg.nextSection();
         },
         error: function(jqXHR) {
-          $('.message-photo').html(jqXHR.responseText);
-          console.log(jqXHR.responseText);
+          var html = prizm.errorHandler(jqXHR);
+          $('.message-photo').html(html);
         }
       });
       return false;

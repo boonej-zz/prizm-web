@@ -38,7 +38,14 @@ var prizm = {
             window.location = 'mailto:info@prizmapp.com?subject=Find out more';
           },
   insightSubjectChange: function(e){
-                        }
+                        },
+  errorHandler: function(jqXHR) {
+    var errorMessage = JSON.parse(jqXHR.responseText).error;
+    console.log(errorMessage);
+    var html = '<div class="error-message"><span class="error"></span>' +
+               '<p>' + errorMessage + '</p></div>';
+    return html;
+  }
 };
 
 /** NAVIGATION BAR **/

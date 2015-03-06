@@ -90,13 +90,10 @@ var members = {
       url: '/users/' + member_id,
       headers:{
         'Accept': 'application/json',
-        // 'org': organization,
-        // 'status': 'active',
         'memberType': 'null',
         'action': 'updateSubtype'
       },
       success: function(response) {
-        console.log("success! - " + response);
         members.activeTab();
       },
       error: function(jqXHR) {
