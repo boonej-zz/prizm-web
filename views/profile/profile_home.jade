@@ -61,10 +61,12 @@ block content
                   .post-comments-avatar
                     if post.creator.profile_photo_url
                       img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-                        class='prizm-avatar-xs')
+                          class='prizm-avatar-xs'
+                          onclick='profile.showProfile("#{post.creator._id}")')
                     else
                       img(src='/images/profile/profile_default_avatar.png'
-                        class='prizm-avatar-xs')
+                          class='prizm-avatar-xs'
+                          onclick='profile.showProfile("#{post.creator._id}")')
                   .avatar-name
                     | #{post.creator.name}
                   .comment-text
@@ -75,10 +77,12 @@ block content
                   .post-comments-avatar
                     if post.comments[i].creator.profile_photo_url
                       img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
-                          class='prizm-avatar-xs')
+                          class='prizm-avatar-xs'
+                          onclick='profile.showProfile("#{post.comments[i].creator._id}")')
                     else
                       img(src='/images/profile/profile_default_avatar.png' 
-                          class='prizm-avatar-sm')
+                          class='prizm-avatar-sm'
+                          onclick='profile.showProfile("#{post.comments[i].creator._id}")')
                   .avatar-name
                     | #{post.comments[i].creator.name}
                   .comment-text

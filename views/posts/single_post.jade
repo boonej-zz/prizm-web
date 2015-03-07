@@ -10,12 +10,12 @@
       .comments-header
         .post-modal-avatar
           if post.creator.profile_photo_url
-            a(href='/profiles/#{post.creator._id}')
-              img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-                class='prizm-avatar-sm')
+            img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                class='prizm-avatar-sm'
+                onclick='profile.showProfile("#{post.creator._id}")')
           else
-            a(href='/profiles/#{post.creator._id}')
-              img(src='/images/default-profile.png' class='prizm-avatar-sm')
+            img(src='/images/default-profile.png' class='prizm-avatar-sm'
+                onclick='profile.showProfile("#{post.creator._id}")')
         .avatar-name
           | #{post.creator.name}
         #clock-image
@@ -29,12 +29,12 @@
           .comment-container
             .post-modal-avatar
               if post.creator.profile_photo_url
-                a(href='/profiles/#{post.creator._id}')
-                  img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-                class='prizm-avatar-sm')
+                img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                    class='prizm-avatar-sm'
+                    onclick='profile.showProfile("#{post.creator._id}")')
               else
-                a(href='/profiles/#{post.creator._id}')
-                  img(src='/images/profile/profile_default_avatar.png')
+                img(src='/images/profile/profile_default_avatar.png'
+                    onclick='profile.showProfile("#{post.creator._id}")')
             .avatar-name
               | #{post.creator.name}
             .comment-text
@@ -45,13 +45,13 @@
           .comment-container
             .post-modal-avatar
               if post.comments[i].creator.profile_photo_url
-                a(href='/profiles/#{post.comments[i].creator._id}')
-                  img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
-                  class='prizm-avatar-sm')
+                img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+                    class='prizm-avatar-sm'
+                    onclick='profile.showProfile("#{post.creator._id}")')
               else
-                a(href='/profiles/#{post.comments[i].creator._id}')
-                  img(src='/images/profile/profile_default_avatar.png' 
-                    class='prizm-avatar-sm')
+                img(src='/images/profile/profile_default_avatar.png' 
+                    class='prizm-avatar-sm'
+                    onclick='profile.showProfile("#{post.creator._id}")')
             .avatar-name
               | #{post.comments[i].creator.name}
             .comment-text
