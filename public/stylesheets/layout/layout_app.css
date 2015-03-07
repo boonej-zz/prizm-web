@@ -458,8 +458,8 @@ body:before {
 @media screen and (max-width:500px) {
   /* Navbar */
   .menu-icon {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 26px;
     background-size: 30px;
     background-position-y: 5px;
     left: 15px;
