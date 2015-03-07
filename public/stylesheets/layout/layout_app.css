@@ -198,9 +198,8 @@ body:before {
     height: 4px;
     background: url('/images/icons/tooltip_icon_white.png');
     background-repeat: no-repeat;
-    position: fixed;
-    left: 251px;
-    top: 34px;
+    position: relative;
+    bottom: 32px;
 }
 
 .settings-avatar-menu .prizm-avatar-xs {
