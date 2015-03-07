@@ -135,7 +135,11 @@ body:before {
 }
 
 .user-menu li:hover {
-  background-color: #f4f8fe;
+  background-color: #3e6a9e;
+}
+
+.user-menu li:hover a {
+  color: #ffffff;
 }
 
 .login-button {

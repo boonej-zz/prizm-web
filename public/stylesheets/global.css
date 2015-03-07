@@ -206,3 +206,25 @@ span.error {
        -o-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 0.995); 
           transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 0.995); /* custom */
 }
+
+@media screen and (max-width:500px) {
+.prizm-avatar-xs {
+  height: 30px;
+  width: 30px;
+}
+
+.prizm-avatar-sm {
+  height: 44px;
+  width: 44px;
+}
+
+.prizm-avatar-md {
+  height: 60px;
+  width: 60px;
+}
+
+.prizm-avatar-lg {
+  height: 90px;
+  width: 90px;
+}
+}
