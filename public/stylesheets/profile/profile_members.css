@@ -443,11 +443,11 @@ li.member.selected a {
 }
 
 .member-name {
-  color: black;
+  color: #484849;
   font-size: 20px;
   width: 80%;
   margin: auto;
-  font-weight: 900;
+  font-weight: 400;
   padding-top: 12px;
 }
 
@@ -458,15 +458,15 @@ li.member.selected a {
   margin: auto;
   border-bottom: 1px solid #e3e5e9;
   padding-bottom: 6px;
-  font-weight: 900;
+  font-weight: 400;
 }
 
 .member-birthday {
-  color: black;
+  color: #484849;
   font-size: 19px;
   margin-top: 18px;
   margin-bottom: 3px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .member-info-top > .location-icon {
@@ -482,12 +482,28 @@ li.member.selected a {
   font-size: 20px;
   display: inline-block;
   margin-bottom: 12px;
-  font-weight: 900;
+  font-weight: 300;
+  background: url('/images/profile/members_location.png');
+  background-repeat: no-repeat;
+  background-position-y: 7px;
+  padding-left: 17px;
+}
+
+.member-phone {
+    display: inline;
+    color: #acacad;
+  
+    font-size: 19px;
+    background: url('/images/profile/members_phone.png');
+    background-repeat: no-repeat;
+    background-position-y: 4px;
+    background-position-x: 20px;
+    padding-left: -17px;
 }
 
 .member-info-bottom {
   background: white;
-  height: 172px;
+  height: 180px;
 }
 
 .member-circle {
@@ -503,9 +519,21 @@ li.member.selected a {
   font-weight: 800;
   font-size: 18px;
   line-height: 1.2;
-  margin-top: 35px;
+  margin-top: 34px;
   margin-left: 26px;
   margin-right: -10px;
+}
+
+.last-login-date {
+    /* margin: 0px auto; */
+  
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    color: #484849;
+    line-height: 13px;
 }
 
 .interests-header {
