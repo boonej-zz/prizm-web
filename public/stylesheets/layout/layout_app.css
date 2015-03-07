@@ -120,6 +120,8 @@ body:before {
   text-align: center;
   font-size: 14px;
   font-weight: 100;
+  z-index: 500;
+  position: relative;
 }
 
 .user-menu li {
@@ -130,6 +132,10 @@ body:before {
 
 .user-menu li:last-child {
   border: none;
+}
+
+.user-menu li:hover {
+  background-color: #f4f8fe;
 }
 
 .login-button {
