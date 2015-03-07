@@ -454,17 +454,41 @@ body:before {
 @media screen and (max-width:500px) {
   /* Navbar */
   .menu-icon {
+    height: 30px;
+    width: 30px;
+    background-size: 30px;
+    background-position-y: 5px;
     left: 15px;
+  }
+
+  .navbar-title {
+    font-size: 32px;
   }
 
   .plus-icon {
     right: 15px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
   }
 
   .avatar-menu {
     right: 20%;
+    height: 30px;
+    width: 30px;
+    top: 18px;
   }
 
+  .avatar-menu .prizm-avatar-xs {
+    height: 30px;
+    width: 30px;
+  
+  }
+  .tool-tip {
+      left: 34px;
+    
+      bottom: 15px;
+  }
   .user-menu {
     position: fixed;
     top: 75px;
