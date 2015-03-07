@@ -66,8 +66,13 @@
               .comment-likes-count
                 | #{post.comments[i].likes_count}
       .comments-footer
-        .comments-like
-          img(src='/images/icons/like_icon.png')
+        if post.ownPost
+          .like-icon.not-liked.cursor
+        else
+          if post.liked
+            .like-icon.liked.cursor(onclick='profile.unlikePost("#{post._id}", event)')
+          else
+            .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id}", event)')
         .comments-post
           form(action='/posts/#{post.id}' method='get' class='comment-post')
             label(for='inputComment' class='sr-only')

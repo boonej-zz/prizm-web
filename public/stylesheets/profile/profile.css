@@ -449,17 +449,15 @@ ul .post.shown {
   bottom: 0px;
 }
 
-.comments-like {
-  display: inline-block;
-  float: left;
-  height: 100%;
-  width: 14%;
-  background: #E4E5EA;
-  padding: 20px;
-}
-
-.comments-like img {
-  width: 100%;
+.comments-footer .like-icon {
+    height: 68px;
+  
+    width: 68px;
+    margin: 0px;
+    background-color: #e4e5ea;
+    background-size: 32px;
+    background-position-x: 18px;
+    background-position-y: 18px;
 }
 
 .comments-post {
@@ -470,7 +468,8 @@ ul .post.shown {
 
 .comment-post {
   display: inline-block;
-  width: 100%;
+  /* float: right; */
+  width: 472px;
   height: 100%;
   background: #f3f5f7;
 }
