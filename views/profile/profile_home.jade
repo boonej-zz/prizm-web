@@ -67,7 +67,7 @@ block content
                       img(src='/images/profile/profile_default_avatar.png'
                           class='prizm-avatar-xs'
                           onclick='profile.showProfile("#{post.creator._id}")')
-                  .avatar-name
+                  .avatar-name.cursor(onclick='profile.showProfile("#{post.creator._id}")')
                     | #{post.creator.name}
                   .comment-text
                     | !{post.formattedText}
@@ -83,7 +83,7 @@ block content
                       img(src='/images/profile/profile_default_avatar.png' 
                           class='prizm-avatar-sm'
                           onclick='profile.showProfile("#{post.comments[i].creator._id}")')
-                  .avatar-name
+                  .avatar-name.cursor(onclick='profile.showProfile("#{post.comments[i].creator._id}")')
                     | #{post.comments[i].creator.name}
                   .comment-text
                     | !{post.comments[i].formattedText}
