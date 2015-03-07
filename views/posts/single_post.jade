@@ -10,10 +10,12 @@
       .comments-header
         .post-modal-avatar
           if post.creator.profile_photo_url
-            img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-              class='prizm-avatar-sm')
+            a(href='/profiles/#{post.creator._id}')
+              img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                class='prizm-avatar-sm')
           else
-            img(src='/images/default-profile.png' class='prizm-avatar-sm')
+            a(href='/profiles/#{post.creator._id}')
+              img(src='/images/default-profile.png' class='prizm-avatar-sm')
         .avatar-name
           | #{post.creator.name}
         #clock-image
@@ -27,10 +29,12 @@
           .comment-container
             .post-modal-avatar
               if post.creator.profile_photo_url
-                img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                a(href='/profiles/#{post.creator._id}')
+                  img(src='https://#{post.creator.profile_photo_url.substr(7)}'
                 class='prizm-avatar-sm')
               else
-                img(src='/images/profile/profile_default_avatar.png')
+                a(href='/profiles/#{post.creator._id}')
+                  img(src='/images/profile/profile_default_avatar.png')
             .avatar-name
               | #{post.creator.name}
             .comment-text
@@ -41,10 +45,12 @@
           .comment-container
             .post-modal-avatar
               if post.comments[i].creator.profile_photo_url
-                img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+                a(href='/profiles/#{post.comments[i].creator._id}')
+                  img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
                   class='prizm-avatar-sm')
               else
-                img(src='/images/profile/profile_default_avatar.png' 
+                a(href='/profiles/#{post.comments[i].creator._id}')
+                  img(src='/images/profile/profile_default_avatar.png' 
                     class='prizm-avatar-sm')
             .avatar-name
               | #{post.comments[i].creator.name}
