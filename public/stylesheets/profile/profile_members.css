@@ -95,11 +95,11 @@ td .prizm-avatar-sm {
 }
 
 .table-striped>tbody>tr:nth-child(odd):hover {
-background-color: rgba(240, 244, 248, 0.5);
+background-color: rgba(240, 244, 248, 0.8);
 }
 
 .table-striped>tbody>tr:nth-child(even):hover {
-background-color: rgba(246, 249, 254, 0.5);
+background-color: rgba(246, 249, 254, 0.8);
 }
 
 .btn-new-member {
