@@ -21,8 +21,12 @@
       each member in members
         tr
           td
-            img(src='https://#{member.profile_photo_url.substr(7)}'
+            if member.profile_photo_url
+              img(src='https://#{member.profile_photo_url.substr(7)}'
                 class='prizm-avatar-sm')
+            else
+              img(src='/images/default-profile.png' class='prizm-avatar-sm'
+                onclick='profile.showProfile("#{member._id}")')
           td
             | #{member.name}
           td
