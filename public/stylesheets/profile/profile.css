@@ -468,7 +468,7 @@ ul .post.shown {
   height: 100%;
 }
 
-.comment-post {
+#profile .comment-post {
   display: inline-block;
   width: 472px;
   height: 100%;
