@@ -11,10 +11,12 @@
         .post-modal-avatar
           if post.creator.profile_photo_url
             img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-              class='prizm-avatar-sm')
+                class='prizm-avatar-sm'
+                onclick='profile.showProfile("#{post.creator._id}")')
           else
-            img(src='/images/default-profile.png' class='prizm-avatar-sm')
-        .avatar-name
+            img(src='/images/default-profile.png' class='prizm-avatar-sm'
+                onclick='profile.showProfile("#{post.creator._id}")')
+        .avatar-name.cursor(onclick='profile.showProfile("#{post.creator._id}")')
           | #{post.creator.name}
         #clock-image
           | #{post.time_since}
@@ -28,10 +30,12 @@
             .post-modal-avatar
               if post.creator.profile_photo_url
                 img(src='https://#{post.creator.profile_photo_url.substr(7)}'
-                class='prizm-avatar-sm')
+                    class='prizm-avatar-sm'
+                    onclick='profile.showProfile("#{post.creator._id}")')
               else
-                img(src='/images/profile/profile_default_avatar.png')
-            .avatar-name
+                img(src='/images/profile/profile_default_avatar.png'
+                    onclick='profile.showProfile("#{post.creator._id}")')
+            .avatar-name.cursor(onclick='profile.showProfile("#{post.creator._id}")')
               | #{post.creator.name}
             .comment-text
               | !{post.formattedText}
@@ -42,11 +46,13 @@
             .post-modal-avatar
               if post.comments[i].creator.profile_photo_url
                 img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
-                  class='prizm-avatar-sm')
+                    class='prizm-avatar-sm'
+                    onclick='profile.showProfile("#{post.comments[i].creator._id}")')
               else
                 img(src='/images/profile/profile_default_avatar.png' 
-                    class='prizm-avatar-sm')
-            .avatar-name
+                    class='prizm-avatar-sm'
+                    onclick='profile.showProfile("#{post.comments[i].creator._id}")')
+            .avatar-name.cursor(onclick='profile.showProfile("#{post.comments[i].creator._id}")')
               | #{post.comments[i].creator.name}
             .comment-text
               | !{post.comments[i].formattedText}
@@ -60,8 +66,13 @@
               .comment-likes-count
                 | #{post.comments[i].likes_count}
       .comments-footer
-        .comments-like
-          img(src='/images/icons/like_icon.png')
+        if post.ownPost
+          .like-icon.not-liked.cursor
+        else
+          if post.liked
+            .like-icon.liked.cursor(onclick='profile.unlikePost("#{post._id}", event)')
+          else
+            .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id}", event)')
         .comments-post
           form(action='/posts/#{post.id}' method='get' class='comment-post')
             label(for='inputComment' class='sr-only')

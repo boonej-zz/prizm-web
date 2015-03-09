@@ -22,9 +22,12 @@ div(class='modal fade'
                   | DOB:
                   strong
                     |  #{member.birthday}
-                .location-icon
                 .member-location
                   | #{member.city}
+                .member-phone
+                  if member.phone_number
+                    | &nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;
+                    | #{member.phone_number}
               .member-info-bottom
                 .member-circle
                   | Followers
@@ -38,6 +41,11 @@ div(class='modal fade'
                   | Posts
                   br
                   | #{member.posts_count}
+                p.last-login-date
+                  if member.last_login_date
+                    | Last logged in on #{member.last_login_date.toString().substr(0, 15)}
+                  else
+                    | Last logged in on #{member.modify_date.toString().substr(0, 15)}
             .back-member.hidden
               .interests-header
                 .card-icon(onclick='members.showCardFront()')
