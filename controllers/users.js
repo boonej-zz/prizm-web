@@ -590,6 +590,7 @@ exports.displayProfile = function(req, res) {
               }
               else {
                 res.render('profile/profile', {
+                  bodyId: 'profile',
                   auth: true,
                   currentUser: req.user,
                   user: user,
@@ -604,6 +605,7 @@ exports.displayProfile = function(req, res) {
           });
         } else {
           res.render('profile/profile', {
+            bodyId: 'profile',
             auth: true,
             currentUser: req.user,
             user: user,
@@ -685,6 +687,7 @@ exports.displayProfileById = function(req, res) {
                 luminaries= [];
               }
               res.render('profile/profile', {
+                bodyId: 'profile',
                 auth: auth,
                 currentUser: currentUser,
                 user: user,
@@ -698,6 +701,7 @@ exports.displayProfileById = function(req, res) {
           });
         } else {
           res.render('profile/profile', {
+            bodyId: 'profile',
             auth: auth,
             currentUser: currentUser,
             user: user,
@@ -756,6 +760,7 @@ var membersHTMLRequest = function(req, res) {
             }
             else {
               res.render('profile/profile_members', {
+                bodyId: 'members',
                 auth: true,
                 currentUser: currentUser,
                 organization: organization,
