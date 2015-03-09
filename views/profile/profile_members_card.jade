@@ -12,12 +12,12 @@ div(class='modal fade'
               .member-info-top
                 .card-icon.cursor(onclick='members.showCardBack()')
                 .member-avatar
-                  if (member.profile_photo_url)
+                  if member.profile_photo_url
                     img(src='https://#{member.profile_photo_url.substr(7)}'
                         class='prizm-avatar-lg')
                   else
                     img(src='/images/default-profile.png' class='prizm-avatar-sm'
-                      onclick='profile.showProfile("#{member._id}")
+                      onclick='profile.showProfile("#{member._id}")')
                 .member-name
                   | #{member.name}
                 .member-email
