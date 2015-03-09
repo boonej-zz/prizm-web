@@ -102,10 +102,13 @@ body:before {
 
 .user-menu a {
   color: #656772;
+  width: 100%;
+  display: block;
 }
 
 .user-menu a:hover {
-  color: #2443a1;
+  background-color: #3e6a9e;
+  color: #ffffff;
 }
 
 .user-menu a:active {
@@ -127,19 +130,11 @@ body:before {
 .user-menu li {
   list-style: none;
   border-bottom: 1px #e4e5ea solid;
-  padding: 12px;
+  padding: 12px 0px;
 }
 
 .user-menu li:last-child {
   border: none;
-}
-
-.user-menu li:hover {
-  background-color: #3e6a9e;
-}
-
-.user-menu li:hover a {
-  color: #ffffff;
 }
 
 .login-button {
