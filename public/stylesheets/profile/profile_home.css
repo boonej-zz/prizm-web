@@ -180,12 +180,14 @@ ul#feed li animate {
   margin-left: 10%;
 }
 
-.comments-post {
-  width: 100%;
+#home-feed .comments-post {
+  padding-left: 0px;
+  height: 50px;
+  display: block;
 }
 
 form #inputComment {
-  height: 46px;
+  height: 50px;
   background-position-x: 15px; 
   background-position-y: 12px;
 }

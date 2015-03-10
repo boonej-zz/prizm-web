@@ -66,6 +66,7 @@ exports.displayOrganization = function(req, res) {
 
               headerImages = _profile.shufflePostImagesForProfileHeader(posts);
               res.render('profile/profile', {
+                bodyId: 'profile',
                 auth: auth,
                 currentUser: currentUser,
                 organization: organization,
