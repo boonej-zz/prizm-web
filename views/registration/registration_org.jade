@@ -20,8 +20,9 @@ block content
                                   data-current-section='0')
             input#org-creation-info(type='hidden')
             .section
-              .col-mob-6
-                h2 Start Connecting with your members today!
+              .col-mob-6.left
+                .header
+                  h2 Start Connecting with your members today!
                 h4 $1/month per member
                 ul
                   li Customize your organization
@@ -39,64 +40,64 @@ block content
                   | Questions? Contact us!
                   a(href='mailto:info@prizmapp.com')
                     | info@prizmapp.com
-              .col-mob-6(style='background-color: aliceblue; height: 100%;')
-                  h1 IMG
-            .section
-              .col-mob-6
-                h2 Checkout
+              .col-mob-6.right
+            .section.checkout
+              .col-mob-6.left
+                .header
+                  h2 Checkout
+                h4 Select payment frequency for your group
                 .radio
-                  label
-                    input(type='radio'
-                          name='radio')
+                  input(id='annual' type='radio' name='frequency' value='annual')
+                  label(for='annual')
+                    span
                     | Annual Billing
                 .radio
-                  label
-                    input(type='radio'
-                          name='radio')
+                  input(id='monthly' type='radio' name='frequency' value='monthly')
+                  label(for='monthly')
+                    span
                     | Monthly Billing
                 button(class='btn btn-primary'
                        onclick='org.nextSection()')
                  | Add payment method
-              .col-mob-6(style='background-color: aliceblue; height: 100%;')
-                  h1 IMG
-            .section
+              .col-mob-6.right
+            .section.stripe
               include registration_payment_form
-            .section
-              .col-mob-6
-                h2 Customize the experience
+            .section.code
+              .col-mob-6.left
+                .header
+                  h2 Customize the experience
                 p
                   | Choose the program code to share your ogranization app
                   | access with members
-                .message-code
                 form#check-code
-                  .form-group
-                    label(for='inputCode') Must be at least 3 characters
-                      input#inputCode.form-control(type='text' required)
-                  button.btn.btn-default(
+                  label(for='inputCode') Must be at least 3 characters
+                    input#inputCode(type='text' required)
+                  button.btn.btn-success.btn-code(
                     type='submit' onclick='org.verifyOrgCode()') Check Code
+                  .message-code
                 button#code-confirm.btn.btn-primary.disabled(
                   onclick='org.nextSection()')
-                 | Confirm
-              .col-mob-6(style='background-color: aliceblue; height: 100%;')
-                  h1 IMG
-            .section
-              .col-mob-6
-                h2 How would you like your name to appear?
+                 | Next
+              .col-mob-6.right
+            .section.namespace
+              .col-mob-6.left
+                .header
+                  h2 How would you like your name to appear?
                 .message-namespace
                 form#check-namespace.form-inline
                   .form-group
                     label(for='inputNamespace') prizmapp.com/
-                      input#inputNamespace.form-control(type='text' required)
+                      input#inputNamespace(type='text' required)
                   button.btn.btn-default(
                     type='submit' onclick='org.verifyNamespace()') Check name
                 button#namespace-confirm.btn.btn-primary.disabled(
                   onclick='org.nextSection()')
                  | Confirm
-              .col-mob-6(style='background-color: aliceblue; height: 100%;')
-                  h1 IMG
-            .section
-              .col-mob-6
-                h2 Select your theme!
+              .col-mob-6.right
+            .section.theme
+              .col-mob-6.left
+                .header
+                  h2 Select your theme!
                 if themes
                   form.form-theme
                     each theme in themes
@@ -112,11 +113,11 @@ block content
                        | Choose Theme
                  .message-theme
                 //- button.btn.btn-primary(onclick='org.nextSection()') Next
-              .col-mob-6(style='background-color: aliceblue; height: 100%;')
-                  h1 IMG
-            .section
-              .col-mob-6
-                h2 create a welcome photo
+              .col-mob-6.right
+            .section.photo
+              .col-mob-6.left
+                .header
+                  h2 create a welcome photo
                 form(class='form-photo'
                      method='' enctype='multipart/form-data')
                   input#x1(type='hidden' name='x1')
@@ -138,15 +139,14 @@ block content
                 button.btn.btn-primary.btn-create-org.disabled(onclick='org.createOrg()') 
                   | Create Organization
                 .message-create 
-              .col-mob-6(style='background-color: aliceblue; height: 100%;')
-                  h1 IMG
+              .col-mob-6.right
             .section
-              .col-mob-6
-                h2 Congrats
+              .col-mob-6.left
+                .header
+                  h2 Congrats
                 p
                   | You are all ready to start sharing your code 
                   | with your prizm users
                 h4 Invite Form Here
-              .col-mob-6(style='background-color: aliceblue; height: 100%;')
-                  h1 IMG
+              .col-mob-6.right
 

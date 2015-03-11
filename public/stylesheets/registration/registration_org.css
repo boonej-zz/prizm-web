@@ -2,11 +2,53 @@
   overflow: hidden;
 }
 
+#payments {
+  color: #4b4b4b;
+}
+
 .payment-card-container {
   margin-top: 100px;
   margin-bottom: 100px;
-  height: 450px;
+  height: 600px;
   overflow-x: hidden;
+}
+
+#payments .right {
+  background-image: url('/images/profile/register/register_background.png');
+  height: 100%;
+  background-size: 1110px 600px;
+  background-position-x: 100%;
+}
+
+#payments .left {
+    padding-right: 52px;
+
+    padding-left: 52px;
+    /* height: 500px; */
+    /* background: #e7ebee; */
+    /* background-size: 1px 1px; */
+    /* background-repeat: repeat-x; */
+    /* background-repeat-y: no-repeat; */
+}
+
+#payments .header {
+  width: 585px;
+  margin-left: -52px;
+  padding-left: 52px;
+  margin-right: -52px;
+  padding-right: 52px;
+  height: 87px;
+  border-bottom: 1px solid #e7ebee;
+  padding-top: 32px;
+  /* margin-bottom: 76px; */
+}
+
+#payments h2 {
+  /* color: #4b4b4b; */
+  font-weight: 700;
+  line-height: 33px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .section {
@@ -17,6 +59,285 @@
   left: 0px;
   transition: all 500ms cubic-bezier(0.550, 0.055, 0.675, 0.190);
   transition-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+}
+
+.checkout .header {
+  margin-bottom: 76px;
+}
+
+.checkout h4 {
+  opacity: 0.8;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 62px;
+}
+
+.checkout .radio {
+    width: 100%;
+}
+
+.checkout input[type=radio]:not(old) {
+    margin: 0;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    opacity: 0;
+}
+
+.checkout input[type=radio]:not(old) + label {
+    padding-left: 0px;
+
+    height: 32px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 32px;
+    /* display: table-cell; */
+    vertical-align: top;
+    margin-bottom: 24px;
+}
+
+.checkout input[type=radio]:not(old) + label > span {
+    display: inline-block;
+
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border: 2px solid #e6e6e6;
+    border-radius: 16px;
+    margin-right: 13px;
+}
+
+.checkout input[type=radio]:not(old):checked + label > span {
+  background-color: #465297;
+}
+
+.checkout .btn-primary {
+    width: 212px;
+  
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    display: inherit;
+    font-size: 18px;
+}
+
+.stripe h4 {
+    color: #425972;
+  
+    margin-top: 42px;
+    margin-bottom: 18px;
+    height: 21px;
+    background-image: url('/images/profile/register/checkout_cards.png');
+    background-size: 160px 42px;
+    background-repeat: no-repeat;
+    background-position-x: 303px;
+    background-position-y: -16px;
+}
+
+form#payment-form {
+
+}
+
+form#payment-form input:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+form#payment-form input {
+  height: 38px;
+  margin-right: 8px;
+  margin-bottom: 11px;
+  color: #425972;
+  padding-left: 13px;
+}
+
+::-webkit-input-placeholder {
+  color: #425972;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.form-row:nth-child(5) {
+  height: 69px;
+}
+input#month::-webkit-input-placeholder,
+input#year::-webkit-input-placeholder {
+  color: #adadad;
+}
+
+input#month + span {
+  color: #adadad;
+}
+
+
+input#name,
+input#address,
+input#number {
+  width: 450px;
+}
+
+input#city {
+  width: 221px;
+}
+
+input#state {
+  width: 76px;
+}
+
+select#state {
+    width: 70px;
+    height: 32px;
+    margin-right: 8px;
+    background: #ffffff;
+    border: none;
+    color: #425972;   padding-left: 13px;
+}
+
+label.states {
+    -webkit-appearance: textfield;
+  
+    border: 2px inset;
+    height: 38px;
+    width: 76px;
+    margin-right: 8px;
+    padding: 1px;
+    background: #ffffff;
+}
+
+input#zip {
+  width: 137px;
+}
+
+input#month {
+  width: 26px;
+  height: 30px !important;
+  margin-right: 0px !important;
+  margin-left: 8px;
+  margin-bottom: 0px !important;
+  border: none;
+  padding: 0px !important;
+}
+
+input#year {
+  width: 60px;
+  height: 30px !important;
+  margin-bottom: 0px !important;
+  border: none !important;
+  padding-left: 0px !important;
+}
+
+input#cvc {
+  width: 176px
+}
+
+.exp-date {
+    width: 265px;
+    margin-right: 8px;
+    margin-bottom: 11px;
+    height: 38px;
+    color: #425972;   font-size: 16px;   font-weight: 400;
+    padding: 1px 1px 1px 13px;
+    /* color: #adadad; */
+    /* border: 2px inset; */
+    display: inline;
+    -webkit-appearance: textfield;   
+    /* padding: 1px; */   
+    background-color: white;   
+    border: 2px inset;   
+    /* border-image-source: initial; */   
+    /* border-image-slice: initial; */   
+    /* border-image-width: initial; */   
+    /* border-image-outset: initial; */   
+    /* border-image-repeat: initial; */   
+    /* -webkit-rtl-ordering: logical; */   
+    /* -webkit-user-select: text; */   
+    /* cursor: auto; */
+}
+
+
+.paypal {
+    color: #002c8a;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 400;
+    display: table-cell;
+    height: 62px;
+    padding-left: 72px;
+    vertical-align: bottom;
+    /* padding-top: 42px; */
+    background-image: url('/images/profile/register/checkout_paypal.png');
+
+    background-repeat: no-repeat;
+}
+
+.btn-payment {
+    display: inherit;
+    height: 50px;
+  
+    width: 212px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.exp-date input {
+
+}
+
+.code p {
+  font-size: 18px;
+  margin-top: 69px;
+  width: 420px;
+}
+
+form#check-code {
+  margin-top: 25px;
+  width: 100%;
+  display: inline-table;
+}
+
+form#check-code label {
+  font-size: 18px;
+  color: #2d3fa9;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+input#inputCode {
+  height: 38px;
+ 
+  display: block;
+  margin-top: 20px;
+  margin-right: 62px;
+}
+
+.btn-code {
+  width: 144px;
+  height: 45px;
+  display: inline;
+}
+
+#code-confirm {
+  width: 211px;
+  height: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 106px;
+  background-image:  url('/images/profile/register/register_btn_arrow.png');
+  background-repeat: no-repeat;
+  background-position-y: 19px;
+  background-position-x: 126px;
+}
+
+.message-code {
+  font-size: 18px;
+  font-weight: 800;
+  opacity: 0.8;
+  margin-top: 33px;
+  height: 25px;
 }
 
 label.theme {
@@ -44,9 +365,8 @@ input.theme {
 
 }
 
-#payments .radio {
+.theme .radio {
     width: 21%;
-  
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 46px;

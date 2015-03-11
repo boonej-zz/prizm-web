@@ -1,48 +1,44 @@
-.col-mob-6
-  h2 Checkout
+- var states = ['AK','AL','AR','AZ','CA','CO','CT','DC','DE','FL','GA','GU','HI','IA','ID', 'IL','IN','KS','KY','LA','MA','MD','ME','MH','MI','MN','MO','MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY', 'OH','OK','OR','PA','PR','PW','RI','SC','SD','TN','TX','UT','VA','VI','VT','WA','WI','WV','WY']
+.col-mob-6.left
+  .header
+    h2 Checkout
+  h4 Enter Credit Card Information
   form#payment-form(action='?action=createStripeAccount' method='POST')
-      span.payment-errors
       .form-row
-        label
-          span Name   
-          input(type='text' size='20' data-stripe='name')
+        input(type='text' data-stripe='name' id="name"
+              placeholder='Name as it appears on card')
       .form-row
-        label
-          span Address
-          input(type='text' size='20' data-stripe='address_line_1')
+        input(type='text' data-stripe='address_line_1'
+              placeholder='Billing Address' id="address")
       .form-row
-        label
-          span City   
-          input(type='text' size='20' data-stripe='address_city')
-        label
-          span State  
-          input(type='text' size='2' data-stripe='address_state') 
-        label
-          span Zip  
-          input(type='text' size='5' data-stripe='address_zip')  
+        input(type='text' data-stripe='address_city'
+              placeholder='City' id='city') 
+        //- input(type='text' data-stripe='address_state'
+        //-       placeholder='State' id ='state')
+        label.states
+          select(id='state' placeholder='State' data-stripe='address_state'
+                 class='')
+            each state in states
+              option(value='#{state}') #{state}
+        input(type='text' data-stripe='address_zip'
+              placeholder='Zip Code' id='zip')  
+      .form-row  
+        input(type='text' data-stripe='number' id='number'
+              placeholder='Credit Card Number') 
       .form-row
-        label
-          span Card Number   
-          input(type='text' size='20' data-stripe='number') 
-      .form-row
-        label
-          span CVC   
-          input(type='text' size='3' data-stripe='cvc')   
-      .form-row
-        label
-          span Expiration (MM/YYYY)   
-          input(type='text' size='2' data-stripe='exp-month')  
-        span 
-        input(type='text' size='4' data-stripe='exp-year') 
-      button(type='submit')
-        | Submit Payment
-  p
-   | Right now submitting payment information creates a saved customer account
-   | in stripe will all the billing information. We will need to create a story
-   | to bill our customers accurately
+        label.exp-date
+          span Exp Date
+          input(type='text' data-stripe='exp-month'
+                placeholder='MM' id='month')
+          span
+            | /
+          input(type='text' data-stripe='exp-year'
+                placeholder='YYYY' id='year') 
+        input(type='text' data-stripe='cvc'
+              placeholder='CVC Code' id='cvc')
+        span.payment-errors
+      span.paypal or pay using paypal
+      button(type='submit' class='btn btn-primary btn-payment')
+        | Start Customizing
   .message-payment
-  button(class='btn btn-primary btn-payment disabled'
-         onclick='org.nextSection()')
-   | Next
-.col-mob-6(style='background-color: aliceblue; height: 100%;')
-    h1 IMG
+.col-mob-6.right
