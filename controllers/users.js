@@ -6,7 +6,9 @@ var ObjectId        = require('mongoose').Types.ObjectId;
 var User            = mongoose.model('User');
 var Post            = mongoose.model('Post');
 var Organization    = mongoose.model('Organization');
-var Interest         = mongoose.model('Interest');
+var Interest        = mongoose.model('Interest');
+var Activity        = mongoose.model('Activity');
+var Push            = require('../classes/push_notification');
 var config          = require('../config');
 var passport        = require('passport');
 var jade            = require('jade');
@@ -167,6 +169,31 @@ exports.updateUser = function(req, res) {
   var userType = req.get('memberType')
   var userId = req.params.id;
 
+  function createActivity() {
+    Organization.findOrganizationOwner(orgId, function(err, owner) {
+      if (err) {
+        console.log(err);
+      }
+      if (owner) {
+        var activity = new Activity({
+          to: userId,
+          from: owner._id,
+          action: 'group_approved'
+        });
+        activity.save(function(err, result) {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            new Push('activity', activity, function(result) {
+              console.log(JSON.stringify(result));
+            });
+          }
+        });
+      }
+    });
+  }
+
   function updateOrgStatus() {
     User.findOne({_id: userId})
       .populate({path: 'org_status.organization'})
@@ -194,6 +221,9 @@ exports.updateUser = function(req, res) {
           },
           function(err, user) {
             if (err) console.log(err);
+            if (status == 'active') {
+              createActivity();
+            }
             res.status(200).send({message: 'User org_status updated'});
           });
         }
