@@ -147,10 +147,10 @@ body a:hover {
 
 .error-message {
   height: 64px;
-
   display: table;
-  max-width: 100%;
+  width: 100%;
   border-left: 4px solid #FF716F;
+  background-color: #ffffff;
 }
 
 .error-message p {

@@ -26,9 +26,11 @@ output {
 }
 
 #registration .message {
-  width: 80%;
+  width: 444px;
   margin: auto;
-  padding-bottom: 24px
+  /* padding-bottom: 24px; */display: block;
+  height: 64px;
+  margin-top: 24px;
 }
 
 #registration .nav-pills {
