@@ -30,23 +30,18 @@ input[type=search] {
   background-position-y: 9px;
   background-position-x: 12px;
   padding-left: 30px;
-  /* margin-top: 6px; */
   margin-bottom: 6px;
 }
 
 #search::-webkit-input-placeholder {
-    color: #808080;
+  color: #808080;
 }
 #search::-moz-placeholder {
-    color: #808080;
+  color: #808080;
 }
 #search:-ms-input-placeholder {
-    color: #808080;
+  color: #808080;
 }
-
-/* tbody:hover>tr {
-  opacity: 0.5;
-} */
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
   vertical-align: middle;
@@ -147,7 +142,6 @@ background-color: rgb(246, 249, 254);
 
 .member-type.ambassador {
   background-position-x: 83px;
-  /*color: #3e6a9e;*/
 }
 
 .member-type {
@@ -438,7 +432,6 @@ li.member.selected a {
 }
 
 .remove-menu .btn {
-/*   margin-right: 10px; */
   width: 61px;
 }
 
@@ -520,15 +513,14 @@ li.member.selected a {
 }
 
 .member-phone {
-    display: inline;
-    color: #acacad;
-  
-    font-size: 19px;
-    background: url('/images/profile/members_phone.png');
-    background-repeat: no-repeat;
-    background-position-y: 4px;
-    background-position-x: 20px;
-    padding-left: -17px;
+  display: inline;
+  color: #acacad;
+  font-size: 19px;
+  background: url('/images/profile/members_phone.png');
+  background-repeat: no-repeat;
+  background-position-y: 4px;
+  background-position-x: 20px;
+  padding-left: -17px;
 }
 
 .member-info-bottom {
@@ -555,15 +547,13 @@ li.member.selected a {
 }
 
 .last-login-date {
-    /* margin: 0px auto; */
-  
-    position: absolute;
-    bottom: 0px;
-    text-align: center;
-    width: 100%;
-    font-size: 14px;
-    color: #484849;
-    line-height: 13px;
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+  color: #484849;
+  line-height: 13px;
 }
 
 .interests-header {
