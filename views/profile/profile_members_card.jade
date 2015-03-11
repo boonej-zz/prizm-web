@@ -28,7 +28,8 @@ div(class='modal fade'
                     |  #{member.birthday}
                 .member-phone
                   if member.phone_number
-                    | #{member.phone_number}
+                    - var number = member.phone_number
+                    | #{number.slice(0,3)}-#{number.slice(3,6)}-#{number.slice(6)}
                 .member-location
                   | #{member.city}
               .member-info-bottom
