@@ -105,8 +105,8 @@
 }
 
 .go {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .log-in {
@@ -114,7 +114,6 @@
   margin-left: 34px;
   margin-top: 20px;
   margin-bottom: 60px;
-  /* margin: 20px 22px 60px 48px; */
 }
 
 .sign-up {
@@ -122,7 +121,6 @@
   margin-right: 48px;
   margin-top: 20px;
   margin-bottom: 60px;
-  /* margin: 20px 48px 60px 22px; */
 }
 
 .form-signin .form-control:focus {
@@ -133,12 +131,6 @@
   margin-bottom: 3px;
   margin-top: 72px;
   height: 54px;
-  /**
-  background: url('/images/login/email_icon.png') no-repeat left center;
-  background-size: 26px 16px;
-  background-color: #F8F8F8;
-  background-position-x: 18px;
-  */
   padding-left: 62px;
 }
 
@@ -160,13 +152,6 @@
   margin-bottom: 40px;
   margin-top: -20px;
   height: 54px;
-  /*
-  background-image: url('/images/login/password_icon.png') !important;
-  background-repeat: no-repeat !important;
-  background-size: 22px 28px !important;
-  background-color: #F8F8F8 !important;
-  background-position-x: 20px !important;
-  */
   padding-left: 62px;
 }
 
@@ -200,55 +185,41 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 }
 
 .facebook-login {
-    width: 50%;
-
-    display: inline-block;
-    text-align: right;
-    margin-bottom: 18px;
-    /* border-bottom: 1px solid red; */
-    padding-right: 22px;
+  width: 50%;
+  display: inline-block;
+  text-align: right;
+  margin-bottom: 18px;
+  padding-right: 22px;
 }
 
 .facebook-login a {
-    width: 120px;
-
-    border-bottom: 1px solid #334b8f;
-    display: inline-block;
+  width: 120px;
+  border-bottom: 1px solid #334b8f;
+  display: inline-block;
 }
 
 .facebook-login img {
   width: 64px;
   height: 64px;
-  /* margin-bottom: 48px; */
-  /* margin-top: 16px; */
-  /* margin-right: 24px; */
   margin: 16px 24px 48px 0px;
-  /* border-bottom: 1px solid red; */
-  /* position: absolute; */
-  /* display: inline-block; */
-  /* float: left; */
-  /* margin: 20px 0px 20px 84px; */
 }
 
 .twitter-login {
-    width: 50%;
-  
-    display: inline-block;
-    text-align: left;
-    padding-left: 22px;
+  width: 50%;
+  display: inline-block;
+  text-align: left;
+  padding-left: 22px;
 }
 
 .twitter-login a {
-    width: 120px;   border-bottom: 1px solid #334b8f;   display: inline-block;
-  
+  width: 120px;   
+  border-bottom: 1px solid #334b8f;   
+  display: inline-block;
 }
 .twitter-login img {
   width: 64px;
   height: 64px;
   display: inline-block;
-  /* margin-bottom: 48px; */
-  /* margin-top: 16px; */
-  /* margin-left: 24px; */
   margin: 16px 0px 48px 24px;
 }
 
@@ -285,18 +256,12 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 
 @media screen and (max-width:500px) {
   .form-signin {
-    /* margin-top: 24px; */
-    /* margin-bottom: 24px; */
     margin-left: 0px;
     width: 100%;
-    /* position: absolute; */
-    /* left:  0px; */
-    /* right:  0px; */
     margin-right: 0px;
   }
   #loginModal > .modal-dialog {
     width: 100%;
-  
     margin: 0px;
     position: absolute;
   }
