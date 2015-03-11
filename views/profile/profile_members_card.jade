@@ -26,12 +26,11 @@ div(class='modal fade'
                   | DOB:
                   strong
                     |  #{member.birthday}
-                .member-location
-                  | #{member.city}
                 .member-phone
                   if member.phone_number
-                    | &nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;
                     | #{member.phone_number}
+                .member-location
+                  | #{member.city}
               .member-info-bottom
                 .member-circle
                   | Followers
