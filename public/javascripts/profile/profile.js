@@ -222,9 +222,6 @@ var profile = {
         }
       }
     });
-  },
-  showProfile: function(id){
-    window.location = '/profiles/' + id;
   }
 }
 
