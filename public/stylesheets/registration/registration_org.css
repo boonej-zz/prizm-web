@@ -21,14 +21,8 @@
 }
 
 #payments .left {
-    padding-right: 52px;
-
-    padding-left: 52px;
-    /* height: 500px; */
-    /* background: #e7ebee; */
-    /* background-size: 1px 1px; */
-    /* background-repeat: repeat-x; */
-    /* background-repeat-y: no-repeat; */
+  padding-right: 52px;
+  padding-left: 52px;
 }
 
 #payments .header {
@@ -40,11 +34,9 @@
   height: 87px;
   border-bottom: 1px solid #e7ebee;
   padding-top: 32px;
-  /* margin-bottom: 76px; */
 }
 
 #payments h2 {
-  /* color: #4b4b4b; */
   font-weight: 700;
   line-height: 33px;
   margin-top: 0px;
@@ -74,38 +66,35 @@
 }
 
 .checkout .radio {
-    width: 100%;
+  width: 100%;
 }
 
 .checkout input[type=radio]:not(old) {
-    margin: 0;
-    padding: 0;
-    width: 32px;
-    height: 32px;
-    opacity: 0;
+  margin: 0;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
 }
 
 .checkout input[type=radio]:not(old) + label {
-    padding-left: 0px;
-
-    height: 32px;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 32px;
-    /* display: table-cell; */
-    vertical-align: top;
-    margin-bottom: 24px;
+  padding-left: 0px;
+  height: 32px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+  vertical-align: top;
+  margin-bottom: 24px;
 }
 
 .checkout input[type=radio]:not(old) + label > span {
-    display: inline-block;
-
-    width: 32px;
-    height: 32px;
-    background-color: white;
-    border: 2px solid #e6e6e6;
-    border-radius: 16px;
-    margin-right: 13px;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border: 2px solid #e6e6e6;
+  border-radius: 16px;
+  margin-right: 13px;
 }
 
 .checkout input[type=radio]:not(old):checked + label > span {
@@ -113,31 +102,25 @@
 }
 
 .checkout .btn-primary {
-    width: 212px;
-  
-    height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 75px;
-    display: inherit;
-    font-size: 18px;
+  width: 212px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 75px;
+  display: inherit;
+  font-size: 18px;
 }
 
 .stripe h4 {
-    color: #425972;
-  
-    margin-top: 42px;
-    margin-bottom: 18px;
-    height: 21px;
-    background-image: url('/images/profile/register/checkout_cards.png');
-    background-size: 160px 42px;
-    background-repeat: no-repeat;
-    background-position-x: 303px;
-    background-position-y: -16px;
-}
-
-form#payment-form {
-
+  color: #425972;
+  margin-top: 42px;
+  margin-bottom: 18px;
+  height: 21px;
+  background-image: url('/images/profile/register/checkout_cards.png');
+  background-size: 160px 42px;
+  background-repeat: no-repeat;
+  background-position-x: 303px;
+  background-position-y: -16px;
 }
 
 form#payment-form input:focus {
@@ -171,7 +154,6 @@ input#month + span {
   color: #adadad;
 }
 
-
 input#name,
 input#address,
 input#number {
@@ -187,23 +169,23 @@ input#state {
 }
 
 select#state {
-    width: 70px;
-    height: 32px;
-    margin-right: 8px;
-    background: #ffffff;
-    border: none;
-    color: #425972;   padding-left: 13px;
+  width: 70px;
+  height: 32px;
+  margin-right: 8px;
+  background: #ffffff;
+  border: none;
+  color: #425972;
+  padding-left: 13px;
 }
 
 label.states {
-    -webkit-appearance: textfield;
-  
-    border: 2px inset;
-    height: 38px;
-    width: 76px;
-    margin-right: 8px;
-    padding: 1px;
-    background: #ffffff;
+  -webkit-appearance: textfield;
+  border: 2px inset;
+  height: 38px;
+  width: 76px;
+  margin-right: 8px;
+  padding: 1px;
+  background: #ffffff;
 }
 
 input#zip {
@@ -233,57 +215,39 @@ input#cvc {
 }
 
 .exp-date {
-    width: 265px;
-    margin-right: 8px;
-    margin-bottom: 11px;
-    height: 38px;
-    color: #425972;   font-size: 16px;   font-weight: 400;
-    padding: 1px 1px 1px 13px;
-    /* color: #adadad; */
-    /* border: 2px inset; */
-    display: inline;
-    -webkit-appearance: textfield;   
-    /* padding: 1px; */   
-    background-color: white;   
-    border: 2px inset;   
-    /* border-image-source: initial; */   
-    /* border-image-slice: initial; */   
-    /* border-image-width: initial; */   
-    /* border-image-outset: initial; */   
-    /* border-image-repeat: initial; */   
-    /* -webkit-rtl-ordering: logical; */   
-    /* -webkit-user-select: text; */   
-    /* cursor: auto; */
+  width: 265px;
+  margin-right: 8px;
+  margin-bottom: 11px;
+  height: 38px;
+  color: #425972;   font-size: 16px;   font-weight: 400;
+  padding: 1px 1px 1px 13px;
+  display: inline;
+  -webkit-appearance: textfield;   
+  background-color: white;   
+  border: 2px inset;   
 }
 
 
 .paypal {
-    color: #002c8a;
-    font-size: 16px;
-    line-height: 16px;
-    font-weight: 400;
-    display: table-cell;
-    height: 62px;
-    padding-left: 72px;
-    vertical-align: bottom;
-    /* padding-top: 42px; */
-    background-image: url('/images/profile/register/checkout_paypal.png');
-
-    background-repeat: no-repeat;
+  color: #002c8a;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+  display: table-cell;
+  height: 62px;
+  padding-left: 72px;
+  vertical-align: bottom;
+  background-image: url('/images/profile/register/checkout_paypal.png');
+  background-repeat: no-repeat;
 }
 
 .btn-payment {
-    display: inherit;
-    height: 50px;
-  
-    width: 212px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-}
-
-.exp-date input {
-
+  display: inherit;
+  height: 50px;
+  width: 212px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
 
 .code p {
@@ -307,7 +271,6 @@ form#check-code label {
 
 input#inputCode {
   height: 38px;
- 
   display: block;
   margin-top: 20px;
   margin-right: 62px;
@@ -341,37 +304,32 @@ input#inputCode {
 }
 
 label.theme {
-    width: 100%;
-
-    height: 100%;
-    /* height: 50px; */
-    color: whitesmoke;
-    font-size: 22px;
-    padding: 0px;
-    text-align: center;
-    padding-top: 9px;
-    /* margin-bottom: 22px; */
+  width: 100%;
+  height: 100%;
+  color: whitesmoke;
+  font-size: 22px;
+  padding: 0px;
+  text-align: center;
+  padding-top: 9px;
 }
 
 input.theme {
-    position: absolute !important;
-    top: 61px;
-    /* left: 49px; */
-    left: 47%;
-    right: 47%;
-    margin: 0px;
-    padding: 0px;
-    margin-left: 0px !important;
-
+  position: absolute !important;
+  top: 61px;
+  left: 47%;
+  right: 47%;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 0px !important;
 }
 
 .theme .radio {
-    width: 21%;
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-bottom: 46px;
-    height: 50px;
-    display: inline-block;
+  width: 21%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 46px;
+  height: 50px;
+  display: inline-block;
 }
 
 output {
