@@ -16,12 +16,12 @@ block content
               if post.creator.profile_photo_url
                 img.cursor(src='https://#{post.creator.profile_photo_url.substr(7)}'
                   class='prizm-avatar-xs'  
-                  onclick='profile.showProfile("#{post.creator._id}")')
+                  onclick='prizm.showProfile("#{post.creator._id}")')
               else
                 img.cursor(src='/images/profile/profile_default_avatar.png' 
                   class='prizm-avatar-sm' 
-                  onclick='profile.showProfile("#{post.creator._id}")')
-              h3.cursor(onclick='profile.showProfile("#{post.creator._id}")')
+                  onclick='prizm.showProfile("#{post.creator._id}")')
+              h3.cursor(onclick='prizm.showProfile("#{post.creator._id}")')
                 | #{post.creator.name}
               .time-since
                 .clock-icon
@@ -62,12 +62,12 @@ block content
                     if post.creator.profile_photo_url
                       img(src='https://#{post.creator.profile_photo_url.substr(7)}'
                           class='prizm-avatar-xs'
-                          onclick='profile.showProfile("#{post.creator._id}")')
+                          onclick='prizm.showProfile("#{post.creator._id}")')
                     else
                       img(src='/images/profile/profile_default_avatar.png'
                           class='prizm-avatar-xs'
-                          onclick='profile.showProfile("#{post.creator._id}")')
-                  .avatar-name.cursor(onclick='profile.showProfile("#{post.creator._id}")')
+                          onclick='prizm.showProfile("#{post.creator._id}")')
+                  .avatar-name.cursor(onclick='prizm.showProfile("#{post.creator._id}")')
                     | #{post.creator.name}
                   .comment-text
                     | !{post.formattedText}
@@ -78,12 +78,12 @@ block content
                     if post.comments[i].creator.profile_photo_url
                       img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
                           class='prizm-avatar-xs'
-                          onclick='profile.showProfile("#{post.comments[i].creator._id}")')
+                          onclick='prizm.showProfile("#{post.comments[i].creator._id}")')
                     else
                       img(src='/images/profile/profile_default_avatar.png' 
                           class='prizm-avatar-sm'
-                          onclick='profile.showProfile("#{post.comments[i].creator._id}")')
-                  .avatar-name.cursor(onclick='profile.showProfile("#{post.comments[i].creator._id}")')
+                          onclick='prizm.showProfile("#{post.comments[i].creator._id}")')
+                  .avatar-name.cursor(onclick='prizm.showProfile("#{post.comments[i].creator._id}")')
                     | #{post.comments[i].creator.name}
                   .comment-text
                     | !{post.comments[i].formattedText}
