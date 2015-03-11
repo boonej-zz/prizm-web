@@ -100,7 +100,7 @@
 }
 
 .form-signin .btn {
-  margin-bottom: 40px;
+  margin-bottom: 64px;
   width: 120px;
 }
 
@@ -110,11 +110,19 @@
 }
 
 .log-in {
-  margin: 20px 22px 60px 48px;
+  float: left;
+  margin-left: 34px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  /* margin: 20px 22px 60px 48px; */
 }
 
 .sign-up {
-  margin: 20px 48px 60px 22px;
+  float: right;
+  margin-right: 48px;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  /* margin: 20px 48px 60px 22px; */
 }
 
 .form-signin .form-control:focus {
@@ -191,38 +199,69 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
   font-size: 16px
 }
 
+.facebook-login {
+    width: 50%;
+
+    display: inline-block;
+    text-align: right;
+    margin-bottom: 18px;
+    /* border-bottom: 1px solid red; */
+    padding-right: 22px;
+}
+
+.facebook-login a {
+    width: 120px;
+
+    border-bottom: 1px solid #334b8f;
+    display: inline-block;
+}
+
 .facebook-login img {
   width: 64px;
   height: 64px;
-  display: inline-block;
-  float: left;
-  margin: 20px 0px 20px 84px;
+  /* margin-bottom: 48px; */
+  /* margin-top: 16px; */
+  /* margin-right: 24px; */
+  margin: 16px 24px 48px 0px;
+  /* border-bottom: 1px solid red; */
+  /* position: absolute; */
+  /* display: inline-block; */
+  /* float: left; */
+  /* margin: 20px 0px 20px 84px; */
 }
 
+.twitter-login {
+    width: 50%;
+  
+    display: inline-block;
+    text-align: left;
+    padding-left: 22px;
+}
+
+.twitter-login a {
+    width: 120px;   border-bottom: 1px solid #334b8f;   display: inline-block;
+  
+}
 .twitter-login img {
   width: 64px;
   height: 64px;
   display: inline-block;
-  margin: 20px 0px 20px 84px;
-}
-
-.underline-left {
-  border-bottom: 1px solid;
-  width: 120px;
-  float: left;
-  margin: 10px 15px 24px 48px;
+  /* margin-bottom: 48px; */
+  /* margin-top: 16px; */
+  /* margin-left: 24px; */
+  margin: 16px 0px 48px 24px;
 }
 
 .underline-middle {
   float: left;
+  position: relative;
+  left: 183px;
+  bottom: 29px;
   width: 14px;
 }
 
-.underline-right {
-  border-bottom: 1px solid;
-  width: 120px;
-  float: left;
-  margin: 10px 48px 24px 15px;
+.go {
+  margin-bottom: 38px !important;
 }
 
 /* Login Modal */
@@ -246,9 +285,19 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 
 @media screen and (max-width:500px) {
   .form-signin {
-    margin-top: 24px;
-    margin-bottom: 24px;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-top: 24px; */
+    /* margin-bottom: 24px; */
+    margin-left: 0px;
+    width: 100%;
+    /* position: absolute; */
+    /* left:  0px; */
+    /* right:  0px; */
+    margin-right: 0px;
+  }
+  #loginModal > .modal-dialog {
+    width: 100%;
+  
+    margin: 0px;
+    position: absolute;
   }
 }
