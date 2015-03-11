@@ -213,7 +213,7 @@ background-color: rgb(246, 249, 254);
   position: absolute; 
   background: #fff;
   width: 158px;
-  height: 105px;
+  height: 146px;
   border: 1px #e4e5ea solid;
   margin-top: 12px;
   z-index: 1000;
@@ -290,6 +290,36 @@ li.ambassador a {
 
 li.ambassador.selected a {
   color: #3e6a9e;
+}
+
+li.luminary {
+  background: url('/images/profile/luminary_icon.png');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position-y: 5px;
+  background-position-x: 2px;
+  padding-left: 34px;
+  padding-bottom: 16px;
+  cursor: pointer;
+}
+
+li.luminary.selected {
+  background: url('/images/profile/luminary_icon_selected.png');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position-y: 5px;
+  background-position-x: 2px;
+  padding-left: 34px;
+  padding-bottom: 16px;
+  cursor: pointer;
+}
+
+li.luminary a {
+  color: #959698;
+}
+
+li.luminary.selected a {
+  color: #ff0a0a;
 }
 
 li.member {

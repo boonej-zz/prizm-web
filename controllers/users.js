@@ -213,37 +213,21 @@ exports.updateUser = function(req, res) {
       userType = null;
     }
 
-    function checkSubtype(user, next) {
-      if (user.subtype == 'luminary') {
-        next('Can not update luminaries subtype');
-      }
-      else {
-        next(null, user);
-      }
-    }
-
     User.findOne({_id: userId}, function(err, user) {
       if (err) {
         res.status(500).send({error: err});
       }
       if (user) {
-        checkSubtype(user, function(err, user) {
+        User.findOneAndUpdate({
+          _id: userId
+        }, {
+          subtype: userType
+        }, function(err, user) {
           if (err) {
             res.status(500).send({error: err});
           }
           else {
-            User.findOneAndUpdate({
-              _id: userId
-            }, {
-              subtype: userType
-            }, function(err, user) {
-              if (err) {
-                res.status(500).send({error: err});
-              }
-              else {
-                res.status(200).send({message: 'User type updated'});
-              }
-            })
+            res.status(200).send({message: 'User type updated'});
           }
         });
       }

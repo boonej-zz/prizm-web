@@ -41,14 +41,18 @@
               - var type = member.subtype
               if type == 'ambassador'
                 | Ambassador
+              else if type == 'luminary'
+                | Luminary
               else
                 | Member
               .ambassador-menu.hidden
                 ul
                   li.ambassador(class=type=='ambassador' ? 'selected' : '')
-                    a(onclick='members.addAmbassador(event)') Ambassador
-                  li.member(class=type=='ambassador' ? '' : 'selected')
-                    a(onclick='members.removeAmbassador(event)') Member
+                    a(onclick='members.makeAmbassador(event)') Ambassador
+                  li.luminary(class=type=='luminary' ? 'selected' : '')
+                    a(onclick='members.makeLuminary(event)') Luminary
+                  li.member(class=type==null ? 'selected' :'')
+                    a(onclick='members.makeMember(event)') Member
           td
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')
