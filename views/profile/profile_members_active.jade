@@ -29,11 +29,13 @@
               .ambassador-small
             if member.profile_photo_url
               img(src='https://#{member.profile_photo_url.substr(7)}'
-                class='prizm-avatar-sm')
+                  class='prizm-avatar-sm cursor' 
+                  onclick='prizm.showProfile("#{member._id}")')
             else
-              img(src='/images/default-profile.png' class='prizm-avatar-sm'
-                onclick='profile.showProfile("#{member._id}")')
-          td
+              img(src='/images/default-profile.png' 
+                  class='prizm-avatar-sm cursor'
+                  onclick='prizm.showProfile("#{member._id}")')
+          td.cursor(onclick='prizm.showProfile("#{member._id}")')
             | #{member.name}
           td(data='#{member.id}')
             .member-type(onclick='members.toggleAmbassadorMenu(event)'
