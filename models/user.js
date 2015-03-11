@@ -74,7 +74,8 @@ var userSchema = new mongoose.Schema({
   insight_count         : {type: Number, default: 0},
   unsubscribed          : {type: Boolean, default: false},
   pwd_updated           : {type: Boolean, default: false},
-  org_status            : [orgStatusSchema]
+  org_status            : [orgStatusSchema],
+  theme                 : {type: ObjectIdType, ref: 'Theme', required: false}
 },{ versionKey          : false });
 
 userSchema.statics.basicFields = function(){
@@ -141,7 +142,8 @@ userSchema.methods.mixpanelProperties = function(){
 userSchema.methods.userBelongsToOrganization = function(org_id) {
   var match = false;
   _.each(this.org_status, function(org_status) {
-    if (org_id == org_status.organization) {
+    if (org_id == org_status.organization || 
+      String(org_id) == String(org_status.organization._id)) {
       match = true
     }
   })

@@ -168,21 +168,32 @@ exports.updateUser = function(req, res) {
   var userId = req.params.id;
 
   function updateOrgStatus() {
-
-    User.findOne({_id: userId}, function(err, user) {
+    User.findOne({_id: userId})
+      .populate({path: 'org_status.organization'})
+      .exec(function(err, user) {
       if (err) { 
         res.status(500).send({error: err});
       }
       if (user) {
         if (user.userBelongsToOrganization(orgId)) {
+          var update = {'org_status.$.status': status};
+          var theme;
+          _.each(user.org_status, function(item, idx, list){
+            if (String(item.organization._id) == String(orgId)) {
+              console.log(item.organization);
+              update.theme = item.organization.theme;
+            }
+          });
+          console.log(update);
           User.findOneAndUpdate({
             _id: user.id,
             org_status: {$elemMatch: { organization: orgId}}
           },
           {
-            $set: {'org_status.$.status': status}
+            $set: update 
           },
           function(err, user) {
+            if (err) console.log(err);
             res.status(200).send({message: 'User org_status updated'});
           });
         }
