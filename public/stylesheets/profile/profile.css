@@ -406,7 +406,7 @@ ul .post.shown {
   background-size: 16px;
 }
 
-.comment-likes {
+.comment-likes, #time {
   display: inline-block;
   margin-right: 4px;
   vertical-align: text-bottom;

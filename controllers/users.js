@@ -521,6 +521,7 @@ exports.displayHomeFeed = function(req, res) {
         var fetch = function(req, res, latest){
           fetchHomeFeed(user, {latest: latest}, function(err, posts) {
           posts = _time.addTimeSinceFieldToObjects(posts);
+          console.log(posts[1]);
           var done = 0;
           _.each(posts, function(post, idx, list){
             User.resolvePostTags(post, function(err, users){

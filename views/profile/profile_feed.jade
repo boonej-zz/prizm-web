@@ -77,13 +77,13 @@ each post in posts
                   .comment-text
                     | !{post.comments[i].formattedText}
                   .comment-info
-                    #clock-image
-                    #time
+                    span.clock-icon
+                    span#time
                       | #{post.comments[i].time_since} ago
-                    .comment-likes
+                    span.comment-likes
                       | -&nbsp;&nbsp;Like
-                    .like-icon
-                    .comment-likes-count
+                    span.like-icon.liked
+                    span.comment-likes-count
                       | #{post.comments[i].likes_count}
               .comments-post
                 form(action='/posts/#{post.id}' method='get' class='comment-post')
