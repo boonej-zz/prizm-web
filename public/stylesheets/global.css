@@ -146,7 +146,7 @@ body a:hover {
 /* Error Messages */
 
 .error-message {
-  height: 64px;
+  height: 58px;
   display: table;
   width: 100%;
   border-left: 4px solid #FF716F;
@@ -161,10 +161,10 @@ body a:hover {
 span.error {
   display: inline-block;
   float: left;
-  width: 64px;
-  height: 64px;
+  width: 58px;
+  height: 58px;
   background: url('/images/warning_icon.png');
-  background-size: 20px 17px;
+  background-size: 26px 22px;
   background-repeat: no-repeat;
   background-position: center;
 }
