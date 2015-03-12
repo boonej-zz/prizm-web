@@ -240,6 +240,7 @@ var profile = {
           return $(target).data('isFollowing') ? 'Following' : 'Follow';
         });
         $('.btn-follow-next').text('Done');
+        $(target).fadeOut();
       }
     });
     return false;

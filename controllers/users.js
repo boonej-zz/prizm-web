@@ -746,10 +746,25 @@ exports.displayProfileById = function(req, res) {
   });
 }
 
-// User Display Following/Follower 
+// User Display Following/Follower
+
+ var determineIsFollowing = function (req, res, users) {
+  var authUser = req.user;
+  var authUserFollowing = _.pluck(authUser.following, '_id');
+  _.each(users, function(user) {
+    if (_.contains(authUserFollowing, String(user._id))) {
+      user.isFollowed = true;
+    }
+    else {
+      user.isFollowed = false;
+    }
+  });
+  return users;
+}
 
 exports.displayFollowers = function(req, res) {
   var userId    = req.params.id;
+  var isFollowing = false;
   var followers = [];
   var html;
 
@@ -767,10 +782,10 @@ exports.displayFollowers = function(req, res) {
           if (err) {
             res.status(500).send({error: err});
           }
-          if (!users) {
-            res.status(400).send({error: 'No users found in followers array'});
-          }
           else {
+            if (req.isAuthenticated()) {
+              users = determineIsFollowing(req, res, users);
+            }
             html = jade.renderFile(profileFollow, {
               users: users,
               type: 'follower'});
@@ -808,10 +823,11 @@ exports.displayFollowing = function(req, res) {
           if (err) {
             res.status(500).send({error: err});
           }
-          if (!users) {
-            res.status(400).send({error: 'No users found in following array'});
-          }
           else {
+            if (req.isAuthenticated()) {
+              console.log("authed");
+              users = determineIsFollowing(req, res, users);
+            }
             html = jade.renderFile(profileFollow, {
               users: users,
               type: 'following'});
