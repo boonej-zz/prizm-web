@@ -377,9 +377,10 @@ var organizationMembersFeed = function(req, res) {
 }
 
 exports.addComment = function(req, res){
- var postId = req.params.id;
- var creator = req.user._id;
- var text = req.body.text;
+  console.log('adding comment');
+  var postId = req.params.id;
+  var creator = req.user._id;
+  var text = req.body.text;
  if (postId && creator && text){
   var comment = new Comment({
     text: text,
@@ -393,6 +394,7 @@ exports.addComment = function(req, res){
   Post.findOneAndUpdate({_id: postId}, update, function(err, result){
     if (err) {
       console.log(err);
+      console.log(result);
       res.status(500).send();
     } else {
       comment.creator = req.user;
