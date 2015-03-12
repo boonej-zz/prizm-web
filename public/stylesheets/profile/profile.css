@@ -132,31 +132,29 @@ ul .post.shown {
 }
 
 .profile-info  {
-  background-color: #fff
-;
-  /* height: 76px; */
+  background-color: #fff;
 }
 
 .profile-info ul {
-    padding: 0px;
-    list-style: none;
-    text-align: center;
-    background: #fbfbfc;
-    color: #818284;
-    border: 1px #d1d1d2 solid;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    font-size: 15px;
-    font-weight: 900;
-    line-height: 1.25em;
+  padding: 0px;
+  list-style: none;
+  text-align: center;
+  background: #fbfbfc;
+  color: #818284;
+  border: 1px #d1d1d2 solid;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.25em;
 }
 
 .profile-info li {
-    list-style: none;
-    display: inline-block;
-    width: 33%;
+  list-style: none;
+  display: inline-block;
+  width: 33%;
 }
 
 .profile-info li:first-child {
@@ -173,12 +171,11 @@ ul .post.shown {
 }
 
 .toggle-label {
-    position: absolute;
-  
-    left: 83px;
-    margin: 29px 0px 29px 15px;
-    font-size: 18px;
-    line-height: 1em;
+  position: absolute;
+  left: 83px;
+  margin: 29px 0px 29px 15px;
+  font-size: 18px;
+  line-height: 1em;
 }
 
 #membersToggle > .toggle-switch {
@@ -257,7 +254,6 @@ ul .post.shown {
   float: right;
 }
 
-
 .clock-icon + .icon-text {
   float: right
 }
@@ -281,36 +277,33 @@ ul .post.shown {
 }
 
 .dismiss {
-    background-image: url('/images/posts/dismiss.png');
-
-    width: 20px;
-    height: 20px;
-    background-size: 20px;
-    position: absolute;
-    top: -26px;
-    right: 5px;
+  background-image: url('/images/posts/dismiss.png');
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+  position: absolute;
+  top: -26px;
+  right: 5px;
 }
 
 .next-post-right {
-    background-image: url('/images/posts/arrow_right.png');
-  
-    width: 40px;
-    height: 40px;
-    background-size: 40px;
-    position: absolute;
-    top: 50%;
-    right: -50px;
+  background-image: url('/images/posts/arrow_right.png');
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  position: absolute;
+  top: 50%;
+  right: -50px;
 }
 
 .next-post-left {
-    background-image: url('/images/posts/arrow_left.png');
-  
-    width: 40px;
-    height: 40px;
-    background-size: 40px;
-    position: absolute;
-    top: 50%;
-    left: -50px;
+  background-image: url('/images/posts/arrow_left.png');
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  position: absolute;
+  top: 50%;
+  left: -50px;
 }
 
 .post-modal-left {
@@ -349,9 +342,6 @@ ul .post.shown {
 }
 
 .post-modal-avatar {
-  /* position: relative; */
-  /* top: 0px; */
-  /* bottom: 0px; */
   width: 80px;
   float: left;
 }
@@ -379,24 +369,16 @@ ul .post.shown {
 }
 
 .avatar-name {
-  /* width: 80%; */
   font-size: 24px;
-  /* float: right; */
   padding-top: 2px;
   display: block;
 }
 
 .comment-text {
-  /* width: 80%; */
   display: inline-block;
-  /* float: right; */
 }
 
 .comment-info {
-  /* position: relative; */
-  /* top: 4px; */
-  /* clear: right; */
-  /* margin-left: 95px; */
   font-size: 14px;
   line-height: 23px;
 }
@@ -459,16 +441,15 @@ ul .post.shown {
 }
 
 .comments-footer .like-icon {
-    height: 68px;
-  
-    width: 68px;
-    margin: 0px;
-    background-color: #e4e5ea;
-    background-size: 32px;
-    background-position-x: 18px;
-    background-position-y: 18px;
-    position: absolute;
-    z-index: 1250;
+  height: 68px;
+  width: 68px;
+  margin: 0px;
+  background-color: #e4e5ea;
+  background-size: 32px;
+  background-position-x: 18px;
+  background-position-y: 18px;
+  position: absolute;
+  z-index: 1250;
 }
 
 .comments-post {
@@ -502,13 +483,13 @@ form #inputComment {
 }
 
 #inputComment::-webkit-input-placeholder {
-    color: #babad5;
+  color: #babad5;
 }
 #inputComment::-moz-placeholder {
-    color: #babad5;
+  color: #babad5;
 }
 #inputComment:-ms-input-placeholder {
-    color: #babad5;
+  color: #babad5;
 }
 
 .post-button {
@@ -527,12 +508,10 @@ form #inputComment {
   padding-bottom: 30px;
   color: #B6B8D2;
 }
+
 .user-card {
   width: 100%;
   margin-top: 30px;
-  /* margin-left: 30px; */
-  /* margin-right: 30px; */
-  /* margin: 0px auto; */
   border: 1px solid #e3e5e9;
   display: inline-block;
 }
@@ -545,25 +524,19 @@ form #inputComment {
 }
 
 .user-follow {
-    text-align: right;
-
-    padding-top: 8px;
-    padding-right: 8px;
-    height: 24px;
+  text-align: right;
+  padding-top: 8px;
+  padding-right: 8px;
+  height: 24px;
 }
 
 .user-follow .btn {
-  
-    height: 28px;
-    width: 88px;
-    background: #e3e5e9;
-    border: none;
-    color: #acacac;
-    text-shadow: none;
-    /* float: right; */
-    /* margin-top: 8px; */
-    /* margin-right: 8px; */
-    /* left: 145px; */
+  height: 28px;
+  width: 88px;
+  background: #e3e5e9;
+  border: none;
+  color: #acacac;
+  text-shadow: none;
 }
 
 .user-avatar {
@@ -607,7 +580,6 @@ form #inputComment {
 
 .user-info-bottom {
   background: white;
-  /* height: 172px; */
 }
 
 .user-circle {
@@ -624,9 +596,6 @@ form #inputComment {
   font-size: 18px;
   line-height: 1.2;
   margin: 14px 8px;
-  /* margin-top: 14px; */
-  /* margin-left: 10px; */
-  /* margin-right: -10px; */
 }
 
 /* Mobile Screen */
