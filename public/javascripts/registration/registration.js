@@ -129,7 +129,7 @@ var reg = {
 
     $.ajax({
       type: 'POST',
-      url: '/profiles/' + userToFollow + '/following',
+      url: '/profiles/' + userToFollow + '/followers',
       headers: {
         newUser: true,
         follower: userId

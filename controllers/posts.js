@@ -194,7 +194,7 @@ var replaceTagsFromUserList = function(string, userList){
 
 var singlePostJadeRequest = function(req, res) {
   var id =  req.params.id;
-  var user = req.user;
+  var user = req.user || {};
   var options = [
     { path: 'creator', select: 'name profile_photo_url' },
     { path: 'comments', match: { status: 'active'} },
@@ -234,8 +234,10 @@ var singlePostJadeRequest = function(req, res) {
               };
             });
 
-          } 
-          mixpanel.track('Post viewed', req.user.mixpanel);
+          }
+          if (req.isAuthenticated()) {
+            mixpanel.track('Post viewed', req.user.mixpanel);
+          }
           var content = jade.render(singlePost, {post: post});
           res.status(200).send(content);
         });
