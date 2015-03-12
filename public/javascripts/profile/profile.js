@@ -307,7 +307,7 @@ var profile = {
                  },
   postComment: function(id, e){
     e.preventDefault();
-    var text = $('#inputComment').val();
+    var text = $(e.target).siblings('#inputComment').val();
     var postId = id;
     var path = '/posts/' + postId + '/comment';
     var scroll = $('.comment-scroll').length?'.comment-scroll':'.comment-drawer';
