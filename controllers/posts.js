@@ -398,7 +398,7 @@ exports.addComment = function(req, res){
       post.comments.push(comment);
       post.comments_count += 1;
       post.save();
-      var cmt = {text: comment.text, creator: req.user, time_since: '0m'};
+      var cmt = {text: comment.text, creator: req.user, time_since: '0m', likes_count: 0};
       var content = jade.renderFile(singleCommentPath, {comment: cmt});
       mixpanel.track('Commented on post', req.user.mixpanel);
       var activity = new Activity({
