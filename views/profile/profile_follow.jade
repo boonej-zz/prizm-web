@@ -3,11 +3,18 @@ each user in users
     .user-card
       .user-info-top
         .user-follow
-          button(class='btn btn-sm btn-primary'
-                 onClick='profile.followToggle(event, "#{user.id}")'
-                 data-is-following='false'
-                 type='link')
-            | Follow
+          if (type = follower)
+            button(class='btn btn-sm btn-primary'
+                   onClick='profile.followToggle(event, "#{user.id}")'
+                   data-is-following='false'
+                   type='link')
+              | Follow
+          if (type = following)
+            button(class='btn btn-sm btn-primary'
+                   onClick='profile.followToggle(event, "#{user.id}")'
+                   data-is-following='true'
+                   type='link')
+              | Following
         .user-avatar
           if user.profile_photo_url
             img(src='https://#{user.profile_photo_url.substr(7)}'

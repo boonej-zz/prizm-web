@@ -66,7 +66,7 @@ router.get('/profile/members', _users.authRequired, _users.displayMembers);
 router.get('/profiles/:id', _users.displayProfileById);
 
 /* Follow */
-// router.get('/profiles/:id/following', _users.displayFollowing);
+router.get('/profiles/:id/following', _users.displayFollowing);
 router.get('/profiles/:id/followers', _users.displayFollowers);
 router.post('/profiles/:id/following', _follow.followUserId);
 

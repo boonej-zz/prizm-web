@@ -789,6 +789,47 @@ exports.displayFollowers = function(req, res) {
   }
 }
 
+exports.displayFollowing = function(req, res) {
+  var userId    = req.params.id;
+  var followeing= [];
+  var html;
+
+  function renderFollowingJade() {
+    User.findOne({_id: userId}, function(err, user) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (!user) {
+        res.status(400).send({error: 'UserId not found'});
+      }
+      else {
+        following = _.pluck(user.following, '_id');
+        User.find({_id: {$in: following}}, function(err, users) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          if (!users) {
+            res.status(400).send({error: 'No users found in following array'});
+          }
+          else {
+            html = jade.renderFile(profileFollow, {
+              users: users,
+              type: following});
+            res.send(html);
+          }
+        });
+      }
+    });
+  }
+
+  if (req.accepts('application/jade')) {
+    renderFollowingJade();
+  }
+  else {
+    res.status(406).send({error: 'Unacceptable request'});
+  }
+}
+
 // User Members Methods
 
 exports.displayMembers = function(req, res) {
