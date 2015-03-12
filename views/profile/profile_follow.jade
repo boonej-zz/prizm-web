@@ -9,18 +9,19 @@ else
       .user-card
         .user-info-top
           .user-follow
-            if (user.isFollowed == true)
-              button(class='btn btn-sm btn-primary'
-                     onClick='profile.followToggle(event, "#{user.id}")'
-                     data-is-following='true'
-                     type='link')
-                | Following
-            else if (user.isFollowed == false)
-              button(class='btn btn-sm btn-primary'
-                     onClick='profile.followToggle(event, "#{user.id}")'
-                     data-is-following='false'
-                     type='link')
-                | Follow
+            if (String(user._id) != String(authUser._id))
+              if (user.isFollowed == true)
+                button(class='btn btn-sm btn-primary'
+                       onClick='profile.followToggle(event, "#{user.id}")'
+                       data-is-following='true'
+                       type='link')
+                  | Following
+              else if (user.isFollowed == false)
+                button(class='btn btn-sm btn-primary'
+                       onClick='profile.followToggle(event, "#{user.id}")'
+                       data-is-following='false'
+                       type='link')
+                  | Follow
           .user-avatar
             if user.profile_photo_url
               img(src='https://#{user.profile_photo_url.substr(7)}'

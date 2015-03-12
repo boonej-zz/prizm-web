@@ -765,9 +765,9 @@ exports.displayProfileById = function(req, res) {
 }
 
 exports.displayFollowers = function(req, res) {
-  var userId    = req.params.id;
-  var isFollowing = false;
-  var followers = [];
+  var userId      = req.params.id;
+  var followers   = [];
+  var authUser    = false;
   var html;
 
   function renderFollowersJade() {
@@ -787,10 +787,13 @@ exports.displayFollowers = function(req, res) {
           else {
             if (req.isAuthenticated()) {
               users = determineIsFollowing(req, res, users);
+              authUser = req.user;
             }
             html = jade.renderFile(profileFollow, {
               users: users,
-              type: 'follower'});
+              type: 'follower',
+              authUser: authUser
+            });
             res.send(html);
           }
         });
@@ -808,7 +811,8 @@ exports.displayFollowers = function(req, res) {
 
 exports.displayFollowing = function(req, res) {
   var userId    = req.params.id;
-  var followeing= [];
+  var following = [];
+  var authUser  = false;
   var html;
 
   function renderFollowingJade() {
@@ -827,12 +831,14 @@ exports.displayFollowing = function(req, res) {
           }
           else {
             if (req.isAuthenticated()) {
-              console.log("authed");
               users = determineIsFollowing(req, res, users);
+              authUser = req.user;
             }
             html = jade.renderFile(profileFollow, {
               users: users,
-              type: 'following'});
+              type: 'following',
+              authUser: authUser
+            });
             res.send(html);
           }
         });
