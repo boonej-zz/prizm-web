@@ -17,7 +17,8 @@ var postFeed    = fs.readFileSync(path.join(__dirname +
 var singlePost  = fs.readFileSync(path.join(__dirname +
                   '/../views/posts/single_post.jade'), 'utf8');
 var singleCommentPath = path.join(__dirname, '/../views/posts/single_comment.jade');
-
+var Mixpanel      = require('mixpanel');
+var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 // Posts Methods
 
 exports.likePost = function(req, res) {
@@ -48,6 +49,7 @@ exports.likePost = function(req, res) {
               post_id: post._id  
             });
             activity.save();
+            mixpanel.track('Post liked', req.user.mixpanel);
             res.status(201).send('added');
           } 
         });
@@ -88,6 +90,7 @@ exports.unlikePost = function(req, res){
                 if (err) console.log(err);
                 else console.log('removed activity');
               }); 
+            mixpanel.track('Post unliked', req.user.mixpanel);
             res.status(200).send('removed');
           } 
         });
@@ -156,6 +159,7 @@ var singlePostHTMLRequest = function(req, res) {
         }
       }
       var ago = _time.timeSinceFormatter(post.create_date);
+      mixpanel.track('Post viewed', req.user.mixpanel);
       res.render('posts/post_twitter_card', {
         bodyId: 'post-card', post: post, tags: tags, ago: ago, category: post.category
       });
@@ -231,6 +235,7 @@ var singlePostJadeRequest = function(req, res) {
             });
 
           } 
+          mixpanel.track('Post viewed', req.user.mixpanel);
           var content = jade.render(singlePost, {post: post});
           res.status(200).send(content);
         });
@@ -394,6 +399,7 @@ exports.addComment = function(req, res){
       var cmt = {text: comment.text, creator: req.user, time_since: '0m'};
       console.log(cmt);
       var content = jade.renderFile(singleCommentPath, { comment: cmt});
+      mixpanel.track('Commented on post', req.user.mixpanel);
       res.status(200).send(content);
     }
   }); 

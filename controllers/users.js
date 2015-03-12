@@ -292,7 +292,7 @@ exports.updateUser = function(req, res) {
       updateSubType();
     }
     else {
-      res.status(400).send({error: 'Invalide action'});
+      res.status(400).send({error: 'Invalid action'});
     }
   }
   else {
@@ -360,6 +360,7 @@ exports.handlePrizmLogin = function(req, res, next) {
         return next(err); 
       }
       mixpanel.track('Login Success', user.mixpanelProperties());
+      mixpanel.people.set(String(user._id), user.mixpanelProperties());
       return res.redirect('/');
       // if (user.type == 'institution_verified') {
       //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
@@ -394,6 +395,7 @@ exports.handleFacebookLogin = function(req, res, next) {
           mixpanel.track('Login Failure');
           return next(err); 
         }
+        mixpanel.people.set(String(user._id), user.mixpanelProperties());
         mixpanel.track('Login Success', user.mixpanelProperties());
         return res.redirect('/');
         // if (user.type == 'institution_verified') {

@@ -5,11 +5,13 @@ var mongoose      = require('mongoose');
 var User          = mongoose.model('User');
 var ObjectId      = require('mongoose').Types.ObjectId;
 var _             = require('underscore');
+var Mixpanel      = require('mixpanel');
+var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 
 // Follow Methods
 
 exports.followUserId = function(req, res){
-
+  var currentUser = req.user;
   var userToFollow = req.params.id;
   var follower;
   var newUser = req.get('newUser');
@@ -58,6 +60,7 @@ exports.followUserId = function(req, res){
               }
               if (user) {
                 res.status(200).send({
+                  mixpanel.track('User followed', currentUser.mixpanel);
                   message: 'Successfully created follower/foll0wing relationship'
                 });
               }

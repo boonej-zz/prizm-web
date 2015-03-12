@@ -59,7 +59,6 @@ passport.use(new TwitterStrategy({
 ));
 
 passport.serializeUser(function(user, done) {
-  console.log("User being serialized: " + user.first_name);
   done(null, user.email);
 });
 
@@ -69,6 +68,7 @@ passport.deserializeUser(function(email, done) {
     path: 'org_status.organization'
   })
   .exec(function (err, user) {
+    user.mixpanel = user.mixpanelProperties();
     done(err, user);
   });
 });
