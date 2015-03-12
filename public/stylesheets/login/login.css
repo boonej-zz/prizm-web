@@ -82,6 +82,7 @@
   float: left;
   padding-left: 18px;
   margin: 0px;
+  clear: left;
 }
 
 .form-signin .link {
