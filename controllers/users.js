@@ -773,7 +773,7 @@ exports.displayFollowers = function(req, res) {
           else {
             html = jade.renderFile(profileFollow, {
               users: users,
-              type: follower});
+              type: 'follower'});
             res.send(html);
           }
         });
@@ -814,7 +814,7 @@ exports.displayFollowing = function(req, res) {
           else {
             html = jade.renderFile(profileFollow, {
               users: users,
-              type: following});
+              type: 'following'});
             res.send(html);
           }
         });

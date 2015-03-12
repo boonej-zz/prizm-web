@@ -68,7 +68,7 @@ router.get('/profiles/:id', _users.displayProfileById);
 /* Follow */
 router.get('/profiles/:id/following', _users.displayFollowing);
 router.get('/profiles/:id/followers', _users.displayFollowers);
-router.post('/profiles/:id/following', _follow.followUserId);
+router.post('/profiles/:id/followers', _follow.followUserId);
 
 /* Registration */
 router.get('/register', _users.displayRegistration);

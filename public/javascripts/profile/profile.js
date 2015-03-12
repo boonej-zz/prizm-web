@@ -219,6 +219,31 @@ var profile = {
       },
     });
   },
+
+  followToggle: function(e, userToFollow) {
+    var target = e.target;
+    var isFollowing = $(target).data('isFollowing');
+
+    $.ajax({
+      type: 'POST',
+      url: '/profiles/' + userToFollow + '/followers',
+      success: function() {
+        if (isFollowing) {
+          $(target).attr('data-is-following', false);
+          $(target).data('isFollowing', false);
+        }
+        else {
+          $(target).attr('data-is-following', true);
+          $(target).data("isFollowing", true);
+        }
+        $(target).text(function() {
+          return $(target).data('isFollowing') ? 'Following' : 'Follow';
+        });
+        $('.btn-follow-next').text('Done');
+      }
+    });
+    return false;
+  },
   
   displayPosts: function() {
     var postContainer = $('.profile-posts-container');
@@ -232,20 +257,6 @@ var profile = {
     else {
       return false;
     }
-  },
-  followUser: function() {
-    var profileId = $('.profile-owner').attr('id');
-
-    $.ajax({
-      url: '/profiles/' + profileId + '/following',
-      type: 'POST',
-      success: function(response) {
-        console.log('Success: ' + response)
-      },
-      error: function(response) {
-        console.log('Error: ' + response)
-      },
-    })
   },
   likePost: function(id, e){
     $.ajax({

@@ -58,7 +58,7 @@ exports.followUserId = function(req, res){
               }
               if (user) {
                 res.status(200).send({
-                  message: 'Successfully created follower/foll0wing relationship'
+                  message: 'Successfully created follower/following relationship'
                 });
               }
               else {

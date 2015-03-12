@@ -3,13 +3,13 @@ each user in users
     .user-card
       .user-info-top
         .user-follow
-          if (type = follower)
+          if (type == 'follower')
             button(class='btn btn-sm btn-primary'
                    onClick='profile.followToggle(event, "#{user.id}")'
                    data-is-following='false'
                    type='link')
               | Follow
-          if (type = following)
+          if (type == 'following')
             button(class='btn btn-sm btn-primary'
                    onClick='profile.followToggle(event, "#{user.id}")'
                    data-is-following='true'
@@ -19,7 +19,7 @@ each user in users
           if user.profile_photo_url
             img(src='https://#{user.profile_photo_url.substr(7)}'
                 class='prizm-avatar-lg cursor'
-                onclick='prizm.showProfile(#{user._id})')
+                onclick='prizm.showProfile("#{user._id}")')
           else
             img(src='/images/profile/profile_default_avatar.png' 
               class='prizm-avatar-lg cursor' 
