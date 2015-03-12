@@ -27,6 +27,7 @@ var activeMembers   = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_active.jade'), 'utf8');
 var pendingMembers  = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_pending.jade'), 'utf8');
+var profileFollow   = path.join(__dirname, '/../views/profile/profile_follow.jade')
 var memberCardPath  = path.join(__dirname, '/../views/profile/profile_members_card.jade')
 var memberCard      = fs.readFileSync(memberCardPath, 'utf8');
 var rejectMail      = fs.readFileSync(path.join(__dirname +
@@ -745,6 +746,47 @@ exports.displayProfileById = function(req, res) {
   });
 }
 
+// User Display Following/Follower 
+
+exports.displayFollowers = function(req, res) {
+  var userId    = req.params.id;
+  var followers = [];
+  var html;
+
+  function renderFollowersJade() {
+    User.findOne({_id: userId}, function(err, user) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (!user) {
+        res.status(400).send({error: 'UserId not found'});
+      }
+      else {
+        followers = _.pluck(user.followers, '_id');
+        User.find({_id: {$in: followers}}, function(err, users) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          if (!users) {
+            res.status(400).send({error: 'No users found in followers array'});
+          }
+          else {
+            html = jade.renderFile(profileFollow, {users: users});
+            res.send(html);
+          }
+        });
+      }
+    });
+  }
+
+  if (req.accepts('application/jade')) {
+    renderFollowersJade();
+  }
+  else {
+    res.status(406).send({error: 'Unacceptable request'});
+  }
+}
+
 // User Members Methods
 
 exports.displayMembers = function(req, res) {
@@ -916,9 +958,9 @@ exports.registerNewUser = function(req, res) {
     console.log('in interests block');
     updateInterests(req, res);
   }
-  else if (dataType == 'following') {
-    updateFollowing(req, res);
-  }
+  // else if (dataType == 'following') {
+  //   updateFollowing(req, res);
+  // }
   else if (req.query.dataType == 'photo'){
     // updatePhoto(req, res);
     uploadProfilePhoto(req, res);
@@ -1064,11 +1106,11 @@ var updateInterests = function(req, res) {
   });
 };
 
-var updateFollowing = function(req, res) {
-  // Need to decide is we want to make API to API call or move following
-  // logic over to web app
-  res.status(200).end();
-};
+// var updateFollowing = function(req, res) {
+//   // Need to decide is we want to make API to API call or move following
+//   // logic over to web app
+//   res.status(200).end();
+// };
 
 var uploadProfilePhoto = function(req, res) {
   var userId    = req.query.userId;

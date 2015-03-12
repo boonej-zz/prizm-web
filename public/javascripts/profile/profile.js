@@ -165,14 +165,72 @@ var profile = {
           $('img.lazy').lazyload({threshold: 100});
         })
       }
+      $('.profile-followers-container').hide();
+      $('.profile-following-container').hide();
       $('.profile-posts-container').hide();
       $('.members-posts-container').fadeIn();
       $('#membersToggle').attr('data-toggle', 'on');
     }
     if (state == 'on') {
+      $('.profile-followers-container').hide();
+      $('.profile-following-container').hide();
       $('.members-posts-container').hide();
       $('.profile-posts-container').fadeIn();
       $('#membersToggle').attr('data-toggle', 'off');
+    }
+  },
+
+  displayFollowers: function(){
+    var profileId = $('.profile-owner').attr('id');
+    $.ajax({
+      'Accept'      : 'application/jade',
+      'Content-type': 'application/jade',
+      'url'         : '/profiles/' + profileId + '/followers',
+      'type'        : 'GET',
+      success: function(html) {
+        $('.profile-followers-container').html(html);
+        $('.profile-following-container').hide();
+        $('.members-posts-container').hide();
+        $('.profile-posts-container').hide();
+        $('.profile-followers-container').fadeIn();
+      },
+      error: function(response) {
+        console.log(response.responseText);
+      },
+    });
+  },
+
+  displayFollowing: function() {
+    var profileId = $('.profile-owner').attr('id');
+    $.ajax({
+      'Accept'      : 'application/jade',
+      'Content-type': 'application/jade',
+      'url'         : '/profiles/' + profileId + '/following',
+      'type'        : 'GET',
+      success: function(html) {
+        $('.profile-following-container').html(html);
+        $('.profile-followers-container').hide();
+        $('.members-posts-container').hide();
+        $('.profile-posts-container').hide();
+        $('.profile-following-container').fadeIn();
+      },
+      error: function(response) {
+        console.log(response.responseText);
+      },
+    });
+  },
+  
+  displayPosts: function() {
+    var postContainer = $('.profile-posts-container');
+
+    if (postContainer.css('display') == 'none') {
+      $('.profile-followers-container').hide();
+      $('.profile-following-container').hide();
+      $('.members-posts-container').hide();
+      $('.profile-posts-container').fadeIn();
+    }
+    else {
+      return false;
     }
   },
   followUser: function() {
