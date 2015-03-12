@@ -392,7 +392,8 @@ exports.addComment = function(req, res){
   };
   console.log(comment);
   console.log(update);
-  Post.findOneAndUpdate({_id: ObjectId(postId)}, update, function(err, result){
+  console.log(postId);
+  Post.findOneAndUpdate({_id: postId}, update, function(err, result){
     if (err) {
       console.log(err);
       console.log(result);
