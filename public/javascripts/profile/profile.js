@@ -326,7 +326,7 @@ var profile = {
         $(scroll).append(data);
         $(scroll).scrollTop($('.comment-scroll')[0].scrollHeight);
       }
-      $('#inputComment').val('');
+      $(e.target).siblings('#inputComment').val('');
     });
   },
   showProfile: function(id){
