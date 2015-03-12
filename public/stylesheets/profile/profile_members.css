@@ -318,7 +318,7 @@ li.luminary.selected a {
 
 li.member {
   background: url('/images/profile/member_icon@2x.png');
-  background-size: 16px;
+  background-size: 20px;
   background-repeat: no-repeat;
   background-position-y: 6px;
   background-position-x: 3px;
@@ -328,7 +328,7 @@ li.member {
 
 li.member.selected {
   background: url('/images/profile/member_icon_selected@2x.png');
-  background-size: 16px;
+  background-size: 20px;
   background-repeat: no-repeat;
   background-position-y: 6px;
   background-position-x: 3px;
