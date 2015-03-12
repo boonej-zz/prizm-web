@@ -234,8 +234,10 @@ var singlePostJadeRequest = function(req, res) {
               };
             });
 
-          } 
-          mixpanel.track('Post viewed', req.user.mixpanel);
+          }
+          if (req.isAuthenticated()) {
+            mixpanel.track('Post viewed', req.user.mixpanel);
+          }
           var content = jade.render(singlePost, {post: post});
           res.status(200).send(content);
         });
