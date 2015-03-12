@@ -14,8 +14,7 @@ var path        = require('path');
 var jade        = require('jade');
 var postFeed    = fs.readFileSync(path.join(__dirname +
                   '/../views/posts/post_feed.jade'), 'utf8');
-var singlePost  = fs.readFileSync(path.join(__dirname +
-                  '/../views/posts/single_post.jade'), 'utf8');
+var singlePost  = path.join(__dirname, '/../views/posts/single_post.jade');
 var singleCommentPath = path.join(__dirname, '/../views/posts/single_comment.jade');
 var Mixpanel      = require('mixpanel');
 var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
@@ -238,7 +237,7 @@ var singlePostJadeRequest = function(req, res) {
           if (req.isAuthenticated()) {
             mixpanel.track('Post viewed', req.user.mixpanel);
           }
-          var content = jade.render(singlePost, {post: post});
+          var content = jade.renderFile(singlePost, {post: post});
           res.status(200).send(content);
         });
         
