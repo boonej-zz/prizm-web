@@ -207,7 +207,7 @@ span.error {
           transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 0.995); /* custom */
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:800px) {
 .prizm-avatar-xs {
   height: 30px;
   width: 30px;

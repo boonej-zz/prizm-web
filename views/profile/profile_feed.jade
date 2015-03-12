@@ -95,5 +95,5 @@ each post in posts
                         placeholder='Write a comment...'
                         onkeypress='profile.overrideEnter(event)'
                         required)
-                  button(class='btn btn-xs btn-default post-button' type='submit')
+                   a.cursor(class='btn btn-xs btn-default post-button' onclick='profile onclick='profile.postComment("#{post._id}", event )');
                     | Post
