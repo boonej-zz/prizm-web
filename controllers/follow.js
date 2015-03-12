@@ -6,7 +6,7 @@ var User          = mongoose.model('User');
 var ObjectId      = require('mongoose').Types.ObjectId;
 var _             = require('underscore');
 var Mixpanel      = require('mixpanel');
-var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 
 // Follow Methods
 
@@ -59,8 +59,9 @@ exports.followUserId = function(req, res){
                 res.status(500).send({error: err});
               }
               if (user) {
+
+                mixpanel.track('User followed', currentUser.mixpanel);
                 res.status(200).send({
-                  mixpanel.track('User followed', currentUser.mixpanel);
                   message: 'Successfully created follower/foll0wing relationship'
                 });
               }
