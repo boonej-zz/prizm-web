@@ -25,6 +25,9 @@ body a:hover {
   margin-top: 75px;
 }
 
+div.container.topnav-offset {
+  background-color:  #EFF1F4;
+}
 .cursor {
   cursor: pointer;
 }
@@ -170,6 +173,7 @@ span.error {
 }
 
 /* UI Elements */
+
 .toggle-container {
     width: 64px;
     height: 32px;

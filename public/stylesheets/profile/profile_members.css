@@ -23,6 +23,15 @@ li a {
   line-height 
 }
 
+.nav-tabs>li>a  {
+  color: #555;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+{
+ color:  #334b8f;
+}
+
 input[type=search] {
   background-image: url('/images/profile/members_search.png');
   background-size: 14px;
@@ -31,6 +40,10 @@ input[type=search] {
   background-position-x: 12px;
   padding-left: 30px;
   margin-bottom: 6px;
+}
+
+div.container.topnav-offset {
+  background-color:  #EFF1F4;
 }
 
 #search::-webkit-input-placeholder {
