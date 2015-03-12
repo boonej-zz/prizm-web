@@ -388,8 +388,7 @@ exports.addComment = function(req, res){
     create_date: Date.now()
   });  
   var update = {
-    $push : {comments: comment},
-    $inc  : {comments_count: 1}
+    $push : {comments: comment}
   };
   console.log(comment);
   console.log(update);
