@@ -43,7 +43,7 @@
                             
         each comment, i in post.comments
           .comment-container
-            .post-comments-avatar
+            .post-modal-avatar
               if post.comments[i].creator.profile_photo_url
                 img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
                     class='prizm-avatar-sm'
