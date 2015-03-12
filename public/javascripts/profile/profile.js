@@ -286,6 +286,8 @@ var profile = {
     var key = e.which;
     if (key == 13) {
       e.preventDefault();
+      $(e.target).blur();
+      $(e.target).siblings('a').click();
       return false;
     } else {
       return true;
