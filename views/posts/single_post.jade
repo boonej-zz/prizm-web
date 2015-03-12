@@ -18,7 +18,7 @@
                 onclick='prizm.showProfile("#{post.creator._id}")')
         .avatar-name.cursor(onclick='prizm.showProfile("#{post.creator._id}")')
           | #{post.creator.name}
-        #clock-image
+        .clock-icon
           | #{post.time_since}
       .post-comments
         .back-button(onclick='profile.dismissModal(event)')
@@ -57,12 +57,12 @@
             .comment-text
               | !{post.comments[i].formattedText}
             .comment-info
-              #clock-image
-              #time
+              .clock-icon
+              .time
                 | #{post.comments[i].time_since}
               .comment-likes
                 | -&nbsp;&nbsp;Like
-              .like-icon
+              .like-icon.liked
               .comment-likes-count
                 | #{post.comments[i].likes_count}
       .comments-footer

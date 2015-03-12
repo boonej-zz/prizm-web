@@ -339,18 +339,20 @@ ul .post.shown {
   display: inline-flex;
 }
 
-.comments-header #clock-image {
-  top: 39px;
+.comments-header .clock-icon {
+  top: 32px;
   position: absolute;
-  left: 21.5%;
+  left: 95px;
   padding-left: 20px;
+  font-size: 16px;
+  line-height: 16px;
 }
 
 .post-modal-avatar {
-  position: relative;
-  top: 0px;
-  bottom: 0px;
-  width: 20%;
+  /* position: relative; */
+  /* top: 0px; */
+  /* bottom: 0px; */
+  width: 80px;
   float: left;
 }
 
@@ -373,34 +375,41 @@ ul .post.shown {
   height: 112px;
   display: block;
   padding: 15px;
+  border-bottom: 1px solid #f3f5f7;
 }
 
 .avatar-name {
-  width: 80%;
-  font-size: 18px;
-  float: right;
+  /* width: 80%; */
+  font-size: 24px;
+  /* float: right; */
+  padding-top: 2px;
+  display: block;
 }
 
 .comment-text {
-  width: 80%;
+  /* width: 80%; */
   display: inline-block;
-  float: right;
+  /* float: right; */
 }
 
 .comment-info {
-  position: relative;
-  top: 4px;
-  clear: right;
-  margin-left: 20%;
+  /* position: relative; */
+  /* top: 4px; */
+  /* clear: right; */
+  /* margin-left: 95px; */
+  font-size: 14px;
+  line-height: 23px;
 }
 
 
-.comment-info #clock-image {
+.comment-info .clock-icon {
   display: inline-block;
+  margin: 0px;
+  float: inherit;
   margin-right: 4px;
 }
 
-.comment-info #time {
+.comment-info .time {
   display: inline-block;
   margin-right: 8px;
   vertical-align: text-bottom;
