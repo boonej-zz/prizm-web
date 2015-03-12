@@ -58,7 +58,7 @@ block content
                   | Comments
               if post.text
                 .comment-container
-                  .post-comments-avatar
+                  .post-modal-avatar.post-comments-avatar
                     if post.creator.profile_photo_url
                       img(src='https://#{post.creator.profile_photo_url.substr(7)}'
                           class='prizm-avatar-xs'
@@ -74,7 +74,7 @@ block content
                   .comment-info
               each comment, i in post.comments
                 .comment-container
-                  .post-comments-avatar
+                  .post-modal-avatar.post-comments-avatar
                     if post.comments[i].creator.profile_photo_url
                       img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
                           class='prizm-avatar-xs'
@@ -97,13 +97,15 @@ block content
                     .comment-likes-count
                       | #{post.comments[i].likes_count}
               .comments-post
-                form(action='/posts/#{post.id}' method='get' class='comment-post')
+                form(class='comment-post')
                   label(for='inputComment' class='sr-only')
                   input(type='text'
                         id='inputComment'
                         name='comment'
                         class='form-control'
                         placeholder='Write a comment...'
+                        onkeypress = 'profile.overrideEnter(event)'
                         required)
-                  button(class='btn btn-xs btn-default post-button' type='submit')
+                  a.cursor(class='btn btn-xs btn-default post-button' 
+                    onclick='profile.postComment("#{post._id}", event)')
                     | Post

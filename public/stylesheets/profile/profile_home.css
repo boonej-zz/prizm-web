@@ -150,7 +150,8 @@ ul#feed li animate {
     border-bottom: 1px #d4daea solid;
     background: #fff;
 }
-.post-comments-avatar {
+
+.post-modal-avatar {
     width: 10%;
     float: left;
 }

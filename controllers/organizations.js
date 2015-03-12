@@ -113,7 +113,7 @@ var verifyOrgCode = function(req, res) {
       res.status(403).send({error: 'Already in use'});
     }
     else {
-      console.log("avail!");
+      mixpanel.track('New organization code verified', req.user.mixpanel);
       res.status(200).send({
         success: 'Code is available',
         code: code
@@ -136,6 +136,7 @@ var verifyOrgNamespace = function(req, res) {
       });
     }
     else {
+      mixpanel.track('New namespace found', req.user.mixpanel);
       res.status(200).send({
         success: 'Namespace is available',
         namespace: namespace
@@ -149,6 +150,7 @@ var displayRegistrationPage = function(req, res) {
     if (err) {
       themes = []
     }
+    mixpanel.track('Viewed payments page.', req.user.mixpanel);
     res.render('registration/registration_org', {
       bodyId: 'payments',
       themes: themes
@@ -180,6 +182,7 @@ var displayRegistrationPage = function(req, res) {
 exports.displayOrgRegistration = function(req, res) {
   var action = req.get('action');
   if (req.user.type == 'institution_verified') {
+    mixpanel.track('Entered partner setup', req.user.mixpanel);
     if (req.accepts('html')) {
       displayRegistrationPage(req, res);
     }
@@ -213,6 +216,7 @@ exports.updateOrg = function (req, res) {
         res.status(500).send({error: err});
       }
       if (url) {
+        mixpanel.track('Partner image uploaded.', req.user.mixpanel);
         res.status(200).send({
           success: 'Uploaded successfully',
           url: url
@@ -227,6 +231,7 @@ exports.updateOrg = function (req, res) {
         res.status(500).send({error: err});
       }
       if (customer) {
+        mixpanel.track('Added credit card data.', req.user.mixpanel);
         res.status(200).send({
           success: 'Stripe customer account created',
           customer: customer
@@ -261,6 +266,7 @@ exports.updateOrg = function (req, res) {
             res.status(500).send({error: err});
           }
           if (org) {
+            mixpanel.track('Partner setup complete', req.user.mixpanel);
             res.status(200).send({success: org});
           }
         });

@@ -135,7 +135,8 @@ userSchema.methods.mixpanelProperties = function(){
     State: this.state || 'unknown',
     Zip: this.zip || 'unknown',
     'Total Posts': this.posts_count || 0,
-    Interests: this.interests
+    Interests: this.interests,
+    Source: 'website'
   };
 };
 

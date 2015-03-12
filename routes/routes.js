@@ -45,6 +45,8 @@ router.get('/posts', function(req, res){
 router.get('/posts/:id', _posts.singlePost)
 router.post('/posts/:id/like', _posts.likePost);
 router.post('/posts/:id/unlike', _posts.unlikePost);
+router.post('/posts/:id/comment', _posts.addComment);
+
 
 
 /* Users */

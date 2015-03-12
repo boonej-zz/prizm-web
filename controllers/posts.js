@@ -4,6 +4,7 @@ var router      = express.Router();
 var mongoose    = require('mongoose');
 var ObjectId    = require('mongoose').Types.ObjectId;
 var Post        = mongoose.model('Post');
+var Comment     = mongoose.model('Comment');
 var User        = mongoose.model('User');
 var Activity    = mongoose.model('Activity');
 var _           = require('underscore');
@@ -15,7 +16,9 @@ var postFeed    = fs.readFileSync(path.join(__dirname +
                   '/../views/posts/post_feed.jade'), 'utf8');
 var singlePost  = fs.readFileSync(path.join(__dirname +
                   '/../views/posts/single_post.jade'), 'utf8');
-
+var singleCommentPath = path.join(__dirname, '/../views/posts/single_comment.jade');
+var Mixpanel      = require('mixpanel');
+var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 // Posts Methods
 
 exports.likePost = function(req, res) {
@@ -46,6 +49,7 @@ exports.likePost = function(req, res) {
               post_id: post._id  
             });
             activity.save();
+            mixpanel.track('Post liked', req.user.mixpanel);
             res.status(201).send('added');
           } 
         });
@@ -86,6 +90,7 @@ exports.unlikePost = function(req, res){
                 if (err) console.log(err);
                 else console.log('removed activity');
               }); 
+            mixpanel.track('Post unliked', req.user.mixpanel);
             res.status(200).send('removed');
           } 
         });
@@ -154,6 +159,7 @@ var singlePostHTMLRequest = function(req, res) {
         }
       }
       var ago = _time.timeSinceFormatter(post.create_date);
+      mixpanel.track('Post viewed', req.user.mixpanel);
       res.render('posts/post_twitter_card', {
         bodyId: 'post-card', post: post, tags: tags, ago: ago, category: post.category
       });
@@ -229,6 +235,7 @@ var singlePostJadeRequest = function(req, res) {
             });
 
           } 
+          mixpanel.track('Post viewed', req.user.mixpanel);
           var content = jade.render(singlePost, {post: post});
           res.status(200).send(content);
         });
@@ -355,7 +362,7 @@ var organizationMembersFeed = function(req, res) {
                 post.liked = false;
                 _.each(post.likes, function(like, index, listb){
                   if (String(like._id) == String(req.user._id)){
-                    post.liked = true
+                    post.liked = true;
                   };
                 });
               });
@@ -369,3 +376,60 @@ var organizationMembersFeed = function(req, res) {
   });
 }
 
+exports.addComment = function(req, res){
+  console.log('adding comment');
+  var postId = req.params.id;
+  var creator = req.user._id;
+  var text = req.body.text;
+ if (postId && creator && text){
+  var comment = new Comment({
+    text: text,
+    creator: creator,
+    create_date: Date.now()
+  });  
+  var update = {
+    $push : {comments: comment}
+  };
+  console.log(comment);
+  console.log(update);
+  console.log(postId);
+  Post.findOne({_id: postId}, function(err, post){
+    if (err) {
+      res.status(500).send('Error finding post');
+    } else {
+      post.comments.push(comment);
+      post.comments_count += 1;
+      post.save();
+      var cmt = {text: comment.text, creator: req.user, time_since: '0m'};
+      var content = jade.renderFile(singleCommentPath, {comment: cmt});
+      mixpanel.track('Commented on post', req.user.mixpanel);
+      var activity = new Activity({
+              from: ObjectId(creator._id),
+              to:   post.creator,
+              action: 'comment',
+              post_id: post._id  
+            });
+      activity.save(); 
+      res.status(200).send(content);
+    }
+  });
+  /**
+  Post.findOneAndUpdate({_id: postId}, update, function(err, result){
+    if (err) {
+      console.log(err);
+      console.log(result);
+      res.status(500).send();
+    } else {
+      comment.creator = req.user;
+      var cmt = {text: comment.text, creator: req.user, time_since: '0m'};
+      console.log(cmt);
+      var content = jade.renderFile(singleCommentPath, { comment: cmt});
+      mixpanel.track('Commented on post', req.user.mixpanel);
+      res.status(200).send(content);
+    }
+  });
+  **/ 
+ } else {
+  res.status(400).send('Invalid request');
+ }
+}

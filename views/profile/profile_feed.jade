@@ -47,7 +47,7 @@ each post in posts
                   | Comments
               if post.text
                 .comment-container
-                  .post-comments-avatar
+                  .post-modal-avatar.post-comments-avatar
                     if post.creator.profile_photo_url
                       img(src='https://#{post.creator.profile_photo_url.substr(7)}'
                           class='prizm-avatar-xs'
@@ -63,7 +63,7 @@ each post in posts
                   .comment-info
               each comment, i in post.comments
                 .comment-container
-                  .post-comments-avatar
+                  .post-modal-avatar.post-comments-avatar
                     if post.comments[i].creator.profile_photo_url
                       img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
                           class='prizm-avatar-xs'
@@ -93,6 +93,7 @@ each post in posts
                         name='comment'
                         class='form-control'
                         placeholder='Write a comment...'
+                        onkeypress='profile.overrideEnter(event)'
                         required)
                   button(class='btn btn-xs btn-default post-button' type='submit')
                     | Post

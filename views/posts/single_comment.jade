@@ -1,0 +1,24 @@
+.comment-container
+  .post-modal-avatar
+    if comment.creator.profile_photo_url
+      img(src='https://#{comment.creator.profile_photo_url.substr(7)}'
+        class='prizm-avatar-sm'
+        onclick='profile.showProfile("#{comment.creator._id}")')
+    else
+      img(src='/images/profile/profile_default_avatar.png'
+        onclick='profile.showProfile("#{comment.creator._id}")' 
+        class='prizm-avatar-sm')
+  .avatar-name.cursor(onclick='profile.showProfile("#{comment.creator._id}")')
+    | #{comment.creator.name}
+  .comment-text
+    | #{comment.text}
+  .comment-info
+    #clock-image
+    #time
+      | #{comment.time_since}
+    .comment-likes
+      | -&nbsp;&nbsp;Like
+    .like-icon
+    .comment-likes-count
+      | #{comment.likes_count}
+

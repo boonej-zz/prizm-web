@@ -74,13 +74,16 @@
           else
             .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id}", event)')
         .comments-post
-          form(action='/posts/#{post.id}' method='get' class='comment-post')
+          form(class='comment-post')
+            input(type='hidden' value='#{post._id}' name='postId')
             label(for='inputComment' class='sr-only')
             input(type='text'
                   id='inputComment'
                   name='comment'
                   class='form-control'
                   placeholder='Write a comment...'
-                  required)
-            button(class='btn btn-xs btn-default post-button' type='submit')
+                  onkeypress = 'profile.overrideEnter(event)'
+                  required='required')
+            a.cursor(class='btn btn-xs btn-default post-button'
+                    onclick='profile.postComment("#{post._id}", event)')
               | Post
