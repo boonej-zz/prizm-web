@@ -57,6 +57,11 @@ ul#feed li animate {
   background-size: 18px;
 }
 
+form.comment-post {
+  float: left;
+  width: 100%;
+}
+
 .category-icon {
   position: absolute;
   top: 18px;

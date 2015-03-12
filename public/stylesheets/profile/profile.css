@@ -698,7 +698,6 @@ form #inputComment {
   }
 
   .comments-post {
-    position: absolute;
     left: 0px;
     z-index: 1000;
   }
@@ -717,6 +716,7 @@ form #inputComment {
     width: 68px;
     margin: 16px 8px;
     height: 36px;
+    line-height: 36px;
     border-radius: 35px;
     position: absolute;
     right: 0px;
