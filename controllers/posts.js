@@ -403,6 +403,13 @@ exports.addComment = function(req, res){
       var cmt = {text: comment.text, creator: req.user, time_since: '0m'};
       var content = jade.renderFile(singleCommentPath, {comment: cmt});
       mixpanel.track('Commented on post', req.user.mixpanel);
+      var activity = new Activity({
+              from: ObjectId(creator._id),
+              to:   post.creator,
+              action: 'comment',
+              post_id: post._id  
+            });
+      activity.save(); 
       res.status(200).send(content);
     }
   });
