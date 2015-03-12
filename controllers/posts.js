@@ -393,6 +393,20 @@ exports.addComment = function(req, res){
   console.log(comment);
   console.log(update);
   console.log(postId);
+  Post.findOne({_id: postId}, function(err, post){
+    if (err) {
+      res.status(500).send('Error finding post');
+    } else {
+      post.comments.push(comment);
+      post.comments_count += 1;
+      post.save();
+      var cmt = {text: comment.text, creator: req.user, time_since: '0m'};
+      var content = jade.renderFile(singleCommentPath, {comment: cmt});
+      mixpanel.track('Commented on post', req.user.mixpanel);
+      res.status(200).send(content);
+    }
+  });
+  /**
   Post.findOneAndUpdate({_id: postId}, update, function(err, result){
     if (err) {
       console.log(err);
@@ -406,7 +420,8 @@ exports.addComment = function(req, res){
       mixpanel.track('Commented on post', req.user.mixpanel);
       res.status(200).send(content);
     }
-  }); 
+  });
+  **/ 
  } else {
   res.status(400).send('Invalid request');
  }
