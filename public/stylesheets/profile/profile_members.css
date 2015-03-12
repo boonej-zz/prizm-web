@@ -320,8 +320,8 @@ li.member {
   background: url('/images/profile/member_icon@2x.png');
   background-size: 20px;
   background-repeat: no-repeat;
-  background-position-y: 6px;
-  background-position-x: 3px;
+  background-position-y: 5px;
+  background-position-x: 2px;
   padding-left: 34px;
   cursor: pointer;
 }
@@ -330,8 +330,8 @@ li.member.selected {
   background: url('/images/profile/member_icon_selected@2x.png');
   background-size: 20px;
   background-repeat: no-repeat;
-  background-position-y: 6px;
-  background-position-x: 3px;
+  background-position-y: 5px;
+  background-position-x: 2px;
   padding-left: 34px;
   cursor: pointer;
 }
