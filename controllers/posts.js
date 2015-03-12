@@ -194,7 +194,7 @@ var replaceTagsFromUserList = function(string, userList){
 
 var singlePostJadeRequest = function(req, res) {
   var id =  req.params.id;
-  var user = req.user;
+  var user = req.user || {};
   var options = [
     { path: 'creator', select: 'name profile_photo_url' },
     { path: 'comments', match: { status: 'active'} },
