@@ -58,7 +58,7 @@ var members = {
     });
   },
 
-  addAmbassador: function(e) {
+  makeAmbassador: function(e) {
     var member_id     = $(e.target).parents('td').attr('data');
     var organization  = $('#organization').attr('data');
 
@@ -67,8 +67,6 @@ var members = {
       url: '/users/' + member_id,
       headers:{
         'Accept': 'application/json',
-        // 'org': organization,
-        // 'status': 'active',
         'memberType': 'ambassador',
         'action': 'updateSubtype'
       },
@@ -81,7 +79,28 @@ var members = {
     });
   },
 
-  removeAmbassador: function(e) {
+  makeLuminary: function(e) {
+    var member_id     = $(e.target).parents('td').attr('data');
+    var organization  = $('#organization').attr('data');
+
+    $.ajax({
+      type: 'POST',
+      url: '/users/' + member_id,
+      headers:{
+        'Accept': 'application/json',
+        'memberType': 'luminary',
+        'action': 'updateSubtype'
+      },
+      success: function() {
+        members.activeTab();
+      },
+      error: function(jqXHR) {
+        console.log(jqXHR.responseText);
+      }
+    });
+  },
+
+  makeMember: function(e) {
     var member_id     = $(e.target).parents('td').attr('data');
     var organization  = $('#organization').attr('data');
 

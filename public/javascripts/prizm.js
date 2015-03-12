@@ -45,6 +45,9 @@ var prizm = {
     var html = '<div class="error-message"><span class="error"></span>' +
                '<p>' + errorMessage + '</p></div>';
     return html;
+  },
+  showProfile: function(id){
+    window.location = '/profiles/' + id;
   }
 };
 

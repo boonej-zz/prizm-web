@@ -31,6 +31,9 @@ var org ={
     var orgInfo = $('#org-creation-info');
     var confirmButton = $('#code-confirm');
     var code = $('#inputCode').val();
+    var $this = this;
+
+    $($this).prop('disabled', true);
     $('#check-code').submit(function(){
       $.ajax({
         type: 'GET',
@@ -43,11 +46,13 @@ var org ={
         },
         success: function(response) {
           orgInfo.data('code', response.code);
+          $('.message-code').html('Congratulations!')
           confirmButton.removeClass('disabled');
         },
         error: function(jqXHR) {
-          var html = prizm.errorHandler(jqXHR);
-          $('.message-code').html(html);
+          // var html = prizm.errorHandler(jqXHR);
+          var errorMessage = JSON.parse(jqXHR.responseText).error;
+          $('.message-code').html(errorMessage);
           confirmButton.addClass('disabled');
         }
       });
@@ -186,10 +191,8 @@ function resubmitPaymentForm($form){
     url: window.location + '?action=createStripeAccount',
     data: data,
     success: function(response) {
-      $('.message-payment').html('Payment information saved successfully');
-      $('#payment-form :input').attr('disabled', true);
-      $('.btn-payment').removeClass('disabled');
       orgInfo.data('customerId', response.customer.id)
+      org.nextSection();
     },
     error: function(jqXHR) {
       var html = prizm.errorHandler(jqXHR);

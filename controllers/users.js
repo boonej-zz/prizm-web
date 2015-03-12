@@ -6,7 +6,9 @@ var ObjectId        = require('mongoose').Types.ObjectId;
 var User            = mongoose.model('User');
 var Post            = mongoose.model('Post');
 var Organization    = mongoose.model('Organization');
-var Interest         = mongoose.model('Interest');
+var Interest        = mongoose.model('Interest');
+var Activity        = mongoose.model('Activity');
+var Push            = require('../classes/push_notification');
 var config          = require('../config');
 var passport        = require('passport');
 var jade            = require('jade');
@@ -25,6 +27,7 @@ var activeMembers   = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_active.jade'), 'utf8');
 var pendingMembers  = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_pending.jade'), 'utf8');
+var profileFollow   = path.join(__dirname, '/../views/profile/profile_follow.jade')
 var memberCardPath  = path.join(__dirname, '/../views/profile/profile_members_card.jade')
 var memberCard      = fs.readFileSync(memberCardPath, 'utf8');
 var rejectMail      = fs.readFileSync(path.join(__dirname +
@@ -167,6 +170,31 @@ exports.updateUser = function(req, res) {
   var userType = req.get('memberType')
   var userId = req.params.id;
 
+  function createActivity() {
+    Organization.findOrganizationOwner(orgId, function(err, owner) {
+      if (err) {
+        console.log(err);
+      }
+      if (owner) {
+        var activity = new Activity({
+          to: userId,
+          from: owner._id,
+          action: 'group_approved'
+        });
+        activity.save(function(err, result) {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            new Push('activity', activity, function(result) {
+              console.log(JSON.stringify(result));
+            });
+          }
+        });
+      }
+    });
+  }
+
   function updateOrgStatus() {
     User.findOne({_id: userId})
       .populate({path: 'org_status.organization'})
@@ -194,6 +222,9 @@ exports.updateUser = function(req, res) {
           },
           function(err, user) {
             if (err) console.log(err);
+            if (status == 'active') {
+              createActivity();
+            }
             res.status(200).send({message: 'User org_status updated'});
           });
         }
@@ -213,37 +244,21 @@ exports.updateUser = function(req, res) {
       userType = null;
     }
 
-    function checkSubtype(user, next) {
-      if (user.subtype == 'luminary') {
-        next('Can not update luminaries subtype');
-      }
-      else {
-        next(null, user);
-      }
-    }
-
     User.findOne({_id: userId}, function(err, user) {
       if (err) {
         res.status(500).send({error: err});
       }
       if (user) {
-        checkSubtype(user, function(err, user) {
+        User.findOneAndUpdate({
+          _id: userId
+        }, {
+          subtype: userType
+        }, function(err, user) {
           if (err) {
             res.status(500).send({error: err});
           }
           else {
-            User.findOneAndUpdate({
-              _id: userId
-            }, {
-              subtype: userType
-            }, function(err, user) {
-              if (err) {
-                res.status(500).send({error: err});
-              }
-              else {
-                res.status(200).send({message: 'User type updated'});
-              }
-            })
+            res.status(200).send({message: 'User type updated'});
           }
         });
       }
@@ -731,6 +746,47 @@ exports.displayProfileById = function(req, res) {
   });
 }
 
+// User Display Following/Follower 
+
+exports.displayFollowers = function(req, res) {
+  var userId    = req.params.id;
+  var followers = [];
+  var html;
+
+  function renderFollowersJade() {
+    User.findOne({_id: userId}, function(err, user) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      if (!user) {
+        res.status(400).send({error: 'UserId not found'});
+      }
+      else {
+        followers = _.pluck(user.followers, '_id');
+        User.find({_id: {$in: followers}}, function(err, users) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          if (!users) {
+            res.status(400).send({error: 'No users found in followers array'});
+          }
+          else {
+            html = jade.renderFile(profileFollow, {users: users});
+            res.send(html);
+          }
+        });
+      }
+    });
+  }
+
+  if (req.accepts('application/jade')) {
+    renderFollowersJade();
+  }
+  else {
+    res.status(406).send({error: 'Unacceptable request'});
+  }
+}
+
 // User Members Methods
 
 exports.displayMembers = function(req, res) {
@@ -902,9 +958,9 @@ exports.registerNewUser = function(req, res) {
     console.log('in interests block');
     updateInterests(req, res);
   }
-  else if (dataType == 'following') {
-    updateFollowing(req, res);
-  }
+  // else if (dataType == 'following') {
+  //   updateFollowing(req, res);
+  // }
   else if (req.query.dataType == 'photo'){
     // updatePhoto(req, res);
     uploadProfilePhoto(req, res);
@@ -1050,11 +1106,11 @@ var updateInterests = function(req, res) {
   });
 };
 
-var updateFollowing = function(req, res) {
-  // Need to decide is we want to make API to API call or move following
-  // logic over to web app
-  res.status(200).end();
-};
+// var updateFollowing = function(req, res) {
+//   // Need to decide is we want to make API to API call or move following
+//   // logic over to web app
+//   res.status(200).end();
+// };
 
 var uploadProfilePhoto = function(req, res) {
   var userId    = req.query.userId;

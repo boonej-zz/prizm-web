@@ -110,9 +110,7 @@ var verifyOrgCode = function(req, res) {
       res.status(500).send({error: err});
     }
     if (org) {
-      res.status(403).send({
-        error: 'The code entered is currently in use by another organization'
-      });
+      res.status(403).send({error: 'Already in use'});
     }
     else {
       console.log("avail!");

@@ -147,10 +147,10 @@ body a:hover {
 
 .error-message {
   height: 64px;
-
   display: table;
-  max-width: 100%;
+  width: 100%;
   border-left: 4px solid #FF716F;
+  background-color: #ffffff;
 }
 
 .error-message p {
@@ -163,7 +163,7 @@ span.error {
   float: left;
   width: 64px;
   height: 64px;
-  background: url('/images/warning_icon@2x.png');
+  background: url('/images/warning_icon.png');
   background-size: 20px 17px;
   background-repeat: no-repeat;
   background-position: center;

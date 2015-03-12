@@ -23,11 +23,13 @@
           td
             if member.profile_photo_url
               img(src='https://#{member.profile_photo_url.substr(7)}'
-                class='prizm-avatar-sm')
+                  class='prizm-avatar-sm cursor'
+                  onclick='prizm.showProfile("#{member._id}")')
             else
-              img(src='/images/default-profile.png' class='prizm-avatar-sm'
-                onclick='profile.showProfile("#{member._id}")')
-          td
+              img(src='/images/default-profile.png' 
+                  class='prizm-avatar-sm cursor'
+                  onclick='prizm.showProfile("#{member._id}")')
+          td.cursor(onclick='prizm.showProfile("#{member._id}")')
             | #{member.name}
           td
             | Pending
@@ -35,4 +37,10 @@
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')
             .member-action.approve(onclick='members.approve(event)')
-            .member-action.deny(onClick='members.reject(event)')
+            .member-action.deny(onClick='members.toggleRemoveMenu(event)')
+              .remove-menu.hidden
+                p Are you sure you want to deny this member?
+                button.btn.btn-default.btn-sm(onClick='members.cancelRemove()')
+                 | Cancel
+                button.btn.btn-primary.btn-sm(onClick='members.reject(event)')
+                 | Delete

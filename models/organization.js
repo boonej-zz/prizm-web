@@ -61,6 +61,29 @@ organizationSchema.statics.getOrganizationByOwnerId = function(user_id, next) {
     });
 }
 
+organizationSchema.statics.findOrganizationOwner = function(orgId, next) {
+  this.model('Organization')
+    .findOne({_id: orgId})
+    .exec(function(err, organization) {
+      if (err) {
+        next(err);
+      }
+      if (organization) {
+        User.findOne({_id: organization.owner}, function(err, user) {
+          if (err) {
+            next(err);
+          }
+          else {
+            next(null, user);
+          }
+        })
+      }
+      else {
+        next('Invalid orgId');
+      }
+    })
+}
+
 var themeSchema = new mongoose.Schema({
   background_url      : {type: String, default: null},
   dominant_color      : {type: String, default: null},

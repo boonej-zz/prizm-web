@@ -30,23 +30,18 @@ input[type=search] {
   background-position-y: 9px;
   background-position-x: 12px;
   padding-left: 30px;
-  /* margin-top: 6px; */
   margin-bottom: 6px;
 }
 
 #search::-webkit-input-placeholder {
-    color: #808080;
+  color: #808080;
 }
 #search::-moz-placeholder {
-    color: #808080;
+  color: #808080;
 }
 #search:-ms-input-placeholder {
-    color: #808080;
+  color: #808080;
 }
-
-/* tbody:hover>tr {
-  opacity: 0.5;
-} */
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
   vertical-align: middle;
@@ -147,7 +142,6 @@ background-color: rgb(246, 249, 254);
 
 .member-type.ambassador {
   background-position-x: 83px;
-  /*color: #3e6a9e;*/
 }
 
 .member-type {
@@ -213,7 +207,7 @@ background-color: rgb(246, 249, 254);
   position: absolute; 
   background: #fff;
   width: 158px;
-  height: 105px;
+  height: 146px;
   border: 1px #e4e5ea solid;
   margin-top: 12px;
   z-index: 1000;
@@ -289,6 +283,36 @@ li.ambassador a {
 }
 
 li.ambassador.selected a {
+  color: #3e6a9e;
+}
+
+li.luminary {
+  background: url('/images/profile/luminary_icon.png');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position-y: 5px;
+  background-position-x: 2px;
+  padding-left: 34px;
+  padding-bottom: 16px;
+  cursor: pointer;
+}
+
+li.luminary.selected {
+  background: url('/images/profile/luminary_icon_selected.png');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position-y: 5px;
+  background-position-x: 2px;
+  padding-left: 34px;
+  padding-bottom: 16px;
+  cursor: pointer;
+}
+
+li.luminary a {
+  color: #959698;
+}
+
+li.luminary.selected a {
   color: #3e6a9e;
 }
 
@@ -408,7 +432,6 @@ li.member.selected a {
 }
 
 .remove-menu .btn {
-/*   margin-right: 10px; */
   width: 61px;
 }
 
@@ -439,23 +462,32 @@ li.member.selected a {
 }
 
 .member-avatar {
-  padding-top: 40px;
+  padding-top: 44px;
+}
+
+#members .prizm-avatar-lg {
+  width: 122px;
+  height: 122px;
 }
 
 .member-name {
   color: #484849;
-  font-size: 20px;
+  font-size: 19px;
+  line-height: 19px;
   width: 80%;
   margin: auto;
   font-weight: 400;
-  padding-top: 12px;
+  padding-top: 22px;
 }
 
 .member-email {
   color: #acacac;
   font-size: 19px;
+  line-height: 19px;
   width: 80%;
-  margin: auto;
+  margin-top: 8px;
+  margin-right: auto;
+  margin-left: auto;
   border-bottom: 1px solid #e3e5e9;
   padding-bottom: 6px;
   font-weight: 400;
@@ -464,8 +496,9 @@ li.member.selected a {
 .member-birthday {
   color: #484849;
   font-size: 19px;
-  margin-top: 18px;
-  margin-bottom: 3px;
+  line-height: 19px;
+  margin-top: 12px;
+  margin-bottom: 0px;
   font-weight: 400;
 }
 
@@ -479,26 +512,29 @@ li.member.selected a {
 
 .member-location {
   color: #acacac;
-  font-size: 20px;
-  display: inline-block;
-  margin-bottom: 12px;
-  font-weight: 300;
+  font-size: 19px;
+  line-height: 19px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7px;
+  font-weight: 400;
   background: url('/images/profile/members_location.png');
   background-repeat: no-repeat;
-  background-position-y: 7px;
   padding-left: 17px;
 }
 
 .member-phone {
-    display: inline;
-    color: #acacad;
-  
-    font-size: 19px;
-    background: url('/images/profile/members_phone.png');
-    background-repeat: no-repeat;
-    background-position-y: 4px;
-    background-position-x: 20px;
-    padding-left: -17px;
+  display: table;
+  color: #acacad;
+  font-size: 19px;
+  line-height: 19px;
+  background: url('/images/profile/members_phone.png');
+  background-repeat: no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7px;
+  padding-left: 17px;
 }
 
 .member-info-bottom {
@@ -525,15 +561,13 @@ li.member.selected a {
 }
 
 .last-login-date {
-    /* margin: 0px auto; */
-  
-    position: absolute;
-    bottom: 0px;
-    text-align: center;
-    width: 100%;
-    font-size: 14px;
-    color: #484849;
-    line-height: 13px;
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+  color: #484849;
+  line-height: 13px;
 }
 
 .interests-header {

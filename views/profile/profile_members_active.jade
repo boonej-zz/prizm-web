@@ -29,11 +29,13 @@
               .ambassador-small
             if member.profile_photo_url
               img(src='https://#{member.profile_photo_url.substr(7)}'
-                class='prizm-avatar-sm')
+                  class='prizm-avatar-sm cursor' 
+                  onclick='prizm.showProfile("#{member._id}")')
             else
-              img(src='/images/default-profile.png' class='prizm-avatar-sm'
-                onclick='profile.showProfile("#{member._id}")')
-          td
+              img(src='/images/default-profile.png' 
+                  class='prizm-avatar-sm cursor'
+                  onclick='prizm.showProfile("#{member._id}")')
+          td.cursor(onclick='prizm.showProfile("#{member._id}")')
             | #{member.name}
           td(data='#{member.id}')
             .member-type(onclick='members.toggleAmbassadorMenu(event)'
@@ -41,14 +43,18 @@
               - var type = member.subtype
               if type == 'ambassador'
                 | Ambassador
+              else if type == 'luminary'
+                | Luminary
               else
                 | Member
               .ambassador-menu.hidden
                 ul
                   li.ambassador(class=type=='ambassador' ? 'selected' : '')
-                    a(onclick='members.addAmbassador(event)') Ambassador
-                  li.member(class=type=='ambassador' ? '' : 'selected')
-                    a(onclick='members.removeAmbassador(event)') Member
+                    a(onclick='members.makeAmbassador(event)') Ambassador
+                  li.luminary(class=type=='luminary' ? 'selected' : '')
+                    a(onclick='members.makeLuminary(event)') Luminary
+                  li.member(class=type==null ? 'selected' :'')
+                    a(onclick='members.makeMember(event)') Member
           td
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')

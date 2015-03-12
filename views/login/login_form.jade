@@ -11,10 +11,8 @@
     .twitter-login
       a(href='/login/twitter')
         img(src='/images/login/twitter.png')
-    .underline-left
     p.underline-middle
       | or
-    .underline-right
     input(class='btn btn-lg btn-primary log-in'
           value='Log In'
           type='button'
@@ -37,7 +35,7 @@
     p#message
       span.error
       | That password is incorrect. Please try again.
-  form(action='/login' method='post' class='form-signin' autocomplete='off')
+  form(action='/login' method='post' class='form-signin' autocomplete='on')
     .form-signin-header
       h4(class="form-signin-heading")
         | Log In

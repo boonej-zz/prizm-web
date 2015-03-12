@@ -65,7 +65,8 @@ PushNotification.prototype.activity = function activity(){
       this.object.action === 'trust_accepted' ||
       this.object.action === 'accolade' ||
       this.object.action === 'trust_request'|| 
-      this.object.action === 'insight'){
+      this.object.action === 'insight' ||
+      this.object.action === 'group_approved'){
 
     var self = this;
 
@@ -95,6 +96,7 @@ PushNotification.prototype.activity = function activity(){
         }
         if(self.object.action === 'trust_accepted') action = 'accepted your trust request';
         if(self.object.action === 'trust_request') action = 'has sent you a trust invite';
+        if(self.object.action === 'group_approved') action = 'has approved your membership';
         if(self.object.insight_id) {
           action = 'sent you an insight';
         }

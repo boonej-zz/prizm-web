@@ -281,6 +281,7 @@ var profile = {
         }
       }
     });
+<<<<<<< HEAD
   },
   overrideEnter: function(e){
     var key = e.which;
@@ -317,6 +318,8 @@ var profile = {
   },
   showProfile: function(id){
     window.location = '/profiles/' + id;
+=======
+>>>>>>> cd964da5296c714d1d0d869d7b7c413cf08934c5
   }
 }
 
