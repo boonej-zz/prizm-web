@@ -223,6 +223,10 @@ form #inputComment {
     min-width: 320px;
   }
 
+  .post-via {
+    top: 30px; 
+  }
+
   .post-header {
     padding: 10px;
   }
@@ -238,6 +242,9 @@ form #inputComment {
   .category-icon {
     top: 10px;
     right: 10px;
+    height: 17px;
+    width: 17px;
+    background: 17px;
   }
 
   .time-since {
