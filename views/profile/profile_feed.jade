@@ -93,6 +93,7 @@ each post in posts
                         name='comment'
                         class='form-control'
                         placeholder='Write a comment...'
+                        onkeypress='profile.overrideEnter(event)'
                         required)
                   button(class='btn btn-xs btn-default post-button' type='submit')
                     | Post

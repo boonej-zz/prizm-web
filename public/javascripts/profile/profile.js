@@ -31,6 +31,7 @@ function animatePosts() {
 $(document).ready(function(){
   animatePosts();
   var listening = true;
+
 $(window).scroll(function() {
   if (listening) {
   if($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
@@ -221,6 +222,39 @@ var profile = {
           $(heart).attr('onclick', 'profile.likePost("' + id + '", event)');
         }
       }
+    });
+  },
+  overrideEnter: function(e){
+    var key = e.which;
+    if (key == 13) {
+      e.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+                 },
+  postComment: function(id, e){
+    e.preventDefault();
+    var text = $('#inputComment').val();
+    var postId = id;
+    var path = '/posts/' + postId + '/comment';
+    var scroll = $('.comment-scroll').length?'.comment-scroll':'.comment-drawer';
+    var data = {
+      text: text
+    };
+    $.post(path, data, function(data){
+      if (scroll == '.comment-drawer') {
+        $(e.target).parent().parent().before(data);
+        $('.post-modal-avatar').addClass('post-comments-avatar');
+        $('.prizm-avatar-sm').addClass('prizm-avatar-xs');
+        $('.prizm-avatar-xs').removeClass('prizm-avatar-sm');
+        $('post-comments-avatar').removeClass('post-modal-avatar');
+
+      } else {
+        $(scroll).append(data);
+        $(scroll).scrollTop($('.comment-scroll')[0].scrollHeight);
+      }
+      $('#inputComment').val('');
     });
   },
   showProfile: function(id){

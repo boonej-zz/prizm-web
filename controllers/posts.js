@@ -4,6 +4,7 @@ var router      = express.Router();
 var mongoose    = require('mongoose');
 var ObjectId    = require('mongoose').Types.ObjectId;
 var Post        = mongoose.model('Post');
+var Comment     = mongoose.model('Comment');
 var User        = mongoose.model('User');
 var Activity    = mongoose.model('Activity');
 var _           = require('underscore');
@@ -15,6 +16,7 @@ var postFeed    = fs.readFileSync(path.join(__dirname +
                   '/../views/posts/post_feed.jade'), 'utf8');
 var singlePost  = fs.readFileSync(path.join(__dirname +
                   '/../views/posts/single_post.jade'), 'utf8');
+var singleCommentPath = path.join(__dirname, '/../views/posts/single_comment.jade');
 
 // Posts Methods
 
@@ -355,7 +357,7 @@ var organizationMembersFeed = function(req, res) {
                 post.liked = false;
                 _.each(post.likes, function(like, index, listb){
                   if (String(like._id) == String(req.user._id)){
-                    post.liked = true
+                    post.liked = true;
                   };
                 });
               });
@@ -369,3 +371,33 @@ var organizationMembersFeed = function(req, res) {
   });
 }
 
+exports.addComment = function(req, res){
+ var postId = req.params.id;
+ var creator = req.user._id;
+ var text = req.body.text;
+ if (postId && creator && text){
+  var comment = new Comment({
+    text: text,
+    creator: creator,
+    create_date: Date.now()
+  });  
+  var update = {
+    $push : {comments: comment},
+    $inc  : {comments_count: 1}
+  };
+  Post.findOneAndUpdate({_id: postId}, update, function(err, result){
+    if (err) {
+      console.log(err);
+      res.status(500).send();
+    } else {
+      comment.creator = req.user;
+      var cmt = {text: comment.text, creator: req.user, time_since: '0m'};
+      console.log(cmt);
+      var content = jade.renderFile(singleCommentPath, { comment: cmt});
+      res.status(200).send(content);
+    }
+  }); 
+ } else {
+  res.status(400).send('Invalid request');
+ }
+}

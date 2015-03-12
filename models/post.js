@@ -255,3 +255,4 @@ postSchema.post('init', function(post){
 
 
 mongoose.model('Post', postSchema);
+mongoose.model('Comment', commentSchema);
