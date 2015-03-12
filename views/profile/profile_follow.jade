@@ -4,7 +4,7 @@ each user in users
       .user-info-top
         .user-follow
           button(class='btn btn-sm btn-primary'
-                 onClick='reg.followUser(event, "#{user.id}")'
+                 onClick='profile.followToggle(event, "#{user.id}")'
                  data-is-following='false'
                  type='link')
             | Follow

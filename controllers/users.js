@@ -771,7 +771,9 @@ exports.displayFollowers = function(req, res) {
             res.status(400).send({error: 'No users found in followers array'});
           }
           else {
-            html = jade.renderFile(profileFollow, {users: users});
+            html = jade.renderFile(profileFollow, {
+              users: users,
+              type: follower});
             res.send(html);
           }
         });
