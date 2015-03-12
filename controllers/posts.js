@@ -391,9 +391,6 @@ exports.addComment = function(req, res){
   var update = {
     $push : {comments: comment}
   };
-  console.log(comment);
-  console.log(update);
-  console.log(postId);
   Post.findOne({_id: postId}, function(err, post){
     if (err) {
       res.status(500).send('Error finding post');
