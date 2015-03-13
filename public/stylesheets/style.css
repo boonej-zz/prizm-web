@@ -2,7 +2,7 @@
 
 /** GLOBAL STYLE MODIFIERS **/
 body {
-  font-weight: 200;
+  font-weight: 100;
 }
 
 .full-width {
@@ -98,7 +98,7 @@ body {
   margin: 0;
   padding: 0;
   border: none;
-  font-weight: normal;
+  font-weight: 300;
   background-color: #e4e5ea;
 }
 
@@ -233,7 +233,7 @@ a {
 }
 
 .home > h2 {
-  font-weight: normal;
+  font-weight: 300;
   font-size: 38px;
   margin-top: 100px;
 }
@@ -250,7 +250,7 @@ p.sign-up-desc {
   display: inline-block;
   margin-top: 30px;
   font-size: 17px;
-  font-weight: bold;
+  font-weight: normal;
   letter-spacing: -1px;
   background: url('/images/app_store.png') no-repeat;
   width: 135px;
