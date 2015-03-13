@@ -145,7 +145,7 @@
   width: 26px;
   top: -38px;
   left: 18px;
-  z-index: 5000;
+  z-index: 6;
 }
 
 
@@ -166,7 +166,7 @@
   width: 22px;
   top: -83px;
   left: 20px;
-  z-index: 5000;
+  z-index: 6;
 }
 
 input:-webkit-autofill, input:-webkit-autofill:focus {
