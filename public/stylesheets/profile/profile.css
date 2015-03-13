@@ -147,7 +147,7 @@ ul .post.shown {
   margin-top: 15px;
   margin-bottom: 15px;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: normal;
   line-height: 1.25em;
 }
 
@@ -544,7 +544,7 @@ form #inputComment {
 }
 
 .user-name {
-  color: black;
+  color: #484849;
   font-size: 20px;
   width: 80%;
   margin: auto;
@@ -592,7 +592,7 @@ form #inputComment {
   display: inline-block;
   padding-top: 28px;
   text-align: center;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 18px;
   line-height: 1.2;
   margin: 14px 8px;
