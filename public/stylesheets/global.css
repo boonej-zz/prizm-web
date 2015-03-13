@@ -12,7 +12,8 @@
 }
 
 body {
-  font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  /**font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  **/
   color: #2443A1;
   background-color: #e4e5ea;
 }
