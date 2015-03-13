@@ -519,7 +519,7 @@ form #inputComment {
 .user-info-top {
   text-align: center;
   background-color: #f8f8f8;
-  height: 246px;
+  height: 245px;
   border-bottom: 1px solid #e3e5e9;
 }
 
@@ -533,10 +533,10 @@ form #inputComment {
 .user-follow .btn {
   height: 28px;
   width: 88px;
-  background: #e3e5e9;
   border: none;
-  color: #acacac;
+  color: #ffffff;
   text-shadow: none;
+  background-color: #3e6a9e;
 }
 
 .user-avatar {
@@ -546,10 +546,11 @@ form #inputComment {
 .user-name {
   color: #484849;
   font-size: 20px;
+  line-height: 20px;
   width: 80%;
   margin: auto;
-  font-weight: bold;
-  padding-top: 12px;
+  font-weight: 600;
+  padding-top: 22px;
 }
 
 .user-email {
@@ -562,24 +563,22 @@ form #inputComment {
   font-weight: bold;
 }
 
-.user-info-top > .location-icon {
-  display:inline-block;
-  margin-right: 4px;
-  height: 12px;
-  width:  12px;
-  background-size: 12px;
-}
-
 .user-location {
   color: #acacac;
   font-size: 20px;
+  line-height: 20px;
+  font-weight: 400;
   display: inline-block;
-  margin-bottom: 12px;
-  font-weight: normal;
+  margin-top: 9px;
+  background-image: url('/images/profile/members_location.png');
+  background-repeat: no-repeat;
+  background-position-y: 1px;
+  padding-left: 19px;
 }
 
 .user-info-bottom {
   background: white;
+  height: 130px;
 }
 
 .user-circle {
