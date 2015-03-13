@@ -72,6 +72,8 @@ router.post('/insights', utils.auth, function (req, res) {
   form.parse(req, function(err, fields, files){
     var width = Number(fields.width);
     var height = Number(fields.height);
+       console.log(width);
+    console.log(height);
     var x1 = Number(fields.x1);
     var y1 = Number(fields.y1);
     var hashTags = String(fields.hashTags).replace(/(^\s+|\s+$)/g, '');
@@ -93,41 +95,51 @@ router.post('/insights', utils.auth, function (req, res) {
       if (fa){
         var file;
         for (var i=0; file = fa[i]; ++i) {
-          gm(file.path)
-            .crop(width, height, x1, y1)
-            .resize(600, 600)
-            .stream(function(err, stdout, stderr){
-              var buf = new Buffer('');
-              stdout.on('data', function(data){
-                buf = Buffer.concat([buf, data]);
-              });
-              stdout.on('end', function(data){
-                var data = {
-                  Bucket: 'higheraltitude.prizm.insights',
-                  Key: fileName,
-                  Body: buf,
-                  ContentType: mime.lookup(fileName),
-                  ACL: 'public-read'
-                };
-                s3.putObject(data, function(err, result){
-                  if (err) console.log(err);
-                  insight.file_path = 
-                   'https://s3.amazonaws.com/higheraltitude.prizm.insights/' + 
-                    fileName;
-                  insight.save(function (err, insight){
-                    if (err) {
-                      console.log(err);
-                      res.status(500).send({ error: err });
-                    }
-                    if (insight) {
-                      console.log(insight);
-                      res.redirect('/insights/' + insight.id);
-                    }
+          var $f = file;
+          gm(file.path).size(function (err, d){
+            height = d.height;
+            width = d.width;
+            width = width <= height?width:height;
+            height = height <=width?height:width;
+            console.log(width);
+            console.log(height);
+            gm($f.path)
+              .gravity('Center')
+              .crop(width, height)
+              .resize(600, 600)
+              .stream(function(err, stdout, stderr){
+                var buf = new Buffer('');
+                stdout.on('data', function(data){
+                  buf = Buffer.concat([buf, data]);
+                });
+                stdout.on('end', function(data){
+                  var data = {
+                    Bucket: 'higheraltitude.prizm.insights',
+                    Key: fileName,
+                    Body: buf,
+                    ContentType: mime.lookup(fileName),
+                    ACL: 'public-read'
+                  };
+                  s3.putObject(data, function(err, result){
+                    if (err) console.log(err);
+                    insight.file_path = 
+                      'https://s3.amazonaws.com/higheraltitude.prizm.insights/' + 
+                        fileName;
+                    insight.save(function (err, insight){
+                      if (err) {
+                        console.log(err);
+                        res.status(500).send({ error: err });
+                      }
+                      if (insight) {
+                        console.log(insight);
+                        res.redirect('/insights/' + insight.id);
+                      }
 
+                    });
                   });
                 });
               });
-            }); 
+          }); 
         }
       }
     }  
