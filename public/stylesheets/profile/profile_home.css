@@ -38,15 +38,16 @@ ul#feed li animate {
 .post-header h3 {
   color: #7e7e7f;
   margin: 0px;
-  font-weight: bold;
+  font-weight: normal;
   position: relative;
 }
 
 .time-since {
   color: #b7c2d4;
   font-size: 15px;
-  line-height: 100%;
   position: initial;
+  font-weight: 200;
+  margin-top: 2px;
 }
 
 .time-since .clock-icon {
@@ -83,7 +84,8 @@ form.comment-post {
 .post-footer {
   height: 69px;
   padding: 18px 15px;
-  font-size: 28px;
+  font-size: 25px;
+  font-weight: 200;
 }
 
 .icon-text {

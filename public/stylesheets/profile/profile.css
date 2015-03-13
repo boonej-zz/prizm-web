@@ -147,7 +147,7 @@ ul .post.shown {
   margin-top: 15px;
   margin-bottom: 15px;
   font-size: 15px;
-  font-weight: 900;
+  font-weight: bold;
   line-height: 1.25em;
 }
 
@@ -548,7 +548,7 @@ form #inputComment {
   font-size: 20px;
   width: 80%;
   margin: auto;
-  font-weight: 900;
+  font-weight: bold;
   padding-top: 12px;
 }
 
@@ -559,7 +559,7 @@ form #inputComment {
   margin: auto;
   border-bottom: 1px solid #e3e5e9;
   padding-bottom: 6px;
-  font-weight: 900;
+  font-weight: bold;
 }
 
 .user-info-top > .location-icon {
@@ -575,7 +575,7 @@ form #inputComment {
   font-size: 20px;
   display: inline-block;
   margin-bottom: 12px;
-  font-weight: 900;
+  font-weight: bold;
 }
 
 .user-info-bottom {
@@ -592,7 +592,7 @@ form #inputComment {
   display: inline-block;
   padding-top: 28px;
   text-align: center;
-  font-weight: 800;
+  font-weight: bold;
   font-size: 18px;
   line-height: 1.2;
   margin: 14px 8px;
