@@ -39,6 +39,7 @@ body:before {
   font-size: 38px;
   width: 100px;
   margin: auto;
+  font-weight: 300;
 }
 
 #registration .navbar-title,
@@ -118,6 +119,8 @@ body:before {
   display: block;
   height: 32px;
   line-height: 32px;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .user-menu a:hover {
@@ -225,14 +228,17 @@ body:before {
   font-size: 14px;
   width: 130px;
   line-height: 15px;
+  color: #fefefe;
+  font-weight: 700;
 }
 
 .settings-menu a {
   display: inline-block;
   margin-top: 3px;
   margin-bottom: 3px;
-  font-weight: 900;
+  font-weight: 700;
   color: inherit;
+  font-height: 17px;
 }
 .settings-menu ul {
   width: 100%;
@@ -279,12 +285,13 @@ body:before {
 .settings-icon {
   background-repeat: no-repeat;
   background-position-x: 132px;
-  background-position-y: 6px;
+  background-position-y: 7px;
   background-size: 14px;
 }
 
 .home-button {
   background-image: url('/images/settings/home_icon@2x.png');
+  background-position-y: 6px;
 }
 
 .home-button.selected {
@@ -293,6 +300,7 @@ body:before {
 
 .activity-button {
   background-size: 11px 16px;
+  background-position-y: 6px;
   background-image: url('/images/settings/activity_icon@2x.png');
 }
 
@@ -344,6 +352,7 @@ body:before {
 }
 
 .billing-button {
+  background-position-y: 8px;
   background-image: url('/images/settings/creditcard_icon@2x.png');
 }
 
@@ -352,6 +361,7 @@ body:before {
 }
 
 .invite-button {
+  background-position-y: 6px;
   background-image: url('/images/settings/useradd_icon@2x.png');
 }
 

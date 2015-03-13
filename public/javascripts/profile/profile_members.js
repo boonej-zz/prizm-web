@@ -270,7 +270,7 @@ var members = {
       },
       success: function(json) {
         var count = json.length;
-        $('a[href="#pending"]').text("Pending Members (" + count + ")");
+        $('a[href="#pending"]').text("Pending Approval (" + count + ")");
       }
     })
   },

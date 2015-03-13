@@ -1,18 +1,6 @@
-@font-face { 
- font-family: 'proxima_nova_ltlight';
-  src: url('/fonts/ProximaNova-Light-webfont.eot');
-  src: url('/fonts/ProximaNova-Light-webfont.eot?#iefix') 
-          format('embedded-opentype'),
-       url('/fonts/ProximaNova-Light-webfont.woff') format('woff'),
-       url('/fonts/ProximaNova-Light-webfont.ttf') format('truetype'),
-       url('/fonts/ProximaNova-Light-webfont.svg#proxdffdaia83a#LKJF')
-           format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
-  font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  /**font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  **/
   color: #2443A1;
   background-color: #e4e5ea;
 }
@@ -25,6 +13,9 @@ body a:hover {
   margin-top: 75px;
 }
 
+div.container.topnav-offset {
+  background-color:  #EFF1F4;
+}
 .cursor {
   cursor: pointer;
 }
@@ -170,6 +161,7 @@ span.error {
 }
 
 /* UI Elements */
+
 .toggle-container {
     width: 64px;
     height: 32px;

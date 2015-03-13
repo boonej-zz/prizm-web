@@ -1,5 +1,6 @@
 var menuActive = false;
 var baseURL = window.location.protocol + '//' + window.location.host;
+try{Typekit.load();}catch(e){};
 
 var prizm = {
   signUp:   function(){

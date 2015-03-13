@@ -147,7 +147,7 @@ ul .post.shown {
   margin-top: 15px;
   margin-bottom: 15px;
   font-size: 15px;
-  font-weight: 900;
+  font-weight: normal;
   line-height: 1.25em;
 }
 
@@ -406,7 +406,7 @@ ul .post.shown {
   background-size: 16px;
 }
 
-.comment-likes {
+.comment-likes, #time {
   display: inline-block;
   margin-right: 4px;
   vertical-align: text-bottom;
@@ -544,11 +544,11 @@ form #inputComment {
 }
 
 .user-name {
-  color: black;
+  color: #484849;
   font-size: 20px;
   width: 80%;
   margin: auto;
-  font-weight: 900;
+  font-weight: bold;
   padding-top: 12px;
 }
 
@@ -559,7 +559,7 @@ form #inputComment {
   margin: auto;
   border-bottom: 1px solid #e3e5e9;
   padding-bottom: 6px;
-  font-weight: 900;
+  font-weight: bold;
 }
 
 .user-info-top > .location-icon {
@@ -575,7 +575,7 @@ form #inputComment {
   font-size: 20px;
   display: inline-block;
   margin-bottom: 12px;
-  font-weight: 900;
+  font-weight: normal;
 }
 
 .user-info-bottom {
@@ -592,7 +592,7 @@ form #inputComment {
   display: inline-block;
   padding-top: 28px;
   text-align: center;
-  font-weight: 800;
+  font-weight: normal;
   font-size: 18px;
   line-height: 1.2;
   margin: 14px 8px;
@@ -698,7 +698,6 @@ form #inputComment {
   }
 
   .comments-post {
-    position: absolute;
     left: 0px;
     z-index: 1000;
   }
@@ -716,7 +715,8 @@ form #inputComment {
     padding: 0px;
     width: 68px;
     margin: 16px 8px;
-    height: 36px;
+    height: 24px;
+    line-height: 24px;
     border-radius: 35px;
     position: absolute;
     right: 0px;

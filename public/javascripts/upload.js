@@ -23,27 +23,19 @@ var Upload = {
             var div = document.createElement('div');
             var img = document.createElement('img');
             img.setAttribute('src', e.target.result);
-            div.appendChild(img);
+            var min = img.width <= img.height?img.width:img.height;
+            var ratio = 300/min;
+            var height = img.height * ratio;
+            var width = img.width * ratio;
+            var diff_h = (height - 300)/2;
+            var diff_w = (300 - width)/2;
+            $(div).css('background-image', 'url(' + e.target.result + ')');
+            $(div).css('background-size', width + 'px ' + height + 'px');
+            $(div).css('background-position', diff_w + 'px ' + diff_h + 'px');
+            $(div).css('width', '300px')
+            $(div).css('height', '300px');
             document.getElementById(elementId).appendChild(div);
-            $(img).imgAreaSelect({
-              handles: true,
-              aspectRatio: '1:1',
-              x1: 0,
-              y1: 0,
-              x2: 100,
-              y2: 100,
-              imageHeight: img.naturalHeight,
-              imageWidth: img.naturalWidth,
-              onSelectEnd: function(img, selection){
-                var fields = ['x1', 'x2', 'y1', 'y2', 'width', 'height'];
-                var field;
-                for (var i = 0; field = fields[i]; ++i) {
-                  document.getElementById(field)
-                  .setAttribute('value', selection[field]);
-                }
-              }
-            }); 
-                      }
+          } 
         }(file));
         reader.readAsDataURL(file);
       }

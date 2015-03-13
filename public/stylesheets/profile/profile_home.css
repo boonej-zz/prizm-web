@@ -38,15 +38,16 @@ ul#feed li animate {
 .post-header h3 {
   color: #7e7e7f;
   margin: 0px;
-  font-weight: 900;
+  font-weight: normal;
   position: relative;
 }
 
 .time-since {
   color: #b7c2d4;
   font-size: 15px;
-  line-height: 100%;
   position: initial;
+  font-weight: 200;
+  margin-top: 2px;
 }
 
 .time-since .clock-icon {
@@ -55,6 +56,11 @@ ul#feed li animate {
   width: 18px;
   margin: 1px 2px 0px 0px;
   background-size: 18px;
+}
+
+form.comment-post {
+  float: left;
+  width: 100%;
 }
 
 .category-icon {
@@ -78,7 +84,8 @@ ul#feed li animate {
 .post-footer {
   height: 69px;
   padding: 18px 15px;
-  font-size: 28px;
+  font-size: 25px;
+  font-weight: 200;
 }
 
 .icon-text {
@@ -164,7 +171,6 @@ ul#feed li animate {
 .avatar-name {
   width: 90%;
   font-size: 22px;
-  font-weight: 900;
   color: #7e7e7f;
   float: none;
   position: relative;
@@ -173,7 +179,6 @@ ul#feed li animate {
 
 .comment-text {
   font-size: 18px;
-  font-weight: 900;
   color: #7e7e7f;
   float: none;
 }
@@ -218,6 +223,11 @@ form #inputComment {
     min-width: 320px;
   }
 
+  .post-via {
+    top: 30px; 
+    font-size: 12px;
+  }
+
   .post-header {
     padding: 10px;
   }
@@ -233,6 +243,9 @@ form #inputComment {
   .category-icon {
     top: 10px;
     right: 10px;
+    height: 17px;
+    width: 17px;
+    background-size: 17px;
   }
 
   .time-since {
