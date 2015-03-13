@@ -171,7 +171,6 @@ form.comment-post {
 .avatar-name {
   width: 90%;
   font-size: 22px;
-  font-weight: 900;
   color: #7e7e7f;
   float: none;
   position: relative;
@@ -180,7 +179,6 @@ form.comment-post {
 
 .comment-text {
   font-size: 18px;
-  font-weight: 900;
   color: #7e7e7f;
   float: none;
 }
