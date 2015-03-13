@@ -228,6 +228,8 @@ body:before {
   font-size: 14px;
   width: 130px;
   line-height: 15px;
+  color: #fefefe;
+  font-weight: 700;
 }
 
 .settings-menu a {
