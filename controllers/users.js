@@ -1064,7 +1064,7 @@ var validateRegistrationRequest = function(req, res,  next) {
               res.status(500).send({error: err});
             }
             if (organization) {
-              next();
+              next(organization);
             }
             else {
               res.status(400).send({error: 'Program code is a valid code'});
@@ -1090,7 +1090,7 @@ var registerIndividual = function(req, res) {
     birthday = String(birthday.getMonth() + 1) + '-' + String(birthday.getDate())
       + '-' + String(birthday.getFullYear());
   }
-  validateRegistrationRequest(req, res, function() {
+  validateRegistrationRequest(req, res, function(organization) {
     var newUser = new User({
       first_name: req.body.firstName,
       last_name: req.body.lastName,
@@ -1102,6 +1102,10 @@ var registerIndividual = function(req, res) {
     });
     if (req.body.programCode) {
       newUser.programe_code = req.body.programCode;
+      newUser.org_status = {
+        organization: ObjectId(organization._id),
+        status: 'pending'
+      }
     }
     if (newUser.hashPassword()) {
       console.log('saving user');
