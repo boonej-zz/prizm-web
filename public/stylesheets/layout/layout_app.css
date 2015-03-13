@@ -119,6 +119,8 @@ body:before {
   display: block;
   height: 32px;
   line-height: 32px;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .user-menu a:hover {
