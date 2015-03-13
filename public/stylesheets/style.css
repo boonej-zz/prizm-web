@@ -1,6 +1,9 @@
 
 
 /** GLOBAL STYLE MODIFIERS **/
+body {
+  font-weight: 200;
+}
 
 .full-width {
   width: 100%;
