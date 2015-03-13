@@ -36,6 +36,7 @@ output {
 #registration .nav-pills {
   width: 80%;
   margin: auto;
+  
 }
 
 .form-register {
@@ -317,4 +318,110 @@ output {
     width: 102px;
     /* left: 50%; */
     /* right: 50%; */
+}
+
+@media screen and (max-width: 800px) {
+
+  #registration .nav-pills, #individual-form, #partner-form {
+    width: 100%;
+    position: relative:
+    margin: 0;
+    left: 5px;
+    right: 5px;
+  }
+
+  .nav-pills li {
+    width: 49%;
+    float: left;
+    position: relative;
+    left: 5px;
+    right: 5px;
+  } 
+
+  .form-control {
+    display: block;
+    position: relative;
+    left: 5px;
+    right: 5px;
+    margin: 0;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 44px;
+    line-height; 44px;
+   }
+
+   #registration .btn-block {
+     position: relative;
+     left: 5px;
+     right: 5px;
+     margin: 0;
+     margin-top: 30px;
+    
+     width: 100%;
+   }
+
+   .checkbox-inline, .radio-inline {
+      float: left;
+      position: relative;
+      left: 5px; 
+      right: 5px;
+      top: 10px;
+      height: 44px;
+   }
+
+   .interests-container {
+    position: relative;
+    margin: 0;
+    top: 65px;
+    left: 5px;
+    right: 5px;
+    width: 100%;
+   }
+
+   #save-interests-button {
+     top: 65px;
+   }
+
+   .interests-container li {
+     font-size: 14px;
+     padding: 2px 20px 2px 20px;
+   }
+
+   .next-user-left {
+     left: 5px;
+     width: 18px;
+     height: 18px;
+     background-size: 18px;
+   }
+
+   .user-card {
+     float: left;
+     width: 310px;
+     margin-left: -50px;
+   }
+
+   .next-user-right {
+     width: 18px;
+     height: 18px;
+     background-size: 18px;
+     right: 5px;
+   }
+
+   .user-card {
+     float: left;
+     width: 290px;
+     margin-left: -55px;
+     margin-right: 175px;
+   }
+
+   .section {
+     height: 100%;
+   }
+
+   .btn-follow-next {
+     top: 25px;
+   }
 }
