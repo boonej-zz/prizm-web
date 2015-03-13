@@ -29,7 +29,8 @@
     width: 22px;
     margin-top: 40px;
     margin-right: 5px;
-    background: url(/images/menu-button.png) no-repeat;
+    background: url(/images/icons/menu_icon@2x.png) no-repeat;
+    background-size: 20px;
     border: none;
   } 
 
