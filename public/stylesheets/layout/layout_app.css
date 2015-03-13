@@ -39,6 +39,7 @@ body:before {
   font-size: 38px;
   width: 100px;
   margin: auto;
+  font-weight: 100;
 }
 
 #registration .navbar-title,
@@ -231,7 +232,7 @@ body:before {
   display: inline-block;
   margin-top: 3px;
   margin-bottom: 3px;
-  font-weight: 900;
+  font-weight: 700;
   color: inherit;
 }
 .settings-menu ul {

@@ -4,7 +4,8 @@ h2 {
 }
 
 li a {
-  font-weight: 900;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .members-header {
@@ -19,8 +20,7 @@ li a {
 .members-header h2 {
   color: #545358;
   font-size: 30px; 
-  font-weight: 700;
-  line-height 
+  font-weight: bold;
 }
 
 .nav-tabs>li>a  {
@@ -58,6 +58,8 @@ div.container.topnav-offset {
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
   vertical-align: middle;
+  font-size: 18px;
+  color: #545358;
 }
 
 table {
