@@ -35,9 +35,9 @@ block content
                           class='prizm-avatar-sm cursor'
                           onclick='prizm.showProfile("#{notification.from._id}")')
                 td
-                  .activity-name
-                    if notification.from
-                        | #{notification.from.name}
+                  if notifications.from
+                    .activity-name.cursor(onclick='prizm.showProfile("#{request.to._id}")')
+                      | #{notification.from.name}
                   .activity-action
                     if notification.action == 'like'
                       | liked your post.
@@ -70,8 +70,8 @@ block content
                           class='prizm-avatar-sm cursor'
                           onclick='prizm.showProfile("#{request.to._id}")')
                 td
-                  .activity-name
-                    if request.to
+                  if request.to
+                    .activity-name.cursor(onclick='prizm.showProfile("#{request.to._id}")')
                       | #{request.to.name}
                   .activity-action
                     | accepted your trust

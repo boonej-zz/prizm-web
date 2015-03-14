@@ -1277,13 +1277,11 @@ exports.displayActivityFeed = function(req, res) {
 
       switch(activity.action) {
         case "insight":
-        console.log("insight");
           Insight.findOne({_id: activity.insight_id}, function(err, insight) {
             activity.photo_url = insight.file_path;
           });
           break;
-        case "post":
-        console.log("post");
+        case "like" || "comment":
           Post.findOne({_id: activity.post_id}, function(err, post) {
             activity.photo_url = post.file_path;
           });
@@ -1293,6 +1291,7 @@ exports.displayActivityFeed = function(req, res) {
           activity.photo_url = null;
       }
       console.log('activity photo: ' + activity.photo_url);
+      console.log(activity.action);
     });
     return activies;
   }
