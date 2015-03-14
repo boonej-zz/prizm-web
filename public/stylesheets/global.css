@@ -51,8 +51,8 @@ div.container.topnav-offset {
 }
 
 .prizm-avatar-lg {
-  height: 128px;
-  width: 128px;
+  height: 122px;
+  width: 122px;
 }
 
 /* Icons */
@@ -200,23 +200,23 @@ span.error {
 }
 
 @media screen and (max-width:800px) {
-.prizm-avatar-xs {
-  height: 30px;
-  width: 30px;
-}
+  .prizm-avatar-xs {
+    height: 30px;
+    width: 30px;
+  }
 
-.prizm-avatar-sm {
-  height: 44px;
-  width: 44px;
-}
+  .prizm-avatar-sm {
+    height: 44px;
+    width: 44px;
+  }
 
-.prizm-avatar-md {
-  height: 60px;
-  width: 60px;
-}
+  .prizm-avatar-md {
+    height: 60px;
+    width: 60px;
+  }
 
-.prizm-avatar-lg {
-  height: 90px;
-  width: 90px;
-}
+  .prizm-avatar-lg {
+    height: 90px;
+    width: 90px;
+  }
 }

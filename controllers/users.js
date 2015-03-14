@@ -766,9 +766,9 @@ exports.displayProfileById = function(req, res) {
 }
 
 exports.displayFollowers = function(req, res) {
-  var userId    = req.params.id;
-  var isFollowing = false;
-  var followers = [];
+  var userId      = req.params.id;
+  var followers   = [];
+  var authUser    = false;
   var html;
 
   function renderFollowersJade() {
@@ -788,10 +788,13 @@ exports.displayFollowers = function(req, res) {
           else {
             if (req.isAuthenticated()) {
               users = determineIsFollowing(req, res, users);
+              authUser = req.user;
             }
             html = jade.renderFile(profileFollow, {
               users: users,
-              type: 'follower'});
+              type: 'follower',
+              authUser: authUser
+            });
             res.send(html);
           }
         });
@@ -809,7 +812,8 @@ exports.displayFollowers = function(req, res) {
 
 exports.displayFollowing = function(req, res) {
   var userId    = req.params.id;
-  var followeing= [];
+  var following = [];
+  var authUser  = false;
   var html;
 
   function renderFollowingJade() {
@@ -822,18 +826,24 @@ exports.displayFollowing = function(req, res) {
       }
       else {
         following = _.pluck(user.following, '_id');
+        // console.log(following);
         User.find({_id: {$in: following}}, function(err, users) {
           if (err) {
             res.status(500).send({error: err});
           }
           else {
             if (req.isAuthenticated()) {
-              console.log("authed");
               users = determineIsFollowing(req, res, users);
+              authUser = req.user;
             }
+            // _.each(users, function(user) {
+            //   console.log(user._id + " : " + user.name);
+            // })
             html = jade.renderFile(profileFollow, {
               users: users,
-              type: 'following'});
+              type: 'following',
+              authUser: authUser
+            });
             res.send(html);
           }
         });
@@ -1009,7 +1019,6 @@ exports.registerNewUser = function(req, res) {
       res.status(400).send('User type undefined');
     }
     else if (userType == 'individual') {
-      console.log('registering individual...')
       registerIndividual(req, res);
     }
     else if (userType == 'partner') {
@@ -1035,17 +1044,33 @@ var validateRegistrationRequest = function(req, res,  next) {
   console.log("Validating request...")
   console.log(JSON.stringify(req.body));
   var userEmail = req.body.email;
+  var userCode = req.body.programCode;
   if (validateEmail(userEmail)) {
     User.findOne({email: userEmail}, function(err, user) {
       if (err) {
         res.status(500).send({error: err});
       }
       if (user) {
-        res.status(400).send({error: 'This email address has already been registered'});
+        res.status(400).send({
+          error: 'This email address has already been registered'
+        });
       }
       else {
         if (req.body.password != req.body.confirmPassword) {
           res.status(400).send({error: 'Passwords do not match'});
+        }
+        if (userCode) {
+          Organization.findOne({code: userCode}, function(err, organization) {
+            if (err) {
+              res.status(500).send({error: err});
+            }
+            if (organization) {
+              next(organization);
+            }
+            else {
+              res.status(400).send({error: 'Program code is a valid code'});
+            }        
+          });
         }
         else {
           next();
@@ -1066,7 +1091,7 @@ var registerIndividual = function(req, res) {
     birthday = String(birthday.getMonth() + 1) + '-' + String(birthday.getDate())
       + '-' + String(birthday.getFullYear());
   }
-  validateRegistrationRequest(req, res, function() {
+  validateRegistrationRequest(req, res, function(organization) {
     var newUser = new User({
       first_name: req.body.firstName,
       last_name: req.body.lastName,
@@ -1078,6 +1103,10 @@ var registerIndividual = function(req, res) {
     });
     if (req.body.programCode) {
       newUser.programe_code = req.body.programCode;
+      newUser.org_status = {
+        organization: ObjectId(organization._id),
+        status: 'pending'
+      }
     }
     if (newUser.hashPassword()) {
       console.log('saving user');

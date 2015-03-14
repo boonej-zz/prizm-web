@@ -19,7 +19,7 @@ each post in posts
               .category-icon(style="background-image: url('/images/icons/#{post.category}_icon.png')")
               if (post.external_provider)
                 .post-via
-                  | Post Via #{post.external_provider}
+                  | Post Via #{post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1)}
             .post-image(onclick='home.toggleComments(event)' prizm-data='#{post.id}')
               img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}' prizm-data='#{post.id}')
             .post-footer
@@ -36,8 +36,6 @@ each post in posts
                             class='cursor'
                             prizm-data='#{post.id}'
                             onclick='home.toggleComments(event)')
-              p.icon-text
-                | #{post.comments_count}
               .repost-icon
               .action-icon
               .location-icon
