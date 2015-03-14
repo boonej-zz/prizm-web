@@ -59,8 +59,9 @@ exports.followUserId = function(req, res){
                 res.status(500).send({error: err});
               }
               if (user) {
-
-                mixpanel.track('User followed', currentUser.mixpanel);
+                if (currentUser){
+                  mixpanel.track('User followed', currentUser.mixpanel);
+                }
                 res.status(200).send({
                   message: 'Successfully created follower/following relationship'
                 });

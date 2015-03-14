@@ -267,7 +267,7 @@ output {
   display: inline-block;
   padding-top: 28px;
   text-align: center;
-  font-weight: 800;
+  font-weight: normal;
   font-size: 18px;
   line-height: 1.2;
   margin: 14px 8px;
@@ -383,8 +383,8 @@ output {
 
    #save-interests-button {
      top: 65px;
-     margin-top: 10px;
-     margin-bottom: 30px;
+     margin-top: 10px !important;
+     margin-bottom: 30px !important;
    }
 
    .interests-container li {
@@ -410,6 +410,7 @@ output {
      height: 18px;
      background-size: 18px;
      right: 5px;
+     left: initial;
    }
 
    .user-card {
@@ -419,6 +420,13 @@ output {
      margin-right: 175px;
    }
 
+   .user-circle {
+     height: 70px;
+     width: 70px;
+     font-size: 14px;
+     padding-top: 20px;
+   }
+
    .section {
      height: 100%;
    }
@@ -426,4 +434,30 @@ output {
    .btn-follow-next {
      top: 25px;
    }
+
+   .btn-take {
+     position: relative; 
+     left: 142px; 
+     bottom: 100px;
+     display: none;
+     width: 102px;
+  }
+  .btn-skip {
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    margin-top: 10px;
+    left: initial;
+    right: initial;
+    bottom: initial;
+    top: initial;
+  }
+  .btn-upload {
+    position: relative;
+    float: left;
+    margin-left: 15px;
+    margin-top: 10px;
+    right: initial;
+    bottom: initial;
+  }
 }
