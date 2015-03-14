@@ -8,6 +8,7 @@ var Post            = mongoose.model('Post');
 var Organization    = mongoose.model('Organization');
 var Interest        = mongoose.model('Interest');
 var Activity        = mongoose.model('Activity');
+var Insight         = mongoose.model('Insight');
 var Push            = require('../classes/push_notification');
 var config          = require('../config');
 var passport        = require('passport');
@@ -1237,4 +1238,94 @@ var uploadProfilePhoto = function(req, res) {
     }
   });
 };
+
+// Activity Feed
+exports.displayActivityFeed = function(req, res) {
+  var userId = req.user._id;
+
+  function getNotifications(next) {
+    Activity
+      .find({to: userId})
+      .populate('from', 'name _id profile_photo_url')
+      .where({action: {$ne: 'trust_accepted'}})
+      .sort({create_date: -1})
+      .exec(function(err, notifications) {
+        if (err) next(err)
+        if (notifications) {
+          next(null, notifications);
+        }
+      });
+  }
+
+  function getRequests(next) {
+    Activity
+      .find({from: userId})
+      .populate('to', 'name _id profile_photo_url')
+      .where({action: 'trust_accepted'})
+      .sort({create_date: -1})
+      .exec(function(err, requests) {
+        if (err) next(err)
+        if (notifications) {
+          next(null, requests);
+        }
+      });
+  }
+
+  function resolveObjectIds(activies) {
+
+    _.each(activies, function(activity) {
+
+      switch(activity.action) {
+        case "insight":
+        console.log("insight");
+          Insight.findOne({_id: activity.insight_id}, function(err, insight) {
+            activity.photo_url = insight.file_path;
+          });
+          break;
+        case "post":
+        console.log("post");
+          Post.findOne({_id: activity.post_id}, function(err, post) {
+            activity.photo_url = post.file_path;
+          });
+          break;
+        default:
+        console.log("default");
+          activity.photo_url = null;
+      }
+      console.log('activity photo: ' + activity.photo_url);
+    });
+    return activies;
+  }
+
+  if (req.accepts('html')) {
+    var notifications = {};
+    var requests      = {};
+
+    getNotifications(function(err, notifications) {
+      if (err) {
+        res.status(500).send({error: err});
+      }
+      else {
+        notifications = resolveObjectIds(notifications);
+        getRequests(function(err, requests) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          else {
+            requests = resolveObjectIds(requests);
+            console.log(requests);
+            res.render('profile/profile_activity', {
+              auth: true,
+              currentUser: req.user,
+              bodyId: 'activity',
+              notifications: notifications,
+              requests: requests
+            });
+          }
+        });
+      }
+    });
+  }
+}
+
 exports.getTrustedLuminariesForUserId = getTrustedLuminariesForUserId

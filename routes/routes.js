@@ -65,6 +65,7 @@ router.get('/logout', _users.handleLogout);
 /* Profiles */
 router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/members', _users.authRequired, _users.displayMembers);
+router.get('/profile/activity', _users.authRequired, _users.displayActivityFeed);
 router.get('/profiles/:id', _users.displayProfileById);
 
 /* Follow */

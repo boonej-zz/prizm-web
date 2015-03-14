@@ -1,0 +1,38 @@
+#requests {
+  display: none;
+}
+table {
+  background: #fff;
+}
+
+table tr {
+  height: 100px;
+  /* margin: 10px; */
+}
+
+tr .prizm-avatar-sm {
+    margin-top: 8px;
+  
+}
+.activity-name {
+    font-size: 20px
+}
+
+img.activity-photo {
+    width: 80px; 
+    float: right;
+}
+
+table.notifcations {
+  
+}
+
+.activity-name {
+    margin-top: 8px;
+    font-size: 20px
+}
+
+img.activity-photo {
+  width: 80px; 
+  float: right;
+}
