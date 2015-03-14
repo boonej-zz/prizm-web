@@ -383,6 +383,8 @@ output {
 
    #save-interests-button {
      top: 65px;
+     margin-top: 10px;
+     margin-bottom: 30px;
    }
 
    .interests-container li {
