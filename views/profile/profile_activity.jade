@@ -6,73 +6,86 @@ block head
 
 block content
   .container.topnav-offset
-    .col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3
-        ul.nav.nav-tabs.nav-justified(role='tablist' id='members-tab')
-          li(role='presentation' class='active')
-            a(href='#'
-              data-toggle='tab'
-              onclick='activity.notificationTab()')
-              | Notifications
-          li(role='presentation' class='')
-            a(href='#'
-              data-toggle='tab'
-              onclick='activity.requestTab()')
-              | Requests
-    #notifications
-      .col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3.background-column
-        table.table.notifications
-          tbody
-            each notification in notifications
-              tr
-                td
-                  if notification.from
-                    if notification.from.profile_photo_url
-                      img(src='https://#{notification.from.profile_photo_url.substr(7)}'
-                          class='prizm-avatar-sm cursor' 
-                          onclick='prizm.showProfile("#{notification.from._id}")')
-                    else
-                      img(src='/images/default-profile.png' 
-                          class='prizm-avatar-sm cursor'
-                          onclick='prizm.showProfile("#{notification.from._id}")')
-                td
-                  if notifications.from
-                    .activity-name.cursor(onclick='prizm.showProfile("#{request.to._id}")')
-                      | #{notification.from.name}
-                  .activity-action
-                    if notification.action == 'like'
-                      | liked your post.
-                    if notification.action == 'insight'
-                      | sent you an insight.
-                    if notification.action == 'follow'
-                      | started following you.
-                    if notification.action == 'comment'
-                      | commented on your post.
-                    if notification.action == 'group_approved'
-                      | approved your membership request.
-                td
-                  if notification.photo_url
-                    img(src='https://#{notification.photo_url.substr(7)}'
-                        class='activity-photo')
-    #requests
-      .col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3.background-column
-        table.table
-          tbody
-            each request in requests
-              tr
-                td
-                  if request.to
-                    if request.to.profile_photo_url
-                      img(src='https://#{request.to.profile_photo_url.substr(7)}'
-                          class='prizm-avatar-sm cursor' 
-                          onclick='prizm.showProfile("#{request.to._id}")')
-                    else
-                      img(src='/images/default-profile.png' 
-                          class='prizm-avatar-sm cursor'
-                          onclick='prizm.showProfile("#{request.to._id}")')
-                td
-                  if request.to
-                    .activity-name.cursor(onclick='prizm.showProfile("#{request.to._id}")')
-                      | #{request.to.name}
-                  .activity-action
-                    | accepted your trust
-                td
+    .row
+      .activity-header.col-sm-10.col-sm-offset-1
+        | Activity 
+    .row
+      .col-sm-10.col-sm-offset-1
+          ul.nav.nav-tabs.nav-justified(role='tablist' id='activity-tab')
+            li(role='presentation' class='active')
+              a(href='#'
+                data-toggle='tab'
+                onclick='activity.notificationTab()')
+                | Notifications
+            li(role='presentation' class='')
+              a(href='#'
+                data-toggle='tab'
+                onclick='activity.requestTab()')
+                | Requests
+    .row
+      #notifications
+        .col-sm-10.col-sm-offset-1.background-column
+          table.table.notifications
+            tbody
+              each notification in notifications
+                tr
+                  td
+                    if notification.from
+                      if notification.from.profile_photo_url
+                        img(src='https://#{notification.from.profile_photo_url.substr(7)}'
+                            class='prizm-avatar-sm cursor' 
+                            onclick='prizm.showProfile("#{notification.from._id}")')
+                      else
+                        img(src='/images/default-profile.png' 
+                            class='prizm-avatar-sm cursor'
+                            onclick='prizm.showProfile("#{notification.from._id}")')
+                  td
+                    if notification.from
+                      .activity-name.cursor(onclick='prizm.showProfile("#{notification.from._id}")')
+                        | #{notification.from.name}
+                  td
+                    .activity-action(class='#{notification.action}')
+                      if notification.action == 'like'
+                        | Liked your post.
+                      if notification.action == 'insight'
+                        | Sent you an insight.
+                      if notification.action == 'follow'
+                        | Started following you.
+                      if notification.action == 'comment'
+                        | Commented on your post.
+                      if notification.action == 'group_approved'
+                        | Approved your membership request.
+                  td
+                    .activity-time
+                      | #{notification.time_since} ago
+                  td
+                    if notification.photo_url
+                      img(src='https://#{notification.photo_url.substr(7)}'
+                          class='activity-photo')
+      #requests
+        .col-sm-10.col-sm-offset-1.background-column
+          table.table
+            tbody
+              each request in requests
+                tr
+                  td
+                    if request.to
+                      if request.to.profile_photo_url
+                        img(src='https://#{request.to.profile_photo_url.substr(7)}'
+                            class='prizm-avatar-sm cursor' 
+                            onclick='prizm.showProfile("#{request.to._id}")')
+                      else
+                        img(src='/images/default-profile.png' 
+                            class='prizm-avatar-sm cursor'
+                            onclick='prizm.showProfile("#{request.to._id}")')
+                  td
+                    if request.to
+                      .activity-name.cursor(onclick='prizm.showProfile("#{request.to._id}")')
+                        | #{request.to.name}
+                  td
+                    .activity-action(class='#{request.action}')
+                      | accepted your trust
+                  td
+                    .activity-time
+                      | #{request.time_since} ago
+                  td

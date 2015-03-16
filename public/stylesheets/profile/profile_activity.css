@@ -1,21 +1,110 @@
+#activity li a {
+  border-radius: 0px;
+  border: none;
+  font-size: 18px;
+  font-weight: 400;
+  color: #555;
+  background-color: #e4e5ea;
+}
+
+#activity li.active a {
+  color: #334b8f;
+  background-color: #fff;
+}
+
 #requests {
   display: none;
 }
+
 table {
   background: #fff;
 }
 
 table tr {
   height: 100px;
+  color: #484849;
+  vertical-align: bottom;
   /* margin: 10px; */
 }
 
+.table>tbody>tr>td {
+  vertical-align: middle;
+  padding: 0px;
+}
+
+table tr:first-child {
+  border-top: 1px solid #ddd;
+}
+
+table tr>td:first-child {
+  width: 12%;
+  border-bottom: 0px !important;
+  border-top: 0px;
+  text-align: right;
+  padding-right: 8px;
+}
+
+table tr>td:nth-child(2) {
+  width: 27%;
+  font-size: 18px;
+  font-weight: 400;
+  padding-left: 8px;
+}
+
+table tr>td:nth-child(3) {
+  width: 35%;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+table tr>td:nth-child(4) {
+  width: 15%;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+table tr>td:nth-child(5) {
+  width: 11%;
+}
+
 tr .prizm-avatar-sm {
-    margin-top: 8px;
+    /* margin-right: 8px; */
   
 }
-.activity-name {
-    font-size: 20px
+
+.activity-header {
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 700;
+  color: #545358;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-image: url('/images/profile/activity/activity_header.png');
+  background-repeat: no-repeat;
+
+  background-position-x: 15px;
+  padding-left: 68px;
+}
+
+.activity-action {
+  padding-left: 38px;
+}
+
+.activity-action.like {
+    background-image: url('/images/profile/activity/activity_like.png');
+  background
+;background-repeat: no-repeat;
+}
+
+.activity-action.comment {
+  background-image: url('/images/profile/activity/activity_comment.png');
+  background-repeat: no-repeat;
+}
+
+.activity-time {
+  background-image: url('/images/profile/activity/activity_clock.png');
+  background-repeat: no-repeat;
+  padding-left: 24px;
 }
 
 img.activity-photo {
@@ -23,16 +112,7 @@ img.activity-photo {
     float: right;
 }
 
-table.notifcations {
-  
-}
-
-.activity-name {
-    margin-top: 8px;
-    font-size: 20px
-}
-
 img.activity-photo {
-  width: 80px; 
+  width: 100px; 
   float: right;
 }
