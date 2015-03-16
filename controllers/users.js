@@ -523,7 +523,7 @@ exports.displayHomeFeed = function(req, res) {
           fetchHomeFeed(user, {latest: latest}, function(err, posts) {
           posts = _time.addTimeSinceFieldToObjects(posts);
           console.log(posts[1]);
-          var done = 0;
+          if (posts && posts.length > 0) {
           _.each(posts, function(post, idx, list){
             User.resolvePostTags(post, function(err, users){
               if (users && users.length > 0){
@@ -553,7 +553,15 @@ exports.displayHomeFeed = function(req, res) {
               }
             });
             
-          });
+          })} else {
+            res.render('profile/profile_home', {
+              title: 'Home',
+              bodyId: 'home-feed',
+              auth: true,
+              currentUser: req.user,
+              posts: []
+            }); 
+          };
         });};
         if (lastPost) {
           Post.findOne({_id: lastPost}, function(err, post){
