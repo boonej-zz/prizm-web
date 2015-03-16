@@ -1271,9 +1271,9 @@ exports.displayActivityFeed = function(req, res) {
       });
   }
 
-  function resolveObjectIds(activies) {
+  function resolveObjectIds(activities) {
 
-    _.each(activies, function(activity) {
+    _.each(activities, function(activity) {
 
       switch(activity.action) {
         case 'insight':
@@ -1294,7 +1294,29 @@ exports.displayActivityFeed = function(req, res) {
       console.log('activity photo: ' + activity.photo_url);
       console.log(activity.action);
     });
-    return activies;
+    return activities;
+  }
+
+  function updateHasBeenViewed(activities) {
+    var update = {
+      $set: {has_been_viewed: true}
+    };
+
+    _.each(activities, function(activity) {
+      if (activity.has_been_viewed == false) {
+        Activity.findOneAndUpdate({
+          _id: activity._id
+        }, update, function(err, activity) {
+          if (activity) {
+            return;
+          }
+          else {
+            return;
+          }
+        });
+      }
+    });
+    return true;
   }
 
   if (req.accepts('html')) {
