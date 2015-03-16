@@ -106,11 +106,6 @@
   width: 120px;
 }
 
-.go {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .log-in {
   float: left;
   margin-left: 34px;
@@ -235,6 +230,8 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
 
 .go {
   margin-bottom: 38px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* Login Modal */
