@@ -298,9 +298,9 @@ $(function(){
   });
   $(document).mouseup(function(e) {
     // Hack to dimiss menus unless menu is clicked.
-    var ambassadorMenu  = $('.member-type');
-    var restrictMenu    = $('.member-action .restrict');
-    var removeMenu      = $('.member-action .remove');
+    var ambassadorMenu  = '.member-type';
+    var restrictMenu    = '.member-action.restrict';
+    var removeMenu      = '.member-action.remove';
     var target          = e.target;
 
     if ($(target).is(ambassadorMenu)) {
