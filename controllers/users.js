@@ -518,6 +518,7 @@ exports.displayHomeFeed = function(req, res) {
         res.send(400);
       }
       if (user) {
+        var done = 0;
         mixpanel.track('Home Feed Viewed', user.mixpanelProperties());
         var fetch = function(req, res, latest){
           fetchHomeFeed(user, {latest: latest}, function(err, posts) {
