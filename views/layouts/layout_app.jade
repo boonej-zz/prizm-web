@@ -78,11 +78,16 @@ html
                 .menu-icon(onclick='nav.toggleSettings()')
                 .plus-icon
                 .avatar-menu
+                  if currentUser.profile_photo_url
                     img(src='https://#{currentUser.profile_photo_url.substr(7)}'
                         class='prizm-avatar-xs'
                         onclick='nav.toggleMenu(event)')
-                    .tool-tip(onclick='nav.toggleMenu(event)')
-                    mixin userMenu
+                  else
+                    img(src='/images/profile/profile_default_avatar.png'
+                        class='prizm-avatar-xs'
+                        onclick='nav.toggleMenu(event')
+                  .tool-tip(onclick='nav.toggleMenu(event)')
+                  mixin userMenu
               else
                 .avatar-menu
                     .login-button.cursor
