@@ -169,7 +169,7 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
     else {
       if (_.has(trusts, 'length')){
         _.each(trusts, function(trust, idx, list){
-          if (trust.to === user._id){
+          if (String(trust.to) == String(user._id)){
             trustArray.push(trust.from);
           } else {
             trustArray.push(trust.to);
