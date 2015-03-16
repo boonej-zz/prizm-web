@@ -1,4 +1,4 @@
-#activity li a {
+#activity-tab li a {
   border-radius: 0px;
   border: none;
   font-size: 18px;
@@ -7,7 +7,7 @@
   background-color: #e4e5ea;
 }
 
-#activity li.active a {
+#activity-tab li.active a {
   color: #334b8f;
   background-color: #fff;
 }
