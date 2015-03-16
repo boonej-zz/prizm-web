@@ -1276,12 +1276,13 @@ exports.displayActivityFeed = function(req, res) {
     _.each(activies, function(activity) {
 
       switch(activity.action) {
-        case "insight":
+        case 'insight':
           Insight.findOne({_id: activity.insight_id}, function(err, insight) {
             activity.photo_url = insight.file_path;
           });
           break;
-        case "like" || "comment":
+        case 'like':
+        case 'comment':
           Post.findOne({_id: activity.post_id}, function(err, post) {
             activity.photo_url = post.file_path;
           });
@@ -1306,12 +1307,14 @@ exports.displayActivityFeed = function(req, res) {
       }
       else {
         notifications = resolveObjectIds(notifications);
+        notifications = _time.addTimeSinceFieldToObjects(notifications);
         getRequests(function(err, requests) {
           if (err) {
             res.status(500).send({error: err});
           }
           else {
             requests = resolveObjectIds(requests);
+            requests = _time.addTimeSinceFieldToObjects(requests);
             console.log(requests);
             res.render('profile/profile_activity', {
               auth: true,
