@@ -363,8 +363,8 @@ li.member.selected a {
   position: relative; 
   left: 38px;
   background: #fff;
-  width: 164px;
-  height: 86px;
+  width: 182px;
+  height: 97px;
   border: 1px #e4e5ea solid;
 }
 
@@ -408,6 +408,8 @@ li.member.selected a {
 .restrict-menu a {
   text-decoration: none;
   font-weight: normal;
+  color: #484849;
+  font-size: 16px;
 }
 
 .remove-menu {
@@ -415,9 +417,11 @@ li.member.selected a {
   left: 38px;
   background: #fff;
   width: 168px;
-  height: 98px;
+  height: 118px;
   border: 1px #e4e5ea solid;
   padding: 10px 12px 0px 12px;
+  font-size: 16px;
+  line-height: 18px;
 }
 
 .remove-menu:after {
