@@ -16,7 +16,7 @@ script(type='text/javascript').
     input#height(type='hidden' name='height' )
     label#status(for='insight-image-upload') Please select a file
     input#photo-image-upload(type='file' 
-    name='image' onchange='Upload.fileSelect(event)')
+    name='image' accept='image/*' capture='camera' onchange='Upload.fileSelect(event)')
     output#preview
     input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
     button(class='btn btn-lg btn-primary btn-upload'
