@@ -1,8 +1,10 @@
 
 var Upload = {
-  infoAreaId: 'filesInfo',
+  infoAreaId: 'preview',
   fileAreaId: 'filesToUpload',
   canvasId: 'imageCanvas',
+  targetWidth: 300,
+  targetHeight: 300,
   fileSelect:   function(e){
     e.stopPropagation();
     e.preventDefault();
@@ -13,6 +15,8 @@ var Upload = {
       var result = '';
       var elementId = this.infoAreaId;
       var fileAreaId = this.fileAreaId;
+      var targetWidth = this.targetWidth;
+      var targetHeight = this.targetHeight;
       for (var i = 0; file = files[i]; i++) {
         if (!file.type.match('image.*')){
           continue;
@@ -24,17 +28,19 @@ var Upload = {
             var img = document.createElement('img');
             img.setAttribute('src', e.target.result);
             var min = img.width <= img.height?img.width:img.height;
-            var ratio = 300/min;
+            var ratio = img.width <= img.height?targetWidth/min:targetHeight/min;
+
             var height = img.height * ratio;
             var width = img.width * ratio;
-            var diff_h = (height - 300)/2;
-            var diff_w = (300 - width)/2;
+            var diff_h = (targetHeight - height)/2;
+            var diff_w = (targetWidth - width)/2;
             $(div).css('background-image', 'url(' + e.target.result + ')');
             $(div).css('background-size', width + 'px ' + height + 'px');
             $(div).css('background-position', diff_w + 'px ' + diff_h + 'px');
-            $(div).css('width', '300px')
-            $(div).css('height', '300px');
-            document.getElementById(elementId).appendChild(div);
+            $(div).css('background-repeat', 'no-repeat');
+            $(div).css('width', targetWidth + 'px');
+            $(div).css('height', targetHeight + 'px');
+            $('output').html(div);
           } 
         }(file));
         reader.readAsDataURL(file);

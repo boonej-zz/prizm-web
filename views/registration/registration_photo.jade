@@ -1,3 +1,5 @@
+script(type='text/javascript').
+  Upload.infoAreaId = 'preview';
 .photo-card
   .photo-header
     h2 Customize
@@ -10,8 +12,8 @@
     input#x2(type='hidden' name='x2')
     input#y1(type='hidden' name='y1')
     input#y2(type='hidden' name='y2')
-    input#width(type='hidden' name='width')
-    input#height(type='hidden' name='height')
+    input#width(type='hidden' name='width' )
+    input#height(type='hidden' name='height' )
     label#status(for='insight-image-upload') Please select a file
     input#photo-image-upload(type='file' 
     name='image' onchange='Upload.fileSelect(event)')
