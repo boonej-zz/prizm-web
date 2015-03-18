@@ -2,6 +2,42 @@
 
 var members = {
   // Member Action Methods
+  formatTable: function(height) {
+    var table = $('table');
+      table.attr('org-width', table.width());
+      table.find('tbody tr').each(function(){
+        $(this).attr('org-width', $(this).width());
+        $(this).attr('org-height', $(this).height() );
+      }); 
+      table.find('thead tr th').each(function(){
+        $(this).attr('org-width', $(this).width() + 20);
+        $(this).attr('org-height', $(this).height());
+      });
+      table.find('tbody tr td').each(function(){
+        $(this).attr('org-width', $(this).width() + 20);
+        $(this).attr('org-height', $(this).height());
+      });
+      $('table thead tr').css('display', 'block');
+      $('tbody').css('display', 'block');
+      //$('tbody tr').css('display', 'block');
+      $('tbody').css('max-height', '606px');
+      $('tbody').css('width', '100%');
+      table.find('tbody tr').each(function(){
+        $(this).css('width', $(this).attr('org-width') + 'px');
+        $(this).css('height', $(this).attr('org-height') + 'px');
+        $(this).css('padding', '16px 0px 16px 0px');
+      });
+      table.css('width', table.attr('org-width') + 'px');
+      table.find('thead tr th').each(function(){
+        $(this).css('width', $(this).attr('org-width') + 'px');
+        $(this).css('padding', '0');
+      });
+      table.find('tbody tr td').each(function(){
+        $(this).css('width', $(this).attr('org-width') + 'px');
+      });
+
+               },
+
   approve: function(e) {
     var member_id = $(e.target).parent('td').attr('data');
     var organization = $('#organization').attr('data');
@@ -214,6 +250,8 @@ var members = {
         }
         $('#pending-members').hide();
         $('#active-members').fadeIn();
+        members.formatTable('606px');
+
       }
     });  
   },
@@ -236,6 +274,7 @@ var members = {
         }
         $('#active-members').hide();
         $('#pending-members').fadeIn();
+        members.formatTable('606px');
       }
     });
    },
@@ -325,19 +364,8 @@ $(function(){
     }
   })
 });
-/**
+
 $(document).ready(function(){
-  var table = $('table');
-  table.attr('org-width', table.width());
-  table.find('thead tr th').each(function(){
-    $(this).attr('org-width', $(this).width());
-  });
-  table.find('tbody tr:eq(0) td').each(function(){
-    $(this).attr('org-width', $(this).width());
-  });
-  $('tbody').css('display', 'block');
-  table.find('thead tr th').each(function(){
-    $(this).attr('width', $(this).attr('org-width'));
-  });
+   members.formatTable('606px');
 });
-*/
+

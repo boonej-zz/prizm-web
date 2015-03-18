@@ -89,8 +89,13 @@ table>thead>tr:last-of-type>th {
 }
 
 .table>tbody>tr {
+  border-top: hidden;
   border-bottom: hidden;
   height: 101px;
+}
+
+.table>tbody>tr:first-child td {
+  border-top: none;
 }
 
 tbody tr:hover td:first-child {
