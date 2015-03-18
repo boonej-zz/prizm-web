@@ -533,10 +533,11 @@ form #inputComment {
 .user-follow .btn {
   height: 28px;
   width: 88px;
-  border: none;
-  color: #ffffff;
   text-shadow: none;
-  background-color: #3e6a9e;
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 17px;
+  vertical-align: middle;
 }
 
 .user-avatar {

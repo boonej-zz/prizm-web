@@ -473,6 +473,17 @@ body:before {
   z-index: 5000;
 }
 
+button[data-is-following="true"] {
+  background-color: #3e6a9e;
+  color: #ffffff; 
+}
+
+button[data-is-following="false"]{
+  background-color: #ffffff;
+  border: 1px solid #d1d1d2; 
+  color: #3e6a9e;
+}
+
 @media screen and (max-width:500px) {
   /* Navbar */
   .menu-icon {
