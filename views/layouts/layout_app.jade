@@ -121,55 +121,55 @@ html
           .settings-menu
             ul
               li.home-button.settings-icon(class="#{title == 'Home'?'selected':''}")
-                a(href='/')
+                a.cursor(dref='/' onclick='nav.navigate(event)')
                   | Home
               li.activity-button.settings-icon
-                a(href='/profile/activity')
+                a.cursor(dref='/profile/activity' onclick='nav.navigate(event)')
                   | Activity
               li.explore-button.settings-icon
-                a(href='#')
+                a.cursor(dref='/' onclick='nav.navigate(event)')
                   | Explore 
               li.insights-button.settings-icon
-                a(href='#')
+                a(dref='/' onclick='nav.navigate(event)')
                   | Insight
             if (currentUser.type == 'institution_verified')
               ul.extended Admin
                 li.settings-icon.message-button
-                  a(href='#')
+                  a(dref='/' onclick='nav.navigate(event)')
                     | Message
                 li.settings-icon.calendar-button
-                  a(href='#')
+                  a(dref='/' onclick='nav.navigate(event)')
                     | Calendar
                 li.settings-icon.surveys-button
-                  a(href='#')
+                  a(dref='#' onclick='nav.navigate(event)')
                     | Survey
                 li.stats-button.settings-icon
-                  a(href='#')
+                  a(dref='#' onclick='nav.navigate(event)')
                     | Stats
                 li.settings-button.settings-icon
-                  a(href='#')
+                  a(dref='#' onclick='nav.navigate(event)')
                     | Settings
                 li.members-button.settings-icon(class="#{title == 'Members'?'selected':''}")
-                  a(href='/profile/members')
+                  a(dref='/profile/members' onclick='nav.navigate(event)')
                     | Members
                 li.billing-button.settings-icon
-                  a(href='/register/' + currentUser.id)
+                  a(dref='/register/' + currentUser.id onclick='nav.navigate(event)')
                     | Billing
                 li.invite-button.settings-icon
-                  a(href='#')
+                  a(dref='#' onclick='nav.navigate(event)')
                     | Invite
             else
               each org in currentUser.org_status
                 if org.status == 'active'
                   ul.extended #{org.organization.name}
                     li.settings-icon.message-button
-                      a(href='#')
+                      a(dref='#' onclick='nav.navigate(event)')
                         | Message
                     li.settings-icon.calendar-button
-                      a(href='#')
+                      a(dref='#' onclick='nav.navigate(event)')
                         | Calendar
                     li.settings-icon.surveys-button
-                      a(href='#')
+                      a(dref='#' onclick='nav.navigate(event)')
                         | Survey
     mixin legal
     script.
