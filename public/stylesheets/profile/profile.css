@@ -151,6 +151,10 @@ ul .post.shown {
   line-height: 1.25em;
 }
 
+.profile-info ul li:hover, .profile-info ul li:focus {
+  color: #2443A1;
+}
+
 .profile-info li {
   list-style: none;
   display: inline-block;

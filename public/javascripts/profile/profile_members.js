@@ -325,3 +325,19 @@ $(function(){
     }
   })
 });
+/**
+$(document).ready(function(){
+  var table = $('table');
+  table.attr('org-width', table.width());
+  table.find('thead tr th').each(function(){
+    $(this).attr('org-width', $(this).width());
+  });
+  table.find('tbody tr:eq(0) td').each(function(){
+    $(this).attr('org-width', $(this).width());
+  });
+  $('tbody').css('display', 'block');
+  table.find('thead tr th').each(function(){
+    $(this).attr('width', $(this).attr('org-width'));
+  });
+});
+*/
