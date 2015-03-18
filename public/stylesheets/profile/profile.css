@@ -554,7 +554,7 @@ form #inputComment {
   line-height: 20px;
   width: 80%;
   margin: auto;
-  font-weight: 600;
+  font-weight: normal;
   padding-top: 22px;
 }
 
@@ -596,7 +596,7 @@ form #inputComment {
   display: inline-block;
   padding-top: 28px;
   text-align: center;
-  font-weight: normal;
+  font-weight: 300;
   font-size: 18px;
   line-height: 1.2;
   margin: 14px 8px;
