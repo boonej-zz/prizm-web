@@ -12,8 +12,8 @@ var _time       = require('../lib/helpers/date_time');
 var fs          = require('fs');
 var path        = require('path');
 var jade        = require('jade');
-var postFeed    = fs.readFileSync(path.join(__dirname +
-                  '/../views/posts/post_feed.jade'), 'utf8');
+var postFeed    = path.join(__dirname, '/../views/posts/post_feed.jade');
+var exploreFeed = path.join(__dirname, '/../views/posts/explore_feed.jade');
 var singlePost  = path.join(__dirname, '/../views/posts/single_post.jade');
 var singleCommentPath = path.join(__dirname, '/../views/posts/single_comment.jade');
 var Mixpanel      = require('mixpanel');
@@ -311,7 +311,7 @@ var profilePostFeed = function(req, res) {
             });
           }
           
-          var content = jade.render(postFeed, {posts: posts});
+          var content = jade.renderFile(postFeed, {posts: posts});
           res.status(200).send(content);
         }
       });
@@ -396,22 +396,8 @@ var explorePostFeed = function(req, res) {
   var populate;
   var sort;
 
-  console.log(lastPost);
-  // if (lastPost) {
-  //   var query = Post.findOne({_id: ObjectId(lastPost)});
-  //   query.select('create_date');
-  //   query.exec(function(err, post) {
-  //     if (err) { 
-  //       res.status(500).send({error: err}); 
-  //     }
-  //     else {
-  //       criteria.create_date = {$lt: post.create_date}
-  //     }
-  //   });
-  // }
-
   if (exploreType == 'latest') {
-    sort = {create_date: -1, _id: -1};;
+    sort = {create_date: -1, _id: -1};
     populate = '';
   }
   else if (exploreType == 'popular') {
@@ -448,29 +434,28 @@ var explorePostFeed = function(req, res) {
         res.status(500).send({ error: err});
       }
       else {
-        posts = _time.addTimeSinceFieldToObjects(posts);
-        if (user) {
-          _.each(posts, function(post, idx, list){
-            post.liked = false;
-            if (String(post.creator._id) == String(user._id)){
-              post.ownPost = true;
-            } else {
-              post.ownPost = false;
-            }
-            _.each(post.likes, function(like, index, listb){
-              if (String(like._id) == String(user._id)){
-                post.liked = true
-              };
-            });
-          });
-        }
-        var content = jade.render(postFeed, {posts: posts});
+        // posts = _time.addTimeSinceFieldToObjects(posts);
+        // if (user) {
+        //   _.each(posts, function(post, idx, list){
+        //     post.liked = false;
+        //     if (String(post.creator._id) == String(user._id)){
+        //       post.ownPost = true;
+        //     } else {
+        //       post.ownPost = false;
+        //     }
+        //     _.each(post.likes, function(like, index, listb){
+        //       if (String(like._id) == String(user._id)){
+        //         post.liked = true
+        //       };
+        //     });
+        //   });
+        // }
+        var content = jade.renderFile(exploreFeed, {posts: posts});
         res.status(200).send(content);
       }
     });
   });
-  console.log(criteria);
-}
+};
 
 exports.addComment = function(req, res){
   console.log('adding comment');

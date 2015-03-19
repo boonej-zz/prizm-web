@@ -1,0 +1,44 @@
+extends ../layouts/layout_app
+
+block head
+  script(src='/javascripts/profile/profile_explore.js' type='text/javascript')
+  script(src='/javascripts/profile/profile.js' type='text/javascript')
+  link(rel='stylesheet' href='/stylesheets/profile/profile.css') 
+  link(rel='stylesheet' href='/stylesheets/profile/profile_explore.css')
+
+block content
+  .container.topnav-offset
+    .row
+      .explore-header.col-sm-10.col-sm-offset-1
+        | Explore 
+    .row
+      #explore-type(data-explore-type='latest')
+      .col-sm-10.col-sm-offset-1
+          ul.nav.nav-tabs.nav-justified(role='tablist' id='explore-tab')
+            li(role='presentation' class='active')
+              a(href='#'
+                data-toggle='tab'
+                onclick='explore.latestTab()')
+                | Latest
+            li(role='presentation')
+              a(href='#'
+                data-toggle='tab'
+                onclick='explore.popularTab()')
+                | Popular
+            li(role='presentation')
+              a(href='#'
+                data-toggle='tab'
+                onclick='explore.featuredTab()')
+                | Featured
+      #latest.col-sm-10.col-sm-offset-1.infinite_feed
+        include ../posts/explore_feed
+      #popular.col-sm-10.col-sm-offset-1.infinite_feed
+      #featured.col-sm-10.col-sm-offset-1.infinite_feed
+  div#postModal.modal.fade(
+    tabIndex='-1'
+    role='dialog'
+    aria-labelledby='postModalLabel')
+    .container.no-padding
+      .modal-dialog
+        .modal-content
+          #post-display.modal-body

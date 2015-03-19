@@ -28,6 +28,10 @@ div.container.topnav-offset {
   background-color: #fff;
 }
 
+.no-padding {
+  padding: 0px;
+}
+
 /* Avatars */
 .prizm-avatar-xs, .prizm-avatar-sm, .prizm-avatar-md, .prizm-avatar-lg {
   border: 1px #d4daea solid;

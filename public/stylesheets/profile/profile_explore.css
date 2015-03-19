@@ -1,0 +1,33 @@
+.explore-header {
+  color: #545358;
+  font-size: 24px;
+  line-height: 40px;
+  margin-top: 50px;   margin-bottom: 20px;
+  font-weight: 700;
+  background-image: url('/images/profile/explore/explore_header.png');
+  background-repeat: no-repeat;
+  background-position-x: 15px;
+  padding-left: 67px;
+}
+
+#explore .post {
+  margin-top: 0px;
+  border-top: none;
+  border-bottom: 1px solid #fff;
+  border-left: none;
+  border-right: 1px solid #fff;
+}
+
+#explore-tab li a {
+  border-radius: 0px;
+  border: none;
+  font-size: 18px;
+  font-weight: 400;
+  color: #555;
+  background-color: #e4e5ea;
+}
+
+#explore-tab li.active a {
+  color: #334b8f;
+  background-color: #fff;
+}

@@ -1434,4 +1434,24 @@ exports.displayActivityFeed = function(req, res) {
   }
 }
 
+/* Explore Feed */
+exports.displayExploreFeed = function(req, res) {
+  Post
+  .find()
+  .sort({create_date: -1, _id: -1})
+  .exec(function(err, posts) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (posts) {
+      res.render('profile/profile_explore', {
+        auth: true,
+        currentUser: req.user,
+        bodyId: 'explore',
+        posts: posts
+      });
+    }
+  });
+}
+
 exports.getTrustedLuminariesForUserId = getTrustedLuminariesForUserId

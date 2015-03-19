@@ -31,52 +31,57 @@ function animatePosts() {
 $(document).ready(function(){
   animatePosts();
   var listening = true;
-
-$(window).scroll(function() {
-  if (listening) {
-  if($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
-    listening = false;
-    var length = $('.post').length;
-    var lastPost = $('.post').last().attr('id');
-    var creator = $('.profile-owner').attr('id');
-    var feedType;
-    if ($('#membersToggle').attr('data-toggle') == 'on') {
-      feedType = 'members';
-    }
-    else if (document.URL.indexOf('profile') > -1){
-      feedType = 'profile';
-    } else {
-      feedType = 'home';
-    }
-    if (length > 0){
-    $.ajax({
-      method: 'GET',
-      url: '/posts',
-      headers: {
-        'Content-type': 'application/jade',
-        'Accept' : 'application/jade',
-        'creator' : creator,
-        'lastPost' : lastPost,
-        'feedType' : feedType
-      },
-    })
-    .done(function(html){
-      if (feedType == 'profile') {
-        $('.profile-posts-container').append(html);
-      } else if (feedType == 'members') {
-        $('.member-posts-container').append(html);
-      } else {
-        $('.infinite-feed').append(html);
+  $(window).scroll(function() {
+    if (listening) {
+      if($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
+        listening = false;
+        var length = $('.post').length;
+        var lastPost = $('.post').last().attr('id');
+        var creator = $('.profile-owner').attr('id');
+        var exploreType = $('#explore-type').data('exploreType');
+        console.log(exploreType);
+        var feedType;
+        if ($('#membersToggle').attr('data-toggle') == 'on') {
+          feedType = 'members';
+        }
+        else if (document.URL.indexOf('explore') > -1) {
+          feedType = 'explore'
+        }
+        else if (document.URL.indexOf('profile') > -1){
+          feedType = 'profile';
+        } else {
+          feedType = 'home';
+        }
+        console.log("feedType: " + feedType + " exploreType: " + exploreType)
+        if (length > 0){
+          $.ajax({
+            method: 'GET',
+            url: '/posts',
+            headers: {
+              'Content-type': 'application/jade',
+              'Accept' : 'application/jade',
+              'creator' : creator,
+              'lastPost' : lastPost,
+              'feedType' : feedType,
+              'exploreType' : exploreType
+            },
+          })
+          .done(function(html){
+            if (feedType == 'profile') {
+              $('.profile-posts-container').append(html);
+            } else if (feedType == 'members') {
+              $('.member-posts-container').append(html);
+            } else {
+              $('.infinite-feed').append(html);
+            }
+            $('img.lazy').lazyload();
+            listening = true;
+          });
+        }
       }
-      $('img.lazy').lazyload();
-      listening = true;
-    });
+    animatePosts();
     }
-  }
-  animatePosts();
-  }
   });
-  
 });
 
 
