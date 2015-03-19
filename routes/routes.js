@@ -7,6 +7,7 @@ var _posts    = require('../controllers/posts');
 var _users    = require('../controllers/users');
 var _follow   = require('../controllers/follow');
 var _orgs     = require('../controllers/organizations');
+var _trusts   = require('../controllers/trusts');
 var config    = require('../config');
 var passport  = require('passport');
 
@@ -74,6 +75,7 @@ router.get('/profiles/:id/followers', _users.displayFollowers);
 router.post('/profiles/:id/followers', _follow.followUserId);
 
 /* Trusts */
+router.post('/trusts/:id', _users.authRequired, _trusts.updateTrusts);
 
 /* Registration */
 router.get('/register', _users.displayRegistration);
