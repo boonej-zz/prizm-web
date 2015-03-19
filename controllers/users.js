@@ -262,7 +262,21 @@ exports.updateUser = function(req, res) {
             res.status(500).send({error: err});
           }
           else {
-            res.status(200).send({message: 'User type updated'});
+            if (userType == 'luminary') {
+              addLuminaryToTrust(function(err, success) {
+                if (err) {
+                  res.status(500).send({error: err});
+                }
+                else {
+                  res.status(200).send({
+                    message: 'User was made luminary and added to trust'
+                  });
+                }
+              });
+            }
+            else {
+              res.status(200).send({message: 'User type updated'});
+            }
           }
         });
       }
@@ -270,22 +284,32 @@ exports.updateUser = function(req, res) {
         res.status(500).send({error: 'User Id invalid'});
       }
     });
+  }
 
-    // User.findOneAndUpdate({
-    //   _id: userId
-    // }, {
-    //   subtype: userType
-    // }, function(err, user) {
-    //   if (err) {
-    //     res.status(500).send({error: err});
-    //   }
-    //   if (user) {
-    //     res.status(200).send({message: 'User type updated'});
-    //   }
-    //   else {
-    //     res.status(500).send({error: 'User Id invalid'});
-    //   }
-    // });
+  function addLuminaryToTrust(next) {
+    Organization.findOrganizationOwner(orgId, function(err, owner) {
+      if (err) {
+        next(err);
+      }
+      if (!owner) {
+        next('Organization has no valid owner');
+      }
+      else {
+        var trust = new Trust({
+          from: owner,
+          to: userId,
+          status: 'accepted'
+        });
+        trust.save(function(err, trust) {
+          if (err) {
+            next(err);
+          }
+          if (trust) {
+            next(null, true);
+          }
+        })
+      }
+    });
   }
 
   if (req.isAuthenticated()) {

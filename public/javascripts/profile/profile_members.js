@@ -104,7 +104,8 @@ var members = {
       headers:{
         'Accept': 'application/json',
         'memberType': 'ambassador',
-        'action': 'updateSubtype'
+        'action': 'updateSubtype',
+        'org': organization
       },
       success: function() {
         members.activeTab();
@@ -125,7 +126,8 @@ var members = {
       headers:{
         'Accept': 'application/json',
         'memberType': 'luminary',
-        'action': 'updateSubtype'
+        'action': 'updateSubtype',
+        'org': organization
       },
       success: function() {
         members.activeTab();
@@ -146,7 +148,8 @@ var members = {
       headers:{
         'Accept': 'application/json',
         'memberType': 'null',
-        'action': 'updateSubtype'
+        'action': 'updateSubtype',
+        'org': organization
       },
       success: function(response) {
         members.activeTab();
