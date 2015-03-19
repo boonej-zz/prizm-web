@@ -109,10 +109,10 @@ block content
                   td
                     .activity-time
                       | #{request.time_since} ago
-                  td
+                  td(data-trust-id='#{request._id}')
                       if request.from && String(request.from._id) != String(currentUser._id)
                         if request.status == 'accepted'
                           .activity-action.accepted
                         if request.status == 'pending'
-                          .activity-action.accept
-                          .activity-action.deny
+                          .activity-action.accept(onclick='activity.acceptRequest(event)')
+                          .activity-action.deny(onclick='activity.denyRequest(event)')
