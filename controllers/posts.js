@@ -401,7 +401,7 @@ var explorePostFeed = function(req, res) {
     populate = '';
   }
   else if (exploreType == 'popular') {
-    sort = {likes_count: 1, _id: -1};
+    sort = {likes_count: -1, _id: -1};
     populate = '';
   }
   else if (exploreType == 'featured') {
