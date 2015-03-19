@@ -115,6 +115,9 @@ exports.fetchPosts = function(req, res) {
     else if (feedType == 'members') {
       organizationMembersFeed(req, res);
     }
+    else if (feedType == 'explore') {
+      explorePostFeed(req, res);
+    }
     else {
       res.status(406).send({ error: "feedType unacceptable"});
     }
@@ -379,6 +382,94 @@ var organizationMembersFeed = function(req, res) {
         });
     }
   });
+}
+
+var explorePostFeed = function(req, res) {
+  var lastPost    = req.get('lastPost');
+  var exploreType = req.get('exploreType');
+  var user = req.user;
+  var criteria = {
+    status: 'active',
+    category: {$ne: 'personal'},
+    scope: {$ne: 'private'}
+  }
+  var populate;
+  var sort;
+
+  console.log(lastPost);
+  // if (lastPost) {
+  //   var query = Post.findOne({_id: ObjectId(lastPost)});
+  //   query.select('create_date');
+  //   query.exec(function(err, post) {
+  //     if (err) { 
+  //       res.status(500).send({error: err}); 
+  //     }
+  //     else {
+  //       criteria.create_date = {$lt: post.create_date}
+  //     }
+  //   });
+  // }
+
+  if (exploreType == 'latest') {
+    sort = {create_date: -1, _id: -1};;
+    populate = '';
+  }
+  else if (exploreType == 'popular') {
+    sort = {likes_count: 1, _id: -1};
+    populate = '';
+  }
+  else if (exploreType == 'featured') {
+    populate = {
+      path: 'creator',
+      match: {type: 'insitution_verified'},
+      select: 'name _id'
+    }
+    sort = {create_date: -1, _id: -1};
+  }
+  else {
+    res.status(400).send({error: 'Invalid explore feed request'});
+  }
+
+  Post.findOne({_id: lastPost}, function(err, post) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (post) {
+      criteria.create_date = {$lt: post.create_date};
+    }
+    Post
+    .find(criteria)
+    .sort(sort)
+    .populate(populate)
+    .limit(21)
+    .exec(function(err, posts) {
+      if (err) {
+        console.log(err);
+        res.status(500).send({ error: err});
+      }
+      else {
+        posts = _time.addTimeSinceFieldToObjects(posts);
+        if (user) {
+          _.each(posts, function(post, idx, list){
+            post.liked = false;
+            if (String(post.creator._id) == String(user._id)){
+              post.ownPost = true;
+            } else {
+              post.ownPost = false;
+            }
+            _.each(post.likes, function(like, index, listb){
+              if (String(like._id) == String(user._id)){
+                post.liked = true
+              };
+            });
+          });
+        }
+        var content = jade.render(postFeed, {posts: posts});
+        res.status(200).send(content);
+      }
+    });
+  });
+  console.log(criteria);
 }
 
 exports.addComment = function(req, res){
