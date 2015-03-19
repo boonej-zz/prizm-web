@@ -17,7 +17,7 @@ var explore = {
         $('#popular').hide();
         $('#featured').hide();
         $('#latest').fadeIn();
-        currentExploreType.data('exploreType', 'latest');
+        $('#explore-type').attr('data-explore-type', 'latest');
       }
     });
   },
@@ -38,7 +38,7 @@ var explore = {
         $('#latest').hide();
         $('#featured').hide();
         $('#popular').fadeIn();
-        currentExploreType.data('exploreType', 'popular');
+        $('#explore-type').attr('data-explore-type', 'popular');
       }
     });
   },
@@ -59,7 +59,7 @@ var explore = {
         $('#popular').hide();
         $('#latest').hide();
         $('#featured').fadeIn();
-        currentExploreType.data('exploreType', 'featured');
+        $('#explore-type').attr('data-explore-type', 'featured');
       }
     });
   },
