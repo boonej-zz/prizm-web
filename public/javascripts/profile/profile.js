@@ -36,6 +36,7 @@ $(window).scroll(function() {
   if (listening) {
   if($(window).scrollTop() >= $(document).height() - $(window).height() - 500) {
     listening = false;
+    var length = $('.post').length;
     var lastPost = $('.post').last().attr('id');
     var creator = $('.profile-owner').attr('id');
     var feedType;
@@ -47,6 +48,7 @@ $(window).scroll(function() {
     } else {
       feedType = 'home';
     }
+    if (length > 0){
     $.ajax({
       method: 'GET',
       url: '/posts',
@@ -69,6 +71,7 @@ $(window).scroll(function() {
       $('img.lazy').lazyload();
       listening = true;
     });
+    }
   }
   animatePosts();
   }
@@ -241,7 +244,7 @@ var profile = {
           return $(target).data('isFollowing') ? 'Following' : 'Follow';
         });
         $('.btn-follow-next').text('Done');
-        $(target).fadeOut();
+        //$(target).fadeOut();
       }
     });
     return false;

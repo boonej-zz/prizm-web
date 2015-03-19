@@ -158,7 +158,11 @@ var singlePostHTMLRequest = function(req, res) {
         }
       }
       var ago = _time.timeSinceFormatter(post.create_date);
-      mixpanel.track('Post viewed', req.user.mixpanel);
+      if (req.user) {
+        mixpanel.track('Post viewed', req.user.mixpanel);
+      } else {
+        mixpanel.track('Post viewed');
+      }
       res.render('posts/post_twitter_card', {
         bodyId: 'post-card', post: post, tags: tags, ago: ago, category: post.category
       });

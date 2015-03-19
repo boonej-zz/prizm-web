@@ -115,6 +115,10 @@ block content
                 //- button.btn.btn-primary(onclick='org.nextSection()') Next
               .col-mob-6.right
             .section.photo
+              script(type='text/javascript').
+                Upload.targetWidth = 320;
+                Upload.targetHeight = 237;
+                Upload.infoAreaId = 'preview';
               .col-mob-6.left
                 .header
                   h2 create a welcome photo
@@ -124,8 +128,8 @@ block content
                   input#x2(type='hidden' name='x2')
                   input#y1(type='hidden' name='y1')
                   input#y2(type='hidden' name='y2')
-                  input#width(type='hidden' name='width')
-                  input#height(type='hidden' name='height')
+                  input#width(type='hidden' name='width' value='320')
+                  input#height(type='hidden' name='height' value='237')
                   label#status(for='insight-image-upload') Please select a file
                   input#photo-image-upload(type='file' 
                   name='image' onchange='Upload.fileSelect(event)')

@@ -121,6 +121,7 @@ body:before {
   line-height: 32px;
   font-size: 14px;
   font-weight: normal;
+  text-decoration: none;
 }
 
 .user-menu a:hover {
@@ -129,7 +130,7 @@ body:before {
 }
 
 .user-menu a:active {
-  color: rgba(36, 67, 161, .6);
+  color: #ffffff;
 }
 
 .user-menu ul {
@@ -471,6 +472,17 @@ body:before {
   right: 0;
   bottom: 0;
   z-index: 5000;
+}
+
+button[data-is-following="true"] {
+  background-color: #3e6a9e;
+  color: #ffffff; 
+}
+
+button[data-is-following="false"]{
+  background-color: #ffffff;
+  border: 1px solid #d1d1d2; 
+  color: #3e6a9e;
 }
 
 @media screen and (max-width:500px) {

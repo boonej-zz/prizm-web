@@ -151,6 +151,10 @@ ul .post.shown {
   line-height: 1.25em;
 }
 
+.profile-info ul li:hover, .profile-info ul li:focus {
+  color: #2443A1;
+}
+
 .profile-info li {
   list-style: none;
   display: inline-block;
@@ -533,10 +537,11 @@ form #inputComment {
 .user-follow .btn {
   height: 28px;
   width: 88px;
-  border: none;
-  color: #ffffff;
   text-shadow: none;
-  background-color: #3e6a9e;
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 17px;
+  vertical-align: middle;
 }
 
 .user-avatar {
@@ -549,7 +554,7 @@ form #inputComment {
   line-height: 20px;
   width: 80%;
   margin: auto;
-  font-weight: 600;
+  font-weight: normal;
   padding-top: 22px;
 }
 
@@ -591,7 +596,7 @@ form #inputComment {
   display: inline-block;
   padding-top: 28px;
   text-align: center;
-  font-weight: normal;
+  font-weight: 300;
   font-size: 18px;
   line-height: 1.2;
   margin: 14px 8px;

@@ -63,7 +63,15 @@ var nav = {
     $('.navbar-header').toggleClass('body-push');
     $('.overlay').toggle();
   },
-
+  navigate: function(e){
+    var target = e.target;
+    var ref = $(target).attr('dref');
+    if (window.location.pathname != ref) {
+      window.location = ref;
+    } else {
+      nav.toggleSettings();
+    }
+  },
   goToHomeFeed: function(){
     window.location = baseURL + '/';
   }

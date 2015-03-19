@@ -38,8 +38,8 @@ var userSchema = new mongoose.Schema({
   country               : {type: String, default: null},
   state                 : {type: String, default: null},
   zip_postal            : {type: String, default: null},
-  cover_photo_url       : {type: String, default: ''},
-  profile_photo_url     : {type: String, default: ''},
+  cover_photo_url       : {type: String, default: null},
+  profile_photo_url     : {type: String, default: null},
   create_date           : {type: Date, default: null},
   modify_date           : {type: Date, default: null},
   delete_date           : {type: Date, default: null},
@@ -169,7 +169,7 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
     else {
       if (_.has(trusts, 'length')){
         _.each(trusts, function(trust, idx, list){
-          if (trust.to === user._id){
+          if (String(trust.to) == String(user._id)){
             trustArray.push(trust.from);
           } else {
             trustArray.push(trust.to);
