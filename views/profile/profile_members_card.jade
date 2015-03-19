@@ -16,7 +16,7 @@ div(class='modal fade'
                     img(src='https://#{member.profile_photo_url.substr(7)}'
                       class='prizm-avatar-lg' dref='/profiles/#{member.id}')
                   else
-                    img(src='/images/default-profile.png' class='prizm-avatar-sm'
+                    img(src='/images/profile/profile_default_avatar.png' class='prizm-avatar-sm'
                       onclick='profile.showProfile("#{member._id}")')
                 .member-name.cursor(onclick='prizm.showProfile("#{member._id}")')
                   | #{member.name}
