@@ -71,6 +71,12 @@ $(document).ready(function(){
               $('.profile-posts-container').append(html);
             } else if (feedType == 'members') {
               $('.member-posts-container').append(html);
+            } else if (exploreType == 'latest') {
+              $('#latest').append(html);
+            } else if (exploreType == 'popular') {
+              $('#popular').append(html);
+            } else if (exploreType == 'featured') {
+              $('#featured').append(html);
             } else {
               $('.infinite-feed').append(html);
             }

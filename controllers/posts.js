@@ -393,29 +393,21 @@ var explorePostFeed = function(req, res) {
     category: {$ne: 'personal'},
     scope: {$ne: 'private'}
   }
-  var populate;
   var sort;
 
   if (exploreType == 'latest') {
     sort = {create_date: -1, _id: -1};
-    populate = '';
   }
   else if (exploreType == 'popular') {
     sort = {likes_count: -1, _id: -1};
-    populate = '';
   }
   else if (exploreType == 'featured') {
-    populate = {
-      path: 'creator',
-      match: {type: 'insitution_verified'},
-      select: 'name _id'
-    }
+    criteria.type = 'institution'
     sort = {create_date: -1, _id: -1};
   }
   else {
     res.status(400).send({error: 'Invalid explore feed request'});
   }
-
   Post.findOne({_id: lastPost}, function(err, post) {
     if (err) {
       res.status(500).send({error: err});
@@ -426,7 +418,6 @@ var explorePostFeed = function(req, res) {
     Post
     .find(criteria)
     .sort(sort)
-    .populate(populate)
     .limit(21)
     .exec(function(err, posts) {
       if (err) {
