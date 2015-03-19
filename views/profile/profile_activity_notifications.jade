@@ -1,0 +1,38 @@
+.col-sm-10.col-sm-offset-1.background-column
+  table.table.notifications
+    tbody
+      each notification in notifications
+        tr
+          td
+            if notification.from
+              if notification.from.profile_photo_url
+                img(src='https://#{notification.from.profile_photo_url.substr(7)}'
+                    class='prizm-avatar-sm cursor' 
+                    onclick='prizm.showProfile("#{notification.from._id}")')
+              else
+                img(src='/images/default-profile.png' 
+                    class='prizm-avatar-sm cursor'
+                    onclick='prizm.showProfile("#{notification.from._id}")')
+          td
+            if notification.from
+              .activity-name.cursor(onclick='prizm.showProfile("#{notification.from._id}")')
+                | #{notification.from.name}
+          td
+            .activity-action(class='#{notification.action}')
+              if notification.action == 'like'
+                | Liked your post.
+              if notification.action == 'insight'
+                | Sent you an insight.
+              if notification.action == 'follow'
+                | Started following you.
+              if notification.action == 'comment'
+                | Commented on your post.
+              if notification.action == 'group_approved'
+                | Approved your membership request.
+          td
+            .activity-time
+              | #{notification.time_since} ago
+          td
+            if notification.photo_url
+              img(src='https://#{notification.photo_url.substr(7)}'
+                  class='activity-photo')

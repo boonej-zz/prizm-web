@@ -9,6 +9,7 @@ var Organization    = mongoose.model('Organization');
 var Interest        = mongoose.model('Interest');
 var Activity        = mongoose.model('Activity');
 var Insight         = mongoose.model('Insight');
+var Trust           = mongoose.model('Trust');
 var Push            = require('../classes/push_notification');
 var config          = require('../config');
 var passport        = require('passport');
@@ -28,8 +29,10 @@ var activeMembers   = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_active.jade'), 'utf8');
 var pendingMembers  = fs.readFileSync(path.join(__dirname +
                       '/../views/profile/profile_members_pending.jade'), 'utf8');
-var profileFollow   = path.join(__dirname, '/../views/profile/profile_follow.jade')
-var memberCardPath  = path.join(__dirname, '/../views/profile/profile_members_card.jade')
+var profileFollow        = path.join(__dirname, '/../views/profile/profile_follow.jade');
+var memberCardPath       = path.join(__dirname, '/../views/profile/profile_members_card.jade');
+var profileNotifications = path.join(__dirname, '/../views/profile/profile_activity_notifications.jade');
+var profileRequests      = path.join(__dirname, '/../views/profile/profile_activity_requests.jade');
 var memberCard      = fs.readFileSync(memberCardPath, 'utf8');
 var rejectMail      = fs.readFileSync(path.join(__dirname +
                       '/../views/mail/reject_mail.jade'), 'utf8');
@@ -1267,48 +1270,87 @@ exports.displayActivityFeed = function(req, res) {
   }
 
   function getRequests(next) {
-    Activity
-      .find({from: userId})
-      .populate('to', 'name _id profile_photo_url')
-      .where({action: 'trust_accepted'})
-      .sort({create_date: -1})
+    var criteria = {
+        $or: [{
+            from: userId
+        }, {
+            to: userId
+        }],
+        $and: [{
+            status: {
+                $ne: 'cancelled'
+            }
+        }, {
+            status: {
+                $ne: 'inactive'
+            }
+        }]
+    };
+
+    Trust
+      .find(criteria)
+      .populate('to from', 'name _id profile_photo_url')
+      .sort('-status -create_date')
       .exec(function(err, requests) {
         if (err) next(err)
-        if (notifications) {
+        if (requests) {
           next(null, requests);
         }
       });
   }
 
-  function resolveObjectIds(activies) {
+  function resolveObjectIds(activities) {
 
-    _.each(activies, function(activity) {
+    _.each(activities, function(activity) {
 
       switch(activity.action) {
         case 'insight':
           Insight.findOne({_id: activity.insight_id}, function(err, insight) {
-            activity.photo_url = insight.file_path;
+            if (insight) {
+              activity.photo_url = insight.file_path;
+            }
           });
           break;
         case 'like':
         case 'comment':
           Post.findOne({_id: activity.post_id}, function(err, post) {
-            activity.photo_url = post.file_path;
+            if (post) {
+              activity.photo_url = post.file_path;
+            }
           });
           break;
         default:
-        console.log("default");
           activity.photo_url = null;
       }
-      console.log('activity photo: ' + activity.photo_url);
-      console.log(activity.action);
     });
-    return activies;
+    return activities;
+  }
+
+  function updateHasBeenViewed(activities) {
+    var update = {
+      $set: {has_been_viewed: true}
+    };
+
+    _.each(activities, function(activity) {
+      if (activity.has_been_viewed == false) {
+        Activity.findOneAndUpdate({
+          _id: activity._id
+        }, update, function(err, activity) {
+          if (activity) {
+            return;
+          }
+          else {
+            return;
+          }
+        });
+      }
+    });
+    return true;
   }
 
   if (req.accepts('html')) {
     var notifications = {};
-    var requests      = {};
+    var requests      = {}
 
     getNotifications(function(err, notifications) {
       if (err) {
@@ -1317,25 +1359,54 @@ exports.displayActivityFeed = function(req, res) {
       else {
         notifications = resolveObjectIds(notifications);
         notifications = _time.addTimeSinceFieldToObjects(notifications);
-        getRequests(function(err, requests) {
-          if (err) {
-            res.status(500).send({error: err});
-          }
-          else {
-            requests = resolveObjectIds(requests);
-            requests = _time.addTimeSinceFieldToObjects(requests);
-            console.log(requests);
-            res.render('profile/profile_activity', {
-              auth: true,
-              currentUser: req.user,
-              bodyId: 'activity',
-              notifications: notifications,
-              requests: requests
-            });
-          }
+        res.render('profile/profile_activity', {
+          auth: true,
+          currentUser: req.user,
+          bodyId: 'activity',
+          notifications: notifications,
+          requests: requests
         });
       }
     });
+  }
+  else if (req.accepts('application/jade')) {
+    var activity = req.get('activity');
+    var content;
+
+    console.log(activity);
+    if (String(activity) == 'trusts') {
+      getRequests(function(err, requests) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        else {
+          requests = _time.addTimeSinceFieldToObjects(requests);
+          content = jade.renderFile(profileRequests, {
+            currentUser: req.user,
+            requests: requests
+          });
+          res.send(content);
+        }
+      });
+    }
+    else if (String(activity) == 'notifications') {
+      getNotifications(function(err, notifications) {
+        if (err) {
+          res.status(500).send({error: err});
+        }
+        else {
+          notifications = _time.addTimeSinceFieldToObjects(notifications);
+          content = jade.renderFile(profileNotifications, {
+            currentUser: req.user,
+            notifications: notifications
+          });
+          res.send(content);
+        }
+      });
+    }
+    else {
+      res.status(400).send({error: 'Invalid type'});
+    }
   }
 }
 
