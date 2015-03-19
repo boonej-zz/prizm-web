@@ -86,17 +86,17 @@ tr .prizm-avatar-sm {
   padding-left: 68px;
 }
 
-.activity-status {
+.activity-action {
   padding-left: 38px;
 }
 
-.activity-status.like {
+.activity-action.like {
     background-image: url('/images/profile/activity/activity_like.png');
   background
 ;background-repeat: no-repeat;
 }
 
-.activity-status.comment {
+.activity-action.comment {
   background-image: url('/images/profile/activity/activity_comment.png');
   background-repeat: no-repeat;
 }
@@ -107,7 +107,7 @@ tr .prizm-avatar-sm {
   padding-left: 24px;
 }
 
-.activity-action.accepted {
+.activity-menu.accepted {
   height: 34px;
   width: 34px;
   background: url('/images/profile/activity/accepted.png');
@@ -118,7 +118,7 @@ tr .prizm-avatar-sm {
   margin-right: 22px;
 }
 
-.activity-action.accept {
+.activity-menu.accept {
   display: inline-block;
   height: 32px;
   width: 32px;
@@ -126,7 +126,7 @@ tr .prizm-avatar-sm {
   margin-left: 28px;
 }
 
-.activity-action.deny {
+.activity-menu.deny {
   display: inline-block;
   height: 32px;
   width: 32px;

@@ -1,11 +1,39 @@
 var activity = {
   notificationTab: function() {
-    $('#requests').hide();
-    $('#notifications').fadeIn();
+    $.ajax({
+      type: 'GET',
+      url: window.location.pathname,
+      headers: {
+        'Accept': 'application/jade',
+        'Content-type': 'application/jade',
+        'activity': 'notifications'
+      },
+      success: function(html) {
+        if (html) {
+          $('#notifications').html(html);
+        }
+        $('#requests').hide();
+        $('#notifications').fadeIn();
+      }
+    });
   },
   requestTab: function() {
-    $('#notifications').hide();
-    $('#requests').fadeIn();
+    $.ajax({
+      type: 'GET',
+      url: window.location.pathname,
+      headers: {
+        'Accept': 'application/jade',
+        'Content-type': 'application/jade',
+        'activity': 'trusts'
+      },
+      success: function(html) {
+        if (html) {
+          $('#requests').html(html);
+        }
+        $('#notifications').hide();
+        $('#requests').fadeIn();
+      }
+    });
   },
   acceptRequest: function(e) {
     var trustId = $(e.target).parent('td').data('trustId');
@@ -18,7 +46,7 @@ var activity = {
         'status': 'accepted'
       },
       success: function() {
-
+        activity.requestTab();
       }
     });
   },
@@ -33,8 +61,8 @@ var activity = {
         'status': 'cancelled'
       },
       success: function() {
-
+        activity.requestTab();
       }
     });
-  }
+  },
 }
