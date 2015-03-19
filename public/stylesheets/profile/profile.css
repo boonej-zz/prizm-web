@@ -749,4 +749,24 @@ form #inputComment {
     top: 15px;
     left: 15px;
   }
+
+  .user-circle {
+    height: 90px;
+    width: 90px;
+    font-size: 16px;
+    margin-left: 3.1%;
+  }
+}
+
+@media screen and (max-width:400px) {
+  .user-circle {
+    height: 85px;
+    width: 85px;
+    margin-left: 1%;
+    margin-top: 7%;
+  }
+
+  .profile-info li {
+    font-size: 12px;
+  }
 }
