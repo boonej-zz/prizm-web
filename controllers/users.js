@@ -1439,6 +1439,7 @@ exports.displayExploreFeed = function(req, res) {
   Post
   .find()
   .sort({create_date: -1, _id: -1})
+  .limit(21)
   .exec(function(err, posts) {
     if (err) {
       res.status(500).send({error: err});

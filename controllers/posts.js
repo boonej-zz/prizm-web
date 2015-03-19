@@ -434,22 +434,6 @@ var explorePostFeed = function(req, res) {
         res.status(500).send({ error: err});
       }
       else {
-        // posts = _time.addTimeSinceFieldToObjects(posts);
-        // if (user) {
-        //   _.each(posts, function(post, idx, list){
-        //     post.liked = false;
-        //     if (String(post.creator._id) == String(user._id)){
-        //       post.ownPost = true;
-        //     } else {
-        //       post.ownPost = false;
-        //     }
-        //     _.each(post.likes, function(like, index, listb){
-        //       if (String(like._id) == String(user._id)){
-        //         post.liked = true
-        //       };
-        //     });
-        //   });
-        // }
         var content = jade.renderFile(exploreFeed, {posts: posts});
         res.status(200).send(content);
       }
