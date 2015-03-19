@@ -1305,13 +1305,17 @@ exports.displayActivityFeed = function(req, res) {
       switch(activity.action) {
         case 'insight':
           Insight.findOne({_id: activity.insight_id}, function(err, insight) {
-            activity.photo_url = insight.file_path;
+            if (insight) {
+              activity.photo_url = insight.file_path;
+            }
           });
           break;
         case 'like':
         case 'comment':
           Post.findOne({_id: activity.post_id}, function(err, post) {
-            activity.photo_url = post.file_path;
+            if (post) {
+              activity.photo_url = post.file_path;
+            }
           });
           break;
         default:
