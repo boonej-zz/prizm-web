@@ -33,14 +33,14 @@
             .activity-status(class='#{request.status}')
               if request.to && String(request.to._id) != String(currentUser._id)
                 if request.status == 'accepted'
-                  | Has accepted your trust request
+                  | Has accepted your request.
                 else 
-                  | has recieved your trust request
+                  | Has recieved your request.
               if request.from && String(request.from._id) != String(currentUser._id)
                 if request.status == 'accepted'
-                  | Was added to your trust
+                  | Request accepted.
                 else
-                  | has requested your trust
+                  | Sent you a request.
           td
             .activity-time
               | #{request.time_since} ago
