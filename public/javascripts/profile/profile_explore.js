@@ -17,6 +17,7 @@ var explore = {
         $('#popular').hide();
         $('#featured').hide();
         $('#latest').fadeIn();
+        $('img.lazy').lazyload();
         $('#explore-type').attr('data-explore-type', 'latest');
       }
     });
@@ -38,6 +39,7 @@ var explore = {
         $('#latest').hide();
         $('#featured').hide();
         $('#popular').fadeIn();
+        $('img.lazy').lazyload();
         $('#explore-type').attr('data-explore-type', 'popular');
       }
     });
@@ -59,6 +61,7 @@ var explore = {
         $('#popular').hide();
         $('#latest').hide();
         $('#featured').fadeIn();
+        $('img.lazy').lazyload();
         $('#explore-type').attr('data-explore-type', 'featured');
       }
     });
