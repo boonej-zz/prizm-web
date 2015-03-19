@@ -73,6 +73,8 @@ router.get('/profiles/:id/following', _users.displayFollowing);
 router.get('/profiles/:id/followers', _users.displayFollowers);
 router.post('/profiles/:id/followers', _follow.followUserId);
 
+/* Trusts */
+
 /* Registration */
 router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);

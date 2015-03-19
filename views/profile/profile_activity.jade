@@ -69,7 +69,7 @@ block content
               each request in requests
                 tr
                   td
-                    if request.to
+                    if request.to && String(request.to._id) != String(currentUser._id)
                       if request.to.profile_photo_url
                         img(src='https://#{request.to.profile_photo_url.substr(7)}'
                             class='prizm-avatar-sm cursor' 
@@ -78,14 +78,41 @@ block content
                         img(src='/images/default-profile.png' 
                             class='prizm-avatar-sm cursor'
                             onclick='prizm.showProfile("#{request.to._id}")')
+                    if request.from && String(request.from._id) != String(currentUser._id)
+                      if request.from.profile_photo_url
+                        img(src='https://#{request.from.profile_photo_url.substr(7)}'
+                            class='prizm-avatar-sm cursor' 
+                            onclick='prizm.showProfile("#{request.from._id}")')
+                      else
+                        img(src='/images/default-profile.png' 
+                            class='prizm-avatar-sm cursor'
+                            onclick='prizm.showProfile("#{request.from._id}")')
                   td
-                    if request.to
+                    if request.to && String(request.to._id) != String(currentUser._id)
                       .activity-name.cursor(onclick='prizm.showProfile("#{request.to._id}")')
                         | #{request.to.name}
+                    if request.from && String(request.from._id) != String(currentUser._id)
+                      .activity-name.cursor(onclick='prizm.showProfile("#{request.from._id}")')
+                        | #{request.from.name}
                   td
-                    .activity-action(class='#{request.action}')
-                      | accepted your trust
+                    .activity-status(class='#{request.status}')
+                      if request.to && String(request.to._id) != String(currentUser._id)
+                        if request.status == 'accepted'
+                          | Has accepted your trust request
+                        else 
+                          | has recieved your trust request
+                      if request.from && String(request.from._id) != String(currentUser._id)
+                        if request.status == 'accepted'
+                          | Was added to your trust
+                        else
+                          | has requested your trust
                   td
                     .activity-time
                       | #{request.time_since} ago
                   td
+                      if request.from && String(request.from._id) != String(currentUser._id)
+                        if request.status == 'accepted'
+                          .activity-action.accepted
+                        if request.status == 'pending'
+                          .activity-action.accept
+                          .activity-action.deny

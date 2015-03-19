@@ -9,6 +9,7 @@ var Organization    = mongoose.model('Organization');
 var Interest        = mongoose.model('Interest');
 var Activity        = mongoose.model('Activity');
 var Insight         = mongoose.model('Insight');
+var Trust           = mongoose.model('Trust');
 var Push            = require('../classes/push_notification');
 var config          = require('../config');
 var passport        = require('passport');
@@ -1258,14 +1259,31 @@ exports.displayActivityFeed = function(req, res) {
   }
 
   function getRequests(next) {
-    Activity
-      .find({from: userId})
-      .populate('to', 'name _id profile_photo_url')
-      .where({action: 'trust_accepted'})
-      .sort({create_date: -1})
+    var criteria = {
+        $or: [{
+            from: userId
+        }, {
+            to: userId
+        }],
+        $and: [{
+            status: {
+                $ne: 'cancelled'
+            }
+        }, {
+            status: {
+                $ne: 'inactive'
+            }
+        }]
+    };
+
+    Trust
+      .find(criteria)
+      .populate('to from', 'name _id profile_photo_url')
+      // .where({action: 'trust_accepted'})
+      .sort('-create_date status')
       .exec(function(err, requests) {
         if (err) next(err)
-        if (notifications) {
+        if (requests) {
           next(null, requests);
         }
       });
@@ -1288,11 +1306,8 @@ exports.displayActivityFeed = function(req, res) {
           });
           break;
         default:
-        console.log("default");
           activity.photo_url = null;
       }
-      console.log('activity photo: ' + activity.photo_url);
-      console.log(activity.action);
     });
     return activities;
   }
@@ -1335,7 +1350,7 @@ exports.displayActivityFeed = function(req, res) {
             res.status(500).send({error: err});
           }
           else {
-            requests = resolveObjectIds(requests);
+            // requests = resolveObjectIds(requests);
             requests = _time.addTimeSinceFieldToObjects(requests);
             console.log(requests);
             res.render('profile/profile_activity', {

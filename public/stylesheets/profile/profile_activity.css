@@ -58,18 +58,18 @@ table tr>td:nth-child(3) {
 }
 
 table tr>td:nth-child(4) {
-  width: 15%;
+  width: 10%;
   font-size: 15px;
   font-weight: 300;
 }
 
 table tr>td:nth-child(5) {
-  width: 11%;
+  width: 16%;
 }
 
 tr .prizm-avatar-sm {
-    /* margin-right: 8px; */
-  
+   width: 53px;
+   height: 53px;
 }
 
 .activity-header {
@@ -86,17 +86,17 @@ tr .prizm-avatar-sm {
   padding-left: 68px;
 }
 
-.activity-action {
+.activity-status {
   padding-left: 38px;
 }
 
-.activity-action.like {
+.activity-status.like {
     background-image: url('/images/profile/activity/activity_like.png');
   background
 ;background-repeat: no-repeat;
 }
 
-.activity-action.comment {
+.activity-status.comment {
   background-image: url('/images/profile/activity/activity_comment.png');
   background-repeat: no-repeat;
 }
@@ -105,6 +105,34 @@ tr .prizm-avatar-sm {
   background-image: url('/images/profile/activity/activity_clock.png');
   background-repeat: no-repeat;
   padding-left: 24px;
+}
+
+.activity-action.accepted {
+  height: 34px;
+  width: 34px;
+  background: url('/images/profile/activity/accepted.png');
+  
+  background-repeat: no-repeat;
+  background-size: 34px;
+  float: right;
+  margin-right: 22px;
+}
+
+.activity-action.accept {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  background-image: url('/images/profile/activity/accept.png');
+  margin-left: 28px;
+}
+
+.activity-action.deny {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  background-image: url('/images/profile/activity/deny.png');
+  float: right;
+  margin-right: 24px;
 }
 
 img.activity-photo {
