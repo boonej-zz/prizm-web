@@ -38,8 +38,11 @@ block content
                   img(src='https://#{headerImage.substr(7)}')
         .slider-container
           .slider
-            img(src='https://#{user.profile_photo_url.substr(7)}'
-                class='prizm-avatar-md')
+            if user.profile_photo_url
+              img(src='https://#{user.profile_photo_url.substr(7)}'
+                  class='prizm-avatar-md')
+            else 
+              img(src='/images/profile/profile_default_avatar.png' class='prizm-avatar-md')
             if organization
               h1 #{organization.name}
               h4 #{user.city}, #{user.state}

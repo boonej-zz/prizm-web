@@ -274,7 +274,16 @@ userSchema.methods.addFollower = function(follower_id, next) {
     console.log('Checking if ' + follower_id + " is following " + userId);
     User.findOne(criteria, function(err, user) {
       if (user) {
-        next('Already following');
+        var index;
+        _.each(user.followers, function(follower, idx, list){
+          if (String(follower._id) == String(follower_id)) {
+            index = idx;
+          }
+        });
+        user.followers.splice(index, 1);
+        user.followers_count -= 1;
+        user.save();
+        next(null, user);
       }
       else {
         console.log('Updating followers with: ' + update);
@@ -372,7 +381,16 @@ userSchema.methods.addFollowing = function(following_id, next) {
     console.log('Checking if ' + following_id + " is following " + userId);
     User.findOne(criteria, function(err, user) {
       if (user) {
-        next('Already following');
+        var index;
+        _.each(user.following, function(follower, idx, list){
+          if (String(follower._id) == String(following_id)) {
+            index = idx;
+          }
+        });
+        user.following_count -= 1;
+        user.following.splice(index, 1);
+        user.save();
+        next(null, user);
       }
       else {
         console.log('Updating following with: ' + update);
