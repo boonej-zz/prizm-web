@@ -228,6 +228,7 @@ userSchema.statics.findOrganizationMembers = function(filters, next) {
             });
           }
         });
+        console.log(users);
         next(err, users);
       });
   });
