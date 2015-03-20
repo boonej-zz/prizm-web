@@ -7,7 +7,7 @@ div(class='modal fade'
     .modal-content
       .modal-body
         span Create Post
-        form#new-post
+        form#new-post(action='/posts' method='post' enctype='multipart/form-data')
           .form-row
             output#preview
             input#post-text(type='textarea' 
@@ -37,6 +37,7 @@ div(class='modal fade'
             //- Trust Toggle
             button.btn.btn-post.btn-trust(type='button')
               input(id='trust' type='checkbox' name='trust')
+              span
           .form-row
             span Select Category
           .form-row

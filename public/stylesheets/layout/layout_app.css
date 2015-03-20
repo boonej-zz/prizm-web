@@ -605,11 +605,40 @@ input#post-text {
 }
 
 .btn-trust {
+/*   background-image: url('/images/posts/globe_icon.png');
+  background-size: 36px;
+  background-repeat: no-repeat;
+  background-position-x: 45px;
+  background-position-y: 20px; */
+  padding: 0px;
+}
+
+.btn-trust input[type=checkbox] {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+    top: 0px;
+    z-index: 500;
+    opacity: 0;
+}
+
+.btn-trust input[type=checkbox] + span {
   background-image: url('/images/posts/globe_icon.png');
   background-size: 36px;
   background-repeat: no-repeat;
   background-position-x: 45px;
-  background-position-y: 20px;
+  background-position-y: 17px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  right: 121px;
+  background-color: inherit;
+}
+
+.btn-trust input[type=checkbox]:checked + span {
+  background-color: #ffffff;
 }
 
 .btn-category {
