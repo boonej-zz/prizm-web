@@ -930,7 +930,7 @@ var membersHTMLRequest = function(req, res) {
           res.redirect('/profile');
         }
         else {
-          User.findOrganizationMembers({organization: organization.id, status: 'active'}, function(err, members) {
+          User.findOrganizationMembers({organization: organization.id, status: 'active'}, organization.owner, function(err, members) {
             if (err) {
                 res.status(500).send({error: err});
             }
@@ -975,7 +975,7 @@ var membersJADERequest = function(req, res) {
         User.findOrganizationMembers({
           organization: organization.id,
           status: status
-        }, function(err, members) {
+        }, organization.owner, function(err, members) {
           if (err) {
               console.log(err);
               res.status(500).send({error: err});
@@ -1009,7 +1009,7 @@ var membersJSONRequest = function(req, res) {
       }
       else {
         criteria.organization = organization.id;
-        User.findOrganizationMembers(criteria, function(err, members) {
+        User.findOrganizationMembers(criteria, organization.owner, function(err, members) {
           if (err) {
             console.log(err);
               res.status(500).send({error: err});
