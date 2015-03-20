@@ -192,6 +192,8 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
 userSchema.statics.findOrganizationMembers = function(filters, next) {
   var $this = this;
   var Trust = mongoose.model('Trust');
+  console.log(filters);
+  console.log(this);
   Trust.find({
     status: 'accepted',
     from: this._id
