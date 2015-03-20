@@ -38,7 +38,7 @@ block content
               name='image' onchange='Upload.fileSelect(event)')
               output#preview(style='border: 1px solid #666; width: 800px')
               input#avatar_url(type='hidden' name='avatar_url' value='/public/images/default.png')
-              input#insight-file-path(type='hidden' name='filePath' value='')
+              input#insight-file-path(type='hidden' name='filePath' accept='image/*' value='')
             .insight.link
               label(for='insight-link-title') Link Title:
               input#insight-link-title(type='text' name='linkTitle')
