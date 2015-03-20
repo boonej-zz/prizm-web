@@ -87,24 +87,12 @@ var login = {
   }
 };
 
-/* Fix for Navbar (bootstrap modal moves it right 15px) */
-/* This seems to shift it left on my browsers 
-$(function() {
-  $('body').on('show.bs.modal', function() {
-    $('.navbar-default').css('right', '15px');
-  });
-  $('body').on('hidden.bs.modal', function() {
-    $('.navbar-default').css('right', '0px');
-  });
-});
+var newPost = {
+  showModal: function() {
+    $('#newPostModal').modal();
+  }
+}
 
-*/
-
-/* Add current field to .user-menu based of window location */
-// $(function(){
-//   var location = window.location.pathname;
-//   $('a[href="' + location + '"]').addClass('current');
-// });
 $(function() {
   $('img.lazy').lazyload();
 });

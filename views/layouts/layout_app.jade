@@ -76,7 +76,7 @@ html
                 | Prizm
               if (auth)
                 .menu-icon(onclick='nav.toggleSettings()')
-                .plus-icon
+                .plus-icon.cursor(onclick='newPost.showModal()')
                 .avatar-menu
                   if currentUser.profile_photo_url
                     img(src='https://#{currentUser.profile_photo_url.substr(7)}'
@@ -106,6 +106,9 @@ html
             .modal-body
               include ../login/login_form
       // End Login Modal
+      // Begin New Post Modeal
+      include ../posts/post_create
+      // End New Post Modal
     block content
 
     block settings

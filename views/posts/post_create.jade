@@ -1,13 +1,13 @@
 div(class='modal fade'
-    id='createPostModal'
+    id='newPostModal'
     tabIndex='-1'
     role='dialog'
-    aria-labelledby='createPostModalLabel')
+    aria-labelledby='newPostModalLabel')
   .modal-dialog
     .modal-content
-      .modal-body.create-post
+      .modal-body.new-post
         span Create Post
-        form#create-post
+        form#new-post
           .form-row
             output#preview
             input#post-text(type='textarea' 
@@ -28,10 +28,10 @@ div(class='modal fade'
                                      accept='image/*'
                                      onchange='Upload.fileSelect(event)')
             //- Location
-            button.btn.btn-post.btn-location(type='button') 
+            button.btn.btn-post.btn-location(type='button'
                                              onclick='post.addLocation()')
             //- Tag
-            button.btn.btn-post.btn-tag(type='button') 
+            button.btn.btn-post.btn-tag(type='button'
                                         onclick='post.tagPost()')
             //- Trust Toggle
             input.btn.btn-post.btn-public(id='trust'
