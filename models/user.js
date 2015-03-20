@@ -190,8 +190,22 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
 }
 
 userSchema.statics.findOrganizationMembers = function(filters, next) {
-  this.model('User').find({'org_status': {$elemMatch: filters}}, function(err, users) {
-    next(err, users);
+  var $this = this;
+  var Trust = mongoose.model('Trust');
+  Trust.find({
+    status: 'accepted',
+    from: this._id
+  }, function(err, trusts){
+      var trustArray = [];
+      if (_.has(trusts, 'length')){
+        trustArray = _.pluck(trusts, 'to');
+      } 
+      $this.model('User').find({$or: [
+        {'org_status': {$elemMatch: filters}},
+        {_id: {$in: trustArray}}
+      ]}, function(err, users){
+        next(err, users);
+      });
   });
 };
 
