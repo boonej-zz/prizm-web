@@ -491,6 +491,216 @@ button[data-is-following="false"]{
   color: #3e6a9e;
 }
 
+/* New Post */
+#newPostModal .modal-content {
+    margin-top: 100px;
+    width: 490px;
+
+    height: 655px;
+    border-radius: 0px;
+    border: none;
+}
+
+.modal-body span {
+    height: 36px; 
+    display: inherit;
+    background-color: #e4e5ea;
+
+    color: #545358; font-size: 24px; 
+    font-weight: 400;
+    text-align: center;
+}
+
+form#new-post {
+
+}
+
+form#new-post output {
+    width: 110px;
+    height: 110px;
+    display: inline-block;
+    margin: 35px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.35);
+    padding: 0px
+}
+
+form#new-post output div {
+  width: 100% !important;
+  height: 100% !important;
+  background-size: 110px !important;
+}
+
+
+.form-row>span {
+    opacity: 0.7; color: #050506; font-size: 14px;
+    line-height: 36px;
+    text-align: left;
+    padding-left: 34px;
+}
+
+form#new-post btn-post {
+
+}
+
+input#post-text {
+    color: #545358; font-size: 19px;
+  
+    display: inline-block;
+    height: 110px;
+    width: 275px;
+    margin-top: 35px;
+    position: absolute;
+    border: none;
+}
+
+.btn-post {
+    width: 122px; height: 71px; background-color: #f2f3f9;
+  
+    border-radius: 0px;
+    border-color: #fff;
+    border-right: none;
+    /* border-bottom: none; */
+    /* border-top: none; */
+}
+
+.btn-image {
+    /* position: relative; */
+    /* overflow: hidden; */
+    background-image: url('/images/posts/camera_icon.png');
+    background-size: 36px 28px;
+    background-repeat: no-repeat;
+    background-position-x: 43px;
+    background-position-y: 21px;
+}
+.btn-image input[type=file] {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    /* font-size: 100px; */
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.btn-location {
+  background-image: url('/images/posts/locationpin_icon.png');
+  background-size: 24px 33px;
+  background-repeat: no-repeat;
+  background-position-x: 50px;
+  background-position-y: 19px;
+}
+
+.btn-tag {
+  background-image: url('/images/posts/usertag_icon.png');
+  background-size: 36px 35px;
+  background-repeat: no-repeat;
+  background-position-x: 44px;
+  background-position-y: 18px;
+}
+
+.btn-trust {
+  background-image: url('/images/posts/globe_icon.png');
+  background-size: 36px;
+  background-repeat: no-repeat;
+  background-position-x: 45px;
+  background-position-y: 20px;
+}
+
+.btn-category {
+   width: 163px;
+  
+   height: 98px;
+   padding: 0px;
+   position: relative;
+   z-index: 0;
+}
+
+.btn-category span {
+  background: inherit;
+  color: #545358;
+  font-size: 14px;
+  line-height: 14px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 162px;
+  padding-top: 69px;
+  z-index: 0;
+  vertical-align: top;
+}
+
+.btn-category input[type=radio] {
+    position: relative;
+
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    margin-top: 0px;
+    opacity: 0;
+}
+
+.btn-category input[type=radio]:checked + span {
+  background-color: #fff;
+}
+
+input#aspiration + span {
+  background-image: url('/images/posts/aspirations_icon.png');
+  background-size: 34px 26px;
+  background-repeat: no-repeat;
+  background-position: 64px 30px;
+}
+
+input#passion + span {
+  background-image: url('/images/posts/passions_icon.png');
+  background-size: 34px 30px;
+  background-repeat: no-repeat;
+  background-position: 64px 26px;
+}
+
+input#experiences + span {
+  background-image: url('/images/posts/experiences_icon.png');
+  background-size: 34px 35px;
+  background-repeat: no-repeat;
+  background-position: 64px 21px;
+}
+
+input#achievements + span {
+  background-image: url('/images/posts/achievements_icon.png');
+  background-size: 34px 35px;
+  background-repeat: no-repeat;
+  background-position: 64px 21px;
+}
+
+input#inspirations + span{
+  background-image: url('/images/posts/inspirations_icon.png');
+  background-size: 19px 34px;
+  background-repeat: no-repeat;
+  background-position: 72px 22px;
+}
+
+input#personal + span {
+  background-image: url('/images/posts/personal_icon.png');
+  background-size: 36px;
+  background-repeat: no-repeat;
+  background-position: 63px 21px;
+}
+
+.btn-create-post {
+    width: 162px;
+  
+    height: 37px;
+    margin-top: 26px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 @media screen and (max-width:500px) {
   /* Navbar */
   .menu-icon {
