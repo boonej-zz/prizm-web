@@ -341,16 +341,21 @@ var organizationMembersFeed = function(req, res) {
       }
     });
   }
-  User.findOrganizationMembers({
-    organization: orgID,
-    status: 'active'
-  }, function(err, users) {
+  console.log('finding members');
+  var userCriteria = {
+    org_status: {$elemMatch: {
+      organization: orgID,
+      status: 'active'
+                }}  
+  };
+  User.find(userCriteria, function(err, users) {
     if (err) { 
+      console.log('error');
       res.status(500).send({error: err}); 
     }
     else {
       _.each(users, function(user) {
-        criteria.members.push(user.id);
+        members.push(user._id);
       });
       Post.find(criteria)
         .sort({create_date: -1})
@@ -376,7 +381,7 @@ var organizationMembersFeed = function(req, res) {
               });
             }
 
-            var content = jade.render(postFeed, {posts: posts});
+            var content = jade.renderFile(postFeed, {posts: posts});
             res.status(200).send(content);
           }
         });
