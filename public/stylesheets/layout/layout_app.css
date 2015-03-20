@@ -447,6 +447,12 @@ body:before {
   background-image: url('/images/instagram.png');
 }
 
+.page-header {
+  color: #545358;
+  font-size: 30px;
+  font-weight: bold;
+}
+
 
 .contact-button {
   width: 32px;

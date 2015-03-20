@@ -73,10 +73,7 @@ tr .prizm-avatar-sm {
 }
 
 .activity-header {
-  font-size: 24px;
   line-height: 40px;
-  font-weight: 700;
-  color: #545358;
   margin-top: 50px;
   margin-bottom: 20px;
   background-image: url('/images/profile/activity/activity_header.png');
