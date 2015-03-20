@@ -197,13 +197,37 @@ userSchema.statics.findOrganizationMembers = function(filters, next) {
     from: this._id
   }, function(err, trusts){
       var trustArray = [];
-      if (_.has(trusts, 'length')){
-        trustArray = _.pluck(trusts, 'to');
-      } 
+      if (filters.status == 'active') {
+        if (_.has(trusts, 'length')){
+          trustArray = _.pluck(trusts, 'to');
+        }
+      }
       $this.model('User').find({$or: [
         {'org_status': {$elemMatch: filters}},
         {_id: {$in: trustArray}}
       ]}, function(err, users){
+        _.each(users, function(user, idx, list){
+          if(users.org_status && _.has(users.org_status, 'length')) {
+            var needsUpdate = true;
+            _.each(user.org_status, function(org,index,list){
+              if (String(org.organization) == String(filters.organization)){
+                needsUpdate = false;
+              }
+            });
+            if (needsUpdate) {
+              user.org_status.push({
+                organization: filters.organization,
+                status: 'active'
+              });
+            }
+          } else {
+            user.org_status = [];
+            user.org_status.push({
+              organization: filters.organization,
+              status: 'active'
+            });
+          }
+        });
         next(err, users);
       });
   });
