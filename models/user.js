@@ -206,7 +206,6 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, next) {
         {'org_status': {$elemMatch: filters}},
         {_id: {$in: trustArray}}
       ]}, function(err, users){
-        console.log(err);
         _.each(users, function(user, idx, list){
           if(users.org_status && _.has(users.org_status, 'length')) {
             var needsUpdate = true;
@@ -229,7 +228,6 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, next) {
             });
           }
         });
-        console.log(users);
         next(err, users);
       });
   });
