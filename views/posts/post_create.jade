@@ -1,0 +1,68 @@
+div(class='modal fade'
+    id='createPostModal'
+    tabIndex='-1'
+    role='dialog'
+    aria-labelledby='createPostModalLabel')
+  .modal-dialog
+    .modal-content
+      .modal-body.create-post
+        span Create Post
+        form#create-post
+          .form-row
+            output#preview
+            input#post-text(type='textarea' 
+                            name='postText' 
+                            placeholder='Caption your post...')
+          .form-row
+            span Select options
+          .form-row
+            //- Image Upload
+            input#x1(type='hidden' name='x1')
+            input#x2(type='hidden' name='x2')
+            input#y1(type='hidden' name='y1')
+            input#y2(type='hidden' name='y2')
+            input#width(type='hidden' name='width' )
+            input#height(type='hidden' name='height' )
+            input#photo-image-upload(type='file' 
+                                     name='image'
+                                     accept='image/*'
+                                     onchange='Upload.fileSelect(event)')
+            //- Location
+            button.btn.btn-post.btn-location(type='button') 
+                                             onclick='post.addLocation()')
+            //- Tag
+            button.btn.btn-post.btn-tag(type='button') 
+                                        onclick='post.tagPost()')
+            //- Trust Toggle
+            input.btn.btn-post.btn-public(id='trust'
+                                          type='checkbox'
+                                          name='trust')
+          .form-row
+            span Select Category
+          .form-row
+            .radio
+              input(id='aspiration' type='radio' name='category' value='aspiration')
+              label(for='aspiration')
+                span
+            .radio
+              input(id='passion' type='radio' name='category' value='passion')
+              label(for='passion')
+                span
+            .radio
+              input(id='experiences' type='radio' name='category' value='experiences')
+              label(for='experiences')
+                span
+            .radio
+              input(id='acheivements' type='radio' name='category' value='acheivements')
+              label(for='acheivements')
+                span
+            .radio
+              input(id='inspirations' type='radio' name='category' value='inspirations')
+              label(for='inspirations')
+                span
+            .radio
+              input(id='personal' type='radio' name='category' value='personal')
+              label(for='personal')
+                span
+          .form-row
+            button.btn.btn-primary.btn-create-post(type='submit') Save
