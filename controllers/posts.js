@@ -350,7 +350,7 @@ var organizationMembersFeed = function(req, res) {
     }
     else {
       _.each(users, function(user) {
-        members.push(user.id);
+        criteria.members.push(user.id);
       });
       Post.find(criteria)
         .sort({create_date: -1})
