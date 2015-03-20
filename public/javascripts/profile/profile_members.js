@@ -369,6 +369,6 @@ $(function(){
 });
 
 $(document).ready(function(){
-   members.formatTable('606px');
+  // members.formatTable('606px');
 });
 
