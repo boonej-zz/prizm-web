@@ -193,7 +193,7 @@ userSchema.statics.findOrganizationMembers = function(filters, next) {
   var $this = this;
   var Trust = mongoose.model('Trust');
   console.log(filters);
-  console.log(this);
+  console.log(this._id);
   Trust.find({
     status: 'accepted',
     from: this._id
@@ -208,6 +208,8 @@ userSchema.statics.findOrganizationMembers = function(filters, next) {
         {'org_status': {$elemMatch: filters}},
         {_id: {$in: trustArray}}
       ]}, function(err, users){
+        console.log(err);
+        console.log(users.length);
         _.each(users, function(user, idx, list){
           if(users.org_status && _.has(users.org_status, 'length')) {
             var needsUpdate = true;
