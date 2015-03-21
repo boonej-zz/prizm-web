@@ -28,6 +28,7 @@ var passport = require('passport');
 var sessionURL = process.env.SESSION_URL || 'mongodb://localhost/session';
 var app = express();
 https.createServer(opts, app).listen(4433);
+console.log('https server started');
 
 app.use(function(req, res, next){
   var protocol = req.protocol;
