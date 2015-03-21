@@ -253,7 +253,7 @@ var members = {
         }
         $('#pending-members').hide();
         $('#active-members').fadeIn();
-        members.formatTable('606px');
+        //members.formatTable('606px');
 
       }
     });  
@@ -277,7 +277,7 @@ var members = {
         }
         $('#active-members').hide();
         $('#pending-members').fadeIn();
-        members.formatTable('606px');
+        //members.formatTable('606px');
       }
     });
    },
