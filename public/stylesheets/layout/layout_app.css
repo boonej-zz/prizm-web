@@ -481,14 +481,14 @@ body:before {
 }
 
 button[data-is-following="true"] {
-  background-color: #3e6a9e;
-  color: #ffffff; 
+  background-color: #3e6a9e !important;
+  color: #ffffff !important; 
 }
 
 button[data-is-following="false"]{
-  background-color: #ffffff;
-  border: 1px solid #d1d1d2; 
-  color: #3e6a9e;
+  background-color: #ffffff !important;
+  border: 1px solid #d1d1d2 !important; 
+  color: #3e6a9e !important;
 }
 
 /* New Post */
