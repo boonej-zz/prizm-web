@@ -163,8 +163,12 @@ var reg = {
           dataType: 'user'
         },
         data: user,
-        success: function(user) {
+        success: function(response) {
+          var user = response.user?response.user:response;
           $('.registration-card').attr('data-user-id', user._id);
+          if (response.welcomePhoto) {
+            $('#welcomePhoto').attr('src', response.welcomePhoto);
+          }
           reg.nextSection();
           // Hack - need to append 'data-user-id' attr to photo upload
           $('#userId').attr('value', user._id);

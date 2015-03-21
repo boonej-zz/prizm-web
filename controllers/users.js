@@ -1139,7 +1139,7 @@ var registerIndividual = function(req, res) {
       profile_photo_url: defaultProfileUrl
     });
     if (req.body.programCode) {
-      newUser.programe_code = req.body.programCode;
+      newUser.program_code = req.body.programCode;
       newUser.org_status = {
         organization: ObjectId(organization._id),
         status: 'pending'
@@ -1152,10 +1152,15 @@ var registerIndividual = function(req, res) {
           res.status(500).send({error: err});
           console.log('saving user error');
         }
+        user.welcomePhoto = organization.welcome_image_url;
+        var response = {
+          user: user,
+          welcomePhoto: organization.welcome_image_url
+        };
         if (user) {
           console.log('user saved');
-          res.status(200).send(user);
-          _mail.sendWelcomeMail(user);
+          res.status(200).send(response);
+          _mail.sendWelcomeMail(response);
         }
       });
     }
