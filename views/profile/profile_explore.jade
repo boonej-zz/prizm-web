@@ -8,32 +8,28 @@ block head
 
 block content
   .container.topnav-offset
-    .row
-      .explore-header.col-sm-10.col-sm-offset-1.page-header
+    #explore-header
+      .explore-header.page-header
         | Explore 
-    .row
-      #explore-type(data-explore-type='latest')
-      .col-sm-10.col-sm-offset-1
-          ul.nav.nav-tabs.nav-justified(role='tablist' id='explore-tab')
-            li(role='presentation' class='active')
-              a(href='#'
-                data-toggle='tab'
-                onclick='explore.latestTab()')
-                | Latest
-            li(role='presentation')
-              a(href='#'
-                data-toggle='tab'
-                onclick='explore.popularTab()')
-                | Popular
-            li(role='presentation')
-              a(href='#'
-                data-toggle='tab'
-                onclick='explore.featuredTab()')
-                | Featured
-      #latest.col-sm-10.col-sm-offset-1
-        include ../posts/explore_feed
-      #popular.col-sm-10.col-sm-offset-1
-      #featured.col-sm-10.col-sm-offset-1
+    #explore-type(data-explore-type='latest')
+    ul.nav.nav-tabs.nav-justified(role='tablist' id='explore-tab')
+      li.cursor(  role='presentation' 
+                  class='active'
+                  onclick='explore.latestTab()'
+                  data-toggle='tab')
+        | Latest
+      li.cursor(role='presentation'
+        onclick='explore.popularTab()'
+        data-toggle='tab')
+        | Popular
+      li.cursor(role='presentation'
+        onclick='explore.featuredTab()'
+        data-toggle='tab')
+        | Featured
+    #latest
+      include ../posts/explore_feed
+    #popular
+    #featured
   div#postModal.modal.fade(
     tabIndex='-1'
     role='dialog'

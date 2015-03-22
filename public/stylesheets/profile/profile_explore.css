@@ -1,9 +1,14 @@
+.container {
+  padding: 0;
+  width: 986px;
+}
+
 .explore-header {
   line-height: 40px;
   margin-top: 50px;   margin-bottom: 20px;
   background-image: url('/images/profile/explore/explore_header.png');
   background-repeat: no-repeat;
-  background-position-x: 15px;
+  background-position-x: 24px;
   padding-left: 67px;
 }
 
@@ -11,22 +16,188 @@
   margin-top: 0px;
   border: 0px solid transparent;
   width: 315px;
+  height: 315px;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
 }
 
 #explore-tab li {
   width: 315px;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+  background-color: #e4e5ea;
+  height: 44px;
+  line-height: 44px;
+  border-left: 1px solid #EFF1F4;
+  border-right: 1px solid #EFF1F4;
+  color: #555;
+}
+
+#explore-tab li.active {
+  margin: 0px;
+  color: #334b8f;
+  background-color: #fff;
 }
 
 #explore-tab li a {
-  border-radius: 0px;
-  border: none;
+  border-radius: 0;
+  border-top: none;
+  border-bottom: none;
+  border-left: 1px solid #EFF1F4;
+  border-right: 1px solid #EFF1F4;
   font-size: 18px;
   font-weight: 400;
   color: #555;
   background-color: #e4e5ea;
 }
 
+
 #explore-tab li.active a {
   color: #334b8f;
   background-color: #fff;
+}
+
+.nav-tabs, #latest, #popular, #featured {
+  margin-left: 23px;
+}
+
+.post-image img {
+  width: 313px;
+  height: 313px;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-tabs, #latest, #popular, #featured {
+    margin-left: 0px;
+  }
+  .nav-tabs {
+    position: fixed;
+    z-index: 100;
+    background-color:  #EFF1F4;
+    width: 498px;
+  }
+
+  #latest, #popular, #featured {
+    margin-top: 44px;
+  }
+
+  .container {
+    width: 498px;
+  }
+
+  #explore-header {
+    display: none;
+  }
+
+  #explore-tab {
+    width: 498px;
+    float: left;
+  }
+
+  #explore-tab li {
+    width: 165px;
+    display: inline-block;
+    font-size: 17px;
+  }
+   #explore .post, .post-image {
+    width: 165px;
+    height: 165px;
+  }
+
+  .post-image img {
+    width: 164px;
+    height: 164px;
+  }
+
+}
+
+@media screen and (max-width: 488px) {
+  .nav-tabs, #latest, #popular, #featured {
+    margin-left: 0px;
+  }
+  .nav-tabs {
+    width: 420px;
+    position: fixed;
+    z-index: 100;
+    margin: 0;
+  }
+
+  #latest, #popular, #featured {
+    margin-top: 44px;
+  }
+
+  .container {
+    width: 420px;
+  }
+
+  #explore-header {
+    display: none;
+  }
+
+  #explore-tab {
+    width: 420px;
+  }
+
+  #explore-tab li {
+    width: 140px;
+    display: inline-block;
+    font-size: 16px;
+  }
+   #explore .post, .post-image {
+    width: 140px;
+    height: 140px;
+  }
+
+  .post-image img {
+    width: 139px;
+    height: 139px;
+  }
+
+}
+
+@media screen and (max-width: 410px) {
+  .nav-tabs, #latest, #popular, #featured {
+    margin-left: 0px;
+  }
+  .nav-tabs {
+    width: 318px;
+    position: fixed;
+    z-index: 100;
+    margin: 0;
+  }
+
+  #latest, #popular, #featured {
+    margin-top: 44px;
+  }
+
+  .container {
+    width: 318px;
+  }
+
+  #explore-header {
+    display: none;
+  }
+
+  #explore-tab {
+    width: 318px;
+  }
+
+  #explore-tab li {
+    width: 106px;
+    display: inline-block;
+    font-size: 14px;
+  }
+   #explore .post, .post-image {
+    width: 106px;
+    height: 106px;
+  }
+
+  .post-image img {
+    width: 105px;
+    height: 105px;
+  }
+
 }
