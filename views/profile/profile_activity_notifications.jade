@@ -28,9 +28,11 @@
               if notification.action == 'comment'
                 | Commented on your post.
               if notification.action == 'group_approved'
-                | Approved your membership request.
+                | Approved membership.
               if notification.action == 'post'
                 | Created a post.
+              if notification.action == 'group_joined'
+                | Reviewing membership.
           td
             .activity-time
               | #{notification.time_since} ago
