@@ -396,8 +396,9 @@ var explorePostFeed = function(req, res) {
   var criteria = {
     status: 'active',
     category: {$ne: 'personal'},
-    scope: {$ne: 'private'}
-  }
+    scope: 'public',
+    is_flagged: false
+  };
   var sort;
 
   if (exploreType == 'latest') {
