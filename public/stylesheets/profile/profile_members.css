@@ -98,12 +98,12 @@ table>thead>tr:last-of-type>th {
   border-top: none;
 }
 
-tbody tr:hover td:first-child {
+tbody tr.hover td:first-child {
   background-image: url('/images/profile/members_highlight.png');
   background-repeat: no-repeat;
 }
 
-tr:hover {
+tr.hover {
   opacity: 1.0 !important;
 }
 
@@ -112,11 +112,11 @@ td .prizm-avatar-sm {
   width: 53px;
 }
 
-.table-striped>tbody>tr:nth-child(odd):hover {
+.table-striped>tbody>tr.hover:nth-child(odd) {
 background-color: rgb(240, 244, 248);
 }
 
-.table-striped>tbody>tr:nth-child(even):hover {
+.table-striped>tbody>tr.hover:nth-child(even) {
 background-color: rgb(246, 249, 254);
 }
 

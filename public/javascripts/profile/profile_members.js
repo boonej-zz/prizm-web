@@ -1,5 +1,13 @@
 /* Members Page */
-
+var hoverLock = false;
+var hover = function() {
+ $('tbody>tr').hover(function(){
+    if (!hoverLock){
+      $('tbody>tr').removeClass('hover');
+      $(this).addClass('hover');
+    }
+  });
+};
 var members = {
   // Member Action Methods
   formatTable: function(height) {
@@ -109,6 +117,7 @@ var members = {
       },
       success: function() {
         members.activeTab();
+        hoverLock = false;
       },
       error: function(jqXHR) {
         console.log(jqXHR.responseText);
@@ -267,6 +276,7 @@ var members = {
         }
         $('#pending-members').hide();
         $('#active-members').fadeIn();
+        hover();
         //members.formatTable('606px');
 
       }
@@ -291,6 +301,7 @@ var members = {
         }
         $('#active-members').hide();
         $('#pending-members').fadeIn();
+        hover();
         //members.formatTable('606px');
       }
     });
@@ -363,22 +374,25 @@ $(function(){
     if ($(target).is(ambassadorMenu)) {
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
+      hoverLock = !hoverLock;      
     }
     else if ($(target).is(restrictMenu)) {
       $('.remove-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
       $('.member-type').removeClass('selected');
+      hoverLock = !hoverLock;
     }
     else if ($(target).is(removeMenu)) {
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
       $('.member-type').removeClass('selected');
+      hoverLock = !hoverLock;
     }
     else if ($(target).is(groupButton)) {
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
       $('.member-type').removeClass('selected');
-
+      hoverLock = !hoverLock;
     }
     else {
       $('.remove-menu').addClass('hidden');
@@ -387,6 +401,7 @@ $(function(){
       $('.member-type').removeClass('selected');    
       $('.group-menu').removeClass('selected');
       $('.group-menu').addClass('hidden');
+      hoverLock = false;
     }
   })
 });
@@ -398,5 +413,6 @@ $(document).ready(function(){
     var group = $this.children('.group-icon').attr('group');
     $this.parents('.group-button').children('div.group-icon').attr('group', group);
   });
+  hover(); 
 });
 
