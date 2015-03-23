@@ -395,7 +395,6 @@ var explorePostFeed = function(req, res) {
   var user = req.user;
   var criteria = {
     status: 'active',
-    category: {$ne: 'personal'},
     scope: 'public',
     is_flagged: false
   };
