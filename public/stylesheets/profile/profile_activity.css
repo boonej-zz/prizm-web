@@ -190,6 +190,10 @@ img.activity-photo {
     display: inline-block;
   }
 
+  .background-column {
+    width: 498px;
+  }
+
   .container.topnav-offset {
     width: 498px;
     margin-left: auto;
@@ -227,6 +231,11 @@ img.activity-photo {
     z-index: 100;
     width: 420px !important;
   }
+
+  .background-column: {
+    width: 420px;
+  }
+
   .nav-tabs li {
     width: 210px !important;
     display: inline-block;
@@ -269,6 +278,11 @@ img.activity-photo {
     z-index: 100;
     width: 318px !important;
   }
+
+  .background-column: {
+    width: 318px;
+  }
+
   .nav-tabs li {
     width: 159px !important;
     display: inline-block;
