@@ -4,7 +4,7 @@
   .next-post-right.cursor(onclick='profile.nextPost(event, "right")')
   .row
     .post-modal-left.no-padding
-      .post-image(onclick='profile.dismissModal(event)')
+      .post-image.single-post(onclick='profile.dismissModal(event)')
         img(src='https://#{post.file_path.substr(7)}')
     .post-modal-right.no-padding.absolute-height
       .comments-header
@@ -34,7 +34,7 @@
                     onclick='prizm.showProfile("#{post.creator._id}")')
               else
                 img(src='/images/profile/profile_default_avatar.png'
-                    onclick='prizm.showProfile("#{post.creator._id}")')
+                    onclick='prizm.showProfile("#{post.creator._id}")' class='prizm-avatar-sm')
             .avatar-name.cursor(onclick='prizm.showProfile("#{post.creator._id}")')
               | #{post.creator.name}
             .comment-text
