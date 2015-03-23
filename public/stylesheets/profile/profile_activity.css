@@ -1,13 +1,43 @@
-#activity-tab li a {
-  border-radius: 0px;
-  border: none;
+.container.topnav-offset {
+  width: 986px;
+  padding: 0;
+}
+.table {
+ 
+}
+
+
+.nav-tabs li
+{
+  width: 474px!important;
+  height: 42px; 
+  line-height: 42px;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
   font-size: 18px;
   font-weight: 400;
   color: #555;
   background-color: #e4e5ea;
 }
 
-#activity-tab li.active a {
+
+
+
+.background-column {
+  width: 948px;
+  margin-left: 19px;
+}
+
+.nav-tabs {
+  width: 948px;
+  margin-left: 19px;
+}
+
+
+#activity-tab li.active {
   color: #334b8f;
   background-color: #fff;
 }
@@ -140,4 +170,130 @@ img.activity-photo {
 img.activity-photo {
   width: 100px; 
   float: right;
+}
+
+@media screen and (max-width: 600px) {
+  .activity-header {
+    display: none;
+  }
+  .nav-tabs, .background-column {
+    margin-left: 0px;
+  }
+
+  .nav-tabs {
+    position: fixed;
+    z-index: 100;
+    width: 498px !important;
+  }
+  .nav-tabs li {
+    width: 249px !important;
+    display: inline-block;
+  }
+
+  .container.topnav-offset {
+    width: 498px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  table.table {
+    margin-top: 42px;
+    width: 498px !important;
+  }
+
+  table tr>td:nth-child(2) {
+    font-size: 16px;
+  }
+
+  table tr>td:nth-child(3) {
+    font-size: 14px;
+  }
+
+  table tr>td:nth-child(4) {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 488px) {
+  .activity-header {
+    display: none;
+  }
+  .nav-tabs, .background-column {
+    margin-left: 0px;
+  }
+
+  .nav-tabs {
+    position: fixed;
+    z-index: 100;
+    width: 420px !important;
+  }
+  .nav-tabs li {
+    width: 210px !important;
+    display: inline-block;
+  }
+
+  .container.topnav-offset {
+    width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  table.table {
+    margin-top: 42px;
+    width: 420px !important;
+  }
+
+  table tr>td:nth-child(2) {
+    font-size: 16px;
+  }
+
+  table tr>td:nth-child(3) {
+    font-size: 14px;
+  }
+
+  table tr>td:nth-child(4) {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .activity-header {
+    display: none;
+  }
+  .nav-tabs, .background-column {
+    margin-left: 0px;
+  }
+
+  .nav-tabs {
+    position: fixed;
+    z-index: 100;
+    width: 318px !important;
+  }
+  .nav-tabs li {
+    width: 159px !important;
+    display: inline-block;
+  }
+
+  .container.topnav-offset {
+    width: 318px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  table.table {
+    margin-top: 42px;
+    width: 318px !important;
+  }
+
+  table tr>td:nth-child(2) {
+    font-size: 15px;
+  }
+
+  table tr>td:nth-child(3) {
+    font-size: 13px;
+  }
+
+  table tr>td:nth-child(4) {
+    font-size: 12px;
+  }
 }

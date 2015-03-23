@@ -6,24 +6,17 @@ block head
 
 block content
   .container.topnav-offset
-    .row
-      .activity-header.col-sm-10.col-sm-offset-1.page-header
-        | Activity 
-    .row
-      .col-sm-10.col-sm-offset-1
-          ul.nav.nav-tabs.nav-justified(role='tablist' id='activity-tab')
-            li(role='presentation' class='active')
-              a(href='#'
-                data-toggle='tab'
-                onclick='activity.notificationTab()')
-                | Notifications
-            li(role='presentation' class='')
-              a(href='#'
-                data-toggle='tab'
-                onclick='activity.requestTab()')
-                | Requests
-    .row
-      #notifications
-        include profile_activity_notifications
-      #requests
-        include profile_activity_requests
+    
+    .activity-header.page-header
+      | Activity 
+    ul.nav.nav-tabs(role='tablist' id='activity-tab')
+      li(role='presentation' class='active' onclick='activity.notificationTab()'
+       data-toggle='tab')
+          | Notifications
+      li(role='presentation' onclick='activity.requestTab()' 
+      data-toggle='tab')
+          | Requests
+    #notifications
+      include profile_activity_notifications
+    #requests
+      include profile_activity_requests
