@@ -407,7 +407,7 @@ var explorePostFeed = function(req, res) {
     sort = {likes_count: -1, _id: -1};
   }
   else if (exploreType == 'featured') {
-    criteria.type = 'institution'
+    criteria.type = 'institution_verified'
     sort = {create_date: -1, _id: -1};
   }
   else {
