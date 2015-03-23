@@ -176,6 +176,8 @@ background-color: rgb(246, 249, 254);
   cursor: pointer;
 }
 
+
+
 .member-type.selected {
   color: #3e6a9e;
 }
@@ -225,6 +227,115 @@ background-color: rgb(246, 249, 254);
 .member-action.deny {
   background: url('/images/profile/members_delete.png') no-repeat;
   background-size: 22px 22px;
+}
+
+.group-menu {
+  position: absolute;
+  background: #fff;
+  width: 158px;
+  border: 1px #e4e5ea solid;
+  margin-top: 12px;
+  z-index: 1000;
+}
+
+.group-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0px 9px 8px 9px;
+  border-color: #fff transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: 10px;
+  top: -7px;
+}
+
+.group-menu:before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0px 9px 8px 9px;
+  border-color: #e4e5ea transparent;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: 10px;
+  top: -8px;
+}
+
+.group-menu ul {
+  margin: 0px auto;
+  padding: 14px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.group-menu li {
+  list-style: none;
+  padding: 5px;
+  color: #959698;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+span.group-icon {
+  display: inline-block;
+  margin-right: 17px;
+}
+
+.group-button {
+  background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
+  background-size: 7px 4px;
+  background-repeat: no-repeat;
+  background-position-y: 8px;
+  background-position-x: 18px;
+}
+
+.group-icon {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.group-icon[group="1"] {
+  background-color: #f89a20;
+}
+
+.group-icon[group="2"] {
+  background-color: #1ea0da;
+}
+
+.group-icon[group="3"] {
+  background-color: #57b948;
+}
+
+.group-icon[group="4"] {
+  background-color: #774c9e;
+}
+
+.group-icon[group="5"] {
+  background-color: #f72aa5;
+}
+
+.group-icon[group="6"] {
+  background-color: #3c63ae;
+}
+
+.group-icon[group="7"] {
+  background-color: #eb1c24;
+}
+
+.group-icon[group="8"] {
+  background-color: #b5d335;
+}
+
+.group-icon[group="9"] {
+  background-color: #42eddf;
+}
+
+.group-icon[group="10"] {
+  background-color: #36c9ff;
 }
 
 .ambassador-menu {

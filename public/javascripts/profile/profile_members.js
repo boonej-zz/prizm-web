@@ -159,7 +159,21 @@ var members = {
       }
     });
   },
+  toggleGroupMenu: function(e){
+    var target = e.target;
+    var targetHidden = $(target).children('.group-menu').hasClass('hidden');
+    $(target).toggleClass('selected');
+    $('.remove-menu').addClass('hidden');
+    $('.restrict-menu').addClass('hidden');
+    if (targetHidden) {
+      $('.group-menu').addClass('hidden');
+      $(target).children('.group-menu').toggleClass('hidden');
+    } else {
+      $(target).children('.group-menu').toggleClass('hidden');
+    }
 
+
+                   },
   toggleAmbassadorMenu: function(e) {
     var target = e.target;
     var targetHidden = $(target).children('.ambassador-menu').hasClass('hidden');
@@ -343,6 +357,7 @@ $(function(){
     var ambassadorMenu  = '.member-type';
     var restrictMenu    = '.member-action.restrict';
     var removeMenu      = '.member-action.remove';
+    var groupButton     = '.group-button';
     var target          = e.target;
 
     if ($(target).is(ambassadorMenu)) {
@@ -359,16 +374,29 @@ $(function(){
       $('.ambassador-menu').addClass('hidden');
       $('.member-type').removeClass('selected');
     }
+    else if ($(target).is(groupButton)) {
+      $('.restrict-menu').addClass('hidden');
+      $('.ambassador-menu').addClass('hidden');
+      $('.member-type').removeClass('selected');
+
+    }
     else {
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
       $('.member-type').removeClass('selected');    
+      $('.group-menu').removeClass('selected');
+      $('.group-menu').addClass('hidden');
     }
   })
 });
 
 $(document).ready(function(){
   // members.formatTable('606px');
+  $('.group-menu li').click(function(){
+    var $this = $(this);
+    var group = $this.children('.group-icon').attr('group');
+    $this.parents('.group-button').children('div.group-icon').attr('group', group);
+  });
 });
 
