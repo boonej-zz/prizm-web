@@ -1442,7 +1442,11 @@ exports.displayActivityFeed = function(req, res) {
 /* Explore Feed */
 exports.displayExploreFeed = function(req, res) {
   Post
-  .find()
+  .find({
+    scope: 'public',
+    is_flagged: false,
+    status: 'active'
+  })
   .sort({create_date: -1, _id: -1})
   .limit(21)
   .exec(function(err, posts) {
