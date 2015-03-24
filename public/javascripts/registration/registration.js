@@ -165,6 +165,7 @@ var reg = {
         data: user,
         success: function(response) {
           var user = response.user?response.user:response;
+          $('.message').toggle();
           $('.registration-card').attr('data-user-id', user._id);
           if (response.welcomePhoto) {
             $('#welcomePhoto').attr('src', response.welcomePhoto);

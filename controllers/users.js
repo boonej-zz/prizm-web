@@ -1096,7 +1096,7 @@ var validateRegistrationRequest = function(req, res,  next) {
         if (req.body.password != req.body.confirmPassword) {
           res.status(400).send({error: 'Passwords do not match'});
         }
-        if (userCode) {
+        else if (userCode) {
           Organization.findOne({code: userCode}, function(err, organization) {
             if (err) {
               res.status(500).send({error: err});
@@ -1152,10 +1152,10 @@ var registerIndividual = function(req, res) {
           res.status(500).send({error: err});
           console.log('saving user error');
         }
-        user.welcomePhoto = organization.welcome_image_url;
+        var welcomePhoto = organization?organization.welcome_image_url:false;
         var response = {
           user: user,
-          welcomePhoto: organization.welcome_image_url
+          welcomePhoto: welcomePhoto
         };
         if (user) {
           console.log('user saved');
