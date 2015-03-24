@@ -216,6 +216,14 @@ img.activity-photo {
   table tr>td:nth-child(4) {
     font-size: 13px;
   }
+
+  .activity-action {
+    padding-left: 0px;
+  }
+
+  .activity-action.comment, .activity-action.like {
+    background-image: none;
+  }
 }
 
 @media screen and (max-width: 488px) {
@@ -309,5 +317,13 @@ img.activity-photo {
 
   table tr>td:nth-child(4) {
     font-size: 12px;
+  }
+  
+  table tr>td:nth-child(5) {
+    width: 60px; 
+  }
+
+  img.activity-photo {
+    width: 60px;
   }
 }
