@@ -205,4 +205,9 @@
     height: 105px;
   }
 
+  .btn-post {
+    height: 44px;
+    width: 79px;
+  }
+
 }

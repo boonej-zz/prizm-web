@@ -569,8 +569,7 @@ input#post-text {
     background-image: url('/images/posts/camera_icon.png');
     background-size: 36px 28px;
     background-repeat: no-repeat;
-    background-position-x: 43px;
-    background-position-y: 21px;
+    background-position: center;
 }
 .btn-image input[type=file] {
     position: relative;
@@ -592,16 +591,14 @@ input#post-text {
   background-image: url('/images/posts/locationpin_icon.png');
   background-size: 24px 33px;
   background-repeat: no-repeat;
-  background-position-x: 50px;
-  background-position-y: 19px;
+  background-position: center;
 }
 
 .btn-tag {
   background-image: url('/images/posts/usertag_icon.png');
   background-size: 36px 35px;
   background-repeat: no-repeat;
-  background-position-x: 44px;
-  background-position-y: 18px;
+  background-position: center;
 }
 
 .btn-trust {
@@ -628,8 +625,7 @@ input#post-text {
   background-image: url('/images/posts/globe_icon.png');
   background-size: 36px;
   background-repeat: no-repeat;
-  background-position-x: 45px;
-  background-position-y: 17px;
+  background-position: center;
   height: 100%;
   width: 100%;
   position: relative;
@@ -682,42 +678,42 @@ input#aspiration + span {
   background-image: url('/images/posts/aspirations_icon.png');
   background-size: 34px 26px;
   background-repeat: no-repeat;
-  background-position: 64px 30px;
+  background-position: center;
 }
 
 input#passion + span {
   background-image: url('/images/posts/passions_icon.png');
   background-size: 34px 30px;
   background-repeat: no-repeat;
-  background-position: 64px 26px;
+  background-position: center;
 }
 
 input#experiences + span {
   background-image: url('/images/posts/experiences_icon.png');
   background-size: 34px 35px;
   background-repeat: no-repeat;
-  background-position: 64px 21px;
+  background-position: center;
 }
 
 input#achievements + span {
   background-image: url('/images/posts/achievements_icon.png');
   background-size: 34px 35px;
   background-repeat: no-repeat;
-  background-position: 64px 21px;
+  background-position: center;
 }
 
 input#inspirations + span{
   background-image: url('/images/posts/inspirations_icon.png');
   background-size: 19px 34px;
   background-repeat: no-repeat;
-  background-position: 72px 22px;
+  background-position: center;
 }
 
 input#personal + span {
   background-image: url('/images/posts/personal_icon.png');
   background-size: 36px;
   background-repeat: no-repeat;
-  background-position: 63px 21px;
+  background-position: center;
 }
 
 .btn-create-post {
@@ -730,7 +726,7 @@ input#personal + span {
     display: block;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:600px) {
   /* Navbar */
   .menu-icon {
     height: 28px;
@@ -788,4 +784,135 @@ input#personal + span {
   .legal-span {
     width: 80%;
   }
+  
+  .modal-dialog: {
+    margin: 0 auto;
+    width: 498px;
+  }
+
+  #newPostModal .modal-content {
+    width: 498px;
+  }
+  
+  input#post-text {
+    margin-top: 5px;
+    width: 175px;
+  }
+
+  form#new-post output {
+    margin: 15px;
+  }
+  
+  .btn-post {
+    height: 44px;
+    width: 124px;
+  }
+
+  .btn-trust input[type=checkbox] + span {
+    right: 123px;
+  } 
+
+  .btn-category {
+    width: 166px;
+    height: 69px;
+  }
+  .btn-category span {
+    right: 165px;
+    padding-top: 52px;
+  }
+
+  .btn-create-post {
+    height: 44px;
+    width: 478px;
+    margin: 33px 10px;
+  }
 }
+
+@media screen and (max-width: 488px){
+  .modal-dialog {
+    margin: 0 auto;
+    width: 420px
+  }
+
+  #newPostModal .modal-content {
+    width: 420px;
+  }
+  
+  input#post-text {
+    margin-top: 5px;
+    width: 175px;
+  }
+
+  form#new-post output {
+    margin: 15px;
+  }
+  
+  .btn-post {
+    height: 44px;
+    width: 105px;
+  }
+
+  .btn-trust input[type=checkbox] + span {
+    right: 104px;
+  } 
+
+  .btn-category {
+    width: 140px;
+    height: 69px;
+  }
+  .btn-category span {
+    right: 139px;
+    padding-top: 52px;
+  }
+
+  .btn-create-post {
+    height: 44px;
+    width: 400px;
+    margin: 33px 10px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .modal-dialog {
+    margin: 0 auto;
+    width: 318px;
+  }
+  
+  #newPostModal .modal-content {
+    width: 318px;
+  }
+
+  input#post-text {
+    margin-top: 5px;
+    width: 175px;
+  }
+
+  form#new-post output {
+    margin: 15px;
+  }
+  
+  .btn-post {
+    height: 44px;
+    width: 79px;
+  }
+
+  .btn-trust input[type=checkbox] + span {
+    right: 78px;
+  } 
+
+  .btn-category {
+    width: 106px;
+    height: 69px;
+  }
+  .btn-category span {
+    right: 105px;
+    padding-top: 52px;
+  }
+
+  .btn-create-post {
+    height: 44px;
+    width: 298px;
+    margin: 33px 10px;
+  }
+}
+
