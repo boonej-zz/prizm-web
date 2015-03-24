@@ -95,4 +95,5 @@ var newPost = {
 
 $(function() {
   $('img.lazy').lazyload();
+  window.scrollTo(0, 0);
 });

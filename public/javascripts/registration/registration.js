@@ -25,6 +25,7 @@ var reg = {
     }
     rc.data(data);
     sectionElem.css(style);
+    window.scrollTo(0, 0);
   },
 
   individualForm: function() {
