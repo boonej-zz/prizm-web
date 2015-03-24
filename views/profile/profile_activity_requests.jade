@@ -51,3 +51,5 @@
                 if request.status == 'pending'
                   .activity-menu.accept.cursor(onclick='activity.acceptRequest(event)')
                   .activity-menu.deny.cursor(onclick='activity.denyRequest(event)')
+              else if request.status == 'accepted'
+                .activity-menu.accepted.cursor
