@@ -1293,7 +1293,30 @@ exports.displayActivityFeed = function(req, res) {
       .exec(function(err, notifications) {
         if (err) next(err)
         if (notifications) {
-          next(null, notifications);
+          var postArray = [];
+          var postMap = [];
+          _.each(notifications, function(note, idx, list){
+            if (note.post_id) {
+              console.log('has post');
+              postArray.push(note.post_id);
+              postMap.push({id: String(note.post_id), index: idx});
+            }
+          });
+          if (postArray.length > 0) {
+            Post.find({_id: {$in: postArray}}, function(err, posts){
+              if (posts) {
+                _.each(postMap, function(p, idx, list){
+                  var post = _.find(posts, function(t){
+                    return String(t._id) == p.id;
+                  });
+                  notifications[p.index].photo_url = post.file_path;
+                });
+              }
+              next(null, notifications);
+            });
+          } else {
+            next(null, notifications);
+          }
         }
       });
   }
