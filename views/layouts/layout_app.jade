@@ -59,12 +59,7 @@ html
     script(src='/javascripts/prizm.js' type='text/javascript')
     script(src='/javascripts/bootstrap.min.js' type='text/javascript')
     script(src='/javascripts/layout/layout_app.js' type='text/javascript')
-    script(type='text/javascript' src='/javascripts/jquery.imgareaselect.min.js')
     script(type='text/javascript' src='/javascripts/upload.js')
-    script(type='text/javascript').
-      Upload.fileAreaId = 'insight-image-upload';
-      Upload.infoAreaId = 'preview';
-    link(rel='stylesheet' type='text/css' href='/stylesheets/imgareaselect-default.css')
     meta(name='viewport' 
          content='width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0')
     meta(name='apple-itunes-app'
@@ -123,66 +118,103 @@ html
     block settings
       if (auth)
         .settings
-          .settings-avatar-menu
-            img(src='https://#{currentUser.profile_photo_url.substr(7)}'
+          .settings-avatar-wrap
+            .settings-avatar-menu
+              img(src='https://#{currentUser.profile_photo_url.substr(7)}'
                 class='prizm-avatar-xs'
                 onclick='nav.toggleMenu(event)')
-            p(onclick='nav.toggleMenu(event)') #{currentUser.name}
-            .settings-tool-tip(onclick='nav.toggleMenu(event)')
-            mixin userMenu
+              p(onclick='nav.toggleMenu(event)')
+                span.name-wrap
+                  span.name #{currentUser.name}
+                .settings-tool-tip(onclick='nav.toggleMenu(event)')
+              mixin userMenu
           .settings-menu
             ul
-              li.home-button.settings-icon(class="#{title == 'Home'?'selected':''}")
-                a.cursor(dref='/' onclick='nav.navigate(event)')
-                  | Home
-              li.activity-button.settings-icon
-                a.cursor(dref='/profile/activity' onclick='nav.navigate(event)')
-                  | Activity
-              li.explore-button.settings-icon
-                a.cursor(dref='/profile/explore' onclick='nav.navigate(event)')
-                  | Explore 
-              li.insights-button.settings-icon
-                a(dref='/' onclick='nav.navigate(event)')
-                  | Insight
+              li.item(
+                class="#{title == 'Home'?'selected':''}"
+                onclick='nav.navigate("/")'
+                )
+                .home-button.settings-icon Home
+              li.item(
+                  class="#{title == 'Activity'?'selected':''}"
+                  onclick="nav.navigate('/profile/activity')"
+                )
+                .activity-button.settings-icon Activity
+              li.item(
+                class="#{title == 'Explore'?'selected':''}"
+                onclick="nav.navigate('/profile/explore')"
+                )
+                .explore-button.settings-icon Explore 
+              li.item(
+                class="#{title == 'Insights'?'selected':''}"
+                onclick="nav.navigate('/profile')"
+                )
+                .insights-button.settings-icon Insight
             if (currentUser.type == 'institution_verified')
-              ul.extended Admin
-                li.settings-icon.message-button
-                  a(dref='/' onclick='nav.navigate(event)')
-                    | Message
-                li.settings-icon.calendar-button
-                  a(dref='/' onclick='nav.navigate(event)')
-                    | Calendar
-                li.settings-icon.surveys-button
-                  a(dref='#' onclick='nav.navigate(event)')
-                    | Survey
-                li.stats-button.settings-icon
-                  a(dref='#' onclick='nav.navigate(event)')
-                    | Stats
-                li.settings-button.settings-icon
-                  a(dref='#' onclick='nav.navigate(event)')
-                    | Settings
-                li.members-button.settings-icon(class="#{title == 'Members'?'selected':''}")
-                  a(dref='/profile/members' onclick='nav.navigate(event)')
-                    | Members
-                li.billing-button.settings-icon
-                  a(dref='/register/' + currentUser.id onclick='nav.navigate(event)')
-                    | Billing
-                li.invite-button.settings-icon
-                  a(dref='#' onclick='nav.navigate(event)')
-                    | Invite
+              ul.extended 
+                li
+                  .settings-header Admin
+                li.item(
+                  class="#{title == 'Message'?'selected:''}"
+                  onclick="nav.navigate('/profile')"
+                )
+                  .settings-icon.message-button Message
+                li.item(
+                  class="#{title == 'Calendar'?'selected:''}"
+                  onclick="nav.navigate('/profile')"
+                  )
+                  .settings-icon.calendar-button Calendar
+                li.item(
+                  class="#{title == 'Survey'?'selected':''}"
+                  onclick="nav.navigate('/profile')"
+                  )
+                  .settings-icon.surveys-button Survey
+                li.item(
+                  class="#{title == 'Stats'?'selected':''}"
+                  onclick="nav.navigate('/profile')"
+                  )
+                  .stats-button.settings-icon Stats
+                li.item(
+                  class="#{title == 'Settings'?'selected':''}"
+                  onclick="nav.navigate('/profile')"
+                  )
+                  .settings-icon.settings-button Settings
+                li.item(
+                  class="#{title == 'Members'?'selected':''}"
+                  onclick="nav.navigate('/profile/members')"
+                  )
+                  .members-button.settings-icon Members
+                li.item(
+                  class="#{title == 'Billing'?'selected':''}"
+                  onclick="nav.navigate('/register')"
+                  )
+                  .billing-button.settings-icon Billing
+                li.item(
+                  class="#{title == 'Invite'?'selected':''}"
+                  onclick="nav.navigate('/profile')"
+                  )
+                  .invite-button.settings-icon Invite
             else
               each org in currentUser.org_status
                 if org.status == 'active'
-                  ul.extended #{org.organization.name}
-                    li.settings-icon.message-button
-                      a(dref='#' onclick='nav.navigate(event)')
-                        | Message
-                    li.settings-icon.calendar-button
-                      a(dref='#' onclick='nav.navigate(event)')
-                        | Calendar
-                    li.settings-icon.surveys-button
-                      a(dref='#' onclick='nav.navigate(event)')
-                        | Survey
+                  ul.extended 
+                    li
+                      .settings-header #{org.organization.name}
+                    li.item(
+                      class="#{title == 'Message'?'selected':''}"
+                      onclick="nav.navigate('/profile')"
+                      )
+                      .settings-icon.message-button Message
+                    li.item(
+                      class="#{title == 'Calendar'?'selected':''}"
+                      onclick="nav.navigate('/profile')"
+                      )
+                      .settings-icon.calendar-button Calendar
+                    li.item(
+                      class="#{title == 'Survey'?'selected':''}"
+                      onclick="nav.navigate('/profile')"
+                      )
+                      .settings-icon.surveys-button Survey
     mixin legal
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

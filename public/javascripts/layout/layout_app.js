@@ -29,13 +29,35 @@ $(document).ready(function(){
     $('.settings li').removeClass('selected');
     $(this).addClass('selected');
   });
+  $('#new-post').submit(function(){
+    var $form = $('#new-post');
+    var post = $form.serialize();
+    $.ajax({
+      type: 'POST',
+      url: '/posts',
+      headers: {
+    
+      },
+      data: post,
+      success: function(response) {
+        alert('success');
+      },
+      error: function(jqXHR) {
+        alert('failure');
+      }
+    });
+    return false;
+  });
+  $('.btn-category').click(function(){
+    $('.btn-create-post').removeClass('disabled');
+  });
 });
 
 var nav = {
   toggleMenu: function(e) {
     var target        = e.target;
     var windowWidth   = $(window).width();
-    var settingsMenu  = $(target).parent('.settings-avatar-menu')
+    var settingsMenu  = $(target).parents('.settings-avatar-menu')
     var navbarMenu    = $(target).parent('.avatar-menu');
     var menu;
     var tooltip;
@@ -63,11 +85,9 @@ var nav = {
     $('.navbar-header').toggleClass('body-push');
     $('.overlay').toggle();
   },
-  navigate: function(e){
-    var target = e.target;
-    var ref = $(target).attr('dref');
-    if (window.location.pathname != ref) {
-      window.location = ref;
+  navigate: function(url){
+    if (window.location.pathname != url) {
+      window.location = url;
     } else {
       nav.toggleSettings();
     }

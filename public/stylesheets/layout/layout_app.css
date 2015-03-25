@@ -20,10 +20,11 @@ body:before {
 }
 
 .body-push {
-  left: 284px;
+  left: 30%;
   transition: all 200ms linear; 
   overflow: hidden;
 }
+
 
 
 /* Navigation Bar */
@@ -167,18 +168,18 @@ body:before {
 
 /* Settings Menu */
 .settings {
-  width:454px;
+  width: 30%;
   background-color: #3c485e;
   position: fixed;
   top: 0px;
   bottom: 0px;
-  left: -454px;
+  left: -30%;
   z-index: 6000;
   color: #ffffff;
   font-size: 16px;
   font-weight: 900;
   letter-spacing: 1px;
-  padding-left: 154px;
+  padding: 0;
   transition: all 200ms linear; 
   overflow-y: auto;
 }
@@ -188,18 +189,24 @@ body:before {
   border-top: 1px solid #485769;
 }
 
-.settings-avatar-menu {
+.settings-avatar-wrap {
+  width: 100%;
   height: 75px;
   background-color: #2F394D;
-  display: table;
-  width: 100%;
-  padding-left: 88px;
-  padding-right: 35px;
+  text-align: right;
+}
+
+.settings-avatar-menu {
+  height: 75px;
+  display: inline-block;
+  width: 202px;
+  text-align: left;
 }
 
 .settings-avatar-menu .user-menu {
-  left: 306px;
-  top: 71px;
+  top: 62px;
+  margin-left: 64px;
+  left: initial;
 }
 
 .settings-avatar-menu .user-menu:after {
@@ -211,26 +218,40 @@ body:before {
     height: 4px;
     background: url('/images/icons/tooltip_icon_white.png');
     background-repeat: no-repeat;
-    position: relative;
-    bottom: 32px;
+  background-position: center;
+  display: inline-block;
 }
+
 
 .settings-avatar-menu .prizm-avatar-xs {
   height: 21px;
   width: 21px;
-  display: table-cell;
   vertical-align: middle;
   margin: 26px 0px;
 }
 
 .settings-avatar-menu p {
-  display: table-cell;
   vertical-align: middle;
   font-size: 14px;
   width: 130px;
-  line-height: 15px;
   color: #fefefe;
   font-weight: 700;
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 0 12px;
+  height: 75px;
+  line-height: 75px;
+}
+
+span.name-wrap {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+span.name {
+  display: inline-block;
+  line-height: 15px;
 }
 
 .settings-menu a {
@@ -244,21 +265,30 @@ body:before {
 .settings-menu ul {
   width: 100%;
   list-style: none;
-  padding: 30px 0px 14px 110px;
+  padding: 14px 0px 14px 110px;
+  text-align: right;
+  margin-right: 35px;
 }
 
 
 .settings-menu li { 
-  padding-left: 165px;
+  text-align: right;
   margin: 18px 35px 3px -130px;
+  font-size: 17px;
+  line-height: 30px;
+  height: 30px;
+  font-weight: 700;
+}
+
+.settings-menu li.item {
   color: #b2b6bd;
 }
 
-.settings-menu li:hover  {
+.settings-menu li.item:hover  {
   background-color: #333e51;
 }
 
-.settings-menu li.selected, .settings-menu li:active {
+.settings-menu li.item.selected, .settings-menu li.item:active {
   background-color: #3e6a9e;
   color: #ffffff;
 }
@@ -279,16 +309,32 @@ body:before {
 }
 
 .settings-visable {
-  left: -154px;
+  left: 0;
   transition: all 200ms linear; 
 }
 
 .settings-icon {
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
   background-repeat: no-repeat;
-  background-position-x: 132px;
+  background-position-x: 0px;
   background-position-y: 7px;
   background-size: 14px;
+  width: 170px;
+  text-align: left;
+  padding-left: 32px;
 }
+
+.settings-header {
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
+  width: 170px;
+  text-align: left;
+  color: #fff !important;
+}
+
 
 .home-button {
   background-image: url('/images/settings/home_icon@2x.png');
@@ -345,6 +391,7 @@ body:before {
 }
 
 .members-button {
+  background-position-y: 8px;
   background-image: url('/images/settings/members_icon@2x.png');
 }
 
@@ -353,7 +400,7 @@ body:before {
 }
 
 .billing-button {
-  background-position-y: 8px;
+  background-position-y: 9px;
   background-image: url('/images/settings/creditcard_icon@2x.png');
 }
 
@@ -726,7 +773,36 @@ input#personal + span {
     display: block;
 }
 
+
+@media screen and (max-width: 900px) {
+  .body-push {
+    left: 40%;
+  }
+
+  .settings {
+    left: -40%;
+    width: 40%;
+  }
+
+  .settings-visable {
+    left: 0px;
+  }
+
+}
+
 @media screen and (max-width:600px) {
+ .body-push {
+    left: 60%;
+  }
+
+  .settings {
+    left: -60%;
+    width: 60%;
+  }
+
+  .settings-visable {
+    left: 0px;
+  }
   /* Navbar */
   .menu-icon {
     height: 28px;
@@ -829,6 +905,18 @@ input#personal + span {
 }
 
 @media screen and (max-width: 488px){
+ .body-push {
+    left: 280px;
+  }
+
+  .settings {
+    left: -280px;
+    width: 280px;
+  }
+
+  .settings-visable {
+    left: 0px;
+  }
   .modal-dialog {
     margin: 0 auto;
     width: 420px

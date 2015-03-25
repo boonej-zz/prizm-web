@@ -491,3 +491,7 @@ exports.addComment = function(req, res){
   res.status(400).send('Invalid request');
  }
 }
+
+exports.createPost = function(req, res){
+  
+};

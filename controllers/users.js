@@ -1415,6 +1415,7 @@ exports.displayActivityFeed = function(req, res) {
           auth: true,
           currentUser: req.user,
           bodyId: 'activity',
+          title: 'Activity',
           notifications: notifications,
           requests: requests
         });
@@ -1478,6 +1479,7 @@ exports.displayExploreFeed = function(req, res) {
     }
     if (posts) {
       res.render('profile/profile_explore', {
+        title: 'Explore',
         auth: true,
         currentUser: req.user,
         bodyId: 'explore',
