@@ -539,6 +539,7 @@ exports.displayHomeFeed = function(req, res) {
   }
   else {
     var id = req.user.id;
+    console.log('Fetching posts');
     var lastPost = req.get('lastPost');
     User.findOne({_id: ObjectId(id)}, function(err, user) {
       if (err) {

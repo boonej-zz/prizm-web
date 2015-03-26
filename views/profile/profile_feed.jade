@@ -1,15 +1,10 @@
 each post in posts
-        li.col-mob-12.col-xs-8.col-xs-offset-2.col-md-6.col-md-offset-3.background-column 
-          .post(id='#{post.id}')
+  li.post(id='#{post.id}') 
             .post-header
-              if post.creator.profile_photo_url
-                img.cursor(src='https://#{post.creator.profile_photo_url.substr(7)}'
-                  class='prizm-avatar-xs' 
-                  onclick='prizm.showProfile("#{post.creator._id}")')
-              else
-                img.cursor(src='/images/profile/profile_default_avatar.png' 
-                  class='prizm-avatar-sm' 
-                  onclick='prizm.showProfile("#{post.creator._id}")')
+              .cursor.profile-image(
+                style="background-image:url(#{post.creator.profile_photo_url?'https://'+post.creator.profile_photo_url.substr(7):'/images/profile/profile_default_avatar.png'})"
+                 onclick='prizm.showProfile("#{post.creator._id}")'
+              )
               h3.cursor(onclick='prizm.showProfile("#{post.creator._id}")')
                 | #{post.creator.name}
               .time-since
@@ -36,6 +31,8 @@ each post in posts
                             class='cursor'
                             prizm-data='#{post.id}'
                             onclick='home.toggleComments(event)')
+              p.icon-text.comments-count
+                | #{post.comments_count}
               .repost-icon
               .action-icon
               .location-icon

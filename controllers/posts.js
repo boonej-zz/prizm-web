@@ -7,6 +7,7 @@ var Post        = mongoose.model('Post');
 var Comment     = mongoose.model('Comment');
 var User        = mongoose.model('User');
 var Activity    = mongoose.model('Activity');
+var Users       = require('./users');
 var _           = require('underscore');
 var _time       = require('../lib/helpers/date_time');
 var fs          = require('fs');
@@ -104,6 +105,7 @@ exports.unlikePost = function(req, res){
 
 exports.fetchPosts = function(req, res) {
   var feedType = req.get('feedType');
+  console.log(feedType);
 
   if (req.accepts('html')) {
     res.status(406).send({ error: "html request unacceptable"});
@@ -117,6 +119,10 @@ exports.fetchPosts = function(req, res) {
     }
     else if (feedType == 'explore') {
       explorePostFeed(req, res);
+    }
+    else if (feedType == 'home') {
+      console.log('fetching home feed');
+      Users.displayHomeFeed(req, res);
     }
     else {
       res.status(406).send({ error: "feedType unacceptable"});

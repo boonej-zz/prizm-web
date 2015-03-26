@@ -39,7 +39,6 @@ $(document).ready(function(){
         var lastPost = $('.post').last().attr('id');
         var creator = $('.profile-owner').attr('id');
         var exploreType = $('#explore-type').data('exploreType');
-        console.log(exploreType);
         var feedType;
         if ($('#membersToggle').attr('data-toggle') == 'on') {
           feedType = 'members';
@@ -52,11 +51,10 @@ $(document).ready(function(){
         } else {
           feedType = 'home';
         }
-        console.log("feedType: " + feedType + " exploreType: " + exploreType)
         if (length > 0){
           $.ajax({
             method: 'GET',
-            url: '/posts',
+            url: feedType=='home'?'/':'/posts',
             headers: {
               'Content-type': 'application/jade',
               'Accept' : 'application/jade',

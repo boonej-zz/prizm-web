@@ -117,6 +117,26 @@
     height: 164px;
   }
 
+  .like-icon {
+    margin-left: 20px;
+  }
+
+  .comment-icon {
+    margin-left: 60px;
+  }
+
+  .repost-icon {
+    margin-left: 60px;
+  }
+
+  .action-icon {
+    margin-left: 90px;
+  }
+
+  .location-icon {
+    margin-left: 90px;
+  }
+
 }
 
 @media screen and (max-width: 488px) {

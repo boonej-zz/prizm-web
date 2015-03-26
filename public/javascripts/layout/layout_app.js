@@ -82,7 +82,7 @@ var nav = {
   toggleSettings: function() {
     $('.settings').toggleClass('settings-visable');
     $('body').toggleClass('body-push');
-    $('.navbar-header').toggleClass('body-push');
+    $('.navbar .container').toggleClass('body-push');
     $('.overlay').toggle();
   },
   navigate: function(url){

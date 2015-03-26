@@ -72,16 +72,16 @@ html
   body(id='#{bodyId}')
     .overlay(onclick='nav.toggleSettings()')
     block navbar
-      .navbar.navbar-default.navbar-fixed-top
+      .navbar
         .container
-          .row
-            .navbar-header.col-mob-12
-              .navbar-title.cursor(onclick='nav.goToHomeFeed()')
-                | Prizm
+          if (auth)
+            .menu-icon(onclick='nav.toggleSettings()')
+          span.navbar-title.cursor(onclick='nav.goToHomeFeed()')
+            | Prizm
+          if (auth)
+            .plus-icon.cursor(onclick='newPost.showModal()')
+            .avatar-menu
               if (auth)
-                .menu-icon(onclick='nav.toggleSettings()')
-                .plus-icon.cursor(onclick='newPost.showModal()')
-                .avatar-menu
                   if currentUser.profile_photo_url
                     img(src='https://#{currentUser.profile_photo_url.substr(7)}'
                         class='prizm-avatar-xs'

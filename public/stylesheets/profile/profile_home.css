@@ -8,13 +8,20 @@
 }
 
 ul#feed {
-  perspective: 1300px;
   padding: 0px;
+  width: 578px;
+  margin: 0 auto;
+  background-color: #f4f5f7;
+  border: 1px solid #e4e5ea;
 }
 
 ul#feed li {
   color: #b7c2d4;
   transform-style: preserve-3d;
+  width: 512px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #e4e5ea;
 }
 
 ul#feed li animate {
@@ -25,29 +32,41 @@ ul#feed li animate {
 @keyframes fallPerspective {
   100% { transform: translateZ(0px) translateY(opx) rotateX(0deg); opacity: 1;}
 }
-
+.post {
+  background-color: #fff;
+}
 .post-header {
-  padding: 20px 15px 0px 15px;
+  height: 78px;
+  width: 512px;
 }
 
-.post-header img {
+.post-header .profile-image {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e4e5ea;
+  border-radius: 50%;
+  background-size: 40px;
+  margin: 20px 11px 18px 15px;
   float: left;
-  margin-right: 13px;
 }
 
 .post-header h3 {
   color: #7e7e7f;
-  margin: 0px;
   font-weight: normal;
   position: relative;
+  margin: 20px 0 0 -80px;
+  display: inline-block;
 }
 
 .time-since {
+  display: inline-block;
   color: #b7c2d4;
   font-size: 15px;
   position: initial;
   font-weight: 200;
-  margin-top: 2px;
+  margin-top: 47px;
+  width: 80px;
+  float: left;
 }
 
 .time-since .clock-icon {
@@ -64,9 +83,8 @@ form.comment-post {
 }
 
 .category-icon {
-  position: absolute;
-  top: 18px;
-  right: 15px;
+  float: right;
+  margin: 18px 17px 8px 0px;
   background-size: 26px;
   width: 26px;
   height: 26px;
@@ -74,64 +92,63 @@ form.comment-post {
 
 .post-via {
   position: absolute;
-  right: 15px;
+  right: 17px;
   top: 46px;
   color: #b7c2d4;
   font-size: 17px;
 }
 
 .post-footer {
-  height: 69px;
-  padding: 18px 15px;
-  font-size: 25px;
+  height: 78px;
+  font-size: 22px;
   font-weight: 200;
 }
 
 .icon-text {
-    margin: 0px;
+    margin: 24px 0px 0px 8px;
+}
+
+.icon-text.comments-count {
+  margin-top: 22px;
 }
 
 .like-icon {
-  margin: 0px 12px 0px 0px;
-  background-size: 36px;
-  width: 36px;
-  height: 36px;
+  margin: 27px 0px 0px 16px;
+  background-size: 24px 22px;
+  width: 24px;
+  height: 22px;
 }
 
 .comment-icon {
-  margin: 2px 12px 0px 27px;
-  width: 36px;
-  height: 36px;
-  background-size: 36px;
+  margin: 26px 0 0 72px;
+  width: 24px;
+  height: 24px;
+  background-size: 24px;
 }
 
 .repost-icon {
-  position: absolute;
-  right: 45%;
-  background-size: 40px;
-  width: 40px;
-  height: 40px;
-  margin-top: -2px;
-  margin-right: auto;
-  margin-left: auto;
+  background-size: 22px 25px;
+  width: 22px;
+  height: 25px;
+  margin: 25px 0px 0px 66px;
+  display: inline-block;
 }
 
 .action-icon {
-  position: absolute;
-  right: 20%;
-  margin: 0px;
-  background-size: 34px;
-  width: 34px;
-  height: 34px;
+  margin: 26px 0px 0px 93px;
+  background-size: 24px;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  float: none;
 }
 
 .location-icon {
-  float: right;
-  background-size: 34px;
-  height: 34px;
-  width: 34px;
-  position: absolute; 
-  right: 15px;
+  background-size: 18px 25px;
+  height: 25px;
+  width: 18px;
+  display: inline-block;
+  margin: 25px 0px 0px 94px;
 }
 
 .comment-drawer {
@@ -195,6 +212,18 @@ form.comment-post {
   display: block;
 }
 
+#home-feed .post-image {
+  width: 510px;
+  height: 510px;
+  margin: 0;
+}
+
+#home-feed .post-image img {
+  width: 512px;
+  height: 511px;
+  margin: 0;
+}
+
 form #inputComment {
   height: 50px;
   background-position-x: 15px; 
@@ -211,6 +240,141 @@ form #inputComment {
   background-color: #EFF1F4;
 }
 
+@media screen and (max-width:600px) {
+  .container.topnav-offset {
+    padding: 0;
+  }
+
+  ul#feed {
+    width: 498px;
+  }  
+  
+  ul#feed li {
+    width: 480px;
+  }
+
+  .post-header {
+    width: 480px;
+  }
+
+  .post-footer {
+    width: 480px;
+  }
+
+  #home-feed .post-image, #home-feed .post-image img {
+    width: 478px;
+    height: 478px;
+  }
+ 
+  .like-icon {
+    margin-left: 20px;
+  }
+
+  .comment-icon {
+    margin-left: 60px;
+  }
+
+  .repost-icon {
+    margin-left: 60px;
+  }
+
+  .action-icon {
+    margin-left: 86px;
+  }
+
+  .location-icon {
+    margin-left: 86px;
+  }
+}
+
+@media screen and (max-width:488px) {
+  ul#feed {
+    width: 420px;
+  }  
+  
+  ul#feed li {
+    width: 400px;
+  }
+
+  .post-header {
+    width: 400px;
+  }
+
+  .post-footer {
+    width: 400px;
+  }
+
+  #home-feed .post-image, #home-feed .post-image img {
+    width: 398px;
+    height: 398px;
+  }
+ 
+  .like-icon {
+    margin-left: 16px;
+  }
+
+  .comment-icon {
+    margin-left: 42px;
+  }
+
+  .repost-icon {
+    margin-left: 48px;
+  }
+
+  .action-icon {
+    margin-left: 64px;
+  }
+
+  .location-icon {
+    margin-left: 64px;
+  }
+}
+
+@media screen and (max-width:410px) {
+  ul#feed {
+    width: 318px;
+  }  
+  
+  ul#feed li {
+    width: 310px;
+  }
+
+  .post-header {
+    width: 310px;
+  }
+
+  .post-footer {
+    width: 310px;
+  }
+
+  #home-feed .post-image, #home-feed .post-image img {
+    width: 308px;
+    height: 308px;
+  }
+ 
+  .like-icon {
+    margin-left: 10px;
+  }
+
+  .comment-icon {
+    margin-left: 22px;
+  }
+
+  .repost-icon {
+    margin-left: 28px;
+  }
+
+  .action-icon {
+    margin-left: 44px;
+  }
+
+  .location-icon {
+    margin-left: 44px;
+  }
+}
+
+
+/**
 @media screen and (max-width:800px) {
   .background-column {
     background-color: #f4f5f7;
@@ -259,9 +423,9 @@ form #inputComment {
   }
 
   .post-footer {
-    padding: 10px;
     font-size: 20px;
-    height: 50px;
+    height: 78px;
+    width: 100%;
   }
 
   .icon-text {
@@ -270,9 +434,9 @@ form #inputComment {
 
   .like-icon {
     margin: 0px 6px 0px 0px;
-    background-size: 28px;
-    width: 28px;
-    height: 28px;
+    background-size: 24px 22px;
+    width: 24px;
+    height: 22px;
   }
 
   .comment-icon {
@@ -311,3 +475,5 @@ form #inputComment {
     right: 10px;
   }
 }
+
+**/

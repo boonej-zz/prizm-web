@@ -17,30 +17,64 @@ body:before {
            url('/images/settings/settings_icon_selected@2x.png')
            url('/images/settings/survey_icon_selected@2x.png')
            url('/images/settings/useradd_icon_selected@2x.png');
-}
+  }
 
 .body-push {
-  left: 30%;
+  left: 30% !important;
   transition: all 200ms linear; 
   overflow: hidden;
+}
+
+.container.topnav-offset {
+  width: 986px;
 }
 
 
 
 /* Navigation Bar */
+.navbar {
+  height: 75px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  z-index: 1000;
+  background-color: #E4E5EA;
+  box-shadow: 0 1px 1px #d4dae9;
+}
+
+.navbar>.container {
+  position: relative;
+  width: 986px;
+  height: 75px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  transition: all 200ms linear; 
+ 
+}
 
 .navbar-header {
+  margin-left: 443px;
+  display: block;
   height: 75px;
+  width: 100px;
   text-align: center;
   padding-top: 12px;
-  transition: all 200ms linear; 
 }
 
 .navbar-title {
+  float: left;
   font-size: 38px;
+  display: inline-block;
+  height: 75px;
   width: 100px;
-  margin: auto;
+  margin-left: 407px;
+  line-height: 75px;
+  vertical-align: middle;
   font-weight: 300;
+  clear: none;
 }
 
 #registration .navbar-title,
@@ -59,27 +93,27 @@ body:before {
   width: 36px;
   height: 36px;
   background-size: 36px;
-  position: absolute;
-  left: 0px;
-  top: 18px;
+  float: left;
+  clear: none;
+  margin: 18px 0 0 0;
 }
 
 .plus-icon {
   width: 36px;
   height: 36px;
   background-size: 36px;
-  position: absolute;
-  right: 0px;
-  top: 18px;
+  margin-top: 18px;
+  float: right;
 }
 
 .avatar-menu {
   height: 40px;
   width: 40px;
-  position: absolute;
-  right: 20%;
-  top: 16px;
+  float: right;
+  margin-top: 16px;
   font-size: 14px;
+  margin-right: 72px;
+  clear: none;
 }
 
 .tool-tip {
@@ -94,7 +128,7 @@ body:before {
 
 .user-menu {
   position: absolute; 
-  left: 60%;
+  margin-left: 28px;
   background: #FBFCFF;
   width: 120px;
   border-radius: 2px;
@@ -328,7 +362,7 @@ span.name {
 
 .settings-header {
   height: 30px;
-  line-height: 30px;
+  line-height: 22px;
   display: inline-block;
   width: 170px;
   text-align: left;
@@ -795,6 +829,22 @@ input#personal + span {
     left: 60%;
   }
 
+  .container.body-push {
+    margin-left: 60%;
+  }
+
+  .container.topnav-offset {
+    width: 520px;
+  }
+
+  .navbar .container {
+    width: 520px;
+  }
+
+  .navbar-title {
+    margin-left: 184px;
+  }
+
   .settings {
     left: -60%;
     width: 60%;
@@ -909,6 +959,10 @@ input#personal + span {
     left: 280px;
   }
 
+  .container.body-push {
+    left: 400px;
+  }
+
   .settings {
     left: -280px;
     width: 280px;
@@ -920,6 +974,18 @@ input#personal + span {
   .modal-dialog {
     margin: 0 auto;
     width: 420px
+  }
+
+  .container.topnav-offset {
+    width: 420px;
+  }
+
+  .navbar .container {
+    width: 420px;
+  }
+
+  .navbar-title {
+    margin-left: 134px;
   }
 
   #newPostModal .modal-content {
@@ -964,6 +1030,23 @@ input#personal + span {
   .modal-dialog {
     margin: 0 auto;
     width: 318px;
+  }
+
+  .container.topnav-offset {
+    width: 318px;
+  }
+  
+  .navbar .container {
+    width: 318px;
+  }
+
+  .avatar-menu {
+
+    margin-right: 30px;
+  }
+
+  .navbar-title {
+    margin-left: 85px;
   }
   
   #newPostModal .modal-content {
