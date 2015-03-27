@@ -1,5 +1,4 @@
 each post in posts
-  .col-md-4.col-sm-6.col-xs-12
     .post(id='#{post.id}')
       .post-image(onclick='profile.showModal(event)')
         img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}'

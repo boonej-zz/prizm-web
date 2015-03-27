@@ -24,18 +24,18 @@ block head
 
 block content
   .container.topnav-offset
-    .row 
       .profile-owner(id='#{user.id}')
       if organization
         .organization(id='#{organization.id}')
-      .col-sm-12#profile-header
+      #profile-header
         if (headerImages.length > 15)
           .background-tile-container
             .background-tile-overlay
             each headerImage, i in headerImages
               if (i < 16)
-                .background-tile
-                  img(src='https://#{headerImage.substr(7)}')
+                .background-tile(
+                  style="background-image:url('https://#{headerImage.substr(7)}')"
+                  )
         .slider-container
           .slider
             if user.profile_photo_url
@@ -72,33 +72,27 @@ block content
             li(onClick='profile.slideHeader(event, 1)')
             if organization
               li(onClick='profile.slideHeader(event, 2)')
-    .row.profile-info
-      if showMembers
-        .col-mob-2
-            .toggle-container(data-toggle='off' 
+      .profile-info
+        if showMembers
+          .toggle-container(data-toggle='off' 
                             id='membersToggle'
                             onClick='profile.toggleMembersPosts()')
-              .toggle-switch
-            .toggle-label
-              | Members
-        .col-mob-10.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
+            .toggle-switch
+          .toggle-label
+            | Members
           mixin profileInfo
-      else
-        .col-mob-12.col-xs-offset-6.col-xs-6.col-md-offset-8.col-md-4
+        else
           mixin profileInfo
-    .row.profile-posts-container.infinite_feed
+      .profile-posts-container.infinite_feed
         if (posts.length < 1)
           .col-sm-12
             h2 This profile has not created any posts yet
         else
           include ../posts/post_feed
-    .row.members-posts-container
-      .col-sm-12
+      .members-posts-container
         h2 Members have not created any posts yet.
-    .row.profile-followers-container
-      .col-sm-12
-    .row.profile-following-container
-      .col-sm-12
+      .profile-followers-container
+      .profile-following-container
   div#postModal.modal.fade(
       tabIndex='-1'
       role='dialog'
