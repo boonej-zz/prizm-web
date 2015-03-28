@@ -84,6 +84,7 @@ body:before {
   background-size: 151px 61px;
   width: 151px;
   position: absolute;
+  margin-left: 0px;
   left: 0px;
   top: 7px;
   height: 61px;
