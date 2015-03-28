@@ -28,12 +28,11 @@ block content
       if organization
         .organization(id='#{organization.id}')
       #profile-header
-        //if (headerImages.length > 15)
-        if(false)
+        if (headerImages.length > 15)
           .background-tile-container
             .background-tile-overlay
             each headerImage, i in headerImages
-              if (i < 16)
+              if (i < 14)
                 .background-tile(
                   style="background-image:url('https://#{headerImage.substr(7)}')"
                   )
