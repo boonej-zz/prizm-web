@@ -1,0 +1,105 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrap {
+  width: 400px;
+  margin: 0 auto;
+}
+
+h1.logo {
+  width: 209px;
+  height: 71px;
+  background-image: url('/images/l-logo.png');
+  background-size: 209px 71px;
+  background-repeat: no-repeat;
+  margin: 88px auto 33px auto;
+}
+
+h1.logo>span {
+  display: none;
+}
+
+p {
+  width: 321px;
+  height: 64px;
+  color: #545358;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 38.02px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+
+.button {
+  display: block;
+  width: 324px;
+  height: 84px;
+  margin: 0 auto;
+  line-height: 84px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 36px;
+  margin-top: 33px;
+}
+
+.blue {
+  background-color: #2443a1;
+  color: white;
+  font-weight: normal;
+}
+
+.clear {
+  font-size: 30px;
+  color: #545358;
+}
+
+.phone-graphic {
+  display: block;
+  height: 498px;
+  width: 360px;
+  background-image: url('/images/phone.png');
+  background-size: 360px 498px;
+  margin: 36px auto 0px auto;
+}
+
+.white-bar {
+  position: absolute;
+  right: 0px;
+  left: 0px;
+  top: 859px;
+  height: 86px;
+  background-color: white;
+}
+
+@media screen and (max-width: 400px) {
+  .wrap {
+    width: 320px;
+  }
+
+  p {
+    width: 300px;
+  }
+
+  .button {
+    width: 300px;
+  }
+  
+  .blue {
+    margin-top: 80px;
+  }
+
+  .phone-graphic {
+    width: 300px;
+    height: 415px;
+    background-size: 300px 415px;
+  }
+
+} 
