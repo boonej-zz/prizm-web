@@ -376,6 +376,8 @@ exports.displayLogin = function(req, res) {
   var agent = req.headers['user-agent'];
   var isIphone = agent.indexOf('iPhone' > -1);
   var isIpad = agent.indexOf('iPad' > -1);
+  res.render('login/login', {bodyId: 'login', failure: failure});
+
   if (bypass || (!isIphone && !isIpad)) {
     res.render('login/login', {bodyId: 'login', failure: failure});
   } else {
