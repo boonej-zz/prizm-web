@@ -8,17 +8,17 @@ a {
 }
 
 .wrap {
-  width: 400px;
+  width: 320px;
   margin: 0 auto;
 }
 
 h1.logo {
-  width: 209px;
-  height: 71px;
+  width: 104px;
+  height: 35px;
   background-image: url('/images/l-logo.png');
-  background-size: 209px 71px;
+  background-size: 104px 35px;
   background-repeat: no-repeat;
-  margin: 88px auto 33px auto;
+  margin: 44px auto 16px auto;
 }
 
 h1.logo>span {
@@ -26,12 +26,12 @@ h1.logo>span {
 }
 
 p {
-  width: 321px;
-  height: 64px;
+  width: 162px;
+  height: 32px;
   color: #545358;
-  font-size: 32px;
+  font-size: 16px;
   font-weight: 300;
-  line-height: 38.02px;
+  line-height: 19px;
   margin: 0 auto;
   text-align: center;
 }
@@ -40,14 +40,14 @@ p {
 
 .button {
   display: block;
-  width: 324px;
-  height: 84px;
+  width: 162px;
+  height: 42px;
   margin: 0 auto;
-  line-height: 84px;
+  line-height: 42px;
   text-align: center;
   vertical-align: middle;
-  font-size: 36px;
-  margin-top: 33px;
+  font-size: 18px;
+  margin-top: 16px;
 }
 
 .blue {
@@ -57,49 +57,25 @@ p {
 }
 
 .clear {
-  font-size: 30px;
+  font-size: 15px;
   color: #545358;
 }
 
 .phone-graphic {
   display: block;
-  height: 498px;
-  width: 360px;
+  height: 249px;
+  width: 180px;
   background-image: url('/images/phone.png');
-  background-size: 360px 498px;
-  margin: 36px auto 0px auto;
+  background-size: 180px 249px;
+  margin: 18px auto 0px auto;
 }
 
 .white-bar {
   position: absolute;
   right: 0px;
   left: 0px;
-  top: 859px;
-  height: 86px;
+  top: 428px;
+  height: 42px;
   background-color: white;
 }
 
-@media screen and (max-width: 400px) {
-  .wrap {
-    width: 320px;
-  }
-
-  p {
-    width: 300px;
-  }
-
-  .button {
-    width: 300px;
-  }
-  
-  .blue {
-    margin-top: 80px;
-  }
-
-  .phone-graphic {
-    width: 300px;
-    height: 415px;
-    background-size: 300px 415px;
-  }
-
-} 
