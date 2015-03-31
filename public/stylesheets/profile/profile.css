@@ -108,7 +108,7 @@ ul .post.shown {
   height: 0px;
   width: 200px;
   margin: 0px auto;
-  z-index: 1000;
+  z-index: 500;
 }
 
 .slider-nav ul {
@@ -536,8 +536,8 @@ form #inputComment {
 }
 
 .user-card {
-  width: 100%;
-  margin-top: 30px;
+  width: 298px;
+  margin: 15px 15px 25px 15px;
   border: 1px solid #e3e5e9;
   display: inline-block;
 }
@@ -605,12 +605,12 @@ form #inputComment {
 
 .user-info-bottom {
   background: white;
-  height: 130px;
+  height: 120px;
 }
 
 .user-circle {
-  height: 100px;
-  width: 100px;
+  height: 91px;
+  width: 91px;
   background: #f8f8f8;
   border: 3px #e3e5e9 solid;
   border-radius: 50%;
@@ -619,9 +619,9 @@ form #inputComment {
   padding-top: 28px;
   text-align: center;
   font-weight: 300;
-  font-size: 18px;
-  line-height: 1.2;
-  margin: 14px 8px;
+  font-size: 17px;
+  line-height: 1em;
+  margin: 14px 0px 14px 6px;
 }
 
 /* Mobile Screen */
@@ -786,12 +786,12 @@ form #inputComment {
     left: 15px;
   }
 
-  .user-circle {
-    height: 90px;
-    width: 90px;
-    font-size: 16px;
-    margin-left: 3.1%;
+  .user-card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
+ 
 }
 
 
@@ -875,14 +875,5 @@ form #inputComment {
     width: 55px;
     font-size: 12px;
   }
- 
-  .user-circle {
-    height: 85px;
-    width: 85px;
-    margin-left: 1%;
-    margin-top: 7%;
-  }
-
-
 }
 
