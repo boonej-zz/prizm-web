@@ -1,6 +1,8 @@
 body {
   padding: 0;
   margin: 0;
+  position: initial;
+  left: initial;
 }
 
 a {
@@ -10,6 +12,7 @@ a {
 .wrap {
   width: 320px;
   margin: 0 auto;
+  height: 100%;
 }
 
 h1.logo {
@@ -74,8 +77,8 @@ p {
   position: absolute;
   right: 0px;
   left: 0px;
-  top: 428px;
-  height: 42px;
+  top: 472px;
+  bottom: 0px;
   background-color: white;
 }
 
