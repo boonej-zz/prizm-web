@@ -86,8 +86,14 @@ router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
 router.post('/register/:id', _orgs.updateOrg);
 
 
+/** Redirect **/
+router.get('/redirect', function(req, res){
+  res.render('redirect', {});
+}); 
 /** Organization Pages **/
 router.get('/:name', _orgs.displayOrganization);
+
+
 
 
 module.exports = router;

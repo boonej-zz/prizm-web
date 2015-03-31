@@ -372,7 +372,15 @@ exports.authRequired = function (req, res, next) {
 exports.displayLogin = function(req, res) {
   mixpanel.track('Login Page loaded');
   var failure = req.query.failure;
-  res.render('login/login', {bodyId: 'login', failure: failure});
+  var bypass = req.query.bypass;
+  var agent = req.headers['user-agent'];
+  var isIphone = agent.indexOf('iPhone' > -1);
+  var isIpad = agent.indexOf('iPad' > -1);
+  if (bypass || (!isIphone && !isIpad)) {
+    res.render('login/login', {bodyId: 'login', failure: failure});
+  } else {
+    res.render('redirect');
+  }
 };
 
 exports.handlePrizmLogin = function(req, res, next) {
