@@ -189,13 +189,60 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
   });
 }
 
+var fetchOrgUsers = function(model, orgId, criteria, sort, next){
+  var $this = model;
+  $this.model('User').find(criteria)
+  .sort(sort)
+  .exec(function(err, users){
+    _.each(users, function(user, idx, list){
+      if(users.org_status && _.has(users.org_status, 'length')) {
+        var needsUpdate = true;
+        _.each(user.org_status, function(org,index,list){
+          if (String(org.organization) == String(orgId)){
+            needsUpdate = false;
+          }
+        });
+        if (needsUpdate) {
+          user.org_status.push({
+            organization: orgId,
+            status: 'active'
+          });
+        }
+      } else {
+        user.org_status = [];
+        user.org_status.push({
+          organization: orgId,
+          status: 'active'
+        });
+      }
+      next(err, users);
+    });
+
+});
+}
+
 userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next) {
+  var keys = ['ambassador', 'luminary', 'member', 'mentor'];
   var $this = this;
   var order = sort;
+  var showLuminaries = true;
+  var criteria = {
+        'org_status': {$elemMatch: filters},
+  };
+  if (_.contains(keys, order)){
+    if (order != 'luminary') showLuminaries = false;
+    if (order != 'member') {
+      criteria.subtype = order;
+    } else { 
+      criteria.subtype = null;
+    }
+    order = '_id';
+  }
   if (!order) order = '_id';
   sort = {};
   sort[order] = 'asc';
   console.log(sort);
+  if (showLuminaries) { 
   var Trust = mongoose.model('Trust');
   Trust.find({
     status: 'accepted',
@@ -208,37 +255,15 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next
           trustArray = _.pluck(trusts, 'to');
         }
       }
-      $this.model('User').find({$or: [
-        {'org_status': {$elemMatch: filters}},
+      var newCriteria = {$or: [
+        criteria,
         {_id: {$in: trustArray}}
-      ]})
-      .sort(sort)
-      .exec(function(err, users){
-        _.each(users, function(user, idx, list){
-          if(users.org_status && _.has(users.org_status, 'length')) {
-            var needsUpdate = true;
-            _.each(user.org_status, function(org,index,list){
-              if (String(org.organization) == String(filters.organization)){
-                needsUpdate = false;
-              }
-            });
-            if (needsUpdate) {
-              user.org_status.push({
-                organization: filters.organization,
-                status: 'active'
-              });
-            }
-          } else {
-            user.org_status = [];
-            user.org_status.push({
-              organization: filters.organization,
-              status: 'active'
-            });
-          }
-        });
-        next(err, users);
-      });
+      ]};
+      fetchOrgUsers($this, filters.organization, newCriteria, sort, next);
   });
+  } else {
+    fetchOrgUsers($this, filters.organization, criteria,sort,  next);
+  }
 };
 
 

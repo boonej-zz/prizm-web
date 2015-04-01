@@ -356,6 +356,9 @@ var members = {
   },
   showNameMenu: function(){
     $('#nameMenu').toggleClass('hidden');
+  },
+  showStatusMenu: function(){
+    $('#statusMenu').toggleClass('hidden');
   }
 };
 
@@ -402,6 +405,7 @@ $(function(){
     }
     else {
       $('#nameMenu').addClass('hidden');
+      $('#statusMenu').addClass('hidden');
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
