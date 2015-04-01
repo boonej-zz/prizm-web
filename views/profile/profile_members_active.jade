@@ -1,5 +1,4 @@
-.col-sm-10.col-sm-offset-1
-  table.table.table-striped.members-table
+table.table.table-striped.members-table
     thead
       tr
         th
@@ -7,16 +6,16 @@
         th
         th
         th
-        th
           button.btn.btn-primary.btn-new-member(
             onclick='members.addMember()') Add New Member
+        th
           button.btn.btn-primary.btn-export(
             onclick='nav.navigate("/profile/members/memberexport.csv")') 
             | Export to CSV
       tr
         th.col-sm-1
         th
-          span.nameHeader(onclick='members.showNameMenu()')
+          span.nameHeader(onclick='members.showNameMenu()' width=160)
             | Name
           #nameMenu.hidden
             ul
@@ -31,10 +30,15 @@
               li(onclick='members.activeTab("luminary")') Luminary
               li(onclick='members.activeTab("leader")') Leader
               li(onclick='members.activeTab("member")') Member
-        th(width=70)
+        th
           | Group
         th
-          | Date
+          span.dateHeader(onclick='members.showDateMenu()')
+            | Date
+          #dateMenu.hidden
+            ul
+              li(onclick='members.activeTab("newest")') Newest
+              li(onclick='members.activeTab("oldest")') Oldest
         th.col-sm-4
           | Action
     tbody

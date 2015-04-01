@@ -359,6 +359,9 @@ var members = {
   },
   showStatusMenu: function(){
     $('#statusMenu').toggleClass('hidden');
+  },
+  showDateMenu: function(){
+    $('#dateMenu').toggleClass('hidden');
   }
 };
 
@@ -404,6 +407,7 @@ $(function(){
       hoverLock = !hoverLock;
     }
     else {
+      $('#dateMenu').addClass('hidden');
       $('#nameMenu').addClass('hidden');
       $('#statusMenu').addClass('hidden');
       $('.remove-menu').addClass('hidden');

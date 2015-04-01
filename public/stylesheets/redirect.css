@@ -75,15 +75,6 @@ p {
   margin: 18px auto 0px auto;
 }
 
-.white-bar {
-  position: absolute;
-  right: 0px;
-  left: 0px;
-  top: 547px;
-  bottom: 0px;
-  background-color: #f7f7f7;
-  border-top: 1px solid #a7a7aa;
-}
 
 @media screen and (max-width: 350px) {
   .wrap {
@@ -119,9 +110,5 @@ p {
     height: 249px;
     width: 180px;
     background-size: 180px 249px;
-  }
-
-  .white-bar {
-    top: 464px;
   }
 }

@@ -1007,7 +1007,7 @@ var membersJADERequest = function(req, res) {
 var membersJSONRequest = function(req, res) {
   var org = req.get('org');
   var status = req.get('memberStatus');
-  var sort = req.get('sort')||false;
+  var sort = false;
   var criteria = {};
   if (status) {
     criteria.status = status;

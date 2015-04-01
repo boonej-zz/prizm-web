@@ -191,12 +191,16 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
 
 var fetchOrgUsers = function(model, orgId, criteria, sort, next){
   var $this = model;
+  console.log('executing query');
   $this.model('User').find(criteria)
   .sort(sort)
   .exec(function(err, users){
+    console.log('query complete');
     _.each(users, function(user, idx, list){
+      console.log('iterating users');
       if(users.org_status && _.has(users.org_status, 'length')) {
         var needsUpdate = true;
+        console.log('updating status');
         _.each(user.org_status, function(org,index,list){
           if (String(org.organization) == String(orgId)){
             needsUpdate = false;
@@ -215,16 +219,19 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
           status: 'active'
         });
       }
-      next(err, users);
     });
+    next(err, users);
 
 });
 }
 
 userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next) {
   var keys = ['ambassador', 'luminary', 'member', 'mentor'];
+  var dates = ['newest', 'oldest'];
+  var needsSort = true;
   var $this = this;
   var order = sort;
+  if (!order) order = '_id';
   var showLuminaries = true;
   var criteria = {
         'org_status': {$elemMatch: filters},
@@ -237,11 +244,14 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next
       criteria.subtype = null;
     }
     order = '_id';
+  } else if (_.contains(dates, order)){
+    needsSort = false;
+    sort = order == 'newest'?{last_login_date: -1}:{last_login_date: 1};
   }
-  if (!order) order = '_id';
-  sort = {};
-  sort[order] = 'asc';
-  console.log(sort);
+  if (needsSort){
+    sort = {};
+    sort[order] = 'asc';
+  }
   if (showLuminaries) { 
   var Trust = mongoose.model('Trust');
   Trust.find({
