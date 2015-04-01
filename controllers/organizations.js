@@ -6,6 +6,7 @@ var ObjectId      = require('mongoose').Types.ObjectId;
 var User          = mongoose.model('User');
 var Post          = mongoose.model('Post');
 var Organization  = mongoose.model('Organization');
+var Trust         = mongoose.model('Trust');
 var Theme         = mongoose.model('Theme');
 var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
@@ -278,3 +279,55 @@ exports.updateOrg = function (req, res) {
   };
 }
 
+exports.exportCSV = function(req, res){
+  var user = req.user;
+  var members = [];
+  Organization.findOne({owner: user._id}, function(err, org){
+    if (org){
+      Trust.find({from: user._id, status: 'accepted'}, function(err, trusts){
+        if (trusts) {
+          members = _.pluck(trusts, 'to');
+        }
+        User.find({
+          $or: [
+            {_id: {$in: members}},
+            {org_status: {$elemMatch: {organization: org._id, status: 'active'}}}
+          ]
+        })
+        .select('last_name first_name birthday city state zip_postal email gender phone_number'  )
+        .exec(function(err, users){
+          var body = '';
+          _.each(users, function(user, idx, list){
+            var raw = user.toObject();
+            var head = false;
+            if (body == '') {
+              head = [];
+              for (var prop in raw) {
+                if (prop != '_id')
+                  head.push(prop);
+              }
+              head = head.join(',');
+              head = head.concat('\n');
+            }
+            var line = [];
+            for (var prop in raw) {
+              if (prop != '_id')
+                line.push(raw[prop]);
+            }
+            line = line.join(',');
+            line = line.concat('\n');
+            if (head) {
+              body = body.concat(head);
+            }
+            body = body.concat(line);
+          });
+          res.status(200);
+          res.contentType('application/octet-stream');
+          res.send(body);
+        });
+      });
+    } else {
+      response.status(500).send(error);
+    }
+  });
+};

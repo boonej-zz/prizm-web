@@ -11,7 +11,8 @@
           button.btn.btn-primary.btn-new-member(
             onclick='members.addMember()') Add New Member
           button.btn.btn-primary.btn-export(
-            onclick='members.exportCSV(event)') Export to CSV
+            onclick='nav.navigate("/profile/members/memberexport.csv")') 
+            | Export to CSV
       tr
         th.col-sm-1
         th

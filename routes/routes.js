@@ -67,6 +67,7 @@ router.get('/logout', _users.handleLogout);
 /* Profiles */
 router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/members', _users.authRequired, _users.displayMembers);
+router.get('/profile/members/memberexport.csv', _orgs.exportCSV);
 router.get('/profile/activity', _users.authRequired, _users.displayActivityFeed);
 router.get('/profile/explore', _users.authRequired, _users.displayExploreFeed);
 router.get('/profiles/:id', _users.displayProfileById);
