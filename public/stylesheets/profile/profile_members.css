@@ -104,7 +104,6 @@ table>thead>tr:last-of-type>th {
   display: block;
   border: 1px solid #e4e5ea;
   overflow: auto;
-  height: 602px;
 }
 
 .table>tbody>tr {
