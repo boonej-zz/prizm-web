@@ -191,16 +191,12 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
 
 var fetchOrgUsers = function(model, orgId, criteria, sort, next){
   var $this = model;
-  console.log('executing query');
   $this.model('User').find(criteria)
   .sort(sort)
   .exec(function(err, users){
-    console.log('query complete');
     _.each(users, function(user, idx, list){
-      console.log('iterating users');
       if(users.org_status && _.has(users.org_status, 'length')) {
         var needsUpdate = true;
-        console.log('updating status');
         _.each(user.org_status, function(org,index,list){
           if (String(org.organization) == String(orgId)){
             needsUpdate = false;
@@ -246,7 +242,7 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next
     order = '_id';
   } else if (_.contains(dates, order)){
     needsSort = false;
-    sort = order == 'newest'?{last_login_date: -1}:{last_login_date: 1};
+    sort = order == 'newest'?{'create_date': -1}:{'create_date': 1};
   }
   if (needsSort){
     sort = {};

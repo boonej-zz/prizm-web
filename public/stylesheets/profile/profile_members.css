@@ -104,6 +104,7 @@ table>thead>tr:last-of-type>th {
   display: block;
   border: 1px solid #e4e5ea;
   overflow: auto;
+  height: 621px;
 }
 
 .table>tbody>tr {
@@ -130,43 +131,48 @@ td .prizm-avatar-sm {
   width: 53px;
 }
 
-#active-members tr>th:first-child, #pending-members tr>th:first-child, 
-#active-members tr>td:first-child, #pending-members tr>td:first-child{
+th {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+#active-members tr>th:first-child, #active-members tr>td:first-child, #pending-members tr>th:first-child, #pending-members tr>td:first-child {
   width: 90px;
 }
 
-#active-members tr>th:nth-child(2), #pending-members tr>th:nth-child(2),
-#active-members tr>td:nth-child(2), #pending-members tr>td:nth-child(2){
-  width: 200px;
+#active-members tr>th:nth-child(2), #pending-members tr>th:nth-child(2), #active-members tr>td:nth-child(2), #pending-members tr>td:nth-child(2) {
+  width: 208px;
 }
 
-#pending-members tr>th:nth-child(3), #pending-members tr>td:nth-child(3),{
-  width: 227px;
+#pending-members tr>th:nth-child(3), #pending-members tr>td:nth-child(3) {
+  width: 226px;
 }
 
-#pending-members tr>td:nth-child(5) {
+#pending-members tr>td:nth-child(5), #pending-members tr>th:nth-child(5) {
   text-align: left;
+  width: 261px;
 }
 
-#active-members tr>th:nth-child(4), #active-members tr>td:nth-child(4){
+#active-members tr>th:nth-child(4), #active-members tr>td:nth-child(4) {
   width: 127px;
 }
 
-#pending-members tr>th:nth-child(4), #pending-members tr>td:nth-child(4){
+#pending-members tr>th:nth-child(4), #pending-members tr>td:nth-child(4) {
   width: 201px;
 }
 
-#active-members tr>th:nth-child(5), #active-members tr>td:nth-child(5){
-  width: 207px
+#active-members tr>th:nth-child(5), #active-members tr>td:nth-child(5) {
+  width: 206px
 }
 
-#active-members tr>th:nth-child(6), #active-members tr>td:nth-child(6){
+#active-members tr>th:nth-child(6), #active-members tr>td:nth-child(6) {
   width: 215px;
 }
 
-#active-members tr>th:nth-child(3), #active-members tr>td:nth-child(3),
-#pending-members tr>td:nth-child(3), #pending-members tr>td:nth-child(3){
-  width: 151px;
+#active-members tr>th:nth-child(3), #active-members tr>td:nth-child(3)
+{
+  width: 140px;
 }
 
 
@@ -619,8 +625,8 @@ li.member.selected a {
 }
 
 .restrict-menu {
-  position: relative; 
-  left: 38px;
+  position: absolute; 
+  margin-left: 38px;
   background: #fff;
   width: 182px;
   height: 97px;
@@ -672,8 +678,8 @@ li.member.selected a {
 }
 
 .remove-menu {
-  position: relative; 
-  left: 38px;
+  position: absolute; 
+  margin-left: 38px;
   background: #fff;
   width: 168px;
   height: 118px;
@@ -681,6 +687,7 @@ li.member.selected a {
   padding: 10px 12px 0px 12px;
   font-size: 16px;
   line-height: 18px;
+  z-index: 1000;
 }
 
 .remove-menu:after {

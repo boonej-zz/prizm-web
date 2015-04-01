@@ -176,8 +176,11 @@ var members = {
     $('.restrict-menu').addClass('hidden');
     if (targetHidden) {
       $('.group-menu').addClass('hidden');
+      $(target).children('.group-menu').css('top', $(target).offset().top - 64 );
+      $('tbody').css('overflow', 'hidden');
       $(target).children('.group-menu').toggleClass('hidden');
     } else {
+      $('tbody').css('overflow', 'auto');
       $(target).children('.group-menu').toggleClass('hidden');
     }
 
@@ -194,9 +197,12 @@ var members = {
     if (targetHidden) {
       $('.ambassador-menu').addClass('hidden');
       $(target).children('.ambassador-menu').toggleClass('hidden');
+      $(target).children('.ambassador-menu').css('top', $(target).offset().top - 50 );
+      $('.table tbody').css('overflow', 'hidden');
     }
     else {
       $(target).children('.ambassador-menu').toggleClass('hidden');
+      $('.table tbody').css('overflow', 'auto');
     }
   },
 
@@ -210,11 +216,14 @@ var members = {
     if (targetHidden) {
       console.log('restrict was hidden - showing now');
       $('.restrict-menu').addClass('hidden');
+      $(target).children('.restrict-menu').css('top', $(target).offset().top - 75 );
       $(target).children('.restrict-menu').removeClass('hidden');
+      $('tbody').css('overflow', 'hidden');
     }
     else {
       console.log('restrict was visable - hiding now');
       $('.restrict-menu').addClass('hidden');
+      $('tbody').css('overflow', 'auto');
     }
   },
 
@@ -227,16 +236,20 @@ var members = {
 
     if (targetHidden) {
       $('.remove-menu').addClass('hidden');
+      $(target).children('.remove-menu').css('top', $(target).offset().top - 75 );
+      $('tbody').css('overflow', 'hidden');
       $(target).children('.remove-menu').toggleClass('hidden');
     }
     else {
       $(target).children('.remove-menu').toggleClass('hidden');
+      $('tbody').css('overflow', 'auto');
     }
 
   },
 
   cancelRemoveMenu: function() {
     $('.remove-menu').addClass('hidden');
+    $('tbody').css('overflow', 'auto');
   },
 
   showCard: function(e) {
@@ -418,6 +431,7 @@ $(function(){
       $('.group-menu').addClass('hidden');
       hoverLock = false;
     }
+    $('tbody').css('overflow', 'auto'); 
   })
 });
 

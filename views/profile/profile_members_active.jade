@@ -13,7 +13,7 @@ table.table.table-striped.members-table
             onclick='nav.navigate("/profile/members/memberexport.csv")') 
             | Export to CSV
       tr
-        th.col-sm-1
+        th
         th
           span.nameHeader(onclick='members.showNameMenu()' width=160)
             | Name
@@ -21,7 +21,7 @@ table.table.table-striped.members-table
             ul
               li(onclick='members.activeTab("first_name")') First
               li(onclick='members.activeTab("last_name")') Last
-        th.col-sm-2
+        th
           span.statusHeader(onclick='members.showStatusMenu()')
             | Status
           #statusMenu.hidden
@@ -39,7 +39,7 @@ table.table.table-striped.members-table
             ul
               li(onclick='members.activeTab("newest")') Newest
               li(onclick='members.activeTab("oldest")') Oldest
-        th.col-sm-4
+        th
           | Action
     tbody
       each member in members
