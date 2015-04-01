@@ -8,6 +8,8 @@ var Comment     = mongoose.model('Comment');
 var User        = mongoose.model('User');
 var Activity    = mongoose.model('Activity');
 var Users       = require('./users');
+var Organization = mongoose.model('Organization');
+var Trust = mongoose.model('Trust');
 var _           = require('underscore');
 var _time       = require('../lib/helpers/date_time');
 var fs          = require('fs');
@@ -347,29 +349,28 @@ var organizationMembersFeed = function(req, res) {
       }
     });
   }
-  console.log('finding members');
-  var userCriteria = {
-    org_status: {$elemMatch: {
-      organization: orgID,
-      status: 'active'
-                }}  
-  };
-  User.find(userCriteria, function(err, users) {
-    if (err) { 
-      console.log('error');
-      res.status(500).send({error: err}); 
-    }
-    else {
-      _.each(users, function(user) {
-        members.push(user._id);
-      });
-      Post.find(criteria)
-        .sort({create_date: -1})
-        .exec(function(err, posts) {
-          if (err) {
-            res.status(500).send({error: err});
+  Organization.findOne({_id: orgID}, function(err, org){
+    if (org) {
+      Trust.find({from: org.owner, status: 'accepted'}, function(err, trusts){
+        if (trusts) {
+          members = _.pluck(trusts, 'to');
+        }
+        var userCriteria = {
+          org_status: {
+                        $elemMatch: {organization: org._id, status: 'active'}
+                      }
+        };
+        User.find(userCriteria, function(err, users) {
+          if (users){
+            members = members.concat(_.pluck(users, '_id'));
           }
-          else {
+          criteria.creator.$in = members;
+          Post.find(criteria)
+          .sort({create_date: -1})
+          .exec(function(err, posts){
+            if (err) {
+              res.status(500).send({error: err});
+            }
             posts = _time.addTimeSinceFieldToObjects(posts);
             if (req.user) {
               _.each(posts, function(post, idx, list){
@@ -389,11 +390,17 @@ var organizationMembersFeed = function(req, res) {
 
             var content = jade.renderFile(postFeed, {posts: posts});
             res.status(200).send(content);
-          }
+
+          });
+          
         });
+      });
+
+    } else {
+      res.status(500).send({error: err});
     }
   });
-}
+};
 
 var explorePostFeed = function(req, res) {
   var lastPost    = req.get('lastPost');
