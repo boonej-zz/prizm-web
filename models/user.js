@@ -189,13 +189,19 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
   });
 }
 
-userSchema.statics.findOrganizationMembers = function(filters, owner, next) {
+userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next) {
   var $this = this;
+  var order = sort;
+  if (!order) order = '_id';
+  sort = {};
+  sort[order] = 'asc';
+  console.log(sort);
   var Trust = mongoose.model('Trust');
   Trust.find({
     status: 'accepted',
     from: String(owner) 
-  }, function(err, trusts){
+  })
+  .exec(function(err, trusts){
       var trustArray = [];
       if (filters.status == 'active') {
         if (_.has(trusts, 'length')){
@@ -205,7 +211,9 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, next) {
       $this.model('User').find({$or: [
         {'org_status': {$elemMatch: filters}},
         {_id: {$in: trustArray}}
-      ]}, function(err, users){
+      ]})
+      .sort(sort)
+      .exec(function(err, users){
         _.each(users, function(user, idx, list){
           if(users.org_status && _.has(users.org_status, 'length')) {
             var needsUpdate = true;

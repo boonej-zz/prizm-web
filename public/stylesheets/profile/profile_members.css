@@ -338,6 +338,52 @@ span.group-icon {
   background-color: #36c9ff;
 }
 
+.nameHeader {
+  display: inline-block;
+  width: 72px;
+  background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
+  background-size: 7px 4px;
+  background-repeat: no-repeat;
+  background-position-y: 12px;
+  background-position-x: 58px;
+  cursor: pointer;
+}
+
+#nameMenu {
+  position: absolute;
+  background: #fff;
+  width: 76px;
+  height: 95px;
+  border: 1px #e4e5ea solid;
+  margin-top: 6px;
+  z-index: 1000;
+}
+
+#nameMenu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0px 9px 8px 9px;
+  border-color: #fff transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: 16px;
+  top: -7px;
+}
+
+#nameMenu:before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0px 9px 8px 9px;
+  border-color: #e4e5ea transparent;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: 16px;
+  top: -8px;
+}
 .ambassador-menu {
   position: absolute; 
   background: #fff;
@@ -346,6 +392,27 @@ span.group-icon {
   border: 1px #e4e5ea solid;
   margin-top: 12px;
   z-index: 1000;
+}
+
+#nameMenu>ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nameMenu>ul>li{
+  margin: 0;
+  margin-left: 17px;
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 300;
+  color: #959698;
+  padding: 0;
+  cursor: pointer;
+}
+
+#nameMenu>ul>li:hover {
+  color: #3e6a9e;
 }
 
 .ambassador-menu:after {

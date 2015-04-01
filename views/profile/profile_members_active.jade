@@ -16,7 +16,12 @@
       tr
         th.col-sm-1
         th
-          | Name
+          span.nameHeader(onclick='members.showNameMenu()')
+            | Name
+          #nameMenu.hidden
+            ul
+              li(onclick='members.activeTab("first_name")') First
+              li(onclick='members.activeTab("last_name")') Last
         th.col-sm-2
           | Status
         th(width=70)

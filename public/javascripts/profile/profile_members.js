@@ -258,7 +258,8 @@ var members = {
   },
 
   // Member Page Controls
-  activeTab: function() {
+  activeTab: function(sort) {
+    if(!sort) sort = false;
     var organization = $('#organization').attr('data');
     var request = $.ajax({
       type: 'GET',
@@ -267,10 +268,11 @@ var members = {
         'Accept': 'application/jade',
         'memberStatus': 'active',
         'content-type': 'application/jade',
-        'org': organization
+        'org': organization,
+        'sort': sort
       },
       success: function(html) {
-        members.updateActiveCount();
+        members.updateActiveCount(sort);
         if (html) {
           $('#active-members').html(html);
         }
@@ -307,7 +309,7 @@ var members = {
     });
    },
 
-  updateActiveCount: function(){
+  updateActiveCount: function(sort){
     var organization = $('#organization').attr('data');
     $.ajax({
       type: 'GET',
@@ -316,7 +318,8 @@ var members = {
         'Accept': 'application/json',
         'content-type': 'application/json',
         'memberStatus': 'active',
-        'org': organization
+        'org': organization,
+        sort: sort
       },
       success: function(json) {
         $('a[href="#active"]').text("Approved Members (" + json.length + ")");
@@ -350,6 +353,9 @@ var members = {
   showCardFront: function(){
     $('.back-member').addClass('hidden');
     $('.front-member').removeClass('hidden'); 
+  },
+  showNameMenu: function(){
+    $('#nameMenu').toggleClass('hidden');
   }
 };
 
@@ -395,6 +401,7 @@ $(function(){
       hoverLock = !hoverLock;
     }
     else {
+      $('#nameMenu').addClass('hidden');
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');
