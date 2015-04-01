@@ -68,10 +68,10 @@ p {
 
 .phone-graphic {
   display: block;
-  height: 375px;
-  width: 197px;
+  height: 386px;
+  width: 210px;
   background-image: url('/images/phone.png');
-  background-size: 197px 375px;
+  background-size: 210px 386px;
   margin: 18px auto 0px auto;
 }
 
@@ -107,8 +107,8 @@ p {
   }
 
   .phone-graphic {
-    height: 343px;
+    height: 331px;
     width: 180px;
-    background-size: 180px 343px;
+    background-size: 180px 331px;
   }
 }
