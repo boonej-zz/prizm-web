@@ -22,10 +22,10 @@ table.table.table-striped.members-table
           td
             if member.profile_photo_url
               img(src='https://#{member.profile_photo_url.substr(7)}'
-                  class='prizm-avatar-sm cursor'
+                  class='prizm-avatar-sm cursor' 
                   onclick='prizm.showProfile("#{member._id}")')
             else
-              img(src='/images/default-profile.png' 
+              img(src='/images/profile/profile_default_avatar.png' 
                   class='prizm-avatar-sm cursor'
                   onclick='prizm.showProfile("#{member._id}")')
           td.cursor(onclick='prizm.showProfile("#{member._id}")')
