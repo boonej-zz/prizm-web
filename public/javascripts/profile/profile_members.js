@@ -173,6 +173,10 @@ var members = {
   },
   toggleGroupMenu: function(e){
     var target = e.target;
+    var isTarget = $(target).children('.group-menu').length > 0;
+    if (!isTarget) {
+      target = $(target).parent();
+    }
     var targetHidden = $(target).children('.group-menu').hasClass('hidden');
     $(target).toggleClass('selected');
     $('.remove-menu').addClass('hidden');

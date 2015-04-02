@@ -289,9 +289,10 @@ background-color: rgb(246, 249, 254);
 .group-menu {
   position: absolute;
   background: #fff;
-  width: 158px;
+  width: 112px;
   border: 1px #e4e5ea solid;
-  margin-top: 12px;
+  margin-top: 22px;
+  margin-left: 22px;
   z-index: 1000;
 }
 
@@ -345,58 +346,36 @@ span.group-icon {
   background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
   background-size: 7px 4px;
   background-repeat: no-repeat;
-  background-position-y: 6px;
-  background-position-x: 18px;
-  width: 30px;
+  background-position-y: 12px;
+  background-position-x: 39px;
+  width: 46px;
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 .group-icon {
-  height: 12px;
-  width: 12px;
+  height: 11px;
+  width: 19px;
+  background-image: url('/images/icons/group_icon.png');
+  background-size: 19px 11px;
+  background-repeat: none;
+  display: inline-block;
+}
+
+.group-count {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
   border-radius: 50%;
+  background-color: #f67914;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 16px;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
 }
 
-.group-icon[group="1"] {
-  background-color: #f89a20;
-}
-
-.group-icon[group="2"] {
-  background-color: #1ea0da;
-}
-
-.group-icon[group="3"] {
-  background-color: #57b948;
-}
-
-.group-icon[group="4"] {
-  background-color: #774c9e;
-}
-
-.group-icon[group="5"] {
-  background-color: #f72aa5;
-}
-
-.group-icon[group="6"] {
-  background-color: #3c63ae;
-}
-
-.group-icon[group="7"] {
-  background-color: #eb1c24;
-}
-
-.group-icon[group="8"] {
-  background-color: #b5d335;
-}
-
-.group-icon[group="9"] {
-  background-color: #42eddf;
-}
-
-.group-icon[group="10"] {
-  background-color: #36c9ff;
-}
 
 .nameHeader, .statusHeader, .dateHeader {
   display: inline-block;

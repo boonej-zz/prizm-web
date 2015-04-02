@@ -78,40 +78,16 @@ table.table.table-striped.members-table
                     a(onclick='members.makeMember(event)') Member
           td
             .group-button.cursor(onclick='members.toggleGroupMenu(event)')
-              .group-icon(group='1' onclick='members.toggleGroupMenu(event)')
+              .group-icon(group='#group1')
+              .group-count 3
               .group-menu.hidden
                 ul
-                  li
-                    span.group-icon(group='1')
-                    | Group 1
-                  li
-                    span.group-icon(group='2')
-                    | Group 2
-                  li
-                    span.group-icon(group='3')
-                    | Group 3
-                  li
-                    span.group-icon(group='4')
-                    | Group 4
-                  li
-                    span.group-icon(group='5')
-                    | Group 5
-                  li
-                    span.group-icon(group='6')
-                    | Group 6
-                  li
-                    span.group-icon(group='7')
-                    | Group 7
-                  li
-                    span.group-icon(group='8')
-                    | Group 8
-                  li
-                    span.group-icon(group='9')
-                    | Group 9
-                  li
-                    span.group-icon(group='10')
-                    | Group 10
-
+                  li(group='#group1')
+                    | #group1
+                  li(group='#group2')
+                    | #group2
+                  li(group='#group3')
+                    | #group3
           td
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')
