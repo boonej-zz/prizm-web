@@ -6,6 +6,7 @@ block head
 
 block content
   #organization(data='#{organization.id}')
+  input#selectedTab(type='hidden' value='active')
   .container.topnav-offset
     .row
       .members-header.page-header
@@ -27,7 +28,8 @@ block content
               id="search"
               value=""
               class="form-control"
-              placeholder="Find by Name or email")
+              placeholder="Find by Name or email"
+              onkeyup='members.search(event)')
     .row
       #active-members
         include profile_members_active

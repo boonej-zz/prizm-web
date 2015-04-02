@@ -909,10 +909,7 @@ exports.displayFollowing = function(req, res) {
 // User Members Methods
 
 exports.displayMembers = function(req, res) {
-  if (req.accepts('html')) {
-    membersHTMLRequest(req, res);
-  }
-  else if (req.accepts('application/jade')) {
+  if (req.accepts('application/jade')) {
     membersJADERequest(req, res);
   }
   else if (req.accepts('application/json')) {
@@ -920,7 +917,7 @@ exports.displayMembers = function(req, res) {
   }
 };
 
-var membersHTMLRequest = function(req, res) {
+exports.membersHTMLRequest = function(req, res) {
   // We may want to display differet pages if they pending verification
   var sort = req.get('sort')||false;
   var currentUser = req.user;
@@ -941,7 +938,7 @@ var membersHTMLRequest = function(req, res) {
           res.redirect('/profile');
         }
         else {
-          User.findOrganizationMembers({organization: organization.id, status: 'active'}, organization.owner, sort, function(err, members) {
+          User.findOrganizationMembers({organization: organization.id, status: 'active'}, organization.owner, sort, false, function(err, members) {
             if (err) {
                 res.status(500).send({error: err});
             }
@@ -968,6 +965,7 @@ var membersJADERequest = function(req, res) {
   var status = req.get('memberStatus');
   var org = req.get('org');
   var sort = req.get('sort');
+  var text = req.get('text');
   if (status == 'active') {
     memberList = activeMembers;
   }
@@ -987,7 +985,7 @@ var membersJADERequest = function(req, res) {
         User.findOrganizationMembers({
           organization: organization.id,
           status: status
-        }, organization.owner, sort, function(err, members) {
+        }, organization.owner, sort, text, function(err, members) {
           if (err) {
               console.log(err);
               res.status(500).send({error: err});
@@ -1022,7 +1020,7 @@ var membersJSONRequest = function(req, res) {
       }
       else {
         criteria.organization = organization.id;
-        User.findOrganizationMembers(criteria, organization.owner, sort, function(err, members) {
+        User.findOrganizationMembers(criteria, organization.owner, sort, false, function(err, members) {
           if (err) {
             console.log(err);
               res.status(500).send({error: err});

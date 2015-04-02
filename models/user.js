@@ -1,5 +1,6 @@
 var serial = require('serializer');
 var utils = require('../utils');
+var util = require('util');
 var _ = require('underscore');
 var moment = require('moment');
 var mongoose = require('mongoose');
@@ -162,7 +163,7 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
     ]
   }, function(err, trusts){
     var trustArray = [];
-    if (err) {
+      if (err) {
       console.log(err);
       next(err);
     }
@@ -221,19 +222,26 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
 });
 }
 
-userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next) {
+userSchema.statics.findOrganizationMembers = function(filters, owner, order, search, next) {
+  search = search?search:'';
+  console.log('text:' + search);
   var keys = ['ambassador', 'luminary', 'member', 'mentor'];
   var dates = ['newest', 'oldest'];
   var needsSort = true;
   var $this = this;
-  var order = sort;
   if (!order) order = '_id';
   var showLuminaries = true;
+  var filterLuminary = false;
   var criteria = {
         'org_status': {$elemMatch: filters},
   };
   if (_.contains(keys, order)){
-    if (order != 'luminary') showLuminaries = false;
+    console.log('contains key');
+    if (order != 'luminary') {
+      showLuminaries = false;
+    } else {
+      filterLuminary = true;
+    }
     if (order != 'member') {
       criteria.subtype = order;
     } else { 
@@ -248,26 +256,44 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, sort, next
     sort = {};
     sort[order] = 'asc';
   }
-  if (showLuminaries) { 
-  var Trust = mongoose.model('Trust');
-  Trust.find({
-    status: 'accepted',
-    from: String(owner) 
-  })
-  .exec(function(err, trusts){
-      var trustArray = [];
-      if (filters.status == 'active') {
-        if (_.has(trusts, 'length')){
-          trustArray = _.pluck(trusts, 'to');
+ 
+  if (showLuminaries === true) { 
+    var Trust = mongoose.model('Trust');
+    Trust.find({
+      status: 'accepted',
+      from: String(owner) 
+    })
+    .exec(function(err, trusts){
+        var trustArray = [];
+        if (filters.status == 'active') {
+          if (_.has(trusts, 'length')){
+            trustArray = _.pluck(trusts, 'to');
+          }
         }
-      }
-      var newCriteria = {$or: [
-        criteria,
-        {_id: {$in: trustArray}}
-      ]};
-      fetchOrgUsers($this, filters.organization, newCriteria, sort, next);
-  });
+        search = search?search:'';
+        var newCriteria = null;
+        search = new RegExp(search, 'i');
+        newCriteria = {
+          $and: [
+            {$or: [
+              {org_status: {$elemMatch: filters}},
+              {_id: {$in: trustArray}}
+            ]},
+            {$or: [
+              {name: search},
+              {email: search}
+            ]}
+          ]
+        };
+        if (filterLuminary) {
+          newCriteria.$and.push({subtype: 'luminary'});
+        }
+        
+        fetchOrgUsers($this, filters.organization, newCriteria, sort, next);
+    });
   } else {
+    console.log('No luminaries');
+    console.log(util.inspect(criteria, {showHidden: false, depth: null}));
     fetchOrgUsers($this, filters.organization, criteria,sort,  next);
   }
 };

@@ -8,6 +8,9 @@ var hover = function() {
     }
   });
 };
+
+var orgID = $('#organization').val(); 
+
 var members = {
   // Member Action Methods
   formatTable: function(height) {
@@ -271,24 +274,27 @@ var members = {
   },
 
   // Member Page Controls
-  activeTab: function(sort) {
+  activeTab: function(sort, text) {
     if(!sort) sort = false;
+    if(!text) text = '';
     var organization = $('#organization').attr('data');
     var request = $.ajax({
       type: 'GET',
-      url: window.location.pathname,
+      url: '/organizations/' + orgID + '/members',
       headers: {
         'Accept': 'application/jade',
         'memberStatus': 'active',
         'content-type': 'application/jade',
         'org': organization,
-        'sort': sort
+        'sort': sort,
+        'text': text
       },
       success: function(html) {
-        members.updateActiveCount(sort);
+        $('#selectedTab').val('active');
         if (html) {
           $('#active-members').html(html);
         }
+        members.updateActiveCount(sort);
         $('#pending-members').hide();
         $('#active-members').fadeIn();
         hover();
@@ -298,18 +304,23 @@ var members = {
     });  
   },
 
-  pendingTab: function() {
+  pendingTab: function(sort, text) {
+    if(!sort) sort = false;
+    if(!text) text = '';
     var organization = $('#organization').attr('data');
     var request = $.ajax({
       type: 'GET',
-      url: window.location.pathname,
+      url: '/organizations/' + orgID + '/members',
       headers: {
         'Accept': 'application/jade',
         'memberStatus': 'pending',
         'content-type': 'application/jade',
-        'org': organization
+        'org': organization,
+        'sort': sort,
+        'text': text
       },
       success: function(html) {
+        $('#selectedTab').val('pending');
         members.updatePendingCount();
         if (html) {
           $('#pending-members').html(html);
@@ -326,7 +337,7 @@ var members = {
     var organization = $('#organization').attr('data');
     $.ajax({
       type: 'GET',
-      url: window.location.pathname,
+      url: '/organizations/' + orgID + '/members',
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',
@@ -344,7 +355,7 @@ var members = {
     var organization = $('#organization').attr('data');
     $.ajax({
       type: 'GET',
-      url: window.location.pathname,
+      url: '/organizations/' + orgID + '/members',
       headers: {
         'Accept': 'application/json',
         'content-type': 'application/json',
@@ -375,6 +386,15 @@ var members = {
   },
   showDateMenu: function(){
     $('#dateMenu').toggleClass('hidden');
+  },
+  search: function(e){
+    var target = e.target;
+    var text = $(target).val();
+    if ($('#selectedTab').val() == 'active'){
+      members.activeTab(false, text);
+    } else {
+      members.pendingTab(false, text);
+    }
   }
 };
 
