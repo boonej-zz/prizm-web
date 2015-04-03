@@ -215,12 +215,13 @@
     display: inline-block;
     font-size: 14px;
   }
-   #explore .post, .post-image {
+
+  #explore .post, .post-image {
     width: 106px;
     height: 106px;
   }
 
-  .post-image img {
+  div.post-image img {
     width: 105px;
     height: 105px;
   }

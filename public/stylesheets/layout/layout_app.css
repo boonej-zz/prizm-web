@@ -955,8 +955,8 @@ input#personal + span {
   }
 }
 
-@media screen and (max-width: 488px){
- .body-push {
+@media screen and (max-width: 488px) {
+  .body-push {
     left: 280px;
   }
 
