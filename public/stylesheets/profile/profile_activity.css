@@ -134,6 +134,7 @@ tr .prizm-avatar-sm {
 
 .activity-action.post {
   background-image: url('/images/activity/follow.png');
+background-size: 24px 24px;
 }
 
 .activity-action.insight {
