@@ -347,30 +347,31 @@ span.group-icon {
   background-size: 7px 4px;
   background-repeat: no-repeat;
   background-position-y: 12px;
-  background-position-x: 39px;
-  width: 46px;
+  background-position-x: 53px;
+  width: 60px;
   display: inline-block;
   margin-left: 0px;
 }
 
 .group-icon {
-  height: 11px;
-  width: 19px;
+  height: 16px;
+  width: 30px;
   background-image: url('/images/icons/group_icon.png');
-  background-size: 19px 11px;
+  background-size: 30px 16px;
   background-repeat: none;
   display: inline-block;
 }
 
 .group-count {
   display: inline-block;
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
+  margin-top: -6px;
   border-radius: 50%;
   background-color: #f67914;
   font-size: 10px;
   font-weight: 600;
-  line-height: 16px;
+  line-height: 18px;
   vertical-align: middle;
   text-align: center;
   color: white;
