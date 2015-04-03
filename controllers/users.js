@@ -1308,7 +1308,6 @@ exports.displayActivityFeed = function(req, res) {
           var postMap = [];
           _.each(notifications, function(note, idx, list){
             if (note.post_id) {
-              console.log('has post');
               postArray.push(note.post_id);
               postMap.push({id: String(note.post_id), index: idx});
             }

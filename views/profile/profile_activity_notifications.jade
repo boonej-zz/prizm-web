@@ -33,6 +33,8 @@
                 | Created a post.
               if notification.action == 'group_joined'
                 | Reviewing membership.
+              if notification.action == 'tag'
+                | Tagged you in a post.
           td
             .activity-time
               | #{notification.time_since} ago
