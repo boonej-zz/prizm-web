@@ -115,17 +115,35 @@ tr .prizm-avatar-sm {
 
 .activity-action {
   padding-left: 38px;
+  background-repeat: no-repeat;
+  height: 25px;
 }
 
 .activity-action.like {
-    background-image: url('/images/profile/activity/activity_like.png');
-  background
-;background-repeat: no-repeat;
+    background-image: url('/images/activity/like.png');
 }
 
 .activity-action.comment {
-  background-image: url('/images/profile/activity/activity_comment.png');
-  background-repeat: no-repeat;
+  background-image: url('/images/activity/comment.png');
+}
+
+.activity-action.follow {
+  background-image: url('/images/activity/follow.png');
+  background-size: 24px 24px;
+}
+
+.activity-action.post {
+  background-image: url('/images/activity/follow.png');
+}
+
+.activity-action.insight {
+  background-image: url('/images/activity/insight.png');
+ background-size: 24px 24px;
+}
+
+.activity-action.group_joined {
+  background-image: url('/images/activity/follow.png');
+  background-size: 24px 24px;
 }
 
 .activity-time {
