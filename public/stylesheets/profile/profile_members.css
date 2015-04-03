@@ -609,7 +609,6 @@ li.member.selected a {
   margin-left: 38px;
   background: #fff;
   width: 182px;
-  height: 97px;
   border: 1px #e4e5ea solid;
 }
 
@@ -648,13 +647,27 @@ li.member.selected a {
 .restrict-menu li {
   list-style: none;
   padding: 5px;
-}
-
-.restrict-menu a {
-  text-decoration: none;
   font-weight: normal;
   color: #484849;
   font-size: 16px;
+}
+
+.restrict-menu p {
+  font-size: 15px;
+  margin: 10px;
+}
+
+
+.restrict-menu .btn-default {
+  float: left;
+  margin-left: 14px;
+  margin-bottom: 10px;
+}
+
+.restrict-menu .btn-primary{
+  float: right;
+  margin-right: 14px;
+  margin-bottom: 10px;
 }
 
 .remove-menu {

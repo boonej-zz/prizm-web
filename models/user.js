@@ -76,7 +76,8 @@ var userSchema = new mongoose.Schema({
   unsubscribed          : {type: Boolean, default: false},
   pwd_updated           : {type: Boolean, default: false},
   org_status            : [orgStatusSchema],
-  theme                 : {type: ObjectIdType, ref: 'Theme', required: false}
+  theme                 : {type: ObjectIdType, ref: 'Theme', required: false},
+  visibility            : {type: String, default: null}
 },{ versionKey          : false });
 
 userSchema.statics.basicFields = function(){

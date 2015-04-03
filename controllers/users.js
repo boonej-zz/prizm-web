@@ -1499,4 +1499,61 @@ exports.displayExploreFeed = function(req, res) {
   });
 }
 
+exports.restrictUser = function(req, res) {
+  var user = req.user;
+  var uid = req.get('id');
+  Organization.findOne({owner: user._id}, function(err, org){
+    if (org) {
+      User.findOne({_id: uid, org_status: {$elemMatch: {organization: org._id}}}, function(err, user){
+        if (user) {
+          user.visibility = 'restricted';
+          user.save(function(err, result){
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              Post.update({creator: uid}, {$set: {is_flagged: true}}, {multi: true}, function(err, result){
+                res.status(201).send();
+              });
+            }
+          });
+        } else {
+          console.log('no user');
+          res.status(500).send(err);
+        }
+      });
+    } else {
+      console.log('bad');
+      res.status(500).send(err);
+    }
+  });
+}
+
+exports.unrestrictUser = function(req, res){
+  var user = req.user;
+  var uid = req.get('id');
+  Organization.findOne({owner: user._id}, function(err, org){
+    if (org) {
+      User.findOne({_id: uid, org_status: {$elemMatch: {organization: org._id}}}, function(err, user){
+        if (user) {
+          user.visibility = null;
+          user.save(function(err, result){
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              res.status(201).send();
+            }
+          });
+        } else {
+          console.log('no user');
+          res.status(500).send(err);
+        }
+      });
+    } else {
+      console.log('bad');
+      res.status(500).send(err);
+    }
+  });
+
+};
+
 exports.getTrustedLuminariesForUserId = getTrustedLuminariesForUserId

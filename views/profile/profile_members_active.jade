@@ -94,10 +94,32 @@ table.table.table-striped.members-table
             .member-action.restrict(onClick='members.toggleRestrictMenu(event)')
               .restrict-menu.hidden
                 ul
-                  li
-                    a(href="#restrict") Restrict this account
-                  li
-                    a(href="#disable") Disable account
+                  if member.visibility != 'restricted'
+                    li(action='restrict')
+                      | Restrict account
+                  else
+                    li(action='unrestrict')
+                      | Unrestrict account
+                  li(action='disable' data-member='#{member.id}')
+                    | Disable account
+                .restrict.hidden
+                  p Are you sure you want to restrict this member?
+                  button.btn.btn-default.btn-sm
+                    | Cancel
+                  btn.btn.btn-primary.btn-sm(onclick='members.restrict("#{member.id}")')
+                    | Restrict
+                .unrestrict.hidden
+                  p Are you sure you want to unrestrict this member?
+                  button.btn.btn-default.btn-sm
+                    | Cancel
+                  btn.btn.btn-primary.btn-sm(onclick='members.unrestrict("#{member.id}")')
+                    | Restore 
+                .disable.hidden
+                  p Are you sure you want to disable this member?
+                  button.btn.btn-default.btn-sm
+                    | Cancel
+                  btn.btn.btn-primary.btn-sm
+                    | Disable 
             .member-action.remove(onClick='members.toggleRemoveMenu(event)')
               .remove-menu.hidden
                 p Are you sure you want to delete this member?

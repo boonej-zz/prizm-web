@@ -9,6 +9,20 @@ var hover = function() {
   });
 };
 
+var setupPage = function(){
+ $('.group-menu li').click(function(){
+    var $this = $(this);
+    var group = $this.children('.group-icon').attr('group');
+    $this.parents('.group-button').children('div.group-icon').attr('group', group);
+  });
+  $('.restrict-menu li').click(function(){
+    var $this = $(this);
+    var action = $(this).attr('action');
+    $this.parent().toggleClass('hidden');
+    $this.parent().siblings('.' + action).toggleClass('hidden');
+  });
+};
+
 var orgID = $('#organization').val(); 
 
 var members = {
@@ -228,9 +242,11 @@ var members = {
       $('tbody').css('overflow', 'hidden');
     }
     else {
-      console.log('restrict was visable - hiding now');
-      $('.restrict-menu').addClass('hidden');
-      $('tbody').css('overflow', 'auto');
+      if ($(target).is('.restrict-menu')) {
+        console.log('restrict was visable - hiding now');
+        $('.restrict-menu').addClass('hidden');
+        $('tbody').css('overflow', 'auto');
+      }
     }
   },
 
@@ -302,6 +318,8 @@ var members = {
         $('#pending-members').hide();
         $('#active-members').fadeIn();
         hover();
+
+        setupPage();
         //members.formatTable('606px');
 
       }
@@ -399,6 +417,36 @@ var members = {
     } else {
       members.pendingTab(false, text);
     }
+  },
+  restrict: function(user){
+    $.ajax({
+      type: 'POST',
+      url: '/users/restrict',
+      headers:{
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'id': user
+      },
+      success: function() {
+        members.activeTab();
+        members.updatePendingCount();
+      }
+    });
+  },
+  unrestrict: function(user){
+    $.ajax({
+      type: 'POST',
+      url: '/users/unrestrict',
+      headers:{
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'id': user
+      },
+      success: function() {
+        members.activeTab();
+        members.updatePendingCount();
+      }
+    });
   }
 };
 
@@ -418,12 +466,21 @@ $(function(){
     var restrictMenu    = '.member-action.restrict';
     var removeMenu      = '.member-action.remove';
     var groupButton     = '.group-button';
+    var restrictItem    = '.member-action.restrict li';
+    var restrictButton  = '.member-action.restrict .btn';
     var target          = e.target;
 
     if ($(target).is(ambassadorMenu)) {
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
       hoverLock = !hoverLock;      
+    }
+    else if($(target).is(restrictItem)) {
+      //alert('restrict');
+    } else if ($(target).is(restrictButton)){
+      $(target).parents('.restrict-menu').children('div').addClass('hidden');
+      $(target).parents('.restrict-menu').children('ul').removeClass('hidden');
+      $(target).parents('.restrict-menu').addClass('hidden');
     }
     else if ($(target).is(restrictMenu)) {
       $('.remove-menu').addClass('hidden');
@@ -461,11 +518,7 @@ $(function(){
 
 $(document).ready(function(){
   // members.formatTable('606px');
-  $('.group-menu li').click(function(){
-    var $this = $(this);
-    var group = $this.children('.group-icon').attr('group');
-    $this.parents('.group-button').children('div.group-icon').attr('group', group);
-  });
+  setupPage(); 
   hover(); 
 });
 

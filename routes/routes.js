@@ -52,11 +52,12 @@ router.post('/posts/:id/comment', _posts.addComment);
 
 
 /* Users */
+router.post('/users/unrestrict', _users.authRequired, _users.unrestrictUser);
+router.post('/users/restrict', _users.authRequired, _users.restrictUser);
 router.get('/users/:id/password', _users.passwordReset);
 router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);
 router.post('/users/:id', _users.authRequired, _users.updateUser);
-
 /* Authorization */
 router.get('/login', _users.displayLogin);
 router.post('/login', _users.handlePrizmLogin);
