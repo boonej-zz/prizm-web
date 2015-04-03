@@ -225,7 +225,7 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
 userSchema.statics.findOrganizationMembers = function(filters, owner, order, search, next) {
   search = search?search:'';
   console.log('text:' + search);
-  var keys = ['ambassador', 'luminary', 'member', 'mentor'];
+  var keys = ['ambassador', 'luminary', 'member', 'leader'];
   var dates = ['newest', 'oldest'];
   var needsSort = true;
   var $this = this;
