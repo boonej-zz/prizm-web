@@ -710,31 +710,51 @@ form #inputComment {
     margin-left: 15px;
   }
 
-
+  .container > .modal-dialog {
+    width: 100%;
+  }
   #postModal .modal-dialog {
-    position: fixed;
-    top: 0px;
-    left: 0px;
+    top: 5px;
+    bottom: 5px;
+    margin: 0 auto;
+    width: 520px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+  }
+
+  #postModal .post-image img {
+    width: 520px;
+    height: 520px;
+  }
+ 
+  .post-modal-right {
+    position: initial;
+    width: 520px;
     bottom: 0px;
-    right: 0px;
-    margin: 0px;
-    max-height: 568px;
+    height: auto;
   }
 
   .post-modal-left {
-      display: none;
+    width: 520px;
+    height: 520px;
   }
 
-  .post-modal-right {
-    width: 100%;
-    height: auto;
+  .next-post-right {
+    display: none;
   }
+
+  .next-post-left {
+    display: none;
+  }
+
   .comments-header {
     display: none;
   }
 
   .comment-scroll {
     top: 64px;
+    position: initial;
   }
 
   .comments-post {
@@ -745,6 +765,13 @@ form #inputComment {
   .comment-post {
     width: 100%;
   }
+  .comments-footer {
+    position: initial;
+  }
+
+  #profile .comment-post {
+    width: 452px;
+  } 
 
   form #inputComment {
     width: 100%;
@@ -765,10 +792,13 @@ form #inputComment {
   .post-comments {
     height: 64px;
     top: 0px;
+    position: initial;
   }
 
   .post-comments > p {
-    margin: 18px auto;
+    line-height: 64px;
+    vertical-align: middle;
+    height: 64px;
   }
 
   .back-button {
@@ -834,6 +864,29 @@ form #inputComment {
     width: 55px;
     font-size: 12px;
   }
+
+  #postModal .modal-dialog {
+    width: 420px;
+  }
+
+  #postModal .post-image img {
+    width: 420px;
+    height: 420px;
+  }
+ 
+ .post-modal-right {
+    width: 420px;
+  }
+
+  .post-modal-left {
+    width: 420px;
+    height: 420px;
+  }
+
+  #profile .comment-post {
+    width: 352px;
+  } 
+
 }
 
 @media screen and (max-width:410px){
@@ -874,6 +927,42 @@ form #inputComment {
     padding-top: 2px;
     width: 55px;
     font-size: 12px;
+  }
+
+  #postModal .modal-dialog {
+    width: 316px;
+  }
+
+  #postModal .post-image img {
+    width: 316px;
+    height: 316px;
+  }
+ 
+ .post-modal-right {
+    width: 316px;
+  }
+
+  .post-modal-left {
+    width: 316px;
+    height: 316px;
+  }
+
+  #profile .comment-post {
+    width: 268px;
+  } 
+  
+  #postModal .avatar-name {
+    font-size: 18px;
+  }
+
+  .comments-footer .like-icon{
+    height: 68px;
+    width: 48px;
+    background-position-x: 8px;
+  }
+
+  .comments-post {
+    padding-left: 48px;
   }
 }
 
