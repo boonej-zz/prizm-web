@@ -1,7 +1,10 @@
 var uid = $('#userId').attr('value');
 
 $(document).ready(function(){
-  $('img.lazy').lazyload({threshold: 200});
+  $('img.lazy').lazyload(
+    {threshold: 200,
+     container: $('#insights')}
+  );
 });
 
 var insights = {
@@ -16,7 +19,10 @@ var insights = {
     })
     .done(function(html){
       $('#insights').html(html); 
-      $('img.lazy').lazyload({threshold: 200});
+      $('img.lazy').lazyload(
+        {threshold: 200,
+         container: $('#insights')}
+      );
       if (type == 'archive') {
         $('#insights').addClass('archive');
       } else {
