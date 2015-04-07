@@ -8,7 +8,10 @@ $(document).ready(function(){
 });
 
 var insights = {
-  fetchInsights: function(type){
+  fetchInsights: function(type, noscroll){
+    if (!noscroll) {
+      $('#insights').scrollTop();
+    }
     $.ajax({
       method: 'GET',
       url: '/profiles/' + uid + '/insights',
@@ -40,7 +43,7 @@ var insights = {
       }
     })
     .done(function(html){
-      insights.fetchInsights('new');
+      insights.fetchInsights('new', true);
     });
   }
 };
