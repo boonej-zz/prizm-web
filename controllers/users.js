@@ -42,6 +42,8 @@ var mandrill        = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 var Mixpanel        = require('mixpanel');
 var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+var Insight = mongoose.model('Insight');
+var InsightTarget = mongoose.model('InsightTarget');
 
 // User Methods
 exports.passwordReset = function(req, res){
@@ -1557,3 +1559,35 @@ exports.unrestrictUser = function(req, res){
 };
 
 exports.getTrustedLuminariesForUserId = getTrustedLuminariesForUserId
+
+// Insights
+
+exports.displayInsightsForUser = function(req, res){
+  var user = req.user;
+  var options = {
+    title: 'Insights',
+    bodyId: 'memberInsights',
+    insights: [],
+    auth: true,
+    currentUser: user
+  };
+  InsightTarget.find(
+      {target: user._id, liked: false, disliked: false}, 
+      function(err, targets){
+        if (targets) {
+          var list = _.pluck(targets, 'insight');
+          Insight.find({_id: {$in: list}})
+          .populate({
+            path: 'creator',
+            select: '_id name profile_photo_url subtype'
+          })
+          .exec(function(err, insights){
+            options.insights = insights;
+            res.render('profile/insights', options);
+
+          });
+        } else {
+          res.render('profile/insights', options);
+        }
+  }); 
+}

@@ -1,0 +1,42 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' href='/stylesheets/profile/insights.css')
+
+block content
+  .container.topnav-offset
+    .insights-header.page-header
+      | Insights
+    ul#insightTab.nav.nav-tabs(role='tablist')
+      li.active(
+        role='presentation' 
+        data-toggle='tab'
+        onclick=''
+        )
+        | Inbox
+      li(
+        role='presentation' 
+        data-toggle='tab'
+        onclick=''
+        )
+        | Archive
+    ul#insights
+      each insight in insights
+        li
+          .insight-header
+            span.profile-icon(
+              style="background-image: url('https://#{insight.creator.profile_photo_url.substr(7)||'/images/default-profile.png'}')"
+            )
+            span.name
+              | #{insight.creator.name}
+            span.delete
+            span.archive
+          .image(style='background-image: url("#{insight.file_path}")')
+            .hashtags
+              each tag in insight.hash_tags
+                | #{'#' + tag + ' '}
+          .insight-footer
+            span.title-wrap
+              span.title
+                | #{insight.title}
+            span.open

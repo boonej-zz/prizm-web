@@ -72,6 +72,7 @@ router.get('/organizations/:id/members', _users.authRequired, _users.displayMemb
 router.get('/profile/members/memberexport.csv', _users.authRequired, _orgs.exportCSV);
 router.get('/profile/activity', _users.authRequired, _users.displayActivityFeed);
 router.get('/profile/explore', _users.authRequired, _users.displayExploreFeed);
+router.get('/profile/insights', _users.authRequired, _users.displayInsightsForUser);
 router.get('/profiles/:id', _users.displayProfileById);
 
 /* Follow */
