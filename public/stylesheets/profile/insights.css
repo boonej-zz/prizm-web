@@ -1,5 +1,6 @@
 .container.topnav-offset {
   padding-left: 22px;
+  padding-bottom: 40px;
 }
 
 .insights-header {
@@ -42,6 +43,8 @@
   padding: 20px 0px;
   background-color: #fefefe;
   font-size: 0;
+  max-height: 760px;
+  overflow-y: auto;
 }
 
 #insights li{
@@ -82,6 +85,7 @@
   border-radius: 50%;
   margin-top: 13px;
   margin-left: 12px;
+  cursor: pointer;
 }
 
 .insight-header .name {
@@ -94,6 +98,7 @@
   font-size: 17px;
   margin-left: 14px;
   margin-top: 0px;
+  cursor: pointer;
 }
 
 .insight-header .delete, .insight-header .archive {
@@ -103,6 +108,7 @@
   background-size: 24px;
   background-repeat: none;
   margin-top: 28px;
+  cursor: pointer;
 }
 
 .insight-header .delete {
@@ -113,6 +119,10 @@
   background-image: url('/images/insights/archive.png');
   margin-left: 22px;
 }
+
+#insights.archive .insight-header .delete, #insights.archive .insight-header .archive {
+  display: none;
+} 
 /** INSIGHT FOOTER **/
 
 .insight-footer {
@@ -153,8 +163,11 @@ ul#insights .image {
   display: block;
   height: 510px;
   width: 510px;
-  background-size: 510px 510px;
+}
 
+ul#insights .image img {
+  height: 510px;
+  width: 510px;
 }
 
 ul#insights .image .hashtags {
@@ -165,14 +178,14 @@ ul#insights .image .hashtags {
   font-size: 24px; 
   color: #e4e5ea;
   position: relative;
-  top: 472px;
+  top: -45px;
   left: 7px;
 }
 
 @media screen and (max-width: 600px) {
   .container.topnav-offset {
     width: 520px;
-    padding: 0;
+    padding: 0 0 20px 0;
   }
 
   .insights-header {
@@ -184,11 +197,13 @@ ul#insights .image .hashtags {
     position: fixed;
     z-index: 500;
     margin-left: 11px;
-    margin-top: 1px;
+    height: 44px;
   }
 
   #insightTab li {
     width: 249px;
+    height: 44px;
+    line-height: 44px;
   }
 
   #insights {
@@ -211,9 +226,13 @@ ul#insights .image .hashtags {
     background-size: 488px 488px;
   }
 
+  ul#insights .image img {
+    height: 488px;
+    width: 488px;
+  }
+
   ul#insights .image .hashtags {
     width: 488px;
-    top: 446px;
   }
 
 }
@@ -252,11 +271,20 @@ ul#insights .image .hashtags {
     height: 398px;
     background-size: 398px 398px;
   }
+  
+  ul#insights .image img {
+    height: 398px;
+    width: 398px;
+  }
 
   ul#insights .image .hashtags {
     width: 398px;
-    top: 358px;
     font-size: 18px;
+  }
+  
+  .insight-footer .title {
+    width: 200px;
+    font-size: 16px;
   }
 
 }
@@ -296,9 +324,13 @@ ul#insights .image .hashtags {
     background-size: 298px 298px;
   }
 
+  ul#insights .image img {
+    height: 298px;
+    width: 298px;
+  }
+
   ul#insights .image .hashtags {
     width: 298px;
-    top: 258px;
     font-size: 18px;
   }
 

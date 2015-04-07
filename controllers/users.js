@@ -42,7 +42,6 @@ var mandrill        = require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 var Mixpanel        = require('mixpanel');
 var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
-var Insight = mongoose.model('Insight');
 var InsightTarget = mongoose.model('InsightTarget');
 
 // User Methods
@@ -1565,7 +1564,7 @@ exports.getTrustedLuminariesForUserId = getTrustedLuminariesForUserId
 exports.displayInsightsForUser = function(req, res){
   var user = req.user;
   var options = {
-    title: 'Insights',
+    title: 'Insight',
     bodyId: 'memberInsights',
     insights: [],
     auth: true,
@@ -1591,3 +1590,87 @@ exports.displayInsightsForUser = function(req, res){
         }
   }); 
 }
+
+exports.fetchInsightsFeed = function(req, res){
+  var user = req.user;
+  var type = req.get('type');
+  var options = {insights: []};
+  var criteria = {
+    target: user._id,
+    liked: type == 'archive',
+    disliked: false
+  };
+  InsightTarget.find(
+      criteria, 
+      function(err, targets){
+        if (targets) {
+          var list = _.pluck(targets, 'insight');
+          Insight.find({_id: {$in: list}})
+          .populate({
+            path: 'creator',
+            select: '_id name profile_photo_url subtype'
+          })
+          .exec(function(err, insights){
+            options.insights = insights;
+            res.render('profile/insight_feed', options);
+
+          });
+        } else {
+          res.render('profile/insight_feed', options);
+        }
+  }); 
+
+}
+
+exports.archiveInsight = function(req, res){
+  var insightId = req.params.id;
+  var uid = req.user._id;
+  mixpanel.track('Insight liked');
+  InsightTarget.findOneAndUpdate(
+    {insight: insightId, target: uid},
+    {liked: true, disliked: false},
+    function(err, it){
+      console.log('in update');
+      if (!err) {
+        Insight.findOne(
+          {insight: insightId},
+          function(err, insight){
+            if(insight) {
+              insight.likes_count += 1;
+              insight.save();
+            }
+          }
+        );
+        res.status(201).send();
+      } else {
+        res.status(400).send();
+      }
+    }
+  );
+};
+
+exports.rejectInsight = function(req, res){
+  var insightId = req.params.id;
+  var uid = req.user._id;
+  mixpanel.track('Insight disliked');
+  InsightTarget.findOneAndUpdate(
+    {insight: insightId, target: uid},
+    {$set: {liked: false, disliked: true}},
+    function(err, it){
+      if (!err) {
+        Insight.findOne(
+          {insight: insightId},
+          function(err, insight){
+            if(insight) {
+              insight.dislikes_count += 1;
+              insight.save();
+            }
+          }
+        );
+        res.status(201).send();
+      } else {
+        res.status(400).send();
+      }
+    }
+  );
+};

@@ -80,6 +80,16 @@ router.get('/profiles/:id/following', _users.displayFollowing);
 router.get('/profiles/:id/followers', _users.displayFollowers);
 router.post('/profiles/:id/followers', _follow.followUserId);
 
+/* Insights */
+router.get('/profiles/:uid/insights', _users.authRequired, _users.fetchInsightsFeed);
+router.post('/profiles/:uid/insights/:id', _users.authRequired, function(req, res){
+  var action = req.get('action');
+  if (action == 'archive') {
+    _users.archiveInsight(req, res);
+  } else {
+    _users.rejectInsight(req, res);
+  }
+});
 /* Trusts */
 router.post('/trusts/:id', _users.authRequired, _trusts.updateTrusts);
 
