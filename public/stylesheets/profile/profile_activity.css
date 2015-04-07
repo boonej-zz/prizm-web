@@ -21,6 +21,7 @@
   font-weight: 400;
   color: #555;
   background-color: #e4e5ea;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -34,6 +35,7 @@
 .nav-tabs {
   width: 948px;
   margin-left: 19px;
+  border-bottom: none;
 }
 
 
