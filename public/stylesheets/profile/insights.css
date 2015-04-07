@@ -210,6 +210,7 @@ ul#insights .image .hashtags {
     width: 498px;
     padding-top: 62px;
     margin: 0 auto;
+    max-height: initial;
   }
 
   #insights li {
