@@ -1,0 +1,22 @@
+each insight in insights
+  - var profilePhoto = insight.creator.profile_photo_url?'https://' + insight.creator.profile_photo_url.substr(7):'/images/default-profile.png'
+  - var ownerLink = '/profiles/' + insight.creator._id
+  li
+    .insight-header
+      span.profile-icon(onclick='nav.navigate("#{ownerLink}")'
+        style='background-image: url("#{profilePhoto}")'
+      )
+      span.name(onclick='nav.navigate("#{ownerLink}")')
+        | #{insight.creator.name}
+      span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject")')
+      span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive")')
+    .image
+      img.lazy(data-original='#{insight.file_path}', alt='insight')
+      .hashtags
+        each tag in insight.hash_tags
+          | #{'#' + tag + ' '}
+    .insight-footer
+      span.title-wrap
+        span.title #{insight.title}
+      span.open
+          
