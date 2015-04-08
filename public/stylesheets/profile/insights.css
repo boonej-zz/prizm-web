@@ -22,6 +22,7 @@
 }
 
 #insightTab li {
+  cursor: pointer;
   display: inline-block;
   width: 471px;
   height: 42px;
@@ -82,8 +83,9 @@
   display: inline-block;
   height: 51px;
   width: 51px;
-  background-size: 51px;
+  background-size: 51px 51px;
   background-repeat: none;
+  background-position: center;
   border: 1px solid #8989a3;
   border-radius: 50%;
   margin-top: 13px;
@@ -93,7 +95,6 @@
 
 .insight-header .name {
   height: 78px;
-  width: 356px;
   line-height: 78px;
   vertical-align: middle;
   color: #484849;
@@ -106,12 +107,14 @@
 
 .insight-header .delete, .insight-header .archive {
   display: inline-block;
+  float: right;
   width: 24px;
   height: 24px;
   background-size: 24px;
   background-repeat: none;
   margin-top: 28px;
   cursor: pointer;
+  margin-right: 12px;
 }
 
 .insight-header .delete {
@@ -120,7 +123,6 @@
 
 .insight-header .archive {
   background-image: url('/images/insights/archive.png');
-  margin-left: 22px;
 }
 
 #insights.archive .insight-header .delete, #insights.archive .insight-header .archive {

@@ -8,8 +8,8 @@ each insight in insights
       )
       span.name(onclick='nav.navigate("#{ownerLink}")')
         | #{insight.creator.name}
-      span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject")')
       span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive")')
+      span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject")')
     .image
       img.lazy(data-original='#{insight.file_path}', alt='insight')
       .hashtags
