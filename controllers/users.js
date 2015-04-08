@@ -1606,11 +1606,11 @@ exports.fetchInsightsFeed = function(req, res){
         if (targets) {
           var list = _.pluck(targets, 'insight');
           Insight.find({_id: {$in: list}})
+          .sort({create_date: -1})
           .populate({
             path: 'creator',
             select: '_id name profile_photo_url subtype'
           })
-          .sort({create_date: -1})
           .exec(function(err, insights){
             options.insights = insights;
             res.render('profile/insight_feed', options);
