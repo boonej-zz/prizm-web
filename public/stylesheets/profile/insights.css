@@ -225,10 +225,6 @@ ul#insights .image .hashtags {
     width: 490px;
   }
 
-  .insight-header .name {
-     width: 328px;
-  }
-
   #insights li .image {
     width: 488px;
     height: 488px;
@@ -269,10 +265,6 @@ ul#insights .image .hashtags {
 
   #insights li {
     width: 400px;
-  }
-
-  .insight-header .name {
-     width: 242px;
   }
 
   #insights li .image {
@@ -321,10 +313,6 @@ ul#insights .image .hashtags {
 
   #insights li {
     width: 300px;
-  }
-
-  .insight-header .name {
-     width: 142px;
   }
 
   #insights li .image {
