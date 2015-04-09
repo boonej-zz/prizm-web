@@ -23,7 +23,6 @@
   height: 698px;
   background-color: #e4e5ea;
   border-right: 1px solid #c5c8cc;
-
 }
 
 .right-box {
@@ -31,6 +30,7 @@
   width: 595px;
   height: 698px;
   background-color: #fefefe;
+ 
 }
 
 ul#topics, ul#messages {
@@ -149,6 +149,10 @@ li.message .content {
   clear: none;
 }
 
+ul#messages li:last-child {
+  margin-bottom: 20px;
+}
+
 .message .creator {
   float: left;
   font-size: 18px;
@@ -198,6 +202,7 @@ li.message .content {
   background-color: #f4f5f7;
   border-right: 1px solid #c5c8cc;
   float: left;
+  margin: 0;
   background-image: url('/images/messages/message_post.png');
   background-position: center;
   background-size: 16px 18px;
@@ -214,4 +219,247 @@ li.message .content {
   color: #8b8989;
   font-size: 16px;
   outline: none;
+}
+
+@media screen and (max-width: 600px) {
+  .container.topnav-offset {
+    width: 520px;
+    padding: 0;
+  }
+
+  .messages-header {
+    display: none;
+  }
+
+  .message-container {
+     overflow: hidden;
+     width: 520px;
+     height: 700px;
+  }
+
+  .left-box {
+    position: absolute;
+    width: 520px;
+    float: left;
+    margin-top: -700px;
+    transition: all 500ms linear; 
+  }
+  
+  .left-box.visible {
+    margin-top: 0px !important;
+    transition: all 500ms linear; 
+  }
+
+  .right-box {
+    width: 520px;
+    float: left;
+    transition: all 500ms linear; 
+  }
+
+  #messages {
+  }
+
+  
+  #newMessage {
+    width: 100%;
+    z-index: 1000;
+    position: relative;
+    bottom: 0;
+  }
+
+  li.message .content {
+    width: 440px;
+  }
+
+  .message .profile-icon {
+    margin-left: 10px;
+  }
+
+  .message .time {
+    width: 100px;
+  }
+
+  .message .message {
+    width: 305px;
+  }
+}
+
+@media screen and (max-width: 488px) {
+  .container.topnav-offset {
+    width: 420px;
+    padding: 0;
+  }
+  
+  .message-container {
+     width: 420px;
+     height: 600px;
+  }
+
+  .left-box {
+    position: absolute;
+    width: 420px;
+    height: 600px;
+    float: left;
+    margin-top: -600px;
+    transition: all 500ms linear; 
+  }
+  
+  .left-box.visible {
+    margin-top: 0px !important;
+    transition: all 500ms linear; 
+  }
+
+  .right-box {
+    width: 420px;
+    height: 600px;
+    float: left;
+    transition: all 500ms linear; 
+  }
+
+  #newMessage {
+    width: 100%;
+    z-index: 1000;
+    position: relative;
+    bottom: 0;
+  }
+
+  li.message .content {
+    width: 338px;
+  }
+
+  .message .profile-icon {
+    margin-left: 10px;
+  }
+
+  .message .time {
+    width: 85px;
+  }
+
+  .message .time-since {
+    font-size: 14px;
+  }
+
+  .message .clock-icon {
+    height: 15px;
+    width: 15px;
+    background-size: 15px;
+  }
+
+  .message .message {
+    width: 240px;
+  }
+
+  #messages, ul#topics {
+    height: 474px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .profile-icon {
+    width: 35px;
+    height: 35px;
+    background-size: 35px;
+  }
+  
+  .header .profile-icon {
+    margin: 5px 5px 5px 5px;
+  }
+
+  .header .group-name {
+    height: 44px;
+    line-height: 44px;
+    margin-left: 20px;
+  }
+
+  .container.topnav-offset {
+    width: 320px;
+    padding: 0;
+  }
+  
+  .message-container {
+     width: 320px;
+     height: 405px;
+  }
+
+  .left-box {
+    position: absolute;
+    width: 320px;
+    height: 405px;
+    float: left;
+    margin-top: -405px;
+    transition: all 500ms linear; 
+  }
+  
+  .left-box.visible {
+    margin-top: 0px !important;
+    transition: all 500ms linear; 
+  }
+
+  .right-box {
+    width: 320px;
+    height: 405px;
+    float: left;
+    transition: all 500ms linear; 
+  }
+  
+  li.message .content {
+    width: 240px;
+    padding: 15px 0 14px 0;
+    min-height: initial;
+  }
+
+  .message .profile-icon {
+    margin-left: 10px;
+    margin-top: 15px;
+  }
+
+  .message .creator {
+    font-size: 14px;
+  }
+
+  .message .time {
+    width: 65px;
+  }
+
+  .message .time-since {
+    font-size: 12px;
+  }
+
+  .message .clock-icon {
+    height: 12px;
+    width: 12px;
+    background-size: 12px;
+  }
+
+  .message .message {
+    width: 170px;
+    font-size: 15px;
+  }
+
+  #messages, ul#topics {
+    height: 306px;
+  }
+
+  ul#topics {
+    width: 100%;
+  }
+
+  #topics .topic {
+    height: 44px;
+    line-height: 44px;
+    font-size: 18px;
+  }
+
+  .left-box>.header, .right-box>.topic {
+    height: 44px;
+    line-height: 44px;
+  }
+
+  #newMessage input {
+    width: 268px;
+  }
+
+  li.message {
+    min-height: 60px;
+  } 
 }

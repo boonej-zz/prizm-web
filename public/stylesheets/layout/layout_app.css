@@ -107,6 +107,17 @@ body:before {
   float: right;
 }
 
+.message-icon {
+  width: 34px;
+  height: 36px;
+  background-image: url('/images/icons/message_icon.png');
+  background-repeat: no-repeat;
+  background-size: 34px 36px;
+  background-position: center;
+  margin-top: 20px;
+  float: right;
+}
+
 .avatar-menu {
   height: 40px;
   width: 40px;
@@ -874,6 +885,14 @@ input#personal + span {
     height: 30px;
     background-size: 30px;
   }
+
+  .message-icon {
+    right: 15px;
+    width: 28px;
+    height: 30px;
+    background-size: 28px 30px;
+  }
+
 
   .avatar-menu {
     right: 20%;

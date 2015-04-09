@@ -29,6 +29,10 @@ var messages = {
       $('input#lastMessage').val($('li.message:first').attr('created'));
       isFetching = false;
       messages.scrollToLatest();
+      var width = $(window).width();
+      if (width < 601) {
+        $('.left-box').removeClass('visible');
+      }
     });
   },
   refresh: function(){
@@ -101,6 +105,19 @@ $(document).ready(function(){
       if (!isFetching){
         messages.fetchOlder();
       }
+    }
+  });
+
+  $('div.topic').click(function(){
+    var width = $(window).width();
+    if (width < 601) {
+      $('.left-box').addClass('visible');
+    }
+  });
+  $('.left-box .header').click(function(){
+    var width = $(window).width();
+    if (width < 601) {
+      $('.left-box').removeClass('visible');
     }
   });
 });
