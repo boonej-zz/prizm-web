@@ -33,6 +33,7 @@ exports.displayMessagesFeed = function(req, res){
         });
         if (userOrgs.length == 0) res.redirect('/');
         options.organization = userOrgs[0].organization;
+        console.log(userOrgs[0].organization.owner);
         Message.fetchMessages(
           {
             organization: userOrgs[0].organization,
