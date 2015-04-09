@@ -5,6 +5,7 @@ var messages = {
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));
   },
   changeTopic: function(e){
+    isFetching = true;
     var target = e.target;
     var topic = $(target).text();
     var organization = $('input#selectedOrganization').val();
@@ -26,10 +27,12 @@ var messages = {
     .done(function(html){
       $('#messages').html(html);
       $('input#lastMessage').val($('li.message:last').attr('created'));
+      isFetching = false;
       messages.scrollToLatest();
     });
   },
   refresh: function(){
+    isFetching = true;
     var organization = $('input#selectedOrganization').val();
     var group = $('input#selectedGroup').val();
     $.ajax({
@@ -43,6 +46,7 @@ var messages = {
     .done(function(html){
       $('#messages').html(html);
       $('input#lastMessage').val($('li.message:first').attr('created'));
+      isFetching = false;
       messages.scrollToLatest();
     });
   },
