@@ -22,10 +22,8 @@ exports.displayMessagesFeed = function(req, res){
   };
   if (user.type == 'user') {
     User.findOne({_id: user._id})
-    .populate({path: 'org_status.organization'})
     .populate({
-      path: 'org_status.organization.owner', 
-      select: '_id name profile_photo_url'
+      path: 'org_status.organization',
     })
     .exec(function(err, user){
       if (user && user.org_status && user.org_status.length > 0) {
@@ -36,17 +34,20 @@ exports.displayMessagesFeed = function(req, res){
         });
         if (userOrgs.length == 0) res.redirect('/');
         options.organization = userOrgs[0].organization;
-        console.log(userOrgs[0].organization.owner);
-        Message.fetchMessages(
-          {
-            organization: userOrgs[0].organization,
-            group: 'all'
-          },
-          function(err, messages){
-            options.messages = messages.reverse() || [];
-            res.render('messages/messages', options);
-          }
-        );
+        User.findOne({_id: userOrgs[0].organization.owner}, function(err, user){
+          options.organization.owner = user;
+          Message.fetchMessages(
+            {
+              organization: userOrgs[0].organization,
+              group: 'all'
+            },
+            function(err, messages){
+              options.messages = messages.reverse() || [];
+              res.render('messages/messages', options);
+            }
+          );
+        });
+       
       } else {
         res.redirect('/');
       }
