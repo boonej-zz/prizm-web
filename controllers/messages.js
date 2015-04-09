@@ -32,10 +32,10 @@ exports.displayMessagesFeed = function(req, res){
           return status.status == 'active';
         });
         if (userOrgs.length == 0) res.redirect('/');
-        options.organization = userOrgs[0];
+        options.organization = userOrgs[0].organization;
         Message.fetchMessages(
           {
-            organization: user.org_status[0].organization,
+            organization: userOrgs[0].organization,
             group: 'all'
           },
           function(err, messages){
