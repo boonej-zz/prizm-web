@@ -1,0 +1,33 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/messages.css')
+  script(type='text/javascript' src='/javascripts/messages.js')
+
+block content
+  - var ownerPhoto = organization.owner.profile_photo_url?organization.owner.profile_photo_url:'/images/default-profile.png';
+  input#selectedOrganization(type='hidden' value='#{organization._id}')
+  input#selectedGroup(type='hidden' value='all')
+  input#lastMessage(type='hidden' value='#{messages[0].create_date}')
+  .container.topnav-offset
+    .messages-header.page-header
+      | Message
+    .message-container
+      .left-box
+        .header
+          span.profile-icon(style="background-image: url('#{ownerPhoto}')")
+          span.group-name
+            | #{organization.name}
+
+        ul#topics
+          include topics_feed
+      .right-box
+        .topic
+          | #all
+        ul#messages
+         include message_feed 
+             
+        form#newMessage
+          .message-icon
+          input(type='text' placeholder='Post a message to #all...')
+          

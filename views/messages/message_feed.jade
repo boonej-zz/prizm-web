@@ -1,0 +1,11 @@
+each message in messages
+  - var creatorPhoto = message.creator.profile_photo_url?message.creator.profile_photo_url:'/images/default-profile.png'
+  li.message(created='#{message.create_date}')
+    .profile-icon(style="background-image: url('#{creatorPhoto}')")
+    .content
+      .time
+        span.clock-icon
+        span.time-since #{message.timeSince} ago
+      span.creator #{message.creator.name}
+      span.message
+        | #{message.text} 
