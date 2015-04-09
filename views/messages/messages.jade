@@ -16,8 +16,9 @@ block content
     .message-container
       .left-box
         .header
-          span.profile-icon(style="background-image: url('#{ownerPhoto}')")
-          span.group-name
+          span.profile-icon.cursor(style="background-image: url('#{ownerPhoto}')" 
+          onclick='nav.navigate("/#{organization.namespace}")')
+          span.group-name.cursor(onclick='nav.navigate("/#{organization.namespace}")')
             | #{organization.name}
 
         ul#topics
