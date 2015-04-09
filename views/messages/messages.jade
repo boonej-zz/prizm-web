@@ -6,9 +6,10 @@ block head
 
 block content
   - var ownerPhoto = organization.owner.profile_photo_url?organization.owner.profile_photo_url:'/images/default-profile.png';
+  - var lastCreated = messages.length > 0?messages[0].create_date:new Date();
   input#selectedOrganization(type='hidden' value='#{organization._id}')
   input#selectedGroup(type='hidden' value='all')
-  input#lastMessage(type='hidden' value='#{messages[0].create_date}')
+  input#lastMessage(type='hidden' value='#{lastCreated}')
   .container.topnav-offset
     .messages-header.page-header
       | Message
