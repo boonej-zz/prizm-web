@@ -208,10 +208,10 @@ li.message .content {
   display: inline-block;
   border: none;
   height: 52px;
-  line-height: 52px;
   vertical-align: middle;
   width: 543px;
   padding: 0 17px;
   color: #8b8989;
   font-size: 16px;
+  outline: none;
 }
