@@ -28,12 +28,12 @@ exports.displayMessagesFeed = function(req, res){
     .exec(function(err, user){
       if (user && user.org_status && user.org_status.length > 0) {
         options.currentUser = user;
-        options.topics = user.org_status[0].groups || [];
         var userOrgs = _.filter(user.org_status, function(status){
           return status.status == 'active';
         });
         if (userOrgs.length == 0) res.redirect('/');
         options.organization = userOrgs[0].organization.toObject();
+        options.topics = userOrgs[0].groups || [];
         User.findOne({_id: userOrgs[0].organization.owner}, '_id name profile_photo_url', function(err, user){
           options.organization.owner = user;
           Message.fetchMessages(
