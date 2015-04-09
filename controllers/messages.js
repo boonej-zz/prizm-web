@@ -41,7 +41,6 @@ exports.displayMessagesFeed = function(req, res){
           },
           function(err, messages){
             options.messages = messages.reverse() || [];
-            console.log(options);
             res.render('messages/messages', options);
           }
         );

@@ -1,5 +1,5 @@
 each message in messages
-  - var creatorPhoto = message.creator.profile_photo_url?message.creator.profile_photo_url:'/images/default-profile.png'
+  - var creatorPhoto = message.creator.profile_photo_url?'https://' + message.creator.profile_photo_url.substr(7):'/images/default-profile.png'
   li.message(created='#{message.create_date}')
     .profile-icon(style="background-image: url('#{creatorPhoto}')")
     .content
