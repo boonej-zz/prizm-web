@@ -28,7 +28,11 @@ exports.displayMessagesFeed = function(req, res){
       if (user && user.org_status && user.org_status.length > 0) {
         options.currentUser = user;
         options.topics = user.org_status[0].groups || [];
-        options.organization = user.org_status[0].organization;
+        var userOrgs = _.filter(user.org_status, function(status){
+          return status.status == 'active';
+        });
+        if (userOrgs.length == 0) res.redirect('/');
+        options.organization = userOrgs[0];
         Message.fetchMessages(
           {
             organization: user.org_status[0].organization,
