@@ -33,9 +33,8 @@ exports.displayMessagesFeed = function(req, res){
           return status.status == 'active';
         });
         if (userOrgs.length == 0) res.redirect('/');
-        options.organization = userOrgs[0].organization;
-        User.findOne({_id: userOrgs[0].organization.owner}, function(err, user){
-          console.log(user);
+        options.organization = userOrgs[0].organization.toObject();
+        User.findOne({_id: userOrgs[0].organization.owner}, '_id name profile_photo_url', function(err, user){
           options.organization.owner = user;
           Message.fetchMessages(
             {
