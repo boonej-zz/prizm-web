@@ -26,7 +26,7 @@ var messages = {
     })
     .done(function(html){
       $('#messages').html(html);
-      $('input#lastMessage').val($('li.message:last').attr('created'));
+      $('input#lastMessage').val($('li.message:first').attr('created'));
       isFetching = false;
       messages.scrollToLatest();
     });
