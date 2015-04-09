@@ -24,7 +24,10 @@ messageSchema.post('init', function(){
 messageSchema.statics.fetchMessages = function(criteria, next){
   this.model('Message').find(criteria)
   .sort({create_date: -1})
-  .populate({path: 'creator'})
+  .populate({
+    path: 'creator',
+    select: '_id name profile_photo_url'
+  })
   .limit(15)
   .exec(function(err, messages){
     next(err, messages);

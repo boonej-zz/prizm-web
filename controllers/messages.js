@@ -23,7 +23,10 @@ exports.displayMessagesFeed = function(req, res){
   if (user.type == 'user') {
     User.findOne({_id: user._id})
     .populate({path: 'org_status.organization'})
-    .populate({path: 'org_status.organization.owner'})
+    .populate({
+      path: 'org_status.organization.owner', 
+      select: '_id name profile_photo_url'
+    })
     .exec(function(err, user){
       if (user && user.org_status && user.org_status.length > 0) {
         options.currentUser = user;
