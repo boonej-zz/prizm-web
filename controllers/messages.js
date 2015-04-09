@@ -11,7 +11,53 @@ var Organization  = mongoose.model('Organization');
 var Message       = mongoose.model('Message');
 var Trust         = mongoose.model('Trust');
 
-exports.displayMessagesFeed = function(req, res){
+exports.displayUserMessagesFeed = function(req, res){
+  console.log('in request');
+  var user = req.user;
+  var org = req.params.organization; 
+  var options = {
+    title: 'Message',
+    bodyId: 'messageList',
+    topics: [],
+    auth: true,
+    currentUser: user
+  };
+  console.log(user.org_status);
+  var userOrgs = _.filter(user.org_status, function(status){
+    if (status.status != 'active') return false;
+    else if (String(status.organization._id) != String(org)) return false
+    else return true;
+  });
+  if (userOrgs.length > 0) {
+    console.log('finding org details');
+    Organization.findOne({_id: org})
+    .populate({
+      path: 'owner',
+      select: '_id name profile_photo_url'
+    })
+    .exec(function (err, organization){
+      options.currentUser = user;
+      options.organization = organization.toObject();
+      options.topics = userOrgs[0].groups || [];
+      console.log('fetching messages');
+      Message.fetchMessages(
+        {
+          organization: org,
+          group: 'all'
+        },
+        function(err, messages){
+          console.log('rendering page');
+          options.messages = messages.reverse() || [];
+          res.render('messages/messages', options);
+        }
+      );
+    });
+  } else {
+    res.redirect('/');
+  }
+};
+
+exports.displayOwnerMessagesFeed = function(req, res){
   var user = req.user;
   var options = {
     title: 'Message',
@@ -20,39 +66,7 @@ exports.displayMessagesFeed = function(req, res){
     auth: true,
     currentUser: user
   };
-  if (user.type == 'user') {
-    User.findOne({_id: user._id})
-    .populate({
-      path: 'org_status.organization',
-    })
-    .exec(function(err, user){
-      if (user && user.org_status && user.org_status.length > 0) {
-        options.currentUser = user;
-        var userOrgs = _.filter(user.org_status, function(status){
-          return status.status == 'active';
-        });
-        if (userOrgs.length == 0) res.redirect('/');
-        options.organization = userOrgs[0].organization.toObject();
-        options.topics = userOrgs[0].groups || [];
-        User.findOne({_id: userOrgs[0].organization.owner}, '_id name profile_photo_url', function(err, user){
-          options.organization.owner = user;
-          Message.fetchMessages(
-            {
-              organization: userOrgs[0].organization,
-              group: 'all'
-            },
-            function(err, messages){
-              options.messages = messages.reverse() || [];
-              res.render('messages/messages', options);
-            }
-          );
-        });
-       
-      } else {
-        res.redirect('/');
-      }
-    });
-  } else if (user.type == 'institution_verified') {
+  if (user.type == 'institution_verified') {
     Organization.findOne({owner: user._id})
     .populate({path: 'owner'})
     .exec(function(err, organization){

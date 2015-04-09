@@ -51,6 +51,14 @@ router.post('/posts/:id/unlike', _posts.unlikePost);
 router.post('/posts/:id/comment', _posts.addComment);
 
 
+/* Messages */
+router.get('/profile/messages/:organization', _users.authRequired, function(req, res){
+  console.log('Forwarding request to controller');
+  _messages.displayUserMessagesFeed(req, res);
+});
+router.get('/messages', _users.authRequired, _messages.displayOwnerMessagesFeed);
+router.get('/messages/:group', _users.authRequired, _messages.fetchMessages);
+router.post('/messages', _users.authRequired, _messages.createMessage);
 
 /* Users */
 router.post('/users/unrestrict', _users.authRequired, _users.unrestrictUser);
@@ -84,10 +92,6 @@ router.post('/profiles/:id/followers', _follow.followUserId);
 /* Insights */
 router.get('/profiles/:uid/insights', _users.authRequired, _users.fetchInsightsFeed);
 
-/* Messages */
-router.get('/messages', _users.authRequired, _messages.displayMessagesFeed);
-router.get('/messages/:group', _users.authRequired, _messages.fetchMessages);
-router.post('/messages', _users.authRequired, _messages.createMessage);
 
 router.post('/profiles/:uid/insights/:id', _users.authRequired, function(req, res){
   var action = req.get('action');

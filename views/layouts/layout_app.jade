@@ -203,7 +203,7 @@ html
                       .settings-header #{org.organization.name}
                     li.item(
                       class="#{title == 'Message'?'selected':''}"
-                      onclick="nav.navigate('/messages')"
+                      onclick="nav.navigate('/profile/messages/#{org.organization._id}')"
                       )
                       .settings-icon.message-button Message
                     li.item(
