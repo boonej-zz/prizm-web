@@ -35,6 +35,7 @@ exports.displayMessagesFeed = function(req, res){
         if (userOrgs.length == 0) res.redirect('/');
         options.organization = userOrgs[0].organization;
         User.findOne({_id: userOrgs[0].organization.owner}, function(err, user){
+          console.log(user);
           options.organization.owner = user;
           Message.fetchMessages(
             {
