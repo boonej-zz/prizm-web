@@ -10,7 +10,8 @@ var ObjectIdType      = mongoose.Schema.Types.ObjectId;
 var orgStatusSchema = new mongoose.Schema({
   organization          : {type: ObjectIdType, ref: 'Organization', required: true},
   status                : {type: String, default: 'pending', required: true},
-  create_date           : {type: Date, default: Date.now()}
+  create_date           : {type: Date, default: Date.now()},
+  groups                : {type: Array, default: []}
 })
 
 var userSchema = new mongoose.Schema({

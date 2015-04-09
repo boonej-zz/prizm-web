@@ -15,7 +15,8 @@ var organizationSchema = new mongoose.Schema({
   logo_url            : {type: String, default: null},
   owner               : {type: ObjectIdType, ref: 'User', required: true},
   namespace           : {type: String, default: null},
-  stripe_id           : {type: String, default: null}
+  stripe_id           : {type: String, default: null},
+  groups              : {type: Array, default: []}
 });
 
 organizationSchema.pre('save', function(next){
