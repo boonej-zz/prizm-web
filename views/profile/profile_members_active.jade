@@ -54,7 +54,7 @@ table.table.table-striped.members-table
           | Action
     tbody
       each member in members
-        - var groups = member.org_status[0].groups || [];
+        - var groups = member.org_status.length > 0?member.org_status[0].groups || []:[];
         - console.log(member.org_status[0]);
         tr
           td
