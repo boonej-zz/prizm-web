@@ -11,8 +11,8 @@ var orgStatusSchema = new mongoose.Schema({
   organization          : {type: ObjectIdType, ref: 'Organization', required: true},
   status                : {type: String, default: 'pending', required: true},
   create_date           : {type: Date, default: Date.now()},
-  groups                : {type: Array, default: []}
-})
+  groups                : [String] 
+});
 
 var userSchema = new mongoose.Schema({
   age                   : {type: Number, default: 0},
@@ -83,7 +83,7 @@ var userSchema = new mongoose.Schema({
 
 userSchema.statics.basicFields = function(){
   return '_id name first_name last_name profile_photo_url type active subtype';
-}
+};
 
 
 userSchema.methods.createUserSalt = function(){
@@ -198,7 +198,7 @@ var orgFieldset = function(orgId, status){
     name: 1,
     first_name: 1,
     last_name: 1,
-    org_status: {$elemMatch: {_id: orgId, status: status}},
+    org_status: {$elemMatch: {organization: orgId}},
     subtype: 1,
     profile_photo_url: 1,
     create_date: 1,
@@ -219,10 +219,10 @@ var orgFieldset = function(orgId, status){
 
 var fetchOrgUsers = function(model, orgId, criteria, sort, next){
   var $this = model;
-  $this.model('User').find(criteria)
+  $this.model('User').find(criteria, orgFieldset(orgId, criteria.status))
   .sort(sort)
-  .select(orgFieldset(orgId, criteria.status))
   .exec(function(err, users){
+    /**
     _.each(users, function(user, idx, list){
       if(users.org_status && _.has(users.org_status, 'length')) {
         var needsUpdate = true;
@@ -244,7 +244,9 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
           status: 'active'
         });
       }
+      console.log(user.org_status);
     });
+    **/
     next(err, users);
 
 });

@@ -343,14 +343,17 @@ span.group-icon {
 }
 
 .group-button {
+  width: 60px;
+  display: inline-block;
+  margin-left: 0px;
+}
+
+.group-button[options='hasarrow'] {
   background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
   background-size: 7px 4px;
   background-repeat: no-repeat;
   background-position-y: 12px;
   background-position-x: 53px;
-  width: 60px;
-  display: inline-block;
-  margin-left: 0px;
 }
 
 .group-icon {

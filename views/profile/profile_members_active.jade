@@ -1,3 +1,13 @@
+mixin groupmenu(groups)
+  .group-icon(group='#group1')
+  if groups.length > 0
+    .group-count #{groups.length}
+    .group-menu.hidden
+      ul
+        each group in groups
+          li(group='#{"#" + group}')
+            | #{"#" + group}
+
 table.table.table-striped.members-table
     thead
       tr
@@ -44,6 +54,8 @@ table.table.table-striped.members-table
           | Action
     tbody
       each member in members
+        - var groups = member.org_status[0].groups || [];
+        - console.log(member.org_status[0]);
         tr
           td
             if member.subtype == 'ambassador'
@@ -77,17 +89,13 @@ table.table.table-striped.members-table
                   li.member(class=type==null ? 'selected' :'')
                     a(onclick='members.makeMember(event)') Member
           td
-            .group-button.cursor(onclick='members.toggleGroupMenu(event)')
-              .group-icon(group='#group1')
-              .group-count 3
-              .group-menu.hidden
-                ul
-                  li(group='#group1')
-                    | #group1
-                  li(group='#group2')
-                    | #group2
-                  li(group='#group3')
-                    | #group3
+            if groups.length > 0
+              .group-button.cursor(options='hasarrow' onclick='members.toggleGroupMenu(event)')
+                mixin groupmenu(groups)
+            else
+              .group-button.cursor
+                mixin groupmenu(groups)
+             
           td
             | Since #{member.create_date.getMonth() + 1}/#{member.create_date.getDate()}/#{member.create_date.getFullYear()}
           td(data='#{member.id}')
