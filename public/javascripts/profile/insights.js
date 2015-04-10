@@ -66,7 +66,7 @@ var insights = {
       if (html) {
         $('body').toggleClass('noscroll');
         $('body').append(html);
-        $('img.lazy').lazyload({threshold: 200, skip_invisible: false});
+        $('img.lazy').lazyload({threshold: 200, container: $('#insightOverlay')});
       }
     });
   },
