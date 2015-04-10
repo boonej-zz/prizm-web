@@ -6,19 +6,6 @@ body {
   transition: all 200ms linear; 
 }
 /* Preloader */
-body:before {
-  display: none;
-  content: url('/images/settings/activity_icon_selected@2x.png')
-           url('/images/settings/creditcard_icon_selected@2x.png')
-           url('/images/settings/graph_icon_selected@2x.png')
-           url('/images/settings/home_icon_selected@2x.png')
-           url('/images/settings/insights_icon_selected@2x.png')
-           url('/images/settings/members_icon_selected@2x.png')
-           url('/images/settings/settings_icon_selected@2x.png')
-           url('/images/settings/survey_icon_selected@2x.png')
-           url('/images/settings/useradd_icon_selected@2x.png');
-  }
-
 .body-push {
   left: 30% !important;
   transition: all 200ms linear; 
