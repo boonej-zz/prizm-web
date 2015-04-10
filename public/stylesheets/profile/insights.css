@@ -190,6 +190,76 @@ ul#insights .image .hashtags {
   text-overflow: ellipsis;
 }
 
+/** ARCHIVE **/
+ul#insights.archive {
+  padding: 0;
+}
+
+#insights li.archive {
+  height: 99px;
+  line-height: 99px;
+  vertical-align: middle;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: #484849;
+  border: none;
+}
+
+#insights li.archive>.content {
+  height: 99px;
+  width: 739px;
+  border-bottom: 1px solid #c5c8cc; 
+  margin: 0 0 0 15px;
+  padding: 0;
+  float: left;
+}
+
+li.archive .profile-icon {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 48px 48px;
+  border: 1px solid #8989a3;
+  margin: 25px 0px 0px 41px;
+  float: left;
+  cursor: pointer;
+}
+
+li.archive .name, li.archive .title {
+  display: inline-block;
+  padding-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+li.archive .name {
+  width: 40%;
+}
+
+li.archive .title {
+  width: 60%;
+}
+
+img.archive-image {
+  width: 99px;
+  height: 99px;
+  float: right;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #c5c8cc; 
+  cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
   .container.topnav-offset {
     width: 520px;

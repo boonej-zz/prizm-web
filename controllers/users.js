@@ -1614,11 +1614,18 @@ exports.fetchInsightsFeed = function(req, res){
           })
           .exec(function(err, insights){
             options.insights = insights;
-            res.render('profile/insight_feed', options);
-
+            if (type == 'archive') {
+              res.render('profile/insight_archive_feed', options);
+            } else {
+              res.render('profile/insight_feed', options);
+            }
           });
         } else {
-          res.render('profile/insight_feed', options);
+          if (type == 'archive') {
+            res.render('profile/insight_archive_feed', options);
+          } else {
+            res.render('profile/insight_feed', options);
+          }
         }
   }); 
 
