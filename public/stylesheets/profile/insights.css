@@ -1,3 +1,7 @@
+.noscroll {
+  overflow: hidden;
+}
+
 .container.topnav-offset {
   padding-left: 22px;
   padding-bottom: 40px;
@@ -260,6 +264,109 @@ img.archive-image {
   cursor: pointer;
 }
 
+/** FULL BLEED **/
+
+#insightOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 5000;
+  overflow: auto;
+}
+
+#insightOverlay .insight {
+  width: 512px;
+  height: auto;
+  background-color: white;
+  margin: 10% auto;
+}
+
+#insightOverlay .image {
+  width: 512px;
+  height: 512px;
+}
+
+#insightOverlay .image img {
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+#insightOverlay .image .hashtags {
+  height: 40px;
+  width: 100%;
+  display: block;
+  line-height: 40px;
+  font-size: 24px; 
+  color: #e4e5ea;
+  position: relative;
+  top: -45px;
+  left: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#insightOverlay .insight-title {
+  height: 78px;
+  width: 100%;
+  padding: 0 12px 0 12px;
+  line-height: 78px;
+  vertical-align: middle;
+}
+
+#insightOverlay .title {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1.5em;
+  color: #484849;
+  width: 50%;
+}
+
+#insightOverlay .insight-divider {
+  height: 35px;
+  line-height: 35px;
+  width: 100%;
+  background-color: #c9cbe3;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 18px;
+  color: #484849;
+}
+
+#insightOverlay .insight-body
+{
+  padding: 18px 12px 26px 12px;
+  font-size: 18px;
+}
+
+#insightOverlay .insight-body p {
+  margin: 0;
+  padding: 0;
+  color: #484849;
+}
+
+#insightOverlay .insight-body a {
+  color: #3063ff;
+  margin-top: 28px;
+}
+
+#insightOverlay .open {
+  float: right;
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-image: url('/images/insights/shareicon.png');
+  margin-right: 12px;
+  margin-top: 27px;
+}
+
 @media screen and (max-width: 600px) {
   .container.topnav-offset {
     width: 520px;
@@ -395,6 +502,18 @@ img.archive-image {
     margin: 25px 0px 0px 10px;
   }
 
+  #insightOverlay .insight {
+    width: 420px;
+    height: auto;
+    background-color: white;
+    margin: 10% auto;
+  }
+
+  #insightOverlay .image {
+    width: 420px;
+    height: 420px;
+  }
+
 }
 
 @media screen and (max-width: 410px) {
@@ -441,6 +560,25 @@ img.archive-image {
   #insights li.archive>.content {
     width: 190px;
     font-size: 15px;
+  }
+  
+  #insightOverlay .insight {
+    width: 320px;
+    height: auto;
+    background-color: white;
+    margin: 10% auto;
+  }
+
+  #insightOverlay .image {
+    width: 320px;
+    height: 320px;
+  }
+
+  .insight-header .name {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 }

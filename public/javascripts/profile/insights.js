@@ -33,7 +33,7 @@ var insights = {
       }
     });
   },
-  toggleArchive: function(id, action){
+  toggleArchive: function(id, action, state){
     $.ajax({
       method: 'POST',
       url: '/profiles/' + uid + '/insights/' + id,
@@ -43,7 +43,48 @@ var insights = {
       }
     })
     .done(function(html){
-      insights.fetchInsights('new', true);
+      if (!state) {
+        insights.fetchInsights('new', true);
+      } else {
+        if (state = 'modal_archive') {
+          var type = state == 'modal_new'?'new':'archive';
+          insights.fetchInsights(type, true);
+          insights.dismissOverlay();
+        }
+      }
     });
+  },
+  showFullBleed: function(id){
+    $.ajax({
+      method: 'GET',
+      url: '/insights/' + id,
+      headers: {
+        'content-type': 'text/html'
+      }
+    })
+    .done(function(html){
+      if (html) {
+        $('body').toggleClass('noscroll');
+        $('body').append(html);
+        $('img.lazy').lazyload({threshold: 200});
+      }
+    });
+  },
+  dismissOverlay: function(e){
+    if (!e) {
+      $('body').toggleClass('noscroll');
+      $('#insightOverlay').remove();
+    } else {
+      var $target = $(e.target);
+      if (
+        $target.is('#insightOverlay') ||
+        $target.is('#insightOverlay img') 
+      ){
+        $('body').toggleClass('noscroll');
+        $('#insightOverlay').remove();
+      } else {
+        return false;
+      }
+    }
   }
 };

@@ -91,6 +91,7 @@ router.post('/profiles/:id/followers', _follow.followUserId);
 
 /* Insights */
 router.get('/profiles/:uid/insights', _users.authRequired, _users.fetchInsightsFeed);
+router.get('/insights/:id', _users.authRequired, _users.getSingleInsight);
 
 
 router.post('/profiles/:uid/insights/:id', _users.authRequired, function(req, res){

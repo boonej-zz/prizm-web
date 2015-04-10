@@ -1,0 +1,35 @@
+- var profilePhoto = insight.creator.profile_photo_url?'https://' + insight.creator.profile_photo_url.substr(7):'/images/default-profile.png'
+- var ownerLink = '/profiles/' + insight.creator._id
+
+#insightOverlay(onclick='insights.dismissOverlay(event)')
+  .insight
+    .insight-header
+      span.profile-icon(onclick='nav.navigate("#{ownerLink}")'
+        style='background-image: url("#{profilePhoto}")'
+      )
+      span.name(onclick='nav.navigate("#{ownerLink}")')
+        | #{insight.creator.name}
+      if insight.liked
+        span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive", "modal-archive")')
+        span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject", "modal-archive")')
+      else
+        span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive", "modal-new")')
+        span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject", "modal-new")')
+
+    .image(onclick='insights.dismissOverlay(event)')
+      img.lazy(data-original='#{insight.file_path}', alt='insight')
+      .hashtags
+        each tag in insight.hash_tags
+          | #{'#' + tag + ' '}
+    .insight-title
+      span.title-wrap
+        span.title #{insight.title}
+      span.open
+    .insight-divider
+      | Insight
+    .insight-body
+      p
+        | #{insight.text}
+      a(href="#{insight.link}") #{insight.link_title}
+
+

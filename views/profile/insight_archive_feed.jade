@@ -9,8 +9,9 @@ each insight in insights
     .content
       .name(onclick='nav.navigate("#{ownerLink}")')
         | #{insight.creator.name}
-      .title
+      .title(onclick='insights.showFullBleed("#{insight._id}")')
         | #{insight.title}
     img.archive-image.lazy(
       data-original='#{insight.file_path}'
+      onclick='insights.showFullBleed("#{insight._id}")'
     )

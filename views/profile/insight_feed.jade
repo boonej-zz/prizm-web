@@ -10,12 +10,12 @@ each insight in insights
         | #{insight.creator.name}
       span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive")')
       span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject")')
-    .image
+    .image(onclick='insights.showFullBleed("#{insight._id}")')
       img.lazy(data-original='#{insight.file_path}', alt='insight')
       .hashtags
         each tag in insight.hash_tags
           | #{'#' + tag + ' '}
-    .insight-footer
+    .insight-footer(onclick='insights.showFullBleed("#{insight._id}")')
       span.title-wrap
         span.title #{insight.title}
       span.open

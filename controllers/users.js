@@ -1683,3 +1683,28 @@ exports.rejectInsight = function(req, res){
     }
   );
 };
+
+exports.getSingleInsight = function(req, res){
+  var insight = req.params.id;
+  var user = req.user;
+  var criteria = {
+    insight: insight,
+    target: user._id
+  };
+  InsightTarget.findOne(criteria)
+  .populate({path: 'insight'})
+  .populate({
+    path: 'creator',
+    select: '_id name profile_photo_url subtype'
+  })
+  .exec(function(err, it){
+    if (it && it.insight) {
+      var insight = it.insight.toObject();
+      insight.creator = it.creator;
+      insight.liked = it.liked;
+      res.render('profile/insight_overlay', {insight: insight});
+    } else {
+      res.status(400).send();
+    }
+  });
+}
