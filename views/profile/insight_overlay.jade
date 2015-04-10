@@ -10,11 +10,11 @@
       span.name(onclick='nav.navigate("#{ownerLink}")')
         | #{insight.creator.name}
       if insight.liked
-        span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive", "modal-archive")')
-        span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject", "modal-archive")')
+        span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive", "archive")')
+        span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject", "archive")')
       else
-        span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive", "modal-new")')
-        span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject", "modal-new")')
+        span.archive(onclick='insights.toggleArchive("#{insight._id}", "archive", "new")')
+        span.delete(onclick='insights.toggleArchive("#{insight._id}", "reject", "new")')
 
     .image(onclick='insights.dismissOverlay(event)')
       img.lazy(data-original='#{insight.file_path}', alt='insight')

@@ -43,15 +43,8 @@ var insights = {
       }
     })
     .done(function(html){
-      if (!state) {
-        insights.fetchInsights('new', true);
-      } else {
-        if (state = 'modal_archive') {
-          var type = state == 'modal_new'?'new':'archive';
-          insights.fetchInsights(type, true);
-          insights.dismissOverlay();
-        }
-      }
+      insights.fetchInsights(state, true);
+      insights.dismissOverlay();
     });
   },
   showFullBleed: function(id){
@@ -66,13 +59,13 @@ var insights = {
       if (html) {
         $('body').toggleClass('noscroll');
         $('body').append(html);
-        $('img.lazy').lazyload({threshold: 200, container: $('#insightOverlay')});
+        $('img.lazy').lazyload({threshold: 1000, container: $('#insightOverlay')});
       }
     });
   },
   dismissOverlay: function(e){
     if (!e) {
-      $('body').toggleClass('noscroll');
+      $('body').removeClass('noscroll');
       $('#insightOverlay').remove();
     } else {
       var $target = $(e.target);
@@ -80,7 +73,7 @@ var insights = {
         $target.is('#insightOverlay') ||
         $target.is('#insightOverlay img') 
       ){
-        $('body').toggleClass('noscroll');
+        $('body').removeClass('noscroll');
         $('#insightOverlay').remove();
       } else {
         return false;
