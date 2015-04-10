@@ -100,55 +100,81 @@ form.comment-post {
 
 .post-footer {
   height: 78px;
+  line-height: 78px;
   font-size: 22px;
   font-weight: 200;
+  display: block;
+  width: 100%; 
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bar-section {
+  display: block;
+  width: 20%;
+  height: 78px;
+  line-height: 78px;
+  vertical-align: middle;
+  margin: 0;
+  float: left;
 }
 
 .icon-text {
-    margin: 24px 0px 0px 8px;
+  /**  margin: 24px 0px 0px 8px; **/
+  display: inline-block;
+  margin: 0 0 0 4px;
+  padding: 0;
 }
 
 .icon-text.comments-count {
-  margin-top: 22px;
+/*  margin-top: 22px; */
 }
 
 .like-icon {
-  margin: 27px 0px 0px 16px;
-  background-size: 24px 22px;
-  width: 24px;
+  display: inline;
+  width: auto;
   height: 22px;
+  line-height: 22px;
+  min-width: 24px;
+  max-width: 100%;
+  background-size: 24px 22px;
+  float: none;
+  margin: 0;
+  padding-left: 30px;
 }
 
 .comment-icon {
-  margin: 26px 0 0 72px;
-  width: 24px;
+  display: inline;
+  width: auto;
+  min-width: 24px;
+  max-width: 100%;
   height: 24px;
+  line-height: 24px;
   background-size: 24px;
+  float: none;
+  padding-left: 30px;
+  margin: 0;
 }
 
 .repost-icon {
   background-size: 22px 25px;
-  width: 22px;
-  height: 25px;
-  margin: 25px 0px 0px 66px;
+  background-position: center;
   display: inline-block;
 }
 
 .action-icon {
-  margin: 26px 0px 0px 93px;
   background-size: 24px;
-  width: 24px;
-  height: 24px;
+  background-position: center;
   display: inline-block;
-  float: none;
 }
 
 .location-icon {
   background-size: 18px 25px;
-  height: 25px;
-  width: 18px;
+  background-position: center;
   display: inline-block;
-  margin: 25px 0px 0px 94px;
 }
 
 .comment-drawer {
@@ -219,8 +245,8 @@ form.comment-post {
 }
 
 #home-feed .post-image img {
-  width: 512px;
-  height: 511px;
+  width: 510px;
+  height: 510px;
   margin: 0;
 }
 
@@ -266,25 +292,6 @@ form #inputComment {
     height: 478px;
   }
  
-  .like-icon {
-    margin-left: 20px;
-  }
-
-  .comment-icon {
-    margin-left: 60px;
-  }
-
-  .repost-icon {
-    margin-left: 60px;
-  }
-
-  .action-icon {
-    margin-left: 86px;
-  }
-
-  .location-icon {
-    margin-left: 86px;
-  }
 }
 
 @media screen and (max-width:488px) {
@@ -302,6 +309,15 @@ form #inputComment {
 
   .post-footer {
     width: 400px;
+    font-size: 20px;
+  }
+
+  .post-header h3 {
+    width: 200px;
+    font-size: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   #home-feed .post-image, #home-feed .post-image img {
@@ -309,25 +325,6 @@ form #inputComment {
     height: 398px;
   }
  
-  .like-icon {
-    margin-left: 16px;
-  }
-
-  .comment-icon {
-    margin-left: 42px;
-  }
-
-  .repost-icon {
-    margin-left: 48px;
-  }
-
-  .action-icon {
-    margin-left: 64px;
-  }
-
-  .location-icon {
-    margin-left: 64px;
-  }
 }
 
 @media screen and (max-width:410px) {
@@ -343,6 +340,8 @@ form #inputComment {
     width: 310px;
   }
 
+  
+
   .post-footer {
     width: 310px;
   }
@@ -352,25 +351,6 @@ form #inputComment {
     height: 308px;
   }
  
-  .like-icon {
-    margin-left: 10px;
-  }
-
-  .comment-icon {
-    margin-left: 22px;
-  }
-
-  .repost-icon {
-    margin-left: 28px;
-  }
-
-  .action-icon {
-    margin-left: 44px;
-  }
-
-  .location-icon {
-    margin-left: 44px;
-  }
 }
 
 

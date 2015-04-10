@@ -192,10 +192,36 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
   });
 }
 
+var orgFieldset = function(orgId, status){
+  return {
+    _id: 1,
+    name: 1,
+    first_name: 1,
+    last_name: 1,
+    org_status: {$elemMatch: {_id: orgId, status: status}},
+    subtype: 1,
+    profile_photo_url: 1,
+    create_date: 1,
+    last_login_date: 1,
+    email: 1,
+    birthday: 1,
+    city: 1,
+    state: 1,
+    zip_postal: 1,
+    following_count: 1,
+    followers_count: 1,
+    posts_count: 1,
+    phone_number: 1,
+    modify_date: 1,
+    interests: 1
+  };
+};
+
 var fetchOrgUsers = function(model, orgId, criteria, sort, next){
   var $this = model;
   $this.model('User').find(criteria)
   .sort(sort)
+  .select(orgFieldset(orgId, criteria.status))
   .exec(function(err, users){
     _.each(users, function(user, idx, list){
       if(users.org_status && _.has(users.org_status, 'length')) {
@@ -223,6 +249,8 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
 
 });
 }
+
+
 
 userSchema.statics.findOrganizationMembers = function(filters, owner, order, search, next) {
   search = search?search:'';

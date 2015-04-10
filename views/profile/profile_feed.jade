@@ -18,24 +18,27 @@ each post in posts
             .post-image(onclick='home.toggleComments(event)' prizm-data='#{post.id}')
               img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}' prizm-data='#{post.id}')
             .post-footer
-              if post.ownPost 
-                p.like-icon.not-liked
-              else
-                if post.liked
-                  .like-icon.liked.cursor(onclick='profile.unlikePost("#{post._id}", event)')
+              .bar-section
+                if post.ownPost 
+                  .like-icon.not-liked
+                    | #{post.likes_count > 0?post.likes_count:''}
                 else
-                  .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id}", event)')
-              p.icon-text.likes-count
-                | #{post.likes_count}
-              .comment-icon(type='button'
+                  if post.liked
+                    .like-icon.liked.cursor(onclick='profile.unlikePost("#{post._id}", event)')
+                      | #{post.likes_count > 0?post.likes_count:''}
+                  else
+                    .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id}", event)')
+                      | #{post.likes_count > 0?post.likes_count:''}
+              .bar-section
+                .comment-icon(type='button'
                             class='cursor'
                             prizm-data='#{post.id}'
                             onclick='home.toggleComments(event)')
-              p.icon-text.comments-count
-                | #{post.comments_count}
-              .repost-icon
-              .action-icon
-              .location-icon
+                   | #{post.comments_count > 0?post.comments_count:''}
+                 
+              .repost-icon.bar-section
+              .action-icon.bar-section
+              .location-icon.bar-section
             .comment-drawer(prizm-data='#{post.id}')
               .post-comments
                 p.comments-title
@@ -90,5 +93,5 @@ each post in posts
                         placeholder='Write a comment...'
                         onkeypress='profile.overrideEnter(event)'
                         required)
-                   a.cursor(class='btn btn-xs btn-default post-button' onclick='profile.postComment("#{post._id}", event )');
+                  a.cursor(class='btn btn-xs btn-default post-button' onclick='profile.postComment("#{post._id}", event )')
                     | Post
