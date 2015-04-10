@@ -309,6 +309,34 @@ img.archive-image {
   ul#insights .image .hashtags {
     width: 488px;
   }
+  
+  #insights.archive {
+    margin-top: 44px;
+    font-size: 16px;
+  }
+
+  #insights li.archive {
+    height: 75px;
+    line-height: 75px;
+  }
+
+  #insights li.archive>.content {
+    height: 75px;
+    width: 363px;
+  }
+
+  li.archive .profile-icon {
+    height: 35px;
+    width: 35px;
+    background-size: 35px 35px;
+    margin: 20px 0px 0px 10px;
+  }
+
+  img.archive-image {
+    width: 75px;
+    height: 75px;
+  }
+
 
 }
 
@@ -358,6 +386,15 @@ img.archive-image {
     font-size: 16px;
   }
 
+  #insights li.archive>.content {
+    width: 290px;
+    margin-left: 10px;
+  }
+
+  li.archive .profile-icon {
+    margin: 25px 0px 0px 10px;
+  }
+
 }
 
 @media screen and (max-width: 410px) {
@@ -399,6 +436,11 @@ img.archive-image {
   ul#insights .image .hashtags {
     width: 298px;
     font-size: 18px;
+  }
+
+  #insights li.archive>.content {
+    width: 190px;
+    font-size: 15px;
   }
 
 }
