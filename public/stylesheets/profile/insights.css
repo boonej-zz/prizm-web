@@ -324,6 +324,10 @@ img.archive-image {
   font-size: 18px;
   line-height: 1.5em;
   color: #484849;
+  width: 100%;
+}
+
+#insightOverlay span.title-wrap {
   width: 60%;
 }
 

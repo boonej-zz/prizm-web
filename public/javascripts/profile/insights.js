@@ -59,7 +59,7 @@ var insights = {
       if (html) {
         $('body').toggleClass('noscroll');
         $('body').append(html);
-        $('img.lazy').lazyload({threshold: 1000, container: $('#insightOverlay')});
+        $('#insightOverlay img.lazy').lazyload({threshold: 1000});
       }
     });
   },
