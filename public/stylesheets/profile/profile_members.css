@@ -289,7 +289,7 @@ background-color: rgb(246, 249, 254);
 .group-menu {
   position: absolute;
   background: #fff;
-  width: 112px;
+  min-width: 112px;
   border: 1px #e4e5ea solid;
   margin-top: 22px;
   margin-left: 22px;
