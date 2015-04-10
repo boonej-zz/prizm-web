@@ -1,0 +1,16 @@
+each insight in insights
+  - var profilePhoto = insight.creator.profile_photo_url?'https://' + insight.creator.profile_photo_url.substr(7):'/images/default-profile.png'
+  - var ownerLink = '/profiles/' + insight.creator._id
+  li.archive
+    .profile-icon(
+      onclick='nav.navigate("#{ownerLink}")'
+      style='background-image: url("#{profilePhoto}")'
+    )
+    .content
+      .name(onclick='nav.navigate("#{ownerLink}")')
+        | #{insight.creator.name}
+      .title
+        | #{insight.title}
+    img.archive-image.lazy(
+      data-original='#{insight.file_path}'
+    )
