@@ -802,18 +802,14 @@ form #inputComment {
   }
 
   .back-button {
-    background-image: url('/images/profile/members_arrow.png');
-    background-size: 18px;
+    background-image: url('/images/posts/btn_close@2x.png');
+    background-size: 20px;
     background-repeat: no-repeat;
-    height: 31px;
-    width: 18px;
-    -webkit-transform: rotate(180deg);
-       -moz-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-            transform: rotate(180deg);
+    height: 20px;
+    width: 20px;
     position: absolute;
     top: 15px;
-    left: 15px;
+    right: 15px;
   }
 
   .user-card {
