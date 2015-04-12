@@ -48,8 +48,10 @@ div(class='modal fade'
                 p.last-login-date
                   if member.last_login_date
                     | Last logged in on #{member.last_login_date.toString().substr(0, 15)}
-                  else
+                  else if member.modify_date
                     | Last logged in on #{member.modify_date.toString().substr(0, 15)}
+                  else
+                    | Has never logged in
             .back-member.hidden
               .interests-header
                 .card-icon(onclick='members.showCardFront()')
