@@ -324,7 +324,7 @@ var processSingleUserByEmail = function(email, next) {
   });
 };
 
-var processUserByProgramCode = function(programCode, next){
+var processUsersByProgramCode = function(programCode, next){
   user.find({program_code: programCode}, function(err, users){
     next(err, users);
   });
