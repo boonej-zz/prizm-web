@@ -220,6 +220,7 @@ var orgFieldset = function(orgId, status){
 var fetchOrgUsers = function(model, orgId, criteria, sort, next){
   var $this = model;
   $this.model('User').find(criteria, orgFieldset(orgId, criteria.status))
+  .populate({path: 'interests', model: 'Interest'})
   .sort(sort)
   .exec(function(err, users){
     /**
