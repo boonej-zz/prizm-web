@@ -263,9 +263,17 @@ router.get('/interests/graph', utils.auth, function(req, res) {
           String(item.total)
           ]);
       });
+      var total_count, male_count, female_count;
       User.count({active: true}, function(err, c){
-        res.render('interest_graph', {results: results, title: 'Interests',
-        count: c, data: data});
+        total_count = c;
+        User.count({gender: 'male', active: true}, function(err, m) {
+          male_count = m;
+          User.count({gender: 'female', active: true}, function(err, f){
+            female_count = f;
+            res.render('interest_graph', {results: results, title: 'Interests',
+            count: c, data: data, males: male_count, females: female_count});
+          });
+        });
       });
     });  
   });
