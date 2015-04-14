@@ -192,6 +192,11 @@ ul .post.shown {
   line-height: 18px;
   vertical-align: middle;
   display: inline-block;
+  color: #818284;
+}
+
+.toggle-label.active {
+  color: #2443A1;
 }
 
 #membersToggle > .toggle-switch {

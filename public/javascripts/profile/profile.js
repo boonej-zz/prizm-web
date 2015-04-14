@@ -183,6 +183,7 @@ var profile = {
       $('.profile-posts-container').hide();
       $('.members-posts-container').fadeIn();
       $('#membersToggle').attr('data-toggle', 'on');
+      $('.toggle-label').addClass('active');
     }
     if (state == 'on') {
       $('.profile-followers-container').hide();
@@ -190,6 +191,7 @@ var profile = {
       $('.members-posts-container').hide();
       $('.profile-posts-container').fadeIn();
       $('#membersToggle').attr('data-toggle', 'off');
+      $('.toggle-label').removeClass('active');
     }
   },
 
