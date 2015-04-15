@@ -11,7 +11,7 @@ var orgStatusSchema = new mongoose.Schema({
   organization          : {type: ObjectIdType, ref: 'Organization', required: true},
   status                : {type: String, default: 'pending', required: true},
   create_date           : {type: Date, default: Date.now()},
-  groups                : [String] 
+  groups                : {type: Array}
 });
 
 var userSchema = new mongoose.Schema({
@@ -594,4 +594,5 @@ userSchema.methods.addFollowing = function(following_id, next) {
   });
 };
 
+mongoose.model('OrgStatus', orgStatusSchema);
 mongoose.model('User', userSchema);

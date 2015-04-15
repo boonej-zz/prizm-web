@@ -12,5 +12,6 @@ exports.insightTarget = require('./insight_target');
 exports.organization  = require('./organization');
 exports.trust         = require('./trust');
 exports.message       = require('./message');
+exports.group         = require('./group');
 
 mongoose.connect(mongoURI);

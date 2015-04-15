@@ -477,7 +477,8 @@ router.post('/insights/:id', utils.auth, function (req, res) {
       processUsersByProgramCode(programCode, function(err, users){
         _.each(users, function(user, index, list){
           sendInsightToUser(insight, user, subjectIndex, subject, function(err){
-            if (err) console.log(err);
+            if (err) res.send(500);
+            res.send(200);
           });
         });
       });

@@ -29,7 +29,7 @@ organizationSchema.pre('save', function(next){
 
 organizationSchema.statics.selectFields = function(type){
   var select = ['id', 'code', 'theme', 'name', 'create_date', 'modify_date',
-      'logo_url', 'welcome_image_url'];
+      'logo_url', 'welcome_image_url', 'groups'];
   return select;
 };
 
@@ -42,7 +42,8 @@ organizationSchema.methods.format = function(type, add_fields){
     name:         this.name,
     theme:        this.theme,
     welcome_image_url: this.welcome_image_url,
-    logo_url        : this.logo_url
+    logo_url        : this.logo_url,
+    groups        : this.groups
   };
   return format;
 }
@@ -50,7 +51,8 @@ organizationSchema.methods.format = function(type, add_fields){
 organizationSchema.statics.canResolve = function(){
   return [
     {members: {identifier: '_id', model: 'User'}},
-    {theme: {identifier: 'code', model: 'Theme'}}
+    {theme: {identifier: 'code', model: 'Theme'}},
+    {groups: {identifier: '_id', model: 'Group'}}
   ];
 }
 
@@ -104,7 +106,7 @@ themeSchema.pre('save', function(next){
 
 themeSchema.statics.selectFields = function(type){
   return ['_id', 'background_url', 'dominant_color', 'text_color', 
-         'create_date', 'modify_date', 'organization'];
+         'create_date', 'modify_date', 'groups'];
 };
 
 themeSchema.methods.format = function(type, add_fields, callback){
