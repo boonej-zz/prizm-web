@@ -155,7 +155,11 @@ exports.newGroup = function(req, res){
       User.findOrganizationMembers({organization: org._id, status: 'active'}, 
         org.owner, false, false, function(err, members) {
           var leaders = _.filter(members, function(user){
-            return user.org_status[0].role == 'leader';
+            var match = false;
+            if (user.org_status.length > 0) {
+              match = user.org_status[0].role == 'leader';
+            }
+            return match;
           });
           res.render('messages/new_group', {members: members, leaders: leaders});
         });
