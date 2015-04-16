@@ -73,7 +73,7 @@ table.table.table-striped.members-table
             .member-type(onclick='members.toggleAmbassadorMenu(event)'
                          class='#{member.subtype}')
              
-              - var role = member.org_status[0].role;
+              - var role = member.org_status.length>0?member.org_status[0].role:null;
               - var type = member.subtype||role;
               if type == 'ambassador'
                 | Ambassador
