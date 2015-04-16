@@ -10,6 +10,7 @@ var User          = mongoose.model('User');
 var Organization  = mongoose.model('Organization');
 var Message       = mongoose.model('Message');
 var Trust         = mongoose.model('Trust');
+var Group         = mongoose.model('Group');
 
 exports.displayUserMessagesFeed = function(req, res){
   console.log('in request');
@@ -35,6 +36,10 @@ exports.displayUserMessagesFeed = function(req, res){
       path: 'owner',
       select: '_id name profile_photo_url'
     })
+    .populate({
+      path: 'groups',
+      model: 'Group'
+    })
     .exec(function (err, organization){
       options.currentUser = user;
       options.organization = organization.toObject();
@@ -43,11 +48,12 @@ exports.displayUserMessagesFeed = function(req, res){
       Message.fetchMessages(
         {
           organization: org,
-          group: 'all'
+          group: null 
         },
         function(err, messages){
           console.log('rendering page');
-          options.messages = messages.reverse() || [];
+          if (err) console.log(err);
+          options.messages = messages?messages.reverse():[];
           res.render('messages/messages', options);
         }
       );
@@ -69,6 +75,7 @@ exports.displayOwnerMessagesFeed = function(req, res){
   if (user.type == 'institution_verified') {
     Organization.findOne({owner: user._id})
     .populate({path: 'owner'})
+    .populate({path: 'groups', model: 'Group'})
     .exec(function(err, organization){
       if (organization) {
         options.topics = organization.groups || [];
@@ -76,10 +83,11 @@ exports.displayOwnerMessagesFeed = function(req, res){
         Message.fetchMessages(
           {
             organization: organization._id,
-            group: 'all'
+            group: null 
           },
           function(err, messages){
-            options.messages = messages.reverse() || [];
+            if (err) console.log(err);
+            options.messages = messages?messages.reverse():[];
             res.render('messages/messages', options);
           }
         );
@@ -98,7 +106,7 @@ exports.fetchMessages = function(req, res){
   if (group && organization) {
     var criteria = {
       organization: organization,
-      group: group
+      group: group == 'all'?null:group
     };
     if (lastDate) {
       criteria.create_date = {$lt: new Date(lastDate)};
@@ -137,4 +145,71 @@ exports.createMessage = function(req, res){
   } else {
     res.status(400).send();
   }
+}
+
+exports.newGroup = function(req, res){
+  var user = req.user;
+  var organization = req.get('organization');
+  if (organization) {
+    Organization.findOne({_id: organization}, function(err, org){
+      User.findOrganizationMembers({organization: org._id, status: 'active'}, 
+        org.owner, false, false, function(err, members) {
+          var leaders = _.filter(members, function(user){
+            return user.org_status[0].role == 'leader';
+          });
+          res.render('messages/new_group', {members: members, leaders: leaders});
+        });
+    });
+  } else {
+    res.status(400).send();
+  }
+}
+
+exports.addNewGroup = function(req, res){
+  var user = req.user;
+  var organization = req.get('organization');
+  var members = req.body.members;
+  var data = {
+    name: req.body.name,
+    description: req.body.description,
+    leader: req.body.leader,
+    organization: organization
+  };
+  Group.newGroup(data, function(err, group){
+    if (!err) {
+      Organization.findOne({_id: organization}, function(err, org){
+        if (org) {
+          org.groups.push(group._id);
+          org.save(function(err, saved){
+            if (err) console.log(err);
+          });
+        }
+      });
+      console.log(members);
+      User.find({_id: {$in: members}}, function(err, users){
+        if (users) {
+          console.log('found ' + users.length + ' users');
+          _.each(users, function(u, i, l){
+            _.each(u.org_status, function(s, c, p){
+              if (String(s.organization) == String(group.organization)) {
+                if (! _.isArray(s.groups)){
+                  s.groups = [];
+                }
+                s.groups.push(group._id);
+                console.log(s);
+              }
+            });
+            u.save(function(err, u){
+              if (err) console.log(err);
+            });
+          });
+        }
+        res.send(200);
+      });
+    } else {
+      console.log(err);
+      res.send(500);
+    }  
+  });
+
 }

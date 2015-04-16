@@ -67,6 +67,10 @@ passport.deserializeUser(function(email, done) {
   .populate({
     path: 'org_status.organization'
   })
+  .populate({
+    path: 'org_status.groups',
+    model: 'Group'
+  })
   .exec(function (err, user) {
     user.mixpanel = user.mixpanelProperties();
     done(err, user);

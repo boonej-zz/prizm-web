@@ -58,6 +58,8 @@ router.get('/profile/messages/:organization', _users.authRequired, function(req,
 });
 router.get('/messages', _users.authRequired, _messages.displayOwnerMessagesFeed);
 router.get('/messages/:group', _users.authRequired, _messages.fetchMessages);
+router.get('/profile/groups', _users.authRequired, _messages.newGroup);
+router.post('/profile/groups', _users.authRequired, _messages.addNewGroup); 
 router.post('/messages', _users.authRequired, _messages.createMessage);
 
 /* Users */

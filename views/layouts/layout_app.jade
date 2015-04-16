@@ -80,10 +80,9 @@ html
           span.navbar-title.cursor(onclick='nav.goToHomeFeed()')
             | Prizm
           if (auth)
-            if bodyId == 'messageList'
-              .message-icon.cursor
-            else
-              .plus-icon.cursor(onclick='newPost.showModal()')
+            .plus-icon.cursor(onclick='action.showMenu()')
+              .plus-menu.hidden
+                block plusmenu
             .avatar-menu
               if (auth)
                   if currentUser.profile_photo_url

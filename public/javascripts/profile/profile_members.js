@@ -164,6 +164,29 @@ var members = {
     });
   },
 
+  promoteUser: function(id, role){
+    var member_id     = id; 
+    var organization  = $('#organization').attr('data');
+    $.ajax({
+      type: 'POST',
+      url: '/users/' + id,
+      headers:{
+        'Accept': 'application/json',
+        'memberType': role,
+        'action': 'updateSubtype',
+        'org': organization
+      },
+      success: function() {
+        members.activeTab();
+      },
+      error: function(jqXHR) {
+        console.log(jqXHR.responseText);
+      }
+    });
+
+
+  },
+
   makeMember: function(e) {
     var member_id     = $(e.target).parents('td').attr('data');
     var organization  = $('#organization').attr('data');

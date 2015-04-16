@@ -23,6 +23,10 @@ $(document).ready(function(){
         }
         $('.settings-tool-tip').toggleClass('rotated');
       }
+    } 
+    var plusMenu = $('.plus-menu');
+    if (!$(e.target).parents('.plus-menu').length ){
+      plusMenu.addClass('hidden');
     }
   });
   $('.settings-menu li').mousedown(function(){
@@ -52,6 +56,17 @@ $(document).ready(function(){
     $('.btn-create-post').removeClass('disabled');
   });
 });
+
+var action = {
+  showMenu: function(){
+    var menuItems = $('#menuItems');
+    if (menuItems && menuItems.length > 0) {
+      $('.plus-menu').toggleClass('hidden');
+    } else {
+      newPost.showModal();
+    }
+  }
+};
 
 var nav = {
   toggleMenu: function(e) {

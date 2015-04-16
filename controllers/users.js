@@ -111,6 +111,7 @@ exports.shortPasswordReset = function(req, res){
 
 exports.fetchUsers = function(req, res){
   var limit = req.query.limit || 50;
+  var fields = req.fields || false;
   if (req.query.name) {
     var search = new RegExp(req.query.name, 'i');
     User.find({name: search}).limit(limit).exec(function(err, users) {
@@ -243,43 +244,47 @@ exports.updateUser = function(req, res) {
     });
   };
 
-  function updateSubType() {
+  function updateSubType(organization) {
     // Need to change string of null from request to null value
     if (userType == 'null') {
       userType = null;
     }
+    console.log(organization);
 
     User.findOne({_id: userId}, function(err, user) {
       if (err) {
         res.status(500).send({error: err});
       }
       if (user) {
-        User.findOneAndUpdate({
-          _id: userId
-        }, {
-          subtype: userType
-        }, function(err, user) {
+        if (userType == 'ambassador' || userType == 'luminary') {
+          user.subtype = userType;
+        }
+        if (userType == 'leader' || userType == 'ambassador') {
+          var mOrgStatus = user.org_status;
+          _.each(mOrgStatus, function(status, index, list){
+            if (String(status.organization) == organization && status.status == 'active'){
+              user.org_status[index].role = userType;
+            }
+          });
+        }
+        user.save(function(err, result){
           if (err) {
-            res.status(500).send({error: err});
-          }
-          else {
-            if (userType == 'luminary') {
-              addLuminaryToTrust(function(err, success) {
-                if (err) {
-                  res.status(500).send({error: err});
-                }
-                else {
-                  res.status(200).send({
-                    message: 'User was made luminary and added to trust'
-                  });
-                }
-              });
-            }
-            else {
-              res.status(200).send({message: 'User type updated'});
-            }
+            console.log(err);
           }
         });
+        if (userType == 'luminary') {
+          addLuminaryToTrust(function(err, success) {
+            if (err) {
+              res.status(500).send({error: err});
+            }
+            else {
+              res.status(200).send({
+                message: 'User was made luminary and added to trust'
+              });
+            }
+          });
+        }
+        res.status(200).send({message: 'User had been modified'});
       }
       else {
         res.status(500).send({error: 'User Id invalid'});
@@ -318,7 +323,7 @@ exports.updateUser = function(req, res) {
       updateOrgStatus();
     }
     else if (action == 'updateSubtype') {
-      updateSubType();
+      updateSubType(orgId);
     }
     else {
       res.status(400).send({error: 'Invalid action'});

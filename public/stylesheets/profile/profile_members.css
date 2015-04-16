@@ -449,7 +449,6 @@ span.group-icon {
   position: absolute; 
   background: #fff;
   width: 158px;
-  height: 146px;
   border: 1px #e4e5ea solid;
   margin-top: 12px;
   z-index: 1000;
@@ -517,6 +516,11 @@ span.group-icon {
 .ambassador-menu a {
   text-decoration: none;
   font-weight: normal;
+  color: #959698;
+}
+
+.ambassador-menu .selected a {
+  color: #3e6a9e;
 }
 
 li.ambassador {
@@ -549,8 +553,23 @@ li.ambassador.selected a {
   color: #3e6a9e;
 }
 
+li.leader {
+  background-image: url('/images/icons/leader_icon.png');
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position-y: 5px;
+  background-position-x: 2px;
+  padding-left: 34px;
+  padding-bottom: 16px;
+  cursor: pointer;
+}
+
+li.leader.selected {
+  background-image: url('/images/icons/leader_icon_selected.png');
+}
+
 li.luminary {
-  background: url('/images/profile/luminary_icon.png');
+  background-image: url('/images/profile/luminary_icon.png');
   background-size: 20px;
   background-repeat: no-repeat;
   background-position-y: 5px;
@@ -561,14 +580,7 @@ li.luminary {
 }
 
 li.luminary.selected {
-  background: url('/images/profile/luminary_icon_selected.png');
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-position-y: 5px;
-  background-position-x: 2px;
-  padding-left: 34px;
-  padding-bottom: 16px;
-  cursor: pointer;
+  background-image: url('/images/profile/luminary_icon_selected.png');
 }
 
 li.luminary a {

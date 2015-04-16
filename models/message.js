@@ -6,7 +6,7 @@ var messageSchema = new mongoose.Schema({
   creator: {type: ObjectId, ref: 'User', required: true},
   create_date: {type: Date, default: null, required: false, index: true},
   text: {type: String, default: ''},
-  group: {type: String, required: true, index: true},
+  group: {type: ObjectId, required: true, index: true},
   organization: {type: ObjectId, ref: 'Organization', required: true, index: true}
 });
 

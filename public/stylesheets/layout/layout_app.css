@@ -92,6 +92,7 @@ body {
   background-size: 36px;
   margin-top: 18px;
   float: right;
+  z-index: 500;
 }
 
 .message-icon {
@@ -806,6 +807,64 @@ input#personal + span {
     margin-right: auto;
     display: block;
 }
+
+.plus-menu {
+  width: 108px;
+  background-color: #fefefe;
+  margin: 0;
+  padding: 0;
+  position: absolute; 
+  margin-top: 57px;
+  margin-left: -72px;
+  border: 1px solid rgba(83, 107, 180, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.plus-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 12px 13px;
+  border-color: #FFFFFF transparent;
+  display: block;
+  width: 0;
+  top: -10px;
+  left: 78px;
+  z-index: 0;
+}
+
+.plus-menu ul {
+  width: 108px;
+  margin: 0;
+  padding: 0;
+  z-index: 500;
+}
+
+#menuItems li {
+  list-style: none;
+  padding: 4px 0;
+}
+
+#menuItems li span {
+  width: 108px;
+  height: 26px;
+  line-height: 26px;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 14px;
+  color: #656772;
+  font-weight: 400;
+  padding-left: 15px;
+  text-align: left;
+}
+
+#menuItems li:hover span {
+  background-color: #3e6a9e;
+  color: white;
+}
+
 
 
 @media screen and (max-width: 900px) {

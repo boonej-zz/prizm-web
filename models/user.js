@@ -8,10 +8,11 @@ var ObjectId          = require('mongoose').Types.ObjectId;
 var ObjectIdType      = mongoose.Schema.Types.ObjectId;
 
 var orgStatusSchema = new mongoose.Schema({
-  organization          : {type: ObjectIdType, ref: 'Organization', required: true},
-  status                : {type: String, default: 'pending', required: true},
+  organization          : {type: ObjectIdType, ref: 'Organization'},
+  status                : {type: String, default: 'pending'},
   create_date           : {type: Date, default: Date.now()},
-  groups                : {type: Array}
+  groups                : {type: Array},
+  role                  : {type: String}
 });
 
 var userSchema = new mongoose.Schema({
@@ -221,6 +222,7 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
   var $this = model;
   $this.model('User').find(criteria, orgFieldset(orgId, criteria.status))
   .populate({path: 'interests', model: 'Interest'})
+  .populate({path: 'org_status.groups', model: 'Group'})
   .sort(sort)
   .exec(function(err, users){
     /**
@@ -265,6 +267,9 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, order, sea
   if (!order) order = '_id';
   var showLuminaries = true;
   var filterLuminary = false;
+  if (order == 'leader'){
+    filters.role = 'leader';
+  }
   var criteria = {
         'org_status': {$elemMatch: filters},
   };
@@ -275,7 +280,7 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, order, sea
     } else {
       filterLuminary = true;
     }
-    if (order != 'member') {
+    if (order != 'member' && order != 'leader') {
       criteria.subtype = order;
     } else { 
       criteria.subtype = null;

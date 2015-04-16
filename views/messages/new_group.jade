@@ -1,0 +1,34 @@
+#newGroupForm
+  .header
+    span.new-group Create Group
+  form#newGroup
+    ul.form
+      .row
+        label(for='name') Group Name
+        input(type='text' id='name' name='name')
+      .row
+        label(for='leader') Group Leader
+        div#leader()
+          input#Leader.name(type='text' onfocus='messages.toggleLeaderSelect()' readonly='readonly')
+          ul#leaderSelect.hidden
+            each leader in leaders
+              li(onclick='messages.setGroupLeader("#{leader._id}", "#{leader.name}")')
+                input(id='leader#{leader._id}' type='radio' name='leader' value='#{leader._id}')
+                label(for='leader#{leader._id}') #{leader.name}
+      .row
+        label(for='description') Group Description
+        textarea(id='description' name='description')
+      .row
+        label(for='members') Group Members
+        div.selectArea          
+          each member in members
+            - var creatorPhoto = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
+            div.option.cursor(onclick='messages.selectRadio(event)')
+              .profile-icon.cursor(style="background-image: url('#{creatorPhoto}')")
+              .content
+                span.name #{member.name} 
+                input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}') 
+                label(for='#{member._id}') 
+      .row
+        button.cancel(type='button') Cancel
+        button.save(type='submit') Save

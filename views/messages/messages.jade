@@ -4,6 +4,21 @@ block head
   link(rel='stylesheet' type='text/css' href='/stylesheets/messages.css')
   script(type='text/javascript' src='/javascripts/messages.js')
 
+block plusmenu
+  ul#menuItems
+    li 
+      span Post
+    li(onclick='messages.showNewGroupForm()')
+      span Group
+    li 
+      span Insight
+    li 
+      span Survey
+    li 
+      span Event
+    li 
+      span Notification
+
 block content
   - var ownerPhoto = organization.owner.profile_photo_url?'https://' + organization.owner.profile_photo_url.substr(7):'/images/default-profile.png';
   - var lastCreated = messages.length > 0?messages[0].create_date:new Date();
@@ -14,22 +29,4 @@ block content
     .messages-header.page-header
       | Message
     .message-container
-      .left-box
-        .header
-          span.profile-icon.cursor(style="background-image: url('#{ownerPhoto}')" 
-          onclick='nav.navigate("/#{organization.namespace}")')
-          span.group-name.cursor(onclick='nav.navigate("/#{organization.namespace}")')
-            | #{organization.name}
-
-        ul#topics
-          include topics_feed
-      .right-box
-        .topic
-          | #all
-        ul#messages
-         include message_feed 
-             
-        form#newMessage
-          .message-icon
-          input(type='text' placeholder='Post a message to #all...')
-          
+      include content 
