@@ -176,6 +176,9 @@ var messages = {
       window.location = window.location.pathname;
     });
     return false;    
+  },
+  cancel: function(){
+    window.location = window.location.pathname;
   }
 
 };

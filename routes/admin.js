@@ -478,8 +478,8 @@ router.post('/insights/:id', utils.auth, function (req, res) {
         _.each(users, function(user, index, list){
           sendInsightToUser(insight, user, subjectIndex, subject, function(err){
             if (err) res.send(500);
-            res.send(200);
           });
+          res.status(200).send('Targeted ' + users.length + ' users.');
         });
       });
     } else if (allUsers) {
@@ -494,7 +494,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
               console.log(err);
                 res.send(500);
               } else {
-                res.send(200);
+                res.status(200).send('Targeted ' + users.length + ' users.');
               };
             };
           });
@@ -522,8 +522,8 @@ router.post('/insights/:id', utils.auth, function (req, res) {
             if (err) console.log(err);
           });
         });
+        res.status(200).send('Targeted ' + users.length + ' users.');
       });           
-      res.redirect('/insights/' + insight._id + '?success=true'); 
   }
   });
  });
