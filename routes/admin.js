@@ -282,6 +282,7 @@ router.get('/interests/graph', utils.auth, function(req, res) {
 
 var sendInsightToUser = function(insight, user, subjectIndex, optionalSubject, next){
   console.log('sending insight to user');
+  if (!user) { next({number: 500, message: 'no user'}, false); };
   InsightTarget.findOne({creator: insight.creator, target: user._id, insight: insight._id}, function(err, it){
     if (err) {
       console.log(err);
@@ -479,7 +480,8 @@ router.post('/insights/:id', utils.auth, function (req, res) {
           sendInsightToUser(insight, user, subjectIndex, subject, function(err){
             if (err) res.send(500);
           });
-          res.status(200).send('Targeted ' + users.length + ' users.');
+            res.status(200).send('Targeted ' + users.length + ' users.');
+
         });
       });
     } else if (allUsers) {
