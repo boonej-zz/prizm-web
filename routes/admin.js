@@ -203,7 +203,7 @@ router.get('/interests/graph', utils.auth, function(req, res) {
   User
   .aggregate()
   .unwind('interests')
-  .group({_id: {interest: '$interests._id', gender: '$gender'}
+  .group({_id: {interest: '$interests._id', interest_raw: '$interests', gender: '$gender'}
     , gender: {'$sum': 1}, count: {'$sum': 1}})
   .exec(function(err, results){
     Interest.find({}, function(err, interests){
@@ -221,10 +221,13 @@ router.get('/interests/graph', utils.auth, function(req, res) {
 
         if (!dataObject[result._id.interest].name){
           var interest = _.find(interests, function(it){
-            return String(it._id).indexOf(String(result._id.interest)) != -1;
+            return (String(it._id) == String(result._id.interest)) ||
+              (String(it._id) == String(result._id.interest_raw));
           });
           if (interest) {
             dataObject[result._id.interest].name = interest.text;
+          } else {
+            dataObject[result._id.interest].name = 'none';
           }
         }
       });
