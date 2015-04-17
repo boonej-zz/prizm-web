@@ -14,13 +14,16 @@ textarea {
   outline: none;
 }
 /** NEW GROUP **/
+#newGroup input {
+  border: 1px solid #c5c8cc;
+}
 
 #newGroupForm {
   background-color: #fefefe;
   height: auto;
   width: 660px;
   margin: 107px auto;
-  padding-bottom: 64px;
+  padding-bottom: 40px;
 }
 
 #newGroupForm .header {
@@ -58,11 +61,11 @@ textarea {
   display: inline-block;
   width: 30%;
   height: 38px;
-  line-height: 38px;
   vertical-align: top;
   color: #545358;
   font-size: 18px;
   font-weight: bold;
+  padding-right: 5px;
 }
 
 #newGroup select#Leader {
@@ -71,6 +74,7 @@ textarea {
   background-repeat: no-repeat;
   background-position-x: 97%;
   background-position-y: center;
+  background-color: #fefefe;
   -webkit-appearance: none;
   width: 70%;
   height: 38px;
@@ -269,3 +273,84 @@ input#memberFilter {
   height: 204px;
   overflow-y: auto;
 }
+
+@media screen and (max-width: 600px) {
+
+  #newGroupForm {
+    width: 520px;
+  }
+
+  #newGroup {
+    width: 460px;
+  }
+
+  #newGroup .selectArea .option .content {
+    width: 272px;
+  }
+
+}
+
+@media screen and (max-width: 488px) {
+  #newGroupForm {
+    width: 420px;
+  }
+
+  #newGroup {
+    width: 360px;
+  }
+
+  #newGroup .selectArea .option .content {
+    width: 202px;
+  }
+
+}
+
+@media screen and (max-width: 410px) {
+  #newGroupForm {
+    width: 320px;
+  }
+
+  #newGroup {
+    width: 280px;
+  }
+
+  #newGroup .selectArea .option .content {
+    width: 162px;
+  }
+  #newGroup label {
+    font-size: 16px;
+  }
+
+  #newGroup span.name {
+    color: #7e7e7f;
+    font-size: 16px;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #newGroup .profile-icon {
+    left: 14px;
+    top: 6px;
+    width: 25px;
+    height: 25px;
+    background-size: 25px;
+    background-position: center;
+    background-repeat: none;
+    border: 1px solid #c0c6e0;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  #newGroup input, #newGroup textarea, #newGroup button {
+    font-size: 16px;
+  }
+
+  #newGroup button {
+    width: 80px;
+  }
+
+
+}
+
