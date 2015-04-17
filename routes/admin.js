@@ -212,13 +212,13 @@ router.get('/interests/graph', utils.auth, function(req, res) {
         var id = result._id.interest || result._id.interest_raw;
         dataObject[id] = dataObject[id]?dataObject[id]:{male: 0, female: 0, unknown: 0, total: 0};
         if (result._id.gender == 'male') {
-          dataObject[id].male = result.count;
+          dataObject[id].male += result.count;
         } else if (result._id.gender =='female'){
-          dataObject[id].female = result.count;
+          dataObject[id].female += result.count;
         } else {
-          dataObject[id].unknown = result.count;
+          dataObject[id].unknown += result.count;
         }
-        dataObject[id].total += result.count;
+        dataObject[id].total = dataObject[id].male + dataObject[id].female + dataObject[id].unknown;
 
         if (!dataObject[id].name){
           var interest = _.find(interests, function(it){
