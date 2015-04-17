@@ -112,6 +112,79 @@ var nav = {
   }
 };
 
+var modal = {
+  cancel: function(e){
+    var shouldDismiss = true;
+    if (e) {
+      shouldDismiss = $(e.target).is('.create-overlay');
+    }
+    if (shouldDismiss){
+      $('.create-overlay').remove();
+      $('body').removeClass('noscroll');
+    }
+  }
+}
+
+var group = {
+  showNewGroupForm: function(){
+    var organization = $('input#selectedOrganization').val();
+    $.ajax({
+      method: 'GET',
+      url: '/profile/groups',
+      contentType: 'text/html',
+      headers: {organization: organization}
+    })
+    .done(function(html){
+      $('body').addClass('noscroll');
+      $('body').prepend(html);
+      $('#newGroup').submit(group.createNewGroup);
+    });
+  },
+  selectRadio: function(e){
+    var $target = $(e.target);
+    var checkbox = 'input[type="checkbox"]';
+    if (!$target.is(checkbox) ){
+      if (!$target.is('label')){
+        if ($target.is('.content')){
+          var checked = $target.children(checkbox).prop('checked');
+          $target.children(checkbox).prop('checked', !checked);
+        } else {
+            var checked = $target.siblings(checkbox).prop('checked');
+            $target.siblings(checkbox).prop('checked', !checked);
+        }
+      }
+    }
+  },
+  createNewGroup: function(){
+    var organization = $('input#selectedOrganization').val();
+    var data = $('#newGroup').serialize();
+    $.ajax({
+      type: 'POST',
+      url:  '/profile/groups',
+      data: data,
+      headers: {organization: organization}
+    })
+    .done(function(html){
+      window.location = window.location.pathname;
+    });
+    return false;    
+  },
+  filterMembers: function(e){
+    var $target = $(e.target);
+    var t = $target.val();
+    var r = new RegExp(t, 'i');
+    $('.selectArea .option').each(function(i){
+      var $this = $(this);
+      var s = $this.children('.content').first().children('.name').first().text();
+      if (s.match(r) || t == '') {
+        $this.show();
+      } else {
+        $this.hide();
+      }
+    });
+  }
+};
+
 var login = {
   displayForm: function() {
     $('.front').css('display', 'none');

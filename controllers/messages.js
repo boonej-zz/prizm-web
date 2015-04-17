@@ -149,9 +149,20 @@ exports.createMessage = function(req, res){
 
 exports.newGroup = function(req, res){
   var user = req.user;
-  var organization = req.get('organization');
-  if (organization) {
-    Organization.findOne({_id: organization}, function(err, org){
+  var criteria = false;
+  if (user.type == 'institution_verified'){
+    criteria = {};
+    criteria.owner = user._id;
+  } else { 
+    _.each(user.org_status, function(s, i, l){
+      if (s.status == 'approved' && s.role == 'leader'){
+        criteria = {};
+        criteria._id = s.organization._id;
+      }
+    });
+  }
+  if (criteria) {
+    Organization.findOne(criteria, function(err, org){
       User.findOrganizationMembers({organization: org._id, status: 'active'}, 
         org.owner, false, false, function(err, members) {
           var leaders = _.filter(members, function(user){
@@ -161,7 +172,7 @@ exports.newGroup = function(req, res){
             }
             return match;
           });
-          res.render('messages/new_group', {members: members, leaders: leaders});
+          res.render('create/group', {organization: org, members: members, leaders: leaders});
         });
     });
   } else {

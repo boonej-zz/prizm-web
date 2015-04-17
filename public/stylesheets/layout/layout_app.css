@@ -16,7 +16,9 @@ body {
   width: 986px;
 }
 
-
+body.noscroll {
+  overflow: hidden !important;
+}
 
 /* Navigation Bar */
 .navbar {

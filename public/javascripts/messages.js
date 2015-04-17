@@ -119,68 +119,7 @@ var messages = {
       $('input#lastMessage').val($('li.message:first').attr('created'));
       isFetching = false;
     });
-  },
-  showNewGroupForm: function(){
-    var organization = $('input#selectedOrganization').val();
-    $.ajax({
-      method: 'GET',
-      url: '/profile/groups',
-      contentType: 'text/html',
-      headers: {organization: organization}
-    })
-    .done(function(html){
-      $('.messages-header').hide();
-      $('.message-container').html(html);
-      $('.message-container').css('margin-top','106px');
-      $('#newGroup').submit(messages.createNewGroup);
-      $('body').click(function(e){
-        if (!$(e.target).is('#Leader')){
-          $('ul#leaderSelect').addClass('hidden');
-        }
-      });
-    });
-  },
-  selectRadio: function(e){
-    var $target = $(e.target);
-    console.log($target);
-    var checkbox = 'input[type="checkbox"]';
-    if (!$target.is(checkbox) ){
-      if (!$target.is('label')){
-        if ($target.is('.content')){
-          var checked = $target.children(checkbox).prop('checked');
-          $target.children(checkbox).prop('checked', !checked);
-        } else {
-            var checked = $target.siblings(checkbox).prop('checked');
-            $target.siblings(checkbox).prop('checked', !checked);
-        }
-      }
-    }
-  },
-  toggleLeaderSelect: function(){
-    $('ul#leaderSelect').toggleClass('hidden');
-  },
-  setGroupLeader: function(id, name){
-    $('#leader input.name').val(name);
-    $('ul#leaderSelect').addClass('hidden');
-  },
-  createNewGroup: function(){
-    var organization = $('input#selectedOrganization').val();
-    var data = $('#newGroup').serialize();
-    $.ajax({
-      type: 'POST',
-      url:  '/profile/groups',
-      data: data,
-      headers: {organization: organization}
-    })
-    .done(function(html){
-      window.location = window.location.pathname;
-    });
-    return false;    
-  },
-  cancel: function(){
-    window.location = window.location.pathname;
   }
-
 };
 
 
