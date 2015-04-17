@@ -209,25 +209,25 @@ router.get('/interests/graph', utils.auth, function(req, res) {
     Interest.find({}, function(err, interests){
       var dataObject = {};
       _.each(results, function(result, index, list){
-        dataObject[result._id.interest] = dataObject[result._id.interest]?dataObject[result._id.interest]:{male: 0, female: 0, unknown: 0, total: 0};
+        var id = result._id.interest || result._id.interest_raw;
+        dataObject[id] = dataObject[id]?dataObject[id]:{male: 0, female: 0, unknown: 0, total: 0};
         if (result._id.gender == 'male') {
-          dataObject[result._id.interest].male = result.count;
+          dataObject[id].male = result.count;
         } else if (result._id.gender =='female'){
-          dataObject[result._id.interest].female = result.count;
+          dataObject[id].female = result.count;
         } else {
-          dataObject[result._id.interest].unknown = result.count;
+          dataObject[id].unknown = result.count;
         }
-        dataObject[result._id.interest].total += result.count;
+        dataObject[id].total += result.count;
 
-        if (!dataObject[result._id.interest].name){
+        if (!dataObject[id].name){
           var interest = _.find(interests, function(it){
-            return (String(it._id) == String(result._id.interest)) ||
-              (String(it._id) == String(result._id.interest_raw));
+            return String(it._id) == String(id);
           });
           if (interest) {
-            dataObject[result._id.interest].name = interest.text;
+            dataObject[id].name = interest.text;
           } else {
-            dataObject[result._id.interest].name = 'none';
+            dataObject[id].name = 'none';
           }
         }
       });
