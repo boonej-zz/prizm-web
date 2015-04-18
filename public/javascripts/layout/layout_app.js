@@ -188,7 +188,7 @@ var group = {
 };
 
 var post = {
-   showNewPostForm: function(){
+  showNewPostForm: function(){
     $.ajax({
       method: 'GET',
       url: '/posts/new',
@@ -197,9 +197,13 @@ var post = {
     .done(function(html){
       $('body').addClass('noscroll');
       $('body').prepend(html);
+      $('#newPost').submit(post.createNewPost);
     });
+  },
+  createNewPost: function(){
+    var data = $('#newPost').serialize();
+    return false;  
   }
-
 }
 
 var login = {

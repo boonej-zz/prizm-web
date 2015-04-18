@@ -66,6 +66,18 @@ router.get('/insights', utils.auth, function (req, res) {
   });
 });
 
+router.get('/insights/archive', utils.auth, function(req, res){
+  Insight.find({}, function(err, insights){
+    insights = insights || [];
+    var options = {
+      insights: insights,
+      title: 'Insights'
+    };
+    res.render('insights/archive', options);
+
+  });
+});
+
 router.post('/insights', utils.auth, function (req, res) {
   var s3 = new AWS.S3();
   var form = new multiparty.Form();
