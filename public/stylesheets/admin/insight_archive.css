@@ -1,0 +1,28 @@
+ul.archive {
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+ul.archive li {
+  list-style: none;
+  display: inline-block;
+  float: left;
+  margin: 14px;
+}
+
+ul.archive .image {
+  height: 290px;
+  width: 290px;
+  background-size: 290px 290px;
+  background-repeat: no-repeat;
+}
+
+.title {
+  width: 290px;
+  height: 60px;
+  text-align: center;
+  background-color: #c0c0c0;
+  font-size: 18px;
+  color: #545358;
+}

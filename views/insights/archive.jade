@@ -1,0 +1,12 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' href='/stylesheets/admin/insight_archive.css' type='text/javascript')
+
+block content
+  .container.topnav-offset
+    ul.archive
+      each insight in insights
+        li(onclick = 'nav.navigate("/insights/#{insight._id}")')
+          div.image(style='background-image: url("#{insight.file_path}")')
+          p.title #{insight.title}
