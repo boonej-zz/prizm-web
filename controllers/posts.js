@@ -505,6 +505,10 @@ exports.addComment = function(req, res){
  }
 }
 
+exports.displayCreatePost = function(req, res){
+  res.render('create/post');
+};
+
 exports.createPost = function(req, res){
   
 };

@@ -44,6 +44,8 @@ router.get('/posts', function(req, res){
   }
 });
 
+router.get('/posts/new', _posts.displayCreatePost);
+
 router.get('/posts/:id', _posts.singlePost);
 router.post('/posts', _posts.createPost);
 router.post('/posts/:id/like', _posts.likePost);

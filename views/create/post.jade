@@ -1,9 +1,27 @@
 .create-overlay(onclick='modal.cancel(event)')
   #newPostForm.create-form
-    .header
-      | Create Post
+    h2 Create Post
     form#newPost
-      ul
-        li
-
+      .section
+        output#preview
+        textarea#postText(name='text' placeholder='Caption your post...')
+      h3 Select Options
+      .section
+        #photo.block(type='button')
+        #location.block(type='button')
+        #tag.block(type='button')
+        input#scope(type='checkbox' name='scope')
+        label.scope.block(for='scope')
+      h3 Select Category
+      .section
+        input#aspiration.block.big(type='radio' name='category' value='aspiration')
+        input#passion.block.big(type='radio' name='category' value='passion')
+        input#experience.block.big(type='radio' name='category' value='experience')
+      .section
+        input#achievement.block.big(type='radio' name='category' value='achievement')
+        input#inspiration.block.big(type='radio' name='category' value='inspiration')
+        input#personal.block.big(type='radio' name='category' value='personal')
+      .section.buttons
+        button.cancel(type='button' onclick='modal.cancel()') Cancel
+        button.save(type='button') Save
       

@@ -85,7 +85,7 @@ html
               .plus-menu.hidden
                 if currentUser.type == 'institution_verified'
                   ul#menuItems
-                    li
+                    li(onclick='post.showNewPostForm()')
                       span Post
                     li(onclick='group.showNewGroupForm()')
                       span Group

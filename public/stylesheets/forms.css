@@ -9,9 +9,251 @@
   overflow-y: auto;
 }
 
+.create-form {
+  background-color: #fefefe;
+  height: auto;
+  margin: 107px auto;
+  padding-bottom: 40px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.35);
+}
+
+.create-form .section {
+  overflow: hidden;
+  line-height: 0;
+}
+
+.create-form .section.buttons {
+  width: 100%;
+  text-align: center;
+}
+
+.create-form button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+.create-form h2 {
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  color: #545358;
+  font-size: 24px;
+  width: 100%;
+  background-color: rgb(228, 229, 234);
+  vertical-align: bottom;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+  margin: 0;
+  padding: 0;
+}
+
+.create-form h3 {
+  width: 100%;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  padding-left: 34px;
+  height: 36px;
+  background-color: #e4e5ea;
+  font-size: 14px;
+  color: #050506;
+  line-height: 36px;
+  vertical-align: middle; 
+}
+
 textarea {
   resize: none;
   outline: none;
+  line-height: 1.5em;
+}
+
+.create-form .block {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 71px;
+  display: inline-block;
+  background-color: #f2f3f9;
+  background-image: none;
+  border: none !important;
+  outline: none !important;
+  margin: 2px 1px;
+  cursor: pointer;
+  line-height: 71px;
+  font-weight: normal;
+  line-height: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.create-form input.block:checked {
+  background-color: #fefefe;
+}
+
+.create-form .section .block:first-child {
+  margin-left: 0px;
+}
+
+.create-form .section .block:last-child {
+  margin-right: 0px;
+}
+
+.create-form .block.big {
+  width: 162px;
+  height: 98px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  text-align: center;
+}
+
+.create-form .section .block.big:first-child {
+  width: 161px;
+}
+
+.create-form input[type='checkbox'] {
+  display: none;
+  height: 0px;
+  width: 0px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+
+.create-form button {
+  width: 106px;
+  height: 38px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 17px;
+  border: none;
+}
+
+button.cancel {
+  background-color: #d6d6d7;
+  color: #545358;
+  margin-right: 11px;
+}
+
+button.save {
+  background-color: #3e6a9e;
+  color: white;
+}
+
+/** NEW POST **/
+#newPostForm {
+  width: 489px;
+}
+
+#newPost #preview {
+  width: 110px;
+  height: 110px;
+  margin: 35px 22px 35px 35px;
+  background-color: rgb(228, 229, 234);
+  display: inline-block;
+}
+ 
+#newPost textarea {
+  height: 110px;
+  width: 287px;
+  margin: 35px 35px 35px 0px;
+  border: none;
+}
+
+#photo {
+  background-image: url('/images/posts/camera_icon.png');
+  background-size: 37px 28px;
+}
+
+#location {
+  background-image: url('/images/posts/locationpin_icon.png');
+  background-size: 24px 32px;
+}
+
+#tag {
+  background-image: url('/images/posts/usertag_icon.png');
+  background-size: 33px 33px;
+}
+
+label.block.scope {
+  background-image: url('/images/posts/globe_icon.png');
+  background-size: 30px 30px;
+}
+
+.block.big::after {
+  position: absolute;
+  height: 98px;
+  width: 162px;
+  text-align: center;
+  line-height: 169px;
+  vertical-align: baseline;
+  margin-left: -80px;
+  color: #545358;
+  font-size: 14px;
+}
+
+.block.big:checked::after{
+  color: #334b8f;
+}
+
+#aspiration {
+  background-image: url('/images/posts/aspirations_icon.png');
+  background-size: 34px 25px;
+}
+
+#aspiration::after {
+  width: 161px;
+  content: 'Aspirations';
+}
+
+#passion::after {
+  content: 'Passions';
+}
+
+#experience::after {
+  content: 'Experiences';
+}
+
+#achievement::after {
+  content: 'Achievements';
+}
+
+#inspiration::after {
+  content: 'Inspirations';
+}
+
+#personal::after {
+  content: 'Personal';
+}
+
+#passion {
+  background-image: url('/images/posts/passions_icon.png');
+  background-size: 33px 29px;
+}
+
+#experience {
+  background-image: url('/images/posts/experiences_icon.png');
+  background-size: 34px 35px;
+}
+
+#achievement {
+  background-image: url('/images/posts/achievements_icon.png');
+  background-size: 34px 35px;
+}
+
+#inspiration {
+  background-image: url('/images/posts/inspirations_icon.png');
+  background-size: 19px 34px;
+}
+
+#personal {
+  background-image: url('/images/posts/personal_icon.png');
+  background-size: 36px 36px;
+}
+
+#newPost button  {
+  margin-top: 28px;
 }
 /** NEW GROUP **/
 #newGroup input {
@@ -19,11 +261,8 @@ textarea {
 }
 
 #newGroupForm {
-  background-color: #fefefe;
-  height: auto;
   width: 660px;
-  margin: 107px auto;
-  padding-bottom: 40px;
+
 }
 
 #newGroupForm .header {
