@@ -7,10 +7,15 @@
         textarea#postText(name='text' placeholder='Caption your post...')
       h3 Select Options
       .section
-        #photo.block(type='button')
+        label#photo.block(for='image')
+          div
+        input#image.hidden(type='file' 
+          name='image' 
+          accept='image/*' 
+          onchange='Upload.fileSelect(event)')
         #location.block(type='button')
         #tag.block(type='button')
-        input#scope(type='checkbox' name='scope')
+        input#scope(type='checkbox' name='scope' value='private')
         label.scope.block(for='scope')
       h3 Select Category
       .section
@@ -23,5 +28,9 @@
         input#personal.block.big(type='radio' name='category' value='personal')
       .section.buttons
         button.cancel(type='button' onclick='modal.cancel()') Cancel
-        button.save(type='button') Save
-      
+        button.save(type='submit') Save
+
+script(type='text/javascript').
+  Upload.targetWidth = 110;
+  Upload.targetHeight = 110;
+  Upload.canvasId = 'preview';
