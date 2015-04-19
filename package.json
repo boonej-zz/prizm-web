@@ -41,7 +41,6 @@
     "serializer": "0.0.3",
     "static-favicon": "~1.0.0",
     "stripe": "~3.3.0",
-    "text-width": "^1.2.0",
     "underscore": "~1.6.0"
   }
 }

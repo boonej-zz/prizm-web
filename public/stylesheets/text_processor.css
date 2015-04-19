@@ -1,0 +1,19 @@
+div {
+  width: 544px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: 'Helvetica';
+  font-weight: light;
+  text-align: center;
+  font-size: 60pt;
+  line-height: 1.2em;
+  margin: 100px auto 20px auto;
+  border: 1px solid gray;
+  text-overflow: hidden;
+}
+
+p {
+  width: 544px;
+  margin: 0 auto;
+  font-size: 20pt;
+}
