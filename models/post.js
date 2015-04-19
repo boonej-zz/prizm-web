@@ -21,7 +21,6 @@ var commentSchema = new mongoose.Schema({
 
 
 var postSchema = new mongoose.Schema({
-  _id                 : {type: ObjectIdType, required:true},
   text                : {type: String, default: null},
   category            : {type: String, required:true},
   create_date         : {type: Date, default:null, index: true},
@@ -248,9 +247,19 @@ postSchema.methods.unlikePost = function(userId, next) {
 
 postSchema.post('init', function(post){
   post.formattedText = post.text;
+  var r = new RegExp('https:/s');
+  post.file_path = post.file_path.replace(r, 'https://s');
   _.each(post.comments, function(comment, idx, list){
     comment.formattedText = comment.text;
   });
+});
+
+postSchema.pre('save', function(next){
+  if (!this.create_date) {
+    this.create_date = Date.now();
+  }
+  this.modify_date = Date.now();
+  next();
 });
 
 

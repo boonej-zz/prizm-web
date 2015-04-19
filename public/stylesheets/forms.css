@@ -67,6 +67,7 @@ textarea {
   resize: none;
   outline: none;
   line-height: 1.5em;
+  color: #545358;
 }
 
 .create-form .block {
@@ -139,6 +140,11 @@ button.cancel {
 button.save {
   background-color: #3e6a9e;
   color: white;
+}
+
+button.save:disabled {
+ color: #545358;
+ background-color: #d6d6d7;
 }
 
 /** NEW POST **/

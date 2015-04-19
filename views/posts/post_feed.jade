@@ -1,7 +1,7 @@
 each post in posts
     .post(id='#{post.id}')
       .post-image(onclick='profile.showModal(event)')
-        img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}'
+        img.lazy(data-original='#{post.file_path.replace(".jpg", "_2.jpg")}'
         width=358
         height=358)
       .post-footer

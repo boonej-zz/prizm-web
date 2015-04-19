@@ -27,6 +27,8 @@ var Upload = {
             var div = document.createElement('div');
             var img = document.createElement('img');
             img.setAttribute('src', e.target.result);
+            console.log(img.width);
+            console.log(img.height);
             var min = img.width <= img.height?img.width:img.height;
             var ratio = img.width <= img.height?targetWidth/min:targetHeight/min;
 

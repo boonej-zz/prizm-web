@@ -38,12 +38,14 @@ $(document).ready(function(){
   $('#new-post').submit(function(){
     var $form = $('#new-post');
     var post = $form.serialize();
+
+     
+     
     $.ajax({
       type: 'POST',
       url: '/posts',
-      headers: {
-    
-      },
+      contentType: false,
+      cache: false,
       data: post,
       success: function(response) {
         alert('success');
@@ -198,11 +200,46 @@ var post = {
       $('body').addClass('noscroll');
       $('body').prepend(html);
       $('#newPost').submit(post.createNewPost);
+      $('input[type="radio"]').click(function(){
+        if ($('textarea').val() || $('input[type="file"]').val()) {
+          $('button.save').attr('disabled', false);
+        } else {
+          $('button.save').attr('disabled', true);
+        }
+      });
+      $('input[type="file"]').change(function(){
+        if ($('input[type="radio"]:checked').length) {
+          $('button.save').attr('disabled', false);
+        } else {
+          $('button.save').attr('disabled', true);
+        }
+      });
+      $('#postText').keyup(function(){
+        if ($('input[type="radio"]:checked').length && $('#postText').val().length > 0) {
+          $('button.save').attr('disabled', false);
+        } else {
+           $('button.save').attr('disabled', true);
+        }
+      });
     });
   },
   createNewPost: function(){
-    var data = $('#newPost').serialize();
-    return false;  
+    var post = $('#newPost').serialize();
+    $('button.save').attr('disabled', true); 
+    var data = new FormData($('form')[0]);
+    $.ajax({
+      method: 'POST',
+      url: '/posts',
+      contentType: false,
+      cache: false, 
+      processData: false,
+      data: data,
+      success: function(){
+        modal.cancel();
+        window.location = window.location.pathname;
+      }
+    });
+   return false;
   }
 }
 

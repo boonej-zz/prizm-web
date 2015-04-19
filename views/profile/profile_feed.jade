@@ -16,7 +16,7 @@ each post in posts
                 .post-via
                   | Post Via #{post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1)}
             .post-image(onclick='home.toggleComments(event)' prizm-data='#{post.id}')
-              img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}' prizm-data='#{post.id}')
+              img.lazy(data-original='https://#{post.file_path.replace(".jpg", "_2.jpg")}' prizm-data='#{post.id}')
             .post-footer
               .bar-section
                 if post.ownPost 

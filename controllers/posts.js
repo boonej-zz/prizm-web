@@ -510,5 +510,33 @@ exports.displayCreatePost = function(req, res){
 };
 
 exports.createPost = function(req, res){
-  
+  var user = req.user;
+  var image = require('../lib/helpers/image');
+  image.uploadPost(req, {}, function(err, path, fields){
+    var params = {
+      category: fields.category?String(fields.category):null,
+      creator: user._id,
+      file_path: path,
+      text: fields.text?String(fields.text):null,
+      scope: fields.scope?String(fields.scope):'public'
+    };
+    var post = new Post(params);
+    User.findOne({_id: user._id}, function(e, user){
+      if (err) console.log(err);
+      post.type = user.type;
+      post.subtype = user.subtype;
+      if (user.visibility && user.visibility == 'restricted'){
+        post.is_flagged = true;
+      }
+      post.save(function(err, p){
+        if (err) {
+          console.log(err);
+          res.send(500);
+        }
+        user.posts_count += 1;
+        user.save(function(err, u){});
+        res.send(200);
+      });
+    });
+  });  
 };

@@ -1,7 +1,7 @@
 .create-overlay(onclick='modal.cancel(event)')
   #newPostForm.create-form
     h2 Create Post
-    form#newPost
+    form#newPost(method='POST')
       .section
         output#preview
         textarea#postText(name='text' placeholder='Caption your post...')
@@ -28,7 +28,7 @@
         input#personal.block.big(type='radio' name='category' value='personal')
       .section.buttons
         button.cancel(type='button' onclick='modal.cancel()') Cancel
-        button.save(type='submit') Save
+        button.save(type='submit' disabled='disabled') Save
 
 script(type='text/javascript').
   Upload.targetWidth = 110;
