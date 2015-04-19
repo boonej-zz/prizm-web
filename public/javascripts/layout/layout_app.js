@@ -67,7 +67,7 @@ var action = {
     if (menuItems && menuItems.length > 0) {
       $('.plus-menu').toggleClass('hidden');
     } else {
-      newPost.showModal();
+      post.showNewPostForm(); 
     }
   }
 };

@@ -81,7 +81,7 @@ html
           span.navbar-title.cursor(onclick='nav.goToHomeFeed()')
             | Prizm
           if (auth)
-            .plus-icon.cursor(onclick='post.showNewPostForm()')
+            .plus-icon.cursor(onclick='action.showMenu()')
               .plus-menu.hidden
                 if currentUser.type == 'institution_verified'
                   ul#menuItems
