@@ -20,9 +20,33 @@ ul.archive .image {
 
 .title {
   width: 290px;
-  height: 60px;
+  height: 80px;
   text-align: center;
   background-color: #c0c0c0;
-  font-size: 18px;
+   color: #545358;
+  vertical-align: middle;
+}
+
+.date {
+  font-size: 15px;
   color: #545358;
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
+
+span.wrap {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+span.text {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1.2em;
+  width: 290px;
+  height: 55px;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

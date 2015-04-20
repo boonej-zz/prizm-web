@@ -9,4 +9,7 @@ block content
       each insight in insights
         li(onclick = 'nav.navigate("/insights/#{insight._id}")')
           div.image(style='background-image: url("#{insight.file_path}")')
-          p.title #{insight.title}
+          .title
+            span.wrap
+              span.text #{insight.title}
+            .date #{insight.create_date.toString().substr(0,15)} 
