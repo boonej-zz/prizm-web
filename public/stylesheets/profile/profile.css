@@ -812,8 +812,8 @@ form #inputComment {
     height: 20px;
     width: 20px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 25px;
+    left: 25px;
   }
 
   .user-card {
