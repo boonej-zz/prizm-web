@@ -6,13 +6,13 @@
       input#selectedOrganization(type='hidden' value='#{organization._id}')
       .row
         label(for='name') Group Name
-        input(type='text' id='name' name='name')
+        input#name(type='text' name='name')
       .row
         label(for='leader') Group Leader
-        select#Leader.name(name='leader')
+        select#Leader.name(name='leader' disabled=leader?'disabled':false)
           option(value='') - 
-          each leader in leaders
-            option(value='#{leader._id}') #{leader.name}
+          each l in leaders
+            option(value='#{l._id}' selected=String(leader)==String(l._id)?'selected':false) #{l.name}  
       .row
         label(for='description') Group Description
         textarea(id='description' name='description')
@@ -27,8 +27,11 @@
                 .profile-icon.cursor(style="background-image: url('#{creatorPhoto}')")
                 .content
                   span.name #{member.name} 
-                  input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}') 
+                  if String(member._id) == String(leader)
+                    input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}' checked='checked') 
+                  else
+                    input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}') 
                   label(for='#{member._id}') 
       .row
         button.cancel(type='button' onclick='modal.cancel()') Cancel
-        button.save(type='submit') Save
+        button.save(type='submit' disabled='disabled') Save

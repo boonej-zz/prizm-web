@@ -142,6 +142,24 @@ var group = {
       $('body').addClass('noscroll');
       $('body').prepend(html);
       $('#newGroup').submit(group.createNewGroup);
+      $('#Leader').change(function(){
+        $('input.members[value=' + $(this).val() + ']').prop('checked', true);
+      });
+      $('#description').keyup(function(){
+        if ($(this).val().length > 0 && $('#name').val().length > 0){
+          $('button.save').attr('disabled', false);
+        } else {
+          $('button.save').attr('disabled', 'disabled');
+        }
+      });
+      $('#name').keyup(function(){
+        if ($(this).val().length > 0 && $('#description').val().length > 0){
+          $('button.save').attr('disabled', false);
+        } else {
+          $('button.save').attr('disabled', 'disabled');
+        }
+
+      });
     });
   },
   selectRadio: function(e){

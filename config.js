@@ -5,6 +5,7 @@ var FacebookStrategy  = require('passport-facebook').Strategy;
 var TwitterStrategy   = require('passport-twitter').Strategy;
 var mongoose          = require('mongoose');
 var User              = mongoose.model('User');
+var _                 = require('underscore');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -72,6 +73,12 @@ passport.deserializeUser(function(email, done) {
     model: 'Group'
   })
   .exec(function (err, user) {
+    user.isLeader = false;
+    _.each(user.org_status, function(s, i, l){
+      if (s.status == 'active' && s.role && s.role == 'leader'){
+        user.isLeader = true;
+      }
+    });
     user.mixpanel = user.mixpanelProperties();
     done(err, user);
   });

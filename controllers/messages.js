@@ -150,29 +150,34 @@ exports.createMessage = function(req, res){
 exports.newGroup = function(req, res){
   var user = req.user;
   var criteria = false;
+  var options = {};
   if (user.type == 'institution_verified'){
     criteria = {};
     criteria.owner = user._id;
   } else { 
     _.each(user.org_status, function(s, i, l){
-      if (s.status == 'approved' && s.role == 'leader'){
+      if (s.status == 'active' && s.role == 'leader'){
         criteria = {};
         criteria._id = s.organization._id;
+        options.leader = user._id;
       }
     });
   }
   if (criteria) {
     Organization.findOne(criteria, function(err, org){
+      options.organization = org;
       User.findOrganizationMembers({organization: org._id, status: 'active'}, 
         org.owner, false, false, function(err, members) {
-          var leaders = _.filter(members, function(user){
+          options.members = members;
+          options.leaders = _.filter(members, function(user){
             var match = false;
             if (user.org_status.length > 0) {
               match = user.org_status[0].role == 'leader';
             }
             return match;
           });
-          res.render('create/group', {organization: org, members: members, leaders: leaders});
+          console.log(options);
+          res.render('create/group', options);
         });
     });
   } else {

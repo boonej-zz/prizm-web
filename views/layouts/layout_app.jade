@@ -97,6 +97,12 @@ html
                       span Event
                     li
                       span Notification
+                if currentUser.isLeader
+                  ul#menuItems
+                    li(onclick='post.showNewPostForm()')
+                      span Post
+                    li(onclick='group.showNewGroupForm()')
+                      span Group
             .avatar-menu
               if (auth)
                   if currentUser.profile_photo_url

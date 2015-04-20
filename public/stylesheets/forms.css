@@ -464,11 +464,6 @@ input#scope:not(:checked) + label::after  {
   margin-right: 11px;
 }
 
-#newGroup button.save {
-  background-color: #3e6a9e;
-  color: white;
-}
-
 #newGroup .selectArea {
   display: inline-block;
   width: 70%;
