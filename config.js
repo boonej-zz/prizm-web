@@ -72,6 +72,10 @@ passport.deserializeUser(function(email, done) {
     path: 'org_status.groups',
     model: 'Group'
   })
+  .populate({
+    path: 'interests',
+    model: 'Interest'
+  })
   .exec(function (err, user) {
     user.isLeader = false;
     _.each(user.org_status, function(s, i, l){
@@ -80,6 +84,7 @@ passport.deserializeUser(function(email, done) {
       }
     });
     user.mixpanel = user.mixpanelProperties();
+    user.heap = user.heapProperties();
     done(err, user);
   });
 });

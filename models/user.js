@@ -144,6 +144,20 @@ userSchema.methods.mixpanelProperties = function(){
   };
 };
 
+userSchema.methods.heapProperties = function(){
+  var interests = _.pluck(this.interests, 'text');
+  interests = interests.join(',');
+  return {
+    handle: this.name,
+    email: this.email,
+    age: this.age,
+    gender: this.gender,
+    'total posts': this.posts_count || 0,
+    source: 'website',
+    interests: interests
+  }
+}
+
 userSchema.methods.userBelongsToOrganization = function(org_id) {
   var match = false;
   _.each(this.org_status, function(org_status) {

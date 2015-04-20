@@ -66,6 +66,7 @@ router.post('/messages', _users.authRequired, _messages.createMessage);
 /* Users */
 router.post('/users/unrestrict', _users.authRequired, _users.unrestrictUser);
 router.post('/users/restrict', _users.authRequired, _users.restrictUser);
+router.get('/users/props', _users.authRequired, _users.getUserProps);
 router.get('/users/:id/password', _users.passwordReset);
 router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);

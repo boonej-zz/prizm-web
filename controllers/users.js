@@ -80,6 +80,15 @@ exports.passwordReset = function(req, res){
   }); 
 };
 
+exports.getUserProps = function(req, res){
+  if (req.get('process') == 'analytics'){
+    var user = req.user;
+    res.status(200).send(req.user.heap); 
+  } else {
+    res.send(400);
+  }
+}
+
 exports.shortPasswordReset = function(req, res){
   var email = req.body.email || false;
   var password = req.body.password || false;
