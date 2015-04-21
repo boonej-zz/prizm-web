@@ -147,6 +147,14 @@ userSchema.methods.mixpanelProperties = function(){
 userSchema.methods.heapProperties = function(){
   var interests = _.pluck(this.interests, 'text');
   interests = interests.join(',');
+  var orgs = [];
+  if (this.org_status && this.org_status.length > 0){
+    _.each(this.org_status, function(s, i, l){
+      if (s && s.organization && s.organization.name) 
+        orgs.push(s.organization.name);
+    });
+  }
+  orgs = orgs.join(',');
   return {
     handle: this.name,
     email: this.email,
@@ -154,7 +162,10 @@ userSchema.methods.heapProperties = function(){
     gender: this.gender,
     'total posts': this.posts_count || 0,
     source: 'website',
-    interests: interests
+    interests: interests,
+    orgs: orgs,
+    type: this.type,
+    subtype: this.subtype
   }
 }
 
