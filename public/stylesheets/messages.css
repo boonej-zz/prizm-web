@@ -123,6 +123,20 @@ ul#topics li, ul#messages li, ul#members li {
   border-bottom: 1px solid #c5c8cc;
 }
 
+.right-box .topic input {
+  border: none;
+  height: 74px;
+  line-height: 1em;
+  outline: none;
+  background: none;
+  display: inline-block;
+  float: left;
+}
+
+#groupName {
+  float: left;
+}
+
 .right-box #groupMembers {
   display: inline-block;
   float: right;

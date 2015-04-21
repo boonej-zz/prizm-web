@@ -83,6 +83,7 @@ router.get('/logout', _users.handleLogout);
 router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/members', _users.authRequired, _users.membersHTMLRequest);
 router.get('/organizations/:id/members', _users.authRequired, _users.displayMembers);
+router.put('/organizations/:organization/groups/:group', _users.authRequired, _messages.modifyGroup);
 router.get('/profile/members/memberexport.csv', _users.authRequired, _orgs.exportCSV);
 router.get('/profile/activity', _users.authRequired, _users.displayActivityFeed);
 router.get('/profile/explore', _users.authRequired, _users.displayExploreFeed);

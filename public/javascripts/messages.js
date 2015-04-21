@@ -23,6 +23,29 @@ function startPage(){
     return false;
   });
 
+  $('#changeName').submit(function(){
+    var name = $('#changeName input').val();
+    var org = $('input#selectedOrganization').val();
+    var group = $('input#selectedGroup').val();
+    var text = '#' + name.toLowerCase();
+    $.ajax({
+      method: 'PUT',
+      url: '/organizations/' + org + '/groups/' + group,
+      data: {name: name},
+      success: function(d){
+        $('#changeName').addClass('hidden');
+        $('#groupName').text(text).removeClass('hidden');
+        $('li.topic[dataid="' + group + '"]').text(text);
+      },
+      error: function(d){
+         $('#changeName').addClass('hidden');
+         $('#groupName').removeClass('hidden');
+      }
+    });
+    return false;
+  });
+
+
   $('#messages').scroll(function(){
     if ($('#messages').scrollTop() < 200) {
       if (!isFetching){
@@ -36,7 +59,8 @@ function startPage(){
     var $target = $(e.target);
     var members = '#groupMembers';
     var count = '#groupMembers .group-count';
-    if (width < 601 && !$target.is(members)&&!$target.is(count)) {
+    var name = '#groupName';
+    if (width < 601 && !$target.is(members)&&!$target.is(count)&&!$target.is(name)) {
       $('.left-box').addClass('visible');
     }
   });
@@ -154,6 +178,11 @@ var messages = {
   showMembers: function(){
     $('#messageArea').toggleClass('hidden');
     $('#memberArea').toggleClass('hidden');
+  },
+  showNameForm: function(){
+    $('#groupName').addClass('hidden');
+    $('#changeName').removeClass('hidden');
+    $('#changeName input').focus();
   }
 };
 

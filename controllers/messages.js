@@ -338,7 +338,6 @@ exports.addNewGroup = function(req, res){
           });
         }
       });
-      console.log(members);
       User.find({_id: {$in: members}}, function(err, users){
         if (users) {
           console.log('found ' + users.length + ' users');
@@ -366,3 +365,41 @@ exports.addNewGroup = function(req, res){
   });
 
 }
+
+exports.modifyGroup = function(req, res){
+  var o = req.params.organization;
+  var g = req.params.group;
+  var u = req.user;
+  var v = false;
+  Organization.findOne({_id: o}, function(err, org){
+    if (org) {
+      if (String(org.owner) == String(u._id)){
+        v = true;
+      } else {
+        _.each(u.org_status, function(s, i, l){
+          if (s && s.organization){
+            if (String(s.organization._id) == String(org._id) 
+              && s.status == 'active'){
+              v = s.role.toLowerCase() == 'leader';
+            }
+          }
+        });
+      }
+      if (v){
+        Group.update({_id: g}, {$set: req.body}, function(err, group){
+          if (!err) {
+            res.status(200).send();
+          } else {
+            console.log(err);
+            res.status(500).send();
+          }
+        });
+      } else {
+        res.status(401).send();
+      }
+    } else {
+      console.log(err);
+      res.status(400).send();
+    }
+  });
+};

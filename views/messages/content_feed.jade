@@ -1,6 +1,9 @@
 .topic
-  span#groupName
+  - var isLeader = currentUser.isLeader || currentUser.type == 'institution_verified'
+  span#groupName(onclick=isLeader && groupName?'messages.showNameForm(event)':'')
     | #{groupName?'#' + groupName.toLowerCase():'#all'} 
+  form#changeName.hidden
+    input(type='text' name='name' value='#{groupName?groupName.toLowerCase():""}' autofocus='autofocus')
   span#groupMembers(onclick='messages.showMembers()') 
     span.group-count #{Number(count)}
 #messageArea
