@@ -327,6 +327,10 @@ button.circle {
   margin-top: 8px;
 }
 
+#memberArea.all button.circle {
+  display: none;
+}
+
 button.action {
   background-image: url('/images/profile/members_warning.png');
   background-size: 26px 22px;

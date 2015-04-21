@@ -13,6 +13,6 @@
   form#newMessage
     .message-icon
     input(type='text' placeholder='Post a message to #{groupName?groupName.toLowerCase():"all"}...')
-#memberArea.hidden
+#memberArea.hidden(class='#{groupName?groupName.toLowerCase():"all"}')
   ul#members
     include member_feed
