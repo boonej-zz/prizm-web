@@ -549,6 +549,8 @@ input#memberFilter {
     width: 272px;
   }
 
+
+
 }
 
 @media screen and (max-width: 488px) {
@@ -556,23 +558,74 @@ input#memberFilter {
     width: 420px;
   }
 
-  #newGroup {
+  #newPostForm {
+    width: 360px;
+    margin-top: 20px;
+  }
+
+  #newGroup, #newPost {
     width: 360px;
   }
 
   #newGroup .selectArea .option .content {
     width: 202px;
   }
+  .create-form .block {
+    width: 88.5px;
+  }
+ 
+  .create-form .block.big {
+    width: 119px;
+    height: 66px;
+  }
+ 
+  .block.big::after {
+    position: absolute;
+    height: 60px;
+    width: 119px;
+    text-align: center;
+    line-height: 116px;
+    vertical-align: baseline;
+    margin-left: -60px;
+    color: #545358;
+    font-size: 12px;
+  }
 
-}
+  #aspiration::after {
+    width: 118px;
+  }
+
+  .create-form .section .block.big:first-child {
+    width: 118px;
+  }
+
+  input#scope + label::after {
+    margin-left: 29.25px;
+  }
+  
+  #newPost textarea {
+    height: 110px;
+    width: 220px;
+    margin: 35px 10px 35px 0px;
+    border: none;
+  }
+
+  #newPost #preview {
+    margin: 35px 10px 35px 10px;
+  }
+} 
 
 @media screen and (max-width: 410px) {
-  #newGroupForm {
+  #newGroupForm, #newPostForm, #newPost {
     width: 320px;
   }
 
   #newGroup {
     width: 280px;
+  }
+
+  #newPostForm {
+    margin-top: 0;
   }
 
   #newGroup .selectArea .option .content {
@@ -612,6 +665,49 @@ input#memberFilter {
     width: 80px;
   }
 
+  .create-form .block {
+    width: 78.5px;
+  }
+ 
+  .create-form .block.big {
+    width: 106px;
+    height: 66px;
+  }
+ 
+  .block.big::after {
+    position: absolute;
+    height: 60px;
+    width: 106px;
+    text-align: center;
+    line-height: 116px;
+    vertical-align: baseline;
+    margin-left: -53px;
+    color: #545358;
+    font-size: 12px;
+  }
+
+  #aspiration::after {
+    width: 104px;
+  }
+
+  .create-form .section .block.big:first-child {
+    width: 104px;
+  }
+
+  input#scope + label::after {
+    margin-left: 24.25px;
+  }
+  
+  #newPost textarea {
+    height: 110px;
+    width: 180px;
+    margin: 35px 10px 35px 0px;
+    border: none;
+  }
+
+  #newPost #preview {
+    margin: 35px 10px 35px 10px;
+  }
 
 }
 
