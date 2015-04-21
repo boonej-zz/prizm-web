@@ -62,6 +62,7 @@ router.get('/messages/:group', _users.authRequired, _messages.fetchMessages);
 router.get('/profile/groups', _users.authRequired, _messages.newGroup);
 router.post('/profile/groups', _users.authRequired, _messages.addNewGroup); 
 router.post('/messages', _users.authRequired, _messages.createMessage);
+router.post('/messages/actions/:mid', _users.authRequired, _messages.manipulateMessage);
 
 /* Users */
 router.post('/users/unrestrict', _users.authRequired, _users.unrestrictUser);

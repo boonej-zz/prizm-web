@@ -11,6 +11,7 @@ var Organization  = mongoose.model('Organization');
 var Message       = mongoose.model('Message');
 var Trust         = mongoose.model('Trust');
 var Group         = mongoose.model('Group');
+var ObjectId      = require('mongoose').Types.ObjectId; 
 
 exports.displayUserMessagesFeed = function(req, res){
   console.log('in request');
@@ -23,7 +24,6 @@ exports.displayUserMessagesFeed = function(req, res){
     auth: true,
     currentUser: user
   };
-  console.log(user.org_status);
   var userOrgs = _.filter(user.org_status, function(status){
     if (status.status != 'active') return false;
     else if (String(status.organization._id) != String(org)) return false
@@ -45,18 +45,31 @@ exports.displayUserMessagesFeed = function(req, res){
       options.organization = organization.toObject();
       options.topics = userOrgs[0].groups || [];
       console.log('fetching messages');
-      Message.fetchMessages(
-        {
-          organization: org,
-          group: null 
-        },
-        function(err, messages){
-          console.log('rendering page');
-          if (err) console.log(err);
-          options.messages = messages?messages.reverse():[];
-          res.render('messages/messages', options);
-        }
-      );
+      User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}}).count(function(err, c){
+        options.groupCount = c;
+        Message.fetchMessages(
+          {
+            organization: org,
+            group: null 
+          },
+          function(err, messages){
+            console.log('rendering page');
+            if (err) console.log(err);
+            options.messages = messages?messages.reverse():[];
+            _.each(options.messages, function(m, i, l){
+              if (_.find(m.likes, function(u){
+                return String(u) == String(user._id);
+              })) {
+                m.liked = true;
+              } else {
+                m.liked = false;
+              }
+            });
+            res.render('messages/messages', options);
+          }
+        );     
+      });
+    
     });
   } else {
     res.redirect('/');
@@ -78,32 +91,50 @@ exports.displayOwnerMessagesFeed = function(req, res){
     .populate({path: 'groups', model: 'Group'})
     .exec(function(err, organization){
       if (organization) {
-        options.topics = organization.groups || [];
-        options.organization = organization;
-        Message.fetchMessages(
-          {
-            organization: organization._id,
-            group: null 
-          },
-          function(err, messages){
-            if (err) console.log(err);
-            options.messages = messages?messages.reverse():[];
-            res.render('messages/messages', options);
-          }
-        );
+        User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}}).count(function(err, c){
+          options.groupCount = c;
+          options.topics = organization.groups || [];
+          options.organization = organization;
+          Message.fetchMessages(
+            {
+              organization: organization._id,
+              group: null 
+            },
+            function(err, messages){
+              if (err) console.log(err);
+              options.messages = messages?messages.reverse():[];
+              _.each(options.messages, function(m, i, l){
+                if (_.find(m.likes, function(u){
+                  return String(u) == String(user._id);
+                })) {
+                  m.liked = true;
+                } else {
+                  m.liked = false;
+                }
+              });
+              res.render('messages/messages', options);
+            }
+           );
+        });
+       
       } else {
         res.redirect('/');
       }      
     });
+  } else {
+    res.redirect('/');
   }
 };
 
 exports.fetchMessages = function(req, res){
   var group = req.params.group;
+  if (group == 'all') group = null;
   var organization = req.get('organization');
   var lastDate = req.get('lastDate');
+  var user = req.user;
   var options = {};
-  if (group && organization) {
+  options.currentUser = req.user;
+  if (organization) {
     var criteria = {
       organization: organization,
       group: group == 'all'?null:group
@@ -114,8 +145,32 @@ exports.fetchMessages = function(req, res){
     Message.fetchMessages(
         criteria, 
         function(err, messages){
-          options.messages = messages.reverse() || [];
-          res.render('messages/message_feed', options);
+          var criteria = {
+                     };
+          if (group) {
+            criteria.org_status = {
+              $elemMatch: {
+                status: 'active',
+                groups: {
+                  $elemMatch: {
+                    $eq: ObjectId(group)
+                  }
+                }
+              }
+            }
+          } else {
+            criteria.org_status = {$elemMatch: {
+              status: 'active',
+              organization: organization
+            }};
+          }
+          User.find(criteria).count(function(err, c){
+            if (err) console.log(err);
+            options.count = c;
+            options.messages = messages.reverse() || [];
+            res.render('messages/message_feed', options);
+          });
+          
         }
     );
   } else {
@@ -127,8 +182,10 @@ exports.createMessage = function(req, res){
   var user = req.user;
   var organization = req.get('organization');
   var group = req.get('group');
+  group = group == 'all'?null:group;
+
   var text = req.get('text');
-  if (organization && group && text) {
+  if (organization &&  text) {
     var message = new Message({
       organization: organization,
       group: group,
@@ -144,6 +201,27 @@ exports.createMessage = function(req, res){
     });
   } else {
     res.status(400).send();
+  }
+}
+
+exports.manipulateMessage = function(req, res){
+  var user = req.user;
+  var mid = req.params.mid;
+  var action = req.get('action');
+  if (action == 'like') {
+    Message.likeMessage(mid, user, function(err, message){
+      if (err) {
+        res.status(400).send(err);
+      }
+      res.status(200).send();
+    });
+  } else if (action == 'unlike') {
+    Message.unlikeMessage(mid, user, function(err, message){
+      if (err) {
+        res.status(400).send(err);
+      }
+      res.status(200).send();
+    });
   }
 }
 

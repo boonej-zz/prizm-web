@@ -54,7 +54,7 @@ var messages = {
     var target = e.target;
     var topic = $(target).text();
     var organization = $('input#selectedOrganization').val();
-    $('.right-box .topic').text(topic);
+    $('.right-box .topic #groupName').text(topic);
     $('#newMessage input').attr('placeholder', 'Post a message to ' + topic + '...');
     topic = topic?topic.substr(1):'all';
     var group = $(target).attr('dataID') || 'all';
@@ -72,6 +72,8 @@ var messages = {
     })
     .done(function(html){
       $('#messages').html(html);
+      var count = $('input#count').val(); 
+      $('.right-box #groupMembers .group-count').text(count); 
       $('input#lastMessage').val($('li.message:first').attr('created'));
       isFetching = false;
       messages.scrollToLatest();
@@ -119,6 +121,33 @@ var messages = {
       $('input#lastMessage').val($('li.message:first').attr('created'));
       isFetching = false;
     });
+  },
+  likeMessage: function(e){
+    var $target = $(e.target);
+    var $parent = $target.parents('li.message');
+    var $heart  = $parent.children().children('.foot').children('.heart');
+    var action = 'like';
+    if ($heart.hasClass('full')) action = 'unlike';
+    var $likesCount = $heart.siblings('#likesCount');
+    var id = $parent.attr('data-id');
+    $.ajax({
+      method: 'POST',
+      url:    '/messages/actions/' + id,
+      headers: {action: action},
+      success: function(d){
+        var rem = action == 'like'?'empty':'full';
+        var add = action == 'like'?'full':'empty';
+        $heart.removeClass(rem).addClass(add);
+        var likes = Number($likesCount.text()); 
+        var c = action == 'like'?likes+1:likes-1;
+        $likesCount.text(c);
+        if (c == 0) {
+          $likesCount.addClass('clear');
+        } else {
+          $likesCount.removeClass('clear');
+        }
+      }
+    })
   }
 };
 
