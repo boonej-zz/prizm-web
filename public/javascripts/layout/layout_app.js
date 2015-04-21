@@ -1,5 +1,9 @@
 window.heap=window.heap||[],heap.load=function(t,e){window.heap.appid=t,window.heap.config=e;var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+t+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(t){return function(){heap.push([t].concat(Array.prototype.slice.call(arguments,0)))}},p=["clearEventProperties","identify","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
-heap.load("3662545250");
+if (window.location.hostname == 'prizmapp.com'){
+  heap.load("3662545250");
+} else {
+  heap.load("3468470936");
+}
 $(document).ready(function(){
   $.ajax({
     method: 'GET',
@@ -46,9 +50,6 @@ $(document).ready(function(){
   $('#new-post').submit(function(){
     var $form = $('#new-post');
     var post = $form.serialize();
-
-     
-     
     $.ajax({
       type: 'POST',
       url: '/posts',

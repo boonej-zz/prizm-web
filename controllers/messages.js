@@ -13,6 +13,20 @@ var Trust         = mongoose.model('Trust');
 var Group         = mongoose.model('Group');
 var ObjectId      = require('mongoose').Types.ObjectId; 
 
+var shortFields = function(org) {
+return {
+    _id: 1, 
+    name: 1, 
+    profile_photo_url: 1,
+    org_status: {
+      $elemMatch: {
+        organization: org._id,
+        status: 'active'
+      }
+    }
+  };
+};
+
 exports.displayUserMessagesFeed = function(req, res){
   console.log('in request');
   var user = req.user;
@@ -45,8 +59,12 @@ exports.displayUserMessagesFeed = function(req, res){
       options.organization = organization.toObject();
       options.topics = userOrgs[0].groups || [];
       console.log('fetching messages');
-      User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}}).count(function(err, c){
-        options.groupCount = c;
+      User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}})
+      .select(shortFields(organization))
+      .populate({path: 'org_status.groups', model: 'Group'})
+      .exec(function(err, users){
+        options.count = users.length;
+        options.members = users;
         Message.fetchMessages(
           {
             organization: org,
@@ -91,8 +109,12 @@ exports.displayOwnerMessagesFeed = function(req, res){
     .populate({path: 'groups', model: 'Group'})
     .exec(function(err, organization){
       if (organization) {
-        User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}}).count(function(err, c){
-          options.groupCount = c;
+        User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}})
+        .select(shortFields(organization))
+        .populate({path: 'org_status.groups', model: 'Group'})
+        .exec(function(err, users){
+          options.count = users.length;
+          options.members = users;
           options.topics = organization.groups || [];
           options.organization = organization;
           Message.fetchMessages(
@@ -112,6 +134,7 @@ exports.displayOwnerMessagesFeed = function(req, res){
                   m.liked = false;
                 }
               });
+              console.log(options.count);
               res.render('messages/messages', options);
             }
            );
@@ -131,6 +154,7 @@ exports.fetchMessages = function(req, res){
   if (group == 'all') group = null;
   var organization = req.get('organization');
   var lastDate = req.get('lastDate');
+  var quick = req.get('quick');
   var user = req.user;
   var options = {};
   options.currentUser = req.user;
@@ -142,18 +166,20 @@ exports.fetchMessages = function(req, res){
     if (lastDate) {
       criteria.create_date = {$lt: new Date(lastDate)};
     }
-    Message.fetchMessages(
+    Group.findOne({_id: group}, function(err, group){
+      Message.fetchMessages(
         criteria, 
         function(err, messages){
           var criteria = {
                      };
           if (group) {
+            options.groupName = group.name;
             criteria.org_status = {
               $elemMatch: {
                 status: 'active',
                 groups: {
                   $elemMatch: {
-                    $eq: ObjectId(group)
+                    $eq: group._id
                   }
                 }
               }
@@ -164,24 +190,44 @@ exports.fetchMessages = function(req, res){
               organization: organization
             }};
           }
-          User.find(criteria).count(function(err, c){
-            if (err) console.log(err);
-            options.count = c;
+          if (lastDate || quick){
             options.messages = messages.reverse() || [];
             _.each(options.messages, function(m, i, l){
-              if (_.find(m.likes, function(u){
-                return String(u) == String(user._id);
-              })) {
-                m.liked = true;
-              } else {
-                m.liked = false;
-              }
-            });
+                if (_.find(m.likes, function(u){
+                  return String(u) == String(user._id);
+                })) {
+                  m.liked = true;
+                } else {
+                  m.liked = false;
+                }
+              });
             res.render('messages/message_feed', options);
-          });
-          
+
+          } else {
+            User.find(criteria)
+            .select(shortFields(organization))
+            .populate({path: 'org_status.groups', model: 'Group'})
+            .exec(function(err, members){
+              if (err) console.log(err);
+              options.count = members.length;
+              options.members = members;
+              options.messages = messages.reverse() || [];
+              _.each(options.messages, function(m, i, l){
+                if (_.find(m.likes, function(u){
+                  return String(u) == String(user._id);
+                })) {
+                  m.liked = true;
+                } else {
+                  m.liked = false;
+                }
+              });
+              res.render('messages/content_feed', options);
+            });
+          }
         }
     );
+    });
+   
   } else {
     res.status(400).send();
   }

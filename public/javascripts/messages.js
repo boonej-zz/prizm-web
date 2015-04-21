@@ -31,9 +31,12 @@ function startPage(){
     }
   });
 
-  $('div.topic').click(function(){
+  $('div.topic').click(function(e){
     var width = $(window).width();
-    if (width < 601) {
+    var $target = $(e.target);
+    var members = '#groupMembers';
+    var count = '#groupMembers .group-count';
+    if (width < 601 && !$target.is(members)&&!$target.is(count)) {
       $('.left-box').addClass('visible');
     }
   });
@@ -55,7 +58,6 @@ var messages = {
     var topic = $(target).text();
     var organization = $('input#selectedOrganization').val();
     $('.right-box .topic #groupName').text(topic);
-    $('#newMessage input').attr('placeholder', 'Post a message to ' + topic + '...');
     topic = topic?topic.substr(1):'all';
     var group = $(target).attr('dataID') || 'all';
     $('input#selectedGroup').val(group);
@@ -71,9 +73,7 @@ var messages = {
       }
     })
     .done(function(html){
-      $('#messages').html(html);
-      var count = $('input#count').val(); 
-      $('.right-box #groupMembers .group-count').text(count); 
+      $('.right-box').html(html);
       $('input#lastMessage').val($('li.message:first').attr('created'));
       isFetching = false;
       messages.scrollToLatest();
@@ -81,6 +81,7 @@ var messages = {
       if (width < 601) {
         $('.left-box').removeClass('visible');
       }
+      startPage();
     });
   },
   refresh: function(){
@@ -92,11 +93,12 @@ var messages = {
       url : '/messages/' + group,
       headers: {
         organization: organization,
+        quick: 'quick',
         'content-type': 'text/html'
       }
     })
     .done(function(html){
-      $('#messages').html(html);
+      $('ul#messages').html(html);
       $('input#lastMessage').val($('li.message:first').attr('created'));
       isFetching = false;
       messages.scrollToLatest();
@@ -148,6 +150,10 @@ var messages = {
         }
       }
     })
+  },
+  showMembers: function(){
+    $('#messageArea').toggleClass('hidden');
+    $('#memberArea').toggleClass('hidden');
   }
 };
 

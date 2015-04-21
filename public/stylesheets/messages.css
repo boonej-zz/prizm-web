@@ -37,14 +37,14 @@ input {
  
 }
 
-ul#topics, ul#messages {
+ul#topics, ul#messages, ul#members {
   list-style: none;
   margin: 0;
   padding: 0;
   overflow: auto;
 }
 
-ul#topics li, ul#messages li {
+ul#topics li, ul#messages li, ul#members li {
   display: block;
   width: 100%;
 }
@@ -154,18 +154,18 @@ ul#topics li, ul#messages li {
   font-weight: 400;
 }
 
-li.message {
+li.message, li.member {
   min-height: 108px;
   width: 100%;
   float: left;
 }
 
-.message .profile-icon {
+.message .profile-icon, .member .profile-icon {
   float: left;
   margin: 27px 16px 0px 45px;
 }
 
-li.message .content {
+li.message .content, li.member .content {
   float: left;
   display: inline-block;
   width: 478px;
@@ -175,14 +175,22 @@ li.message .content {
   clear: none;
 }
 
-ul#messages li:last-child {
+li.member .content {
+  height: 108px;
+}
+
+ul#messages li:last-child, ul#members li:last-child {
   margin-bottom: 20px;
 }
 
-.message .creator {
+.message .creator, .member .creator {
   float: left;
   font-size: 18px;
   color: #545358;
+}
+
+.member .content .creator {
+  line-height: 40px;
 }
 
 .message .message {
@@ -293,6 +301,39 @@ ul#messages li:last-child {
   outline: none;
 }
 
+button.circle {
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  float: right;
+  margin-top: 8px;
+}
+
+button.action {
+  background-image: url('/images/profile/members_warning.png');
+  background-size: 26px 22px;
+  width: 26px;
+  height: 22px; 
+  margin-right: 53px;
+}
+
+button.remove {
+  background-image: url('/images/profile/members_delete.png');
+  background-size: 22px 22px;
+  width: 22px;
+  height: 22px;
+  margin-right: 32px; 
+}
+
+#members {
+  height: 624px;
+  overflow-y: auto;
+} 
+
 
 @media screen and (max-width: 600px) {
   .container.topnav-offset {
@@ -340,11 +381,11 @@ ul#messages li:last-child {
     bottom: 0;
   }
 
-  li.message .content {
+  li.message .content, li.member .content {
     width: 440px;
   }
 
-  .message .profile-icon {
+  .message .profile-icon, .member .profile-icon {
     margin-left: 10px;
   }
 
@@ -396,11 +437,11 @@ ul#messages li:last-child {
     bottom: 0;
   }
 
-  li.message .content {
+  li.message .content, li.member .content {
     width: 338px;
   }
 
-  .message .profile-icon {
+  .message .profile-icon, .member .profile-icon {
     margin-left: 10px;
   }
 
@@ -422,7 +463,7 @@ ul#messages li:last-child {
     width: 240px;
   }
 
-  #messages, ul#topics {
+  #messages, ul#topics, #members {
     height: 474px;
   }
 }
@@ -475,13 +516,13 @@ ul#messages li:last-child {
     transition: all 500ms linear; 
   }
   
-  li.message .content {
+  li.message .content, li.member.content {
     width: 240px;
     padding: 15px 0 14px 0;
     min-height: initial;
   }
 
-  .message .profile-icon {
+  .message .profile-icon, .member .profile-icon {
     margin-left: 10px;
     margin-top: 15px;
   }
@@ -509,7 +550,7 @@ ul#messages li:last-child {
     font-size: 15px;
   }
 
-  #messages, ul#topics {
+  #messages, ul#topics, #members {
     height: 306px;
   }
 

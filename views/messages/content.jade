@@ -8,14 +8,4 @@
   ul#topics
     include topics_feed
 .right-box
-  .topic
-    span#groupName
-      | #all
-    span#groupMembers 
-      span.group-count #{Number(groupCount)}
-  ul#messages
-   include message_feed 
-       
-  form#newMessage
-    .message-icon
-    input(type='text' placeholder='Post a message to #all...')
+  include content_feed 
