@@ -168,6 +168,15 @@ exports.fetchMessages = function(req, res){
             if (err) console.log(err);
             options.count = c;
             options.messages = messages.reverse() || [];
+            _.each(options.messages, function(m, i, l){
+              if (_.find(m.likes, function(u){
+                return String(u) == String(user._id);
+              })) {
+                m.liked = true;
+              } else {
+                m.liked = false;
+              }
+            });
             res.render('messages/message_feed', options);
           });
           
