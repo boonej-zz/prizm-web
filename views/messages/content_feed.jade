@@ -1,0 +1,15 @@
+.topic
+  span#groupName
+    | #{groupName?'#' + groupName.toLowerCase():'#all'} 
+  span#groupMembers(onclick='messages.showMembers()') 
+    span.group-count #{Number(count)}
+#messageArea
+  ul#messages
+    include message_feed 
+       
+  form#newMessage
+    .message-icon
+    input(type='text' placeholder='Post a message to #{groupName?groupName.toLowerCase():"all"}...')
+#memberArea.hidden
+  ul#members
+    include member_feed
