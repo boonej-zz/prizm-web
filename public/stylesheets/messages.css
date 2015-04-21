@@ -327,7 +327,7 @@ button.circle {
   margin-top: 8px;
 }
 
-#memberArea.all button.circle {
+#memberArea.all button.remove {
   display: none;
 }
 
