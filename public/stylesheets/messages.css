@@ -157,6 +157,10 @@ ul#topics li, ul#messages li, ul#members li {
   padding: bottom: 0;
 }
 
+.right-box #groupMembers.selected{
+  background-image: url('/images/icons/group_icon_selected.png');
+}
+
 #groupMembers .group-count {
   float: right;
   display: inline-block;

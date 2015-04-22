@@ -176,6 +176,7 @@ var messages = {
     })
   },
   showMembers: function(){
+    $('#groupMembers').toggleClass('selected');
     $('#messageArea').toggleClass('hidden');
     $('#memberArea').toggleClass('hidden');
   },
