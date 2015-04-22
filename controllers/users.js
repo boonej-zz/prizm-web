@@ -43,6 +43,7 @@ var mandrillEndpointSend = '/messages/send';
 var Mixpanel        = require('mixpanel');
 var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 var InsightTarget = mongoose.model('InsightTarget');
+var moment = require('moment');
 
 // User Methods
 exports.passwordReset = function(req, res){
@@ -1108,6 +1109,7 @@ var validateRegistrationRequest = function(req, res,  next) {
   console.log(JSON.stringify(req.body));
   var userEmail = req.body.email;
   var userCode = req.body.programCode;
+  var birthday = req.body.birthday;
   if (validateEmail(userEmail)) {
     User.findOne({email: userEmail}, function(err, user) {
       if (err) {
@@ -1122,28 +1124,39 @@ var validateRegistrationRequest = function(req, res,  next) {
         if (req.body.password != req.body.confirmPassword) {
           res.status(400).send({error: 'Passwords do not match'});
         }
-        else if (userCode) {
-          Organization.findOne({code: userCode}, function(err, organization) {
-            if (err) {
-              res.status(500).send({error: err});
-            }
-            if (organization) {
-              next(organization);
-            }
-            else {
-              res.status(400).send({error: 'Program code is a valid code'});
-            }        
-          });
-        }
-        else {
+        else if (birthday){
+          birthday = birthday.split('/');
+          birthday = [birthday[2], birthday[0] - 1, birthday[1]];
+          birthday = moment(birthday);
+          diff = moment().diff(birthday, 'years');
+          if (diff < 13) {
+            res.status(400).send({
+              error: 'You must be 13 years of age to create an account.'
+            });
+          }
+          if (userCode) {
+            Organization.findOne({code: userCode}, function(err, organization) {
+              if (err) {
+                res.status(500).send({error: err});
+              }
+              if (organization) {
+                next(organization);
+              }
+              else {
+                res.status(400).send({error: 'Program code is a valid code'});
+              }        
+            });
+          } else {
           next();
         }
+        }
+       
       }
     });
   }
   else {
     res.status(400).send({error: 'Invalid Email Address'});
-  }
+  } 
 };
 
 var registerIndividual = function(req, res) {

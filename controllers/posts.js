@@ -334,7 +334,6 @@ var organizationMembersFeed = function(req, res) {
   var criteria = {
     creator: {$in: members},
     status: 'active',
-    category: {$ne: 'personal'},
     scope: {$ne: 'private'}
   }
   if (lastPost) {
