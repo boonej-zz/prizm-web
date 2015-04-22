@@ -4,6 +4,13 @@ if (window.location.hostname == 'www.prizmapp.com'){
 } else {
   heap.load("3468470936");
 }
+
+var lastPostDate = new Date().toISOString();
+var lastActivityDate = new Date().toISOString();
+var messagePollCount = 0;
+var newPostCount = 0;
+
+
 $(document).ready(function(){
   $.ajax({
     method: 'GET',
@@ -68,7 +75,78 @@ $(document).ready(function(){
   $('.btn-category').click(function(){
     $('.btn-create-post').removeClass('disabled');
   });
+  poll.messages();
 });
+
+var poll = {
+  messages: function(){
+    console.log(messagePollCount);
+    if (messagePollCount > 0) {
+      console.log('polling');
+      $.ajax({
+        type: 'GET',
+        contentType: 'application/json',
+        url:  '/',
+        headers: {
+          action: 'newer',
+          create_date: lastPostDate
+        }
+      })
+      .done(function(data){
+        lastPostDate = new Date().toISOString();
+        if (data.count > 0) {
+          newPostCount += data.count;
+          var string = String(newPostCount) + ' new post';
+          if (newPostCount > 1) {
+            string = string + 's.';
+          } else {
+            string = string + '.';
+          }
+          $('#activityBar span').text(string);
+          $('#activityBar').click(function(){
+            window.location = '/';
+          });
+          $('#activityBar').addClass('visible');
+          setTimeout(function(){
+            $('#activityBar').removeClass('visible');
+           
+          }, 4000);
+        }
+        setTimeout('poll.activities()', 15000);
+      });
+    } else {
+      messagePollCount++;
+      setTimeout('poll.messages()', 15000);
+    }
+  },
+  activities: function(){
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      url: '/profile/activity',
+      headers: {
+        action: 'newer',
+        create_date: lastActivityDate
+      },
+      cache: false
+    })
+    .done(function(data){
+      if (data){
+        $('#activityBar span').text(data);
+        $('#activityBar').click(function(){
+          window.location = '/profile/activity';
+        });
+        $('#activityBar').addClass('visible');
+       
+      }
+      setTimeout(function(){
+          $('#activityBar').removeClass('visible');
+          setTimeout('poll.messages()', 15000);
+        }, 4000);
+      lastActivityDate = new Date().toISOString();
+    });
+  } 
+};
 
 var action = {
   showMenu: function(){

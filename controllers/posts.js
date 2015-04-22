@@ -474,7 +474,7 @@ exports.addComment = function(req, res){
       var content = jade.renderFile(singleCommentPath, {comment: cmt});
       mixpanel.track('Commented on post', req.user.mixpanel);
       var activity = new Activity({
-              from: ObjectId(creator._id),
+              from: req.user._id,
               to:   post.creator,
               action: 'comment',
               post_id: post._id  

@@ -25,12 +25,12 @@ body {
   line-height: 40px;
   vertical-align: center;
   z-index: 3000;
-  transition: all 200ms linear; 
+  transition: all 500ms linear; 
 }
 
 #activityBar.visible {
   top: 0px;
-  transition: all 200ms linear;
+  transition: all 500ms linear;
 }
 
 /* Preloader */
@@ -59,12 +59,12 @@ body.noscroll {
   z-index: 1000;
   background-color: #E4E5EA;
   box-shadow: 0 1px 1px #d4dae9;
-  transition: all 200ms linear;
+  transition: all 500ms linear;
 }
 
 #activityBar.visible + .navbar {
   top: 40px;
-  transition: all 200ms linear;
+  transition: all 500ms linear;
 }
 
 .navbar>.container {

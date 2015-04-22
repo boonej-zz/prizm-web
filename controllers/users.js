@@ -1347,181 +1347,239 @@ var uploadProfilePhoto = function(req, res) {
 // Activity Feed
 exports.displayActivityFeed = function(req, res) {
   var userId = req.user._id;
-
-  function getNotifications(next) {
-    Activity
-      .find({to: userId})
-      .populate('from', 'name _id profile_photo_url')
-      .where({action: {$ne: 'trust_accepted'}})
-      .sort({create_date: -1})
-      .exec(function(err, notifications) {
-        if (err) next(err)
-        if (notifications) {
-          var postArray = [];
-          var postMap = [];
-          _.each(notifications, function(note, idx, list){
-            if (note.post_id) {
-              postArray.push(note.post_id);
-              postMap.push({id: String(note.post_id), index: idx});
-            }
-          });
-          if (postArray.length > 0) {
-            Post.find({_id: {$in: postArray}}, function(err, posts){
-              if (posts) {
-                _.each(postMap, function(p, idx, list){
-                  var post = _.find(posts, function(t){
-                    return String(t._id) == p.id;
-                  });
-                  notifications[p.index].photo_url = post.file_path;
-                });
-              }
-              next(null, notifications);
-            });
-          } else {
-            next(null, notifications);
-          }
-        }
-      });
-  }
-
-  function getRequests(next) {
-    var criteria = {
-        $or: [{
-            from: userId
-        }, {
-            to: userId
-        }],
-        $and: [{
-            status: {
-                $ne: 'cancelled'
-            }
-        }, {
-            status: {
-                $ne: 'inactive'
-            }
-        }]
-    };
-
-    Trust
-      .find(criteria)
-      .populate('to from', 'name _id profile_photo_url')
-      .sort('-status -create_date')
-      .exec(function(err, requests) {
-        if (err) next(err)
-        if (requests) {
-          next(null, requests);
-        }
-      });
-  }
-
-  function resolveObjectIds(activities) {
-
-    _.each(activities, function(activity) {
-
-      switch(activity.action) {
-        case 'insight':
-          Insight.findOne({_id: activity.insight_id}, function(err, insight) {
-            if (insight) {
-              activity.photo_url = insight.file_path;
-            }
-          });
-          break;
-        case 'like':
-        case 'comment':
-          Post.findOne({_id: activity.post_id}, function(err, post) {
-            if (post) {
-              activity.photo_url = post.file_path;
-            }
-          });
-          break;
-        default:
-          activity.photo_url = null;
-      }
-    });
-    return activities;
-  }
-
-  function updateHasBeenViewed(activities) {
-    var update = {
-      $set: {has_been_viewed: true}
-    };
-
-    _.each(activities, function(activity) {
-      if (activity.has_been_viewed == false) {
-        Activity.findOneAndUpdate({
-          _id: activity._id
-        }, update, function(err, activity) {
-          if (activity) {
-            return;
-          }
-          else {
-            return;
-          }
-        });
-      }
-    });
-    return true;
-  }
-
-  if (req.accepts('html')) {
-    var notifications = {};
-    var requests      = {}
-
-    getNotifications(function(err, notifications) {
+  var action = req.get('action');
+  if (action){
+    console.log('fetching actions');
+    var create_date = req.get('create_date');
+    Activity.findOne({to: userId, create_date: {'$gt': create_date}}, {action: 1, from:1, post_id:1, comment_id: 1})
+    .populate('from', 'name')
+    .sort({create_date: -1})
+    .exec(function(err, a){
       if (err) {
-        res.status(500).send({error: err});
-      }
-      else {
-        notifications = resolveObjectIds(notifications);
-        notifications = _time.addTimeSinceFieldToObjects(notifications);
-        res.render('profile/profile_activity', {
-          auth: true,
-          currentUser: req.user,
-          bodyId: 'activity',
-          title: 'Activity',
-          notifications: notifications,
-          requests: requests
-        });
+        res.status(500).send();
+      } else {
+        var string = false;
+        if (a) {
+          if (a.from && a.from.name){
+            string = a.from.name;
+          } else {
+            string = '';
+          }
+          switch(a.action){
+            case 'comment':
+              string += ' commented on your post.';
+              break;
+            case 'tag':
+              string += ' tagged you in a ';
+              break;
+            case 'like':
+              string += ' liked your';
+              break;
+            case 'trust_accepted':
+              string += ' accepted your trust request.';
+              break;
+            case 'trust_request':
+              string += ' has sent you a trust invite.';
+              break;
+            case 'group_approved':
+              string += ' has approved your membership.';
+              break;
+            case 'post':
+              string += ' created a post.';
+              break;
+            default: 
+              break;
+          }
+          if (a.action=='like' && a.post_id){
+            string += ' post.';
+          }
+          if (a.action=='like' && a.comment_id){
+            string += ' comment.';
+          }
+          if (a.insight_id) {
+            string += ' sent you an insight.';
+          }
+        }
+        res.status(200).send(string);
       }
     });
-  }
-  else if (req.accepts('application/jade')) {
-    var activity = req.get('activity');
-    var content;
 
-    console.log(activity);
-    if (String(activity) == 'trusts') {
-      getRequests(function(err, requests) {
-        if (err) {
-          res.status(500).send({error: err});
-        }
-        else {
-          requests = _time.addTimeSinceFieldToObjects(requests);
-          content = jade.renderFile(profileRequests, {
-            currentUser: req.user,
-            requests: requests
-          });
-          res.send(content);
+  } else{
+    function getNotifications(next) {
+      Activity
+        .find({to: userId})
+        .populate('from', 'name _id profile_photo_url')
+        .where({action: {$ne: 'trust_accepted'}})
+        .sort({create_date: -1})
+        .exec(function(err, notifications) {
+          if (err) next(err)
+          if (notifications) {
+            var postArray = [];
+            var postMap = [];
+            _.each(notifications, function(note, idx, list){
+              if (note.post_id) {
+                postArray.push(note.post_id);
+                postMap.push({id: String(note.post_id), index: idx});
+              }
+            });
+            if (postArray.length > 0) {
+              Post.find({_id: {$in: postArray}}, function(err, posts){
+                if (posts) {
+                  _.each(postMap, function(p, idx, list){
+                    var post = _.find(posts, function(t){
+                      return String(t._id) == p.id;
+                    });
+                    notifications[p.index].photo_url = post.file_path;
+                  });
+                }
+                next(null, notifications);
+              });
+            } else {
+              next(null, notifications);
+            }
+          }
+        });
+    }
+
+    function getRequests(next) {
+      var criteria = {
+          $or: [{
+              from: userId
+          }, {
+              to: userId
+          }],
+          $and: [{
+              status: {
+                  $ne: 'cancelled'
+              }
+          }, {
+              status: {
+                  $ne: 'inactive'
+              }
+          }]
+      };
+
+      Trust
+        .find(criteria)
+        .populate('to from', 'name _id profile_photo_url')
+        .sort('-status -create_date')
+        .exec(function(err, requests) {
+          if (err) next(err)
+          if (requests) {
+            next(null, requests);
+          }
+        });
+    }
+
+    function resolveObjectIds(activities) {
+
+      _.each(activities, function(activity) {
+
+        switch(activity.action) {
+          case 'insight':
+            Insight.findOne({_id: activity.insight_id}, function(err, insight) {
+              if (insight) {
+                activity.photo_url = insight.file_path;
+              }
+            });
+            break;
+          case 'like':
+          case 'comment':
+            Post.findOne({_id: activity.post_id}, function(err, post) {
+              if (post) {
+                activity.photo_url = post.file_path;
+              }
+            });
+            break;
+          default:
+            activity.photo_url = null;
         }
       });
+      return activities;
     }
-    else if (String(activity) == 'notifications') {
+
+    function updateHasBeenViewed(activities) {
+      var update = {
+        $set: {has_been_viewed: true}
+      };
+
+      _.each(activities, function(activity) {
+        if (activity.has_been_viewed == false) {
+          Activity.findOneAndUpdate({
+            _id: activity._id
+          }, update, function(err, activity) {
+            if (activity) {
+              return;
+            }
+            else {
+              return;
+            }
+          });
+        }
+      });
+      return true;
+    }
+
+    if (req.accepts('html')) {
+      var notifications = {};
+      var requests      = {}
+
       getNotifications(function(err, notifications) {
         if (err) {
           res.status(500).send({error: err});
         }
         else {
+          notifications = resolveObjectIds(notifications);
           notifications = _time.addTimeSinceFieldToObjects(notifications);
-          content = jade.renderFile(profileNotifications, {
+          res.render('profile/profile_activity', {
+            auth: true,
             currentUser: req.user,
-            notifications: notifications
+            bodyId: 'activity',
+            title: 'Activity',
+            notifications: notifications,
+            requests: requests
           });
-          res.send(content);
         }
       });
     }
-    else {
-      res.status(400).send({error: 'Invalid type'});
+    else if (req.accepts('application/jade')) {
+      var activity = req.get('activity');
+      var content;
+
+      console.log(activity);
+      if (String(activity) == 'trusts') {
+        getRequests(function(err, requests) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          else {
+            requests = _time.addTimeSinceFieldToObjects(requests);
+            content = jade.renderFile(profileRequests, {
+              currentUser: req.user,
+              requests: requests
+            });
+            res.send(content);
+          }
+        });
+      }
+      else if (String(activity) == 'notifications') {
+        getNotifications(function(err, notifications) {
+          if (err) {
+            res.status(500).send({error: err});
+          }
+          else {
+            notifications = _time.addTimeSinceFieldToObjects(notifications);
+            content = jade.renderFile(profileNotifications, {
+              currentUser: req.user,
+              notifications: notifications
+            });
+            res.send(content);
+          }
+        });
+      }
+      else {
+        res.status(400).send({error: 'Invalid type'});
+      }
     }
   }
 }

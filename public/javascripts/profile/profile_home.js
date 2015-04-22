@@ -1,7 +1,6 @@
 /* Profile Home Feed */
 var checkCount = 0;
 $(document).ready(function(){
-  home.watchForChanges();
 });
 
 var home = {
