@@ -12,6 +12,9 @@ var Message       = mongoose.model('Message');
 var Trust         = mongoose.model('Trust');
 var Group         = mongoose.model('Group');
 var ObjectId      = require('mongoose').Types.ObjectId; 
+var url = require('../lib/helpers/url');
+var request = require('request');
+var htmlparser = require('htmlparser');
 
 var shortFields = function(org) {
 return {
@@ -240,6 +243,8 @@ exports.createMessage = function(req, res){
   group = group == 'all'?null:group;
 
   var text = req.get('text');
+  var urls = url.urls(text);
+  console.log(urls); 
   if (organization &&  text) {
     var message = new Message({
       organization: organization,
@@ -247,13 +252,75 @@ exports.createMessage = function(req, res){
       text: text,
       creator: user._id
     });
-    message.save(function(err, result){
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(201).send();
-      }
-    });
+    var save = function(message){
+      message.save(function(err, result){
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(201).send();
+        }
+      });
+    };
+    if (urls) {
+      request({
+        uri: urls[0],
+        method: 'GET',
+        timeout: 10000,
+        followRedirect: true,
+        maxRedirects: 10
+      }, function(error, response, body) {
+        var handler = new htmlparser.DefaultHandler(function(err, dom){
+          if (err) console.log(err);
+          var meta = [];
+          var traverse = function(doc) {
+            _.each(doc, function(node, i, l){
+              if (node.name == 'meta') {
+                if (node.attribs.property && node.attribs.property.match('og:')) {
+                  meta.push(node.attribs);
+                } 
+                if (node.attribs.name && node.attribs.name.match('og:')) {
+                  meta.push(node.attribs);
+                } 
+              } 
+              if (node.children && node.children.length > 0){
+                traverse(node.children);
+              }
+            });
+          };
+          traverse(dom);
+          if (meta.length > 0){
+            var metaData = {image:{}};
+            _.each(meta, function(m, i, l){
+              var accessor = '';
+              if (m.property) accessor = 'property';
+              if (m.name) accessor = 'name';
+              if (m[accessor] == 'og:image'){
+                metaData.image.url = m.content;
+              } 
+              if (m[accessor] == 'og:image:width') {
+                metaData.image.width = m.content;
+              }
+              if (m[accessor] == 'og:image:height') {
+                metaData.image.height = m.content;
+              }
+              if (m[accessor] == 'og:description'){
+                metaData.description = m.content;
+              }
+              if (m[accessor] == 'og:title'){
+                metaData.title = m.content;
+              }
+            });
+            console.log(metaData);
+            message.meta = metaData;
+          }
+          save(message);
+        });
+        var parser = new htmlparser.Parser(handler);
+        parser.parseComplete(body);
+      });
+    } else {
+      save(message);
+    }
   } else {
     res.status(400).send();
   }

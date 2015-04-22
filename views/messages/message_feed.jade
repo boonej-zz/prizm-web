@@ -8,6 +8,12 @@ each message in messages
       span.creator.cursor(onclick='nav.navigate("/profiles/#{message.creator._id}")') 
         | #{message.creator.name}
       span.message
+        if message.meta.image && message.meta.image.url
+          img.image-thumb(src=message.meta.image.url)
+        if message.meta.title 
+          .title #{message.meta.title}
+        if message.meta.description
+          .description #{message.meta.description}
         | #{message.text} 
       .foot
         span.clock-icon

@@ -3,6 +3,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var time       = require('../lib/helpers/date_time');
 var _ = require('underscore');
 
+
 var messageSchema = new mongoose.Schema({
   creator: {type: ObjectId, ref: 'User', required: true},
   create_date: {type: Date, default: null, required: false, index: true},
@@ -10,7 +11,16 @@ var messageSchema = new mongoose.Schema({
   group: {type: ObjectId, index: true},
   organization: {type: ObjectId, ref: 'Organization', required: true, index: true},
   likes: {type: Array},
-  likes_count: {type: Number, default: 0}
+  likes_count: {type: Number, default: 0},
+  meta: {
+    description: {type: String},
+    title: {type: String},
+    image: {
+      url:  {type: String},
+      width:  {type: Number},
+      height: {type: Number}
+    }
+  }
 });
 
 messageSchema.pre('save', function(next){

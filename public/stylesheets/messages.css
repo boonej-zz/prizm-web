@@ -212,7 +212,7 @@ ul#messages li:last-child, ul#members li:last-child {
   clear: left;
   font-size: 16px;
   color: #8b8989;
-  width: 325px;
+  width: 75%;
 }
 
 .message .foot {
@@ -278,6 +278,18 @@ ul#messages li:last-child, ul#members li:last-child {
 
 #likesCount.clear {
   color: rgba(0, 0, 0, 0);
+}
+
+span.message .title {
+  font-weight: bold;
+}
+
+span.message .description {
+  
+}
+
+span.message img {
+  width: 100%;
 }
 
 /** NEW MESSAGE **/
@@ -411,9 +423,7 @@ button.remove {
     width: 100px;
   }
 
-  .message .message {
-    width: 305px;
-  }
+
 }
 
 @media screen and (max-width: 488px) {
@@ -477,9 +487,7 @@ button.remove {
     background-size: 15px;
   }
 
-  .message .message {
-    width: 240px;
-  }
+
 
   #messages, ul#topics, #members {
     height: 474px;
@@ -564,7 +572,6 @@ button.remove {
   }
 
   .message .message {
-    width: 170px;
     font-size: 15px;
   }
 

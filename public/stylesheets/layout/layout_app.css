@@ -134,23 +134,26 @@ body.noscroll {
 }
 
 .user-menu {
+  margin-top: 15px; 
   position: absolute; 
   margin-left: 28px;
   background: #FBFCFF;
-  width: 120px;
+  width: 123px;
   border-radius: 2px;
   display: none;
+  border: 1px solid rgba(83, 107, 180, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .user-menu:after {
   content: '';
   position: absolute;
   border-style: solid;
-  border-width: 0 12px 15px;
+  border-width: 0 12px 13px;
   border-color: #FFFFFF transparent;
   display: block;
   width: 0;
-  z-index: 100;
+  z-index: 0;
   top: -10px;
   left: 12px;
 }
@@ -159,8 +162,8 @@ body.noscroll {
   color: #656772;
   width: 100%;
   display: block;
-  height: 32px;
-  line-height: 32px;
+  height: 28px;
+  line-height: 28px;
   font-size: 14px;
   font-weight: normal;
   text-decoration: none;
@@ -176,21 +179,19 @@ body.noscroll {
 }
 
 .user-menu ul {
-  margin: 0px auto;
   width: 100%;
-  float: left;
   padding: 0px;
   text-align: center;
   font-size: 14px;
   font-weight: 100;
   z-index: 500;
-  position: relative;
+  height: 100%;
+  margin-bottom: 0;
 }
 
 .user-menu li {
   list-style: none;
-  border-bottom: 1px #e4e5ea solid;
-  padding: 6px 0px;
+  padding: 4px 0px;
 }
 
 .user-menu li:last-child {
@@ -962,8 +963,9 @@ input#personal + span {
     left: 34px;
     bottom: 15px;
   }
-  .user-menu {
+  .user-menu, .plus-menu {
     position: fixed;
+    margin: 0;
     top: 75px;
     right: 0px;
     left: 0px;
@@ -971,8 +973,17 @@ input#personal + span {
     border-radius: 0px;
   }
   
-  .user-menu:after {
+  .user-menu:after, .plus-menu:after {
     display: none;
+  }
+
+  .plus-menu ul {
+    width: 100%;
+  }
+
+  #menuItems li, .user-menu li {
+    width: 100%;
+    border-bottom: 1px solid rgba(83, 107, 180, 0.1);
   }
 
   /* Settings */
