@@ -248,7 +248,9 @@ postSchema.methods.unlikePost = function(userId, next) {
 postSchema.post('init', function(post){
   post.formattedText = post.text;
   var r = new RegExp('https:/s');
-  post.file_path = post.file_path.replace(r, 'https://s');
+  if (post.file_path){
+    post.file_path = post.file_path.replace(r, 'https://s');
+  }
   _.each(post.comments, function(comment, idx, list){
     comment.formattedText = comment.text;
   });

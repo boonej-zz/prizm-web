@@ -1,5 +1,5 @@
 each post in posts
-  li.post(id='#{post.id}') 
+  li.post(id='#{post.id}' data-date='#{post.create_date.toISOString()}') 
             .post-header
               .cursor.profile-image(
                 style="background-image:url(#{post.creator.profile_photo_url?'https://'+post.creator.profile_photo_url.substr(7):'/images/profile/profile_default_avatar.png'})"

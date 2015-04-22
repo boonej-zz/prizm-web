@@ -1,5 +1,5 @@
 each post in posts
-  .post(id='#{post.id}')
+  .post(id='#{post.id}' data-date='#{post.create_date}')
     .post-image(onclick='profile.showModal(event)')
       img.lazy(data-original='https://#{post.file_path.substr(7).replace(".jpg", "_2.jpg")}'
         ) 

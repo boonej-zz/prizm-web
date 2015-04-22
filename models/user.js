@@ -182,12 +182,12 @@ userSchema.methods.userBelongsToOrganization = function(org_id) {
 userSchema.methods.fetchHomeFeedCriteria = function(next){
   var following = _.pluck(this.following, '_id');
   var Trust = mongoose.model('Trust');
-  var user = this;
+  var $user = this;
   Trust.find({
     status: 'accepted',
     $or: [
-      {to: user._id},
-      {from: user._id}
+      {to: $user._id},
+      {from: $user._id}
     ]
   }, function(err, trusts){
     var trustArray = [];
@@ -198,7 +198,7 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
     else {
       if (_.has(trusts, 'length')){
         _.each(trusts, function(trust, idx, list){
-          if (String(trust.to) == String(user._id)){
+          if (String(trust.to) == String($user._id)){
             trustArray.push(trust.from);
           } else {
             trustArray.push(trust.to);
@@ -209,7 +209,7 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
         $or: [
           {scope: 'public', status: 'active', creator: {$in: following}},
           {scope: {$in: ['trust', 'public']}, status: 'active', creator: {$in: trustArray}},
-          {creator: this._id, status: 'active'}
+          {creator: $user._id, status: 'active'}
         ],
         is_flagged: false
       };

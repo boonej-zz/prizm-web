@@ -564,7 +564,7 @@ exports.displayHomeFeed = function(req, res) {
   }
   else {
     var id = req.user.id;
-    console.log('Fetching posts');
+    var action = req.get('action');
     var lastPost = req.get('lastPost');
     User.findOne({_id: ObjectId(id)}, function(err, user) {
       if (err) {
@@ -572,11 +572,34 @@ exports.displayHomeFeed = function(req, res) {
       }
       if (user) {
         var done = 0;
+        if (action) {
+          var createDate = req.get('create_date');
+          user.fetchHomeFeedCriteria(function(err, criteria){
+            criteria.create_date = {'$gt': createDate};
+            console.log(criteria);
+            Post.find(criteria, {_id: 1})
+            .exec(function(err, posts){
+              if (err) {
+                console.log(err);
+                res.status(500).send();
+                return;
+              }
+              var count = posts.length;
+              console.log(posts);
+              var data = {count: count};
+              console.log(data);
+              res.status(200).send(data);
+              return;
+            });
+
+            });
+       
+        } else {
+
         mixpanel.track('Home Feed Viewed', user.mixpanelProperties());
         var fetch = function(req, res, latest){
           fetchHomeFeed(user, {latest: latest}, function(err, posts) {
           posts = _time.addTimeSinceFieldToObjects(posts);
-          console.log(posts[1]);
           if (posts && posts.length > 0) {
           _.each(posts, function(post, idx, list){
             User.resolvePostTags(post, function(err, users){
@@ -617,6 +640,7 @@ exports.displayHomeFeed = function(req, res) {
             }); 
           };
         });};
+       
         if (lastPost) {
           Post.findOne({_id: lastPost}, function(err, post){
             if (post){
@@ -628,6 +652,7 @@ exports.displayHomeFeed = function(req, res) {
         } else {
           fetch(req, res, false);
         }
+      }
       }
       else {
         res.status(400).send({error: "User can not be found"});
