@@ -97,6 +97,10 @@ ul#topics li, ul#messages li, ul#members li {
   font-weight: bold; 
   border-bottom: 1px solid #c5c8cc;
   cursor: pointer;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #topics .topic.active {
