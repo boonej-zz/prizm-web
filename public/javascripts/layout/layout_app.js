@@ -77,6 +77,7 @@ $(document).ready(function(){
     $('.btn-create-post').removeClass('disabled');
   });
   poll.posts();
+  poll.unreadActivities();
 });
 
 var poll = {
@@ -155,7 +156,6 @@ var poll = {
     });
   },
   messages: function(){
-    console.log('polling messages');
     $.ajax({
       type: 'GET',
       contentType: 'application/json',
@@ -186,6 +186,21 @@ var poll = {
           $('#activityBar').removeClass('visible');
           setTimeout('poll.posts()', 7500);
         }, 4000);
+    });
+  },
+  unreadActivities: function(){
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      url: '/profile/activity',
+      headers: {action: 'unread'},
+      cache: false
+    })
+    .done(function(data){
+      if (data.count && data.count > 0){
+        $('.settings-menu ul:first-child li:nth-child(2)').addClass('new');
+      }
+      setTimeout('poll.unreadActivities()', 20000);
     });
   } 
 };

@@ -556,6 +556,9 @@ var fetchHomeFeed = function(user, params, next){
 
 exports.displayHomeFeed = function(req, res) {
   if (!req.user) {
+    if (req.get('action')){
+      res.status(400).send();
+    }
     res.render('site/index', {
       title: 'Prizm App',
       selected:'home',
@@ -1345,61 +1348,82 @@ var uploadProfilePhoto = function(req, res) {
 exports.displayActivityFeed = function(req, res) {
   var userId = req.user._id;
   var action = req.get('action');
+  console.log(action);
   if (action){
     console.log('fetching actions');
-    var create_date = req.get('create_date');
-    Activity.findOne({to: userId, create_date: {'$gt': create_date}}, {action: 1, from:1, post_id:1, comment_id: 1})
-    .populate('from', 'name')
-    .sort({create_date: -1})
-    .exec(function(err, a){
-      if (err) {
-        res.status(500).send();
-      } else {
-        var string = false;
-        if (a) {
-          if (a.from && a.from.name){
-            string = a.from.name;
-          } else {
-            string = '';
+    if (action == 'newer') {
+      var create_date = req.get('create_date');
+      Activity.findOne({to: userId, create_date: {'$gt': create_date}}, {action: 1, from:1, post_id:1, comment_id: 1})
+      .populate('from', 'name')
+      .sort({create_date: -1})
+      .exec(function(err, a){
+        if (err) {
+          res.status(500).send();
+        } else {
+          var string = false;
+          if (a) {
+            if (a.from && a.from.name){
+              string = a.from.name;
+            } else {
+              string = '';
+            }
+            switch(a.action){
+              case 'comment':
+                string += ' commented on your post.';
+                break;
+              case 'tag':
+                string += ' tagged you in a ';
+                break;
+              case 'like':
+                string += ' liked your';
+                break;
+              case 'trust_accepted':
+                string += ' accepted your trust request.';
+                break;
+              case 'trust_request':
+                string += ' has sent you a trust invite.';
+                break;
+              case 'group_approved':
+                string += ' has approved your membership.';
+                break;
+              case 'post':
+                string += ' created a post.';
+                break;
+              default: 
+                break;
+            }
+            if (a.action=='like' && a.post_id){
+              string += ' post.';
+            }
+            if (a.action=='like' && a.comment_id){
+              string += ' comment.';
+            }
+            if (a.insight_id) {
+              string += ' sent you an insight.';
+            }
           }
-          switch(a.action){
-            case 'comment':
-              string += ' commented on your post.';
-              break;
-            case 'tag':
-              string += ' tagged you in a ';
-              break;
-            case 'like':
-              string += ' liked your';
-              break;
-            case 'trust_accepted':
-              string += ' accepted your trust request.';
-              break;
-            case 'trust_request':
-              string += ' has sent you a trust invite.';
-              break;
-            case 'group_approved':
-              string += ' has approved your membership.';
-              break;
-            case 'post':
-              string += ' created a post.';
-              break;
-            default: 
-              break;
-          }
-          if (a.action=='like' && a.post_id){
-            string += ' post.';
-          }
-          if (a.action=='like' && a.comment_id){
-            string += ' comment.';
-          }
-          if (a.insight_id) {
-            string += ' sent you an insight.';
-          }
+          res.status(200).send(string);
         }
-        res.status(200).send(string);
-      }
-    });
+      });
+    } else {
+      console.log('checking count');
+      console.log(userId);
+      var total = 0;
+      Activity.find({to: userId, has_been_viewed: false})
+      .count(function(err, c){
+        if (err) console.log(err);
+        console.log(c + ' new activity requests');
+        if (c) total += c;
+        Trust.find({to: userId, status: 'pending'})
+        .count(function(err, c){
+          if (err) console.log(err);
+          console.log(c + ' new trust requests');
+          if (c) total += c;
+          console.log({count: total});
+          res.status(200).send({count: total});
+        });
+      });
+    }
 
   } else{
     function getNotifications(next) {
@@ -1409,10 +1433,12 @@ exports.displayActivityFeed = function(req, res) {
         .where({action: {$ne: 'trust_accepted'}})
         .sort({create_date: -1})
         .exec(function(err, notifications) {
-          if (err) next(err)
+          if (err) next(err);
           if (notifications) {
             var postArray = [];
             var postMap = [];
+            var ids = _.pluck(notifications, '_id');
+            Activity.update({_id: {$in: ids}}, {$set: {has_been_viewed: true}});
             _.each(notifications, function(note, idx, list){
               if (note.post_id) {
                 postArray.push(note.post_id);
