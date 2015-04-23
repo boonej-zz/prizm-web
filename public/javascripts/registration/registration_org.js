@@ -148,6 +148,7 @@ var org ={
     var code = orgInfo.data('code');
     var namespace = orgInfo.data('namespace');
     var welcomeImage = orgInfo.data('welcomeImage');
+    var theme = orgInfo.data('theme');
 
     $.ajax({
       type: 'POST',
@@ -155,7 +156,8 @@ var org ={
       headers: {
         'code': code,
         'namespace': namespace,
-        'welcomeImage' : welcomeImage
+        'welcomeImage' : welcomeImage,
+        theme: theme
       },
       success: function(response) {
         org.nextSection();

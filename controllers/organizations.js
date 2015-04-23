@@ -262,6 +262,10 @@ exports.updateOrg = function (req, res) {
           theme: ObjectId(theme),
           stripe_id: stripeId
         });
+        owner.theme = ObjectId(theme);
+        owner.save(function(err, res){
+          if (err) console.log(err);
+        });
         org.save(function(err, org) {
           if (err) {
             res.status(500).send({error: err});
