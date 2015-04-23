@@ -582,14 +582,11 @@ exports.displayHomeFeed = function(req, res) {
               if (err) {
                 console.log(err);
                 res.status(500).send();
-                return;
               }
               var count = posts.length;
               console.log(posts);
               var data = {count: count};
-              console.log(data);
               res.status(200).send(data);
-              return;
             });
 
             });

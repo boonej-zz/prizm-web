@@ -7,9 +7,10 @@ if (window.location.hostname == 'www.prizmapp.com'){
 
 var lastPostDate = new Date().toISOString();
 var lastActivityDate = new Date().toISOString();
+var lastMessageDate = new Date().toISOString();
 var messagePollCount = 0;
 var newPostCount = 0;
-
+var newMessageCount = 0;
 
 $(document).ready(function(){
   $.ajax({
@@ -75,12 +76,11 @@ $(document).ready(function(){
   $('.btn-category').click(function(){
     $('.btn-create-post').removeClass('disabled');
   });
-  poll.messages();
+  poll.posts();
 });
 
 var poll = {
-  messages: function(){
-    console.log(messagePollCount);
+  posts: function(){
     if (messagePollCount > 0) {
       console.log('polling');
       $.ajax({
@@ -90,6 +90,12 @@ var poll = {
         headers: {
           action: 'newer',
           create_date: lastPostDate
+        },
+        success: function(){
+          console.log('success');
+        },
+        error: function(){
+          console.log('error');
         }
       })
       .done(function(data){
@@ -112,11 +118,12 @@ var poll = {
            
           }, 4000);
         }
-        setTimeout('poll.activities()', 15000);
+        console.log('moving to activities');
+        setTimeout('poll.activities()', 7500);
       });
     } else {
       messagePollCount++;
-      setTimeout('poll.messages()', 15000);
+      setTimeout('poll.posts()', 7500);
     }
   },
   activities: function(){
@@ -140,10 +147,45 @@ var poll = {
        
       }
       setTimeout(function(){
+        console.log('advancing to messages');
           $('#activityBar').removeClass('visible');
-          setTimeout('poll.messages()', 15000);
+          setTimeout('poll.messages()', 7500);
         }, 4000);
       lastActivityDate = new Date().toISOString();
+    });
+  },
+  messages: function(){
+    console.log('polling messages');
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      url: '/messages',
+      headers: {
+        action: 'newer',
+        create_date: lastMessageDate
+      },
+      cache: false
+    })
+    .done(function(data){
+      lastMessageDate = new Date().toISOString();
+      if (data.count && data.count > 0){
+        newMessageCount += data.count;
+        var string = String(newMessageCount) + ' new message';
+        if (newMessageCount == 1) {
+          string += '.';
+        } else {
+          string += 's.';
+        }
+        $('#activityBar span').text(string);
+        $('#activityBar').click(function(){
+        });
+        $('#activityBar').addClass('visible');
+       
+      }
+      setTimeout(function(){
+          $('#activityBar').removeClass('visible');
+          setTimeout('poll.posts()', 7500);
+        }, 4000);
     });
   } 
 };

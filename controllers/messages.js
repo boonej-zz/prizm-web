@@ -15,6 +15,7 @@ var ObjectId      = require('mongoose').Types.ObjectId;
 var url = require('../lib/helpers/url');
 var request = require('request');
 var htmlparser = require('htmlparser');
+var utils = require('util');
 
 var shortFields = function(org) {
 return {
@@ -99,56 +100,86 @@ exports.displayUserMessagesFeed = function(req, res){
 
 exports.displayOwnerMessagesFeed = function(req, res){
   var user = req.user;
-  var options = {
-    title: 'Message',
-    bodyId: 'messageList',
-    topics: [],
-    auth: true,
-    currentUser: user
-  };
-  if (user.type == 'institution_verified') {
-    Organization.findOne({owner: user._id})
-    .populate({path: 'owner'})
-    .populate({path: 'groups', model: 'Group'})
-    .exec(function(err, organization){
-      if (organization) {
-        User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}})
-        .select(shortFields(organization))
-        .populate({path: 'org_status.groups', model: 'Group'})
-        .exec(function(err, users){
-          options.count = users.length;
-          options.members = users;
-          options.topics = organization.groups || [];
-          options.organization = organization;
-          Message.fetchMessages(
-            {
-              organization: organization._id,
-              group: null 
-            },
-            function(err, messages){
-              if (err) console.log(err);
-              options.messages = messages?messages.reverse():[];
-              _.each(options.messages, function(m, i, l){
-                if (_.find(m.likes, function(u){
-                  return String(u) == String(user._id);
-                })) {
-                  m.liked = true;
-                } else {
-                  m.liked = false;
-                }
-              });
-              console.log(options.count);
-              res.render('messages/messages', options);
-            }
-           );
-        });
-       
-      } else {
-        res.redirect('/');
-      }      
-    });
+  var action = req.get('action');
+  var create_date = req.get('create_date');
+  if (action){
+    if (user.type == 'user'){
+      var criteria1 = {organization: {$in: []}, group:null};
+      var criteria2 = {organization: {$in: []}, group:{$in: []}};
+      _.each(user.org_status, function(o, i, l){
+        if (o.status == 'active'){
+          criteria1.organization.$in.push(o.organization._id);
+          if (o.groups && o.groups.length > 0){
+            criteria2.organization.$in.push(o.organization._id);
+            _.each(o.groups, function(g, i, l){
+              criteria2.group.$in.push(g._id);
+            });
+          }
+        }
+      });
+      criteria = {$or:[criteria1, criteria2], create_date: {$gt: create_date}};
+      console.log('%j', criteria);
+      Message.find(criteria).count(function(err, c){
+        if (err) res.status(500).send();
+        else {
+          console.log(c + ' messages');
+          res.status(200).send({count: c})
+        };
+      });
+
+    }
   } else {
-    res.redirect('/');
+    var options = {
+      title: 'Message',
+      bodyId: 'messageList',
+      topics: [],
+      auth: true,
+      currentUser: user
+    };
+    if (user.type == 'institution_verified') {
+      Organization.findOne({owner: user._id})
+      .populate({path: 'owner'})
+      .populate({path: 'groups', model: 'Group'})
+      .exec(function(err, organization){
+        if (organization) {
+          User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}})
+          .select(shortFields(organization))
+          .populate({path: 'org_status.groups', model: 'Group'})
+          .exec(function(err, users){
+            options.count = users.length;
+            options.members = users;
+            options.topics = organization.groups || [];
+            options.organization = organization;
+            Message.fetchMessages(
+              {
+                organization: organization._id,
+                group: null 
+              },
+              function(err, messages){
+                if (err) console.log(err);
+                options.messages = messages?messages.reverse():[];
+                _.each(options.messages, function(m, i, l){
+                  if (_.find(m.likes, function(u){
+                    return String(u) == String(user._id);
+                  })) {
+                    m.liked = true;
+                  } else {
+                    m.liked = false;
+                  }
+                });
+                console.log(options.count);
+                res.render('messages/messages', options);
+              }
+             );
+          });
+         
+        } else {
+          res.redirect('/');
+        }      
+      });
+    } else {
+      res.redirect('/');
+    }
   }
 };
 
