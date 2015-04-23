@@ -353,6 +353,17 @@ span.name {
   font-weight: 700;
 }
 
+.settings-menu li.new div::before {
+  content: '';
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: #fe7328;
+  margin-left: -22px;
+  margin-top: 7px;
+}
+
 .settings-menu li.item {
   color: #b2b6bd;
   cursor: pointer;

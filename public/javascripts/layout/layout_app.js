@@ -65,10 +65,8 @@ $(document).ready(function(){
       cache: false,
       data: post,
       success: function(response) {
-        alert('success');
       },
       error: function(jqXHR) {
-        alert('failure');
       }
     });
     return false;
@@ -150,7 +148,6 @@ var poll = {
        
       }
       setTimeout(function(){
-        console.log('advancing to messages');
           $('#activityBar').removeClass('visible');
           setTimeout('poll.messages()', 7500);
         }, 4000);
@@ -201,6 +198,8 @@ var poll = {
     .done(function(data){
       if (data.count && data.count > 0){
         $('.settings-menu ul:first-child li:nth-child(2)').addClass('new');
+      } else {
+        $('.settings-menu ul:first-child li:nth-child(2)').removeClass('new');
       }
       setTimeout('poll.unreadActivities()', 20000);
     });

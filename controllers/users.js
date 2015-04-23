@@ -1358,8 +1358,10 @@ exports.displayActivityFeed = function(req, res) {
       .sort({create_date: -1})
       .exec(function(err, a){
         if (err) {
+          console.log(err);
           res.status(500).send();
         } else {
+          console.log(a);
           var string = false;
           if (a) {
             if (a.from && a.from.name){
@@ -1437,8 +1439,13 @@ exports.displayActivityFeed = function(req, res) {
           if (notifications) {
             var postArray = [];
             var postMap = [];
-            var ids = _.pluck(notifications, '_id');
-            Activity.update({_id: {$in: ids}}, {$set: {has_been_viewed: true}});
+            var unread = _.filter(notifications, function(note){ return note.has_been_viewed == false});
+            var ids = _.pluck(unread, '_id');
+            console.log(ids.length + ' records to be updated');
+            Activity.update({_id: {$in: ids}}, {$set: {has_been_viewed: true}}, {multi: true}, function(err, result){
+              if (err) console.log(err);
+              else console.log(result);
+            });
             _.each(notifications, function(note, idx, list){
               if (note.post_id) {
                 postArray.push(note.post_id);
