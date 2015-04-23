@@ -76,8 +76,10 @@ $(document).ready(function(){
   $('.btn-category').click(function(){
     $('.btn-create-post').removeClass('disabled');
   });
-  poll.posts();
-  poll.unreadActivities();
+  if (window.location.hostname == 'www.prizmapp.com' || window.location.hostname == 'prizmapp.dev') {
+    poll.posts();
+    poll.unreadActivities();
+  }
 });
 
 var poll = {
