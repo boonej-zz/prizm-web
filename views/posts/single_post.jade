@@ -20,6 +20,7 @@
           | #{post.creator.name}
         .clock-icon
           | #{post.time_since}
+        .category-icon(class=post.category)
       .post-comments
         .back-button(onclick='profile.dismissModal(event)')
         p.comments-title

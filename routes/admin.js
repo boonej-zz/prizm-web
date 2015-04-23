@@ -67,7 +67,9 @@ router.get('/insights', utils.auth, function (req, res) {
 });
 
 router.get('/insights/archive', utils.auth, function(req, res){
-  Insight.find({}, function(err, insights){
+  Insight.find({})
+  .sort({create_date: -1})
+  .exec(function(err, insights){
     insights = insights || [];
     var options = {
       insights: insights,

@@ -311,9 +311,66 @@ div.post {
   right: 5px;
 }
 
+#postModal .category-icon {
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 31px;
+  height: 31px;
+  float: right;
+  margin-top: -28px;
+  margin-right: 10px;
+}
+
+#postModal .passion {
+  background-image: url('/images/posts/passions_icon.png');
+  background-size: 30px 26px;
+} 
+
+#postModal .aspiration {
+  background-image: url('/images/posts/aspirations_icon.png');
+  background-size: 31px 23px;
+}
+
+#postModal .experience {
+  background-image: url('/images/posts/experiences_icon.png');
+  background-size: 31px 31px;
+}
+
+#postModal .acheivement {
+  background-image: url('/images/posts/acheivements_icon.png');
+  background-size: 30px 31px;
+}
+
+#postModal .inspiration {
+  background-image: url('/images/posts/inspirations_icon.png');
+  background-size: 17px 29px;
+}
+
+#postModal .personal {
+  background-image: url('/images/post/personal_icon.png');
+  background-size: 31px 30px;
+}
+
 #postModal .post-image img, #newPostModal .post-image img {
   width: 100%;
   height: 100%;
+}
+
+#postModal .post-button {
+  color: #b7b7d2;
+  background-color: #ededf1;
+  border-radius: 10px;
+  width: 66px;
+  height: 31px;
+  margin-right: 29px;
+  margin-bottom: 34px;
+  line-height: 31px;
+  vertical-align: middle;
+}
+
+#postModal .post-button:hover {
+  color: #b7b7d2;
+  background-color: #989999;
 }
 
 .next-post-right {
