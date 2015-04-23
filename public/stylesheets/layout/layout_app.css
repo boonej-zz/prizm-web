@@ -172,6 +172,7 @@ body.noscroll {
   display: none;
   border: 1px solid rgba(83, 107, 180, 0.1);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  padding: 0;
 }
 
 .user-menu:after {
@@ -196,6 +197,7 @@ body.noscroll {
   font-size: 14px;
   font-weight: normal;
   text-decoration: none;
+  padding-left: 15px;
 }
 
 .user-menu a:hover {
@@ -220,7 +222,7 @@ body.noscroll {
 
 .user-menu li {
   list-style: none;
-  padding: 4px 0px;
+  padding: 4px 0;
 }
 
 .user-menu li:last-child {
