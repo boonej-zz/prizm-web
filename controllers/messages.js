@@ -11,6 +11,8 @@ var Organization  = mongoose.model('Organization');
 var Message       = mongoose.model('Message');
 var Trust         = mongoose.model('Trust');
 var Group         = mongoose.model('Group');
+var Activity      = mongoose.model('Activity');
+var Push            = require('../classes/push_notification');
 var ObjectId      = require('mongoose').Types.ObjectId; 
 var url = require('../lib/helpers/url');
 var request = require('request');
@@ -451,17 +453,33 @@ exports.addNewGroup = function(req, res){
             });
             u.save(function(err, u){
               if (err) console.log(err);
+              var activity = new Activity({
+                from: user._id,
+                to: u._id,
+                action: 'group_added',
+                group_id: group._id
+              });
+              activity.save(function (err, result){
+                if (err) {
+                  console.log(err);
+                }
+                else {
+                  new Push('activity', activity, function(result) {
+                  console.log(JSON.stringify(result));
+                });
+                }
+              });
+
+              });
             });
-          });
-        }
         res.send(200);
-      });
     } else {
       console.log(err);
       res.send(500);
     }  
   });
-
+  }
+  });
 }
 
 exports.modifyGroup = function(req, res){

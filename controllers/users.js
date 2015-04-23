@@ -259,7 +259,6 @@ exports.updateUser = function(req, res) {
     if (userType == 'null') {
       userType = null;
     }
-    console.log(organization);
 
     User.findOne({_id: userId}, function(err, user) {
       if (err) {
@@ -282,12 +281,33 @@ exports.updateUser = function(req, res) {
             console.log(err);
           }
         });
+        if (userType == 'leader') {
+          Organization.findOne({_id: organization}, function(err, org){
+            if (org){
+              var activity = new Activity({
+                from: org.owner,
+                to: user._id,
+                action: 'leader'
+              });
+              console.log(activity);
+              activity.save(function(err, res){
+                if (err) console.log(err);
+                else {
+                new Push('activity', res, function(result) {
+                  console.log(result);
+                });
+                }
+              });
+            }
+          });
+        }
         if (userType == 'luminary') {
           addLuminaryToTrust(function(err, success) {
             if (err) {
               res.status(500).send({error: err});
             }
             else {
+             
               res.status(200).send({
                 message: 'User was made luminary and added to trust'
               });
@@ -1387,6 +1407,12 @@ exports.displayActivityFeed = function(req, res) {
                 break;
               case 'group_approved':
                 string += ' has approved your membership.';
+                break;
+              case 'leader':
+                string += ' made you a leader.';
+                break;
+              case 'group_added':
+                string += ' added you to a group.';
                 break;
               case 'post':
                 string += ' created a post.';

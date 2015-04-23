@@ -35,6 +35,10 @@
                 | Reviewing membership.
               if notification.action == 'tag'
                 | Tagged you in a post.
+              if notification.action == 'leader'
+                | Made you a leader.
+              if notification.action == 'group_added'
+                | Added you to a group.
           td
             .activity-time
               | #{notification.time_since} ago
