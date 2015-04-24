@@ -316,9 +316,9 @@ div.post {
   background-repeat: no-repeat;
   width: 31px;
   height: 31px;
-  float: right;
-  margin-top: -28px;
-  margin-right: 10px;
+  position: absolute;
+  right: 22px;
+  top: 27px;
 }
 
 #postModal .passion {
@@ -347,7 +347,7 @@ div.post {
 }
 
 #postModal .personal {
-  background-image: url('/images/post/personal_icon.png');
+  background-image: url('/images/posts/personal_icon.png');
   background-size: 31px 30px;
 }
 
