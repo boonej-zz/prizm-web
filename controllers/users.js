@@ -1482,7 +1482,9 @@ exports.displayActivityFeed = function(req, res) {
                       var insight = _.find(insights, function(t){
                         return String(t._id) == i.id;
                       });
-                      notifications[i.index].photo_url = insight.file_path;
+                      if (insight){
+                        notifications[i.index].photo_url = insight.file_path;
+                      }
                     });
                   }
                   next(null, notifications);
