@@ -24,4 +24,11 @@ insightSchema.pre('save', function(next){
   next();
 });
 
+insightSchema.pre('init', function(insight){
+  var r = new Regexp('https:/s');
+  if (insight.file_path) {
+    insight.file_path = insight.file_path.replace(r, 'https://s');
+  }
+});
+
 mongoose.model('Insight', insightSchema);
