@@ -122,15 +122,15 @@ var profile = {
 
   nextPost: function(e, direction) {
     var target = e.target;
-    var currentPostId = $(target).parent().attr('id');
-    var profilePostElement = $('#' + currentPostId).parent();
+    var currentPostId = $(target).parents('.container').attr('id');
+    var profilePostElement = $('#' + currentPostId);
     var nextPostId;
     var nextPost;
     if (direction == 'left') {
-      nextPostId = profilePostElement.prev().children('.post').attr('id');
+      nextPostId = $('#' + currentPostId).prev().attr('id');
     }
     if (direction == 'right') {
-      nextPostId = profilePostElement.next().children('.post').attr('id');
+      nextPostId =  $('#' + currentPostId).next().attr('id');
     }
     var request = $.ajax({
       url: '/posts/' + nextPostId,
