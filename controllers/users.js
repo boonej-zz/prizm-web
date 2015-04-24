@@ -1449,6 +1449,8 @@ exports.displayActivityFeed = function(req, res) {
           if (notifications) {
             var postArray = [];
             var postMap = [];
+            var insightArray = [];
+            var insightMap = [];
             var unread = _.filter(notifications, function(note){ return note.has_been_viewed == false});
             var ids = _.pluck(unread, '_id');
             Activity.update({_id: {$in: ids}}, {$set: {has_been_viewed: true}}, {multi: true}, function(err, result){
@@ -1459,8 +1461,12 @@ exports.displayActivityFeed = function(req, res) {
                 postArray.push(note.post_id);
                 postMap.push({id: String(note.post_id), index: idx});
               }
+              if (note.insight_id) {
+                insightArray.push(note.insight_id);
+                insightMap.push({id: String(note.insight_id), index: idx});
+              }
             });
-            if (postArray.length > 0) {
+            if (postArray.length > 0 || insightArray.length > 0) {
               Post.find({_id: {$in: postArray}}, function(err, posts){
                 if (posts) {
                   _.each(postMap, function(p, idx, list){
@@ -1470,8 +1476,18 @@ exports.displayActivityFeed = function(req, res) {
                     notifications[p.index].photo_url = post.file_path;
                   });
                 }
-                next(null, notifications);
-              });
+                Insight.find({_id: {$in: insightArray}}, function (err, insights){
+                  if (insights) {
+                    _.each(insightMap, function(i, idx, list){
+                      var insight = _.find(insights, function(t){
+                        return String(t._id) == i.id;
+                      });
+                      notifications[i.index].photo_url = insight.file_path;
+                    });
+                  }
+                  next(null, notifications);
+                });
+                });
             } else {
               next(null, notifications);
             }
@@ -1512,7 +1528,7 @@ exports.displayActivityFeed = function(req, res) {
     function resolveObjectIds(activities) {
 
       _.each(activities, function(activity) {
-
+        activity = activity.toObject();
         switch(activity.action) {
           case 'insight':
             Insight.findOne({_id: activity.insight_id}, function(err, insight) {
@@ -1533,6 +1549,7 @@ exports.displayActivityFeed = function(req, res) {
             activity.photo_url = null;
         }
       });
+     
       return activities;
     }
 
@@ -1567,6 +1584,7 @@ exports.displayActivityFeed = function(req, res) {
           res.status(500).send({error: err});
         }
         else {
+          resolveObjectIds
           notifications = resolveObjectIds(notifications);
           notifications = _time.addTimeSinceFieldToObjects(notifications);
           res.render('profile/profile_activity', {
