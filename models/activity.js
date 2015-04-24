@@ -15,7 +15,7 @@ var activitySchema = new mongoose.Schema({
 }, { versionKey: false });
 
 activitySchema.pre('save', function(next) {
-  this.create_date = Date.now();
+  this.create_date = new Date().toISOString();
   next();
 });
 

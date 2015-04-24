@@ -139,8 +139,8 @@ var poll = {
       cache: false
     })
     .done(function(data){
-      if (data){
-        $('#activityBar span').text(data);
+      if (data && data.alert){
+        $('#activityBar span').text(data.alert);
         $('#activityBar').click(function(){
           window.location = '/profile/activity';
         });

@@ -93,7 +93,6 @@ exports.getUserProps = function(req, res){
 exports.shortPasswordReset = function(req, res){
   var email = req.body.email || false;
   var password = req.body.password || false;
-  console.log(email + ':' + password);
   User.findOne({email: email}, function(err, user){
     if (err) {
       console.log(err);
@@ -168,7 +167,6 @@ exports.institutionApproval = function(req, res){
                }   
        }, function(err, response) {
          if (err) {
-           console.log(response);
             res.render('error', err);
          }
         res.render('approve_deny');
@@ -203,7 +201,6 @@ exports.updateUser = function(req, res) {
           }
           else {
             new Push('activity', activity, function(result) {
-              console.log(JSON.stringify(result));
             });
           }
         });
@@ -224,11 +221,9 @@ exports.updateUser = function(req, res) {
           var theme;
           _.each(user.org_status, function(item, idx, list){
             if (String(item.organization._id) == String(orgId)) {
-              console.log(item.organization);
               update.theme = item.organization.theme;
             }
           });
-          console.log(update);
           User.findOneAndUpdate({
             _id: user.id,
             org_status: {$elemMatch: { organization: orgId}}
@@ -289,7 +284,6 @@ exports.updateUser = function(req, res) {
                 to: user._id,
                 action: 'leader'
               });
-              console.log(activity);
               activity.save(function(err, res){
                 if (err) console.log(err);
                 else {
@@ -376,7 +370,6 @@ function getTrustedLuminariesForUserId(userId, next) {
       _.each(trusts, function(trust, index, list) {
         trustedUserIds.push(trust.to);
       });
-      console.log("These are the trusted users: " + trustedUserIds);
       User
       .find({_id: { $in: trustedUserIds}})
       .where('subtype').equals('luminary')
@@ -599,7 +592,6 @@ exports.displayHomeFeed = function(req, res) {
           var createDate = req.get('create_date');
           user.fetchHomeFeedCriteria(function(err, criteria){
             criteria.create_date = {'$gt': createDate};
-            console.log(criteria);
             Post.find(criteria, {_id: 1})
             .exec(function(err, posts){
               if (err) {
@@ -607,7 +599,6 @@ exports.displayHomeFeed = function(req, res) {
                 res.status(500).send();
               }
               var count = posts.length;
-              console.log(posts);
               var data = {count: count};
               res.status(200).send(data);
             });
@@ -1120,10 +1111,8 @@ exports.displayRegistration = function(req, res) {
 
 exports.registerNewUser = function(req, res) {
   var dataType = req.get('dataType');
-  console.log("dataType: " + dataType);
   if (dataType == 'user') {
     var userType = req.body.userType;
-    console.log(JSON.stringify(req.body));
     if (!userType) {
       res.status(400).send('User type undefined');
     }
@@ -1150,7 +1139,6 @@ exports.registerNewUser = function(req, res) {
 // Registration Methods
 
 var validateRegistrationRequest = function(req, res,  next) {
-  console.log("Validating request...")
   console.log(JSON.stringify(req.body));
   var userEmail = req.body.email;
   var userCode = req.body.programCode;
@@ -1236,7 +1224,6 @@ var registerIndividual = function(req, res) {
       }
     }
     if (newUser.hashPassword()) {
-      console.log('saving user');
       newUser.save(function(err, user) {
         if (err) {
           res.status(500).send({error: err});
@@ -1294,7 +1281,6 @@ var registerPartner = function(req, res) {
 };
 
 var updateInterests = function(req, res) {
-  console.log('iterating in interests');
   var interestsArray = req.body.interests;
   var userId = req.body.userId;
   Interest.find({_id: {$in: interestsArray}}, function(err, interests) {
@@ -1374,20 +1360,17 @@ var uploadProfilePhoto = function(req, res) {
 exports.displayActivityFeed = function(req, res) {
   var userId = req.user._id;
   var action = req.get('action');
-  console.log(action);
   if (action){
-    console.log('fetching actions');
     if (action == 'newer') {
       var create_date = req.get('create_date');
-      Activity.findOne({to: userId, create_date: {'$gt': create_date}}, {action: 1, from:1, post_id:1, comment_id: 1})
+      var criteria = {to: userId, create_date: {'$gt': create_date}};
+      Activity.findOne(criteria, {action: 1, from:1, post_id:1, comment_id: 1})
       .populate('from', 'name')
-      .sort({create_date: -1})
       .exec(function(err, a){
         if (err) {
           console.log(err);
           res.status(500).send();
         } else {
-          console.log(a);
           var string = false;
           if (a) {
             if (a.from && a.from.name){
@@ -1436,24 +1419,19 @@ exports.displayActivityFeed = function(req, res) {
               string += ' sent you an insight.';
             }
           }
-          res.status(200).send(string);
+          res.status(200).send({alert: string});
         }
       });
     } else {
-      console.log('checking count');
-      console.log(userId);
       var total = 0;
       Activity.find({to: userId, has_been_viewed: false})
       .count(function(err, c){
         if (err) console.log(err);
-        console.log(c + ' new activity requests');
         if (c) total += c;
         Trust.find({to: userId, status: 'pending'})
         .count(function(err, c){
           if (err) console.log(err);
-          console.log(c + ' new trust requests');
           if (c) total += c;
-          console.log({count: total});
           res.status(200).send({count: total});
         });
       });
@@ -1473,10 +1451,8 @@ exports.displayActivityFeed = function(req, res) {
             var postMap = [];
             var unread = _.filter(notifications, function(note){ return note.has_been_viewed == false});
             var ids = _.pluck(unread, '_id');
-            console.log(ids.length + ' records to be updated');
             Activity.update({_id: {$in: ids}}, {$set: {has_been_viewed: true}}, {multi: true}, function(err, result){
               if (err) console.log(err);
-              else console.log(result);
             });
             _.each(notifications, function(note, idx, list){
               if (note.post_id) {
@@ -1608,7 +1584,6 @@ exports.displayActivityFeed = function(req, res) {
       var activity = req.get('activity');
       var content;
 
-      console.log(activity);
       if (String(activity) == 'trusts') {
         getRequests(function(err, requests) {
           if (err) {
@@ -1690,12 +1665,10 @@ exports.restrictUser = function(req, res) {
             }
           });
         } else {
-          console.log('no user');
           res.status(500).send(err);
         }
       });
     } else {
-      console.log('bad');
       res.status(500).send(err);
     }
   });
@@ -1717,12 +1690,10 @@ exports.unrestrictUser = function(req, res){
             }
           });
         } else {
-          console.log('no user');
           res.status(500).send(err);
         }
       });
     } else {
-      console.log('bad');
       res.status(500).send(err);
     }
   });
@@ -1811,7 +1782,6 @@ exports.archiveInsight = function(req, res){
     {insight: insightId, target: uid},
     {liked: true, disliked: false},
     function(err, it){
-      console.log('in update');
       if (!err) {
         Insight.findOne(
           {insight: insightId},

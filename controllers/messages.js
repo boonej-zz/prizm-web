@@ -34,7 +34,6 @@ return {
 };
 
 exports.displayUserMessagesFeed = function(req, res){
-  console.log('in request');
   var user = req.user;
   var org = req.params.organization; 
   var options = {
@@ -50,7 +49,6 @@ exports.displayUserMessagesFeed = function(req, res){
     else return true;
   });
   if (userOrgs.length > 0) {
-    console.log('finding org details');
     Organization.findOne({_id: org})
     .populate({
       path: 'owner',
@@ -64,7 +62,6 @@ exports.displayUserMessagesFeed = function(req, res){
       options.currentUser = user;
       options.organization = organization.toObject();
       options.topics = userOrgs[0].groups || [];
-      console.log('fetching messages');
       User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}})
       .select(shortFields(organization))
       .populate({path: 'org_status.groups', model: 'Group'})
@@ -77,7 +74,6 @@ exports.displayUserMessagesFeed = function(req, res){
             group: null 
           },
           function(err, messages){
-            console.log('rendering page');
             if (err) console.log(err);
             options.messages = messages?messages.reverse():[];
             _.each(options.messages, function(m, i, l){
@@ -120,11 +116,9 @@ exports.displayOwnerMessagesFeed = function(req, res){
         }
       });
       criteria = {$or:[criteria1, criteria2], create_date: {$gt: create_date}};
-      console.log('%j', criteria);
       Message.find(criteria).count(function(err, c){
         if (err) res.status(500).send();
         else {
-          console.log(c + ' messages');
           res.status(200).send({count: c})
         };
       });
@@ -169,7 +163,6 @@ exports.displayOwnerMessagesFeed = function(req, res){
                     m.liked = false;
                   }
                 });
-                console.log(options.count);
                 res.render('messages/messages', options);
               }
              );
@@ -277,7 +270,6 @@ exports.createMessage = function(req, res){
 
   var text = req.get('text');
   var urls = url.urls(text);
-  console.log(urls); 
   if (organization &&  text) {
     var message = new Message({
       organization: organization,
@@ -343,7 +335,6 @@ exports.createMessage = function(req, res){
                 metaData.title = m.content;
               }
             });
-            console.log(metaData);
             message.meta = metaData;
           }
           save(message);
@@ -409,7 +400,6 @@ exports.newGroup = function(req, res){
             }
             return match;
           });
-          console.log(options);
           res.render('create/group', options);
         });
     });
