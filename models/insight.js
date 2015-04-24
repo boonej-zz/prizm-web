@@ -25,7 +25,7 @@ insightSchema.pre('save', function(next){
 });
 
 insightSchema.pre('init', function(insight){
-  var r = new Regexp('https:/s');
+  var r = new RegExp('https:/s');
   if (insight.file_path) {
     insight.file_path = insight.file_path.replace(r, 'https://s');
   }
