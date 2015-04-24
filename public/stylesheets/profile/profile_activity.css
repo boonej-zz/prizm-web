@@ -141,7 +141,7 @@ tr .prizm-avatar-sm {
 }
 
 .activity-action.post {
-  background-image: url('/images/activity/follow.png');
+  background-image: url('/images/activity/post.png');
 background-size: 24px 24px;
 }
 
@@ -151,8 +151,18 @@ background-size: 24px 24px;
 }
 
 .activity-action.group_joined {
-  background-image: url('/images/activity/follow.png');
+  background-image: url('/images/activity/member_pending.png');
   background-size: 24px 24px;
+}
+
+.activity-action.group_approved {
+  background-image: url('/images/activity/member_pending.png');
+  background-size: 24px 24px;
+}
+
+.activity-action.tag {
+  background-image: url('/images/activity/tag.png');
+  background-size: 33px 24px;
 }
 
 .activity-time {
