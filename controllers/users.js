@@ -1170,14 +1170,20 @@ var validateRegistrationRequest = function(req, res,  next) {
           res.status(400).send({error: 'Passwords do not match'});
         }
         else if (birthday){
-          birthday = birthday.split('/');
-          birthday = [birthday[2], birthday[0] - 1, birthday[1]];
+          if (birthday.indexOf('/') != -1) {
+            birthday = birthday.split('/');
+            birthday = [birthday[2], birthday[0] - 1, birthday[1]];
+          } else if (birthday.indexOf('-') != -1) {
+            birthday = birthday.split('-');
+            birthday = [birthday[0], birthday[1] - 1, birthday[2]] 
+          }
           birthday = moment(birthday);
           diff = moment().diff(birthday, 'years');
           if (diff < 13) {
             res.status(400).send({
               error: 'You must be 13 years of age to create an account.'
             });
+            return;
           }
           if (userCode) {
             Organization.findOne({code: userCode}, function(err, organization) {

@@ -14,6 +14,8 @@ groupSchema.statics.newGroup = function(obj, next){
   if (obj.organization && obj.name) {
     var model = new this(obj);
     model.save(function(err, group){
+      console.log('Error: ' + err);
+      console.log('Group: ' + group);
       next(err, group);
     });
   } else {

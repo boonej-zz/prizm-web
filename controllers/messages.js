@@ -422,10 +422,13 @@ exports.addNewGroup = function(req, res){
   var user = req.user;
   var organization = req.get('organization');
   var members = req.body.members;
+  if (!_.isArray(members)){
+    members = [members];
+  }
   var data = {
     name: req.body.name,
     description: req.body.description,
-    leader: req.body.leader,
+    leader: req.body.leader && req.body.leader != ''?req.body.leader:null,
     organization: organization
   };
   Group.newGroup(data, function(err, group){
@@ -434,13 +437,12 @@ exports.addNewGroup = function(req, res){
         if (org) {
           org.groups.push(group._id);
           org.save(function(err, saved){
-            if (err) console.log(err);
+            if (err) console.log('Save error: ' + err);
           });
         }
       });
       User.find({_id: {$in: members}}, function(err, users){
         if (users) {
-          console.log('found ' + users.length + ' users');
           _.each(users, function(u, i, l){
             _.each(u.org_status, function(s, c, p){
               if (String(s.organization) == String(group.organization)) {
@@ -448,11 +450,10 @@ exports.addNewGroup = function(req, res){
                   s.groups = [];
                 }
                 s.groups.push(group._id);
-                console.log(s);
               }
             });
             u.save(function(err, u){
-              if (err) console.log(err);
+              if (err) console.log('User save error: ' + err);
               var activity = new Activity({
                 from: user._id,
                 to: u._id,
@@ -465,7 +466,6 @@ exports.addNewGroup = function(req, res){
                 }
                 else {
                   new Push('activity', activity, function(result) {
-                  console.log(JSON.stringify(result));
                 });
                 }
               });
