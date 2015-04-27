@@ -101,6 +101,7 @@ var poll = {
       })
       .done(function(data){
         lastPostDate = new Date().toISOString();
+        console.log(lastPostDate);
         if (data.count > 0) {
           newPostCount += data.count;
           var string = String(newPostCount) + ' new post';
@@ -152,6 +153,7 @@ var poll = {
           setTimeout('poll.messages()', 7500);
         }, 4000);
       lastActivityDate = new Date().toISOString();
+      console.log(lastActivityDate);
     });
   },
   messages: function(){
