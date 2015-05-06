@@ -6,7 +6,8 @@ var groupSchema = new mongoose.Schema({
   description   : {type: String, default: ''},
   organization  : {type: ObjectId, ref: 'Organization', required: true},
   leader        : {type: ObjectId, ref: 'User', required: false},
-  create_date   : {type: Date} 
+  create_date   : {type: Date},
+  status        : {type: String, default: 'active', required: true} 
 });
 
 groupSchema.statics.newGroup = function(obj, next){
@@ -24,6 +25,9 @@ groupSchema.statics.newGroup = function(obj, next){
 }
 
 groupSchema.pre('save', function(next){
+  if (!this.status) {
+    this.status = 'active';
+  }
   if (!this.create_date) {
     this.create_date = Date.now();
   }

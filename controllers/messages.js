@@ -60,14 +60,25 @@ exports.displayUserMessagesFeed = function(req, res){
     })
     .exec(function (err, organization){
       options.currentUser = user;
-      options.organization = organization.toObject();
-      options.topics = userOrgs[0].groups || [];
+      var o = organization.toObject();
+      o.groups = _.filter(o.groups, function(group){
+        return group.status != 'inactive';
+      });
+      options.organization = o; 
+      if (userOrgs[0].groups) {
+        options.topics = _.filter(userOrgs[0].groups, function(group){
+          return group.status != 'inactive';
+        });
+      } else {
+        options.topics = [];
+      }
       User.find({org_status: {$elemMatch: {organization: organization._id, status: 'active'}}})
       .select(shortFields(organization))
       .populate({path: 'org_status.groups', model: 'Group'})
       .exec(function(err, users){
         options.count = users.length;
         options.members = users;
+        
         Message.fetchMessages(
           {
             organization: org,
@@ -144,7 +155,13 @@ exports.displayOwnerMessagesFeed = function(req, res){
           .exec(function(err, users){
             options.count = users.length;
             options.members = users;
-            options.topics = organization.groups || [];
+            if (organization.groups) {
+              options.topics = _.filter(organization.groups, function(group){
+                return group.status != 'inactive';
+              });
+            } else {
+              options.topics = [];
+            }
             options.organization = organization;
             Message.fetchMessages(
               {
