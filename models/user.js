@@ -250,33 +250,14 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
   .populate({path: 'org_status.groups', model: 'Group'})
   .sort(sort)
   .exec(function(err, users){
-    /**
-    _.each(users, function(user, idx, list){
-      if(users.org_status && _.has(users.org_status, 'length')) {
-        var needsUpdate = true;
-        _.each(user.org_status, function(org,index,list){
-          if (String(org.organization) == String(orgId)){
-            needsUpdate = false;
-          }
+    _.each(users, function(u, i, l) {
+      _.each(u.org_status, function(os, ind, li){
+        os.groups = _.filter(os.groups, function(obj){
+          return obj.status != 'inactive';
         });
-        if (needsUpdate) {
-          user.org_status.push({
-            organization: orgId,
-            status: 'active'
-          });
-        }
-      } else {
-        user.org_status = [];
-        user.org_status.push({
-          organization: orgId,
-          status: 'active'
-        });
-      }
-      console.log(user.org_status);
-    });
-    **/
+      });
+    }); 
     next(err, users);
-
 });
 }
 
