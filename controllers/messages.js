@@ -113,8 +113,8 @@ exports.displayOwnerMessagesFeed = function(req, res){
   var create_date = req.get('create_date');
   if (action){
     if (user.type == 'user'){
-      var criteria1 = {organization: {$in: []}, group:null};
-      var criteria2 = {organization: {$in: []}, group:{$in: []}};
+      var criteria1 = {organization: {$in: []}, group:null, creator:{$ne: user._id}};
+      var criteria2 = {organization: {$in: []}, group:{$in: []}, creator:{$ne: user._id}};
       _.each(user.org_status, function(o, i, l){
         if (o.status == 'active'){
           criteria1.organization.$in.push(o.organization._id);

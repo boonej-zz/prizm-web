@@ -88,6 +88,7 @@ var poll = {
         type: 'GET',
         contentType: 'application/json',
         url:  '/',
+        processData: false,
         headers: {
           action: 'newer',
           create_date: lastPostDate
@@ -137,7 +138,8 @@ var poll = {
         action: 'newer',
         create_date: lastActivityDate
       },
-      cache: false
+      cache: false,
+      processData: false
     })
     .done(function(data){
       if (data && data.alert){
@@ -165,7 +167,8 @@ var poll = {
         action: 'newer',
         create_date: lastMessageDate
       },
-      cache: false
+      cache: false,
+      processData: false
     })
     .done(function(data){
       lastMessageDate = new Date().toISOString();
@@ -195,7 +198,8 @@ var poll = {
       contentType: 'application/json',
       url: '/profile/activity',
       headers: {action: 'unread'},
-      cache: false
+      cache: false,
+      processData: false
     })
     .done(function(data){
       if (data.count && data.count > 0){
