@@ -182,6 +182,7 @@ userSchema.methods.userBelongsToOrganization = function(org_id) {
 userSchema.methods.fetchHomeFeedCriteria = function(next){
   var following = _.pluck(this.following, '_id');
   var Trust = mongoose.model('Trust');
+  var User = this.model('User');
   var $user = this;
   Trust.find({
     status: 'accepted',
@@ -205,16 +206,31 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
           }
         });
       }
-      var criteria = {
+      var orgs = _.filter($user.org_status, function(org){
+        return org.status == 'active';
+      });
+      var orgArray = _.pluck(orgs, 'organization');
+      User.find({org_status: {$elemMatch: {organization: {$in: orgArray}, status: 'active'}}})
+      .select({_id: 1})
+      .exec(function(err, users){
+        if (err) console.log(err);
+        var orgUsers = [];
+        if (users) {
+          orgUsers = _.pluck(users, '_id');
+        }
+        var criteria = {
         $or: [
           {scope: 'public', status: 'active', creator: {$in: following}},
           {scope: {$in: ['trust', 'public']}, status: 'active', creator: {$in: trustArray}},
+          {scope: {$in: ['trust', 'public']}, status: 'active', creator: {$in: orgUsers}},
           {creator: $user._id, status: 'active'}
         ],
         is_flagged: false
       };
       next(null, criteria);
-    }
+
+      });
+          }
   });
 }
 
