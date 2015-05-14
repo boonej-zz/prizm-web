@@ -535,6 +535,129 @@ input#memberFilter {
   overflow-y: auto;
 }
 
+/** New Invite Form **/
+#newMemberForm {
+  width: 489px;
+  padding: 0;
+}
+
+#newMember {
+  width: 100%;
+  padding: 0;
+}
+
+#newMember label {
+  color: #545358;
+  font-size: 18px;
+  font-weight: 400;
+  display: block;
+  width: 85%;
+  margin: 65px auto 11px auto;
+}
+
+#submitArea {
+  text-align: center;
+}
+
+
+
+#newMember textarea {
+  width: 85%;
+  display: block;
+  height: 160px;
+  margin: 0px auto 9px auto;
+  border: 1px solid #e4e5ea;
+}
+
+#newMember .tip {
+  color: #818284;
+  font-size: 14px;
+  font-weight: 400;
+  width: 85%;
+  margin: 0 auto 46px auto;
+}
+
+#newMember #add {
+  width: 98px;
+  height: 41px;
+  background-color: #3e6a9e;
+  color: white;
+  margin: 0 auto 28px auto;
+  display: block;
+}
+
+#newMember .description{
+  width: 100%;
+  background-color: #f9f9fb; 
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-top: 1px solid #e4e5ea;
+  border-bottom: 1px solid #e4e5ea;
+}
+
+#newMember .description:last-child {
+  margin-bottom: 0px;
+}
+
+#newMember .description p {
+  width: 85%;
+  margin: 0 auto;
+  color: #818284;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+#newMember ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 234px;
+  overflow: auto;
+}
+
+#newMember li {
+  width: 100%;
+  border-top: 1px solid #e4e5ea;
+  margin: 0;
+  padding: 0;
+  color: #545358;
+  font-size: 18px;
+}
+
+#newMember li .content {
+  width: 85%; 
+  height: 23px;
+  margin: 21px auto;
+}
+
+#newMember .right {
+  float: right;
+}
+
+#newMember .resend {
+  display: inline-block;
+  background-image: url('/images/icons/email-icon.png');
+  background-size: 26px 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 23px;
+  width: 26px;
+  margin-left: 25px;
+}
+
+#newMember .remove {
+  display: inline-block;
+  background-image: url('/images/icons/cancel_icon.png');
+  background-size: 23px 23px;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 23px;
+  width: 23px;
+  margin-left: 25px;
+}
+
 @media screen and (max-width: 600px) {
 
   #newGroupForm {

@@ -1,0 +1,9 @@
+each invite in invites
+  li.invitecell(id = '#{invite._id}')
+    .content
+      span.address #{invite.address}
+      span.remove.right.cursor(onclick='member.removeItem(event)')
+      if invite.status == 'sent'
+        span.resend.right.cursor(onclick='member.resendInvite(event)')
+        span.status.right Sent
+

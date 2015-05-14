@@ -17,7 +17,7 @@ table.table.table-striped.members-table
         th
         th
           button.btn.btn-primary.btn-new-member(
-            onclick='members.addMember()') Add New Member
+            onclick='member.showNewMemberForm("#{organization._id}")') Add New Member
         th
           button.btn.btn-primary.btn-export(
             onclick='nav.navigate("/profile/members/memberexport.csv")') 

@@ -8,15 +8,23 @@ var Post          = mongoose.model('Post');
 var Organization  = mongoose.model('Organization');
 var Trust         = mongoose.model('Trust');
 var Theme         = mongoose.model('Theme');
+var Invite        = mongoose.model('Invite');
 var _users        = require('../controllers/users');
 var _posts        = require('../controllers/posts');
 var _stripe       = require('../controllers/stripe');
 var _time         = require('../lib/helpers/date_time');
 var _profile      = require('../lib/helpers/profile');
 var _image        = require('../lib/helpers/image');
+var path          = require('path');
 var Mixpanel      = require('mixpanel');
 var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 var _             = require('underscore');
+var jade          = require('jade');
+var config 			= require('../config');
+var mandrill 		= require('node-mandrill')(config.mandrill.client_secret);
+var mandrillEndpointSend = '/messages/send';
+
+var inviteMail    = path.join(__dirname, '/../views/mail/invite_mail.jade');
 
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
@@ -334,4 +342,188 @@ exports.exportCSV = function(req, res){
       response.status(500).send(error);
     }
   });
+};
+
+exports.addMembers = function(req, res){
+  var user = req.user;
+  var orgId = req.params.id;
+  console.log(orgId);
+  Organization.findOne({
+    _id: orgId
+  }, function(err, org){
+    if (err) {
+      console.log(err);
+    }
+    if (org){
+      Invite.find({
+        organization: orgId,
+        status: 'sent'
+      })
+      .exec(function(err, invites){
+        invites = invites||[];
+        var options = {
+          organization : org,
+          currentUser  : user,
+          invites      : invites
+        };
+        res.render('create/member', options);
+      });
+    }else {
+      res.status(400).send();
+    }
+  });
+};
+
+exports.createInvites = function(req, res) {
+  console.log('in request');
+  var user = req.user;
+  var orgId = req.params.id;
+  var addresses = req.get('invites');
+  console.log(orgId);
+  console.log(addresses);
+  addresses = addresses.replace(/\n/g, ';');
+  addresses = addresses.replace(/,/g, ';');
+  addresses = addresses.split(';');
+  _.each(addresses, function(a, i, l){
+    a = a.replace(/\s/g, '');
+  });
+  addresses = _.uniq(addresses);
+  console.log(addresses);
+  Organization.findOne({_id: orgId})
+  .exec(function(err, org){
+    if (err) {
+      console.log(err);
+    }
+    if (org) {
+      var results = [];
+      Invite.find({address: {$in: addresses}, organization: org._id})
+      .exec(function(err, addys){
+        console.log(addys);
+        _.each(addys, function(a, i, l){
+          var idx = _.indexOf(addresses, a.address);
+          if (idx != -1){
+            addresses = addresses.splice(idx, 1);
+          } if (a.status == 'unsent') {
+            results.push(a);
+          } if (a.status == 'cancelled') {
+            a.status == 'unsent';
+            results.push(a);
+          } 
+        });
+        _.each(addresses, function(a, i, l){
+          var invite = new Invite({
+            organization: org._id,
+            address: a,
+            status: 'unsent'
+          });
+          invite.save(function(err, result){
+            if (err) console.log(err);
+          });
+          results.push(invite);
+        });
+        res.render('create/invites', {invites: results});
+      }); 
+    } else {
+      res.status(400).send();
+    }
+  });
+};
+
+exports.sendInvites = function(req, res){
+  console.log('in request');
+  var user = req.user;
+  var orgId = req.params.id;
+  var invites = req.get('invites');
+  console.log(invites);
+  if (!_.isArray(invites)){
+    invites = invites.split(',');
+  }
+  Organization.findOne({_id: orgId}, function (err, org){
+    if (err) console.log(err);
+    if (org){
+      var mail = jade.renderFile(inviteMail, {org: org});
+      Invite.find({_id: {$in: invites}}, function(err, objects){
+        if (err) console.log(err);
+        if (objects) {
+          console.log('have invites');
+          _.each(objects, function(o, i, l) {
+            o.status = 'sent';
+            o.save (function(err, result){
+              if (err) console.log(err);
+              mandrill(mandrillEndpointSend, {
+                message: {
+                  to: [{email: o.address}],
+                  from_email: 'info@prizmapp.com',
+                  from_name: 'Prizm',
+                  subject: 'You\'ve been invited to join Prizm!',
+                  html: mail  
+                }}, function (err, response){
+                  if (err) console.log(err);
+                });
+            });
+          });
+          res.render('create/invites', {invites: objects});
+        } else {
+          res.status(400).send();
+        } 
+      });
+    } else {
+      res.status(400).send();
+    }
+  });
+};
+
+exports.deleteInvite = function(req, res){
+  var orgID = req.params.org_id;
+  var inviteID = req.params.invite_id;
+  var user = req.user;
+  Invite.findOne({_id: inviteID})
+  .populate({path: 'organization'})
+  .exec(function(err, invite){
+    if (err) console.log(err);
+    if (invite){
+      if (String(invite.organization.owner) == String(user._id)) {
+        invite.status = 'cancelled';
+        invite.save(function(err, result){
+          if (err)console.log(err);
+          res.status(200).send();
+        });
+      } else {
+        res.status(401).send();
+      }
+    } else {
+      res.status(400).send();
+    }
+  });
+
+};
+
+exports.resendInvite = function(req, res){
+  console.log('in request');
+  var inviteID = req.params.invite_id;
+  console.log(inviteID);
+  Invite.findOne({_id: inviteID})
+  .populate({path: 'organization'})
+  .exec(function(err, invite){
+    if (err) console.log(err);
+    console.log('found invite');
+    if (invite) {
+       var mail = jade.renderFile(inviteMail, {org: invite.organization});
+        mandrill(mandrillEndpointSend, {
+        message: {
+          to: [{email: invite.address}],
+          from_email: 'info@prizmapp.com',
+          from_name: 'Prizm',
+          subject: 'You\'ve been invited to join Prizm!',
+          html: mail  
+        }}, function (err, response){
+          if (err) console.log(err);
+        });
+        res.status(200).send();
+
+    } else {
+      res.status(400).send();
+    }
+  });
+
 };

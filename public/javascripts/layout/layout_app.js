@@ -354,6 +354,88 @@ var group = {
   }
 };
 
+var member = {
+  showNewMemberForm: function(org){
+    $.ajax({
+      method: 'GET',
+      url: '/organizations/' + org + '/members/new',
+      contentType: 'text/html'
+    })
+    .done(function(html){
+      $('body').addClass('noscroll');
+      $('body').prepend(html);
+      $('#newMember').submit(member.sendForm);
+    });
+  },
+  createInvites: function(e){
+    var org = $('#selectedOrganization').val();
+    var invites = $('#newMemberInput').val();
+    invites = invites.replace(/\n/g, ';');
+    $.ajax({
+      method: 'POST',
+      url: '/organizations/' + org + '/members/new',
+      headers: {
+        invites: invites
+      }
+    })
+    .done(function(html){
+      if (html) {
+        $('#inviteList').html(html);
+        $('.description.primary').addClass('hidden');
+        $('.description.secondary').removeClass('hidden');
+        $('button.save').attr('disabled', false);
+      }
+    }); 
+  },
+  removeItem: function(e){
+    var org = $('#selectedOrganization').val();
+    var $target = $(e.target);
+    var inviteId = $target.parents('li').attr('id');
+    $.ajax({
+      method: 'DELETE',
+      url: '/organizations/' + org + '/invites/' + inviteId 
+    }).done(function(resp){
+      $target.parents('li').remove();
+    });
+  },
+  resendInvite: function(e){
+    var org = $('#selectedOrganization').val();
+    var $target = $(e.target);
+    var inviteId = $target.parents('li').attr('id');
+    $.ajax({
+      method: 'PUT',
+      url: '/organizations/' + org + '/invites/' + inviteId,
+      contentType: null,
+      processData: false
+    }).done(function(resp){
+      $target.siblings('.status').text('Resent'); 
+    });
+
+  },
+  sendForm: function(e){
+    var org = $('#selectedOrganization').val();
+    var invites = [];
+    $.each($('li.invitecell'), function(index, value){
+      var iid = $(value).attr('id');
+      if (iid){
+        invites.push(iid);
+      }
+    });
+    $.ajax({
+      method: 'POST',
+      url: '/organizations/' + org + '/members/invite',
+      headers: {
+        invites: invites
+      },
+      success: function(html){
+        $('#inviteList').html(html);
+        modal.cancel();
+      }
+    });
+    return false;
+  }
+};
+
 var post = {
   showNewPostForm: function(){
     $.ajax({

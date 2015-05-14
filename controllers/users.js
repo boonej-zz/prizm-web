@@ -10,6 +10,7 @@ var Interest        = mongoose.model('Interest');
 var Activity        = mongoose.model('Activity');
 var Insight         = mongoose.model('Insight');
 var Trust           = mongoose.model('Trust');
+var Invite          = mongoose.model('Invite');
 var Push            = require('../classes/push_notification');
 var config          = require('../config');
 var passport        = require('passport');
@@ -222,6 +223,16 @@ exports.updateUser = function(req, res) {
           _.each(user.org_status, function(item, idx, list){
             if (String(item.organization._id) == String(orgId)) {
               update.theme = item.organization.theme;
+            }
+          });
+          Invite.findOne({address: user.email, organization: orgId}, function(err, invite){
+            if (err) console.log(err);
+            if (invite){
+              invite.status = 'accepted';
+              invite.user = user._id;
+              invite.save(function(err, result){
+                if (err) console.log(err);
+              });
             }
           });
           User.findOneAndUpdate({
@@ -1222,6 +1233,17 @@ var registerIndividual = function(req, res) {
         organization: ObjectId(organization._id),
         status: 'pending'
       }
+      Invite.findOne({address: newUser.email, organization: organization._id})
+      .exec(function(err, invite){
+        if (err) console.log(err);
+        if (invite) {
+          invite.status = 'accepted';
+          invite.user = newUser._id;
+          invite.save(function(err, user){
+            if (err) console.log(err);
+          });
+        }
+      });
     }
     if (newUser.hashPassword()) {
       newUser.save(function(err, user) {
