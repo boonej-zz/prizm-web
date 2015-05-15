@@ -383,6 +383,7 @@ exports.createInvites = function(req, res) {
   console.log(addresses);
   addresses = addresses.replace(/\n/g, ';');
   addresses = addresses.replace(/,/g, ';');
+  addresses = addresses.replace(/\s+/g, ';');
   addresses = addresses.split(';');
   _.each(addresses, function(a, i, l){
     a = a.replace(/\s/g, '');
@@ -401,25 +402,36 @@ exports.createInvites = function(req, res) {
         console.log(addys);
         _.each(addys, function(a, i, l){
           var idx = _.indexOf(addresses, a.address);
-          if (idx != -1){
-            addresses = addresses.splice(idx, 1);
-          } if (a.status == 'unsent') {
+          console.log(idx);
+          if (idx > -1){
+            addresses.splice(idx, 1);
+            console.log(addresses);
+          } 
+          if (a.status == 'unsent') {
+            console.log('unsent');
             results.push(a);
-          } if (a.status == 'cancelled') {
+          } else if (a.status == 'cancelled') {
+            console.log('cancelled');
             a.status == 'unsent';
             results.push(a);
-          } 
+          } else if (a.status == 'sent') {
+            console.log('sent');
+          }
+
         });
+        var r = /^\S+@\S+\.\S+$/i;
         _.each(addresses, function(a, i, l){
-          var invite = new Invite({
-            organization: org._id,
-            address: a,
-            status: 'unsent'
-          });
-          invite.save(function(err, result){
-            if (err) console.log(err);
-          });
-          results.push(invite);
+          if (r.test(a)){
+            var invite = new Invite({
+              organization: org._id,
+              address: a,
+              status: 'unsent'
+            });
+            invite.save(function(err, result){
+              if (err) console.log(err);
+            });
+            results.push(invite);
+          }
         });
         res.render('create/invites', {invites: results});
       }); 
