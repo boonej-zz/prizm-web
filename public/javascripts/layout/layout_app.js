@@ -91,7 +91,8 @@ var poll = {
         processData: false,
         headers: {
           action: 'newer',
-          create_date: lastPostDate
+          create_date: lastPostDate,
+          current_time: new Date().toISOString()
         },
         success: function(){
           console.log('success');
@@ -136,7 +137,8 @@ var poll = {
       url: '/profile/activity',
       headers: {
         action: 'newer',
-        create_date: lastActivityDate
+        create_date: lastActivityDate,
+        current_time: new Date().toISOString()
       },
       cache: false,
       processData: false
@@ -165,7 +167,8 @@ var poll = {
       url: '/messages',
       headers: {
         action: 'newer',
-        create_date: lastMessageDate
+        create_date: lastMessageDate,
+        current_time: new Date().toISOString()
       },
       cache: false,
       processData: false

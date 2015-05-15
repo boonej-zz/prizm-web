@@ -601,6 +601,8 @@ exports.displayHomeFeed = function(req, res) {
         var done = 0;
         if (action) {
           var createDate = req.get('create_date');
+          var currentTime = Date(req.get('current_time'));
+          var serverTime = new Date();
           user.fetchHomeFeedCriteria(function(err, criteria){
             criteria.create_date = {'$gt': createDate};
             Post.find(criteria, {_id: 1})
