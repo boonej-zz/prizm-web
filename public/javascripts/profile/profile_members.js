@@ -25,8 +25,46 @@ var setupPage = function(){
 
 var orgID = $('#organization').val(); 
 
+var csv = {
+  showModal: function(){
+    $.ajax({
+      type: 'GET',
+      url: '/profile/members/csv'
+    })
+    .done(function(html){
+      $('body').prepend(html);
+      $('#newCSV').submit(csv.submitForm);
+      $('.checkboxes label').click(csv.handleSelection);
+    });
+
+  },
+  submitForm: function(){
+    var form = $('#newCSV').serialize();
+    window.location.href = '/profile/members/memberexport.csv?' + form;
+    modal.cancel();
+    return false;
+  },
+  handleSelection: function(){
+    var $this = $(this);
+    if ($this.attr('for') == 'all') {
+      $('input#all').siblings('input').attr('checked', false);
+    } else {
+      $('input#all').attr('checked', false);
+    }
+  }
+};
+
 var members = {
   // Member Action Methods
+  renderCSVModal: function(){
+    $.ajax({
+      type: 'GET',
+      url: '/profile/members/csv'
+    })
+    .done(function(html){
+      $('body').prepend(html);
+    });
+  },
   formatTable: function(height) {
     var table = $('table');
       table.attr('org-width', table.width());

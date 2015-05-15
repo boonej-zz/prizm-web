@@ -89,6 +89,7 @@ router.post('/organizations/:id/members/invite', _users.authRequired, _orgs.send
 router.delete('/organizations/:org_id/invites/:invite_id', _users.authRequired, _orgs.deleteInvite);
 router.put('/organizations/:org_id/invites/:invite_id', _users.authRequired, _orgs.resendInvite);
 router.put('/organizations/:organization/groups/:group', _users.authRequired, _messages.modifyGroup);
+router.get('/profile/members/csv', _users.authRequired, _orgs.renderCSVModal);
 router.get('/profile/members/memberexport.csv', _users.authRequired, _orgs.exportCSV);
 router.get('/profile/activity', _users.authRequired, _users.displayActivityFeed);
 router.get('/profile/explore', _users.authRequired, _users.displayExploreFeed);

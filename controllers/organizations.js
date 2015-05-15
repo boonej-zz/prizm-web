@@ -291,9 +291,32 @@ exports.updateOrg = function (req, res) {
   };
 }
 
+exports.renderCSVModal = function(req, res){
+  res.render('create/csv');
+}
+
 exports.exportCSV = function(req, res){
   var user = req.user;
   var members = [];
+  var fields = req.query.fields;
+  if (_.isArray(fields)){
+    fields = fields.join(',');
+  }
+  fields = fields.split(',');
+  var fieldParams = {};
+  _.each(fields, function(f, i, l){
+    if (f == 'address') {
+      fieldParams.city = 1;
+      fieldParams.state = 1;
+      fieldParams.zip_postal = 1;
+    } else if (f == 'social') {
+      fieldParams.followers_count = 1;
+      fieldParams.following_count = 1;
+      fieldParams.posts_count = 1;
+    } else {
+      fieldParams[f] = 1;
+    }
+  });
   Organization.findOne({owner: user._id}, function(err, org){
     if (org){
       Trust.find({from: user._id, status: 'accepted'}, function(err, trusts){
@@ -306,7 +329,8 @@ exports.exportCSV = function(req, res){
             {org_status: {$elemMatch: {organization: org._id, status: 'active'}}}
           ]
         })
-        .select('last_name first_name birthday city state zip_postal email gender phone_number'  )
+        .select(fieldParams)
+        .populate({path: 'interests', model: 'Interest'})
         .exec(function(err, users){
           var body = '';
           _.each(users, function(user, idx, list){
@@ -314,7 +338,7 @@ exports.exportCSV = function(req, res){
             var head = false;
             if (body == '') {
               head = [];
-              for (var prop in raw) {
+              for (var prop in fieldParams) {
                 if (prop != '_id')
                   head.push(prop);
               }
@@ -322,8 +346,12 @@ exports.exportCSV = function(req, res){
               head = head.concat('\n');
             }
             var line = [];
-            for (var prop in raw) {
-              if (prop != '_id')
+            for (var prop in fieldParams) {
+              if (prop == 'interests') {
+                var interests = _.pluck(raw[prop], 'text');
+                line.push(interests.join(' '));
+              }
+              else if (prop != '_id')
                 line.push(raw[prop]);
             }
             line = line.join(',');

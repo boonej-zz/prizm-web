@@ -1,0 +1,29 @@
+.create-overlay(onclick='modal.cancel(event)')
+  #newCSVForm.create-form
+    h2 Export to CSV
+    form#newCSV(method="GET")
+      h3 Select data that you would like to export to CSV.
+      .checkboxes
+        input#all(type='checkbox' checked='checked' name='fields' value='first_name,last_name,email,address,birthday,gender,phone,interests,followers_count,following_count,posts_count')
+        label(for='all') All Data
+        input#firstName(type='checkbox' name='fields' value='first_name')
+        label(for='firstName') First Name
+        input#lastName(type='checkbox' name='fields' value='last_name')
+        label(for='lastName') Last Name
+        input#email(type='checkbox' name='fields' value='email')
+        label(for='email') Email Address
+        input#address(type='checkbox' name='fields' value='address')
+        label(for='address') Mailing Address
+        input#birthday(type='checkbox' name='fields' value='birthday')
+        label(for='birthday') DOB
+        input#gender(type='checkbox' name='fields' value='gender')
+        label(for='gender') Gender
+        input#phone(type='checkbox' name='fields' value='phone_number')
+        label(for='phone') Phone Number
+        input#interests(type='checkbox' name='fields' value='interests')
+        label(for='interests') Interests
+        input#social(type='checkbox' name='fields' value='following_count,followers_count,posts_count')
+        label(for='social') Social Count (followers, following, posts)
+      .button-section
+        button.save Done
+      

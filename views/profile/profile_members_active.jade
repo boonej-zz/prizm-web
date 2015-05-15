@@ -20,7 +20,7 @@ table.table.table-striped.members-table
             onclick='member.showNewMemberForm("#{organization._id}")') Add New Member
         th
           button.btn.btn-primary.btn-export(
-            onclick='nav.navigate("/profile/members/memberexport.csv")') 
+            onclick='csv.showModal()') 
             | Export to CSV
       tr
         th

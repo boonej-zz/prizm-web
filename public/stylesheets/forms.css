@@ -658,6 +658,63 @@ input#memberFilter {
   margin-left: 25px;
 }
 
+#newCSVForm {
+  width: 489px;
+}
+
+#newCSV {
+  display: block;
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 43px;
+}
+
+#newCSV h3 {
+  background-color: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 47px 0;
+  padding: 0;
+}
+
+#newCSV input {
+  height: 0px;
+  width: 0px;
+}
+
+#newCSV label {
+  display: block;
+  width: 100%;
+  padding-left: 33px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #545358;
+}
+
+#newCSV input + label::before {
+  content: '';
+  display: block;
+  position: absolute;
+  margin-left: -33px;
+  margin-top: 2px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #a9aaae;
+}
+
+#newCSV input:checked + label::before {
+  background-color: #334b8f;
+  border: 1px solid #334b8f;
+}
+
+#newCSV .button-section {
+  width: 100%;
+  text-align: center;
+  margin-top: 60px;
+}
+
 @media screen and (max-width: 600px) {
 
   #newGroupForm {
