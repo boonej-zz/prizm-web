@@ -7,18 +7,17 @@ div(class='modal fade'
     .modal-content
       .modal-body
         each member in members
+          - var memberID = member._id
+          - var photo = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
           .member-card.hidden(data='#{member.id}')
             .front-member
               .member-info-top
                 .card-icon.cursor(onclick='members.showCardBack()')
-                .member-avatar.cursor(onclick='prizm.showProfile("#{member._id}")')
-                  if member.profile_photo_url
-                    img(src='https://#{member.profile_photo_url.substr(7)}'
-                      class='prizm-avatar-lg' dref='/profiles/#{member.id}')
-                  else
-                    img(src='/images/profile/profile_default_avatar.png' class='prizm-avatar-sm'
-                      onclick='profile.showProfile("#{member._id}")')
-                .member-name.cursor(onclick='prizm.showProfile("#{member._id}")')
+                .member-avatar.cursor(onclick='prizm.showProfile("#{memberID}")')
+                    img(src='https://#{photo}'
+                      class='prizm-avatar-lg' dref='/profiles/#{memberID}'
+                      onclick='profile.showProfile("#{member.id}")')
+                .member-name.cursor(onclick='prizm.showProfile("#{member.id}")')
                   | #{member.name}
                 .member-email
                   | #{member.email}

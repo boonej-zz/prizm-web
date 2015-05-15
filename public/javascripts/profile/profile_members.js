@@ -323,7 +323,7 @@ var members = {
     var organization = $('#organization').attr('data');
     var request = $.ajax({
       type: 'GET',
-      url: '/organizations/' + orgID + '/members',
+      url: '/organizations/' + organization + '/members',
       headers: {
         'Accept': 'application/jade',
         'memberStatus': 'active',
@@ -355,7 +355,7 @@ var members = {
     var organization = $('#organization').attr('data');
     var request = $.ajax({
       type: 'GET',
-      url: '/organizations/' + orgID + '/members',
+      url: '/organizations/' + organization + '/members',
       headers: {
         'Accept': 'application/jade',
         'memberStatus': 'pending',

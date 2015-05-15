@@ -1027,10 +1027,12 @@ exports.membersHTMLRequest = function(req, res) {
 };
 
 var membersJADERequest = function(req, res) {
+  console.log('requesting users');
   var status = req.get('memberStatus');
-  var org = req.get('org');
+  var org = req.params.id;
   var sort = req.get('sort');
   var text = req.get('text');
+  var currentUser = req.user;
   if (status == 'active') {
     memberList = activeMembers;
   }
@@ -1056,11 +1058,11 @@ var membersJADERequest = function(req, res) {
               res.status(500).send({error: err});
           }
           else {
-            var content = jade.render(memberList, {
-              filename: memberCardPath,
-              members: members
-            });
-            res.send(content);
+            console.log(status);
+            var path = status=='active'?'profile/profile_members_active':'profile/profile_members_pending';
+            res.render(path, {currentUser: currentUser,
+                organization: organization,
+                members: members});
           }
         });
       }
