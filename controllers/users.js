@@ -26,10 +26,6 @@ var _image          = require('../lib/helpers/image');
 var _organizations  = require('../controllers/organizations');
 var validateEmail   = require('../utils').validateEmail;
 var _utils          = require('../utils.js');
-var activeMembers   = fs.readFileSync(path.join(__dirname +
-                      '/../views/profile/profile_members_active.jade'), 'utf8');
-var pendingMembers  = fs.readFileSync(path.join(__dirname +
-                      '/../views/profile/profile_members_pending.jade'), 'utf8');
 var profileFollow        = path.join(__dirname, '/../views/profile/profile_follow.jade');
 var memberCardPath       = path.join(__dirname, '/../views/profile/profile_members_card.jade');
 var profileNotifications = path.join(__dirname, '/../views/profile/profile_activity_notifications.jade');
@@ -1033,12 +1029,6 @@ var membersJADERequest = function(req, res) {
   var sort = req.get('sort');
   var text = req.get('text');
   var currentUser = req.user;
-  if (status == 'active') {
-    memberList = activeMembers;
-  }
-  else if (status == 'pending') {
-    memberList = pendingMembers;
-  }
   Organization.findOne({_id: ObjectId(org)}, function(err, organization) {
       if (err) {
         console.log(err);
