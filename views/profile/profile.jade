@@ -83,7 +83,9 @@ block content
           mixin profileInfo
         else
           mixin profileInfo
-      .profile-posts-container.infinite_feed
+      #profileEdit.profile-edit-container(hidden = !edit)
+        include edit
+      .profile-posts-container.infinite_feed(hidden = edit)
         if (posts.length < 1)
           .col-sm-12
             h2 This profile has not created any posts yet

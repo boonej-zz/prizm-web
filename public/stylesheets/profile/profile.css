@@ -685,6 +685,57 @@ form #inputComment {
   margin: 14px 0px 14px 6px;
 }
 
+/** Edit Profile **/
+.profile-edit-container {
+  width: 100%;
+}
+
+.profile-edit-container form {
+  width: 60%;
+  margin: 0 auto;
+}
+
+#profileEdit ul {
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #818284;
+  font-size: 17px;
+}
+
+#profileEdit li {
+  margin: 0;
+  padding: 0;
+  line-height: 38px;
+  vertical-align: middle;
+}
+
+#profileEdit label {
+  width: 40%;
+  font-weight: 400;
+}
+
+#profileEdit input {
+  width: 60%;
+  color: #4d4f53;
+  height: 38px;
+  background-color: #fefefe;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  font-weight: 400;
+  line-height: 1em;
+  padding: 0 20px;
+}
+
+#profileEdit button {
+  float: right;
+  margin-left: 14px;
+  margin-top: 58px;
+  margin-bottom: 80px;
+}
+
+
 /* Mobile Screen */
 @media screen and (max-width:600px) {
   #profile-header {

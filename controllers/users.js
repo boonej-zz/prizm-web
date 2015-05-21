@@ -684,6 +684,7 @@ exports.displayHomeFeed = function(req, res) {
 exports.displayProfile = function(req, res) {
   var id = req.user.id
   var showMembers = false;
+  var edit = req.query.edit?true:false;
   User.findOne({_id: ObjectId(id)}, function(err, user) {
     if (err) {
       res.send(400);
@@ -734,7 +735,8 @@ exports.displayProfile = function(req, res) {
                   showMembers: showMembers,
                   posts: posts,
                   organization: organization,
-                  luminaries: luminaries
+                  luminaries: luminaries,
+                  edit: edit
                 });
               }
             })
@@ -749,7 +751,8 @@ exports.displayProfile = function(req, res) {
             showMembers: showMembers,
             posts: posts,
             organization: false,
-            luminaries: false
+            luminaries: false,
+            edit: edit
           });
         }
       });
