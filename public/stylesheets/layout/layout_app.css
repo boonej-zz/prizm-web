@@ -842,7 +842,7 @@ input#inspirations + span{
 }
 
 input#personal + span {
-  background-image: url('/images/posts/personal_icon.png');
+  background-image: url('/images/icons/lock.png');
   background-size: 36px;
   background-repeat: no-repeat;
   background-position: center;

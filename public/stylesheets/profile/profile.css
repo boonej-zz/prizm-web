@@ -347,8 +347,8 @@ div.post {
 }
 
 #postModal .personal {
-  background-image: url('/images/posts/personal_icon.png');
-  background-size: 31px 30px;
+  background-image: url('/images/icons/lock.png');
+  background-size: 19px 24px;
 }
 
 #postModal .post-image img, #newPostModal .post-image img {

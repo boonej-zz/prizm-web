@@ -406,7 +406,6 @@ exports.authRequired = function (req, res, next) {
 }
 
 exports.displayLogin = function(req, res) {
-  mixpanel.track('Login Page loaded');
   var failure = req.query.failure;
   var bypass = req.query.bypass;
   var agent = req.headers['user-agent'];

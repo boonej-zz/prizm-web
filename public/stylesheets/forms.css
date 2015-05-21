@@ -251,7 +251,7 @@ input#scope:not(:checked) + label::after  {
 }
 
 #personal::after {
-  content: 'Personal';
+  content: 'Private';
 }
 
 #passion {
@@ -275,8 +275,8 @@ input#scope:not(:checked) + label::after  {
 }
 
 #personal {
-  background-image: url('/images/posts/personal_icon.png');
-  background-size: 36px 36px;
+  background-image: url('/images/icons/lock.png');
+  background-size: 28px 35px;
 }
 
 #newPost button  {
