@@ -741,6 +741,13 @@ form #inputComment {
   #profile-header {
     height: 200px;
   }
+  
+  .profile-edit-container form {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
   #profile-header h1 {
     font-size: 27px;
