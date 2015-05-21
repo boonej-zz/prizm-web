@@ -392,7 +392,10 @@ userSchema.pre('save', function(next){
 userSchema.statics.resolvePostTags = function(post, next){
   console.log('resolving post tags');
   var postText = post.text || '';
-  var commentText = _.pluck(post.comments, 'text');
+  var commentText = [];
+  if (post.comments) {
+    _.pluck(post.comments, 'text');
+  }
   commentText.push(postText);
   var userArray = [];
   _.each(commentText, function(comment, idx, list){
