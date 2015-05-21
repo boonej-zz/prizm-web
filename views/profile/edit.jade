@@ -1,0 +1,66 @@
+form
+  ul
+    if (currentUser.type == 'institution_verified')
+      li
+        label(for='name') Name
+        input#name(type='text' name='name' value='#{currentUser.name || ""}')
+      li
+        label(for='info') Info
+        input#info(type='text' name='info' value='#{currentUser.info || ""}')
+      li
+        label(for='website') Website
+        input#website(type='text' name='website' value='#{currentUser.website || ""}')
+      li
+        label(for='founded') Date Founded
+        input#founded(type='text' name='date_founded' value='#{currentUser.date_founded || ""}')
+      li
+        label(for='mascot') Mascot
+        input#mascot(type='text' name='mascot' value='#{currentUser.mascot || ""}')
+      li
+        label(for='population') Population
+        input#population(type='text' name='enrollment' value='#{currentUser.enrollment || ""}')
+      li
+        label(for='email') Email
+        input#email(type='text' name='email' value='#{currentUser.email || ""}')
+      li
+        label(for='zip') Zip Code
+        input#zip(type='text' name='zip_postal' value='#{currentUser.zip_postal || ""}')
+      li
+        label(for='phone') Phone Number
+        input#phone(type='text' name='phone_number' value='#{currentUser.phone_number || ""}')
+    else
+      li
+        label(for='first') First Name
+        input#first(type='text' name='first_name' value='#{currentUser.first_name || ""}')
+      li
+        label(for='last') Last Name
+        input#last(type='text' name='last_name' value='#{currentUser.last_name || ""}')
+      li
+        label(for='info') Info
+        input#info(type='text' name='info' value='#{currentUser.info || ""}')
+      li
+        label(for='website') Website
+        input#website(type='text' name='website' value='#{currentUser.website || ""}')
+      li
+        label(for='email') Email
+        input#email(type='text' name='email' value='#{currentUser.email || ""}')
+      li  
+        label(for='birthday') Date of Birth
+        input#birthday(type='text' name='birthday' value='#{currentUser.birthday || ""}')
+      li
+        label(for='zip') Zip Code
+        input#zip(type='text' name='zip_postal' value='#{currentUser.zip_postal || ""}')
+      li
+        label(for='phone') Phone Number
+        input#phone(type='text' name='phone_number' value='#{currentUser.phone_number || ""}')
+      li
+        label(for='code') Program Code
+        input#code(type='text' name='program_code' value='#{currentUser.program_code || ""}')
+      li
+        label(for='ethnicity') Ethnicity
+        input#ethnicity(type='text' name='ethnicity' value='#{currentUser.ethnicity || ""}')
+      li
+        label(for='religion') Religion
+        input#religion(type='text' name='religion' value='#{currentUser.religion || ""}')
+  button.save Submit
+  button.cancel Cancel
