@@ -728,6 +728,10 @@ form #inputComment {
   padding: 0 20px;
 }
 
+#profileEdit input:required:invalid, #profileEdit input:focus:invalid {
+  border-color: #fe7328;
+}
+
 #profileEdit button {
   float: right;
   margin-left: 14px;

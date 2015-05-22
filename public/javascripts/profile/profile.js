@@ -86,6 +86,7 @@ $(document).ready(function(){
     animatePosts();
     }
   });
+  $('#profileEdit form').submit(profile.updateProfile);
 });
 
 
@@ -178,6 +179,7 @@ var profile = {
           $('img.lazy').lazyload({threshold: 100});
         })
       }
+      $('#profileEdit').addClass('hidden');
       $('.profile-followers-container').hide();
       $('.profile-following-container').hide();
       $('.profile-posts-container').hide();
@@ -186,6 +188,7 @@ var profile = {
       $('.toggle-label').addClass('active');
     }
     if (state == 'on') {
+      $('#profileEdit').addClass('hidden');
       $('.profile-followers-container').hide();
       $('.profile-following-container').hide();
       $('.members-posts-container').hide();
@@ -203,6 +206,7 @@ var profile = {
       'url'         : '/profiles/' + profileId + '/followers',
       'type'        : 'GET',
       success: function(html) {
+        $('#profileEdit').addClass('hidden');
         $('.profile-followers-container').html(html);
         $('.profile-following-container').hide();
         $('.members-posts-container').hide();
@@ -223,6 +227,7 @@ var profile = {
       'url'         : '/profiles/' + profileId + '/following',
       'type'        : 'GET',
       success: function(html) {
+        $('#profileEdit').addClass('hidden');
         $('.profile-following-container').html(html);
         $('.profile-followers-container').hide();
         $('.members-posts-container').hide();
@@ -265,6 +270,7 @@ var profile = {
     var postContainer = $('.profile-posts-container');
 
     if (postContainer.css('display') == 'none') {
+      $('#profileEdit').addClass('hidden');
       $('.profile-followers-container').hide();
       $('.profile-following-container').hide();
       $('.members-posts-container').hide();
@@ -345,6 +351,23 @@ var profile = {
   },
   showProfile: function(id){
     window.location = '/profiles/' + id;
+  },
+  updateProfile: function(){
+    var body = $('#profileEdit form').serialize(); 
+    var id = $('#userID').val();
+    $.ajax({
+      url: '/users/' + id,
+      type: 'PUT',
+      data: body
+    })
+    .done(function(data){
+      profile.cancelEdit();
+    });
+    return false;
+  },
+  cancelEdit: function(){
+    $('#profileEdit').addClass('hidden'); 
+    $('.profile-posts-container').removeClass('hidden');
   }
 }
 

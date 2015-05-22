@@ -1,4 +1,5 @@
 form
+  input#userID(type='hidden' value='#{currentUser._id}')
   ul
     if (currentUser.type == 'institution_verified')
       - var founded = currentUser.date_founded?new Date(currentUser.date_founded):false
@@ -14,7 +15,8 @@ form
         input#info(type='text' name='info' value='#{currentUser.info || ""}')
       li
         label(for='website') Website
-        input#website(type='url' name='website' value='#{currentUser.website || ""}')
+        input#website(type='url' name='website' value='#{currentUser.website || ""}'
+        )
       li
         label(for='founded') Date Founded
         input#founded(
@@ -95,4 +97,4 @@ form
         label(for='religion') Religion
         input#religion(type='text' name='religion' value='#{currentUser.religion || ""}')
   button.save Submit
-  button.cancel Cancel
+  button.cancel(type='button' onclick='profile.cancelEdit()') Cancel

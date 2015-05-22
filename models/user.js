@@ -277,6 +277,23 @@ var fetchOrgUsers = function(model, orgId, criteria, sort, next){
 });
 }
 
+userSchema.statics.allowedFields = function(){
+  return [
+    'first_name',
+    'last_name',
+    'info',
+    'date_founded',
+    'mascot',
+    'website',
+    'email',
+    'zip_postal',
+    'phone_number',
+    'program_code',
+    'ethnicity',
+    'religion',
+    'birthday'
+  ];
+}
 
 
 userSchema.statics.findOrganizationMembers = function(filters, owner, order, search, next) {

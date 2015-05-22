@@ -72,6 +72,7 @@ router.get('/users/:id/password', _users.passwordReset);
 router.get('/users', utils.auth, _users.fetchUsers);
 router.get('/users/:id/institutions', _users.institutionApproval);
 router.post('/users/:id', _users.authRequired, _users.updateUser);
+router.put('/users/:id', _users.authRequired, _users.updateUser);
 /* Authorization */
 router.get('/login', _users.displayLogin);
 router.post('/login', _users.handlePrizmLogin);

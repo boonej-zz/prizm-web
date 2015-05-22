@@ -357,7 +357,38 @@ exports.updateUser = function(req, res) {
       updateSubType(orgId);
     }
     else {
-      res.status(400).send({error: 'Invalid action'});
+      var update = {};
+      var allowedFields = User.allowedFields();
+      var didUpdate = false;
+      var body = req.body;
+      for (var prop in body) {
+        if (_.indexOf(allowedFields, prop) != -1){
+          if (prop == 'birthday') {
+            var date = body[prop].split('-');
+            if (date.length == 3) {
+              date = date[1] + '-' + date[2] + '-' + date[0];
+            } else {
+              date = false;
+            }
+            update[prop] = date;
+            didUpdate = true;
+          } else if (prop == 'date_founded'){
+            update[prop] = new Date(body[prop]);
+            didUpdate = true;
+          }
+          else if (body[prop]) {
+            update[prop] = body[prop];
+            didUpdate = true;
+          }
+        }
+      }
+      if (didUpdate) {
+        User.findOneAndUpdate({_id: userId}, update, function(err, result){
+          res.status(200).send('ok'); 
+        });
+      } else {
+        res.status(400).send();
+      }
     }
   }
   else {
