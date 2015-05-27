@@ -12,7 +12,7 @@ form
         required='required')
       li
         label(for='info') Info
-        input#info(type='textarea' name='info' value='#{currentUser.info || ""}')
+        textarea#info(name='info') #{currentUser.info}
       li
         label(for='website') Website
         input#website(type='url' name='website' value='#{currentUser.website || ""}'
@@ -63,7 +63,7 @@ form
         required='required')
       li
         label(for='info') Info
-        textarea#info(name='info' value='#{currentUser.info || ""}')
+        textarea#info(name='info') #{currentUser.info}
       li
         label(for='website') Website
         input#website(type='url' name='website' value='#{currentUser.website || ""}')
