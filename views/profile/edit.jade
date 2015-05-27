@@ -104,6 +104,6 @@ form
           option(value='') -
           each r in religions
             option(value='#{r}' selected=String(currentUser.religion)==String(r)?'selected':false) #{r}
-      input#avatar(type='file' name='avatar' accept='image/*' onchange='profile.uploadAvatar(event)')
+  input#avatar(type='file' name='avatar' accept='image/*' onchange='profile.uploadAvatar(event)')
   button.save Submit
   button.cancel(type='button' onclick='profile.cancelEdit()') Cancel
