@@ -12,7 +12,7 @@ form
         required='required')
       li
         label(for='info') Info
-        input#info(type='text' name='info' value='#{currentUser.info || ""}')
+        input#info(type='textarea' name='info' value='#{currentUser.info || ""}')
       li
         label(for='website') Website
         input#website(type='url' name='website' value='#{currentUser.website || ""}'
@@ -63,7 +63,7 @@ form
         required='required')
       li
         label(for='info') Info
-        input#info(type='text' name='info' value='#{currentUser.info || ""}')
+        textarea#info(name='info' value='#{currentUser.info || ""}')
       li
         label(for='website') Website
         input#website(type='url' name='website' value='#{currentUser.website || ""}')
@@ -96,5 +96,6 @@ form
       li
         label(for='religion') Religion
         input#religion(type='text' name='religion' value='#{currentUser.religion || ""}')
+      input#avatar(type='file' name='avatar' accept='image/*' onchange='profile.uploadAvatar(event)')
   button.save Submit
   button.cancel(type='button' onclick='profile.cancelEdit()') Cancel

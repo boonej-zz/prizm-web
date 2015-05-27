@@ -361,34 +361,45 @@ exports.updateUser = function(req, res) {
       var allowedFields = User.allowedFields();
       var didUpdate = false;
       var body = req.body;
-      for (var prop in body) {
-        if (_.indexOf(allowedFields, prop) != -1){
-          if (prop == 'birthday') {
-            var date = body[prop].split('-');
-            if (date.length == 3) {
-              date = date[1] + '-' + date[2] + '-' + date[0];
-            } else {
-              date = false;
+      console.log('requesting');
+      console.log(body);
+      _image.uploadAvatar(req, function(err, path, fields){
+        if (path) {
+          update.profile_photo_url = path;
+          didUpdate = true;
+        }
+        for (var prop in fields) {
+          if (_.indexOf(allowedFields, prop) != -1){
+            var value = fields[prop][0];
+            if (prop == 'birthday') {
+              var date = value.split('-'); 
+              if (date.length == 3) {
+                date = date[1] + '-' + date[2] + '-' + date[0];
+              } else {
+                date = false;
+              }
+              update[prop] = date;
+              didUpdate = true;
+            } else if (prop == 'date_founded'){
+              update[prop] = new Date(value);
+              didUpdate = true;
             }
-            update[prop] = date;
-            didUpdate = true;
-          } else if (prop == 'date_founded'){
-            update[prop] = new Date(body[prop]);
-            didUpdate = true;
-          }
-          else if (body[prop]) {
-            update[prop] = body[prop];
-            didUpdate = true;
+            else if (value) {
+              update[prop] = value;
+              didUpdate = true;
+            }
           }
         }
-      }
-      if (didUpdate) {
-        User.findOneAndUpdate({_id: userId}, update, function(err, result){
-          res.status(200).send('ok'); 
-        });
-      } else {
-        res.status(400).send();
-      }
+        if (didUpdate) {
+          User.findOneAndUpdate({_id: userId}, update, function(err, result){
+            res.status(200).send('ok'); 
+          });
+        } else {
+          res.status(400).send();
+        }
+      });
+
+      
     }
   }
   else {

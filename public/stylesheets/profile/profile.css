@@ -113,6 +113,7 @@ ul .post.shown {
 .slider-nav ul {
   list-style: none;
   padding: 0px;
+  height: 0px;
 }
 
 .slider-nav li {
@@ -707,16 +708,18 @@ form #inputComment {
 #profileEdit li {
   margin: 0;
   padding: 0;
-  line-height: 38px;
   vertical-align: middle;
+  margin-bottom: 4px;
 }
 
 #profileEdit label {
   width: 40%;
   font-weight: 400;
+  vertical-align: top;
+  float: left;
 }
 
-#profileEdit input {
+#profileEdit input, #profileEdit textarea {
   width: 60%;
   color: #4d4f53;
   height: 38px;
@@ -726,10 +729,23 @@ form #inputComment {
   font-weight: 400;
   line-height: 1em;
   padding: 0 20px;
+  float: left;
+  margin-bottom: 4px;
 }
 
-#profileEdit input:required:invalid, #profileEdit input:focus:invalid {
+#profileEdit textarea {
+  height: 80px;
+  margin-bottom: 4px;
+  padding: 5px 20px;
+  line-height: 1.2em;
+}
+
+#profileEdit input:required:invalid {
   border-color: #fe7328;
+}
+
+#profileEdit input:focus, #profileEdit textarea:focus {
+  border: 1px solid #3e6a9e;
 }
 
 #profileEdit button {
@@ -739,13 +755,38 @@ form #inputComment {
   margin-bottom: 80px;
 }
 
+.edit-image-overlay {
+  height: 96px;
+  width: 96px;
+  background-image: url('/images/icons/edit_avatar.png');
+  background-size: 96px 96px;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  position: absolute;
+  margin-left: -96px;
+  cursor: pointer;
+  z-index: 6000;
+}
+
+#profileEdit input[type='file'] {
+  display: none;
+}
+
 
 /* Mobile Screen */
 @media screen and (max-width:600px) {
   #profile-header {
     height: 200px;
   }
-  
+
+  .edit-image-overlay {
+    height: 60px;
+    width: 60px;
+    background-size: 60px 60px;
+    margin-left: -60px;
+  }
+
   .profile-edit-container form {
     width: 100%;
     margin: 0 auto;

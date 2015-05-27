@@ -352,22 +352,52 @@ var profile = {
   showProfile: function(id){
     window.location = '/profiles/' + id;
   },
-  updateProfile: function(){
+  updateProfile: function(e){
     var body = $('#profileEdit form').serialize(); 
+    var d = new FormData($('#profileEdit form')[0]);
     var id = $('#userID').val();
     $.ajax({
       url: '/users/' + id,
       type: 'PUT',
-      data: body
+      data: d,
+      cache: false,
+      contentType: false,
+      processData: false
     })
     .done(function(data){
-      profile.cancelEdit();
+      window.location = '/profile';
     });
     return false;
   },
   cancelEdit: function(){
     $('#profileEdit').addClass('hidden'); 
     $('.profile-posts-container').removeClass('hidden');
+  },
+  editAvatar: function(){
+    $('#avatar').click();
+  },
+  uploadAvatar: function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (window.File && window.FileReader && window.FileList && window.Blob){
+      var files = e.target.files;
+      var file;
+      var result = '';
+      for (var i=0; file = files[i]; ++i){
+        if (!file.type.match('image.*')){
+          continue;
+        }
+        reader = new FileReader();
+        reader.onload = (function (tfile){
+          return function(r){
+            $('img.prizm-avatar-md').attr('src', null);
+            $('img.prizm-avatar-md').css('outline', 'none');
+            $('img.prizm-avatar-md').attr('style', 'background-image: url(' + r.target.result + ')'); 
+          }
+        }(file));
+        reader.readAsDataURL(file);
+      }
+    }
   }
 }
 
