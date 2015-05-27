@@ -719,7 +719,7 @@ form #inputComment {
   float: left;
 }
 
-#profileEdit input, #profileEdit textarea {
+#profileEdit input, #profileEdit textarea, #profileEdit select {
   width: 60%;
   color: #4d4f53;
   height: 38px;
@@ -731,6 +731,17 @@ form #inputComment {
   padding: 0 20px;
   float: left;
   margin-bottom: 4px;
+}
+
+#profileEdit select {
+  background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
+  background-size: 7px 4px;
+  background-repeat: no-repeat;
+  background-position-x: 97%;
+  background-position-y: center;
+ -webkit-appearance: none;
+ outline: none;
+
 }
 
 #profileEdit textarea {

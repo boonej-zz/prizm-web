@@ -1,3 +1,5 @@
+- var ethnicities = ['African-American or Black', 'American Indian or Alaska Native', 'Asian', 'Caucasian or White', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander']
+- var religions = ['Anglican (Episcopal)', 'Bahá\'í', 'Buddhist', 'Caodalist', 'Cheondoist', 'Christian', 'Christian Scientist', 'Church of World Messianity', 'Congregationalist (UCC)', 'Disciples of Christ', 'Friend (Quaker)', 'Hindu', 'Jain', 'Jehovah\'s Witness', 'Jewish', 'Latter-day Saint (Morman)', 'Lutheran', 'Methodist', 'Moravian', 'Muslim', 'None', 'Orthodox', 'Other - Non-Christian', 'Pentacostal', 'Presbyterian', 'Rastafari', 'Reformed', 'Roman Catholic', 'Seicho-no-le-ist', 'Seventh Day Adventist', 'Sikh', 'Taoist', 'Unitarian Universalist (UU)', 'Wiccan (Pagan)', 'Yazidi']
 form
   input#userID(type='hidden' value='#{currentUser._id}')
   ul
@@ -91,11 +93,17 @@ form
         label(for='code') Program Code
         input#code(type='text' name='program_code' value='#{currentUser.program_code || ""}')
       li
-        label(for='ethnicity') Ethnicity
-        input#ethnicity(type='text' name='ethnicity' value='#{currentUser.ethnicity || ""}')
+        label(for='ethnicity' ) Ethnicity
+        select#ethnicity(name='ethnicity')
+          option(value='') -
+          each e in ethnicities
+            option(value='#{e}' selected=String(currentUser.ethnicity)==String(e)?'selected':false) #{e}
       li
         label(for='religion') Religion
-        input#religion(type='text' name='religion' value='#{currentUser.religion || ""}')
+        select#religion(name='religion')
+          option(value='') -
+          each r in religions
+            option(value='#{r}' selected=String(currentUser.religion)==String(r)?'selected':false) #{r}
       input#avatar(type='file' name='avatar' accept='image/*' onchange='profile.uploadAvatar(event)')
   button.save Submit
   button.cancel(type='button' onclick='profile.cancelEdit()') Cancel
