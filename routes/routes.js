@@ -9,6 +9,7 @@ var _follow   = require('../controllers/follow');
 var _orgs     = require('../controllers/organizations');
 var _trusts   = require('../controllers/trusts');
 var _messages = require('../controllers/messages');
+var Insights = require('../controllers/insights');
 var config    = require('../config');
 var passport  = require('passport');
 
@@ -104,7 +105,12 @@ router.post('/profiles/:id/followers', _follow.followUserId);
 
 /* Insights */
 router.get('/profiles/:uid/insights', _users.authRequired, _users.fetchInsightsFeed);
+router.get('/insights/new', function(req, res){
+  res.render('create/insight');
+});
+router.post('/insights', _users.authRequired, Insights.createInsight);
 router.get('/insights/:id', _users.authRequired, _users.getSingleInsight);
+router.post('/insights/:id', _users.authRequired, Insights.sendInsight);
 
 
 router.post('/profiles/:uid/insights/:id', _users.authRequired, function(req, res){

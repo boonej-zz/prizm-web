@@ -283,6 +283,79 @@ var modal = {
   }
 }
 
+var insight = {
+  showNewInsightForm: function(){
+    $.ajax({
+      method: 'GET',
+      url: '/insights/new',
+      contentType: 'text/html',
+    })
+    .done(function(html){
+      $('body').addClass('noscroll');
+      $('body').prepend(html); 
+      $('#newInsight #imageContainer').click(insight.showFileUpload);
+      $('#newInsight').submit(insight.submitNewForm);
+    });
+  },
+  showFileUpload: function(){
+    $('input#image').click();
+  },
+  submitNewForm: function(){
+    var d = new FormData($('#newInsight')[0]);
+    $.ajax({
+      method: 'POST',
+      url: '/insights',
+      contentType: false,
+      data: d,
+      cache: false,
+      processData: false
+    })
+    .done(function(html){
+      modal.cancel();
+      $('body').addClass('noscroll');
+      $('body').prepend(html);
+      $('#sendInsight').submit(insight.sendInsight);
+    });
+    return false;
+  },
+  sendInsight: function(e){
+    var data = $('#sendInsight').serialize();
+    $.ajax({
+      method: 'POST',
+      url: '/insights/' + $('#insightID').val(),
+      data: data
+    })
+    .done(function(res){
+      alert('Your insight was sent successfully.');
+      modal.cancel();
+    });
+    return false;
+  },
+  imageChanged: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    if (window.File && window.FileReader && window.FileList && window.Blob){
+      var files = e.target.files;
+      var file;
+      var result = '';
+      for(var i = 0; file = files[i]; i++){
+        if(!file.type.match('image.*')){
+          continue;
+        }
+        reader = new FileReader();
+        reader.onload = (function(tfile){
+          return function(im) {
+            $('#imageContainer').css('background-image', 'url(' + im.target.result +')'); 
+          }
+        }(file));
+        reader.readAsDataURL(file);
+      } 
+    } else {
+      alert('This browser does not support the File API.');
+    }
+  }
+};
+
 var group = {
   showNewGroupForm: function(){
     var organization = $('input#selectedOrganization').val();
@@ -312,7 +385,6 @@ var group = {
         } else {
           $('button.save').attr('disabled', 'disabled');
         }
-
       });
     });
   },

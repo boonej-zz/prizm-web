@@ -199,6 +199,7 @@ exports.fetchMessages = function(req, res){
   var group = req.params.group;
   if (group == 'all') group = null;
   var organization = req.get('organization');
+  var name = req.get('group_name');
   var lastDate = req.get('lastDate');
   var quick = req.get('quick');
   var user = req.user;
@@ -207,11 +208,16 @@ exports.fetchMessages = function(req, res){
   if (organization) {
     var criteria = {
       organization: organization,
-      group: group == 'all'?null:group
     };
+    if (name){
+      criteria.name = name;
+    } else {
+      criteria.group == 'all'?null:group
+    } 
     if (lastDate) {
       criteria.create_date = {$lt: new Date(lastDate)};
     }
+    console.log(criteria);
     Group.findOne({_id: group}, function(err, group){
       Message.fetchMessages(
         criteria, 

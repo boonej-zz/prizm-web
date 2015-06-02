@@ -343,7 +343,7 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, order, sea
     .exec(function(err, trusts){
         var trustArray = [];
         if (filters.status == 'active') {
-          if (_.has(trusts, 'length')){
+          if (trusts && trusts.length > 0){
             trustArray = _.pluck(trusts, 'to');
           }
         }

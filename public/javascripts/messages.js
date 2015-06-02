@@ -6,6 +6,7 @@ function startPage(){
     var text = $('#newMessage input').val();
     var organization = $('input#selectedOrganization').val();
     var group = $('input#selectedGroup').val();
+    var hash = window.location.hash;
     $.ajax({
       type: 'POST',
       url: '/messages',
@@ -13,6 +14,7 @@ function startPage(){
       headers: {
         organization: organization,
         group: group,
+        group_name: hash,
         text: text
       }
     })
