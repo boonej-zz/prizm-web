@@ -763,12 +763,20 @@ input#scope:not(:checked) + label::after  {
   height: 88px;
 }
 
+#imageContainer {
+  background-image: url('/images/icons/upload_image.png');
+  background-size: initial;
+}
+
+#previewImage {
+  background-size: contain;
+}
+
 #newInsightForm #imageContainer, #newInsightForm #previewImage {
   width: 86%;
   height: 404px;
   margin: 14px auto 0px auto;
   border: 1px solid #e4e5ea;
-  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }

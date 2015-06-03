@@ -353,6 +353,7 @@ var insight = {
         reader.onload = (function(tfile){
           return function(im) {
             $('#imageContainer').css('background-image', 'url(' + im.target.result +')'); 
+            $('#imageContainer').css('background-size', 'cover');
           }
         }(file));
         reader.readAsDataURL(file);
