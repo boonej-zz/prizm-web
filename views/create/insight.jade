@@ -18,7 +18,26 @@
         #previewImage(style='background-image: url("#{insight.file_path}")')
         input#insightID(type='hidden' name='insight_id' value='#{insight._id}')
         input#subject(type='text' name='subject' placeholder='Email Subject Line')
-        input#group(type='text' name='group' placeholder='Group')
+        .selectArea
+          input#filter(type='text' onkeyup='insight.filterGroup(event)' placeholder='Choose groups to target.')
+          .options
+            .option(onclick='insight.selectRadio(event)')
+              .content
+                span.name All Groups
+                input#all.hidden(type='checkbox' 
+                  name='groups' 
+                  value=false 
+                  checked='checked')
+                label(for='all')
+            each group in organization.groups
+              .option.cursor(onclick='insight.selectRadio(event)')
+                .content
+                  span.name #{group.name}
+                  input.hidden(type='checkbox'
+                    name='groups',
+                    value='#{group._id}',
+                    id='#{group._id}')
+                  label(for='#{group._id}')
         .section.buttons
           button.cancel Cancel
           button.save Send

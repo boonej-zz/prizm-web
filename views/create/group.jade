@@ -20,7 +20,7 @@
         label(for='members') Group Members
         div.selectArea          
           input#memberFilter(type='text' onkeyup='group.filterMembers(event)' placeholder='Search by member')
-          .members-container
+          .members-container.options
             each member in members
               - var creatorPhoto = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
               div.option.cursor(onclick='group.selectRadio(event)')

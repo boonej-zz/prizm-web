@@ -353,6 +353,42 @@ var insight = {
     } else {
       alert('This browser does not support the File API.');
     }
+  },
+  selectRadio: function(e){
+    var $target = $(e.target);
+    var checkbox = 'input[type="checkbox"]';
+    var targetBox;
+    var id;
+    var checked;
+    if (!$target.is(checkbox) ){
+      id = $target.children(checkbox).attr('id');
+      checked = $target.children(checkbox).prop('checked');
+      targetBox = $target.children(checkbox);
+    } else {
+      id = $target.siblings(checkbox).attr('id');
+      checked = $target.siblings(checkbox).prop('checked');
+      targetBox = $target.siblings(checkbox);
+    }
+    if (id == 'all') {
+      $(checkbox).prop('checked', false);
+    } else {
+      $('input#all').prop('checked', false);
+    }
+    targetBox.prop('checked', !checked);
+  },
+  filterGroup: function(e){
+    var $target = $(e.target);
+    var t = $target.val();
+    var r = new RegExp(t, 'i');
+    $('.selectArea .option').each(function(i){
+      var $this = $(this);
+      var s = $this.children('.content').first().children('.name').first().text();
+      if (s.match(r) || t == '') {
+        $this.show();
+      } else {
+        $this.hide();
+      }
+    });
   }
 };
 

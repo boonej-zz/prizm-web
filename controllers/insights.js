@@ -54,8 +54,12 @@ exports.createInsight = function(req, res){
         if (err) {
           res.status(400).send();
         } else {
-          res.render('create/insight', {insight: insight});
-        }
+          Organization.findOne({owner: user._id})
+          .populate({path: 'groups', model: 'Group'})
+          .exec(function(err, org){
+            res.render('create/insight', {insight: insight, organization: org});
+          });
+          }
       });
     }
   }); 
@@ -66,14 +70,30 @@ exports.sendInsight = function(req, res){
   console.log(req.body);
   var insight_id = req.body.insight_id;
   var subject = req.body.subject;
-  Organization.findOne({owner: user._id}, function(err, org){
+  var groups = req.body.groups;
+  Organization.findOne({owner: user._id})
+   .exec(function(err, org){
     if (err) console.log(err);
     if (org) {
       Insight.findOne({_id: insight_id}, function(err, insight){
         if (err) console.log(err);
         if (insight) {
+          var criteria = {organization: org._id, status: 'active'};
+          if (groups && groups.length > 0) {
+            if (_.isArray(groups)) {
+              console.log('Sending to multiple groups ' + groups);
+              criteria.groups = {'$elemMatch': {_id: {$in: groups}}};
+            } else {
+              if (groups != 'on') {
+                console.log('Sending to one group ' + groups);
+                criteria.groups = {'$elemMatch': {_id: groups}};
+              } else {
+                console.log('Sending to everybody!');
+              }
+            } 
+          }
       
-          User.findOrganizationMembers({organization: org._id, status: 'active'}, 
+          User.findOrganizationMembers(criteria, 
             user._id, false, false, function(err, members){
             if (members) {
               _.each(members, function(m, i, l){
