@@ -1,38 +1,81 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var time       = require('../lib/helpers/date_time');
+var User = mongoose.model('User');
 var _ = require('underscore');
 
 
 var messageSchema = new mongoose.Schema({
   creator: {type: ObjectId, ref: 'User', required: true},
   create_date: {type: Date, default: null, required: false, index: true},
+  modify_date: {type: Date, default: null, required: false, index: true},
   text: {type: String, default: ''},
   group: {type: ObjectId, index: true},
   organization: {type: ObjectId, ref: 'Organization', required: true, index: true},
   likes: {type: Array},
   likes_count: {type: Number, default: 0},
+  pretty_text: {type: String},
+  web_text: {type: String},
+  image_url: {type: String},
   meta: {
+    message_id: {type: ObjectId, ref:'Message'},
     description: {type: String},
     title: {type: String},
+    url: {type: String},
+    video_url: {type: String},
     image: {
+      message_id: {type: ObjectId, ref: 'Message'},
       url:  {type: String},
       width:  {type: Number},
       height: {type: Number}
     }
-  }
+  },
+  read: {type: Array}
 });
 
 messageSchema.pre('save', function(next){
   if (!this.create_date){
     this.create_date = Date.now();
   }
+  this.modify_date = Date.now();
   next();
 });
 
 messageSchema.post('init', function(){
   this.timeSince = time.timeSinceFormatter(this.create_date);
+  if (this.meta) {
+    this.meta.message_id = this._id;
+    this.meta.image.message_id = this._id;
+  }
+  if (!this.read){
+    this.read = [];
+  }
 });
+
+var replaceTagsFromUserList = function(string, userList){
+  var ps = '<a class="tag-link" href="/profiles/';
+  var pm = '">@';
+  var pe = '</a>';
+  var newString = string;
+  var match = string.match(/@\S{24}/g); 
+  if (match && match.length > 0){
+    console.log('matching');
+    _.each(match, function(tag, idx, list){
+      console.log(tag);
+      if (tag && tag.length > 0){
+        var uid = tag.substr(1);
+        var mu = _.find(userList, function(user){
+          return String(user._id) == uid;
+        });
+        if (mu) {
+          var replace = ps + String(mu._id) + pm + mu.name + pe;
+          newString = newString.replace(tag, replace);
+        }
+      }
+    });
+  }
+  return newString;
+};
 
 messageSchema.statics.fetchMessages = function(criteria, next){
   this.model('Message').find(criteria)
@@ -43,7 +86,18 @@ messageSchema.statics.fetchMessages = function(criteria, next){
   })
   .limit(15)
   .exec(function(err, messages){
-    next(err, messages);
+    _.each(messages, function(message, index, list){
+        User.resolvePostTags(message, function(err, users){
+          if (users && users.length > 0){
+            if (message.text) {
+              message.web_text = replaceTagsFromUserList(message.text, users);
+            }
+          }
+          if (index == (list.length -1)){
+            next(err, messages);
+          }
+        });
+    });
   });
 };
 
@@ -108,5 +162,6 @@ messageSchema.methods.prettyText = function(next) {
     next(prettyText);
   });
 };
+
 
 mongoose.model('Message', messageSchema);

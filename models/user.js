@@ -407,7 +407,6 @@ userSchema.pre('save', function(next){
  * returns the reformatted string. 
  */
 userSchema.statics.resolvePostTags = function(post, next){
-  console.log('resolving post tags');
   var postText = post.text || '';
   var commentText = [];
   if (post.comments) {

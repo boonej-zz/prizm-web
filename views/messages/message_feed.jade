@@ -23,7 +23,9 @@ each message in messages
           .title #{message.meta.title}
         if message.meta.description
           .description #{message.meta.description}
-        | #{message.text}
+        if message.image_url
+          img.message-image(src=message.image_url)
+        | !{message.web_text}
     
 
       
