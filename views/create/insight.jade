@@ -11,7 +11,7 @@
         input#url(type='text' placeholder='URL' name='link')
         input#hashtags(type='text' placeholder='Hashtags' name='hash_tags')
         .section.buttons
-          button.cancel Cancel
+          button.cancel(onclick='modal.cancel()') Cancel
           button.save.next Next
     else
       form#sendInsight
@@ -39,5 +39,5 @@
                     id='#{group._id}')
                   label(for='#{group._id}')
         .section.buttons
-          button.cancel Cancel
+          button.cancel(onclick='modal.cancel()') Cancel
           button.save Send

@@ -271,6 +271,15 @@ var nav = {
 };
 
 var modal = {
+  showModal: function(html){
+    $('body').addClass('noscroll');
+    $('body').prepend(html);
+    $('.create-overlay').click(function(event){
+      if ($(event.target).hasClass('create-form')) {
+        modal.cancel();
+      }
+    });
+  },
   cancel: function(e){
     var shouldDismiss = true;
     if (e) {
@@ -291,8 +300,7 @@ var insight = {
       contentType: 'text/html',
     })
     .done(function(html){
-      $('body').addClass('noscroll');
-      $('body').prepend(html); 
+      modal.showModal(html); 
       $('#newInsight #imageContainer').click(insight.showFileUpload);
       $('#newInsight').submit(insight.submitNewForm);
     });
@@ -312,8 +320,7 @@ var insight = {
     })
     .done(function(html){
       modal.cancel();
-      $('body').addClass('noscroll');
-      $('body').prepend(html);
+      modal.showModal(html);
       $('#sendInsight').submit(insight.sendInsight);
     });
     return false;
@@ -402,8 +409,7 @@ var group = {
       headers: {organization: organization}
     })
     .done(function(html){
-      $('body').addClass('noscroll');
-      $('body').prepend(html);
+      modal.showModal(html);
       $('#newGroup').submit(group.createNewGroup);
       $('#Leader').change(function(){
         $('input.members[value=' + $(this).val() + ']').prop('checked', true);
@@ -477,8 +483,7 @@ var member = {
       contentType: 'text/html'
     })
     .done(function(html){
-      $('body').addClass('noscroll');
-      $('body').prepend(html);
+      modal.showModal(html);
       $('#newMember').submit(member.sendForm);
     });
   },
@@ -559,8 +564,7 @@ var post = {
       contentType: 'text/html'
     })
     .done(function(html){
-      $('body').addClass('noscroll');
-      $('body').prepend(html);
+      modal.showModal(html);
       $('#newPost').submit(post.createNewPost);
       $('input[type="radio"]').click(function(){
         if ($('textarea').val() || $('input[type="file"]').val()) {
