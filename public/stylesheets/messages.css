@@ -184,7 +184,7 @@ li.message, li.member {
 
 .message .profile-icon, .member .profile-icon {
   float: left;
-  margin: 27px 16px 0px 45px;
+  margin: 26px 16px 0px 45px;
 }
 
 li.message .content, li.member .content {
@@ -193,8 +193,9 @@ li.message .content, li.member .content {
   width: 478px;
   min-height: 108px;
   border-bottom: 1px solid #c5c8cc;
-  padding: 33px 0 10px 0;
+  padding: 16px 0 10px 0;
   clear: none;
+  margin-top: 9px;
 }
 
 li.member .content {
@@ -221,6 +222,7 @@ ul#messages li:last-child, ul#members li:last-child {
   font-size: 16px;
   color: #8b8989;
   width: 75%;
+  margin-top: 8px;
 }
 
 .message .foot {
@@ -229,7 +231,7 @@ ul#messages li:last-child, ul#members li:last-child {
   height: 20px;
   float: left;
   clear: left;
-  margin-top: 9px;
+  margin-top: 0px;
   line-height: 20px;
   vertical-align: middle;
 }
@@ -254,6 +256,11 @@ ul#messages li:last-child, ul#members li:last-child {
   font-weight: 300;
 }
 
+.likes {
+  float: right;
+  display: inline-block;
+}
+
 .heart {
   display: inline-block;
   background-size: 16px 14px;
@@ -274,6 +281,7 @@ ul#messages li:last-child, ul#members li:last-child {
 }
 
 #likesCount {
+  display: inline-block;
   font-size: 15px;
   color: #484849;
   font-weight: 300;
@@ -281,7 +289,8 @@ ul#messages li:last-child, ul#members li:last-child {
   line-height: 17px;
   margin-left: 9px;
   vertical-align: top;
-
+  margin-right: 51px;
+  width: 20px;
 }
 
 #likesCount.clear {
@@ -503,6 +512,10 @@ button.remove {
 }
 
 @media screen and (max-width: 410px) {
+  #likesCount {
+    margin-right: 4px;
+  }
+
   .profile-icon {
     width: 35px;
     height: 35px;

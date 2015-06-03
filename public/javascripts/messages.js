@@ -153,7 +153,7 @@ var messages = {
   likeMessage: function(e){
     var $target = $(e.target);
     var $parent = $target.parents('li.message');
-    var $heart  = $parent.children().children('.foot').children('.heart');
+    var $heart  = $parent.children().children('.likes').children('.heart');
     var action = 'like';
     if ($heart.hasClass('full')) action = 'unlike';
     var $likesCount = $heart.siblings('#likesCount');

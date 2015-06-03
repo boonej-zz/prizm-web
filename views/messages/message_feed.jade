@@ -1,5 +1,6 @@
 input#count(type='hidden' value='#{count}')
 each message in messages
+  -var likeAction = String(message.creator._id) == String(currentUser._id)?'':'messages.likeMessage(event)'
   - var creatorPhoto = message.creator.profile_photo_url?'https://' + message.creator.profile_photo_url.substr(7):'/images/default-profile.png'
   li.message(created='#{message.create_date}' data-id='#{message._id}' data-liked=message.liked)
     .profile-icon.cursor(style="background-image: url('#{creatorPhoto}')"
@@ -7,6 +8,14 @@ each message in messages
     .content
       span.creator.cursor(onclick='nav.navigate("/profiles/#{message.creator._id}")') 
         | #{message.creator.name}
+      span.likes
+        span.heart(class='#{message.liked?"full":"empty"}' 
+          onclick='#{likeAction}')
+        span#likesCount(class=message.likes_count == 0?'clear':'') 
+          | #{message.likes_count}
+      .foot
+        span.clock-icon
+        span.time-since #{message.timeSince} ago 
       span.message
         if message.meta.image && message.meta.image.url
           img.image-thumb(src=message.meta.image.url)
@@ -14,10 +23,9 @@ each message in messages
           .title #{message.meta.title}
         if message.meta.description
           .description #{message.meta.description}
-        | #{message.text} 
-      .foot
-        span.clock-icon
-        span.time-since #{message.timeSince} ago - Like
-        span.heart(class='#{message.liked?"full":"empty"}' onclick=String(message.creator._id)==String(currentUser._id)?'':'messages.likeMessage(event)')
-        span#likesCount(class=message.likes_count == 0?'clear':'') 
-          | #{message.likes_count}
+        | #{message.text}
+    
+
+      
+     
+       
