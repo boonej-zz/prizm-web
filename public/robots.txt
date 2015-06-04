@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: https://www.prizmapp.com/privacy
+Disallow: https://www.prizmapp.com/terms
