@@ -18,6 +18,7 @@ var url = require('../lib/helpers/url');
 var request = require('request');
 var htmlparser = require('htmlparser');
 var utils = require('util');
+var S = require('string');
 
 var shortFields = function(org) {
 return {
@@ -352,10 +353,10 @@ exports.createMessage = function(req, res){
                 metaData.image.height = m.content;
               }
               if (m[accessor] == 'og:description'){
-                metaData.description = m.content;
+                metaData.description = S(m.content).decodeHTMLEntities().s;
               }
               if (m[accessor] == 'og:title'){
-                metaData.title = m.content;
+                metaData.title = S(m.content).decodeHTMLEntities().s;
               }
             });
             message.meta = metaData;
