@@ -358,6 +358,12 @@ exports.createMessage = function(req, res){
               if (m[accessor] == 'og:title'){
                 metaData.title = S(m.content).decodeHTMLEntities().s;
               }
+              if (m[accessor] == 'og:url'){
+                metaData.url = m.content;
+              }
+              if (m[accessor] == 'og:video:url'){
+                metaData.video_url = m.content;
+              }
             });
             message.meta = metaData;
           }
