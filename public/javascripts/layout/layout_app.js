@@ -301,6 +301,8 @@ var modal = {
       headers: {type: 'settings'}
     })
     .done(function(html){
+      var pm = $('#postModal');
+      if (pm) pm.remove();
       $('body').addClass('noscroll');
       $('body').append(html);
       $('#postModal').modal();
