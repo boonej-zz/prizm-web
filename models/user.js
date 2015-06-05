@@ -642,7 +642,7 @@ userSchema.methods.addFollowing = function(following_id, next) {
 
 userSchema.statics.fetchSuggestions = function(user, next){
   var following = _.pluck(user.following, '_id');
-  var criteria = {active: true, _id: {$nin: following}};
+  var criteria = {active: true, _id: {$nin: following}, _id: {$ne: user._id}};
   if (user.org_status && user.org_status.length > 0) {
     var orgs = [];
     _.each(user.org_status, function(item, idx, list){
