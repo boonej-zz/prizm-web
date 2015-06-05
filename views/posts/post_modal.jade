@@ -1,0 +1,79 @@
+- var profilePhoto = post.creator.profile_photo_url?'https://' + post.creator.profile_photo_url.substr(7):'/images/default-profile.png'
+div#postModal.modal.fade(
+  tabIndex='-1'
+  role='dialog'
+  aria-labelledby='postModalLabel')
+  .container.no-padding
+    .modal-dialog
+      .modal-content
+        #post-display.modal-body
+          .container(id='#{post.id}')
+            .dismiss.cursor(onclick='modal.cancelPostModal(event)')
+            .next-post-left.cursor(onclick='profile.nextPost(event, "left")')
+            .next-post-right.cursor(onclick='profile.nextPost(event, "right")')
+            .row
+              .post-modal-left.no-padding
+                .post-image.single-post(onclick='modal.cancelPostModal(event)')
+                  img(src='#{post.file_path}')
+              .post-modal-right.no-padding.absolute-height
+                .comments-header
+                  .post-modal-avatar
+                    img.prizm-avatar-sm(src='#{profilePhoto}' onclick='prizm.showProfile("#{post.creator._id}")')
+                  .avatar-name.cursor(onclick='prizm.showProfile("#{post.creator._id}")')
+                    | #{post.creator.name}
+                  .clock-icon
+                    | #{post.time_since}
+                  .category-icon(class=post.category)
+                .post-comments
+                  .back-button(onclick='modal.cancelPostModal(event)')
+                  p.comments-title
+                    | Comments
+                .comment-scroll
+                  if post.text
+                    .comment-container
+                      .post-modal-avatar
+                        img.prizm-avatar-sm(src='#{profilePhoto}' onclick='prizm.showProfile("#{post.creator._id}")')
+                      .avatar-name.cursor(onclick='prizm.showProfile("#{post.creator._id")')
+                        | #{post.creator.name}
+                      .comment-text
+                        | !{post.formattedText}
+                      .comment-info
+                  each comment, i in post.comments
+                    - var commentAvatar = comment.creator.profile_photo_url?'https://' + comment.creator.profile_photo_url.substr(7):'/images/profile/profile_default_avatar.png'
+                    .comment-container
+                      .post-modal-avatar
+                        img.prizm-avatar-sm(src='#{commentAvatar}' onclick='prizm.showProfile("#{comment.creator._id}")')
+                      .avatar-name.cursor(onclick='prizm.showProfile("#{comment.creator._id}")')
+                        | #{comment.creator.name}
+                      .comment-text
+                        | !{comment.formattedText}
+                      .comment-info
+                        .clock-icon
+                        .time
+                          | #{comment.time_since}
+                        .comment-likes
+                          | -&nbsp;&nbsp;Like
+                        .like-icon.liked
+                        .comment-likes-count
+                          | #{comment.likes_count}
+                .comments-footer
+                  if post.ownPost
+                    .like-icon.not-liked.cursor
+                  else
+                    if post.liked
+                      .like-icon.liked.cursor(onclick='profile.unlikePost("#{post._id}", event)')
+                    else
+                      .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id", event)')
+                  .comments-post
+                    form(class='comment-post')
+                      input(type='hidden' value='#{post._id}' name='postId')
+                      label(for='inputComment' class='sr-only')
+                      input(type='text'
+                        id='inputComment'
+                        class='form-control'
+                        placeholder='Write a comment...'
+                        onkeypress='profile.overrideEnter(event)'
+                        required='required')
+                      a.cursor(class='btn btn-xs btn-default post-button'
+                        onclick='profile.postComment("#{post._id}", event)')
+                        | Post

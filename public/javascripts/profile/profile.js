@@ -133,6 +133,9 @@ var profile = {
     if (direction == 'right') {
       nextPostId =  $('#' + currentPostId).next().attr('id');
     }
+    if (!nextPostId){
+      nextPostId = $('.posts #' + currentPostId).next().attr('id');
+    }
     var request = $.ajax({
       url: '/posts/' + nextPostId,
       headers: {

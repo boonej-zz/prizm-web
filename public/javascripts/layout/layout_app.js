@@ -289,6 +289,22 @@ var modal = {
       $('.create-overlay').remove();
       $('body').removeClass('noscroll');
     }
+  },
+  cancelPostModal: function(e){
+    $('#postModal').remove();
+    $('body').removeClass('noscroll');
+  },
+  showPostModal: function(post_id){
+    $.ajax({
+      method: 'GET',
+      url: '/posts/' + post_id,
+      headers: {type: 'settings'}
+    })
+    .done(function(html){
+      $('body').addClass('noscroll');
+      $('body').append(html);
+      $('#postModal').modal();
+    });
   }
 }
 

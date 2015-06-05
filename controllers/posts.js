@@ -135,8 +135,28 @@ exports.fetchPosts = function(req, res) {
   }
 };
 
+var renderPostModal = function(req, res){
+  console.log('in post modal');
+  var user = req.user;
+  var postID = req.params.id;
+  console.log(postID);
+  Post.findOne({_id: postID})
+    .populate({path: 'creator'})
+    .populate({path: 'comments.creator', model: 'User', fields: '_id name profile_photo_url'}) 
+    .exec(function(err, post){
+      console.log(post);
+      console.log('rendering');
+      res.render('posts/post_modal', {post: post, currentUser: user});
+    });
+};
+
 exports.singlePost = function(req, res) {
-  if (req.accepts('html')) {
+  var type = req.get('type');
+  console.log(type);
+  if (type && type == 'settings') {
+    renderPostModal(req, res);
+  }
+  else if (req.accepts('html')) {
     singlePostHTMLRequest(req, res);
   }
   else if (req.accepts('application/json')) {
@@ -539,3 +559,4 @@ exports.createPost = function(req, res){
     });
   });  
 };
+

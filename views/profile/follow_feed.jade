@@ -1,0 +1,27 @@
+h3 Who to Follow
+ul.cards
+  each user in users
+    -var profilePhoto = user.profile_photo_url?'https://' + user.profile_photo_url.substr(7):'/images/default-profile.png'; 
+    -var city = user.city || false
+    -var location = user.state || false
+    -if (location) location = user.city?user.city + ', ' + location:location
+    -else location = user.city?user.city:'Unknown'
+    li
+      .follow
+        button.follow(type='button', data-is-following=false, onclick='profile.followToggle(event, "#{user._id}")') Follow
+      .profile-avatar.cursor(style = 'background-image: url("#{profilePhoto}")' onclick='nav.navigate("/profiles/#{user._id}")')
+      p.name.cursor(onclick='nav.navigate("/profiles/#{user._id}")') #{user.name}
+      .location #{location}
+      br
+      .user-circle
+        | Followers
+        br
+        | #{user.followers_count}
+      .user-circle
+        | Following
+        br
+        | #{user.following_count}
+      .user-circle
+        | Posts
+        br
+        | #{user.posts_count}

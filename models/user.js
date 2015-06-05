@@ -640,5 +640,39 @@ userSchema.methods.addFollowing = function(following_id, next) {
   });
 };
 
+userSchema.statics.fetchSuggestions = function(user, next){
+  var following = _.pluck(user.following, '_id');
+  var criteria = {active: true, _id: {$nin: following}};
+  if (user.org_status && user.org_status.length > 0) {
+    var orgs = [];
+    _.each(user.org_status, function(item, idx, list){
+      if (item.status == 'active'){
+        orgs.push(item.organization._id);
+      }
+    });
+    if (orgs && orgs.length > 0){
+      criteria.$or = [
+        {org_status: {
+          $elemMatch: {
+            organization: {$in: orgs},
+            status: 'active'
+          }
+        }},
+      {subtype: 'luminary'}
+      ];
+    } else {
+      criteria.subtype =  'luminary';
+    }
+  } else {
+    criteria.subtype = 'luminary';
+  }
+  criteria.posts_count = {$gt: 4};
+  this.find(criteria)
+    .limit(25)
+    .exec(function(err, users){
+      next(err, users);
+    });
+};
+
 mongoose.model('OrgStatus', orgStatusSchema);
 mongoose.model('User', userSchema);

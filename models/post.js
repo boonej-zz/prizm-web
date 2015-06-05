@@ -89,6 +89,7 @@ postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, i
  * Takes userId and callback and will add userId to likes of post
  * and update the likes_count
  */
+
 postSchema.methods.likePost = function(userId, next) {
   var postId = this._id;
   var Post = this.model('Post');

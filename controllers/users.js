@@ -1930,3 +1930,32 @@ exports.getSingleInsight = function(req, res){
     }
   });
 }
+
+exports.showSettings = function(req, res){
+  var user = req.user;
+  User.fetchSuggestions(user, function(err, users) {
+    res.render('profile/settings', {auth: true, bodyID: 'Settings', currentUser: user, users: users});
+  });
+};
+
+exports.fetchLikesFeed = function(req, res){
+  var user = req.user;
+  Post.find({likes: {$elemMatch: {_id: String(user._id)}}})
+  .populate({path: 'creator'})
+  .exec(function(err, posts){
+    if (err) console.log(err);
+    res.render('profile/likes_feed', {posts: posts}); 
+  })
+}
+
+exports.fetchSupport = function(req, res){
+  var user = req.user;
+  res.render('profile/support_feed');
+}
+
+exports.fetchFollowFeed = function(req, res){
+  var user = req.user;
+  User.fetchSuggestions(user, function(err, users){
+    res.render('profile/follow_feed', {users: users});
+  });
+};

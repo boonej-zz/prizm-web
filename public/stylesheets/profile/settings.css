@@ -1,0 +1,227 @@
+.container.topnav-offset {
+  padding-right: 15px;
+  padding-left: 15px; 
+}
+
+.user-settings-header {
+  font-size: 24px;
+  display: block;
+  line-height: 36px;
+  background-image: url('/images/icons/settings_icon.png');
+  background-size: 36px;
+  background-repeat: no-repeat;
+  padding-left: 52px;
+  vertical-align: middle;
+}
+
+.settings-container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #e4e5ea;
+  padding: 1%;
+  margin-bottom: 40px;
+  height: 646px;
+}
+
+.left-box, .right-box {
+  display: inline-block;
+  height: 628px;
+  background-color: #fefefe;
+  border: 1px solid #c5c8cc;
+  color: #545358;
+  height: 100%;
+  vertical-align: top;
+}
+
+.left-box {
+  width: 25%;
+  margin-right: 1%;
+}
+
+.right-box {
+  width: 74%;
+}
+
+.settings-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.left-box li {
+  width: 100%;
+  border-bottom: 1px solid #c5c8cc;
+  height: 45px;
+  font-size: 18px;
+  padding-left: 7%;
+  vertical-align: middle;
+  line-height: 45px;
+  font-weight: 400;
+  background-image: url('/images/icons/disclosure.png');
+  background-size: 5px 10px;
+  background-position: 91% center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.left-box li.selected {
+  color: #334b8f;
+}
+
+.settings-container button {
+  -webkit-appearance: none;
+  background-image: none;
+  outline: none;
+  width: 102px;
+  height: 29px;
+  border: 1px solid #828282;
+  font-weight: 400;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #fefefe;
+}
+button[data-is-following="true"] {
+  border: none;
+}
+
+.right-box h3 {
+  width: 100%;
+  height: 7%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 19px;
+  background-color: #fefefe;
+  border-bottom: 1px solid #c5c8cc;
+  vertical-align: middle;
+  line-height: 1.5em;
+  margin-bottom: 0px;
+}
+
+ul.cards {
+  width: 100%;
+  height: 89.5%;
+  overflow: scroll;
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 8px;
+}
+
+ul.cards li {
+  width: 393px;
+  height: 398px;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fbfbfb;
+  margin: 0 auto 40px auto;
+}
+
+.right-box .profile-avatar {
+  position: relative;
+  height: 95px;
+  width: 95px;
+  border: 1px solid #c5c8cc;
+  border-radius: 50%;
+  margin-top: 39px;
+  display: inline-block;
+  background-size: contain;
+  background-position: center;
+}
+
+div.follow {
+  text-align: right;
+  width: 100%;
+  height: 24px;
+}
+
+button.follow {
+  display: inline-block;
+  margin: 19px 16px 0 0;
+  top: 0px;
+}
+
+.right-box p.name {
+  margin-top: 0px;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+}
+
+.user-circle {
+  display: inline-block;
+  height: 105px;
+  width: 105px;
+  border: 3px solid #c5c8cc;
+  border-radius: 50%;
+  padding-top: 31px;
+  margin: 42px 8px 14px 8px;
+
+}
+
+.right-box .location {
+  margin-top: 12px;
+  height: 16px;
+  font-size: 14px;
+  color: #a3a4a6;
+  font-weight: 400;
+  background-image: url('/images/profile/members_location.png');
+  background-repeat: no-repeat;
+  padding-left: 19px;
+  width: initial;
+  display: inline-block;
+  clear: right;
+}
+.wrapper {
+  width: 100%;
+  height: 89.5%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+ul.posts {
+  width: 64%;
+  margin: 0 auto;
+  list-style: none;
+  padding: 38.5px 0 40px 0;
+}
+
+ul.posts li {
+  width: 33.333%;
+  display: inline-block; 
+}
+
+ul.posts li img {
+  width: 100%;
+}
+
+ul.support {
+  list-style: none;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0 
+}
+
+ul.support li {
+  width: 86%;
+  border-bottom: 1px solid #c5c8cc;
+  margin: 0 auto;
+  height: 48px;
+  display: block;
+  line-height: 48px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #545358;
+  background-image: url('/images/icons/disclosure.png');
+  background-size: 5px 10px;
+  background-position: 98% center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+ul.support li:first-child {
+  border-top: 1px solid #c5c8cc;
+  margin-top: 38.5px;
+}

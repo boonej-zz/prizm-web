@@ -84,6 +84,10 @@ router.get('/logout', _users.handleLogout);
 /* Profiles */
 router.get('/profile', _users.authRequired, _users.displayProfile);
 router.get('/profile/members', _users.authRequired, _users.membersHTMLRequest);
+router.get('/profile/settings', _users.authRequired, _users.showSettings);
+router.get('/profile/settings/follow', _users.authRequired, _users.fetchFollowFeed);
+router.get('/profile/settings/likes', _users.authRequired, _users.fetchLikesFeed);
+router.get('/profile/settings/support', _users.authRequired, _users.fetchSupport);
 router.get('/organizations/:id/members', _users.authRequired, _users.displayMembers);
 router.get('/organizations/:id/members/new', _users.authRequired, _orgs.addMembers);
 router.post('/organizations/:id/members/new', _users.authRequired, _orgs.createInvites);

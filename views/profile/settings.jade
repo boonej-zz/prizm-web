@@ -1,0 +1,21 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/profile/profile.css')
+  link(rel='stylesheet' type='text/css' href='/stylesheets/profile/settings.css')
+  script(type='text/javascript' src='/javascripts/profile/profile.js')
+  script(type='text/javascript' src='/javascripts/profile/settings.js')
+
+block content
+  .container.topnav-offset
+    .user-settings-header.page-header
+      | Settings
+    .settings-container
+      .left-box
+        ul#options
+          li(class='selected' onclick='settings.nav("follow")') Who to Follow
+          li(onclick='settings.nav("likes")') Likes
+          li(onclick='settings.nav("support")') Support
+      .right-box
+        include follow_feed
+    
