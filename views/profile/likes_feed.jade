@@ -5,4 +5,4 @@ h3 Likes
       - var thumbPath = post.file_path.substr(0, (post.file_path.length - 4))
       - thumbPath = thumbPath + '_2.jpg'
       li.cursor(onclick='modal.showPostModal("#{post._id}")' id='#{post._id}')
-        img(src='#{thumbPath}')
+        img.lazy(src='#{thumbPath}')
