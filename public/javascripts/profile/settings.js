@@ -1,5 +1,17 @@
+var prepHeader = function(){
+  $('.left-box').removeClass('visible');
+  $('.right-box h3').click(function(e){
+    var width = $(window).width();
+    if (width < 601) {
+      $('.left-box').toggleClass('visible');
+    }
+  });
+
+}
+
 $(document).ready(function(){
   $('.left-box li').click(settings.itemSelected);
+  prepHeader();
 });
 
 var settings = {
@@ -25,6 +37,7 @@ var settings = {
       })
       .done(function(html){
         $('.right-box').html(html);
+        prepHeader();
       })
     }
   }

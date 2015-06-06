@@ -225,3 +225,115 @@ ul.support li:first-child {
   border-top: 1px solid #c5c8cc;
   margin-top: 38.5px;
 }
+
+@media screen and (max-width: 600px) {
+  .user-settings-header {
+    display: none;
+  }
+
+  .container.topnav-offset {
+    padding: 0;
+  }
+
+  .left-box {
+    position: fixed;
+    height: auto;
+    float: left;
+    width: 520px;
+    box-shadow: 0 3px 3px #c5c8cc; 
+    top: -65px;
+    transition: all 500ms linear; 
+    z-index: 500;
+  }
+
+  .left-box.visible {
+    top: 135px;
+    transition: all 500ms linear;
+  }
+
+  .right-box h3 {
+    position: fixed;
+    top: 75px;
+    width: 520px;
+    margin-top: 0;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    z-index: 2000;
+  }
+
+  .right-box {
+    width: 100%;
+    height: auto;
+    display: block;
+    float: left;
+    clear: both;
+  }
+  
+  .settings-container {
+    width: 100%;
+    padding: 0;
+    background-color: #EFF1F4;
+  }
+
+  .right-box ul {
+    margin-top: 60px;
+  }
+
+  ul.posts {
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  ul.cards {
+    height: auto;
+  }
+
+  ul.support li:first-child {
+    margin-top: 4px;
+  }
+
+  .wrapper {
+    height: 100%;
+  }
+
+}
+
+@media screen and (max-width: 488px){
+ .right-box h3 {
+   width: 420px;
+ }
+ 
+ .left-box {
+   width: 420px;
+ }
+}
+
+@media screen and (max-width: 410px){
+ .right-box h3 {
+   width: 320px;
+ }
+ 
+ .left-box {
+   width: 320px;
+ }
+ 
+ ul.cards li {
+  width: 300px;
+  height: 302px;
+ }
+
+ .right-box .location {
+   margin-top: -20px;
+ }
+
+ div.user-circle {
+   height: 70px;
+   width: 70px;
+   font-size: 13px;
+   margin-top: 5px;
+   margin-bottom: 0px;
+   border-width: 1px;
+   padding-top: 25px;
+ }
+}
