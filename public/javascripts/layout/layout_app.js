@@ -293,6 +293,7 @@ var modal = {
   cancelPostModal: function(e){
     $('#postModal').remove();
     $('body').removeClass('noscroll');
+    $('body').removeClass('modal-open');
   },
   showPostModal: function(post_id){
     $.ajax({
