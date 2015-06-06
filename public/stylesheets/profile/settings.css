@@ -259,7 +259,7 @@ ul.support li:first-child {
     cursor: pointer;
     height: 60px;
     line-height: 60px;
-    z-index: 2000;
+    z-index: 1000;
   }
 
   .right-box {
