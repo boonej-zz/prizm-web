@@ -1942,8 +1942,24 @@ exports.fetchLikesFeed = function(req, res){
   var user = req.user;
   Post.find({likes: {$elemMatch: {_id: String(user._id)}}})
   .populate({path: 'creator'})
+  .sort({create_date: -1})
   .exec(function(err, posts){
     if (err) console.log(err);
+      posts = _time.addTimeSinceFieldToObjects(posts); 
+      _.each(posts, function(post, idx, list){
+        if (String(post.creator._id) == String(user._id)){
+          post.ownPost = true;
+        } else {
+          post.ownPost = false;
+        }
+        post.liked = false;
+        _.each(post.likes, function(like, index, listb){
+          if (String(like._id) == String(user._id)){
+            post.liked = true;
+          };
+        });
+      });
+    console.log(posts);
     res.render('profile/likes_feed', {posts: posts}); 
   })
 }

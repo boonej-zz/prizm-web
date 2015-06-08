@@ -63,7 +63,7 @@ div#postModal.modal.fade(
                     if post.liked
                       .like-icon.liked.cursor(onclick='profile.unlikePost("#{post._id}", event)')
                     else
-                      .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id", event)')
+                      .like-icon.not-liked.cursor(onclick='profile.likePost("#{post._id}", event)')
                   .comments-post
                     form(class='comment-post')
                       input(type='hidden' value='#{post._id}' name='postId')

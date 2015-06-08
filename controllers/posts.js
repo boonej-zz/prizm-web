@@ -144,8 +144,18 @@ var renderPostModal = function(req, res){
     .populate({path: 'creator'})
     .populate({path: 'comments.creator', model: 'User', fields: '_id name profile_photo_url'}) 
     .exec(function(err, post){
-      console.log(post);
-      console.log('rendering');
+      if (String(post.creator._id) == String(user._id)){
+        post.ownPost = true;
+      } else {
+        post.ownPost = false;
+      }
+      post.liked = false;
+      _.each(post.likes, function(like, index, listb){
+        if (String(like._id) == String(user._id)){
+          post.liked = true;
+        };
+      });
+
       res.render('posts/post_modal', {post: post, currentUser: user});
     });
 };
