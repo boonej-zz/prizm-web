@@ -11,6 +11,7 @@ var lastMessageDate = new Date().toISOString();
 var messagePollCount = 0;
 var newPostCount = 0;
 var newMessageCount = 0;
+var droppedFiles = false;
 
 $(document).ready(function(){
   $.ajax({
@@ -327,8 +328,12 @@ var insight = {
   showFileUpload: function(){
     $('input#image').click();
   },
-  submitNewForm: function(){
+  submitNewForm: function(e){
+    e.preventDefault();
     var d = new FormData($('#newInsight')[0]);
+    if (droppedFiles){
+      d.append('image', droppedFiles);
+    }
     $.ajax({
       method: 'POST',
       url: '/insights',
@@ -340,6 +345,7 @@ var insight = {
     .done(function(html){
       modal.cancel();
       modal.showModal(html);
+      droppedFiles = false;
       $('#sendInsight').submit(insight.sendInsight);
     });
     return false;
@@ -361,7 +367,7 @@ var insight = {
     e.stopPropagation();
     e.preventDefault();
     if (window.File && window.FileReader && window.FileList && window.Blob){
-      var files = e.target.files;
+      var files = e.target.files || e.dataTransfer.files;
       var file;
       var result = '';
       for(var i = 0; file = files[i]; i++){
@@ -416,6 +422,18 @@ var insight = {
         $this.hide();
       }
     });
+  },
+  drag: function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.target.className = (e.type == 'dragover'?'hover':'');
+  },
+  drop: function(e){
+    e.preventDefault();
+    insight.drag(e);
+    var files = e.target.files || e.dataTransfer.files;
+    insight.imageChanged(e);
+    droppedFiles = files;
   }
 };
 

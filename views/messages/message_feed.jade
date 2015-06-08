@@ -18,15 +18,15 @@ each message in messages
         span.time-since #{message.timeSince} ago 
       span.message
         if message.meta.image && message.meta.image.url
-          a(href=message.meta.url)
+          a(href=message.meta.url target='_blank')
             img.image-thumb(src=message.meta.image.url)
         if message.meta.title 
-          a(href=message.meta.url)
+          a(href=message.meta.url target='_blank')
             .title #{message.meta.title}
         if message.meta.description
           .description #{message.meta.description}
         if message.image_url
-          img.message-image(src=message.image_url)
+          img.message-image(src=message.image_url target='_blank')
         | !{message.web_text}
     
 
