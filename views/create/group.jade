@@ -2,20 +2,25 @@
   #newGroupForm.create-form
     .header
       | Create Group
-    form#newGroup
+    form#newGroup(data-action=edit?'update':'create')
+      - var groupName = group?group.name:''
+      - var groupDescription = group?group.description:''
+      if (group)
+        input#groupID(type='hidden' value='#{group._id}')
       input#selectedOrganization(type='hidden' value='#{organization._id}')
       .row
         label(for='name') Group Name
-        input#name(type='text' name='name')
+        input#name(type='text' name='name' value='#{groupName}')
       .row
         label(for='leader') Group Leader
         select#Leader.name(name='leader' disabled=leader?'disabled':false)
           option(value='') - 
           each l in leaders
-            option(value='#{l._id}' selected=String(leader)==String(l._id)?'selected':false) #{l.name}  
+            - var preLeader = group?String(group.leader) == String(l._id):false
+            option(value='#{l._id}' selected=preLeader) #{l.name}  
       .row
         label(for='description') Group Description
-        textarea(id='description' name='description')
+        textarea(id='description' name='description') #{groupDescription}
       .row
         label(for='members') Group Members
         div.selectArea          
@@ -27,10 +32,11 @@
                 .profile-icon.cursor(style="background-image: url('#{creatorPhoto}')")
                 .content
                   span.name #{member.name} 
-                  if String(member._id) == String(leader)
+                  - var gLeader = group?String(member._id) == String(group.leader):false
+                  if String(member._id) == String(leader) || gLeader 
                     input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}' checked='checked') 
                   else
-                    input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}') 
+                    input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}' checked=member.inGroup) 
                   label(for='#{member._id}') 
       .row
         button.cancel(type='button' onclick='modal.cancel()') Cancel

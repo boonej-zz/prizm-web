@@ -190,6 +190,42 @@ var messages = {
   },
   showGroupInfo: function(e){
     $('#groupDescription').toggle();
+  },
+  showEditGroup: function(e){
+    var name = $(e.target).attr('data-name');
+    var org = $('#selectedOrganization').val();
+    $.ajax({
+      method: 'GET',
+      url: '/profile/groups',
+      contentType: 'text/html',
+      headers: {organization: org, name: name, action: 'edit'},
+      cache: false,
+      success: function(data){
+        modal.showModal(data);
+        $('#newGroup').submit(group.createNewGroup);
+        $('#Leader').change(function(){
+          $('input.members[value=' + $(this).val() + ']').prop('checked', true);
+        });
+        $('#description').keyup(function(){
+          if ($(this).val().length > 0 && $('#name').val().length > 0){
+            $('button.save').attr('disabled', false);
+          } else {
+            $('button.save').attr('disabled', 'disabled');
+          }
+        });
+
+        $('button.save').attr('disabled', false);
+        $('#name').keyup(function(){
+          if ($(this).val().length > 0 && $('#description').val().length > 0){
+          } else {
+            $('button.save').attr('disabled', 'disabled');
+          }
+        });
+      },
+      error: function(err){
+        alert('This group cannot be edited at this time. Please check with your administrator.');
+      }
+    });
   }
 };
 

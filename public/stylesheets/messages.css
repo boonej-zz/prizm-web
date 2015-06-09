@@ -176,6 +176,18 @@ ul#topics li, ul#messages li, ul#members li {
   font-weight: 400;
 }
 
+#groupSettings {
+  height: 74px;
+  width: 18px;
+  display: inline-block;
+  background-size: 18px 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('/images/icons/edit_icon.png');
+  cursor: pointer;
+  margin-left: 28px;
+}
+
 #groupInfo {
   height: 74px; 
   width: 24px;
@@ -184,8 +196,9 @@ ul#topics li, ul#messages li, ul#members li {
   background-position: center;
   background-image: url('/images/icons/info_icon.png');
   background-repeat: no-repeat;
-  margin-left: 49px;
   cursor: pointer;
+  float: right;
+  margin-right: 31px;
 }
 
 #groupDescription {
@@ -199,7 +212,7 @@ ul#topics li, ul#messages li, ul#members li {
   font-size: 15px;
   font-weight: 400;
   margin-top: 68px;
-  margin-left: -129px;
+  margin-left: -420px;
   display: none;
 }
 
@@ -213,7 +226,7 @@ ul#topics li, ul#messages li, ul#members li {
   width: 0;
   z-index: 0;
   top: -13px;
-  left: 128px; 
+  left: 418px; 
 }
 
 #groupDescription::before {
@@ -433,6 +446,15 @@ button.remove {
     padding: 0;
   }
 
+  #groupDescription {
+    width: 380px;
+    margin-left: -300px;
+  }
+
+  #groupDescription::after, #groupDescription::before {
+    left: 299px;
+  }
+
   .messages-header {
     display: none;
   }
@@ -558,6 +580,15 @@ button.remove {
   #messages, ul#topics, #members {
     height: 474px;
   }
+ 
+  #groupDescription {
+    width: 300px;
+    margin-left: -220px;
+  }
+
+  #groupDescription::after, #groupDescription::before {
+    left: 219px;
+  }
 }
 
 @media screen and (max-width: 410px) {
@@ -580,10 +611,15 @@ button.remove {
     line-height: 44px;
     margin-left: 20px;
   }
+  
+  #groupSettings {
+    height: 44px;
+    margin-left: 8px;
+  }
 
   #groupInfo {
     height: 44px;
-    margin-left: 20px;
+    margin-right: 10px;
   }
 
   #groupDescription {
@@ -680,5 +716,10 @@ button.remove {
 
   li.message {
     min-height: 60px;
+  }
+
+  .right-box #groupMembers {
+    margin-top: 13px;
+    margin-right: 8px;
   } 
 }

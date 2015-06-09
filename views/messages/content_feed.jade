@@ -4,11 +4,14 @@
     | #{groupName?'#' + groupName.toLowerCase():'#all'} 
   form#changeName.hidden
     input(type='text' name='name' value='#{groupName?groupName.toLowerCase():""}' autofocus='autofocus')
+  if isLeader && groupName
+    div#groupSettings(data-name='#{groupName}' onclick='messages.showEditGroup(event)')
+  span#groupMembers(onclick='messages.showMembers()') 
+    span.group-count #{Number(count)}
   div#groupInfo(onclick='messages.showGroupInfo(event)')
     div#groupDescription
       | #{groupDescription || 'This group contains all members of the organization.'} 
-  span#groupMembers(onclick='messages.showMembers()') 
-    span.group-count #{Number(count)}
+ 
 #messageArea
   ul#messages
     include message_feed 

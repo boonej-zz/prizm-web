@@ -405,38 +405,163 @@ exports.manipulateMessage = function(req, res){
 exports.newGroup = function(req, res){
   var user = req.user;
   var criteria = false;
+  var action = req.get('action');
+  var name = req.get('name');
+  var organization = req.get('organization');
   var options = {};
-  if (user.type == 'institution_verified'){
-    criteria = {};
-    criteria.owner = user._id;
-  } else { 
-    _.each(user.org_status, function(s, i, l){
-      if (s.status == 'active' && s.role == 'leader'){
-        criteria = {};
-        criteria._id = s.organization._id;
-        options.leader = user._id;
-      }
-    });
-  }
-  if (criteria) {
-    Organization.findOne(criteria, function(err, org){
-      options.organization = org;
+  if (organization && name && action == 'edit'){
+    criteria = {
+      organization: organization,
+      name: name
+    };
+    Organization.findOne({_id: organization}, function(err, org){
+      if (err) {
+        console.log(err);
+        res.send(400);
+        return;
+      } 
       User.findOrganizationMembers({organization: org._id, status: 'active'}, 
-        org.owner, false, false, function(err, members) {
-          options.members = members;
-          options.leaders = _.filter(members, function(user){
-            var match = false;
-            if (user.org_status.length > 0) {
-              match = user.org_status[0].role == 'leader';
+          org.owner, false, false, function(err, members) {
+        var options = {};
+        options.organization = org; 
+        options.leaders = _.filter(members, function(user){
+          var match = false;
+          if (user.org_status.length > 0) {
+            match = user.org_status[0].role == 'leader';
+          }
+          return match;
+        });
+        _.each(members, function(m, i, l) {
+          _.each(m.org_status, function(o, ind, li){
+            if (String(o.organization) == String(org._id)){
+              _.each(o.groups, function(group, index, list){
+                if (String(group.name) == String(name)){
+                  m.inGroup = true;
+                }
+              });
             }
-            return match;
           });
+        });
+        options.members = members;
+        Group.findOne(criteria, function(err, group){
+          options.group = group; 
+          options.edit = true;
           res.render('create/group', options);
         });
+      });
+
     });
+    
   } else {
-    res.status(400).send();
+    if (user.type == 'institution_verified'){
+      criteria = {};
+      criteria.owner = user._id;
+    } else { 
+      _.each(user.org_status, function(s, i, l){
+        if (s.status == 'active' && s.role == 'leader'){
+          criteria = {};
+          criteria._id = s.organization._id;
+          options.leader = user._id;
+        }
+      });
+    }
+    if (criteria) {
+      Organization.findOne(criteria, function(err, org){
+        options.organization = org;
+        User.findOrganizationMembers({organization: org._id, status: 'active'}, 
+          org.owner, false, false, function(err, members) {
+            options.members = members;
+            options.leaders = _.filter(members, function(user){
+              var match = false;
+              if (user.org_status.length > 0) {
+                match = user.org_status[0].role == 'leader';
+              }
+              return match;
+            });
+            res.render('create/group', options);
+          });
+      });
+    } else {
+      res.status(400).send();
+    }
   }
+}
+
+exports.updateGroup = function(req, res){
+  var groupID = req.params.group_id;
+  var currentUser = req.user;
+  var organization = req.get('organization');
+  var members = req.body.members;
+  if (members && !_.isArray(members)){
+    members = [members];
+  }
+  var data = {
+    name: req.body.name,
+    description: req.body.description,
+    leader: req.body.leader && req.body.leader != ''?req.body.leader:null,
+    organization: organization
+  };
+  if (req.body.name && !req.body.description && !req.body.leader){
+    data = {name: req.body.name};
+  }
+  Group.findOneAndUpdate({_id: groupID}, data, function(err, result){
+    if (err) {
+      console.log(err);
+      res.status(400).send();
+      return;
+    }
+    if (members) {
+      var criteria = {org_status: {$elemMatch: {organization: organization, status:'active'}}};
+      User.find(criteria, function(err, users){
+        if (err) console.log(err);
+        if (users){
+          _.each(users, function(user){
+            var inMembers = _.find(members, function(item){
+              return String(item) == String(user._id);
+            });
+            _.each(user.org_status, function(status){
+              if (String(status.organization) == String(organization)){
+                var groupIndex = -1;
+                _.each(status.groups, function(group, index){
+                  if (String(group) == String(result._id)) {
+                    groupIndex = index;
+                  }
+                }); 
+                if (groupIndex == -1) {
+                  if (inMembers) {
+                    status.groups.push(result._id);
+                    var activity = new Activity({
+                      from: currentUser._id,
+                      to: user._id,
+                      action: 'group_added',
+                      group_id: result._id
+                    });
+                    activity.save(function (err, result){
+                      if (err) {
+                      console.log(err);
+                      }
+                      else {
+                        new Push('activity', activity, function(result) {
+                        });
+                      }
+                    });
+                  } 
+                } else {
+                  if (!inMembers){
+                    status.groups.splice(groupIndex, 1);
+                  }
+                }
+              }
+            });
+            user.save(function(err, u){
+              if (err) console.log(err);
+            });
+          });
+        }
+      });
+    }
+    res.status(200).send(result);
+  });
 }
 
 exports.addNewGroup = function(req, res){

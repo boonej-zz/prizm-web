@@ -488,17 +488,33 @@ var group = {
     }
   },
   createNewGroup: function(){
+    var action = $('#newGroup').attr('data-action');
     var organization = $('input#selectedOrganization').val();
     var data = $('#newGroup').serialize();
-    $.ajax({
-      type: 'POST',
-      url:  '/profile/groups',
-      data: data,
-      headers: {organization: organization}
-    })
-    .done(function(html){
-      window.location = window.location.pathname;
-    });
+    var groupID = $('#newGroup #groupID').val();
+    if (action == 'create') {
+      $.ajax({
+        type: 'POST',
+        url:  '/profile/groups',
+        data: data,
+        headers: {organization: organization},
+        cache: false
+      })
+      .done(function(html){
+        window.location = window.location.pathname;
+      });
+    } else if (action == 'update'){
+      $.ajax({
+        type: 'PUT',
+        url: '/organizations/' + organization + '/groups/' + groupID,
+        data: data,
+        headers: {organization: organization},
+        cache: false
+      })
+      .done(function(html){
+        window.location = window.location.pathname;
+      });
+    }
     return false;    
   },
   filterMembers: function(e){
