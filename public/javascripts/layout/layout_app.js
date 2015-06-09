@@ -340,13 +340,17 @@ var insight = {
       contentType: false,
       data: d,
       cache: false,
-      processData: false
-    })
-    .done(function(html){
-      modal.cancel();
-      modal.showModal(html);
-      droppedFiles = false;
-      $('#sendInsight').submit(insight.sendInsight);
+      processData: false,
+      success: function(html){
+        droppedFiles = false;
+        modal.cancel();
+        modal.showModal(html);
+        $('#sendInsight').submit(insight.sendInsight);
+      },
+      error: function(err){
+        droppedFiles = false;
+        alert('There was an error creating your insight. Please try again later.');
+      }
     });
     return false;
   },
@@ -433,7 +437,7 @@ var insight = {
     insight.drag(e);
     var files = e.target.files || e.dataTransfer.files;
     insight.imageChanged(e);
-    droppedFiles = files;
+    droppedFiles = files[0];
   }
 };
 

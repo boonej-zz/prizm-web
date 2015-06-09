@@ -227,6 +227,7 @@ exports.fetchMessages = function(req, res){
                      };
           if (group) {
             options.groupName = group.name;
+            options.groupDescription = group.description;
             criteria.org_status = {
               $elemMatch: {
                 status: 'active',

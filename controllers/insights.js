@@ -20,8 +20,15 @@ exports.createInsight = function(req, res){
   var user = req.user;
   console.log('creating insight');
   Image.uploadInsight(req, function(err, path, fields){
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+      return;
+    }
+    console.log(path);
     console.log('uploaded image');
     if (path) {
+      console.log('populating data');
       var data = {creator: user._id, file_path: path};
       var allowed = ['title', 'text', 'link', 'hash_tags'];
       for (var prop in fields) {
@@ -52,11 +59,14 @@ exports.createInsight = function(req, res){
       var insight = new Insight(data);
       insight.save(function(err, insight){
         if (err) {
+          console.log(err);
           res.status(400).send();
         } else {
+          console.log('finding organization');
           Organization.findOne({owner: user._id})
           .populate({path: 'groups', model: 'Group'})
           .exec(function(err, org){
+            console.log('found organization sending response');
             res.render('create/insight', {insight: insight, organization: org});
           });
           }

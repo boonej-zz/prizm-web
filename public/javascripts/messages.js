@@ -62,7 +62,8 @@ function startPage(){
     var members = '#groupMembers';
     var count = '#groupMembers .group-count';
     var name = '#groupName';
-    if (width < 601 && !$target.is(members)&&!$target.is(count)&&!$target.is(name)) {
+    var info = '#groupInfo';
+    if (width < 601 && !$target.is(members)&&!$target.is(count)&&!$target.is(name)&&!$target.is(info)) {
       $('.left-box').addClass('visible');
     }
   });
@@ -186,6 +187,9 @@ var messages = {
     $('#groupName').addClass('hidden');
     $('#changeName').removeClass('hidden');
     $('#changeName input').focus();
+  },
+  showGroupInfo: function(e){
+    $('#groupDescription').toggle();
   }
 };
 
