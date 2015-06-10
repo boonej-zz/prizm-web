@@ -213,12 +213,11 @@ exports.fetchMessages = function(req, res){
     if (name){
       criteria.name = name;
     } else {
-      criteria.group == 'all'?null:group
+      criteria.group = group =='all'?null:group
     } 
     if (lastDate) {
       criteria.create_date = {$lt: new Date(lastDate)};
     }
-    console.log(criteria);
     Group.findOne({_id: group}, function(err, group){
       Message.fetchMessages(
         criteria, 

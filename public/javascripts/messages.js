@@ -97,7 +97,7 @@ var messages = {
     var organization = $('input#selectedOrganization').val();
     $('.right-box .topic #groupName').text(topic);
     topic = topic?topic.substr(1):'all';
-    var group = $(target).attr('dataID') || 'all';
+    var group = $(e.target).attr('dataid') || 'all';
     $('input#selectedGroup').val(group);
     $('li.topic').removeClass('active');
     $(target).addClass('active');   
