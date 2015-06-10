@@ -1,8 +1,11 @@
 input#count(type='hidden' value='#{count}')
 each message in messages
-  -var likeAction = String(message.creator._id) == String(currentUser._id)?'':'messages.likeMessage(event)'
+  - var canEdit = String(message.creator._id)==String(currentUser._id)
+  - var isLeader = currentUser.type == 'institution_verified'
+  - var likeAction = String(message.creator._id) == String(currentUser._id)?'':'messages.likeMessage(event)'
   - var creatorPhoto = message.creator.profile_photo_url?'https://' + message.creator.profile_photo_url.substr(7):'/images/default-profile.png'
   li.message(created='#{message.create_date}' data-id='#{message._id}' data-liked=message.liked)
+    .raw-text.hidden(data-text = '#{message.text}')
     .profile-icon.cursor(style="background-image: url('#{creatorPhoto}')"
       onclick='nav.navigate("/profiles/#{message.creator._id}")') 
     .content
@@ -13,6 +16,12 @@ each message in messages
           onclick='#{likeAction}')
         span#likesCount(class=message.likes_count == 0?'clear':'') 
           | #{message.likes_count}
+      if canEdit || isLeader
+        span.edit(onclick='messages.settingsClicked(event)')
+          ul.edit-menu.hidden
+            if message.text && message.text.length > 0 && canEdit
+              li.action-edit(onclick='messages.editMessage(event)') Edit
+            li.action-delete(onclick='messages.deleteMessage(event)') Delete
       .foot
         span.clock-icon
         span.time-since #{message.timeSince} ago 

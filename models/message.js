@@ -30,7 +30,8 @@ var messageSchema = new mongoose.Schema({
       height: {type: Number}
     }
   },
-  read: {type: Array}
+  read: {type: Array},
+  status: {type: String, default: 'active'}
 });
 
 messageSchema.pre('save', function(next){
@@ -43,6 +44,7 @@ messageSchema.pre('save', function(next){
 
 messageSchema.post('init', function(){
   this.timeSince = time.timeSinceFormatter(this.create_date);
+  this.web_text = this.text;
   if (this.meta) {
     this.meta.message_id = this._id;
     this.meta.image.message_id = this._id;
@@ -78,6 +80,7 @@ var replaceTagsFromUserList = function(string, userList){
 };
 
 messageSchema.statics.fetchMessages = function(criteria, next){
+  criteria.status = {$ne: 'inactive'};
   this.model('Message').find(criteria)
   .sort({create_date: -1})
   .populate({
@@ -115,6 +118,12 @@ messageSchema.statics.likeMessage = function(id, user, next){
     } else {
       next(true, false);
     }
+  });
+};
+
+messageSchema.statics.deleteMessage = function(id, next){
+  this.findOneAndUpdate({_id: id}, {status: 'inactive'}, function(err, result){
+    next(err, result);
   });
 };
 

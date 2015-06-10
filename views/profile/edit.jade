@@ -45,8 +45,8 @@ form
         label(for='phone') Phone Number
         input#phone(type='tel' name='phone_number' value='#{currentUser.phone_number || ""}')
     else
-      - var birthday = currentUser.birthday.split('-')
-      - var formattedBirthday = birthday.length == 3?[birthday[2], birthday[0], birthday[1]]:[]
+      - var birthday = currentUser && currentUser.birthday?currentUser.birthday.split('-'):false;
+      - var formattedBirthday = birthday && birthday.length == 3?[birthday[2], birthday[0], birthday[1]]:[]
       - var bdayString = formattedBirthday.join('-')
       - var dateNow = new Date()
       - var earliestDate = new Date(dateNow.getFullYear() - 13, dateNow.getMonth(), dateNow.getDate())

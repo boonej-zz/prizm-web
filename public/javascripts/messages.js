@@ -3,13 +3,16 @@ var isFetching = false;
 function startPage(){
  messages.scrollToLatest();
   $('#newMessage').submit(function(){
+    var action = $('#newMessage').attr('data-action');
+    var url = action && action == 'edit'?'/messages/' + $('#newMessage').attr('data-id'):'/messages';
+    var method = action && action == 'edit'?'PUT':'POST';
     var text = $('#newMessage input').val();
     var organization = $('input#selectedOrganization').val();
     var group = $('input#selectedGroup').val();
     var hash = window.location.hash;
     $.ajax({
-      type: 'POST',
-      url: '/messages',
+      type: method,
+      url: url,
       contentType: 'application/json',
       headers: {
         organization: organization,
@@ -20,6 +23,8 @@ function startPage(){
     })
     .done(function(){
       $('#newMessage input').val('');
+      $('#newMessage').attr('data-action', '');
+      $('#newMessage').attr('data-id', '');
       messages.refresh();
     });
     return false;
@@ -71,6 +76,12 @@ function startPage(){
     var width = $(window).width();
     if (width < 601) {
       $('.left-box').removeClass('visible');
+    }
+  });
+  $('body').click(function(e){
+    if (!$(e.target).is('.edit-menu') && !$(e.target).is('span.edit') && !$(e.target).is('.edit-menu li')){
+      $('.edit-menu').addClass('hidden');
+      $('.edit').removeClass('active');
     }
   });
 }
@@ -226,6 +237,32 @@ var messages = {
         alert('This group cannot be edited at this time. Please check with your administrator.');
       }
     });
+  },
+  settingsClicked: function(e){
+    $(e.target).toggleClass('active');
+    $(e.target).children('.edit-menu').toggleClass('hidden');
+  },
+  editMessage: function(e){
+    var id = $(e.target).parents('li.message').attr('data-id');
+    var text = $(e.target).parents('li.message').children('.raw-text').attr('data-text');
+    $('#newMessage').attr('data-action', 'edit');
+    $('#newMessage').attr('data-id', id);
+    $('#newMessage input').val(text);
+  },
+  deleteMessage: function(e){
+    var id = $(e.target).parents('li.message').attr('data-id');
+    $.ajax({
+      method: 'DELETE',
+      url: '/messages/' + id,
+      cache: false,
+      success: function(response){
+        $(e.target).parents('li.message').remove();
+      },
+      error: function(error){
+        alert('There was a problem deleting the message.');
+      }
+    });
+    $(e.target).parents('li.message').remove();
   }
 };
 

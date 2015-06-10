@@ -287,6 +287,76 @@ exports.fetchMessages = function(req, res){
   }
 };
 
+var processMessageText = function(message, next){
+  console.log(message.text);
+  var urls = url.urls(message.text);
+  if (urls && urls.length > 0) {
+    request({
+      uri: urls[0],
+      method: 'GET',
+      timeout: 10000,
+      followRedirect: true,
+      maxRedirects: 10
+    }, function(error, response, body) {
+      var handler = new htmlparser.DefaultHandler(function(err, dom){
+        if (err) console.log(err);
+        var meta = [];
+        var traverse = function(doc) {
+          _.each(doc, function(node, i, l){
+            if (node.name == 'meta') {
+              if (node.attribs.property && node.attribs.property.match('og:')) {
+                meta.push(node.attribs);
+              } 
+              if (node.attribs.name && node.attribs.name.match('og:')) {
+                meta.push(node.attribs);
+              } 
+            } 
+            if (node.children && node.children.length > 0){
+              traverse(node.children);
+            }
+          });
+        };
+        traverse(dom);
+        if (meta.length > 0){
+          var metaData = {image:{}};
+          _.each(meta, function(m, i, l){
+            var accessor = '';
+            if (m.property) accessor = 'property';
+            if (m.name) accessor = 'name';
+            if (m[accessor] == 'og:image'){
+              metaData.image.url = m.content;
+            } 
+            if (m[accessor] == 'og:image:width') {
+              metaData.image.width = m.content;
+            }
+            if (m[accessor] == 'og:image:height') {
+              metaData.image.height = m.content;
+            }
+            if (m[accessor] == 'og:description'){
+              metaData.description = S(m.content).decodeHTMLEntities().s;
+            }
+            if (m[accessor] == 'og:title'){
+              metaData.title = S(m.content).decodeHTMLEntities().s;
+            }
+            if (m[accessor] == 'og:url'){
+              metaData.url = m.content;
+            }
+            if (m[accessor] == 'og:video:url'){
+              metaData.video_url = m.content;
+            }
+          });
+          message.meta = metaData;
+        }
+        next(message);
+      });
+      var parser = new htmlparser.Parser(handler);
+      parser.parseComplete(body);
+    });
+  } else {
+    next(message);
+  }
+};
+
 exports.createMessage = function(req, res){
   var user = req.user;
   var organization = req.get('organization');
@@ -294,7 +364,6 @@ exports.createMessage = function(req, res){
   group = group == 'all'?null:group;
 
   var text = req.get('text');
-  var urls = url.urls(text);
   if (organization &&  text) {
     var message = new Message({
       organization: organization,
@@ -311,71 +380,7 @@ exports.createMessage = function(req, res){
         }
       });
     };
-    if (urls) {
-      request({
-        uri: urls[0],
-        method: 'GET',
-        timeout: 10000,
-        followRedirect: true,
-        maxRedirects: 10
-      }, function(error, response, body) {
-        var handler = new htmlparser.DefaultHandler(function(err, dom){
-          if (err) console.log(err);
-          var meta = [];
-          var traverse = function(doc) {
-            _.each(doc, function(node, i, l){
-              if (node.name == 'meta') {
-                if (node.attribs.property && node.attribs.property.match('og:')) {
-                  meta.push(node.attribs);
-                } 
-                if (node.attribs.name && node.attribs.name.match('og:')) {
-                  meta.push(node.attribs);
-                } 
-              } 
-              if (node.children && node.children.length > 0){
-                traverse(node.children);
-              }
-            });
-          };
-          traverse(dom);
-          if (meta.length > 0){
-            var metaData = {image:{}};
-            _.each(meta, function(m, i, l){
-              var accessor = '';
-              if (m.property) accessor = 'property';
-              if (m.name) accessor = 'name';
-              if (m[accessor] == 'og:image'){
-                metaData.image.url = m.content;
-              } 
-              if (m[accessor] == 'og:image:width') {
-                metaData.image.width = m.content;
-              }
-              if (m[accessor] == 'og:image:height') {
-                metaData.image.height = m.content;
-              }
-              if (m[accessor] == 'og:description'){
-                metaData.description = S(m.content).decodeHTMLEntities().s;
-              }
-              if (m[accessor] == 'og:title'){
-                metaData.title = S(m.content).decodeHTMLEntities().s;
-              }
-              if (m[accessor] == 'og:url'){
-                metaData.url = m.content;
-              }
-              if (m[accessor] == 'og:video:url'){
-                metaData.video_url = m.content;
-              }
-            });
-            message.meta = metaData;
-          }
-          save(message);
-        });
-        var parser = new htmlparser.Parser(handler);
-        parser.parseComplete(body);
-      });
-    } else {
-      save(message);
-    }
+    processMessageText(message, save);
   } else {
     res.status(400).send();
   }
@@ -665,3 +670,54 @@ exports.modifyGroup = function(req, res){
     }
   });
 };
+
+exports.deleteMessage = function(req, res){
+  var user = req.user;
+  var message_id = req.params.message_id;
+  Message.findOne({_id: message_id}, function(err, message){
+    if (err) console.log(err);
+    if (!message){
+      res.status(400).send('invalid request');
+      return;
+    }
+    if (String(message.creator) != String(user._id) && user.type != 'institution_verified') {
+      res.status(401).send('invalid permissions');
+      return;
+    }
+    Message.deleteMessage(message_id, function(err, result){
+      if (err) console.log(err);
+      if (!result) {
+        res.status(500).send('server error');
+      }
+      res.status(200).send(result);
+    });
+  });
+};
+
+exports.updateMessage = function(req, res){
+  var user = req.user;
+  var message_id = req.params.message_id;
+  var text = req.get('text');
+  Message.findOne({_id: message_id}, function(err, message){
+    if (err) console.log(err);
+    if (!message){
+      res.status(400).send('invalid request');
+      return;
+    }
+    if (String(message.creator) != String(user._id) && user.type != 'institution_verified') {
+      res.status(401).send('invalid permissions');
+      return;
+    }
+    message.text = text;
+    processMessageText(message, function(message){
+      message.save(function(err, message){
+        if (err) {
+          console.log(err);
+          res.status(500).send('server error');
+          return;
+        }
+        res.status(200).send(message);
+      });
+    });
+  });
+}

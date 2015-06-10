@@ -314,6 +314,100 @@ ul#messages li:last-child, ul#members li:last-child {
   font-weight: 300;
 }
 
+.message:hover .edit {
+  display: inline-block;
+}
+
+.edit {
+  float: right;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-size: 16px;
+  background-image: url('/images/icons/settings_button.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  display:none;
+}
+
+.edit.active {
+  display: inline-block !important;
+  background-image: url('/images/icons/settings_button_selected.png');
+}
+
+ul.edit-menu {
+  list-style: none;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background-color: #fefefe;
+  border: 1px solid #c5c8cc;
+  top: 33px;
+  left: -20px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.06);
+  float: left;
+  z-index: 5000;
+}
+
+ul.edit-menu::after, ul.edit-menu::before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 12px 13px;
+  border-color: #fefefe transparent;
+  display: block;
+  width: 0;
+  z-index: 0;
+  top: -13px;
+  left: 15px;
+}
+
+ul.edit-menu::before {
+  border-color: #c5c8cc transparent;
+  top: -14px;
+}
+
+ul.edit-menu li {
+  display: block;
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 31px;
+  height: 24px;
+  font-size: 15px;
+  color: #9c9d9f;
+  float: left;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+ul.edit-menu li.action-edit {
+  background-image: url('/images/icons/action_edit.png');
+  background-position: 0px 17px;
+  background-size: 18px 20px;
+}
+
+ul.edit-menu li.action-delete {
+  background-image: url('/images/icons/action_delete.png');
+  background-position: 0px 16px;
+  background-size: 20px 21px;
+}
+
+ul.edit-menu li:hover {
+  color: #3e6a9e;
+}
+
+ul.edit-menu li.action-edit:hover {
+  background-image: url('/images/icons/action_edit_selected.png');
+}
+
+ul.edit-menu li.action-delete:hover {
+  background-image: url('/images/icons/action_delete_selected.png');
+}
+
 .likes {
   float: right;
   display: inline-block;
