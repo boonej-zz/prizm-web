@@ -243,6 +243,7 @@ ul#topics li, ul#messages li, ul#members li {
   margin-top: 68px;
   margin-left: -420px;
   display: none;
+  z-index: 5000;
 }
 
 #groupDescription::after, #groupDescription::before {
