@@ -360,9 +360,7 @@ var insight = {
       method: 'POST',
       url: '/insights/' + $('#insightID').val(),
       data: data,
-      processData: false,
-      cache: false,
-      contentType: false
+      cache: false
     })
     .done(function(res){
       alert('Your insight was sent successfully.');
