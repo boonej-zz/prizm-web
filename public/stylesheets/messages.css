@@ -84,7 +84,7 @@ ul#topics li, ul#messages li, ul#members li {
 }
 
 .profile-icon.leader::after {
-  background-image: url('/images/profile/leader_icon_selected.png');
+  background-image: url('/images/icons/leader_icon_selected.png');
 }
 
 
