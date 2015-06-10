@@ -85,7 +85,16 @@ messageSchema.statics.fetchMessages = function(criteria, next){
   .sort({create_date: -1})
   .populate({
     path: 'creator',
-    select: '_id name profile_photo_url'
+    select: {
+      _id: 1,
+      name: 1,
+      profile_photo_url: 1,
+      subtype: 1,
+      org_status: {$elemMatch: {
+        organization: criteria.organization || null,
+        status: 'active'
+      }} 
+    }
   })
   .limit(15)
   .exec(function(err, messages){

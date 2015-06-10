@@ -60,6 +60,35 @@ ul#topics li, ul#messages li, ul#members li {
   display: inline-block;
 }
 
+.profile-icon.luminary::after, .profile-icon.leader::after, .profile-icon.ambassador::after {
+  content: '';
+  display: block;
+  position: relative;
+  height: 22px;
+  width: 22px;
+  background-size: 22px 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  border-radius: 50%;
+  left: 36px;
+  top: -2px;
+}
+
+.profile-icon.luminary::after {
+  background-image: url('/images/icons/luminary_icon_selected.png');
+}
+
+.profile-icon.ambassador::after {
+  background-image: url('/images/profile/ambassador_icon_selected@2x.png');
+}
+
+.profile-icon.leader::after {
+  background-image: url('/images/profile/leader_icon_selected.png');
+}
+
+
+
 /** TOPICS **/
 #topics {
   height: 624px;
@@ -489,11 +518,24 @@ span.message img {
   border: none;
   height: 52px;
   vertical-align: middle;
-  width: 543px;
-  padding: 0 17px;
+  width: 491px;
+  padding: 0 0 0 17px;
   color: #8b8989;
   font-size: 16px;
   outline: none;
+  float: left;
+}
+
+#newMessage button.send {
+  display: inline-block;
+  border: none;
+  height: 52px;
+  width: 52px;
+  background-image: url('/images/icons/message_send.png');
+  background-size: 28px 27px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
 }
 
 button.circle {
@@ -589,6 +631,10 @@ button.remove {
     bottom: 0;
   }
 
+  #newMessage input{
+    width: 416px;
+  }
+
   li.message .content, li.member .content {
     width: 440px;
   }
@@ -645,6 +691,10 @@ button.remove {
     z-index: 1000;
     position: relative;
     bottom: 0;
+  }
+
+  #newMessage input{
+    width: 316px;
   }
 
   li.message .content, li.member .content {
@@ -805,7 +855,7 @@ button.remove {
   }
 
   #newMessage input {
-    width: 268px;
+    width: 216px;
   }
 
   li.message {

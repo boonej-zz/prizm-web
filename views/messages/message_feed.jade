@@ -4,9 +4,13 @@ each message in messages
   - var isLeader = currentUser.type == 'institution_verified'
   - var likeAction = String(message.creator._id) == String(currentUser._id)?'':'messages.likeMessage(event)'
   - var creatorPhoto = message.creator.profile_photo_url?'https://' + message.creator.profile_photo_url.substr(7):'/images/default-profile.png'
+  - var creatorClass = message.creator.subtype?message.creator.subtype:false
+  - creatorClass = creatorClass?creatorClass:message.creator.org_status[0].role
   li.message(created='#{message.create_date}' data-id='#{message._id}' data-liked=message.liked)
     .raw-text.hidden(data-text = '#{message.text}')
-    .profile-icon.cursor(style="background-image: url('#{creatorPhoto}')"
+    .profile-icon.cursor(
+        class = '#{creatorClass}'
+        style="background-image: url('#{creatorPhoto}')"
       onclick='nav.navigate("/profiles/#{message.creator._id}")') 
     .content
       span.creator.cursor(onclick='nav.navigate("/profiles/#{message.creator._id}")') 
@@ -36,8 +40,7 @@ each message in messages
           .description #{message.meta.description}
         if message.image_url
           img.message-image(src=message.image_url target='_blank')
-        | !{message.web_text}
-    
+        | !{message.web_text}    
 
       
      
