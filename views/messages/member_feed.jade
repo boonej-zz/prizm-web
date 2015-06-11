@@ -1,10 +1,13 @@
 input#count(type='hidden' value='#{count}')
 each member in members
   - var photo = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
+  - var creatorClass = member.subtype?member.subtype:false
+  - creatorClass = creatorClass?creatorClass:member.org_status[0].role
   li.member(data-id='#{member._id}')
     - var showAdmin = currentUser.isLeader || currentUser.type == 'institution_verified'?'':'hidden'
     .profile-icon.cursor(style='background-image: url("#{photo}")'
-      onclick='nav.navigate("profiles/#{member._id}")')
+      onclick='nav.navigate("profiles/#{member._id}")'
+      class='#{creatorClass}')
     .content
       span.creator.cursor
         | #{member.name}
