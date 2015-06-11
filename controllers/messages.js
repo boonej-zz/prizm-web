@@ -20,6 +20,22 @@ var htmlparser = require('htmlparser');
 var utils = require('util');
 var S = require('string');
 
+var markRead = function(messages, user_id){
+  _.each(messages, function(message){
+    var hasRead = false;
+    _.each(message.read, function(r){
+      if (String(r) == String(user_id)){
+        hasRead = true;
+      }
+    });
+    if (!hasRead){
+      message.read.push(ObjectId(user_id));
+      message.markModified('read');
+      message.save(function(err, obj){});
+    }
+  });
+}
+
 var shortFields = function(org) {
 return {
     _id: 1, 
@@ -97,6 +113,7 @@ exports.displayUserMessagesFeed = function(req, res){
                 m.liked = false;
               }
             });
+            markRead(messages, user._id);
             res.render('messages/messages', options);
           }
         );     
@@ -181,6 +198,7 @@ exports.displayOwnerMessagesFeed = function(req, res){
                     m.liked = false;
                   }
                 });
+                markRead(messages, user._id);
                 res.render('messages/messages', options);
               }
              );
@@ -195,6 +213,45 @@ exports.displayOwnerMessagesFeed = function(req, res){
     }
   }
 };
+
+exports.fetchViewed = function(req, res){
+  var group = req.params.group;
+  if (group == 'all') group = null;
+  var organization = req.get('organization');
+  var message_id = req.get('message_id');
+  var user = req.user;
+  var options = {};
+  var criteria = {status: 'active'};
+  var match = {};
+  if (organization) {
+    match.organization = organization;
+    match.group = group;
+    match.status = active; 
+  }
+  var oStatus = {$elemMatch: match};
+  criteria.org_status = oStatus;
+  User.find(criteria)
+  .select('_id name profile_photo_url org_status subtype')
+  .sort({name: 1})
+  .exec(function(err, users){
+    Message.findOne({_id: message_id}, function(err, message){
+      if (err) console.log(err);
+      if (message) {
+        _.each(users, function(u){
+          u.hasViewed = false;
+          _.each(message.read, function(r){
+            if (String(r) == String(u._id)){
+              u.hasViewed = true;
+            }
+          });
+        });
+      }
+      options.members = users;
+      options.message = message;
+      res.render('messages/member_feed', options);
+    });
+  });
+}
 
 exports.fetchMessages = function(req, res){
   var group = req.params.group;
@@ -254,6 +311,7 @@ exports.fetchMessages = function(req, res){
                   m.liked = false;
                 }
               });
+            markRead(messages, user._id);
             res.render('messages/message_feed', options);
 
           } else {
@@ -274,6 +332,7 @@ exports.fetchMessages = function(req, res){
                   m.liked = false;
                 }
               });
+              markRead(messages, user._id);
               res.render('messages/content_feed', options);
             });
           }

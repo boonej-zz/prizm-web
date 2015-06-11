@@ -23,6 +23,9 @@ each message in messages
       .foot
         span.clock-icon
         span.time-since #{message.timeSince} ago 
+        if isLeader && canEdit
+          span.viewedBy.cursor
+            | #{message.read?message.read.length:''}
       span.message
         if message.meta.image && message.meta.image.url
           a(href=message.meta.url target='_blank')

@@ -8,5 +8,8 @@ each member in members
     .content
       span.creator.cursor
         | #{member.name}
-      button.circle.remove(type='button' class=(showAdmin))
-      button.circle.action(type='button' class=(showAdmin))
+      if message
+        p.read #{member.hasViewed?'Opened':'Not Opened'}
+      else
+        button.circle.remove(type='button' class=(showAdmin))
+        button.circle.action(type='button' class=(showAdmin))

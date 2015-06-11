@@ -336,6 +336,7 @@ ul#messages li:last-child, ul#members li:last-child {
   background-repeat: no-repeat;
   display: inline-block;
   background-position: center;
+  float: left;
 }
 
 .message .time-since {
@@ -346,6 +347,25 @@ ul#messages li:last-child, ul#members li:last-child {
   line-height: 17px;
   vertical-align: top;
   font-weight: 300;
+  float: left;
+}
+
+.message .viewedBy {
+  display: inline-block;
+  height: 15px;
+  line-height: 15px;
+  padding-top: 0px;
+  padding-left: 31px;
+  background-image: url('/images/icons/view_icon.png');
+  background-position: left center;
+  background-size: 22px 15px;
+  background-repeat: no-repeat;
+  font-size: 15px;
+  color: #484849; 
+  vertical-align: middle;
+  margin-left: 24px;
+  float: left;
+  margin-top: 2px;
 }
 
 .message:hover .edit {

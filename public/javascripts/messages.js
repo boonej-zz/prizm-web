@@ -195,6 +195,21 @@ var messages = {
     $('#messageArea').toggleClass('hidden');
     $('#memberArea').toggleClass('hidden');
   },
+  showViewed: function(e){
+    var org = $('input#selectedOrganization').val();
+    var group = $('input#selectedGroup').val();
+    var message_id = $(e.target).parents('li.message').attr('data-id');
+    $.ajax({
+      url: '/organization/' + org + '/groups/' + group + '/members',
+      method: 'GET',
+      headers: {message_id: message_id},
+      cache: false,
+      success: function(html){
+      },
+      err: function(err){
+      }
+    });
+  },
   showNameForm: function(){
     $('#groupName').addClass('hidden');
     $('#changeName').removeClass('hidden');
