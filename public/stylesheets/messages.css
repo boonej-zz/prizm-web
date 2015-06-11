@@ -374,7 +374,7 @@ ul#messages li:last-child, ul#members li:last-child {
 
 .edit {
   float: right;
-  display: inline-block;
+  display: none;
   height: 16px;
   width: 16px;
   background-size: 16px;
@@ -382,7 +382,6 @@ ul#messages li:last-child, ul#members li:last-child {
   background-repeat: no-repeat;
   background-position: center;
   vertical-align: bottom;
-  display: inline-block;
   margin-right: -73px;
 }
 
