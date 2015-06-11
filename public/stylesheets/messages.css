@@ -383,7 +383,7 @@ ul#messages li:last-child, ul#members li:last-child {
   background-position: center;
   vertical-align: bottom;
   display: inline-block;
-  margin-right: -40px;
+  margin-right: -73px;
 }
 
 .edit.active {
@@ -498,7 +498,7 @@ ul.edit-menu li.action-delete:hover {
   line-height: 17px;
   margin-left: 9px;
   vertical-align: top;
-  margin-right: 51px;
+  margin-right: 18px;
   width: 20px;
 }
 
@@ -676,7 +676,7 @@ button.remove {
   }
 
   .edit {
-    margin-right: -30px;
+    margin-right: -63px;
   }
 
 
@@ -767,7 +767,7 @@ button.remove {
   }
 
   .edit {
-    margin-right: -5px;
+    margin-right: -39px;
   }
 }
 
