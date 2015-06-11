@@ -384,6 +384,7 @@ var insight = {
           return function(im) {
             $('#imageContainer').css('background-image', 'url(' + im.target.result +')'); 
             $('#imageContainer').css('background-size', 'cover');
+            $('#photoInstructions').hide();
           }
         }(file));
         reader.readAsDataURL(file);
