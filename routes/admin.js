@@ -370,8 +370,19 @@ var processUsersWithInterestsAndOptions = function(interests, options, next){
   }); 
 };
 
-var processAllUsers = function(next) {
-  User.find(function(err, users) {
+var processAllUsers = function(req, next) {
+
+  var gender = req.param('gender').toLowerCase();
+  var startAge = Number(req.param('startingAge'));
+  var endAge = Number(req.param('endingAge'));
+  var options = {};
+  if (gender != 'all') {
+    options.gender = gender
+  }
+  options.age = {$gte: startAge, $lte: endAge};   
+  options.active = true;
+
+  User.find(options, function(err, users) {
     next(err, users);
   });
 };
@@ -502,7 +513,7 @@ router.post('/insights/:id', utils.auth, function (req, res) {
         });
       });
     } else if (allUsers) {
-      processAllUsers(function(err, users) {
+      processAllUsers(req, function(err, users) {
         _.each(users, function(user, index, list) {
           sendInsightToUser(insight, user, subjectIndex, subject, function(err) {
             if (!(index == (list.length - 1))) {
