@@ -6,6 +6,7 @@ each message in messages
   - var creatorPhoto = message.creator.profile_photo_url?'https://' + message.creator.profile_photo_url.substr(7):'/images/default-profile.png'
   - var creatorClass = message.creator.subtype?message.creator.subtype:false
   - creatorClass = creatorClass?creatorClass:message.creator.org_status[0].role
+  - var readCount = message.read.length > 1?message.read.length -1:''
   li.message(created='#{message.create_date}' data-id='#{message._id}' data-liked=message.liked)
     .raw-text.hidden(data-text = '#{message.text}')
     .profile-icon.cursor(
@@ -25,7 +26,7 @@ each message in messages
         span.time-since #{message.timeSince} ago 
         if isLeader && canEdit
           span.viewedBy.cursor
-            | #{message.read?message.read.length:''}
+            | #{readCount}
       span.message
         if message.meta.image && message.meta.image.url
           a(href=message.meta.url target='_blank')
