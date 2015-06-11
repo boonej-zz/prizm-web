@@ -20,12 +20,6 @@ each message in messages
           onclick='#{likeAction}')
         span#likesCount(class=message.likes_count == 0?'clear':'') 
           | #{message.likes_count}
-      if canEdit || isLeader
-        span.edit(onclick='messages.settingsClicked(event)')
-          ul.edit-menu.hidden
-            if message.text && message.text.length > 0 && canEdit
-              li.action-edit(onclick='messages.editMessage(event)') Edit
-            li.action-delete(onclick='messages.deleteMessage(event)') Delete
       .foot
         span.clock-icon
         span.time-since #{message.timeSince} ago 
@@ -40,7 +34,13 @@ each message in messages
           .description #{message.meta.description}
         if message.image_url
           img.message-image(src=message.image_url target='_blank')
-        | !{message.web_text}    
+        | !{message.web_text}
+        if canEdit || isLeader
+          span.edit(onclick='messages.settingsClicked(event)')
+            ul.edit-menu.hidden
+              if message.text && message.text.length > 0 && canEdit
+                li.action-edit(onclick='messages.editMessage(event)') Edit
+              li.action-delete(onclick='messages.deleteMessage(event)') Delete
 
       
      

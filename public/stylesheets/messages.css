@@ -2,6 +2,10 @@ input {
   outline: none;
 }
 
+.noscroll {
+  overflow: hidden !important;
+}
+
 .messages-header {
   display: block;
   height: 42px;
@@ -357,7 +361,9 @@ ul#messages li:last-child, ul#members li:last-child {
   background-image: url('/images/icons/settings_button.png');
   background-repeat: no-repeat;
   background-position: center;
-  display:none;
+  vertical-align: bottom;
+  display: inline-block;
+  margin-right: -40px;
 }
 
 .edit.active {
@@ -366,15 +372,15 @@ ul#messages li:last-child, ul#members li:last-child {
 }
 
 ul.edit-menu {
+  position: absolute;
   list-style: none;
   width: auto;
   margin: 0;
   padding: 0;
-  position: relative;
   background-color: #fefefe;
   border: 1px solid #c5c8cc;
-  top: 33px;
-  left: -20px;
+  margin-top: 33px;
+  margin-left: -20px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.06);
   float: left;
   z-index: 5000;
@@ -400,7 +406,7 @@ ul.edit-menu::before {
 
 ul.edit-menu li {
   display: block;
-  width: 100%;
+  width: 80% !important;
   margin-left: 10px;
   margin-right: 10px;
   padding-left: 31px;
@@ -412,6 +418,7 @@ ul.edit-menu li {
   padding-bottom: 18px;
   background-repeat: no-repeat;
   cursor: pointer;
+  background-color: #fefefe;
 }
 
 ul.edit-menu li.action-edit {
@@ -648,6 +655,10 @@ button.remove {
     width: 100px;
   }
 
+  .edit {
+    margin-right: -30px;
+  }
+
 
 }
 
@@ -733,6 +744,10 @@ button.remove {
 
   #groupDescription::after, #groupDescription::before {
     left: 219px;
+  }
+
+  .edit {
+    margin-right: -5px;
   }
 }
 
@@ -866,5 +881,9 @@ button.remove {
   .right-box #groupMembers {
     margin-top: 13px;
     margin-right: 8px;
+  }
+
+ .edit {
+    margin-right: -28px;
   } 
 }

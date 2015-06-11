@@ -82,6 +82,7 @@ function startPage(){
     if (!$(e.target).is('.edit-menu') && !$(e.target).is('span.edit') && !$(e.target).is('.edit-menu li')){
       $('.edit-menu').addClass('hidden');
       $('.edit').removeClass('active');
+      $('ul#messages').removeClass('noscroll');
     }
   });
 }
@@ -239,7 +240,15 @@ var messages = {
     });
   },
   settingsClicked: function(e){
+    var targetHidden = $(e.target).children('.edit-menu').hasClass('hidden');
     $(e.target).toggleClass('active');
+    if (targetHidden){
+      $(e.target).children('.edit-menu').css('top', $(e.target).offset().top - 75);
+      $('ul#messages').addClass('noscroll');
+    } else {
+      $('ul#messages').removeClass('noscroll');
+    }
+
     $(e.target).children('.edit-menu').toggleClass('hidden');
   },
   editMessage: function(e){
