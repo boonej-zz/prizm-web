@@ -92,11 +92,11 @@ exports.sendInsight = function(req, res){
           if (groups && groups.length > 0) {
             if (_.isArray(groups)) {
               console.log('Sending to multiple groups ' + groups);
-              criteria.groups = {'$elemMatch': {_id: {$in: groups}}};
+              criteria.groups = {$in: groups};
             } else {
               if (groups != 'on') {
                 console.log('Sending to one group ' + groups);
-                criteria.groups = {'$elemMatch': {_id: groups}};
+                criteria.groups = groups;
               } else {
                 console.log('Sending to everybody!');
               }

@@ -11,7 +11,7 @@ var orgStatusSchema = new mongoose.Schema({
   organization          : {type: ObjectIdType, ref: 'Organization'},
   status                : {type: String, default: 'pending'},
   create_date           : {type: Date, default: Date.now()},
-  groups                : {type: Array},
+  groups                : [ObjectIdType],
   role                  : {type: String}
 });
 
