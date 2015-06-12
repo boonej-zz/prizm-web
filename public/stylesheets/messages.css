@@ -139,6 +139,11 @@ ul#topics li, ul#messages li, ul#members li {
 #topics .topic.active {
   background-color: #fefefe;
   border-left: 9px solid #ea622c;
+  border-bottom: none;
+}
+
+#topics .topic.active + .topic {
+  border-top: 1px solid #c5c8cc;
 }
 
 /* MESSAGES */
