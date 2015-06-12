@@ -80,7 +80,7 @@ ul#topics li, ul#messages li, ul#members li {
 }
 
 .profile-icon.luminary::after {
-  background-image: url('/images/icons/luminary_icon_selected.png');
+  background-image: url('/images/profile/luminary_icon_selected.png');
 }
 
 .profile-icon.ambassador::after {
