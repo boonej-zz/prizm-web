@@ -130,6 +130,7 @@ exports.displayOwnerMessagesFeed = function(req, res){
   var user = req.user;
   var action = req.get('action');
   var create_date = req.get('create_date');
+  var group = req.get('group');
   if (action){
     if (user.type == 'user'){
       var criteria1 = {organization: {$in: []}, group:null, creator:{$ne: user._id}};
@@ -160,7 +161,8 @@ exports.displayOwnerMessagesFeed = function(req, res){
       bodyId: 'messageList',
       topics: [],
       auth: true,
-      currentUser: user
+      currentUser: user,
+      group: group || false
     };
     if (user.type == 'institution_verified') {
       Organization.findOne({owner: user._id})
@@ -185,7 +187,7 @@ exports.displayOwnerMessagesFeed = function(req, res){
             Message.fetchMessages(
               {
                 organization: organization._id,
-                group: null 
+                group: group || null 
               },
               function(err, messages){
                 if (err) console.log(err);

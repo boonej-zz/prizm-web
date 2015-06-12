@@ -508,6 +508,18 @@ var members = {
         members.updatePendingCount();
       }
     });
+  },
+  showGroup: function(organization, group){
+    $.ajax({
+      type: 'GET',
+      url: '/messages',
+      headers: {group: group},
+      success: function(html){
+        document.open();
+        document.write(html);
+        document.close();
+      }
+    });
   }
 };
 

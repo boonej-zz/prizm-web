@@ -5,7 +5,8 @@ mixin groupmenu(groups)
     .group-menu.hidden
       ul
         each group in groups
-          li(group='#{"#" + group.name.toLowerCase()}')
+          li.cursor(group='#{"#" + group.name.toLowerCase()}' 
+          onclick='members.showGroup("#{group.organization}", "#{group._id}")')
             | #{"#" + group.name.toLowerCase()}
 
 table.table.table-striped.members-table
