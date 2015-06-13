@@ -25,7 +25,7 @@ each message in messages
         span.clock-icon
         span.time-since #{message.timeSince} ago 
         if isLeader && canEdit
-          span.viewedBy.cursor
+          span.viewedBy.cursor(onclick='messages.showViews(event)')
             | #{readCount}
       span.message
         if message.meta.image && message.meta.image.url

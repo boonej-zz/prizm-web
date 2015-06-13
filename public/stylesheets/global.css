@@ -203,6 +203,139 @@ span.error {
           transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 0.995); /* custom */
 }
 
+/** OVERLAYS AND MODAL SCREENS **/
+.modal-overlay {
+  z-index: 5000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-overlay .content::before {
+  content: 'close';
+  color: rgba(1, 1, 1, 0);
+  display: block;
+  height: 20px;
+  width: 20px;
+  background-image: url('/images/posts/dismiss.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  float: right;
+  margin-top: -34px;
+}
+
+.modal-overlay .content {
+  width: 597px;
+  background-color: #fefefe;
+  border: 1px solid #c5c8cc;
+  margin: 10% auto;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.35);
+}
+
+.modal-overlay .body:not(.active) {
+  display: none;
+}
+
+.modal-overlay .body {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+li.user-cell {
+  display: block;
+  width: 100%;
+  height: 108px;
+  line-height: 108px;
+  vertical-align: middle;
+}
+
+li.user-cell .cell-content {
+  height: 100%;
+  border-bottom: 1px solid #c5c8cc;
+  width: 80%;
+  float: left;
+}
+
+li.user-cell .image {
+  width: 20%;
+  height: 100%;
+  line-height: 105px;
+  vertical-align: middle;
+  display: inline-block;
+  float: left;
+}
+
+li.user-cell .profile-avatar {
+  height: 50px;
+  width: 50px;
+  background-size: 50px 50px;
+  border-radius: 50%;
+  border: 1px solid #c0c6e0;
+  display: inline-block;
+  margin-left: 45px;
+  vertical-align: middle;
+}
+
+li.user-cell .name {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #545358;
+}
+
+li.user-cell .content {
+  height: 100%;
+  width: 65%;
+  border-bottom: 1px solid #c5c8cc;
+  display: inline-block;
+}
+
+ul.tabs {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+ul.tabs li {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #e4e5ea;
+  height: 37px;
+  color: #555;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 37px;
+  vertical-align: middle;
+  border-bottom: 1px solid #c6c8cc;
+}
+
+ul.tabs li.active {
+  background-color: #fefefe;
+  color: #334b8f;
+}
+
+ul.tabs[data-cols='2'] li {
+  width: 50%;
+}
+
+ul.tabs[data-cols='3'] li {
+  width: 33.33%;
+}
+
+ul.tabs[data-cols='4'] li {
+  width: 25%;
+}
+
+
+
+
 @media screen and (max-width:800px) {
   .prizm-avatar-xs {
     height: 30px;

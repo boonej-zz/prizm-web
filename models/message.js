@@ -30,7 +30,7 @@ var messageSchema = new mongoose.Schema({
       height: {type: Number}
     }
   },
-  read: {type: Array},
+  read: [ObjectId],
   status: {type: String, default: 'active'}
 });
 

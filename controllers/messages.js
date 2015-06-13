@@ -914,3 +914,38 @@ exports.updateMessage = function(req, res){
     });
   });
 }
+
+exports.showMessageViewOverlay = function(req, res){
+  var messageID = req.params.message_id;
+  Message.findOne({_id: messageID})
+  .populate({path: 'read', model: 'User'})
+  .exec(function(err, message){
+    if (err) console.log(err);
+    if (message){
+      var users = message.read;
+      var readList = _.pluck(users, '_id');
+      console.log(readList);
+      var criteria = {};
+      criteria.status = 'active';
+      criteria.organization = message.organization;
+      if (message.group){
+        criteria.groups = message.group;
+      }
+      User.find({org_status: {
+        $elemMatch: criteria 
+      }, _id: {$nin: readList}}, function(err, unread){
+        if (err) console.log(err);
+        if (unread){
+          var options = {};
+          options.read = users;
+          options.unread = unread;
+          res.render('overlays/message_views', options);
+        } else {
+          res.status(500).send('server error');
+        }
+      });
+    } else {
+      res.status(400).send('bad request');
+    }
+  });
+}

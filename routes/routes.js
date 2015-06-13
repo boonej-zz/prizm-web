@@ -67,6 +67,7 @@ router.post('/messages', _users.authRequired, _messages.createMessage);
 router.post('/messages/actions/:mid', _users.authRequired, _messages.manipulateMessage);
 router.delete('/messages/:message_id', _users.authRequired, _messages.deleteMessage);
 router.put('/messages/:message_id', _users.authRequired, _messages.updateMessage);
+router.get('/messages/:message_id/views', _users.authRequired, _messages.showMessageViewOverlay);
 
 /* Users */
 router.post('/users/unrestrict', _users.authRequired, _users.unrestrictUser);

@@ -287,6 +287,20 @@ var messages = {
       }
     });
     $(e.target).parents('li.message').remove();
+  },
+  showViews: function(e){
+    var messageID = $(e.target).parents('li.message').attr('data-id');
+    $.ajax({
+      url: '/messages/' + messageID + '/views',
+      method: 'GET',
+      cache: false,
+      success: function(html){
+        if (html) {
+          $('body').append(html);
+          $('body').addClass('noscroll');
+        }
+      }
+    });
   }
 };
 

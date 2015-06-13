@@ -605,7 +605,14 @@ button.remove {
 #members {
   height: 624px;
   overflow-y: auto;
-} 
+}
+
+ul.body {
+  height: 560px;
+  padding-bottom: 75px;
+  overflow: scroll;
+}
+
 
 
 @media screen and (max-width: 600px) {
