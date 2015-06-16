@@ -515,6 +515,8 @@ var members = {
       url: '/messages',
       headers: {group: group},
       success: function(html){
+        var state = {members: 'messages'};
+        history.pushState(state, 'messages', 'messages');
         document.open();
         document.write(html);
         document.close();

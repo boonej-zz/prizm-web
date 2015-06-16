@@ -373,6 +373,10 @@ ul#messages li:last-child, ul#members li:last-child {
   margin-top: 2px;
 }
 
+.message .viewedBy:hover {
+  background-image: url('/images/icons/view_icon_hover.png');
+}
+
 .message:hover .edit {
   display: inline-block;
 }

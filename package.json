@@ -43,6 +43,7 @@
     "static-favicon": "~1.0.0",
     "string": "^3.2.0",
     "stripe": "~3.3.0",
+    "twilio": "^2.2.1",
     "underscore": "~1.6.0"
   }
 }
