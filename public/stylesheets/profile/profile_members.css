@@ -337,6 +337,10 @@ background-color: rgb(246, 249, 254);
   font-weight: 400;
 }
 
+.group-menu li:hover {
+  color: #334b8f;
+}
+
 span.group-icon {
   display: inline-block;
   margin-right: 17px;
