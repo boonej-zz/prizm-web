@@ -469,14 +469,14 @@ span.group-icon {
   margin-left: 17px;
   margin-top: 16px;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   color: #959698;
   padding: 0;
   cursor: pointer;
 }
 
 #nameMenu>ul>li:hover, #statusMenu>ul>li:hover, #dateMenu>ul>li:hover {
-  color: #3e6a9e;
+  color: #334b8f;
 }
 
 .ambassador-menu:after {
