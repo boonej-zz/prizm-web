@@ -61,6 +61,9 @@ form(action='/register' method='post' class='form-register' id='individual-form'
         class='form-control'
         placeholder='mm/dd/yyyy'
         required)
+  label(for='phoneNumber' class='sr-only')
+    | Phone Number
+  input#phoneNumber(type='tel' name='phone_number' class='form-control' placeholder='Phone Number' required)
   label(for='inputProgramCode' class='sr-only')
     | Program Code
   input(type='text'

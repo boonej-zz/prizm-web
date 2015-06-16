@@ -1192,6 +1192,7 @@ var validateRegistrationRequest = function(req, res,  next) {
   var userEmail = req.body.email;
   var userCode = req.body.programCode;
   var birthday = req.body.birthday;
+  var phoneNumber = req.body.phone_number;
   if (validateEmail(userEmail)) {
     User.findOne({email: userEmail}, function(err, user) {
       if (err) {
@@ -1222,6 +1223,11 @@ var validateRegistrationRequest = function(req, res,  next) {
             });
             return;
           }
+          if (!phoneNumber){
+            res.status(400).send({
+              error: 'You must enter a valid phone number.'
+            });
+          }
           if (userCode) {
             Organization.findOne({code: userCode}, function(err, organization) {
               if (err) {
@@ -1250,6 +1256,7 @@ var validateRegistrationRequest = function(req, res,  next) {
 var registerIndividual = function(req, res) {
   var defaultProfileUrl = 'https://s3.amazonaws.com/higheraltitude.prism/' +
                           'default/profile_default_avatar.png';
+  var phoneNumber = req.body.phone_number;
   var birthday = new Date(req.body.birthday);
   if (birthday){
     birthday = String(birthday.getMonth() + 1) + '-' + String(birthday.getDate())
@@ -1263,7 +1270,8 @@ var registerIndividual = function(req, res) {
       password: req.body.password,
       gender: req.body.gender,
       birthday: birthday,
-      profile_photo_url: defaultProfileUrl
+      profile_photo_url: defaultProfileUrl,
+      phone_number: phoneNumber
     });
     if (req.body.programCode) {
       newUser.program_code = req.body.programCode;
