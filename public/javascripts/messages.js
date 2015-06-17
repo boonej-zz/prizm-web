@@ -1,4 +1,5 @@
 var isFetching = false;
+var counter = 0;
 
 function startPage(){
  messages.scrollToLatest();
@@ -25,6 +26,8 @@ function startPage(){
       $('#newMessage input').val('');
       $('#newMessage').attr('data-action', '');
       $('#newMessage').attr('data-id', '');
+      $('#newMessage button').removeClass('env');
+      $('#newMessage button').attr('type', 'button');
       messages.refresh();
     });
     return false;
@@ -85,6 +88,22 @@ function startPage(){
       $('ul#messages').removeClass('noscroll');
     }
   });
+ $('#newMessage input').keyup(function(){
+          if ($('#newMessage input').val() && $('#newMessage input').val().length > 0){
+            $('#newMessage button').addClass('env');
+            $('#newMessage button').attr('type', 'submit');
+          } else {
+            $('#newMessage button').removeClass('env');
+            $('#newMessage button').attr('type', 'button');
+          }
+        });
+  document.body.addEventListener('dragenter', messages.drag);
+  document.body.addEventListener('dragleave', messages.dragEnd);
+  document.body.addEventListener('dragover', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+  });
+  document.body.addEventListener('drop', messages.drop);
 }
 
 var messages = {
@@ -248,6 +267,7 @@ var messages = {
             $('button.save').attr('disabled', 'disabled');
           }
         });
+       
       },
       error: function(err){
         alert('This group cannot be edited at this time. Please check with your administrator.');
@@ -301,6 +321,70 @@ var messages = {
         }
       }
     });
+  },
+  addImage: function(e){
+    if(!$(e.target).hasClass('env')){
+      $('#uploadImage').click();
+    }
+  }, 
+  uploadImage: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    if (window.File && window.FileReader && window.FileList && window.Blob){
+      var files = e.target.files || e.dataTransfer.files;
+      var file = files[0];
+      //if (file.type.match('image.*')){ 
+        var data = new FormData();
+        data.append('image', file);
+        var organization = $('input#selectedOrganization').val();
+        var group = $('input#selectedGroup').val();
+        var hash = window.location.hash;
+        $.ajax({
+          type: 'POST',
+          url: '/messages',
+          contentType: false,
+          cache: false,
+          processData: false,
+          headers: {
+            organization: organization,
+            group: group,
+            group_name: hash
+          },
+          data: data
+        })
+        .done(function(){
+          $('#newMessage input').val('');
+          $('#newMessage').attr('data-action', '');
+          $('#newMessage').attr('data-id', '');
+          messages.refresh();
+        });
+    //  }
+    } else {
+      alert('This browser does not support the File API.');
+    }
+  },
+  drag: function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    counter++;
+    if (!$(document.body).hasClass('drag')) {
+      $(document.body).addClass('drag');
+    }
+  },
+  dragEnd: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    counter--;
+    if (counter < 1){
+      $(document.body).removeClass('drag');
+      counter = 0;
+    }
+  },
+  drop: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    $(document.body).removeClass('drag');
+    messages.uploadImage(e);
   }
 };
 

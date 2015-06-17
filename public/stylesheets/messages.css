@@ -6,6 +6,29 @@ input {
   overflow: hidden !important;
 }
 
+body #uploadOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9000;
+}
+
+body #uploadOverlay .text {
+  margin: 25% auto 0 auto;
+  font-size: 28px;
+  color: white;
+  text-align: center;
+  width: 300px;
+}
+
+body.drag #uploadOverlay {
+  display: block;
+}
+
 .messages-header {
   display: block;
   height: 42px;
@@ -567,11 +590,17 @@ span.message img {
   border: none;
   height: 52px;
   width: 52px;
-  background-image: url('/images/icons/message_send.png');
-  background-size: 28px 27px;
+  background-image: url('/images/icons/addcontent.png');
+  background-size: 26px 26px;
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
+  outline: none;
+}
+
+#newMessage button.send.env {
+  background-image: url('/images/icons/message_send.png');
+  background-size: 28px 27px;
 }
 
 button.circle {

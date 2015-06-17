@@ -8,7 +8,7 @@
     div#groupSettings(data-name='#{groupName}' onclick='messages.showEditGroup(event)')
   span#groupMembers(onclick='messages.showMembers()') 
     span.group-count #{Number(count)}
-  div#groupInfo(onclick='messages.showGroupInfo(event)')
+  div#groupInfo(onclick='messages.showGroupInfo(event)' )
     div#groupDescription
       | #{groupDescription || 'This group contains all members of the organization.'} 
  
@@ -19,7 +19,8 @@
   form#newMessage
     .message-icon
     input(type='text' placeholder='Post a message to #{groupName?groupName.toLowerCase():"all"}...')
-    button.send
+    button.send(type='button' onclick='messages.addImage(event)' )
+    input#uploadImage.hidden(type='file' name='image' accept='image/*' onchange='messages.uploadImage(event)')
 #memberArea.hidden(class='#{groupName?groupName.toLowerCase():"all"}')
   ul#members
     include member_feed

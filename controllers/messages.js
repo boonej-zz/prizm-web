@@ -20,6 +20,7 @@ var htmlparser = require('htmlparser');
 var utils = require('util');
 var S = require('string');
 var iPush = require('../classes/i_push');
+var Image = require('../lib/helpers/image');
 
 var markRead = function(messages, user_id){
   _.each(messages, function(message){
@@ -574,6 +575,22 @@ exports.createMessage = function(req, res){
       });
     };
     processMessageText(message, save);
+  } else if (organization){
+    Image.uploadMessageImage(req, function(err, path, fields){
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+        return;
+      }
+      if (path) {
+        var data = {creator: user._id, image_url: path, organization: organization, group: group};
+        var message = new Message(data);
+        message.save(function(err, data){
+          if (err) console.log(err);
+          res.status(200).send(data);
+        });
+      }
+    }); 
   } else {
     res.status(400).send();
   }
