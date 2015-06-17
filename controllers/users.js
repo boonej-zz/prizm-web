@@ -214,6 +214,7 @@ exports.updateUser = function(req, res) {
       }
       if (user) {
         if (user.userBelongsToOrganization(orgId)) {
+          alert('something is going wrong');
           var update = {'org_status.$.status': status};
           var theme;
           _.each(user.org_status, function(item, idx, list){
@@ -221,31 +222,34 @@ exports.updateUser = function(req, res) {
               update.theme = item.organization.theme;
             }
           });
-          Invite.findOne({address: user.email, organization: orgId}, function(err, invite){
+          Invite.findOne({code: user.program_code, organization: orgId}, function(err, invite){
+
             if (err) console.log(err);
             if (invite){
               invite.status = 'accepted';
               invite.user = user._id;
+              update['org_status.$.status'] = 'active';
               invite.save(function(err, result){
                 if (err) console.log(err);
               });
             }
+            User.findOneAndUpdate({
+              _id: user.id,
+              org_status: {$elemMatch: { organization: orgId}}
+            },
+            {
+              $set: update 
+            },
+            function(err, user) {
+              if (err) console.log(err);
+              if (status == 'active') {
+                createActivity();
+              }
+              res.status(200).send({message: 'User org_status updated'});
+            });
+
           });
-          User.findOneAndUpdate({
-            _id: user.id,
-            org_status: {$elemMatch: { organization: orgId}}
-          },
-          {
-            $set: update 
-          },
-          function(err, user) {
-            if (err) console.log(err);
-            if (status == 'active') {
-              createActivity();
-            }
-            res.status(200).send({message: 'User org_status updated'});
-          });
-        }
+                 }
         else {
           res.status(400).send({error: 'User does not have org_status with organization'});
         }
@@ -1228,19 +1232,7 @@ var validateRegistrationRequest = function(req, res,  next) {
               error: 'You must enter a valid phone number.'
             });
           }
-          if (userCode) {
-            Organization.findOne({code: userCode}, function(err, organization) {
-              if (err) {
-                res.status(500).send({error: err});
-              }
-              if (organization) {
-                next(organization);
-              }
-              else {
-                res.status(400).send({error: 'Program code is a valid code'});
-              }        
-            });
-          } else {
+         else {
           next();
         }
         }
@@ -1251,6 +1243,26 @@ var validateRegistrationRequest = function(req, res,  next) {
   else {
     res.status(400).send({error: 'Invalid Email Address'});
   } 
+};
+
+var saveUser = function(user, organization, res){
+  user.save(function(err, user) {
+    if (err) {
+      res.status(500).send({error: err});
+      console.log('saving user error');
+    }
+    var welcomePhoto = organization?organization.welcome_image_url:false;
+    var response = {
+      user: user,
+      welcomePhoto: welcomePhoto
+    };
+    if (user) {
+      console.log('user saved');
+      res.status(200).send(response);
+      _mail.sendWelcomeMail(response);
+    }
+  });
+
 };
 
 var registerIndividual = function(req, res) {
@@ -1275,11 +1287,19 @@ var registerIndividual = function(req, res) {
     });
     if (req.body.programCode) {
       newUser.program_code = req.body.programCode;
-      newUser.org_status = {
-        organization: ObjectId(organization._id),
+    }
+    if (organization) {
+      newUser.org_status = [{
+        organization: organization._id,
         status: 'pending'
+      }];
+      if (newUser.hashPassword()){
+        saveUser(newUser, organization, res);
       }
-      Invite.findOne({address: newUser.email, organization: organization._id})
+
+    } else {
+      Invite.findOne({code: newUser.program_code, status: 'sent'})
+      .populate({path: 'organization', model: 'Organization'})
       .exec(function(err, invite){
         if (err) console.log(err);
         if (invite) {
@@ -1288,29 +1308,35 @@ var registerIndividual = function(req, res) {
           invite.save(function(err, user){
             if (err) console.log(err);
           });
+          newUser.org_status = [{
+            organization: invite.organization._id,
+            status: 'active'
+          }];
+          if (newUser.hashPassword()) {
+            saveUser(newUser, invite.organization, res);          
+          }
+
+        } else {
+          if (newUser.program_code){
+            Organization.findOne({code: newUser.program_code}, function(err, org){
+              if (org) {
+                newUser.org_status = [{
+                  organization: org._id,
+                  status: 'pending'
+                }];
+                if (newUser.hashPassword()){
+                  saveUser(newUser, org, res);
+                }
+              }
+            });
+          } else {
+            if (newUser.hashPassword()){
+              saveUser(newUser, false, res);
+            }
+          }
         }
+       
       });
-    }
-    if (newUser.hashPassword()) {
-      newUser.save(function(err, user) {
-        if (err) {
-          res.status(500).send({error: err});
-          console.log('saving user error');
-        }
-        var welcomePhoto = organization?organization.welcome_image_url:false;
-        var response = {
-          user: user,
-          welcomePhoto: welcomePhoto
-        };
-        if (user) {
-          console.log('user saved');
-          res.status(200).send(response);
-          _mail.sendWelcomeMail(response);
-        }
-      });
-    }
-    else {
-      res.status(500).send({error: 'There was an error trying to create account'});
     }
   });
 };

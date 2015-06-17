@@ -481,12 +481,12 @@ exports.sendInvites = function(req, res){
   Organization.findOne({_id: orgId}, function (err, org){
     if (err) console.log(err);
     if (org){
-      var mail = jade.renderFile(inviteMail, {org: org});
       Invite.find({_id: {$in: invites}}, function(err, objects){
         if (err) console.log(err);
         if (objects) {
           console.log('have invites');
           _.each(objects, function(o, i, l) {
+            var mail = jade.renderFile(inviteMail, {org: org, invite: o});
             o.status = 'sent';
             o.save (function(err, result){
               if (err) console.log(err);

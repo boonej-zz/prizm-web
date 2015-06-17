@@ -75,6 +75,7 @@ var reg = {
     });
     $.ajax({
       type: 'POST',
+      cache: false,
       url: window.location,
       headers: {
         dataType: 'interests',
@@ -131,6 +132,7 @@ var reg = {
     $.ajax({
       type: 'POST',
       url: '/profiles/' + userToFollow + '/followers',
+      cache: false,
       headers: {
         newUser: true,
         follower: userId
@@ -163,6 +165,7 @@ var reg = {
         headers: {
           dataType: 'user'
         },
+        cache: false,
         data: user,
         success: function(response) {
           var user = response.user?response.user:response;
@@ -199,6 +202,7 @@ var reg = {
         contentType: false,
         processData: false,
         data: formData,
+        cache: false,
         success: function(response) {
           $('[class^="imgareaselect"]').css('display', 'none');
           reg.nextSection();
