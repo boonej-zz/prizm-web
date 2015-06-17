@@ -77,6 +77,7 @@ passport.deserializeUser(function(email, done) {
     model: 'Interest'
   })
   .exec(function (err, user) {
+    if (user) {
     user.isLeader = false;
     _.each(user.org_status, function(s, i, l){
       if (s.status == 'active' && s.role && s.role == 'leader'){
@@ -85,6 +86,7 @@ passport.deserializeUser(function(email, done) {
     });
     user.mixpanel = user.mixpanelProperties();
     user.heap = user.heapProperties();
+    }
     done(err, user);
   });
 });

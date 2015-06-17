@@ -26,6 +26,8 @@ var _image          = require('../lib/helpers/image');
 var _organizations  = require('../controllers/organizations');
 var validateEmail   = require('../utils').validateEmail;
 var _utils          = require('../utils.js');
+var path = require('path');
+var util = require('util');
 var profileFollow        = path.join(__dirname, '/../views/profile/profile_follow.jade');
 var memberCardPath       = path.join(__dirname, '/../views/profile/profile_members_card.jade');
 var profileNotifications = path.join(__dirname, '/../views/profile/profile_activity_notifications.jade');
@@ -41,6 +43,15 @@ var Mixpanel        = require('mixpanel');
 var mixpanel        = Mixpanel.init(process.env.MIXPANEL_TOKEN);
 var InsightTarget = mongoose.model('InsightTarget');
 var moment = require('moment');
+var baseMail = path.join(__dirname, '/../views/mail/base_template.jade');
+
+var iPush = require('../classes/i_push');
+var ownerGreeting = 'Dear %s,';
+var ownerBody1 = '%s has requested to join %s\'s Prizm group. Please go to your admin page <a href="https://www.prizmapp.com/profile/members">here</a> to approve or deny.';
+var ownerBody1Alt = '%s has just joined %s\'s Prizm group. Please go to your admin page <a href="https://www.prizmapp.com/profile/members">here</a> to review your members.';
+var ownerClosing = 'Thank you,';
+var ownerPush = '%s has requested to join your Prizm group. Please go to your admin page to approve or deny.';
+var ownerPushAlt = '%s has just joined your Prizm group. Please go to your admin page to review your members.';
 
 // User Methods
 exports.passwordReset = function(req, res){
@@ -1295,30 +1306,66 @@ var registerIndividual = function(req, res) {
       }];
       if (newUser.hashPassword()){
         saveUser(newUser, organization, res);
+        
       }
 
     } else {
       Invite.findOne({code: newUser.program_code, status: 'sent'})
-      .populate({path: 'organization', model: 'Organization'})
       .exec(function(err, invite){
         if (err) console.log(err);
+        console.log(invite);
         if (invite) {
+          Organization.findOne({_id: invite.organization})
+          .populate({path: 'owner'})
+          .exec(function(err, org){
           invite.status = 'accepted';
           invite.user = newUser._id;
           invite.save(function(err, user){
             if (err) console.log(err);
           });
           newUser.org_status = [{
-            organization: invite.organization._id,
+            organization: org._id,
             status: 'active'
           }];
+          console.log('saving user');
           if (newUser.hashPassword()) {
-            saveUser(newUser, invite.organization, res);          
+            saveUser(newUser, org, res);          
+            var params = {
+                    body: [
+                      util.format(ownerGreeting, org.owner.name),
+                      util.format(ownerBody1Alt, newUser.first_name + ' ' + newUser.last_name, org.owner.name)
+                    ],
+                    closing: ownerClosing
+                  };
+                  var mail = jade.renderFile(baseMail, params);
+                  mandrill(mandrillEndpointSend, {
+                    message: {
+                      to: [{email: org.owner.email}],
+                      from_email: 'info@prizmapp.com',
+                      from_name: 'Prizm',
+                      subject: 'New Member Pending',
+                      html: mail
+                    }
+                  }, function (err, response){
+                    if (err) console.log(err); 
+                  }); 
+                  var messageString = util.format(ownerPushAlt, org.owner.name);
+                  iPush.sendNotification({
+                    device: org.owner.device_token,
+                    alert: messageString,
+                    payload: {_id: invite._id},
+                    badge: 1 
+                  }, function(err, result){
+                    if (err) console.log(err);
+                    else console.log('Sent push'); 
+                  });
           }
-
+          });
         } else {
           if (newUser.program_code){
-            Organization.findOne({code: newUser.program_code}, function(err, org){
+            Organization.findOne({code: newUser.program_code})
+            .populate({path: 'owner'})
+            .exec(function(err, org){
               if (org) {
                 newUser.org_status = [{
                   organization: org._id,
@@ -1326,6 +1373,35 @@ var registerIndividual = function(req, res) {
                 }];
                 if (newUser.hashPassword()){
                   saveUser(newUser, org, res);
+                  var params = {
+                    body: [
+                      util.format(ownerGreeting, org.owner.name),
+                      util.format(ownerBody1, newUser.first_name + ' ' + newUser.last_name, org.owner.name)
+                    ],
+                    closing: ownerClosing
+                  };
+                  var mail = jade.renderFile(baseMail, params);
+                  mandrill(mandrillEndpointSend, {
+                    message: {
+                      to: [{email: org.owner.email}],
+                      from_email: 'info@prizmapp.com',
+                      from_name: 'Prizm',
+                      subject: 'New Member Pending',
+                      html: mail
+                    }
+                  }, function (err, response){
+                    if (err) console.log(err); 
+                  }); 
+                  var messageString = util.format(ownerPush, org.owner.name);
+                  iPush.sendNotification({
+                    device: org.owner.device_token,
+                    alert: messageString,
+                    payload: {_id: org._id},
+                    badge: 1 
+                  }, function(err, result){
+                    if (err) console.log(err);
+                    else console.log('Sent push'); 
+                  });   
                 }
               }
             });
