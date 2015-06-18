@@ -225,7 +225,7 @@ exports.updateUser = function(req, res) {
       }
       if (user) {
         if (user.userBelongsToOrganization(orgId)) {
-          alert('something is going wrong');
+          console.log('something is going wrong');
           var update = {'org_status.$.status': status};
           var theme;
           _.each(user.org_status, function(item, idx, list){
