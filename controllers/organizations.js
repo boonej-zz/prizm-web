@@ -548,14 +548,13 @@ exports.resendInvite = function(req, res){
     if (err) console.log(err);
     console.log('found invite');
     if (invite) {
-       var mail = jade.renderFile(inviteMail, {org: invite.organization});
+       var mail = jade.renderFile(inviteMail, {org: invite.organization, invite: invite});
         mandrill(mandrillEndpointSend, {
         message: {
           to: [{email: invite.address}],
           from_email: 'info@prizmapp.com',
           from_name: 'Prizm',
           subject: 'You\'ve been invited to join Prizm!',
-          invite: invite,
           html: mail  
         }}, function (err, response){
           if (err) console.log(err);
