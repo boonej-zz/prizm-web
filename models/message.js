@@ -3,6 +3,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var time       = require('../lib/helpers/date_time');
 var User = mongoose.model('User');
 var _ = require('underscore');
+var util = require('util');
 
 
 var messageSchema = new mongoose.Schema({

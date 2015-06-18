@@ -183,8 +183,35 @@ function startPage(){
 }
 
 var messages = {
+  cleanHashtags: function(){
+    $('li.message span.message').each(function(){
+      var $this = $(this);
+      var text = $this.html();
+      var matches = text.match(/#\w+/g);
+      if (matches) {
+        for (var i = 0; i != matches.length; ++i) {
+          var match = matches[i];
+          var name = match.substr(1);
+          var html = '<a class="cursor" onclick="messages.clickNav(\'' + name + '\')">' + match + '</a>';
+          var r = new RegExp(match) ;
+          text = text.replace(r, html);
+          $this.html(text);
+        }
+      }
+    });
+  },
+  clickNav: function(name){
+    var topic = $('ul#topics li[data-name="' + name + '"]');
+    if (name == 'all') {
+      topic = $('ul#topics li:first-child');
+    }
+    if (topic){
+      topic.click();
+    }
+  },
   scrollToLatest: function(){
     $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+    messages.cleanHashtags();
   },
   changeTopic: function(e){
     isFetching = true;
