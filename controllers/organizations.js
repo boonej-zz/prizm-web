@@ -555,6 +555,7 @@ exports.resendInvite = function(req, res){
           from_email: 'info@prizmapp.com',
           from_name: 'Prizm',
           subject: 'You\'ve been invited to join Prizm!',
+          invite: invite,
           html: mail  
         }}, function (err, response){
           if (err) console.log(err);
