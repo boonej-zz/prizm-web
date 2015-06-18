@@ -17,6 +17,7 @@
     include message_feed 
        
   form#newMessage
+    ul#autoComplete.hidden
     .message-icon
     input(type='text' placeholder='Post a message to #{groupName?groupName.toLowerCase():"all"}...')
     button.send(type='button' onclick='messages.addImage(event)' )

@@ -7,7 +7,8 @@ var typingTag = false;
 
 function startPage(){
  $('ul#topics li').each(function(){
-  availableTags.push($(this).attr('data-name'));
+  var group = $(this).attr('data-name') || 'all';
+  availableTags.push(group);
  });
  messages.scrollToLatest();
   $('#newMessage').submit(function(){
@@ -103,23 +104,59 @@ function startPage(){
       $('#newMessage button').removeClass('env');
       $('#newMessage button').attr('type', 'button');
     }
+    var fieldVal = $('#newMessage input').val();
     if (e.keyCode == 51 && e.shiftKey) {
       typingHash = true;
       currentTag = '';
     } else if (e.keyCode == 32){
       typingTag = false;
       typingHash = false;
+      currentTag = '';
+      $('#autoComplete').addClass('hidden');
     } else {
+      if (!fieldVal || fieldVal.length == 0) {
+        typingHash = false;
+      }
       if (typingHash) {
-        currentTag = currentTag + String.fromCharCode(e.keyCode).toLowerCase();
-        var filteredTags = availableTags.filter(function(value){
-          if (value.match(currentTag)) {
-            return true;
-          } else {
-            return false;
+        var c = String.fromCharCode(e.keyCode);
+        if (c.match(/\w/)) {
+          currentTag = currentTag + String.fromCharCode(e.keyCode).toLowerCase();
+        } 
+        if (e.keyCode == 8 && currentTag.length > 0){
+          currentTag = currentTag.substr(0, currentTag.length - 1);
+        }
+        var filteredTags = [];
+        for (var i = 0; i != availableTags.length; ++i){
+          var len = currentTag.length;
+          var value = availableTags[i];
+          var sub = value.substr(0, len);
+          if (sub == currentTag) {
+            filteredTags.push(value);
           }
-        });
-        alert(filteredTags);
+        }
+        $('#autoComplete').removeClass('hidden');
+        $('#autoComplete').html('');
+        var ac = document.getElementById('autoComplete');
+        for (var i = 0; i != filteredTags.length; ++i) {
+          var listItem = document.createElement('li');
+          listItem.appendChild(document.createTextNode('#' + filteredTags[i]));
+          ac.appendChild(listItem);
+          $(listItem).click(function(){
+            var val = $('#newMessage input[type="text"]').val();
+            var replace = '#' + currentTag;
+            var regex = new RegExp(replace + '$'); 
+            val = val.replace(regex, $(this).text());
+            $('#newMessage input[type="text"]').val(val);
+            $('#autoComplete').html('');
+            $('#autoComplete').addClass('hidden');
+            currentTag = '';
+            typingHash = false;
+            $('#newMessage input[type="text"]').focus();
+          });
+        }
+      } else {
+        currentTag = '';
+        $('#autoComplete').addClass('hidden');
       }
     }
     //var r = new RegExp('\S*#(?:\[[^\]]+\]|\S+)');
