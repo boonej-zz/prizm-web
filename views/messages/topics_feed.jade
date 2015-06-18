@@ -1,5 +1,5 @@
 li.topic(onclick='messages.changeTopic(event)' class=group?'':'active')
   | #all
 each topic in topics
-  li.topic(onclick='messages.changeTopic(event)' dataID='#{topic._id}' class='#{String(topic._id) == String(group)?"active":""}')
+  li.topic(onclick='messages.changeTopic(event)' dataID='#{topic._id}' data-name='#{topic.name.toLowerCase()}' class='#{String(topic._id) == String(group)?"active":""}')
     | #{'#' + topic.name.toLowerCase()}

@@ -1,7 +1,14 @@
 var isFetching = false;
 var counter = 0;
+var currentTag = '';
+var availableTags = [];
+var typingHash = false;
+var typingTag = false;
 
 function startPage(){
+ $('ul#topics li').each(function(){
+  availableTags.push($(this).attr('data-name'));
+ });
  messages.scrollToLatest();
   $('#newMessage').submit(function(){
     var action = $('#newMessage').attr('data-action');
@@ -88,15 +95,47 @@ function startPage(){
       $('ul#messages').removeClass('noscroll');
     }
   });
- $('#newMessage input').keyup(function(){
-          if ($('#newMessage input').val() && $('#newMessage input').val().length > 0){
-            $('#newMessage button').addClass('env');
-            $('#newMessage button').attr('type', 'submit');
+ $('#newMessage input').keyup(function(e){
+    if ($('#newMessage input').val() && $('#newMessage input').val().length > 0){
+      $('#newMessage button').addClass('env');
+      $('#newMessage button').attr('type', 'submit');
+    } else {
+      $('#newMessage button').removeClass('env');
+      $('#newMessage button').attr('type', 'button');
+    }
+    if (e.keyCode == 51 && e.shiftKey) {
+      typingHash = true;
+      currentTag = '';
+    } else if (e.keyCode == 32){
+      typingTag = false;
+      typingHash = false;
+    } else {
+      if (typingHash) {
+        currentTag = currentTag + String.fromCharCode(e.keyCode).toLowerCase();
+        var filteredTags = availableTags.filter(function(value){
+          if (value.match(currentTag)) {
+            return true;
           } else {
-            $('#newMessage button').removeClass('env');
-            $('#newMessage button').attr('type', 'button');
+            return false;
           }
         });
+        alert(filteredTags);
+      }
+    }
+    //var r = new RegExp('\S*#(?:\[[^\]]+\]|\S+)');
+    /*
+    var r = /(?:#)\S+/gi;
+    var val = $('#newMessage input').val();
+    var hashtags = [];
+    while (result = r.exec(val)) {
+      hashtags.push(result);
+    }
+    if (hashtags.length > 0){
+      var lastTag = String(hashtags.pop()).substr(1);
+      alert(String(lastTag));
+    }
+    */
+  })  ;
   document.body.addEventListener('dragenter', messages.drag);
   document.body.addEventListener('dragleave', messages.dragEnd);
   document.body.addEventListener('dragover', function(e){
