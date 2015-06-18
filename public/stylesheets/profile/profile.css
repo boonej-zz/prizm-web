@@ -195,6 +195,34 @@ ul .post.shown {
   color: #818284;
 }
 
+.container.topnav-offset.edit .toggle-label, .container.topnav-offset.edit #membersToggle, .container.topnav-offset.edit .profile-info ul {
+  display: none;
+}
+
+.container.topnav-offset.edit .profile-info {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.container.topnav-offset #editHeader {
+  display: none;
+  font-size: 18px;
+  font-weight: 600; 
+  color: #818284;
+  background-color: #f8f8f9;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 45px; 
+  margin-top: 17px;
+  height: 43px;
+  line-height: 43px;
+  vertical-align: center;
+  padding: 0px 17px;
+}
+
+.container.topnav-offset.edit #editHeader {
+  display: inline-block;
+}
+
+
 .toggle-label.active {
   color: #2443A1;
 }
@@ -699,7 +727,7 @@ form #inputComment {
 #profileEdit ul {
   list-style: none;
   width: 100%;
-  margin: 0;
+  margin: 30px 0 0 0;
   padding: 0;
   color: #818284;
   font-size: 17px;
