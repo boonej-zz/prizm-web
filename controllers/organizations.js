@@ -486,10 +486,10 @@ exports.sendInvites = function(req, res){
         if (objects) {
           console.log('have invites');
           _.each(objects, function(o, i, l) {
-            var mail = jade.renderFile(inviteMail, {org: org, invite: o});
             o.status = 'sent';
             o.save (function(err, result){
               if (err) console.log(err);
+              var mail = jade.renderFile(inviteMail, {org: org, invite: result});
               mandrill(mandrillEndpointSend, {
                 message: {
                   to: [{email: o.address}],
