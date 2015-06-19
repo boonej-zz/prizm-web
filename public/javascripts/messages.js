@@ -2,14 +2,22 @@ var isFetching = false;
 var counter = 0;
 var currentTag = '';
 var availableTags = [];
+var availableUsers = [];
 var typingHash = false;
 var typingTag = false;
+var userTags = [];
 
 var refreshTags = function(){
   if (availableTags.length == 0){
     $('ul#topics li').each(function(){
       var group = $(this).attr('data-name') || 'all';
       availableTags.push(group);
+    });
+  }
+  if (availableUsers.length == 0){
+    $('ul#members li.member').each(function(){
+      var member = $(this).attr('data-name');
+      availableUsers.push(member);
     });
   }
 };
@@ -24,6 +32,11 @@ function startPage(){
     var text = $('#newMessage input').val();
     var organization = $('input#selectedOrganization').val();
     var group = $('input#selectedGroup').val();
+    for (var i = 0; i != userTags.length; ++i){
+      var tag = userTags[i];
+      text = text.replace(tag.name, tag.id);
+    }
+    userTags = [];
     var hash = window.location.hash;
     $.ajax({
       type: method,
@@ -120,6 +133,10 @@ function startPage(){
       typingHash = false;
       currentTag = '';
       $('#autoComplete').addClass('hidden');
+    } else if (e.keyCode == 50) {
+      typingTag = true;
+      typingHash = false;
+      currentTag = '';
     } 
     if (typingHash){
       if (!fieldVal || fieldVal.length == 0) {
@@ -134,9 +151,9 @@ function startPage(){
           currentTag = currentTag.substr(0, currentTag.length - 1);
         }
         var filteredTags = [];
-        for (var i = 0; i != availableTags.length; ++i){
+        for (var i = 0; i != availableUsers.length; ++i){
           var len = currentTag.length;
-          var value = availableTags[i];
+          var value = availableUsers[i];
           var sub = value.substr(0, len);
           if (sub == currentTag) {
             filteredTags.push(value);
@@ -151,7 +168,7 @@ function startPage(){
           ac.appendChild(listItem);
           $(listItem).click(function(){
             var val = $('#newMessage input[type="text"]').val();
-            var replace = '#' + currentTag;
+            var replace = '@' + currentTag;
             var regex = new RegExp(replace + '$'); 
             val = val.replace(regex, $(this).text());
             $('#newMessage input[type="text"]').val(val);
@@ -166,7 +183,66 @@ function startPage(){
         currentTag = '';
         $('#autoComplete').addClass('hidden');
       }
-    }
+    } else if (typingTag){
+      if (!fieldVal || fieldVal.length == 0) {
+        typingTag = false;
+      }
+      if (typingTag) {
+        var c = String.fromCharCode(e.keyCode);
+        if (c.match(/[A-Za-z]/)) {
+          currentTag = currentTag + String.fromCharCode(e.keyCode).toLowerCase();
+        } 
+        if (e.keyCode == 8 && currentTag.length > 0){
+          currentTag = currentTag.substr(0, currentTag.length - 1);
+        }
+        var filteredTags = [];
+        console.log(availableUsers);
+        for (var i = 0; i != availableUsers.length; ++i){
+          var len = currentTag.length;
+          var value = availableUsers[i];
+          var sub = value.substr(0, len);
+          if (sub.toLowerCase() == currentTag) {
+            filteredTags.push(value);
+          }
+        }
+        $('#autoComplete').removeClass('hidden');
+        $('#autoComplete').html('');
+        var ac = document.getElementById('autoComplete');
+        for (var i = 0; i != filteredTags.length; ++i) {
+          var photoUrl = $('ul#members li.member[data-name="' + filteredTags[i] +'"]').attr('data-avatar');
+          var listItem = document.createElement('li');
+          listItem.className = 'user-tag';
+          var profilePhoto = document.createElement('div');
+          var style = document.createAttribute('style');
+          style.value = 'background-image: url("' + photoUrl + '")'; 
+          profilePhoto.className = 'avatar';
+          profilePhoto.setAttributeNode(style);
+          listItem.appendChild(profilePhoto);
+          listItem.appendChild(document.createTextNode('@' + filteredTags[i]));
+          ac.appendChild(listItem);
+          $(listItem).click(function(){
+            var val = $('#newMessage input[type="text"]').val();
+            var name = $(this).text().substr(1);
+            var replace = '@' + currentTag;
+            var regex = new RegExp(replace + '$', 'i');
+            var id = $('ul#members li.member[data-name="' + name + '"]').attr('data-id');
+            var obj = {name: name, id: id};
+            userTags.push(obj);
+            val = val.replace(regex, $(this).text());
+            $('#newMessage input[type="text"]').val(val);
+            $('#autoComplete').html('');
+            $('#autoComplete').addClass('hidden');
+            currentTag = '';
+            typingHash = false;
+            $('#newMessage input[type="text"]').focus();
+          });
+        }
+      } else {
+        currentTag = '';
+        $('#autoComplete').addClass('hidden');
+      }
+ 
+    } 
     //var r = new RegExp('\S*#(?:\[[^\]]+\]|\S+)');
     /*
     var r = /(?:#)\S+/gi;

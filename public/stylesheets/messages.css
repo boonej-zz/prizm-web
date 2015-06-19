@@ -39,6 +39,34 @@ input {
   background-color: #f4f5f7;
 }
 
+#autoComplete li.user-tag {
+  height: 70px;
+  line-height: 70px;
+  padding-left: 9px;
+  font-size: 16px;
+  color: #545358;
+  margin: 0;
+}
+
+#autoComplete li.user-tag:hover {
+  background-color: #3e6a9e;
+  color: #fefefe;
+}
+
+#autoComplete li.user-tag .avatar {
+  display: inline-block;
+  float: left;
+  height: 50px;
+  width: 50px;
+  background-size: 50px 50px;
+  border-radius: 50%;
+  border: 1px solid #c0c6e0;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 11px;
+  margin-right: 16px;
+}
+
 body #uploadOverlay {
   display: none;
   position: fixed;
