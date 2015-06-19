@@ -28,7 +28,7 @@ var setupPage = function(){
      lastElement.text(count);
    } else {
      var element = document.createElement('li');
-     element.appendChild(document.createTextNode(item));
+     element.appendChild(document.createTextNode('#' + item));
      var countSpan = document.createElement('span');
      countSpan.className = 'group-count';
      countSpan.appendChild(document.createTextNode(count));
