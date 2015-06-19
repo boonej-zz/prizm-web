@@ -1,5 +1,6 @@
 /* Members Page */
 var hoverLock = false;
+var populatedGroups = [];
 var hover = function() {
  $('tbody>tr').hover(function(){
     if (!hoverLock){
@@ -10,6 +11,55 @@ var hover = function() {
 };
 
 var setupPage = function(){
+ var availableGroups = [];
+ $('.group-menu ul li.cursor').each(function(){
+   var name = $(this).attr('data-name');
+   availableGroups.push(name);
+ });
+ availableGroups.sort();
+
+ var lastItem;
+ for (var i = 0; i != availableGroups.length; ++i){
+   var item = availableGroups[i];
+   var count = 1;
+   if (item == lastItem) {
+     var lastElement =  $('#groupMenu ul li[data-name="' + item + '"] .group-count');
+     count = Number(lastElement.text()) + 1;
+     lastElement.text(count);
+   } else {
+     var element = document.createElement('li');
+     element.appendChild(document.createTextNode(item));
+     var countSpan = document.createElement('span');
+     countSpan.className = 'group-count';
+     countSpan.appendChild(document.createTextNode(count));
+     element.appendChild(countSpan);
+     var a = document.createAttribute('data-name');
+     a.value = item;
+     element.onclick = function(e){
+       var name = ($(e.target).attr('data-name'));
+       $('#active-members tbody tr').each(function(){
+         var row = $(this);
+         var keep = false;
+         row.children().children().children('.group-menu').children('ul').children('li').each(function(){
+           var gname = $(this).attr('data-name');
+           if (gname == name) {
+             keep = true;
+           }
+         });
+         if (keep) {
+           row.removeClass('hidden');
+         } else {
+           row.addClass('hidden');
+         }
+         $('#groupMenu').addClass('hidden');
+       });
+     };
+     element.setAttributeNode(a);
+     var list = document.getElementById('groupMenuList');
+     list.appendChild(element);
+     lastItem = item;
+   }
+ }
  $('.group-menu li').click(function(){
     var $this = $(this);
     var group = $this.children('.group-icon').attr('group');
@@ -470,6 +520,9 @@ var members = {
   showDateMenu: function(){
     $('#dateMenu').toggleClass('hidden');
   },
+  showGroupsMenu: function(){
+    $('#groupMenu').toggleClass('hidden');
+  },
   search: function(e){
     var target = e.target;
     var text = $(target).val();
@@ -543,12 +596,15 @@ $(function(){
     var groupButton     = '.group-button';
     var restrictItem    = '.member-action.restrict li';
     var restrictButton  = '.member-action.restrict .btn';
+    var groupItem = '.groupHeader';
     var target          = e.target;
 
     if ($(target).is(ambassadorMenu)) {
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
       hoverLock = !hoverLock;      
+    } else if ($(target).is(groupItem)){
+
     }
     else if($(target).is(restrictItem)) {
       //alert('restrict');
@@ -579,6 +635,7 @@ $(function(){
       $('#dateMenu').addClass('hidden');
       $('#nameMenu').addClass('hidden');
       $('#statusMenu').addClass('hidden');
+      $('#groupMenu').addClass('hidden');
       $('.remove-menu').addClass('hidden');
       $('.restrict-menu').addClass('hidden');
       $('.ambassador-menu').addClass('hidden');

@@ -6,6 +6,7 @@ mixin groupmenu(groups)
       ul
         each group in groups
           li.cursor(group='#{"#" + group.name.toLowerCase()}' 
+          data-name='#{group.name}'
           onclick='members.showGroup("#{group.organization}", "#{group._id}")')
             | #{"#" + group.name.toLowerCase()}
 
@@ -43,7 +44,11 @@ table.table.table-striped.members-table
               li(onclick='members.activeTab("leader")') Leader
               li(onclick='members.activeTab("member")') Member
         th
-          | Group
+          span.groupHeader(onclick='members.showGroupsMenu()')
+            | Group
+          #groupMenu.hidden
+            ul#groupMenuList
+              li(onclick='members.activeTab()') All
         th
           span.dateHeader(onclick='members.showDateMenu()')
             | Date

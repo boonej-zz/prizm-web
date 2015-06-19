@@ -385,7 +385,7 @@ span.group-icon {
 }
 
 
-.nameHeader, .statusHeader, .dateHeader {
+.nameHeader, .statusHeader, .dateHeader, .groupHeader {
   display: inline-block;
   width: 72px;
   background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
@@ -404,7 +404,7 @@ span.group-icon {
   background-position-x: 48px;
 }
 
-#nameMenu, #statusMenu, #dateMenu {
+#nameMenu, #statusMenu, #dateMenu, #groupMenu {
   position: absolute;
   background: #fff;
   width: 76px;
@@ -412,6 +412,11 @@ span.group-icon {
   border: 1px #e4e5ea solid;
   margin-top: 6px;
   z-index: 1000;
+}
+
+#groupMenu {
+  width: auto;
+  height: auto;
 }
 
 #statusMenu {
@@ -424,7 +429,7 @@ span.group-icon {
   height: 95px;
 }
 
-#nameMenu:after, #statusMenu:after, #dateMenu:after {
+#nameMenu:after, #statusMenu:after, #dateMenu:after, #groupMenu:after {
   content: '';
   position: absolute;
   border-style: solid;
@@ -437,7 +442,7 @@ span.group-icon {
   top: -7px;
 }
 
-#nameMenu:before, #statusMenu:before, #dateMenu:before {
+#nameMenu:before, #statusMenu:before, #dateMenu:before, #groupMenu:before {
   content: '';
   position: absolute;
   border-style: solid;
@@ -458,13 +463,13 @@ span.group-icon {
   z-index: 1000;
 }
 
-#nameMenu>ul, #statusMenu>ul, #dateMenu>ul {
+#nameMenu>ul, #statusMenu>ul, #dateMenu>ul, #groupMenu ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-#nameMenu>ul>li, #statusMenu>ul>li, #dateMenu>ul>li {
+#nameMenu>ul>li, #statusMenu>ul>li, #dateMenu>ul>li, #groupMenu>ul>li {
   margin: 0;
   margin-left: 17px;
   margin-top: 16px;
@@ -475,7 +480,17 @@ span.group-icon {
   cursor: pointer;
 }
 
-#nameMenu>ul>li:hover, #statusMenu>ul>li:hover, #dateMenu>ul>li:hover {
+#groupMenu>ul>li {
+  padding-right: 17px;
+  margin-bottom: 16px;
+}
+
+#groupMenu>ul>li .group-count {
+  float: right;
+  display: none;
+}
+
+#nameMenu>ul>li:hover, #statusMenu>ul>li:hover, #dateMenu>ul>li:hover, #groupMenu>ul>li:hover {
   color: #334b8f;
 }
 
