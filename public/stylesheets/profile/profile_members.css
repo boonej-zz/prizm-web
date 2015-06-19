@@ -84,6 +84,10 @@ table {
   overflow: auto;
 }
 
+td {
+  position: relative;
+}
+
 .table>thead {
   display: block;
   border-left: 1px solid #e4e5ea;
@@ -108,6 +112,7 @@ table>thead>tr:last-of-type>th {
 }
 
 .table>tbody>tr {
+  position: relative;
   border-top: hidden;
   border-bottom: hidden;
   height: 101px;
@@ -932,4 +937,32 @@ li.member.selected a {
 .interests-container::-webkit-scrollbar-thumb {
   background-color: #5E6B7D;
   border-radius: 6px;
+}
+
+
+img.prizm-avatar-sm + .luminary, img.prizm-avatar-sm + .leader, img.prizm-avatar-sm + .ambassador {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  background-size: 22px 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  border-radius: 50%;
+  margin-top: -53px;
+  margin-left: 36px;
+}
+
+img.prizm-avatar-sm + .luminary {
+  background-image: url('/images/profile/luminary_icon_selected.png');
+}
+
+img.prizm-avatar-sm + .ambassador {
+  background-image: url('/images/profile/ambassador_icon_selected@2x.png');
+}
+
+img.prizm-avatar-sm + .leader {
+  background-image: url('/images/icons/leader_icon_selected.png');
 }

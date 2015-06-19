@@ -61,18 +61,15 @@ table.table.table-striped.members-table
     tbody
       each member in members
         - var groups = member.org_status.length > 0?member.org_status[0].groups || []:[];
+        - var creatorClass = member.subtype?member.subtype:false
+        - creatorClass = creatorClass?creatorClass:member.org_status[0]?member.org_status[0].role:''
+        - var photo = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
         tr
           td
-            if member.subtype == 'ambassador'
-              .ambassador-small
-            if member.profile_photo_url
-              img(src='https://#{member.profile_photo_url.substr(7)}'
-                  class='prizm-avatar-sm cursor' 
+            img.prizm-avatar-sm.cursor(src='#{photo}' 
                   onclick='prizm.showProfile("#{member._id}")')
-            else
-              img(src='/images/profile/profile_default_avatar.png' 
-                  class='prizm-avatar-sm cursor'
-                  onclick='prizm.showProfile("#{member._id}")')
+            if creatorClass != ''
+              div(class='#{creatorClass}')
           td.cursor(onclick='prizm.showProfile("#{member._id}")')
             | #{member.name}
           td(data='#{member.id}')

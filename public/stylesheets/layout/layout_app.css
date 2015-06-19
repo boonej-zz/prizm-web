@@ -916,7 +916,6 @@ input#personal + span {
 }
 
 
-
 @media screen and (max-width: 900px) {
   .body-push {
     left: 40%;
