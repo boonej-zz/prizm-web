@@ -1294,7 +1294,9 @@ var registerIndividual = function(req, res) {
       gender: req.body.gender,
       birthday: birthday,
       profile_photo_url: defaultProfileUrl,
-      phone_number: phoneNumber
+      phone_number: phoneNumber,
+      ethnicity: req.body.ethnicity || null,
+      religion: req.body.religion || null
     });
     if (req.body.programCode) {
       newUser.program_code = req.body.programCode;

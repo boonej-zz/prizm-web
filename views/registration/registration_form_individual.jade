@@ -1,3 +1,6 @@
+- var ethnicities = ['African-American or Black', 'American Indian or Alaska Native', 'Asian', 'Caucasian or White', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander']
+- var religions = ['Anglican (Episcopal)', 'Bahá\'í', 'Buddhist', 'Caodalist', 'Cheondoist', 'Christian', 'Christian Scientist', 'Church of World Messianity', 'Congregationalist (UCC)', 'Disciples of Christ', 'Friend (Quaker)', 'Hindu', 'Jain', 'Jehovah\'s Witness', 'Jewish', 'Latter-day Saint (Morman)', 'Lutheran', 'Methodist', 'Moravian', 'Muslim', 'None', 'Orthodox', 'Other - Non-Christian', 'Pentacostal', 'Presbyterian', 'Rastafari', 'Reformed', 'Roman Catholic', 'Seicho-no-le-ist', 'Seventh Day Adventist', 'Sikh', 'Taoist', 'Unitarian Universalist (UU)', 'Wiccan (Pagan)', 'Yazidi']
+
 form(action='/register' method='post' class='form-register' id='individual-form')
   label(for='inputFirstName' class='sr-only')
     | First Name
@@ -71,6 +74,16 @@ form(action='/register' method='post' class='form-register' id='individual-form'
         id='inputProgramCode'
         class='form-control'
         placeholder='Program Code')
+  label(for='ethnicity' class='sr-only') Ethnicity
+  select#ethnicity.form-control(name='ethnicity')
+    option(value='') Ethnicity
+    each e in ethnicities
+      option(value='#{e}') #{e}
+  label(for='religion' class='sr-only') Religion
+  select#religion.form-control(name='religion')
+    option(value='') Religion
+    each r in religions
+      option(value='#{r}') #{r}
   input(name='userType'
         value='individual'
         class='hidden')
