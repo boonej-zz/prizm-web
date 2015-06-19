@@ -6,11 +6,7 @@ var typingHash = false;
 var typingTag = false;
 
 function startPage(){
- $('ul#topics li').each(function(){
-  var group = $(this).attr('data-name') || 'all';
-  availableTags.push(group);
- });
- messages.scrollToLatest();
+  messages.scrollToLatest();
   $('#newMessage').submit(function(){
     var action = $('#newMessage').attr('data-action');
     var url = action && action == 'edit'?'/messages/' + $('#newMessage').attr('data-id'):'/messages';
@@ -97,6 +93,12 @@ function startPage(){
     }
   });
  $('#newMessage input').keyup(function(e){
+    if (availableTags.length == 0){
+      $('ul#topics li').each(function(){
+        var group = $(this).attr('data-name') || 'all';
+        availableTags.push(group);
+      });
+    }
     if ($('#newMessage input').val() && $('#newMessage input').val().length > 0){
       $('#newMessage button').addClass('env');
       $('#newMessage button').attr('type', 'submit');
@@ -105,7 +107,7 @@ function startPage(){
       $('#newMessage button').attr('type', 'button');
     }
     var fieldVal = $('#newMessage input').val();
-    if (e.keyCode == 51 && e.shiftKey) {
+    if ((e.keyCode == 51 && e.shiftKey) || fieldVal.substr(fieldVal.length - 1) == '#') {
       typingHash = true;
       currentTag = '';
     } else if (e.keyCode == 32){
@@ -113,7 +115,8 @@ function startPage(){
       typingHash = false;
       currentTag = '';
       $('#autoComplete').addClass('hidden');
-    } else {
+    } 
+    if (typingHash){
       if (!fieldVal || fieldVal.length == 0) {
         typingHash = false;
       }
