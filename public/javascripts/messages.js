@@ -5,7 +5,17 @@ var availableTags = [];
 var typingHash = false;
 var typingTag = false;
 
+var refreshTags = function(){
+  if (availableTags.length == 0){
+    $('ul#topics li').each(function(){
+      var group = $(this).attr('data-name') || 'all';
+      availableTags.push(group);
+    });
+  }
+};
+
 function startPage(){
+  refreshTags();
   messages.scrollToLatest();
   $('#newMessage').submit(function(){
     var action = $('#newMessage').attr('data-action');
@@ -93,12 +103,7 @@ function startPage(){
     }
   });
  $('#newMessage input').keyup(function(e){
-    if (availableTags.length == 0){
-      $('ul#topics li').each(function(){
-        var group = $(this).attr('data-name') || 'all';
-        availableTags.push(group);
-      });
-    }
+    refreshTags(); 
     if ($('#newMessage input').val() && $('#newMessage input').val().length > 0){
       $('#newMessage button').addClass('env');
       $('#newMessage button').attr('type', 'submit');
