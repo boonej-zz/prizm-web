@@ -99,31 +99,68 @@ exports.getUserProps = function(req, res){
 }
 
 exports.shortPasswordReset = function(req, res){
+  var type = req.body.email?'admin':'web';
   var email = req.body.email || false;
   var password = req.body.password || false;
-  User.findOne({email: email}, function(err, user){
+  var u = req.user;
+  var criteria = {};
+  if (type=='web') {
+    criteria._id = u._id;
+  } else {
+    var process = false;
+    console.log(req.subdomains);
+    _.each(req.subdomains, function(d){
+      if (d == 'admin') process = true;
+    });
+    if (process){
+      criteria.email = email;
+    }
+  }
+  if (criteria._id || criteria.email) {
+  User.findOne(criteria, function(err, user){
     if (err) {
       console.log(err);
-      res.render('reset', {success: false});
+      if (type == 'web') {
+        res.status(400).send();
+      } else {
+        res.render('reset', {success: false});
+      }
     }
     if (user && password){
       user.password = password;
       if (user.hashPassword()){
         user.save(function(err, result){
           if (err) {
-            res.render('reset', {success: false});
+            if (type == 'web') {
+              res.status(500).send();
+            } else {
+              res.render('reset', {success: false});
+            }
           } else {
-            res.render('reset', {success: true});
+            if (type == 'web') {
+              res.status(200).send(true);
+            } else {
+              res.render('reset', {success: true});
+            }
           }
         });
       } else {
-        res.render('reset',{success: false});
+        if (type == 'web') {
+          res.status(400).send();
+        } else {
+          res.render('reset',{success: false});
+        }
       }
     } else {
-      console.log('missing user or password');
-      res.render('reset', {success: false});
+      if (type=='web') {
+        res.status(400).send();
+      } else {
+        console.log('missing user or password');
+        res.render('reset', {success: false});
+      }
     }
   });
+  }
 };
 
 exports.fetchUsers = function(req, res){
@@ -2087,3 +2124,8 @@ exports.fetchFollowFeed = function(req, res){
     res.render('profile/follow_feed', {users: users});
   });
 };
+
+exports.showPasswordModal = function(req, res){
+  var user = req.user;
+  res.render('overlays/password_reset');
+}
