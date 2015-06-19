@@ -2,11 +2,8 @@ var overlay = {
   cancel: function(e){
     if (e.target.classList.contains('modal-overlay') ||
         e.target.classList.contains('content')){
-      var modal = document.getElementsByClassName('modal-overlay');
-      for (var i = 0; i != modal.length; ++i){
-        document.body.removeChild(modal[i]);
-      }
-      document.body.classList.remove('noscroll');
+      $('.modal-overlay').remove();
+      $('body').removeClass('noscroll');
     }
   }
 }
