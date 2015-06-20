@@ -401,6 +401,51 @@ var profile = {
         reader.readAsDataURL(file);
       }
     }
+  }, 
+  showPasswordReset(e){
+    $.ajax({
+      type: 'GET',
+      url: '/profile/reset',
+      cache: false,
+      success: function(html){
+        overlay.show(html);
+        $('form#resetPassword').submit(function(){
+            var pass = $('input#password').val();
+            var conf = $('input#confirm').val();
+            if (pass == conf) {
+              var data = $('form#resetPassword').serialize();
+              $.ajax({
+                type: 'POST',
+                url: '/passwordreset',
+                cache: false,
+                data: data,
+                success: function(success){
+                  if (success) {
+                    alert('Your password was changed successfully.');
+                    overlay.cancel();
+                  } else {
+                    alert('Your password could not be changed at this time.');
+                  }
+                },
+                error: function(error){
+                  alert('There was a problem changing your password.');
+                }
+              });
+            }
+            return false; 
+          });
+
+        $('.modal-overlay input').keyup(function(){
+          var pass = $('input#password').val();
+          var conf = $('input#confirm').val();
+          if (pass == conf){
+            $('.modal-overlay button.save').attr('disabled', false);
+          } else {
+            $('.modal-overlay button.save').attr('disabled', 'disabled');
+          }
+                  });
+      }
+    });
   }
 }
 

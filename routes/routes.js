@@ -69,6 +69,9 @@ router.delete('/messages/:message_id', _users.authRequired, _messages.deleteMess
 router.put('/messages/:message_id', _users.authRequired, _messages.updateMessage);
 router.get('/messages/:message_id/views', _users.authRequired, _messages.showMessageViewOverlay);
 
+router.post('/passwordreset', _users.authRequired, function(req, res){
+  _users.shortPasswordReset(req, res);
+});
 /* Users */
 router.post('/users/unrestrict', _users.authRequired, _users.unrestrictUser);
 router.post('/users/restrict', _users.authRequired, _users.restrictUser);
@@ -92,6 +95,7 @@ router.get('/profile/settings', _users.authRequired, _users.showSettings);
 router.get('/profile/settings/follow', _users.authRequired, _users.fetchFollowFeed);
 router.get('/profile/settings/likes', _users.authRequired, _users.fetchLikesFeed);
 router.get('/profile/settings/support', _users.authRequired, _users.fetchSupport);
+router.get('/profile/reset', _users.authRequired, _users.showPasswordModal);
 router.get('/organizations/:id/members', _users.authRequired, _users.displayMembers);
 router.get('/organizations/:id/members/new', _users.authRequired, _orgs.addMembers);
 router.post('/organizations/:id/members/new', _users.authRequired, _orgs.createInvites);

@@ -44,6 +44,8 @@ form
       li
         label(for='phone') Phone Number
         input#phone(type='tel' name='phone_number' value='#{currentUser.phone_number || ""}')
+      li
+        #resetPassword(onclick='profile.showPasswordReset(event)') Change Password
     else
       - var birthday = currentUser && currentUser.birthday?currentUser.birthday.split('-'):false;
       - var formattedBirthday = birthday && birthday.length == 3?[birthday[2], birthday[0], birthday[1]]:[]
@@ -104,6 +106,8 @@ form
           option(value='') -
           each r in religions
             option(value='#{r}' selected=String(currentUser.religion)==String(r)?'selected':false) #{r}
+      li
+        #resetPassword(onclick='profile.showPasswordReset(event)') Change Password
   input#avatar(type='file' name='avatar' accept='image/*' onchange='profile.uploadAvatar(event)')
   button.save Submit
   button.cancel(type='button' onclick='profile.cancelEdit()') Cancel

@@ -812,6 +812,16 @@ form #inputComment {
   display: none;
 }
 
+#profileEdit #resetPassword {
+  float: right;
+  color: #2443a1;
+  font-size: 15px;
+  font-weight: 300;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 16px;
+}
+
 
 /* Mobile Screen */
 @media screen and (max-width:600px) {
