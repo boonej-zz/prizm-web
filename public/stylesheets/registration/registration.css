@@ -88,6 +88,7 @@ output {
   position: relative;
   left: 0px;
   overflow: hidden;
+  line-height: 1.5em;
 }
 
 /* Interests */
