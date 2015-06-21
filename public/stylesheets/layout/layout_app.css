@@ -11,6 +11,17 @@ body {
   transition: all 200ms linear; 
 }
 
+.section {
+  overflow: hidden;
+  line-height: 0;
+}
+
+.section.buttons {
+  width: 100%;
+  text-align: center;
+}
+
+
 #activityBar {
   position: fixed;
   top: -40px;
