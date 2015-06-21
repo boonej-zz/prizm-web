@@ -295,16 +295,6 @@ span.error {
   margin-top: 56px;
 }
 
-.section {
-  overflow: hidden;
-  line-height: 0;
-}
-
-.section.buttons {
-  width: 100%;
-  text-align: center;
-}
-
 .modal-overlay button.save {
   background-color: #3e6a9e;
   color: white;
