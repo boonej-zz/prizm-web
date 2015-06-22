@@ -376,6 +376,29 @@ userSchema.statics.findOrganizationMembers = function(filters, owner, order, sea
 };
 
 
+// User Partner Methods (Organizations)
+userSchema.methods.joinOrganization = function(organization, next, approval){
+  var userStatus = approval?'active':'pending';
+  var user_update = {
+    $push: {org_status: {status: userStatus, 
+      organization: organization._id, date: new Date().toString()}}
+  };
+  var present = false;
+  _.each(this.org_status, function(item, idx, list){
+    if (String(item.organization) == String(organization._id)) {
+      present = true;
+    }
+  });
+
+  if (!present) {
+    this.model('User').findOneAndUpdate({_id: this._id}, user_update, function(err, result){
+      next(err, result, true);
+    });
+  } else {
+    next(null, this, false);
+  }
+};
+
 userSchema.pre('save', function(next){
   var birthday = this.birthday?this.birthday.split('-'):false;
   var name;

@@ -459,7 +459,6 @@ exports.updateUser = function(req, res) {
   }
 };
 
-// User Partner Methods (Organizations)
 
 function getTrustedLuminariesForUserId(userId, next) {
   var trustedUserIds = [];
@@ -1221,6 +1220,7 @@ exports.registerNewUser = function(req, res) {
       registerIndividual(req, res);
     }
     else if (userType == 'partner') {
+      console.log('registering partner');
       registerPartner(req, res);
     }
   }
@@ -1283,6 +1283,8 @@ var validateRegistrationRequest = function(req, res,  next) {
          else {
           next();
         }
+        } else {
+          next();
         }
        
       }
@@ -1460,6 +1462,7 @@ var registerPartner = function(req, res) {
   var defaultProfileUrl = 'https://s3.amazonaws.com/higheraltitude.prism/' +
                           'default/profile_default_avatar.png';
   validateRegistrationRequest(req, res, function() {
+    console.log('User validated');
     var newUser = new User({
       first_name: req.body.name,
       type: 'institution',
@@ -1471,10 +1474,13 @@ var registerPartner = function(req, res) {
       review_key: _utils.uuid.v1(),
       profile_photo_url: defaultProfileUrl
     });
+    console.log(newUser);
     if (newUser.hashPassword()) {
       newUser.save(function(err, user) {
         if (err) {
           res.status(500).send({error: err});
+        } else {
+          console.log('saved partner user');
         }
         if (user) {
           res.status(200).send(user);
