@@ -134,7 +134,7 @@ function startPage(){
       typingHash = false;
       currentTag = '';
       $('#autoComplete').addClass('hidden');
-    } else if (e.keyCode == 50) {
+    } else if (e.keyCode == 50 || fieldVal.substr(fieldVal.length - 1) == '#') {
       typingTag = true;
       typingHash = false;
       currentTag = '';
@@ -152,9 +152,9 @@ function startPage(){
           currentTag = currentTag.substr(0, currentTag.length - 1);
         }
         var filteredTags = [];
-        for (var i = 0; i != availableUsers.length; ++i){
+        for (var i = 0; i != availableTags.length; ++i){
           var len = currentTag.length;
-          var value = availableUsers[i];
+          var value = availableTags[i];
           var sub = value.substr(0, len);
           if (sub == currentTag) {
             filteredTags.push(value);
@@ -202,7 +202,7 @@ function startPage(){
         console.log(availableUsers);
         for (var i = 0; i != availableUsers.length; ++i){
           var len = currentTag.length;
-          var value = availableTags[i];
+          var value = availableUsers[i];
           var sub = value.substr(0, len);
           if (sub.toLowerCase() == currentTag) {
             filteredTags.push(value);
