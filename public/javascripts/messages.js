@@ -127,6 +127,7 @@ function startPage(){
     var fieldVal = $('#newMessage input').val();
     if ((e.keyCode == 51 && e.shiftKey) || fieldVal.substr(fieldVal.length - 1) == '#') {
       typingHash = true;
+      typingTag = false;
       currentTag = '';
     } else if (e.keyCode == 32){
       typingTag = false;
@@ -176,6 +177,7 @@ function startPage(){
             $('#autoComplete').addClass('hidden');
             currentTag = '';
             typingHash = false;
+            typingTag = false;
             $('#newMessage input[type="text"]').focus();
           });
         }
@@ -186,6 +188,7 @@ function startPage(){
     } else if (typingTag){
       if (!fieldVal || fieldVal.length == 0) {
         typingTag = false;
+        typingHash = false;
       }
       if (typingTag) {
         var c = String.fromCharCode(e.keyCode);
@@ -199,7 +202,7 @@ function startPage(){
         console.log(availableUsers);
         for (var i = 0; i != availableUsers.length; ++i){
           var len = currentTag.length;
-          var value = availableUsers[i];
+          var value = availableTags[i];
           var sub = value.substr(0, len);
           if (sub.toLowerCase() == currentTag) {
             filteredTags.push(value);
