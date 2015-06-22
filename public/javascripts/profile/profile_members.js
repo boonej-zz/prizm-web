@@ -308,7 +308,7 @@ var members = {
     $('.restrict-menu').addClass('hidden');
     if (targetHidden) {
       $('.group-menu').addClass('hidden');
-      $(target).children('.group-menu').css('top', $(target).offset().top - 64 );
+      //$(target).children('.group-menu').css('top', $(target).offset().top - 64 );
       $('tbody').css('overflow', 'hidden');
       $(target).children('.group-menu').toggleClass('hidden');
     } else {
@@ -329,7 +329,7 @@ var members = {
     if (targetHidden) {
       $('.ambassador-menu').addClass('hidden');
       $(target).children('.ambassador-menu').toggleClass('hidden');
-      $(target).children('.ambassador-menu').css('top', $(target).offset().top - 50 );
+      //$(target).children('.ambassador-menu').css('top', $(target).offset().top - 50 );
       $('.table tbody').css('overflow', 'hidden');
     }
     else {
@@ -348,7 +348,7 @@ var members = {
     if (targetHidden) {
       console.log('restrict was hidden - showing now');
       $('.restrict-menu').addClass('hidden');
-      $(target).children('.restrict-menu').css('top', $(target).offset().top - 75 );
+      //$(target).children('.restrict-menu').css('top', $(target).offset().top - 75 );
       $(target).children('.restrict-menu').removeClass('hidden');
       $('tbody').css('overflow', 'hidden');
     }
@@ -370,7 +370,7 @@ var members = {
 
     if (targetHidden) {
       $('.remove-menu').addClass('hidden');
-      $(target).children('.remove-menu').css('top', $(target).offset().top - 75 );
+      //$(target).children('.remove-menu').css('top', $(target).offset().top - 75 );
       $('tbody').css('overflow', 'hidden');
       $(target).children('.remove-menu').toggleClass('hidden');
     }
