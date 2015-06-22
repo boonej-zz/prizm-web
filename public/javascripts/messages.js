@@ -144,7 +144,7 @@ function startPage(){
         typingHash = false;
       }
       if (typingHash) {
-        var c = String.fromCharCode(e.keyCode);
+        var c = fieldVal.substr(fieldVal.length - 1);
         if (c.match(/\w/)) {
           currentTag = currentTag + String.fromCharCode(e.keyCode).toLowerCase();
         } 
