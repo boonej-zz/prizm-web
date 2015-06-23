@@ -230,7 +230,7 @@ $(function(){
   var numberOfFollowCards = container.data('cardCount');
   var containerWidth = numberOfFollowCards * 410 + offset;
   var style = {
-    width: containerWidth + 'px',
+    //width: containerWidth + 'px',
     paddingLeft: offset + 'px'
   }
   $(container).css(style);
