@@ -175,7 +175,6 @@ output {
   position: absolute;
   z-index: 500;
   top: 298px;
-  left: 70px;
 }
 
 .next-user-right {
@@ -186,7 +185,7 @@ output {
   position: absolute;
   z-index: 500;
   top: 298px;
-  left: 490px;
+  left: 460px;
 }
 .user-info-top {
   text-align: center;
