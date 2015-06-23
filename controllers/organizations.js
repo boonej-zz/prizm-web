@@ -378,7 +378,9 @@ exports.addMembers = function(req, res){
   console.log(orgId);
   Organization.findOne({
     _id: orgId
-  }, function(err, org){
+  })
+  .populate({path: 'groups', model: 'Group'})
+  .exec(function(err, org){
     if (err) {
       console.log(err);
     }
@@ -392,7 +394,8 @@ exports.addMembers = function(req, res){
         var options = {
           organization : org,
           currentUser  : user,
-          invites      : invites
+          invites      : invites,
+          groups       : org.groups || []
         };
         res.render('create/member', options);
       });
@@ -406,7 +409,7 @@ exports.createInvites = function(req, res) {
   console.log('in request');
   var user = req.user;
   var orgId = req.params.id;
-  var addresses = req.get('invites');
+  var addresses = req.body.invites;
   console.log(orgId);
   console.log(addresses);
   addresses = addresses.replace(/\n/g, ';');
@@ -473,7 +476,9 @@ exports.sendInvites = function(req, res){
   console.log('in request');
   var user = req.user;
   var orgId = req.params.id;
-  var invites = req.get('invites');
+  var invites = req.body.invites;
+  var group = req.body.group;
+  console.log(group);
   console.log(invites);
   if (!_.isArray(invites)){
     invites = invites.split(',');
@@ -487,6 +492,7 @@ exports.sendInvites = function(req, res){
           console.log('have invites');
           _.each(objects, function(o, i, l) {
             o.status = 'sent';
+            o.group = group || null;
             o.save (function(err, result){
               if (err) console.log(err);
               var mail = jade.renderFile(inviteMail, {org: org, invite: result});

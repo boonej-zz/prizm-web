@@ -551,12 +551,12 @@ var member = {
     var org = $('#selectedOrganization').val();
     var invites = $('#newMemberInput').val();
     invites = invites.replace(/\n/g, ';');
+    var body = {};
+    body.invites = invites;
     $.ajax({
       method: 'POST',
       url: '/organizations/' + org + '/members/new',
-      headers: {
-        invites: invites
-      }
+      data: body
     })
     .done(function(html){
       if (html) {
@@ -601,12 +601,12 @@ var member = {
         invites.push(iid);
       }
     });
+    var group = $('#selectGroups').val();
+    var body = {invites: invites, group: group};
     $.ajax({
       method: 'POST',
       url: '/organizations/' + org + '/members/invite',
-      headers: {
-        invites: invites
-      },
+      data: body,
       success: function(html){
         $('#inviteList').html(html);
         modal.cancel();

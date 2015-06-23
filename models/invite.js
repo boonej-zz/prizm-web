@@ -9,7 +9,8 @@ var inviteSchema = new mongoose.Schema({
   organization  : {type: ObjectId, ref: 'Organization', index: true},
   code          : {type: String, required: false},
   create_date   : {type: Date},
-  modify_date   : {type: Date}
+  modify_date   : {type: Date},
+  group         : {type: ObjectId, ref: 'Group', required: false}
 });
 
 

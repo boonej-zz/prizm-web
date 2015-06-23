@@ -348,7 +348,7 @@ input#scope:not(:checked) + label::after  {
   padding-right: 5px;
 }
 
-#newGroup select#Leader {
+#newGroup select#Leader, #newMember select {
   background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
   background-size: 7px 4px;
   background-repeat: no-repeat;
@@ -590,12 +590,19 @@ input#scope:not(:checked) + label::after  {
 
 
 
-#newMember textarea {
+#newMember textarea, #newMember select {
   width: 85%;
   display: block;
   height: 160px;
   margin: 0px auto 9px auto;
   border: 1px solid #e4e5ea;
+}
+
+#newMember select {
+  height: 37px;
+  margin-top: 40px;
+  color: #545358;
+  font-size: 18px;
 }
 
 #newMember .tip {

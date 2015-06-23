@@ -1364,9 +1364,14 @@ var registerIndividual = function(req, res) {
           invite.save(function(err, user){
             if (err) console.log(err);
           });
+          var groups = [];
+          if (invite.group) {
+            groups.push(invite.group);
+          }
           newUser.org_status = [{
             organization: org._id,
-            status: 'active'
+            status: 'active',
+            groups: groups 
           }];
           console.log('saving user');
           if (newUser.hashPassword()) {
