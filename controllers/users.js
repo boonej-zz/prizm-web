@@ -1389,7 +1389,7 @@ var registerIndividual = function(req, res) {
                       to: [{email: org.owner.email}],
                       from_email: 'info@prizmapp.com',
                       from_name: 'Prizm',
-                      subject: 'New Member Pending',
+                      subject: 'New Member Added',
                       html: mail
                     }
                   }, function (err, response){
