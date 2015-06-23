@@ -699,7 +699,7 @@ exports.displayHomeFeed = function(req, res) {
                 console.log(err);
                 res.status(500).send();
               }
-              var count = posts.length;
+              var count = posts?posts.length:0;
               var data = {count: count};
               res.status(200).send(data);
             });
