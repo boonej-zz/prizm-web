@@ -283,6 +283,8 @@ exports.fetchMessages = function(req, res){
       Message.fetchMessages(
         criteria, 
         function(err, messages){
+          if (err) console.log(err);
+          messages = messages || [];
           var criteria = {
                      };
           if (group) {
