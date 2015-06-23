@@ -6,7 +6,8 @@
       select#selectGroups(name='group')
         option(value='') Select Group
         each group in groups
-          option(value='#{group._id}') #{group.name}
+          if (group.status == 'active')
+            option(value='#{group._id}') #{group.name}
       input#selectedOrganization(type='hidden' value='#{organization._id}')
       label(for='newMemberInput') Enter email address to add new members
       textarea#newMemberInput(type='text' name='email')
