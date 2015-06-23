@@ -132,6 +132,7 @@ exports.displayOwnerMessagesFeed = function(req, res){
   var action = req.get('action');
   var create_date = req.get('create_date');
   var group = req.get('group');
+  console.log('display owner message feed');
   if (action){
     if (user.type == 'user'){
       var criteria1 = {organization: {$in: []}, group:null, creator:{$ne: user._id}};
@@ -274,7 +275,7 @@ exports.fetchMessages = function(req, res){
     if (name){
       criteria.name = name;
     } else {
-      criteria.group = group =='all'?null:group
+      criteria.group = group; 
     } 
     if (lastDate) {
       criteria.create_date = {$lt: new Date(lastDate)};
@@ -352,7 +353,6 @@ exports.fetchMessages = function(req, res){
 };
 
 var processMessageText = function(message, next){
-  console.log(message.text);
   var urls = url.urls(message.text);
   if (urls && urls.length > 0) {
     request({

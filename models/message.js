@@ -99,6 +99,7 @@ messageSchema.statics.fetchMessages = function(criteria, next){
   })
   .limit(15)
   .exec(function(err, messages){
+    if (messages && messages.length > 0) {
     _.each(messages, function(message, index, list){
         User.resolvePostTags(message, function(err, users){
           if (users && users.length > 0){
@@ -111,6 +112,9 @@ messageSchema.statics.fetchMessages = function(criteria, next){
           }
         });
     });
+    } else {
+      next(err, []);
+    }
   });
 };
 

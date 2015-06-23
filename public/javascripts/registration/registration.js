@@ -233,5 +233,5 @@ $(function(){
     width: containerWidth + 'px',
     paddingLeft: offset + 'px'
   }
-  //$(container).css(style);
+  $(container).css(style);
 });
