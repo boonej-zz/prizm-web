@@ -16,7 +16,7 @@ var util = require('util');
 
 /* Website */
 router.get('/', _users.displayHomeFeed);
-
+/**
 router.get('/users/followFix', function(req, res){
   var User = mongoose.model('User');
   User.find(function(err, users){
@@ -66,6 +66,7 @@ router.get('/users/followFix', function(req, res){
     };
   });
 });
+*/
 
 router.get('/terms', function(req, res) {
   res.render('site/terms', { title: 'Prizm App | Legal', selected:'none'});

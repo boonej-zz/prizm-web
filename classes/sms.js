@@ -52,13 +52,10 @@ exports.receiveMessage = function(req, res){
   var body = req.body;
   var token = process.env.TWILIO_TOKEN;
   var header = req.get('x-twilio-signature');
-  console.log(token);
-  console.log(header);
-  console.log(body);
   if (twilio.validateRequest(token, header, 'https://www.prizmapp.com/sms',
         body)) {
     var resp = new twilio.TwimlResponse();
-    resp.say('hi, friend');
+    resp.message('hi, friend');
     console.log(resp.toString());
     res.set('Content-type', 'text/xml');
     res.send(resp.toString());
