@@ -25,6 +25,7 @@ var mandrill 		= require('node-mandrill')(config.mandrill.client_secret);
 var mandrillEndpointSend = '/messages/send';
 
 var inviteMail    = path.join(__dirname, '/../views/mail/invite_mail.jade');
+var Notification  = mongoose.model('Notification');
 
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
@@ -572,4 +573,55 @@ exports.resendInvite = function(req, res){
     }
   });
 
+};
+
+exports.showNotificationForm = function(req, res){
+  var user = req.user;
+  var criteria = false;
+  console.log(user.type);
+  if (user.type == 'institution_verified') {
+    criteria = {};
+    criteria.owner = user._id;
+  } else {
+    var org_id = false;
+    _.each(user.org_status, function(o){
+      if (o.role == 'leader' && o.status == 'active') {
+        org_id = o.organization;
+      } 
+    });
+    if (org_id) {
+      criteria = {};
+      criteria._id = org_id;
+    }
+  }
+  console.log(criteria);
+  if (criteria){ 
+    Organization.findOne(criteria)
+    .exec(function(err, org){
+      if (err) console.log(err);
+      if (org) {
+        User.findOrganizationMembers({organization: org._id, status: 'active'}, org.owner, false, false, function(err, members){
+          var options = {members: members, organization: org, sender: user};
+          res.render('create/notification', options);
+        });
+      } else {
+        res.status(400).send();
+      }
+    });
+  } else {
+    res.status(403).send('Forbidden');
+  }
+};
+
+exports.createNotification = function(req, res){
+  var user = req.user;
+  var body = req.body;
+  var note = Notification.create({
+    from: user._id,
+    to: body.to,
+    type: body.type,
+    text: body.text
+  }, function(err, n){
+    res.send(n); 
+  });
 };

@@ -402,7 +402,20 @@ userSchema.methods.joinOrganization = function(organization, next, approval){
 userSchema.pre('save', function(next){
   var birthday = this.birthday?this.birthday.split('-'):false;
   var name;
-
+  var phone_number = this.phone_number;
+  if (phone_number.length != 10) {
+    phone_number = phone_number.replace('-', '');
+    phone_number = phone_number.replace('.', '');
+    phone_number = phone_number.replace('(', '');
+    phone_number = phone_number.replace(')', '');
+    if (phone_number.substr(0, 1) == '1') {
+      phone_number = phone_number.substr(1);
+    }
+    if (phone_number.substr(0, 1) == '+') {
+      phone_number = phone_number.substr(2);
+    }
+    this.phone_number = phone_number;
+  }
   if (birthday && birthday.length == 3) {
     birthday = [birthday[2], birthday[0] - 1, birthday[1]];
     birthday = moment(birthday);

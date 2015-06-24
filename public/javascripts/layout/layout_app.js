@@ -312,6 +312,63 @@ var modal = {
   }
 }
 
+var notification = {
+  showNewNotificationForm: function(){
+    $.ajax({
+      method: 'GET',
+      url: '/notifications/new',
+      contentType: 'text/html',
+      success: notification.render
+    }); 
+  },
+  render: function(html){
+    modal.showModal(html);
+    $('#newNotification').submit(notification.submit);
+  },
+  changeNotificationType: function(e){
+    var value = $(e.target).val();
+    $('.members-container .option').addClass('hidden');
+    if (value == 'sms') {
+      $('.members-container .option.sms').removeClass('hidden');
+    } else if (value == 'push') {
+      $('.members-container .option.push').removeClass('hidden');
+    } else if (value == 'auto') {
+      $('.members-container .option.sms').removeClass('hidden');
+      $('.members-container .option.push').removeClass('hidden');
+    }
+    notification.validate(e);
+  },
+  validate: function(e){
+    var body = $('#notificationBody').val();
+    var type = $('select[name="type"]').val();
+    var disabled = 'disabled';
+    if (body.length >= 1 && type) {
+      disabled = false; 
+    }
+    $('button.save').attr('disabled', disabled);   
+    return !disabled;
+  },
+  submit: function(e){
+    if (notification.validate(e)){
+      var data = $('#newNotification').serialize();
+      $.ajax({
+        type: 'POST',
+        url: '/notifications',
+        data: data,
+        cache: false,
+        success: function(d){
+          alert('Your notification was sent successfully.');
+          modal.cancel();
+        },
+        error: function(e){
+          alert('Your notification could not be sent.');
+        }
+      });
+    } 
+    return false;
+  }
+};
+
 var insight = {
   showNewInsightForm: function(){
     $.ajax({

@@ -402,7 +402,7 @@ var profile = {
       }
     }
   }, 
-  showPasswordReset(e){
+  showPasswordReset: function(e){
     $.ajax({
       type: 'GET',
       url: '/profile/reset',

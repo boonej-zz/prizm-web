@@ -348,7 +348,7 @@ input#scope:not(:checked) + label::after  {
   padding-right: 5px;
 }
 
-#newGroup select#Leader, #newMember select {
+#newGroup select#Leader, #newMember select, #newNotification select {
   background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
   background-size: 7px 4px;
   background-repeat: no-repeat;
@@ -424,7 +424,7 @@ input#scope:not(:checked) + label::after  {
   display: none;
 }
 
-#newGroup .profile-icon {
+#newGroup .profile-icon, #newNotification .profile-icon{
   position: relative;
   left: 14px;
   top: 16px;
@@ -590,7 +590,7 @@ input#scope:not(:checked) + label::after  {
 
 
 
-#newMember textarea, #newMember select {
+#newMember textarea, #newMember select, #newNotification select {
   width: 85%;
   display: block;
   height: 160px;
@@ -603,6 +603,14 @@ input#scope:not(:checked) + label::after  {
   margin-top: 40px;
   color: #545358;
   font-size: 18px;
+}
+
+#newNotification select {
+  height: 37px;
+  color: #545358;
+  font-size: 18px;
+  -webkit-style: none;
+  margin-top: 40px;
 }
 
 #newMember .tip {
@@ -745,7 +753,7 @@ input#scope:not(:checked) + label::after  {
   border: 1px solid #334b8f;
 }
 
-#newCSV .button-section {
+#newCSV .button-section, #newNotification .button-section {
   width: 100%;
   text-align: center;
   margin-top: 60px;
@@ -815,6 +823,36 @@ input#scope:not(:checked) + label::after  {
   text-align: center;
 }
 
+#newNotificationForm {
+  width: 489px;
+}
+
+#newNotification input, #newNotification textarea, #newNotification .selectArea {
+  display: block;
+  width: 86%;
+  margin: 0 auto 20px auto;
+  border: 1px solid #e4e5ea;
+}
+
+#newNotification label[for='notificationBody'] {
+  display: block;
+  height: 16px;
+  color: #545358;
+  font-size: 18px;
+  font-weight: 600;
+  width: 86%;
+  margin: 0 auto 20px auto;
+}
+
+#newNotification textarea#notificationBody {
+  height: 117px;
+  background-color: #fefefe;
+  
+}
+
+#newNotification .selectArea .option .content {
+  width: 80%;
+}
 
 @media screen and (max-width: 600px) {
 
@@ -925,7 +963,7 @@ input#scope:not(:checked) + label::after  {
     text-overflow: ellipsis;
   }
 
-  #newGroup .profile-icon {
+  #newGroup .profile-icon, #newNotification .profile-icon {
     left: 14px;
     top: 6px;
     width: 25px;
