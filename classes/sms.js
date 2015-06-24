@@ -55,7 +55,7 @@ exports.receiveMessage = function(req, res){
   console.log(token);
   console.log(header);
   console.log(body);
-  if (twilio.validateRequest(token, header, 'http://twilio-raw.herokuapp.com',
+  if (twilio.validateRequest(token, header, 'https://www.prizmapp.com/sms',
         body)) {
     var resp = new twilio.TwimlResponse();
     resp.say('hi, friend');
