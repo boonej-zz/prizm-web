@@ -26,8 +26,8 @@ notificationSchema.statics.create = function(params, next){
      note.save(function(err, n){
        if (err) console.log(err);
        if (n) {
-         n.sendNotification(function(success){
-           next(err, n);
+         note.sendNotification(function(success){
+           next(err, note);
          });
        }
      });
@@ -45,10 +45,10 @@ var sendSMS = function(n, next){
         n.save(function(err){
           if (err) console.log(err);
         });
-        next(err, n);
+        next(true);
       });
     } else {
-      next(err, n);
+      next(false);
     }
   });
 };
@@ -66,23 +66,25 @@ var sendPush = function(n, u, next) {
 
 notificationSchema.methods.sendNotification = function(next){
   var User = mongoose.model('User');
-  User.findOne({_id: this.to}, function(err, user){
+  var type = this.type;
+  var $this = this;
+  User.findOne({_id: $this.to}, function(err, user){
     if (err) console.log(err);
     if (user) {
       var canSMS = user.phone_number && user.phone_number.length == 10;
       var canPush = user.device_token != null;
-      if (this.type == 'auto') {
+      if (type == 'auto') {
         if (canPush) {
-          sendPush(this, user, next);
+          sendPush($this, user, next);
         } else if (canSMS) {
-          sendSMS(this, next);
+          sendSMS($this, next);
         } else {
           next(false);
         }
-      } else if (this.type == 'push') {
-        sendPush(this, user, next);
-      } else if (this.type == 'sms') {
-        sendSMS(this, next);
+      } else if (type == 'push') {
+        sendPush($this, user, next);
+      } else if (type == 'sms') {
+        sendSMS($this, next);
       }
     } else {
       next(false);

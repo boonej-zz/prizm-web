@@ -616,12 +616,20 @@ exports.showNotificationForm = function(req, res){
 exports.createNotification = function(req, res){
   var user = req.user;
   var body = req.body;
+  var notes = [];
+  console.log(body);
+  var members = _.isArray(body.members)?body.members:[body.members];
+  _.each(members, function(to){
+  console.log('sending to ' + to);
   var note = Notification.create({
     from: user._id,
-    to: body.to,
+    to: to,
     type: body.type,
     text: body.text
   }, function(err, n){
-    res.send(n); 
+    console.log(n);
+    notes.push(n);
   });
+  });
+  res.send(notes);
 };
