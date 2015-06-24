@@ -52,6 +52,9 @@ exports.receiveMessage = function(req, res){
   var body = req.body;
   var token = process.env.TWILIO_TOKEN;
   var header = req.get('x-twilio-signature');
+  console.log(token);
+  console.log(header);
+  console.log(body);
   if (twilio.validateRequest(token, header, 'http://twilio-raw.herokuapp.com',
         body)) {
     var resp = new twilio.TwimlResponse();
