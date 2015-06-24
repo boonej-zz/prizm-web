@@ -12,9 +12,60 @@ var _messages = require('../controllers/messages');
 var Insights = require('../controllers/insights');
 var config    = require('../config');
 var passport  = require('passport');
+var util = require('util');
 
 /* Website */
 router.get('/', _users.displayHomeFeed);
+
+router.get('/users/followFix', function(req, res){
+  var User = mongoose.model('User');
+  User.find(function(err, users){
+    if (users){
+      var fixedCount = 0;
+      _.each(users, function(u){
+        var followString = '';
+        var followers = [];
+        var following = [];
+        _.each(u.followers, function(f, i, l){
+          if (f._id && f.date && followString.indexOf(f._id) == -1) {
+            followString = followString + f._id + '|';
+            followers.push(f);
+          }
+        });
+        followString = '';
+        _.each(u.following, function(f, i, l){
+          if (f._id && f.date && followString.indexOf(f._id) == -1){
+            followString = followString + f._id + '|';
+            following.push(f);
+          }
+        });
+        var changed = false;
+        if (followers.length != u.followers.length){
+          changed = true;
+          console.log('Fixing followers for ' + u.name);
+          u.followers = followers;
+          u.followers_count = followers.length;
+        }
+        if (following.length != u.following.length){
+          changed = true;
+          console.log('Fixing following for ' + u.name);
+          u.following = following;
+          u.following_count = following.length;
+        }
+        if (changed) {
+          fixedCount++;
+          u.save(function(err, result){
+            if (err) console.log(err);
+            else console.log('user saved');
+          });
+        }
+      });
+      console.log('Finished fixing for ' + fixedCount + ' of ' 
+         + users.length + ' users.'); 
+      res.status(200).send();
+    };
+  });
+});
 
 router.get('/terms', function(req, res) {
   res.render('site/terms', { title: 'Prizm App | Legal', selected:'none'});
