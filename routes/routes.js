@@ -141,7 +141,28 @@ router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
 router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
 router.post('/register/:id', _orgs.updateOrg);
-
+router.get('/notifications/test', _users.authRequired, function(req, res){
+  var Notification = mongoose.model('Notification');
+  var note = Notification.create({
+    from: req.user._id,
+    to: req.user._id,
+    text: 'This is a test.' 
+  }, function(err, note){
+    res.send(note); 
+  });
+});
+router.get('/notifications/:id', _users.authRequired, function(req, res){
+  var Notification = mongoose.model('Notification');
+  var noteId = req.params.id;
+  Notification.findOne({_id: noteId})
+  .populate({path: 'sms'})
+  .exec(function(err, note){
+    var sms = require('../classes/sms');
+    sms.getMessages(function(err, result){
+      res.send(result);
+    });
+  });
+});
 
 /** Redirect **/
 router.get('/redirect', function(req, res){
@@ -149,6 +170,10 @@ router.get('/redirect', function(req, res){
 }); 
 /** Organization Pages **/
 router.get('/:name', _orgs.displayOrganization);
+router.post('/sms', function(req, res){
+  var sms = require('../classes/sms');
+  sms.receiveMessage(req, res);
+}); 
 
 
 

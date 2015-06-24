@@ -14,5 +14,7 @@ exports.trust         = require('./trust');
 exports.message       = require('./message');
 exports.group         = require('./group');
 exports.invite        = require('./invite');
+exports.SMS           = require('./sms');
+exports.notification  = require('./notification');
 
 mongoose.connect(mongoURI);
