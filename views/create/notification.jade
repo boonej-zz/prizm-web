@@ -28,7 +28,8 @@
       select(name='group')
         option(value=false) Groups
         each group in organization.groups
-          option(value='#{group._id}') #{group.name}
+          if (group.status == 'active')
+            option(value='#{group._id}') #{group.name}
       label(for='notificationBody') Message
       textarea#notificationBody(name='text', onkeyup='notification.validate(event)')
       .button-section
