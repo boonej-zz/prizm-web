@@ -1,0 +1,33 @@
+.create-overlay(onclick='modal.cancel(event)')
+  #newNotificationForm.create-form
+    h2 Create Notification  
+    form#newNotification
+      input(type='hidden' name='organization' value='#{organization._id}')
+      select(name='type', onchange='notification.changeNotificationType(event)')
+        option(value=false) Notification Type
+        option(value='push') Push
+        option(value='sms') SMS
+        option(value='auto') Automatic
+      .selectArea
+        input#memberFilter(type='text' onkeyup='group.filterMembers(event)' 
+        placeholder='Search by member')
+        .members-container.options
+          each member in members
+            - var type = []
+            - if (member.phone_number) type.push('sms')
+            - if (member.device_token) type.push('push')
+            - type = type.join(' ')
+            - var creatorPhoto = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
+
+            div.option.cursor.hidden(onclick='group.selectRadio(event)' class='#{type}')
+              .profile-icon.cursor(style='background-image: url("#{creatorPhoto}")')
+              .content
+                span.name #{member.name}
+                input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}')
+                label(for='#{member._id}')
+      label(for='notificationBody') Message
+      textarea#notificationBody(name='text', onkeyup='notification.validate(event)')
+      .button-section
+        button.cancel(type='button' onclick='modal.cancel()') Cancel
+        button.save(type='submit' disabled='disabled') Send
+      
