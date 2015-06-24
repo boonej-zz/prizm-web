@@ -597,6 +597,7 @@ exports.showNotificationForm = function(req, res){
   console.log(criteria);
   if (criteria){ 
     Organization.findOne(criteria)
+    .populate({path: 'groups', model: 'Group'})
     .exec(function(err, org){
       if (err) console.log(err);
       if (org) {
@@ -614,22 +615,41 @@ exports.showNotificationForm = function(req, res){
 };
 
 exports.createNotification = function(req, res){
+  var process = function(members, body, user, res){
+   _.each(members, function(to){
+    console.log('sending to ' + to);
+    var note = Notification.create({
+      from: user._id,
+      to: to,
+      type: body.type,
+      text: body.text
+    }, function(err, n){
+      console.log(n);
+      notes.push(n);
+    });
+    });
+   res.send(notes);
+  };
   var user = req.user;
   var body = req.body;
   var notes = [];
   console.log(body);
   var members = _.isArray(body.members)?body.members:[body.members];
-  _.each(members, function(to){
-  console.log('sending to ' + to);
-  var note = Notification.create({
-    from: user._id,
-    to: to,
-    type: body.type,
-    text: body.text
-  }, function(err, n){
-    console.log(n);
-    notes.push(n);
-  });
-  });
-  res.send(notes);
+  if (body.group) {
+    User.find({org_status: 
+      {$elemMatch: 
+        {groups: body.group, status: 'active'}
+      }
+    }, function (err, users){
+      if (users) {
+        _.each(users, function(u){
+          members.push(String(u._id));
+        });
+      }
+      process(members, body, user, res); 
+    });
+  } else {
+    process(members, body, user, res);
+  }
+
 };

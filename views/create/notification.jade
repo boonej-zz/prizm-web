@@ -25,6 +25,10 @@
                 span.name #{member.name}
                 input.members.hidden(type='checkbox' name='members' id='#{member._id}' value='#{member._id}')
                 label(for='#{member._id}')
+      select(name='group')
+        option(value=false) Groups
+        each group in organization.groups
+          option(value='#{group._id}') #{group.name}
       label(for='notificationBody') Message
       textarea#notificationBody(name='text', onkeyup='notification.validate(event)')
       .button-section
