@@ -255,7 +255,8 @@ var orgFieldset = function(orgId, status){
     posts_count: 1,
     phone_number: 1,
     modify_date: 1,
-    interests: 1
+    interests: 1,
+    device_token: 1
   };
 };
 
