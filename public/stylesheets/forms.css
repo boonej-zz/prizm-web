@@ -610,6 +610,9 @@ input#scope:not(:checked) + label::after  {
   color: #545358;
   font-size: 18px;
   -webkit-style: none;
+}
+
+#newNotification select[name='type'] {
   margin-top: 40px;
 }
 
@@ -847,6 +850,8 @@ input#scope:not(:checked) + label::after  {
 #newNotification textarea#notificationBody {
   height: 117px;
   background-color: #fefefe;
+  padding: 13px 12px 12px 12px;
+
   
 }
 
