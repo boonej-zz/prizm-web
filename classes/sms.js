@@ -59,6 +59,7 @@ exports.receiveMessage = function(req, res){
         body)) {
     var resp = new twilio.TwimlResponse();
     resp.say('hi, friend');
+    console.log(resp.toString());
     res.set('Content-type', 'text/xml');
     res.send(resp.toString());
   } else {
