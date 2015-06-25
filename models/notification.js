@@ -11,15 +11,17 @@ var notificationSchema = new mongoose.Schema({
   text:               {type: String},
   replies:            {type: Array, default: []},
   sms:                {type: ObjectId, ref: 'SMS'},
-  type:               {type: String} 
+  type:               {type: String},
+  title:              {type: String, required: true, index: true} 
 });
 
 notificationSchema.statics.create = function(params, next){
-  if (params.from && params.to && params.type) {
+  if (params.from && params.to && params.type && params.title) {
      var note = new this({
        from: params.from,
        to:  params.to,
-       type: params.type
+       type: params.type,
+       title: params.title
      });
      note.create_date = Date.now();
      note.text = params.text || '';

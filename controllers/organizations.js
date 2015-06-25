@@ -622,9 +622,9 @@ exports.createNotification = function(req, res){
       from: user._id,
       to: to,
       type: body.type,
+      title: body.title,
       text: body.text
     }, function(err, n){
-      console.log(n);
       notes.push(n);
     });
     });

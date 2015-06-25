@@ -837,7 +837,14 @@ input#scope:not(:checked) + label::after  {
   border: 1px solid #e4e5ea;
 }
 
-#newNotification label[for='notificationBody'] {
+#newNotification input {
+  height: 37px;
+  padding: 13px 0px 12px 0px;
+  color: #545358;
+  padding-left: 13px;
+}
+
+#newNotification label[for='notificationBody'], #newNotification label[for='notificationTitle']  {
   display: block;
   height: 16px;
   color: #545358;

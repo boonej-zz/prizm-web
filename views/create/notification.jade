@@ -30,6 +30,8 @@
         each group in organization.groups
           if (group.status == 'active')
             option(value='#{group._id}') #{group.name}
+      label(for='notificationTitle') Title
+      input#notificationTitle(name='title' required='required')
       label(for='notificationBody') Message
       textarea#notificationBody(name='text', onkeyup='notification.validate(event)')
       .button-section
