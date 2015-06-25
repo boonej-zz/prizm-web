@@ -267,6 +267,17 @@ span.error {
   font-weight: 400;
 }
 
+.modal-overlay .information {
+  color: #818284;
+  font-size: 17px;
+  font-weight: 400;
+  padding-bottom: 50px;
+}
+
+.modal-overlay p {
+  margin: 50px;
+}
+
 .modal-overlay input {
   height: 37px;
   background-color: #fefefe;
