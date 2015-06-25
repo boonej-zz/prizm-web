@@ -653,3 +653,4 @@ exports.createNotification = function(req, res){
   }
 
 };
+

@@ -207,6 +207,9 @@ html
                   onclick="nav.navigate('/profile')"
                   )
                   .settings-icon.settings-button Settings
+                li.item(class='#{title == "Notifications"?"selected":""}'
+                  onclick='nav.navigate("/profile")')
+                  .notifications-button.settings-icon Notifications
                 li.item(
                   class="#{title == 'Members'?'selected':''}"
                   onclick="nav.navigate('/profile/members')"

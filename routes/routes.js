@@ -67,6 +67,15 @@ router.get('/users/followFix', function(req, res){
   });
 });
 */
+router.get('/stats', function(req, res){
+  var Organization = mongoose.model('Organization');
+  var Stats = require('../lib/workers/stats');
+  Organization.findOne({name: /LSU/i}, function(err, org){
+    Stats.getWeeklyStats(org, function(err, stats){
+
+    });
+  }); 
+});
 
 router.get('/terms', function(req, res) {
   res.render('site/terms', { title: 'Prizm App | Legal', selected:'none'});
