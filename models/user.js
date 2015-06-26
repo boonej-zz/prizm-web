@@ -404,7 +404,7 @@ userSchema.pre('save', function(next){
   var birthday = this.birthday?this.birthday.split('-'):false;
   var name;
   var phone_number = this.phone_number;
-  if (phone_number.length != 10) {
+  if (phone_number && phone_number.length != 10) {
     phone_number = phone_number.replace('-', '');
     phone_number = phone_number.replace('.', '');
     phone_number = phone_number.replace('(', '');
