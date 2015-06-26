@@ -134,11 +134,16 @@ tr.hover {
 td .prizm-avatar-sm {
   height: 53px;
   width: 53px;
+  margin-left: 8px;
 }
 
 th {
   padding: 0 !important;
   margin: 0 !important;
+}
+
+td {
+  padding: 0 !important;
 }
 
 

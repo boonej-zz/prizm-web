@@ -26,6 +26,10 @@ var mandrillEndpointSend = '/messages/send';
 
 var inviteMail    = path.join(__dirname, '/../views/mail/invite_mail.jade');
 var Notification  = mongoose.model('Notification');
+var sms = require('../classes/sms');
+var SMS = mongoose.model('SMS');
+var util = require('util');
+var moment = require('moment');
 
 // Organizations Methods
 exports.displayOrganization = function(req, res) {
@@ -652,5 +656,57 @@ exports.createNotification = function(req, res){
     process(members, body, user, res);
   }
 
+};
+
+exports.renderNotificationsPage = function(req, res){
+  var user = req.user;
+  if (user.type == 'institution_verified') {
+  Notification.refreshMessageStatus(user, function(err, sms){
+    Organization.findOne({owner: user._id})
+    .exec(function(err, org){
+      var grouped = _.groupBy(sms, function(o){
+        return o.type + '|' + o.title;
+      });
+      var items = [];
+      for (var key in grouped){
+        var item = {};
+        var itemA = key.split('|');
+        item.type = itemA[0];
+        item.title = itemA[1];
+        var date = grouped[key][0].create_date;
+        item.date = moment(date).format('M/D/YYYY');
+        item.time = moment(date).format('h:mm A');
+        item.key = key;
+        if (item.type == 'sms') {
+          item.type = item.type.toUpperCase();
+          var delivered = _.filter(grouped[key], function(o){
+            var r = false;
+            if (o.sms &&( o.sms.status == 'delivered' || o.sms.status == 'sent')){
+              r = true;
+            } 
+            return r;
+          });
+          item.delivered = delivered.length;
+        } else {
+          item.type = item.type.substr(0, 1).toUpperCase() + item.type.substr(1);
+          item.delivered = false;
+        }
+        console.log(item);
+        items.push(item);
+      }
+      res.render('notifications/main', {
+        bodyId: 'notifications',
+        currentUser: user, 
+        auth: true, 
+        org: org, 
+        notes: grouped,
+        items: items,
+        title: 'Notifications'
+      });
+    });
+  });
+  } else {
+    res.status(403).send('Unauthorized');
+  }
 };
 

@@ -16,7 +16,7 @@ var util = require('util');
 
 /* Website */
 router.get('/', _users.displayHomeFeed);
-/**
+
 router.get('/users/followFix', function(req, res){
   var User = mongoose.model('User');
   User.find(function(err, users){
@@ -34,7 +34,7 @@ router.get('/users/followFix', function(req, res){
         });
         followString = '';
         _.each(u.following, function(f, i, l){
-          if (f._id && f.date && followString.indexOf(f._id) == -1){
+          if (f._id && f.date && followString.indexOf(f._id) == -1 && !f._id._id){
             followString = followString + f._id + '|';
             following.push(f);
           }
@@ -66,7 +66,7 @@ router.get('/users/followFix', function(req, res){
     };
   });
 });
-*/
+
 router.get('/stats', function(req, res){
   var Organization = mongoose.model('Organization');
   var Stats = require('../lib/workers/stats');
@@ -166,6 +166,7 @@ router.put('/organizations/:org_id/invites/:invite_id', _users.authRequired, _or
 router.put('/organizations/:organization/groups/:group_id', _users.authRequired, _messages.updateGroup);
 router.get('/notifications/new', _users.authRequired, _orgs.showNotificationForm);
 router.post('/notifications', _users.authRequired, _orgs.createNotification);
+router.get('/notifications', _users.authRequired, _orgs.renderNotificationsPage);
 router.get('/profile/members/csv', _users.authRequired, _orgs.renderCSVModal);
 router.get('/profile/members/memberexport.csv', _users.authRequired, _orgs.exportCSV);
 router.get('/profile/activity', _users.authRequired, _users.displayActivityFeed);
@@ -204,28 +205,6 @@ router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
 router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
 router.post('/register/:id', _orgs.updateOrg);
-router.get('/notifications/test', _users.authRequired, function(req, res){
-  var Notification = mongoose.model('Notification');
-  var note = Notification.create({
-    from: req.user._id,
-    to: req.user._id,
-    text: 'This is a test.' 
-  }, function(err, note){
-    res.send(note); 
-  });
-});
-router.get('/notifications/:id', _users.authRequired, function(req, res){
-  var Notification = mongoose.model('Notification');
-  var noteId = req.params.id;
-  Notification.findOne({_id: noteId})
-  .populate({path: 'sms'})
-  .exec(function(err, note){
-    var sms = require('../classes/sms');
-    sms.getMessages(function(err, result){
-      res.send(result);
-    });
-  });
-});
 
 /** Redirect **/
 router.get('/redirect', function(req, res){

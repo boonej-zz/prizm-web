@@ -1,0 +1,48 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/notifications.css')
+  script(type='text/javascript' src='/javascripts/notifications.js')
+
+block content
+  .container.topnav-offset
+    .notifications-header.page-header
+      | Notifications
+    table#notifications
+      thead
+        tr
+          th Type
+          th Date
+          th Time
+          th Message
+          th Delivered
+      tbody
+        each item in items
+          tr
+            td #{item.type}
+            td #{item.date}
+            td #{item.time}
+            td #{item.title}
+            td
+              if item.delivered
+                .delivered(onclick='notifications.showDelivered(event)'
+                 data-key='#{item.key}')
+                  | #{item.delivered}
+  each item in items
+    if item.delivered
+      .modal-overlay.hidden(data-key='#{item.key}' onclick='notifications.closeDelivered(event)')
+        .content(style='width: 590px; height: 610px; ')
+          h2 Delivered
+          ul(style='-webkit-padding-start: 0')
+            - var messages = notes[item.key]
+            each message in messages
+              if message.sms && (message.sms.status == 'sent' || message.sms.status == 'delivered')
+                - var userLink = '/profiles/' + message.to._id
+                li.user-cell(style='margin-left: 0px;' onclick='nav.navigate("#{userLink}")')
+                  - var photo =  message.to.profile_photo_url?'https://' + message.to.profile_photo_url.substr(7):'/images/default-profile.png'
+                  .image
+                    .profile-avatar.cursor(style='background-image: url("#{photo}")')
+                  .cell-content
+                    .name.cursor #{message.to.name}
+
+           

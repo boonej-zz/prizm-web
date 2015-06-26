@@ -6,7 +6,19 @@ var client = new twilio.RestClient(
 var TWILIO_NUMBER = process.env.TWILIO_NUMBER;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var SMS = mongoose.model('SMS');
 var _ = require('underscore');
+
+var formatNumber = function(n){
+  var number = n;
+  number = number.replace('-', '');
+  number = number.replace('(', '');
+  number = number.replace(')', '');
+  number = number.replace(' ', '');
+  number = number.replace('.', '');
+  number = number.substr(0, 1) == '1'?'+' + number:'+1' + number;
+  return number;
+}
 
 exports.sendMessage = function(notification, next){
   console.log('sending');
@@ -55,7 +67,7 @@ exports.receiveMessage = function(req, res){
   if (twilio.validateRequest(token, header, 'https://www.prizmapp.com/sms',
         body)) {
     var resp = new twilio.TwimlResponse();
-    resp.message('hi, friend');
+    resp.message('');
     console.log(resp.toString());
     res.set('Content-type', 'text/xml');
     res.send(resp.toString());
@@ -63,3 +75,5 @@ exports.receiveMessage = function(req, res){
     res.status(403).send();
   }
 };
+
+exports.client = client;

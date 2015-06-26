@@ -3,6 +3,8 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var Sms = require('../classes/sms');
 var SMS = mongoose.model('SMS');
 var iPush = require('../classes/i_push');
+var _ = require('underscore');
+var util = require('util');
 
 var notificationSchema = new mongoose.Schema({
   from:               {type: ObjectId, ref: 'User', required: true},
@@ -92,6 +94,40 @@ notificationSchema.methods.sendNotification = function(next){
       next(false);
     }
   });
+};
+
+notificationSchema.statics.refreshMessageStatus = function(u, next){
+  var complete = [];
+  this.find({from: u._id})
+  .populate({path: 'to'})
+  .populate({path: 'sms'})
+  .sort({create_date: -1})
+  .exec(function(err, n){
+    if (n){
+      var queued = _.filter(n, function(o){
+        var r = false;
+        if (o.sms && o.sms.status && o.sms.status != 'delivered' && o.sms.status !='received') {
+          r = true;
+        }
+        return r;
+      });
+      _.each(queued, function(s){
+        Sms.client.messages(s.sms.sid).get(function(err, m){
+          if (m) {
+            s.sms.status = m.status;
+          }
+          s.sms.save(function(err, r){
+            complete.push(true);
+            if (complete.length == queued.length){
+              next(err, n);
+            }
+          });
+        })
+      });
+    } else {
+      next(err, n);
+    }
+  }); 
 };
 
 mongoose.model('Notification', notificationSchema);
