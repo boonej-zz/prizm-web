@@ -1,0 +1,48 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/profile/profile.css')
+  link(rel='stylesheet' type='text/css' href='/stylesheets/profile/settings.css')
+  link(rel='stylesheet' type='text/css' href='/stylesheets/settings.css')
+  script(type='text/javascript' src='/javascripts/settings.js')
+block content
+  input#orgID(type='hidden' value='#{org._id}')
+  .container.topnav-offset
+    .user-settings-header.page-header
+      | Settings
+    .settings-container
+      .left-box
+        ul#options
+          li.disabled(onclick='settings.nav("theme")') Theme Color
+          li.disabled(onclick='settings.nav("theme")') Welcome Screen
+          li.selected(onclick='settings.nav("branding")') Branding
+          li.disabled(onclick='settings.nav("theme")') User Policy
+          li.disabled(onclick='settings.nav("follow")') Who to Follow
+          li.disabled(onclick='settings.nav("theme")') Featured
+      .right-box
+        h3 Branding
+        form#branding.settings-form.active  
+          ul
+            li
+              label(for='uniqueURL') Unique URL
+              input#uniqueURL(type='text' name='namespace' value='#{org.namespace || ""}')
+            li
+              label(for='reply') Reply to Email Address
+              input#replay(type='text' name='reply_to' value='#{org.reply_to || ""}')
+            li
+              label(for='display') Display Name
+              input#display(type='text' name='display_name' value='#{org.display_name || ""}')
+          .logo
+            label(for='logo' ) Upload Logo in Header
+            - var background = org.welcome_image_url?'background-image: url("' + org.welcome_image_url + '"); background-size: cover':''
+            div.logo-drop(ondragover='settings.drag(event)' ondrop='settings.drop(event)' style='#{background}' onclick='$("#imageFile").click()')
+              .instructions(class='#{org.logo_url?"hidden":""}')
+                | or drag and drop files onto this window to upload
+                br
+                | (limit file size to 2MB)
+            input#imageFile.hidden(type='file' accept='image/*' name='image' onchange='settings.imageChanged(event)')
+            .buttons
+              button.save(type='submit') Save
+
+    
+

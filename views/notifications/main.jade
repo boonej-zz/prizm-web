@@ -16,6 +16,7 @@ block content
           th Time
           th Message
           th Delivered
+          th Reply
       tbody
         each item in items
           tr
@@ -26,11 +27,12 @@ block content
             td
               if item.delivered
                 .delivered(onclick='notifications.showDelivered(event)'
-                 data-key='#{item.key}')
-                  | #{item.delivered}
+                 data-key='#{item.unique}')
+                   | #{item.delivered}
+            td
   each item in items
     if item.delivered
-      .modal-overlay.hidden(data-key='#{item.key}' onclick='notifications.closeDelivered(event)')
+      .modal-overlay.hidden(data-key='#{item.unique}' onclick='notifications.closeDelivered(event)')
         .content(style='width: 590px; height: 610px; ')
           h2 Delivered
           ul(style='-webkit-padding-start: 0')

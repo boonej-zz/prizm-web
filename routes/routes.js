@@ -164,6 +164,8 @@ router.post('/organizations/:id/members/invite', _users.authRequired, _orgs.send
 router.delete('/organizations/:org_id/invites/:invite_id', _users.authRequired, _orgs.deleteInvite);
 router.put('/organizations/:org_id/invites/:invite_id', _users.authRequired, _orgs.resendInvite);
 router.put('/organizations/:organization/groups/:group_id', _users.authRequired, _messages.updateGroup);
+router.put('/organizations/:org_id', _users.authRequired, _orgs.updateSettings);
+router.get('/organizations/settings', _users.authRequired, _orgs.renderPartnerSettings);
 router.get('/notifications/new', _users.authRequired, _orgs.showNotificationForm);
 router.post('/notifications', _users.authRequired, _orgs.createNotification);
 router.get('/notifications', _users.authRequired, _orgs.renderNotificationsPage);

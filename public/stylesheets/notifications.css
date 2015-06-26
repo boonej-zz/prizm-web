@@ -39,6 +39,7 @@ tr {
   display: block;
   line-height: 60px;
   vertical-align: middle;
+  z-index: 500;
 }
 
 td, th {
@@ -91,10 +92,14 @@ tr td:nth-child(3), tr th:nth-child(3) {
 }
 
 tr td:nth-child(4), tr th:nth-child(4) {
-  width: 38%;
+  width: 25%;
 }
 
 tr td:nth-child(5), tr th:nth-child(5) {
+  width: 18%;
+}
+
+tr td:nth-child(6), tr th:nth-child(6) {
   width: 9%;
 }
 
@@ -123,4 +128,40 @@ tr td:nth-child(5), tr th:nth-child(5) {
   position: relative;
   margin-left: 39px;
   margin-top: -21px;
+}
+
+.tip {
+  position: absolute;
+  background: #fff;
+  min-width: 112px;
+  max-width: 310px;
+  border: 1px #e4e5ea solid;
+  z-index: 5000;
+}
+
+.tip:before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0px 9px 8px 9px;
+  border-color: #e4e5ea transparent;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: 10px;
+  top: -8px;
+}
+
+.tip:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0px 9px 8px 9px;
+  border-color: #fff transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: 10px;
+  top: -7px;
+
 }

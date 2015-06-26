@@ -16,7 +16,9 @@ var organizationSchema = new mongoose.Schema({
   owner               : {type: ObjectIdType, ref: 'User', required: true},
   namespace           : {type: String, default: null},
   stripe_id           : {type: String, default: null},
-  groups              : {type: Array, default: []}
+  groups              : {type: Array, default: []},
+  reply_to            : {type: String},
+  display_name        : {type: String}
 });
 
 organizationSchema.pre('save', function(next){

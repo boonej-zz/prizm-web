@@ -667,7 +667,7 @@ exports.renderNotificationsPage = function(req, res){
     Organization.findOne({owner: user._id})
     .exec(function(err, org){
       var grouped = _.groupBy(sms, function(o){
-        return o.type + '&|&' + o.title + '&|&' + o.text;
+        return o.type + '&|&' + o.title + '&|&' o.text;
       });
       var items = [];
       for (var key in grouped){
