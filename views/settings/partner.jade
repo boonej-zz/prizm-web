@@ -13,15 +13,44 @@ block content
     .settings-container
       .left-box
         ul#options
-          li.disabled(onclick='settings.nav("theme")') Theme Color
-          li.disabled(onclick='settings.nav("theme")') Welcome Screen
-          li.selected(onclick='settings.nav("branding")') Branding
-          li.disabled(onclick='settings.nav("theme")') User Policy
-          li.disabled(onclick='settings.nav("follow")') Who to Follow
-          li.disabled(onclick='settings.nav("theme")') Featured
+          li.selected(data-val='theme' onclick='settings.nav(event)') 
+            | Theme Color
+          li.disabled(data-val='welcome' onclick='settings.nav(event)') 
+            | Welcome Screen
+          li.disabled(data-val='branding' onclick='settings.nav(event)') 
+            | Branding
+          li.disabled(data-val='policy' onclick='settings.nav(event)') 
+            | User Policy
+          li.disabled(data-val='follow' onclick='settings.nav(event)') 
+            | Who to Follow
+          li.disabled(data-val='featured' onclick='settings.nav(event)') 
+            | Featured
       .right-box
-        h3 Branding
-        form#branding.settings-form.active  
+        h3 Theme Color
+        form#theme.settings-form
+          h4 Select App Theme Color
+          ul.themes
+            li
+              input#greenTheme.hidden(type='radio' name='theme' value='green')
+              label.color.green(for='#greenTheme')
+            li
+              input#pinkTheme.hidden(type='radio' name='theme' value='pink')
+              label.color.pink(for='#pinkTheme')
+            li
+              input#redTheme.hidden(type='radio' name='theme' value='red')
+              label.color.red(for='#redTheme')
+            li
+              input#blueTheme.hidden(type='radio' name='theme' value='blue')
+              label.color.blue(for='#blueTheme' selected='selected')
+            li
+              input#purpleTheme.hidden(type='radio' name='theme' value='purple')
+              label.color.purple(for='#purpleTheme')
+            li
+              #selectedTheme.color.blue
+          .buttons
+            button.cancel(type='button') Cancel
+            button.submit Save
+        form#branding.settings-form.hidden  
           ul
             li
               label(for='uniqueURL') Unique URL

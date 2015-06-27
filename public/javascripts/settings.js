@@ -5,6 +5,27 @@ $(document).ready(function(){
 });
 
 var settings = {
+  nav: function(e){
+    var title = false;
+    var s = $(e.target).attr('data-val');
+    switch (s) {
+      case 'theme':
+        title = 'Theme Color';
+        break;
+      case 'branding':
+        title = 'Branding';
+        break;
+      default:
+        break;
+    }
+    if (title) {
+      $('#options li').removeClass('selected');
+      $(e.target).addClass('selected');
+      $('h3').text(title);
+      $('.settings-form').addClass('hidden');
+      $('#' + s).removeClass('hidden');
+    }
+  },
   submitBranding : function(e){
     var org = $('#orgID').val();
     var d = new FormData($('form#branding')[0]);

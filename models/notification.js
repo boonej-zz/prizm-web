@@ -111,6 +111,9 @@ notificationSchema.statics.refreshMessageStatus = function(u, next){
         }
         return r;
       });
+      if (!queued || queued.length == 0){
+        next(err, n);
+      }
       _.each(queued, function(s){
         Sms.client.messages(s.sms.sid).get(function(err, m){
           if (m) {
@@ -125,7 +128,7 @@ notificationSchema.statics.refreshMessageStatus = function(u, next){
         })
       });
     } else {
-      next(err, n);
+      next(err, []);
     }
   }); 
 };

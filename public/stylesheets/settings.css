@@ -5,6 +5,15 @@
   height: 100%;
 }
 
+h4 {
+  font-size: 18px;
+  color: #545358;
+  font-weight: 500;
+  padding-left: 6%;
+}
+
+/** GENERAL **/
+
 .settings-form ul {
   list-style: none;
   margin: 0;
@@ -83,3 +92,46 @@ button.save {
   font-weight: 400;
   line-height: 17px;
 }
+
+/** THEME **/
+
+ul.themes li {
+  display: inline-block;
+  width: auto;
+  margin-right: 1.5%;
+}
+
+ul.themes li:last-child {
+  margin-left: 8%;
+}
+
+ul.themes li:hover {
+  border-bottom: 4px solid #2444a2;
+}
+
+.color, label.color {
+  display: block;
+  height: 27px;
+  width: 27px;
+}
+
+.green {
+  background-color: #155f47;
+} 
+
+.pink {
+  background-color: #d8008f;
+}
+
+.red {
+  background-color: #a20723;
+}
+
+.blue {
+  background-color: #4870a0;
+}
+
+.purple {
+  background-color: #694c87;
+}
+
