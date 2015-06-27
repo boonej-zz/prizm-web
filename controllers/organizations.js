@@ -757,5 +757,21 @@ exports.updateSettings = function(req, res){
         }
       });
     });
+  } else if (action == 'theme'){
+    var theme = req.body.theme;
+    Theme.findOne({background_url: theme}, function(err, t){
+      console.log(t);
+      Organization.findOne({_id: organization}, function(err, org){
+        if (org && (String(org.owner) == String(user._id))){
+          var th = t?t._id:null;
+          org.theme = th;
+          org.save(function(err, o){
+            res.status(200).send(o);
+          });
+        } else {
+          res.status(403).send('Forbidden');
+        }
+      });
+    });
   }
 }

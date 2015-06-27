@@ -101,6 +101,13 @@ ul.themes li {
   margin-right: 1.5%;
 }
 
+ul.themes input[type='radio'] {
+  height: 0;
+  width: 0;
+  background: none;
+  display: none;
+}
+
 ul.themes li:last-child {
   margin-left: 8%;
 }

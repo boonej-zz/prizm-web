@@ -1,7 +1,18 @@
 var droppedFiles = false;
+var colors = ['green', 'pink', 'red', 'blue', 'purple'];
 
 $(document).ready(function(){
   $('form#branding').submit(settings.submitBranding);
+  $('form#theme').submit(settings.submitTheme);
+  $('label.color').click(function(){
+    var $this = $(this);
+    var f = $this.attr('for');
+    var color = $('input#' + f).val();
+    for (var i = 0; i != colors.length; ++i){
+      $('#selectedTheme').removeClass(colors[i]);
+    }
+    $('#selectedTheme').addClass(color);
+  });
 });
 
 var settings = {
@@ -85,5 +96,26 @@ var settings = {
     var files = e.target.files || e.dataTransfer.files;
     settings.imageChanged(e);
     droppedFiles = files[0];
+  },
+  submitTheme: function(){
+    var org = $('#orgID').val();
+    var d = $('form#theme').serialize();
+    $.ajax({
+      method: 'PUT',
+      url: '/organizations/' + org,
+      data: d,
+      cache: false,
+      headers: {action: 'theme'},
+      success: function(code){
+        droppedFiles = false;
+        window.location = '/organizations/settings';
+      },
+      error: function(err){
+        alert('There was a problem updating your profile.');
+      }
+   
+    });
+
+    return false;
   }
 };

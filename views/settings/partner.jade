@@ -32,24 +32,23 @@ block content
           ul.themes
             li
               input#greenTheme.hidden(type='radio' name='theme' value='green')
-              label.color.green(for='#greenTheme')
+              label.color.green(for='greenTheme')
             li
               input#pinkTheme.hidden(type='radio' name='theme' value='pink')
-              label.color.pink(for='#pinkTheme')
+              label.color.pink(for='pinkTheme')
             li
-              input#redTheme.hidden(type='radio' name='theme' value='red')
-              label.color.red(for='#redTheme')
+              label.color.red(for='redTheme')
+              input#redTheme(type='radio' name='theme' value='red')
             li
-              input#blueTheme.hidden(type='radio' name='theme' value='blue')
-              label.color.blue(for='#blueTheme' selected='selected')
+              input#blueTheme(type='radio' name='theme' value='blue')
+              label.color.blue(for='blueTheme')
             li
-              input#purpleTheme.hidden(type='radio' name='theme' value='purple')
-              label.color.purple(for='#purpleTheme')
+              input#purpleTheme(type='radio' name='theme' value='purple')
+              label.color.purple(for='purpleTheme')
             li
-              #selectedTheme.color.blue
+              #selectedTheme.color(class='#{org.theme?org.theme.background_url:"blue"}')
           .buttons
-            button.cancel(type='button') Cancel
-            button.submit Save
+            button.save Save
         form#branding.settings-form.hidden  
           ul
             li
