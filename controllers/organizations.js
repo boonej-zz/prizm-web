@@ -746,7 +746,7 @@ exports.updateSettings = function(req, res){
                 org[prop] = value;
               }
             }
-            if (path) org.welcome_image_url = path;
+            if (path) org.logo_url = path;
             org.save(function(err, org){
               if (err) res.status(500).send(err);
               else res.status(200).send(org);

@@ -63,7 +63,7 @@ block content
               input#display(type='text' name='display_name' value='#{org.display_name || ""}')
           .logo
             label(for='logo' ) Upload Logo in Header
-            - var background = org.welcome_image_url?'background-image: url("' + org.welcome_image_url + '"); background-size: cover':''
+            - var background = org.logo_url?'background-image: url("' + org.logo_url + '"); background-size: cover':''
             div.logo-drop(ondragover='settings.drag(event)' ondrop='settings.drop(event)' style='#{background}' onclick='$("#imageFile").click()')
               .instructions(class='#{org.logo_url?"hidden":""}')
                 | or drag and drop files onto this window to upload
