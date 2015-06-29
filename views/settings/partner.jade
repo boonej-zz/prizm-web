@@ -87,6 +87,61 @@ block content
             input#imageFile.hidden(type='file' accept='image/*' name='image' onchange='settings.imageChanged(event)' data-preview='logo-drop')
             .buttons
               button.save(type='submit') Save
-
-    
-
+        form#follow.settings-form.hidden
+          - var plum = org.who_to_follow?org.who_to_follow.luminaries:false;
+          - var olum = org.who_to_follow?org.who_to_follow.org_luminaries: false;
+          - var lead = org.who_to_follow?org.who_to_follow.leaders: false;
+          - var amb = org.who_to_follow?org.who_to_follow.ambassadors: false;
+          h4 Select who you want your members to follow:
+          ul
+            li
+              input#prizmLuminaries(type='checkbox' name='follow' value='pl'
+              checked=plum?'checked':false)
+              .checkbox(onclick='$("#prizmLuminaries").click()')
+              label(for='prizmLuminaries') Prizm Luminaries
+            li
+              input#orgLuminaries(type='checkbox' name='follow' value='ol'
+              checked=olum?'checked':false)
+              .checkbox(onclick='$("#orgLuminaries").click()')
+              label(for='orgLuminaries') Your Organization's Luminaries
+            li
+              input#leaders(type='checkbox' name='follow' value='l'
+              checked=lead?'checked':false)
+              .checkbox(onclick='$("#leaders").click()')
+              label(for='leaders') Leaders
+            li
+              input#ambassadors(type='checkbox' name='follow' value='a'
+              checked=amb?'checked':false)
+              .checkbox(onclick='$("#ambassadors").click()')
+              label(for='ambassadors') Ambassadors
+          .buttons
+            button.save(type='submit') Save
+        form#featured.settings-form.hidden
+          - var part = org.featured?org.featured.partners:false;
+          - var amb = org.featured?org.featured.ambassadors:false;
+          - var lum = org.featured?org.featured.luminaries:false;
+          - var lead = org.featured?org.featured.leaders:false;
+          h4 Select content you want featured in explore:
+          ul
+            li
+              input#featuredPartners(type='checkbox' name='featured' value='p'
+              checked=part?'checked':false)
+              .checkbox(onclick='$("#featuredPartners").click()')
+              label(for='featuredPartners') Partners
+            li
+              input#featuredAmbassadors(type='checkbox' name='featured' value='a'
+              checked=amb?'checked':false)
+              .checkbox(onclick='$("#featuredAmbassadors").click()')
+              label(for='featuredAmbassadors') Ambassadors
+            li
+              input#featuredLuminaries(type='checkbox' name='featured' value='pl'
+              checked=lum?'checked':false)
+              .checkbox(onclick='$("#featuredLuminaries").click()')
+              label(for='featuredLuminaries') Luminaries
+            li
+              input#featuredLeaders(type='checkbox' name='featured' value='l'
+              checked=lead?'checked':false)
+              .checkbox(onclick='$("#featuredLeaders").click()')
+              label(for='featuredLeaders') Leaders
+          .buttons
+            button.save(type='submit') Save

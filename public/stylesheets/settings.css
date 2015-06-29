@@ -8,7 +8,7 @@
 h4 {
   font-size: 18px;
   color: #545358;
-  font-weight: 500;
+  font-weight: 600;
   padding-left: 6%;
 }
 
@@ -158,3 +158,35 @@ ul.themes li:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
+/** WHO TO FOLLOW **/
+
+#follow input[type='checkbox'], #featured input[type='checkbox'] {
+  display: none;
+}
+
+#follow .checkbox, #featured .checkbox {
+  width: 28px;
+  height: 28px;
+  background-color: #fefefe;
+  border: 1px solid #c5c8cc;
+  display: inline-block;
+  float: left;
+  cursor: pointer;
+}
+
+#follow input[type='checkbox']:checked + .checkbox, #featured input[type='checkbox']:checked + .checkbox { 
+  background-color: #3e6a9e;
+  border: none;
+}
+
+#follow label, #featured label {
+  float: left;
+  line-height: 28px;
+  margin-top: 10px;
+  margin-left: 3%;
+  width: auto;
+  font-weight: 400;
+}
+
+

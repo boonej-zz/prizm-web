@@ -3,8 +3,10 @@ var colors = ['green', 'pink', 'red', 'blue', 'purple'];
 
 $(document).ready(function(){
   $('form#branding').submit(settings.submitBranding);
-  $('form#theme').submit(settings.submitTheme);
+  $('form#theme').submit(settings.baseSubmit);
   $('form#welcome').submit(settings.submitWelcome);
+  $('form#follow').submit(settings.baseSubmit);
+  $('form#featured').submit(settings.baseSubmit);
   $('label.color').click(function(){
     var $this = $(this);
     var f = $this.attr('for');
@@ -29,6 +31,12 @@ var settings = {
         break;
       case 'branding':
         title = 'Branding';
+        break;
+      case 'follow':
+        title = 'Who to Follow';
+        break;
+      case 'featured':
+        title = 'Featured';
         break;
       default:
         break;
@@ -126,15 +134,16 @@ var settings = {
     settings.imageChanged(e);
     droppedFiles = files[0];
   },
-  submitTheme: function(){
+  baseSubmit: function(e){
+    var action = $(e.target).attr('id');
     var org = $('#orgID').val();
-    var d = $('form#theme').serialize();
+    var d = $('form#' + action).serialize();
     $.ajax({
       method: 'PUT',
       url: '/organizations/' + org,
       data: d,
       cache: false,
-      headers: {action: 'theme'},
+      headers: {action: action},
       success: function(code){
         droppedFiles = false;
         window.location = '/organizations/settings';

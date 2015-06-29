@@ -791,5 +791,94 @@ exports.updateSettings = function(req, res){
         }
       });
     });
+  } else if (action == 'follow'){
+    Organization.findOne({_id: organization}, function(err, org){
+      if (org) {
+        var follow = req.body.follow;
+        if (!_.isArray(follow)){
+          follow = [follow];
+        }
+        var wtf = {
+          luminaries: false,
+          org_luminaries: false,
+          ambassadors: false,
+          leaders: false
+        };
+        _.each(follow, function(f){
+          switch(f){
+            case 'pl':
+              wtf.luminaries = true;
+              break;
+            case 'ol':
+              wtf.org_luminaries = true;
+              break;
+            case 'l':
+              wtf.leaders = true;
+              break;
+            case 'a':
+              wtf.ambassadors = true;
+              break;
+            default:
+              break;
+          }
+        });
+        org.who_to_follow = wtf;
+        org.save(function(err, o){
+          if (err) {
+            console.log(err);
+            res.status(500).send(err);
+          } else {
+            res.status(200).send(o);
+          }
+        });
+      } else {
+        res.status(403).send('Forbidden');
+      }
+    });
+  } else if (action == 'featured') {
+    Organization.findOne({_id: organization}, function(err, org){
+      if (org) {
+        var featured = req.body.featured;
+        if (!_.isArray(featured)){
+          featured = [featured];
+        }
+        var fe = {
+          partners: false,
+          luminaries: false,
+          ambassadors: false,
+          leaders: false
+        };
+        _.each(featured, function(f){
+          switch(f){
+            case 'pl':
+              fe.luminaries = true;
+              break;
+            case 'p':
+              fe.partners = true;
+              break;
+            case 'l':
+              fe.leaders = true;
+              break;
+            case 'a':
+              fe.ambassadors = true;
+              break;
+            default:
+              break;
+          }
+        });
+        org.featured = fe;
+        org.save(function(err, o){
+          if (err) {
+            console.log(err);
+            res.status(500).send(err);
+          } else {
+            res.status(200).send(o);
+          }
+        });
+      } else {
+        res.status(403).send('Forbidden');
+      }
+    });
+
   }
 }
