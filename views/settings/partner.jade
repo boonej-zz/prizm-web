@@ -49,6 +49,22 @@ block content
               #selectedTheme.color(class='#{org.theme?org.theme.background_url:"blue"}')
           .buttons
             button.save Save
+        form#welcome.settings-form.hidden
+          - var background = org.welcome_image_url?'background-image: url("' + org.welcome_image_url + '"); background-size: cover':''
+
+          h4 Upload Image for Welcome Screen
+          .welcome-drop(ondragover='settings.drag(event)' 
+          ondrop='settings.drop(event)'
+          data-preview='welcome-drop'
+          style='#{background}' 
+          onclick='$("#welcomeFile").click()')
+            .instructions(class='#{org.welcome_image_url?"hidden":""}')
+              | or drag and drop files onto this window to upload
+              br
+              | (limit file size to 2MB)
+          input#welcomeFile.hidden(type='file' accept='image/*' name='image' data-preview='welcome-drop' onchange='settings.imageChanged(event)')
+          .buttons
+            button.save(type='submit') Save
         form#branding.settings-form.hidden  
           ul
             li
@@ -63,12 +79,12 @@ block content
           .logo
             label(for='logo' ) Upload Logo in Header
             - var background = org.logo_url?'background-image: url("' + org.logo_url + '"); background-size: cover':''
-            div.logo-drop(ondragover='settings.drag(event)' ondrop='settings.drop(event)' style='#{background}' onclick='$("#imageFile").click()')
+            div.logo-drop(ondragover='settings.drag(event)' ondrop='settings.drop(event)' style='#{background}' onclick='$("#imageFile").click()' data-preview='logo-drop')
               .instructions(class='#{org.logo_url?"hidden":""}')
                 | or drag and drop files onto this window to upload
                 br
                 | (limit file size to 2MB)
-            input#imageFile.hidden(type='file' accept='image/*' name='image' onchange='settings.imageChanged(event)')
+            input#imageFile.hidden(type='file' accept='image/*' name='image' onchange='settings.imageChanged(event)' data-preview='logo-drop')
             .buttons
               button.save(type='submit') Save
 

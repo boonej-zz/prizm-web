@@ -4,6 +4,7 @@ var colors = ['green', 'pink', 'red', 'blue', 'purple'];
 $(document).ready(function(){
   $('form#branding').submit(settings.submitBranding);
   $('form#theme').submit(settings.submitTheme);
+  $('form#welcome').submit(settings.submitWelcome);
   $('label.color').click(function(){
     var $this = $(this);
     var f = $this.attr('for');
@@ -23,6 +24,9 @@ var settings = {
       case 'theme':
         title = 'Theme Color';
         break;
+      case 'welcome':
+        title = 'Welcome Screen';
+        break;
       case 'branding':
         title = 'Branding';
         break;
@@ -36,6 +40,30 @@ var settings = {
       $('.settings-form').addClass('hidden');
       $('#' + s).removeClass('hidden');
     }
+  },
+  submitWelcome: function(e){
+    var org = $('#orgID').val();
+    var d = new FormData($('form#branding')[0]);
+    if (droppedFiles) {
+      d.append('image', droppedFiles);
+    }
+    $.ajax({
+      method: 'PUT',
+      url: '/organizations/' + org,
+      contentType: false,
+      data: d,
+      cache: false,
+      processData: false,
+      headers: {action: 'welcome'},
+      success: function(code){
+        droppedFiles = false;
+        window.location = '/organizations/settings';
+      },
+      error: function(err){
+        alert('There was a problem updating your profile.');
+      }
+    });
+    return false;
   },
   submitBranding : function(e){
     var org = $('#orgID').val();
@@ -64,6 +92,7 @@ var settings = {
   imageChanged: function(e){
     e.stopPropagation();
     e.preventDefault();
+    var c = $(e.target).attr('data-preview');
     if (window.File && window.FileReader && window.FileList && window.Blob){
       var files = e.target.files || e.dataTransfer.files;
       var file;
@@ -75,9 +104,9 @@ var settings = {
         reader = new FileReader();
         reader.onload = (function(tfile){
           return function(im) {
-            $('.logo-drop').css('background-image', 'url(' + im.target.result +')'); 
-            $('.logo-drop').css('background-size', 'cover');
-            $('.logo-drop .instructions').hide();
+            $('.' + c).css('background-image', 'url(' + im.target.result +')'); 
+            $('.' + c).css('background-size', 'cover');
+            $('.' + c + ' .instructions').hide();
           }
         }(file));
         reader.readAsDataURL(file);
