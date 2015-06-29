@@ -687,16 +687,36 @@ userSchema.statics.fetchSuggestions = function(user, next){
         orgs.push(item.organization._id);
       }
     });
-    if (orgs && orgs.length > 0){
-      criteria.$or = [
-        {org_status: {
-          $elemMatch: {
-            organization: {$in: orgs},
-            status: 'active'
+
+    var o = [];
+    if (user.org_status && user.org_status.length > 0){
+      _.each(user.org_status, function(orgi){
+        console.log('iterating');
+        var org = orgi.organization;
+        if (orgi.status == 'active') {
+        if (org.who_to_follow){
+          console.log('has who');
+          if (org.who_to_follow.luminaries) {
+            o.push({subtype: 'luminary'});
           }
-        }},
-      {subtype: 'luminary'}
-      ];
+          if (org.who_to_follow.org_luminaries) {
+            o.push({$and: [{subtype: 'luminary'}, {org_status: {$elemMatch: {organization: org._id}}}]});
+          }
+          if (org.who_to_follow.leaders) {
+            o.push({org_status: {$elemMatch: {organization: org._id, status: 'active', role: 'leader'}}});
+          }
+          if (org.who_to_follow.ambassadors) {
+            o.push({org_status: {$elemMatch: {organization: org._id, status: 'active', role: 'ambassador'}}});
+          }
+        } 
+        }
+      });
+      console.log(o);
+      if (o.length > 0) {
+        criteria.$or = o;
+      } else {
+        criteria.subtype = 'luminary';
+      }
     } else {
       criteria.subtype =  'luminary';
     }
@@ -704,6 +724,7 @@ userSchema.statics.fetchSuggestions = function(user, next){
     criteria.subtype = 'luminary';
   }
   criteria.posts_count = {$gt: 4};
+  console.log(criteria);
   this.find(criteria)
     .limit(25)
     .exec(function(err, users){

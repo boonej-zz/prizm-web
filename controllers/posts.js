@@ -21,6 +21,7 @@ var singlePost  = path.join(__dirname, '/../views/posts/single_post.jade');
 var singleCommentPath = path.join(__dirname, '/../views/posts/single_comment.jade');
 var Mixpanel      = require('mixpanel');
 var mixpanel      = Mixpanel.init(process.env.MIXPANEL_TOKEN);
+var util = require('util');
 // Posts Methods
 
 exports.likePost = function(req, res) {
@@ -432,36 +433,8 @@ var organizationMembersFeed = function(req, res) {
 };
 
 var explorePostFeed = function(req, res) {
-  var lastPost    = req.get('lastPost');
-  var exploreType = req.get('exploreType');
-  var user = req.user;
-  var criteria = {
-    status: 'active',
-    scope: 'public',
-    is_flagged: false
-  };
-  var sort;
-
-  if (exploreType == 'latest') {
-    sort = {create_date: -1, _id: -1};
-  }
-  else if (exploreType == 'popular') {
-    sort = {likes_count: -1, _id: -1};
-  }
-  else if (exploreType == 'featured') {
-    criteria.type = 'institution_verified'
-    sort = {create_date: -1, _id: -1};
-  }
-  else {
-    res.status(400).send({error: 'Invalid explore feed request'});
-  }
-  Post.findOne({_id: lastPost}, function(err, post) {
-    if (err) {
-      res.status(500).send({error: err});
-    }
-    if (post) {
-      criteria.create_date = {$lt: post.create_date};
-    }
+  var findPosts = function(criteria, sort, res){
+    console.log(criteria);
     Post
     .find(criteria)
     .sort(sort)
@@ -476,7 +449,78 @@ var explorePostFeed = function(req, res) {
         res.status(200).send(content);
       }
     });
-  });
+  };
+
+  var lastPost    = req.get('lastPost');
+  var exploreType = req.get('exploreType');
+  var user = req.user;
+  var usercriteria = false;
+  var criteria = {
+    status: 'active',
+    scope: 'public',
+    is_flagged: false
+  };
+  var sort;
+
+  if (exploreType == 'latest') {
+    sort = {create_date: -1, _id: -1};
+  }
+  else if (exploreType == 'popular') {
+    sort = {likes_count: -1, _id: -1};
+  }
+  else if (exploreType == 'featured') {
+    _.each(user.org_status, function(org){
+      var ol = [];
+      if (org.status == 'active') {
+        var o = org.organization;
+        if (o.featured) {
+          if (o.featured.partners) {
+            ol.push({type: 'institution_verified'});
+          }
+          if (o.featured.ambassadors) {
+            ol.push({org_status: {$elemMatch: {organization: o._id, status: 'active', role: 'ambassador'}}});
+          }
+          if (o.featured.leaders) {
+            ol.push({org_status: {$elemMatch: {organization: o._id, status: 'active', role: 'leader'}}});
+          }
+          if (o.featured.luminaries) {
+            ol.push({subtype: 'luminary'});
+          }
+        }
+      }
+      if (ol.length > 0) {
+        usercriteria = {$or: ol};
+      }
+    });
+    if (!usercriteria) {
+      criteria.type = 'institution_verified'
+    }
+    sort = {create_date: -1, _id: -1};
+  }
+  else {
+    res.status(400).send({error: 'Invalid explore feed request'});
+  }
+  Post.findOne({_id: lastPost}, function(err, post) {
+    if (err) {
+      res.status(500).send({error: err});
+    }
+    if (post) {
+      criteria.create_date = {$lt: post.create_date};
+    }
+    if (usercriteria) {
+      User.find(usercriteria)
+      .select('_id')
+      .exec(function(err, users){
+        if (err) console.log(err);
+        if (users) {
+          criteria.creator = {$in: _.pluck(users, '_id')};
+        }
+        findPosts(criteria, sort, res);
+      });
+    } else {
+      findPosts(criteria, sort, res);
+    }
+      });
 };
 
 exports.addComment = function(req, res){
