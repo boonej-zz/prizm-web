@@ -1,7 +1,11 @@
 .create-overlay(onclick='modal.cancel(event)')
   #newGroupForm.create-form
-    .header
-      | Create Group
+    if edit
+      .header
+        | Edit Group
+    else
+      .header
+        | Create Group
     form#newGroup(data-action=edit?'update':'create')
       - var groupName = group?group.name:''
       - var groupDescription = group?group.description:''
