@@ -1,0 +1,80 @@
+mixin questions(n)
+  li
+    label(for='question') Question #{n}
+    input#question(name='questions' type='text')
+  li
+    label(for='type') Type
+    select#type(name='type' onchange='survey.changeQuestionType(event)')
+      option(value='scale') Scale
+      option(value='multiple') Multiple
+  li.scale
+    label(for='scale') Scale
+    select#scale(name='scale')
+      option(value=5) 5
+      option(value=10) 10
+
+mixin buttons(s)
+  .buttons.section
+    button.cancel(type='button' onclick='modal.cancel(event)') Cancel
+    button.save #{s}
+
+
+.create-overlay(onclick='modal.cancel(event)')
+  #newSurveyForm.create-form
+    if(!survey)
+      h2 Create Survey
+      form#newSurvey
+        input#organizationID(type='hidden' value='#{organization._id}')
+        ul
+          li
+            label(for='name') Survey Name
+            input#name(type='text' name='name')
+          li
+            label(for='number') Number of Questions
+            select#number(name='number_of_questions')
+              option(value=1) 1
+              option(value=2) 2
+              option(value=3) 3
+              option(value=4) 4
+              option(value=5) 5
+          mixin questions(1)
+        mixin buttons('Next')
+    else if (survey.questions.length != survey.number_of_questions)
+      h2 Create Survey
+      form#newSurvey.question
+        input#surveyID(type='hidden' value='#{survey._id}')
+        - var questionNumber = survey.questions.length + 1
+        input#questionNumber(type='hidden' 
+        name='order' 
+        value='#{questionNumber}')
+        ul
+          mixin questions(questionNumber)
+        mixin buttons('Next')
+    else
+      h2 Publish Survey
+      form#newSurvey.publish
+        input#surveyID(type='hidden' value='#{survey._id}')
+        p
+          | Send survey to a group or to all members
+        .selectArea
+          input#filter(type='text' onkeyup='insight.filterGroup(event)' placeholder='Choose groups to target.')
+          .options
+            .option(onclick='insight.selectRadio(event)')
+              .content
+                span.name All Groups
+                input#all.hidden(type='checkbox' 
+                  name='groups' 
+                  value=false 
+                  checked='checked')
+                label(for='all')
+            each group in organization.groups
+              if group.status == 'active'
+                .option.cursor(onclick='insight.selectRadio(event)')
+                  .content
+                    span.name #{group.name}
+                    input.hidden(type='checkbox'
+                      name='groups',
+                      value='#{group._id}',
+                      id='#{group._id}')
+                    label(for='#{group._id}')
+        mixin buttons('Publish')

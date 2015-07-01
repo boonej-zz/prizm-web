@@ -11,7 +11,8 @@ var activitySchema = new mongoose.Schema({
   insight_id:        {type: String, default: null, required: false},
   insight_target_id: {type: String, default: null, required: false},
   has_been_viewed:   {type: Boolean, default: false, required: false},
-  group_id:          {type: ObjectId, ref: 'Group', required: false}
+  group_id:          {type: ObjectId, ref: 'Group', required: false},
+  survey_id:         {type: ObjectId, ref: 'Survey', required: false}
 }, { versionKey: false });
 
 activitySchema.pre('save', function(next) {

@@ -16,5 +16,6 @@ exports.group         = require('./group');
 exports.invite        = require('./invite');
 exports.SMS           = require('./sms');
 exports.notification  = require('./notification');
+exports.survey        = require('./survey');
 
 mongoose.connect(mongoURI);

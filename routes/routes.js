@@ -9,6 +9,7 @@ var _follow   = require('../controllers/follow');
 var _orgs     = require('../controllers/organizations');
 var _trusts   = require('../controllers/trusts');
 var _messages = require('../controllers/messages');
+var _surveys = require('../controllers/surveys');
 var Insights = require('../controllers/insights');
 var config    = require('../config');
 var passport  = require('passport');
@@ -207,6 +208,12 @@ router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
 router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
 router.post('/register/:id', _orgs.updateOrg);
+
+/* Surveys */
+router.get('/surveys/new', _users.authRequired, _surveys.newSurvey);
+router.post('/surveys', _users.authRequired, _surveys.createSurvey);
+router.post('/surveys/:survey_id/questions', _users.authRequired, _surveys.createQuestion);
+router.post('/surveys/:survey_id/groups', _users.authRequired, _surveys.publishSurvey);
 
 /** Redirect **/
 router.get('/redirect', function(req, res){

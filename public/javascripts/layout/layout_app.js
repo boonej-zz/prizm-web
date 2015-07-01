@@ -726,6 +726,131 @@ var post = {
   }
 }
 
+var survey = {
+  showNewSurveyForm: function(){
+    $.ajax({
+      method: 'GET',
+      url: '/surveys/new',
+      contentType: 'text/html'
+    })
+    .done(function(html){
+      modal.showModal(html);
+      $('#newSurvey').submit(survey.submit);
+    });
+  },
+  changeQuestionType: function(e){
+    var type = $(e.target).val();
+    if (type == 'multiple') {
+      $('li.scale').remove();
+      var answerLi = document.createElement('li');
+      answerLi.className = 'multiple';
+      var answerLabel = document.createElement('label');
+      answerLabel.setAttribute('for', 'answerCount');
+      answerLabel.appendChild(document.createTextNode('Answers'));
+      answerLi.appendChild(answerLabel);
+      var answerSelect = document.createElement('select');
+      answerSelect.setAttribute('id', 'answerCount');
+      answerSelect.setAttribute('name', 'answer_count');
+      answerSelect.addEventListener('change', survey.answerChange);
+      for (var i = 0; i != 5; ++i) {
+        var option = document.createElement('option');
+        var value = i + 1;
+        option.setAttribute('value', value);
+        option.appendChild(document.createTextNode(value));
+        answerSelect.appendChild(option);
+      }
+      answerLi.appendChild(answerSelect);
+      $('#newSurvey ul').append(answerLi);
+      var choiceLi = document.createElement('li');
+      choiceLi.className = 'choice';
+      var choiceLabel = document.createElement('label');
+      choiceLabel.setAttribute('for', 'choice1');
+      choiceLabel.appendChild(document.createTextNode('1.'));
+      choiceLi.appendChild(choiceLabel);
+      var choiceInput = document.createElement('input');
+      choiceInput.setAttribute('id', 'choice1');
+      choiceInput.setAttribute('type', 'text');
+      choiceInput.setAttribute('name', 'values');
+      choiceLi.appendChild(choiceInput);
+      $('#newSurvey ul').append(choiceLi);
+    } else {
+      $('#newSurvey ul li.multiple').remove();
+      $('#newSurvey ul li.choice').remove();
+      var scaleLi = document.createElement('li');
+      scaleLi.className = 'scale';
+      var scaleLabel = document.createElement('label');
+      scaleLabel.setAttribute('for', 'scale');
+      scaleLabel.appendChild(document.createTextNode('Scale'));
+      scaleLi.appendChild(scaleLabel);
+      var scaleSelect = document.createElement('select');
+      scaleSelect.setAttribute('id', 'scale');
+      for (var i = 5; i < 11; i += 5) {
+        var option = document.createElement('option');
+        option.setAttribute('value', i);
+        option.appendChild(document.createTextNode(String(i)));
+        scaleSelect.appendChild(option);
+      }
+      scaleLi.appendChild(scaleSelect);
+      $('#newSurvey ul').append(scaleLi);
+    }
+  },
+  answerChange: function(e){
+    var currentCount = $('li.choice').length;
+    var neededCount = Number($(e.target).val());
+    if (neededCount > currentCount) {
+      var c = neededCount - currentCount;
+      for (var i = 0; i != c; ++i) {
+        var n = currentCount + i + 1;
+        var choiceLi = document.createElement('li');
+        choiceLi.className = 'choice';
+        var choiceLabel = document.createElement('label');
+        choiceLabel.setAttribute('for', 'choice' + String(n));
+        choiceLabel.appendChild(document.createTextNode(String(n) + '.'));
+        choiceLi.appendChild(choiceLabel);
+        var choiceInput = document.createElement('input');
+        choiceInput.setAttribute('id', 'choice1');
+        choiceInput.setAttribute('type', 'text');
+        choiceInput.setAttribute('name', 'values'); 
+        choiceLi.appendChild(choiceInput);
+        $('#newSurvey ul').append(choiceLi);
+      }
+    } else if (neededCount < currentCount) {
+      var c = currentCount - neededCount;
+      for (var i = 0; i != c; ++i) {
+        $('#newSurvey li.choice:last-child').remove();
+      }
+    }
+  },
+  submit: function(e){
+    var d = $('#newSurvey').serialize();
+    var url = '/surveys';
+    var sid = $('#surveyID').val();
+    if ($(e.target).hasClass('question')){
+      url = '/surveys/' + sid + '/questions';
+    }
+    if ($(e.target).hasClass('publish')){
+      url = '/surveys/' + sid + '/groups';
+    }
+    $.ajax({
+      method: 'POST',
+      url: url,
+      cache: 'false',
+      data: d,
+      success: function(html){
+        modal.cancel();
+        if (html) {
+          modal.showModal(html);
+          $('#newSurvey').submit(survey.submit);
+        }
+      },
+      error: function(err){
+        alert('There was an error creating your survey');
+      }
+    });
+    return false;
+  }
+};
+
 var login = {
   displayForm: function() {
     $('.front').css('display', 'none');
