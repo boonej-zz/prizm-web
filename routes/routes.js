@@ -214,6 +214,7 @@ router.get('/surveys/new', _users.authRequired, _surveys.newSurvey);
 router.post('/surveys', _users.authRequired, _surveys.createSurvey);
 router.post('/surveys/:survey_id/questions', _users.authRequired, _surveys.createQuestion);
 router.post('/surveys/:survey_id/groups', _users.authRequired, _surveys.publishSurvey);
+router.post('/surveys/:survey_id/answers', _surveys.answerQuestion);
 router.get('/surveys', _users.authRequired, function(req, res){
   var user = req.user;
   var Organization = mongoose.model('Organization');

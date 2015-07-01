@@ -26,6 +26,7 @@ var _image          = require('../lib/helpers/image');
 var _organizations  = require('../controllers/organizations');
 var validateEmail   = require('../utils').validateEmail;
 var _utils          = require('../utils.js');
+var Survey = mongoose.model('Survey');
 var path = require('path');
 var util = require('util');
 var profileFollow        = path.join(__dirname, '/../views/profile/profile_follow.jade');
@@ -489,14 +490,63 @@ function getTrustedLuminariesForUserId(userId, next) {
   });
 }
 
+
+var renderSurveyPage = function(survey, req, res) {
+  var user = req.user;
+  var options ={
+      bodyId: 'survey',
+      currentUser: user, 
+      auth: true, 
+      title: 'Survey',
+      survey: survey
+  };
+  res.render('surveys/take', options)
+
+}
+
 // User Authentication Methods
 
-exports.authRequired = function (req, res, next) {
+var authRequired = function (req, res, next) {
   if (req.isAuthenticated()) {
-   return next(); 
- }
-  res.redirect('/login')
+    var user = req.user;
+    var rawGroups = [];
+    var orgs = [];
+    _.each(user.org_status, function(o){
+      if (o.status == 'active') {
+        orgs.push(o.organization._id);
+        var rg = _.filter(o.groups, function(i){
+          return i.status == 'active';
+        });
+        rawGroups = rawGroups.concat(rg);
+      }
+    });
+    var groups = _.pluck(rawGroups, '_id');
+    var criteria = {
+      organization: {$in: orgs},
+      completed: {$ne: user._id},
+      $or: [
+        {target_all: true},
+        {groups: 
+          {$in: groups}
+        }
+      ]
+    }
+    Survey.findOne(criteria)
+    .populate({path: 'questions', model: 'Question'})
+    .populate({path: 'creator', model: 'User', select: {name: 1}}) 
+    .exec(function(err, survey){
+      if (err) console.log(err);
+      if (survey) {
+        renderSurveyPage(survey, req, res);
+      } else {
+        next();
+      }
+    });
+  } else {
+    res.redirect('/login');
+  }
 }
+exports.authRequired = authRequired;
 
 exports.displayLogin = function(req, res) {
   var failure = req.query.failure;
@@ -679,12 +729,10 @@ exports.displayHomeFeed = function(req, res) {
   }
   else {
     var id = req.user.id;
+    var user = req.user;
     var action = req.get('action');
     var lastPost = req.get('lastPost');
-    User.findOne({_id: ObjectId(id)}, function(err, user) {
-      if (err) {
-        res.send(400);
-      }
+    authRequired(req, res, function(){
       if (user) {
         var done = 0;
         if (action) {

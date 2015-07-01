@@ -6,6 +6,7 @@ var TwitterStrategy   = require('passport-twitter').Strategy;
 var mongoose          = require('mongoose');
 var User              = mongoose.model('User');
 var _                 = require('underscore');
+var util = require('util');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',

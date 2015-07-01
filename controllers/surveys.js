@@ -26,6 +26,7 @@ exports.newSurvey = function(req, res){
 exports.createSurvey = function(req, res){
   var user = req.user;
   Organization.findOne({owner: user._id})
+  .populate({path: 'groups', model: 'Group'})
   .exec(function(err, org){
     if (err) console.log(err);
     if (org){
@@ -35,7 +36,6 @@ exports.createSurvey = function(req, res){
         type: req.body.type,
         scale: req.body.scale
       }; 
-      console.log(questionObj);
       var question = new Question({
         text: req.body.questions,
         order: 1,
@@ -163,7 +163,9 @@ exports.publishSurvey = function(req, res){
               status: 'active',
               organization: org._id
             }
-            if (groupIDs) {
+            if (!groupIDs) {
+              survey.target_all = true;
+            } else {
               criteria.groups = {$in: groupIDs};
               survey.groups = groupIDs;
             }
@@ -186,3 +188,75 @@ exports.publishSurvey = function(req, res){
     }
   });
 };
+
+var finishSurvey = function(req, res) {
+  var user = req.user;
+  console.log('finishing survey');
+  Survey.findOne({_id: req.params.survey_id}, function (err, s){
+    if (s) {
+      s.completed.push(user._id);
+      s.save(function(err, r){
+        if (r) {
+          res.status(200).json({action: 'finish'});
+        } else {
+          res.status(500).send('Server Error');
+        }
+      });
+    } else {
+      if (err) console.log(err);
+      res.status(500).send('Could not complete survey');
+    }
+  });
+}
+
+exports.answerQuestion = function(req, res){
+  var user = req.user;
+  var survey_id = req.params.survey_id;
+  console.log('answering question');
+  var final = req.get('final');
+  Question.findOne({_id: req.body.question})
+  .populate({path: 'answers', model: 'Answer'})
+  .exec(function(err, question){
+    if (question) {
+      var userAnswers = _.filter(question.answers, function(o){
+        return String(o.user) == String(user._id);
+      });
+      if (userAnswers.length == 0) {
+        var answer = new Answer({
+          user: user._id,
+          value: req.body.value
+        });
+        answer.save(function(err, a){
+          if (a) {
+            Question.findOne({_id: question._id}, function(err, q){
+              q.answers.push(a._id);
+              q.save(function(err, q){
+                if (q){
+                  if (final) {
+                    finishSurvey(req, res);
+                  } else {
+                    res.status(200).json({action: 'continue'});
+                  }
+                } else {
+                  res.status(500).send('Server error');
+                }
+              });
+            });
+          } else {
+            if (err) console.log(err);
+            res.status(500).send('Server error');
+          }
+        });
+      } else {
+        if (final) {
+          finishSurvey(req, res);
+        } else {
+          res.status(200).json({action: 'continue'});
+        }
+      }
+    } else {
+      if (err) conosle.log (err);
+      res.status(400).send('Invalid request');
+    }
+  });
+}

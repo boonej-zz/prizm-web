@@ -43,7 +43,8 @@ var surveySchema = new mongoose.Schema({
   groups: [ObjectId],
   number_of_questions: {type: Number},
   questions: [ObjectId],
-  completed: [ObjectId]
+  completed: [ObjectId],
+  target_all: {type: Boolean, default: false}
 });
 
 surveySchema.pre('save', function(next){
