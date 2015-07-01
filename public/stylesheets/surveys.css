@@ -1,0 +1,182 @@
+.survey-header {
+  line-height: 40px;
+  background-image: url('/images/icons/survey_main_icon.png');
+  background-repeat: no-repeat;
+  background-position-x: 0px;
+  background-size: 36px;
+  padding-left: 52px;
+  width: 95.7%;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+form.survey {
+  width: 95.7%;
+  margin: 0 auto 200px auto;
+  background-color: #fefefe;
+  padding-bottom: 69px;
+}
+
+form.survey h3 {
+  width: 100%;
+  height: 42px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); 
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 52px;
+  color: #545358;
+  vertical-align: baseline;
+  text-align: center;
+}
+
+form.survey h3 span.lighter {
+  color: #bbc3cc;
+}
+
+form.survey h4 {
+  width: 42%;
+  margin: 40px auto 49px auto;
+  color: #545358;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 27px;
+  text-align: center;
+}
+
+form.survey .survey-progress {
+  margin: 0 auto;
+  min-width: 33px;
+  text-align: center;
+}
+
+form.survey .survey-progress .circle {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  color: #fefefe;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 33px;
+  vertical-align: middle;
+  display: inline-block;
+  text-align: center;
+}
+
+
+.divider {
+  width: 8.3%;
+  height: 8px;
+  display: inline-block;
+}
+
+.circle.empty, .divider.empty {
+  background-color: #bbc3cc;
+}
+
+.circle.full, .divider.full {
+  background-color: #34c256;
+}
+
+
+p.question {
+  color: #545358;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 27px;
+  text-align: center;
+  width: 50.4%;
+  background-color: #f4f5f7;
+  border: 1px solid #d8d8d8;
+  padding: 31px;
+  margin: 48px auto 0 auto;
+}
+
+.scale {
+  min-width: 46%;
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+.scale .legend {
+  width: 100%;
+  margin: 48px auto 36px auto; 
+  color: #545358;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.scale .legend .lower-threshold {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+
+.scale .legend .upper-threshold {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+}
+
+.scale .control {
+  width: 100%;
+  text-align: center;
+}
+
+span.choice {
+  display: inline-block;
+  width: 54px;
+  text-align: center;
+  min-width: 0;
+  max-width: initial;
+
+}
+
+span.choice label {
+  color: #545358;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+input.scale {
+  -webkit-appearance: none;
+  border-radius: 0;
+  width: 54px;
+  height: 52px;
+  border: 1px solid #d8d8d8;
+  outline: none;
+  display: block;
+  margin: 0;
+  min-width: 0;
+  max-width: initial;
+
+ }
+
+input.scale:focus {
+  outline: none;
+}
+
+input.scale:checked {
+  background-color: #12b950;
+  border: 1px solid #d8d8d8;
+  outline: none;
+}
+
+.buttons {
+  width: 100%;
+  text-align: center;
+  margin-top: 65px;
+}
+
+button {
+  -webkit-appearance: none;
+  outline: none;
+  background-color: #334b8f;
+  color: #fefefe;
+  border: none;
+  color: #fefefe;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 15px 36px 14px 38px;
+  text-align: center;
+}

@@ -1,0 +1,52 @@
+extends ../layouts/layout_app
+
+mixin progress(current, max)
+  .survey-progress
+    - var i = 0
+    while i < max
+      - var n = i + 1
+      .circle(class=current >=  n?'full':'empty') #{n}
+      if (n != max) 
+        .divider(class=current > n?'full':'empty')
+      - ++i
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/surveys.css')
+  script(type='text/javascript' src='/javascripts/surveys.js')
+
+block content
+  .container.topnav-offset
+    input#surveyID(type='hidden' value='#{survey._id}')
+    .survey-header.page-header
+      | Survey
+    each question in survey.questions
+      form.survey(id='question' + question.order class=question.order > 1?'hidden':'' 
+        class=question.order == survey.questions.length?'last':'')
+        input(type='hidden' name='question' value=question._id)
+        input(type='hidden' name='order' value=question.order)
+        h3 
+          | Question #{question.order} 
+          span.lighter of #{survey.questions.length}
+        h4 #{survey.creator.name} would like for you to answer a few questions
+        mixin progress(question.order, survey.questions.length) 
+        p.question #{question.text}
+        if question.type == 'scale'
+          .scale
+            .legend
+              span.lower-threshold Strongly Disagree
+              span.upper-threshold Strongly Agree
+            .control
+              - var i = 0
+              while i < question.scale
+                - var n = i + 1;
+                span.choice
+                  input.scale(type='radio' id='scale_#{n}' value=n name='value')
+                  label(for='scale_#{n}') #{n}
+                - ++i
+        .buttons
+          if question.order == survey.questions.length
+            button.done 
+              span Done
+          else
+            button.next 
+              span.arrow Next
