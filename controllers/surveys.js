@@ -243,8 +243,16 @@ exports.answerQuestion = function(req, res){
               });
             });
           } else {
-            if (err) console.log(err);
-            res.status(500).send('Server error');
+            if (err) { 
+              console.log(err);
+              if (final) {
+                finishSurvey(req, res);
+              } else {
+                res.status(200).send({action: 'continue'});
+              }
+            } else {
+              res.status(500).send('Server error');
+            }
           }
         });
       } else {

@@ -953,6 +953,10 @@ input#scope:not(:checked) + label::after  {
   width: 359px;
 }
 
+#newSurvey .selectArea {
+  margin-bottom: 44px;
+}
+
 @media screen and (max-width: 600px) {
 
   #newGroupForm {
