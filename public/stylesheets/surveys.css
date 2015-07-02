@@ -162,6 +162,55 @@ input.scale:checked {
   outline: none;
 }
 
+ul.multiple {
+  list-style: none;
+  width: 50.4%;
+  margin: 50px auto 0 auto;
+  padding: 0;
+  clear: right;
+}
+
+ul.multiple li {
+  color: #545358;
+  font-size: 18px;
+  font-weight: 700;
+  height: 26px;
+  line-height: 26px;
+  vertical-align: middle;
+  display: block;
+  width: 100%;
+}
+
+ul.multiple li label {
+  float: left;
+  clear: right;
+}
+
+input.multiple {
+  width: 20px;
+  height: 20px;
+  background-color: #fefefe;
+  border: 1px solid #a9aaae;
+  -webkit-appearance: none;
+  border-radius: 50%;
+  outline: none;
+  display: inline-block;
+  margin: 3px 21px 0 0;
+  float: left;
+  clear: left;
+}
+
+input.multiple:checked {
+  background-color: #334b8f;
+  border: none;
+  outline: none;
+}
+
+input.multiple:focus {
+  outline: none;
+}
+
+
 .buttons {
   width: 100%;
   text-align: center;

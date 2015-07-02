@@ -43,6 +43,13 @@ block content
                   input.scale(type='radio' id='scale_#{n}' value=n name='value')
                   label(for='scale_#{n}') #{n}
                 - ++i
+        else if question.type == 'multiple'
+          ul.multiple
+            each value in question.values
+              li
+                input.multiple(type='radio' id='multiple_#{value.order}' 
+                value=value.order name='value')
+                label(for='multiple_#{value.order}') #{value.question}
         .buttons
           if question.order == survey.questions.length
             button.done 
