@@ -1,0 +1,20 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/surveys.css')
+  script(type='text/javascript' src='/javascripts/surveys.js')
+
+block content
+  .container.topnav-offset
+    .survey-header.page-header
+      | Survey
+    ul#surveyAdmin
+      each survey in surveys
+        li
+          button.details
+          .title-label Survey Name
+          .title #{survey.name}
+          .date-label Survey Date
+          .date #{survey.formattedDate}
+          button.resend Resend Survey
+          button.edit
