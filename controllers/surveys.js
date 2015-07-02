@@ -293,7 +293,6 @@ exports.adminPage = function(req, res){
             title: 'Survey',
             bodyId: 'survey' 
           });
-          res.send('<pre>' + JSON.stringify(surveys, null, 2) + '</pre>');
       });
     } else {
       if (err) console.log(err);
