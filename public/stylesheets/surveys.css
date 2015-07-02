@@ -180,3 +180,100 @@ button {
   padding: 15px 36px 14px 38px;
   text-align: center;
 }
+
+ul#surveyAdmin {
+  list-style: none;
+  width: 95.7%;
+  margin: 36.5px auto 40px auto;
+  border: 1px solid #c5c8cc;
+  padding: 0;
+  background-color: #fefefe;
+}
+
+ul#surveyAdmin li {
+  height: 37.5px;
+  line-height: 37.5px;
+  vertical-align: middle;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #c5c8cc;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+#surveyAdmin .title-label, #surveyAdmin .title, #surveyAdmin .date-label, #surveyAdmin .date {
+  display: inline-block;
+  height: 100%;
+  line-height: 37.5px;
+  vertical-align: middle;
+  float: left;
+}
+
+#surveyAdmin .title-label, #surveyAdmin .date-label {
+  color: #545358;
+  font-size: 10px;
+  font-weight: 600;
+  margin-right: 7px;
+  width: 6.7%;
+}
+
+#surveyAdmin .title, #surveyAdmin .date {
+  color: #545358;
+  font-weight: 400;
+  font-size: 10px;
+  width: 15.6%;
+  height: 18.5px;
+  line-height: 18.5px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 9.5px;
+  border: 1px solid #e4e5ea;
+}
+
+#surveyAdmin .title {
+  margin-right: 10%;
+}
+
+button.details {
+  height: 100%;
+  width: 4.1%;
+  border: none;
+  outline: none;
+  background-image: url('/images/icons/button_details.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 17.5px 17.5px;
+  background-color: inherit;
+  display: inline-block;
+  float: left;
+}
+
+button.resend {
+  margin-left: 13.8%;
+  width: 8.9%;
+  height: 20.5px;
+  margin-top: 8.5px;
+  font-size: 10px;
+  color: white;
+  float: left;
+  padding: 0;
+  line-height: 20.5px;
+  vertical-align: middle;
+}
+
+button.edit {
+  float: left;
+  width: 17.5px;
+  background: none;
+  background-image: url('/images/icons/edit_button_sm.png');
+  background-size: 17.5px 17.5px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  outline: none;
+  height: 100%;
+  margin-left: 4.9%;
+}
+
+
+

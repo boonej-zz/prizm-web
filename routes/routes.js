@@ -215,28 +215,7 @@ router.post('/surveys', _users.authRequired, _surveys.createSurvey);
 router.post('/surveys/:survey_id/questions', _users.authRequired, _surveys.createQuestion);
 router.post('/surveys/:survey_id/groups', _users.authRequired, _surveys.publishSurvey);
 router.post('/surveys/:survey_id/answers', _surveys.answerQuestion);
-router.get('/surveys', _users.authRequired, function(req, res){
-  var user = req.user;
-  var Organization = mongoose.model('Organization');
-  var Survey = mongoose.model('Survey');
-  var util = require('util');
-  Organization.findOne({owner: user._id}, function(err, org){
-    if (org){
-      Survey.find({creator: user._id})
-      .populate({path: 'questions', model: 'Question'})
-      .populate({path: 'organization', select: {name: 1}})
-      .populate({path: 'questions.answers', model: 'Answer'})
-      .populate({path: 'groups', model: 'Group', select: {name: 1}})
-      .exec(function(err, surveys){
-        if (err) console.log(err);
-        res.send('<pre>' + JSON.stringify(surveys, null, 2) + '</pre>');
-      });
-    } else {
-      if (err) console.log(err);
-      res.status(403).send('Forbidden');
-    }
-  });
-});
+router.get('/surveys', _users.authRequired, _surveys.adminPage);
 
 /** Redirect **/
 router.get('/redirect', function(req, res){

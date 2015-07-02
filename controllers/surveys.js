@@ -9,6 +9,7 @@ var Answer = mongoose.model('Answer');
 var Group = mongoose.model('Group');
 var Activity = mongoose.model('Activity');
 var User = mongoose.model('User');
+var moment = require('moment');
 
 exports.newSurvey = function(req, res){
   var user = req.user;
@@ -267,4 +268,37 @@ exports.answerQuestion = function(req, res){
       res.status(400).send('Invalid request');
     }
   });
-}
+};
+
+exports.adminPage = function(req, res){
+  var user = req.user;
+  Organization.findOne({owner: user._id}, function(err, org){
+    if (org){
+      Survey.find({creator: user._id})
+      .populate({path: 'questions', model: 'Question'})
+      .populate({path: 'organization', select: {name: 1}})
+      .populate({path: 'questions.answers', model: 'Answer'})
+      .populate({path: 'groups', model: 'Group', select: {name: 1}})
+      .exec(function(err, surveys){
+          if (err) console.log(err);
+          if (surveys) {
+            _.each(surveys, function(s){
+              s.formattedDate = moment(s.create_date).format('M/D/YYYY'); 
+            });
+          }
+          res.render('surveys/admin', {
+            currentUser: user,
+            auth: true,
+            surveys: surveys,
+            title: 'Survey',
+            bodyId: 'survey' 
+          });
+          res.send('<pre>' + JSON.stringify(surveys, null, 2) + '</pre>');
+      });
+    } else {
+      if (err) console.log(err);
+      res.status(403).send('Forbidden');
+    }
+  });
+
+};
