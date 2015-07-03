@@ -2,6 +2,10 @@ body, div, input, p, h1, h2, h3, h4, span, ul, li {
   box-sizing: border-box;
 }
 
+button {
+  cursor: pointer;
+}
+
 .navbar .already {
   display: inline-block;
   float: right;
