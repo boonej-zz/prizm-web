@@ -135,6 +135,7 @@ router.post('/passwordreset', _users.authRequired, function(req, res){
   _users.shortPasswordReset(req, res);
 });
 /* Users */
+router.post('/users', _users.register);
 router.post('/users/unrestrict', _users.authRequired, _users.unrestrictUser);
 router.post('/users/restrict', _users.authRequired, _users.restrictUser);
 router.get('/users/props', _users.authRequired, _users.getUserProps);
@@ -206,6 +207,8 @@ router.post('/trusts/:id', _users.authRequired, _trusts.updateTrusts);
 /* Registration */
 router.get('/register', _users.displayRegistration);
 router.post('/register', _users.registerNewUser);
+
+router.get('/register/interests', _users.authRequired, _users.displayInterests);
 router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
 router.post('/register/:id', _orgs.updateOrg);
 

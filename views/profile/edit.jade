@@ -48,7 +48,9 @@ form
         #resetPassword(onclick='profile.showPasswordReset(event)') Change Password
     else
       - var birthday = currentUser && currentUser.birthday?currentUser.birthday.split('-'):false;
-      - var formattedBirthday = birthday && birthday.length == 3?[birthday[2], birthday[0], birthday[1]]:[]
+      - var formattedBirthday = birthday && birthday.length == 3?[String(birthday[2]), String(birthday[0]), String(birthday[1])]:[]
+      - if (formattedBirthday && formattedBirthday[1].length == 1) formattedBirthday[1] = '0' + formattedBirthday[1]
+      - if (formattedBirthday && formattedBirthday[2].length == 1) formattedBirthday[2] = '0' + formattedBirthday[2]
       - var bdayString = formattedBirthday.join('-')
       - var dateNow = new Date()
       - var earliestDate = new Date(dateNow.getFullYear() - 13, dateNow.getMonth(), dateNow.getDate())

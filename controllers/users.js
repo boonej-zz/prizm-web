@@ -1248,7 +1248,7 @@ exports.displayRegistration = function(req, res) {
           if (err) {
             var users = [];
           }
-          res.render('registration/registration', {
+          res.render('registration/new', {
             bodyId: 'registration',
             interests: interests,
             usersToFollow: usersToFollow
@@ -1256,6 +1256,88 @@ exports.displayRegistration = function(req, res) {
         });
     });
 };
+
+var validate = function(req, res, next) {
+  var required_user = ['email', 'password', 'confirm_password', 'birthday', 'gender', 'first_name', 'last_name',
+      'phone_number'];
+  var required_institution = ['email', 'name', 'subtype', 'password', 'confirm_password', 'zip_postal', 'contact_first',
+      'contact_last', 'contact_email', 'website'];
+  var required = false;
+  if (req.body.type == 'user') required = required_user;
+  if (req.body.type == 'institution') required = required_institution;
+  if (required) {
+    var valid = true;
+    _.each(required, function(r){
+      if (!req.body[r]) required = false; 
+    }); 
+    console.log(req.body);
+    if (req.body.confirm_password != req.body.password) valid = false;
+    if (valid) { 
+    User.findOne({email: req.body.email}, function(err, user){
+      if (err) console.log(err);
+      if (user) {
+        res.status(400).json({error: 'This email address is already registered.'});
+      } else {
+        var birthday = req.body.birthday;
+        if (birthday.indexOf('/') != -1) {
+          birthday = birthday.split('/');
+          birthday = [birthday[2], birthday[0] - 1, birthday[1]];
+        } else if (birthday.indexOf('-') != -1) {
+          birthday = birthday.split('-');
+          birthday = [birthday[0], birthday[1] - 1, birthday[2]] 
+        }
+        birthday = moment(birthday);
+        diff = moment().diff(birthday, 'years');
+        if (diff < 13) {
+          res.status(400).json({
+            error: 'You must be 13 years of age to create an account.'
+          });
+          return;
+        } else {
+          next();
+        }
+      }
+    });
+    } else {
+      res.status(400).json({error: 'Passwords do not match.'});
+    }
+  }
+}
+
+exports.register = function(req, res){
+  validate(req, res, function(){
+    var body = req.body;
+    if (body.birthday) {
+      var birthday = new Date(body.birthday);
+      if (birthday){
+        birthday = String(birthday.getMonth() + 1) + '-' + String(birthday.getDate() + 1)
+        + '-' + String(birthday.getFullYear());
+        body.birthday = birthday;
+      }
+    }
+    var u = new User(body);
+    if (u.hashPassword()){
+      u.save(function(err, result){
+        if (err) console.log(err);
+        if (result) {
+          req.logIn(result, function(err){
+            if (err) console.log(err);
+            res.status(200).json(result);
+          });
+        }
+      });
+    }
+  });
+}
+
+exports.displayInterests = function(req, res) {
+  var user = req.user;
+  Interest.find({is_subinterest: false})
+  .populate({path: 'subinterests', model: 'Interest'})
+  .exec(function(err, interests){
+    res.render('registration/interests', {interests: interests});
+  });
+}
 
 exports.registerNewUser = function(req, res) {
   var dataType = req.get('dataType');
@@ -1288,7 +1370,6 @@ exports.registerNewUser = function(req, res) {
 // Registration Methods
 
 var validateRegistrationRequest = function(req, res,  next) {
-  console.log(JSON.stringify(req.body));
   var userEmail = req.body.email;
   var userCode = req.body.programCode;
   var birthday = req.body.birthday;
