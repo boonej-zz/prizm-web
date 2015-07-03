@@ -858,6 +858,47 @@ var login = {
   },
   register: function() {
     window.location = baseURL + '/register';
+  },
+  resetPassword: function(e) {
+    $.ajax({
+      type: 'GET',
+      url: '/users/reset',
+      cache: false,
+      success: function(html){
+        overlay.show(html);
+        $('form#resetPassword').submit(function(){
+            var pass = $('input#password').val();
+            var conf = $('input#confirm').val();
+            if (pass == conf) {
+              var data = $('form#resetPassword').serialize();
+              $.ajax({
+                type: 'POST',
+                url: '/users/password',
+                cache: false,
+                data: data,
+                success: function(success){
+                    alert('Check your email for instructions to reset your password.');
+                    overlay.cancel()
+                },
+                error: function(error){
+                  alert('There was a problem changing your password.');
+                }
+              });
+            }
+            return false; 
+        });
+        $('.modal-overlay input').keyup(function(){
+          var pass = $('input#password').val();
+          var conf = $('input#confirm').val();
+          if (pass == conf){
+            $('.modal-overlay button.save').attr('disabled', false);
+          } else {
+            $('.modal-overlay button.save').attr('disabled', 'disabled');
+          }
+                  });
+      }
+    });
+
   }
 };
 

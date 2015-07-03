@@ -202,6 +202,46 @@ var checkAndUpdateOrg = function(user, next){
  } 
 };
 
+exports.resetPassword = function(req, res){
+  var email = req.body.email;
+  User.findOne({email: email}, function(err, user){
+    if (err) {
+      console.log(err);
+      res.send(400, {error: 'bad request'});
+    }
+    if (user) {
+      user.password_reset = req.body.password;
+      user.reset_date = new Date();
+      user.reset_key = _utils.uuid.v1();
+      user.save(function(err, result){
+        if (result) {
+          var params = {
+            body: [
+              'Please click on the below link to reset your password.',
+              '<a href="https://www.prizmapp.com/users/' + result._id + '/password?reset_key=' + result.reset_key + '&approval=yes">Confirm Password Reset</a>'
+            ],
+                    closing: ownerClosing
+                  };
+                  var mail = jade.renderFile(baseMail, params);
+                  mandrill(mandrillEndpointSend, {
+                    message: {
+                      to: [{email: result.email}],
+                      from_email: 'info@prizmapp.com',
+                      from_name: 'Prizm',
+                      subject: 'Prizm Password Reset for ' + result.name,
+                      html: mail
+                    }
+                  }, function (err, response){
+                    if (err) console.log(err); 
+                    res.status(200).send();
+                  }); 
+        } else {
+          if (err) console.log(err);
+        }
+      });
+      
+  }}); 
+};
 
 
 // User Methods
@@ -2489,5 +2529,10 @@ exports.fetchFollowFeed = function(req, res){
 
 exports.showPasswordModal = function(req, res){
   var user = req.user;
-  res.render('overlays/password_reset');
+  var reset = req.get('reset');
+  if (user) {
+    res.render('overlays/password_reset');
+  } else {
+    res.render('overlays/mail_password_reset');
+  }
 }

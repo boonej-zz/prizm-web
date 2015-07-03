@@ -28,7 +28,7 @@
               class='form-control')
         | Remember Me
     div.link
-      a(href='#')
+      a.cursor(onclick='login.resetPassword(event)')
         | Forgot password?
 .back
   if failure
@@ -66,7 +66,7 @@
               id='rememberMe')
         | Remember Me
     div.link
-      a(href='#')
+      a.cursor(onclick='login.resetPassword(event)')
         | Forgot password?
   
   if failure
