@@ -54,6 +54,156 @@ var ownerClosing = 'Thank you,';
 var ownerPush = '%s has requested to join your Prizm group. Please go to your admin page to approve or deny.';
 var ownerPushAlt = '%s has just joined your Prizm group. Please go to your admin page to review your members.';
 
+
+var notifyOwnerJoined = function(owner, user, joined){
+  var bodyp = joined?ownerBody1Alt:ownerBody1;
+  var pushp = joined?ownerPushAlt:ownerPush;
+  var subject = joined?'New Member Added':'New Member Pending';
+  var params = {
+    body: [
+      util.format(ownerGreeting, owner.name),
+      util.format(bodyp, user.first_name + ' ' + user.last_name, owner.name)
+    ],
+    closing: ownerClosing
+  };
+  var mail = jade.renderFile(baseMail, params);
+  mandrill(mandrillEndpointSend, {
+    message: {
+      to: [{email: owner.email}],
+      from_email: 'info@prizmapp.com',
+      from_name: 'Prizm',
+      subject: subject,
+      html: mail}
+    }, function (err, response){
+      if (err) console.log(err); 
+    }); 
+    var messageString = util.format(pushp, user.first_name + ' ', user.last_name);
+    iPush.sendNotification({
+      device: owner.device_token,
+      alert: messageString,
+      payload: {_id: owner._id},
+      badge: 1 
+    }, function(err, result){
+      if (err) console.log(err);
+      else console.log('Sent push'); 
+    });
+
+};
+
+var checkAndUpdateOrg = function(user, next){
+ if (!user) {
+    next(null, null);
+    return;
+ }
+ var empty_set = {
+  organization: null,
+  theme: null
+ };
+ if (user && user.program_code) {
+  Organization.findOne({code: user.program_code})
+  .populate({path: 'owner'})
+  .exec(function(err, organization){
+    if (!err && organization) {
+      var in_org = false;
+      var date = new Date().toString();
+      var user_update = {
+        theme: organization.theme,
+        $push: {org_status: {status: 'pending', 
+          organization: organization._id}}
+      };
+      var owner_update = {};
+      User.findOne({_id: user._id}, function(err, result){
+        if (result) {
+          console.log('found user');
+          var exists = false;
+          console.log(result.following);
+          if (organization.owner){
+            result.follow(organization.owner._id, function(err, res){
+              if (err) console.log(err);
+            });
+          }
+          result.joinOrganization(organization, function(err, saved, sendPush){
+            next(err, saved);
+            if (saved) {
+              if (sendPush){
+                notifyOwnerJoined(organization.owner, saved, false);
+              }
+              Invite.findOne({address: saved.email, organization: organization._id})
+              .exec(function(err, invite){
+                if (invite) {
+                  invite.status = 'accepted';
+                  invite.user = result._id;
+                  invite.save(function(err, inviteResult){
+                    if (err) console.log(err);
+                  });
+                }
+              });
+            }
+          });
+          /**
+          User.findOneAndUpdate({_id: user._id}, user_update, function(err, saved){
+            console.log('updated user');
+            var savedUser = saved;
+            if (organization.owner) {
+             User.findOneAndUpdate({_id: organization.owner}, owner_update, 
+                function(err, result){
+                  console.log('updated owner');
+                  if (!err) {
+                    console.log(organization.owner + ':' + user._id);
+                    _utils.registerActivityEvent(organization.owner,
+                                                         user._id,
+                                                         'follow'
+                                                         );
+                                        }
+                });
+            }
+            next(err, saved);
+          }); */
+        } else {
+          console.log('Could not find user');
+          next(err, user);
+        } 
+      });
+    } else {
+      console.log('Org did not exist');
+      Invite.findOne({code: user.program_code, status: 'sent'})
+      .populate({path: 'organization'})
+      .exec(function(err, invite) {
+
+        if (invite) {
+          invite.status = 'accepted';
+          invite.save(function(err, result){
+            if (err) console.log(err);
+          });
+          User.findOne({_id: user._id}, function(err, u){
+            Organization.findOne({_id: invite.organization._id})
+            .populate({path: 'owner'})
+            .exec(function(err, org){
+              u.joinOrganization(invite, function(err, saved, groupJoined){
+                if (groupJoined){
+                  notifyOwnerJoined(org.owner, u, true);
+                } 
+                next(err, saved);
+              });
+            });
+          });
+
+        } else {
+
+          User.findOneAndUpdate({_id: user._id}, empty_set, next);
+        }
+
+      });
+    }
+  });
+ } else {
+   console.log('No org present');
+  User.findOneAndUpdate({_id: user._id}, empty_set, next);
+ } 
+};
+
+
+
 // User Methods
 exports.passwordReset = function(req, res){
   var id = req.params.id;
@@ -1322,7 +1472,14 @@ exports.register = function(req, res){
         if (result) {
           req.logIn(result, function(err){
             if (err) console.log(err);
-            res.status(200).json(result);
+            _mail.sendWelcomeMail(result);
+            checkAndUpdateOrg(result, function(err, saved){
+              if (saved.org_status.length > 0) {
+                res.status(200).json({next: '/register/welcome'});
+              } else {
+                res.status(200).json({next: '/register/interests'});
+              }
+            });
           });
         }
       });
@@ -1337,6 +1494,71 @@ exports.displayInterests = function(req, res) {
   .exec(function(err, interests){
     res.render('registration/interests', {interests: interests});
   });
+}
+
+exports.saveInterests = function(req, res) {
+  console.log('saving interests');
+  var u = req.user;
+  var interests = req.body.interests;
+  var next = req.get('next');
+  Interest.find({_id: {$in: interests}}, function(err, i){
+    if (i) {
+      var ia = _.pluck(i, '_id');
+      User.findOneAndUpdate({_id: u._id}, 
+        {$set: {interests: ia}}, 
+        function(err, r){
+          if (r) {
+            if (next) {
+              res.status(200).send({next: next});
+            } else {
+              res.status(200).send(r);
+            }
+          } else {
+            if (err) console.log(err);
+            res.status(400).send({error: 'Bad request'});
+          }
+      });
+    } else {
+      res.status(400).send({error: 'Bad request'});
+    }
+  });
+}
+
+exports.displaySuggestedFollow = function(req, res){
+  var user = req.user;
+  User.fetchSuggestions(user, function(err, users){
+    res.render('registration/follow', {users: users});
+  }); 
+};
+
+exports.displayAvatarUpload = function(req, res){
+  res.render('registration/avatar');
+}
+
+exports.updateAvatar = function(req, res){
+  console.log('in request');
+  _image.uploadAvatar(req, function(err, path, fields){
+    console.log(path);
+    if (path) {
+      User.findOneAndUpdate({_id: req.user._id}, {$set: {profile_photo_url: path}}, function(err, r){
+        if (r) {
+          console.log('done');
+          res.status(200).send(r);
+        } else {
+          if (err) console.log(err);
+          res.status(500).send({error: 'server error'});
+        }
+      });
+    } else {
+      if (err) console.log(err);
+      res.status(500).send({error: 'server error'});
+    }
+  });
+}
+
+exports.displayWelcome = function(req, res){
+  var user = req.user;
+  res.render('registration/welcome', {user: user});
 }
 
 exports.registerNewUser = function(req, res) {

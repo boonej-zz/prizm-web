@@ -1,0 +1,22 @@
+extends ../layouts/registration
+
+block head
+  script(type='text/javascript' src='/javascripts/profile/profile.js')
+  script(type='text/javascript' src='/javascripts/registration.js')
+block content
+  .container.topnav-offset
+    .registration
+      h2 Customize
+      form#avatar
+        p.tagline
+          | Add a photo to your Prizm
+        #imageContainer.cursor(
+          ondragover='register.drag(event)'
+          ondrop='register.drop(event)')
+          div#photoInstructions
+            | or drag and drop files onto this window to upload
+            br
+            | (please limit file size to 2MB)
+        input#imageFile(type='file' name='image' accept='image/*' onchange='register.imageChanged(event)')
+        .buttons
+          button.save Save

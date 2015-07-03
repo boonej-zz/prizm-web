@@ -1,0 +1,365 @@
+body, div, input, p, h1, h2, h3, h4, span, ul, li {
+  box-sizing: border-box;
+}
+
+.navbar .already {
+  display: inline-block;
+  float: right;
+  height: 100%;
+  line-height: 75px;
+  vertical-align: middle;
+}
+
+.already .teaser {
+  font-size: 18px;
+  color: #4b4b4b;
+  font-weight: 400;
+  margin-right: 27px;
+}
+
+button.login, button.next {
+  -webkit-appearance: none;
+  outline: none;
+  color: #fafafc;
+  font-weight: 400;
+  padding: 11.5px 36px 9px 37px;
+  background-color: #465297;
+  border: none;
+  font-size: 18px;
+}
+
+.container.topnav-offset {
+  margin: 0 auto;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  z-index: 500;
+}
+
+form.body:not(.active) {
+  display: none;
+}
+
+/** NEW ACCOUNTS **/
+.registration {
+  width: 56.3%;
+  margin: 82.5px auto;
+  background-color: white;
+}
+
+.registration ul.tabs {
+  padding-bottom: 0;
+  box-shadow: none;
+  border: none;
+}
+
+.registration ul.tabs li {
+  background-color: inherit;
+  color: black;
+  border-position: inside;
+  width: 50%;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border: none;
+  box-shadow: 0px 0px 1px 0px rgba(0,0,0,1);
+}
+
+.registration ul.tabs li.active {
+  background-color: #3e6a9e;
+  color: white;
+}
+
+.registration h2 {
+  height: 92px;
+  line-height: 92px;
+  text-align: center;
+  vertical-align: middle;
+  color: #545358;
+  font-weight: 700;
+  font-size: 30px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.multi-form {
+  width: 62.5%;
+  margin: 0 auto;
+}
+
+.multi-form p {
+  text-align: center;
+  font-size: 18px;
+  width: 100%;
+  color: #545358;
+  font-weight: 400;
+}
+
+.multi-form ul {
+  list-style: none;
+  margin: 54.5px 0 0 0;
+  padding: 0;
+  width: 100%;
+}
+
+.multi-form ul li {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 18px;
+}
+
+.multi-form ul li label {
+  display: block;
+  font-size: 14px;
+  color: #545358;
+  font-weight: 600;
+}
+
+.multi-form ul li input:not([type='radio']), .multi-form ul li select {
+  width: 100%;
+  height: 29px;
+  border: 1px solid #000;
+  margin-top: 5px;
+  outline: none;
+  font-size: 14px;
+  padding-left: 14px;
+  box-sizing: border-box;
+}
+
+.multi-form ul li input:not([type='radio']):focus {
+  border: 1px solid #2f38a2;
+}
+
+.multi-form ul li label.inline {
+  display: inline-block;
+  width: auto;
+  float: left;
+}
+
+span.radio {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  margin-left: 10%;
+}
+
+span.radio label {
+  width: auto;
+  display: block;
+  font-weight: 400!important;
+}
+
+span.radio input[type='radio'] {
+  height: 19px;
+  width: 19px;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  border: 1px solid black;
+}
+
+span.radio input[type='radio']:checked {
+  background-color: #3e6a9e;
+  border: none;
+}
+
+select {
+  -webkit-appearance: none;
+  margin: 0;
+  border-radius: 0;
+  background-color: inherit;
+  background-image: url('/images/icons/disclosure_grey.png');
+  background-size: 21px 4px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.buttons {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  padding-bottom: 50px;
+}
+
+.buttons button.save {
+  font-size: 18px;
+  height: 49px;
+  background-color: #334b8f;
+  color: white;
+  font-weight: 400;
+  border: none;
+  padding: 0 74.5px;
+}
+
+.registration .tagline {
+  font-size: 16px;
+  color: rgb(67, 67, 67);
+  width: 64%;
+  margin: 22px auto;
+  text-align: center;
+}
+
+/** INTERESTS **/
+
+ul#interests {
+  list-style: none;
+  width: 64%;
+  margin: 12px auto;
+  padding: 0;
+  font-size: 16px;
+  color: rgb(67,67,67);
+  height: 350px;
+  overflow: auto;
+}
+
+ul#interests li {
+  margin: 0 0 6px 0;
+  display: inline-block;
+  background-color: #c0c0c0; 
+  border-radius: 24px;
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+ul#interests li.subinterest {
+  display: none;
+}
+
+ul#interests li.selected {
+  background-color: rgba(94,107,125, 0.5) !important;
+  color: white; 
+}
+
+button.next:disabled {
+  background-color: #d6d6d7;
+}
+
+ul#follow {
+  width: 100%;
+  height: 465px;
+  overflow: auto;
+  text-align: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 0px;
+  padding-top: 15px;
+}
+
+ul#follow li {
+  width: 393px;
+  height: 398px;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fbfbfb;
+  margin: 0 auto 40px auto;
+
+}
+
+div.follow {
+  text-align: right;
+  width: 100%;
+  height: 24px;
+}
+
+button.follow {
+  display: inline-block;
+  margin: 19px 16px 0 0;
+  top: 0px;
+}
+
+.user-circle {
+  display: inline-block;
+  height: 105px;
+  width: 105px;
+  border: 3px solid #c5c8cc;
+  border-radius: 50%;
+  padding-top: 31px;
+  margin: 42px 8px 14px 8px;
+}
+
+#follow .profile-avatar {
+  position: relative;
+  height: 95px;
+  width: 95px;
+  border: 1px solid #c5c8cc;
+  border-radius: 50%;
+  margin-top: 39px;
+  display: inline-block;
+  background-size: contain;
+  background-position: center;
+}
+
+#follow p.name {
+  margin-top: 0px;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+}
+
+#follow .location {
+  margin-top: 12px;
+  height: 16px;
+  font-size: 14px;
+  color: #a3a4a6;
+  font-weight: 400;
+  background-image: url('/images/profile/members_location.png');
+  background-repeat: no-repeat;
+  padding-left: 19px;
+  width: initial;
+  display: inline-block;
+  clear: right;
+
+}
+
+#follow button {
+  -webkit-appearance: none;
+  background-image: none;
+  outline: none;
+  width: 102px;
+  height: 29px;
+  border: 1px solid #828282;
+  font-weight: 400;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #fefefe;
+}
+
+#imageContainer {
+  background-image: url('/images/icons/upload_image.png');
+  background-size: initial;
+  width: 86%;
+  height: 404px;
+  margin: 14px auto 0px auto;
+  border: 1px solid #e4e5ea;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+#photoInstructions {
+  color: #343642;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  width: 188px;
+  height: 34px;
+  margin: 284px auto 0 auto;
+  text-align: center;
+
+}
+
+input#imageFile {
+  display: none;
+}
+
+#welcomeImage {
+  width: 100%;
+  height: 265px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}

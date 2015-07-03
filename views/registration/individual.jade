@@ -1,0 +1,48 @@
+- var ethnicities = ['African-American or Black', 'American Indian or Alaska Native', 'Asian', 'Caucasian or White', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander']
+- var religions = ['Anglican (Episcopal)', 'Bahá\'í', 'Buddhist', 'Caodalist', 'Cheondoist', 'Christian', 'Christian Scientist', 'Church of World Messianity', 'Congregationalist (UCC)', 'Disciples of Christ', 'Friend (Quaker)', 'Hindu', 'Jain', 'Jehovah\'s Witness', 'Jewish', 'Latter-day Saint (Morman)', 'Lutheran', 'Methodist', 'Moravian', 'Muslim', 'None', 'Orthodox', 'Other - Non-Christian', 'Pentacostal', 'Presbyterian', 'Rastafari', 'Reformed', 'Roman Catholic', 'Seicho-no-le-ist', 'Seventh Day Adventist', 'Sikh', 'Taoist', 'Unitarian Universalist (UU)', 'Wiccan (Pagan)', 'Yazidi']
+ul
+  li
+    label(for='first') First Name
+    input#first(type='text' name='first_name' required='required')
+  li
+    label(for='last') Last Name
+    input#last(type='text' name='last_name' required='required')
+  li
+    label(for='email') Email
+    input#email(type='email' name='email' required='required')
+  li
+    label(for='password') Password
+    input#password(type='password' name='password' required='required')
+  li
+    label(for='confirm') Confirm Password
+    input#confirm(type='password' name='confirm_password' required='required')
+  li
+    label.inline Gender
+    span.radio
+      label.radio(for='female') Female
+      input#female(type='radio' value='female' name='gender')
+    span.radio
+      label.radio(for='male') Male
+      input#male(type='radio' value='male' name='gender')
+  li
+    label(for='phone') Phone Number
+    input#phone(type='text' name='phone_number' required='required')
+  li
+    label(for='birthdate') Birth Date
+    input#birthdate(type='date' name='birthday' required='required')
+  li
+    label(for='code') Program Code
+    input#program_code(type='string' name='program_code')
+  li
+    label(for='ethnicity') Ethnicity
+    select#ethnicity(name='ethnicity')
+      option(value='') Optional
+      each e in ethnicities
+        option(value='#{e}') #{e}
+  li
+    label(for='religion') Religion
+    select#religion(name='religion')
+      option(value='') Optional
+      each r in religions
+        option(value='#{r}') #{r}
+

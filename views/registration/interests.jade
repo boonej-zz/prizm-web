@@ -1,0 +1,24 @@
+extends ../layouts/registration
+
+block head
+  script(type='text/javascript' src='/javascripts/registration.js')
+  script(type='text/javascript' src='/javascripts/interests.js')
+
+block content
+  .container.topnav-offset
+    .registration
+      h2 What are you interested in?
+      p.tagline
+        | Please choose 3 or more categories and we'll share some good
+        | stuff with you.
+      ul#interests(data-next='/register/follow')
+        for i in interests
+          li.parent(data-id='#{i._id}') #{i.text}
+          if i.subinterests 
+            for s in i.subinterests
+              li.subinterest.hidden(
+                data-id='#{s._id}' 
+                data-parent='#{i._id}')
+                | #{s.text}
+      .buttons
+        button.next.interests(disabled='disabled') Next

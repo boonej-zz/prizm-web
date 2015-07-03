@@ -1,0 +1,13 @@
+extends ../layouts/registration
+block head
+  script(type='text/javascript' src='/javascripts/profile/profile.js')
+  script(type='text/javascript' src='/javascripts/registration.js')
+block content
+  .container.topnav-offset
+    .registration
+      - var welcomeImage = user.org_status[0].organization.welcome_image_url
+      h2 Welcome to Prizm!
+      #welcomeImage(style='background-image: url("#{welcomeImage}")')
+      .buttons
+        button.next(onclick='register.finishWelcome(event)') Next
+

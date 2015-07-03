@@ -735,5 +735,88 @@ userSchema.statics.fetchSuggestions = function(user, next){
     });
 };
 
+userSchema.methods.follow = function(user, next){
+  var User = mongoose.model('User');
+  var Activity = mongoose.model('Activity');
+  var isFollowing = false;
+  var userID = user && typeof(user) == 'object'?user.toString():user;
+  _.each(this.following, function(item, idx, list){
+    if (item._id == userID) {
+      isFollowing = true;
+    }
+  });
+  if (!isFollowing){
+    var followingUpdate = {
+      $push: {following: {_id: userID, date: new Date().toString()}},
+      $inc: {following_count: 1}
+    };
+    var followersUpdate = {
+      $push: {followers: {_id: this._id.toString(), date: new Date().toString()}},
+      $inc: {followers_count: 1}
+    }
+    User.findOneAndUpdate({_id: this._id}, followingUpdate, function(err, result){
+      User.findOneAndUpdate({_id: user}, followersUpdate, function(err, res){
+        if (err) console.log(err);
+        if (!err) {
+          console.log(res._id + ':' + result._id);
+          var a = new Activity({
+            from: res._id,
+            to :result._id,
+            action :'follow'
+          }
+          );
+          a.save(function(err){if (err) console.log(err)});
+        }
+      });
+      next(err, result);
+    });
+  } else {
+    next(null, null);
+  }
+}
+
+userSchema.methods.joinOrganization = function(organization, next, approval){
+  var Activity = mongoose.model('Activity');
+  var invite = null;
+  if (organization.organization){
+    invite = organization;
+    organization = invite.organization;
+    console.log('have invite');
+  }
+  var userStatus = invite?'active':'pending';
+  var groups = [];
+  if (invite && invite.group){
+    groups.push(invite.group);
+  }
+  var user_update = {
+    $push: {org_status: {status: userStatus, 
+      organization: organization._id, date: new Date().toString(),
+      groups: groups
+    }}
+  };
+  var present = false;
+  _.each(this.org_status, function(item, idx, list){
+    if (String(item.organization) == String(organization._id)) {
+      present = true;
+    }
+  });
+
+  if (!present) {
+    this.model('User').findOneAndUpdate({_id: this._id}, user_update, function(err, result){
+      if (!err) {
+         var a = new Activity({
+           from: result._id,
+          to: organization.owner,
+          action: 'group_joined'
+         });
+         a.save();
+      }
+      next(err, result, true);
+    });
+  } else {
+    next(null, this, false);
+  }
+};
+
 mongoose.model('OrgStatus', orgStatusSchema);
 mongoose.model('User', userSchema);
