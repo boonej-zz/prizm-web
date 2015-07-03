@@ -63,15 +63,15 @@ form.body:not(.active) {
   width: 50%;
   margin-bottom: 0;
   padding-bottom: 0;
-  border: none;
+  border: 1px solid #c5c8cc;
   height: 49px;
   line-height: 49px;
-  box-shadow: 0px 0px 1px 0px rgba(0,0,0,1);
 }
 
 .registration ul.tabs li.active {
   background-color: #3e6a9e;
   color: white;
+  border: none;
 }
 
 .registration h2 {
