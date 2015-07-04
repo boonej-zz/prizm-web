@@ -1,0 +1,20 @@
+script(type='text/javascript' src='/javascripts/interests.js')
+h3 Interests
+.wrapper
+  ul#interests
+    for i in interests
+      - var iil = selectedInterests.indexOf(i._id) == -1?'':'selected'
+      li.parent(data-id='#{i._id}' class='#{iil}') #{i.text}
+      if i.subinterests
+        for s in i.subinterests
+          - var vis = iil == 'selected'?'':'hidden'
+          - var sel = selectedInterests.indexOf(s._id) == -1?'':'selected'
+          - var cs = vis + ' ' + sel
+          li.subinterest(
+            data-id='#{s._id}'
+            data-parent='#{i._id}'
+            class='#{cs}'
+          ) #{s.text}
+  .buttons
+    button.save(onclick='settings.submitInterests()') Save  
+   

@@ -20,16 +20,7 @@ var settings = {
     $(this).addClass('selected');
   },
   nav: function(path){
-    var url = false;
-    if (path == 'likes'){
-      url = '/profile/settings/likes';
-    }
-    if (path == 'follow') {
-      url = '/profile/settings/follow';
-    }
-    if (path == 'support') {
-      url = '/profile/settings/support';
-    }
+    var url = '/profile/settings/' + path;
     if (url) {
       $.ajax({
         method: 'GET',
@@ -37,6 +28,8 @@ var settings = {
       })
       .done(function(html){
         $('.right-box').html(html);
+        interests.layoutInterests();
+        $('.buttons button.save').click(interests.submit);
         prepHeader();
       })
     }

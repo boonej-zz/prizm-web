@@ -38,6 +38,9 @@ var settings = {
       case 'featured':
         title = 'Featured';
         break;
+      case 'interests':
+        title = 'Interests';
+        break;
       default:
         break;
     }

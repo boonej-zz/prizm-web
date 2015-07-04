@@ -2527,6 +2527,39 @@ exports.fetchFollowFeed = function(req, res){
   });
 };
 
+exports.fetchInterestsFeed = function(req, res){
+  var user = req.user;
+  console.log('yo');
+  var selected = '';
+  if (user.interests && user.interests.length > 0) {
+    console.log('got it');
+    for (var i = 0; i < user.interests.length; ++i) {
+      if (user.interests[i]._id) {
+        selected = selected + user.interests[i]._id + '|';
+      } else {
+        selected = selected + user.interests[i] + '|';
+      }
+    }
+  }
+  var options = {
+    selectedInterests: selected
+  };
+  console.log(options);
+  Interest.find({is_subinterest: false})
+  .populate({path: 'subinterests', model: 'Interest'})
+  .exec(function(err, interests){
+    console.log('in request');
+    console.log(interests);
+    if (interests) {
+      options.interests = interests;
+      res.render('profile/interests', options);
+    } else {
+      if (err) console.log(err);
+      res.status(500).send({error: 'Server error'});
+    }
+  });
+}
+
 exports.showPasswordModal = function(req, res){
   var user = req.user;
   var reset = req.get('reset');
