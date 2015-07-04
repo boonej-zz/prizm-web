@@ -1,5 +1,6 @@
 - var ethnicities = ['African-American or Black', 'American Indian or Alaska Native', 'Asian', 'Caucasian or White', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander']
 - var religions = ['Anglican (Episcopal)', 'Bahá\'í', 'Buddhist', 'Caodalist', 'Cheondoist', 'Christian', 'Christian Scientist', 'Church of World Messianity', 'Congregationalist (UCC)', 'Disciples of Christ', 'Friend (Quaker)', 'Hindu', 'Jain', 'Jehovah\'s Witness', 'Jewish', 'Latter-day Saint (Morman)', 'Lutheran', 'Methodist', 'Moravian', 'Muslim', 'None', 'Orthodox', 'Other - Non-Christian', 'Pentacostal', 'Presbyterian', 'Rastafari', 'Reformed', 'Roman Catholic', 'Seicho-no-le-ist', 'Seventh Day Adventist', 'Sikh', 'Taoist', 'Unitarian Universalist (UU)', 'Wiccan (Pagan)', 'Yazidi']
+- var types = ['community', 'corporate', 'education', 'foundation', 'military']
 form
   input#userID(type='hidden' value='#{currentUser._id}')
   ul
@@ -7,7 +8,7 @@ form
       - var founded = currentUser.date_founded?new Date(currentUser.date_founded):false
       - var foundedString = founded?founded.getFullYear() + '-' + (founded.getMonth() + 1) + '-' + founded.getDate():false
       li
-        label(for='name') Name
+        label(for='name') Organization
         input#name(type='text' 
         name='name' 
         value='#{currentUser.name || ""}' 
@@ -44,6 +45,27 @@ form
       li
         label(for='phone') Phone Number
         input#phone(type='tel' name='phone_number' value='#{currentUser.phone_number || ""}')
+      li
+        label(for='contact_first') Contact First Name
+        input#contact_first(
+          type='text' 
+          name='contact_first' 
+          required='required'
+          value='#{currentUser.contact_first}')
+      li
+        label(for='contact_last') Contact Last Name
+        input#contact_last(
+          type='text'
+          name='contact_last'
+          required='required'
+          value='#{currentUser.contact_last}')
+      li
+        label(for='contact_email') Contact Email
+        input#contact_email(
+          type='email' 
+          name='contact_email'
+          required='required'
+          value='#{currentUser.contact_email}')
       li
         #resetPassword(onclick='profile.showPasswordReset(event)') Change Password
     else

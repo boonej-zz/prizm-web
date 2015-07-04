@@ -295,7 +295,11 @@ userSchema.statics.allowedFields = function(){
     'program_code',
     'ethnicity',
     'religion',
-    'birthday'
+    'birthday',
+    'type',
+    'contact_first',
+    'contact_last',
+    'contact_email'
   ];
 }
 
