@@ -1532,7 +1532,7 @@ exports.displayInterests = function(req, res) {
   Interest.find({is_subinterest: false})
   .populate({path: 'subinterests', model: 'Interest'})
   .exec(function(err, interests){
-    res.render('registration/interests', {interests: interests});
+    res.render('registration/interests', {interests: interests, bodyId: 'registration'});
   });
 }
 
@@ -1567,12 +1567,12 @@ exports.saveInterests = function(req, res) {
 exports.displaySuggestedFollow = function(req, res){
   var user = req.user;
   User.fetchSuggestions(user, function(err, users){
-    res.render('registration/follow', {users: users});
+    res.render('registration/follow', {users: users, bodyId: 'registration'});
   }); 
 };
 
 exports.displayAvatarUpload = function(req, res){
-  res.render('registration/avatar');
+  res.render('registration/avatar', {bodyId: 'registration'});
 }
 
 exports.updateAvatar = function(req, res){
