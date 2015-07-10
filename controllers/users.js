@@ -789,11 +789,28 @@ exports.handleFacebookLogin = function(req, res, next) {
   }
   else {
     // Handle Facebook callback
-    passport.authenticate('facebook', function(err, user, info) {
+    passport.authenticate('facebook', function(err, user, info, token) {
+      console.log('Inside Token: ' + token);
       if (err) { return next(err) }
       if (!user) {
-        req.session.messages =  [info.message];
-        return res.redirect('/login');
+        info = info._json;
+        var u = {};
+        if (info.birthday) {
+          var m = info.birthday.split('/');
+          if (m.length == 3) {
+            u.birthday = m[2] + '-' + m[0] + '-' + m[1];
+          }
+        }
+        u.first_name = info.first_name;
+        u.last_name = info.last_name;
+        u.email = info.email;
+        u.gender = info.gender;
+        u.provider = 'facebook';
+        u.provider_id = info.id;
+        u.provider_token = token;
+        u.profile_photo_url = 'https://graph.facebook.com/v2.4/' + info.id + '/picture?width=600';
+        res.render('registration/new', {social: u});
+        //return res.redirect('/login');
       }
       req.logIn(user, function(err) {
         if (err) { 
@@ -830,8 +847,27 @@ exports.handleTwitterLogin = function(req, res, next) {
       if (err) { 
         return next(err) }
       if (!user) {
-        req.session.messages =  [info.message];
-        return res.redirect('/login');
+        var u = {};
+        u.provider_token = info.token;
+        u.provider = 'twitter';
+       
+        var profile = info.profile._json;
+        u.provider_id = profile.id;
+        var name = profile.name.split(' ');
+        u.first_name = name[0] || '';
+        u.last_name = name[name.length - 1] || '';
+        if (profile.birthday) {
+          var m = info.birthday.split('/');
+          if (m.length == 3) {
+            u.birthday = m[2] + '-' + m[0] + '-' + m[1];
+          }
+        }
+        u.email = profile.email;
+        u.gender = info.gender;
+        u.profile_photo_url = profile.profile_image_url_https;
+        console.log(profile);
+        console.log(u);
+        return res.render('registration/new', {social: u});
       }
       req.logIn(user, function(err) {
         if (err) {
@@ -1458,10 +1494,18 @@ var validate = function(req, res, next) {
   if (required) {
     var valid = true;
     _.each(required, function(r){
-      if (!req.body[r]) required = false; 
+      if (r == 'password' || r == 'confirm_password') {
+        if (!req.body.provider && !req.body.password) {
+          valid = false;
+        }
+      } else {
+        if (!req.body[r]) valid = false;
+      }
     }); 
     console.log(req.body);
-    if (req.body.confirm_password != req.body.password) valid = false;
+    if (!req.body.provider) {
+      if (req.body.confirm_password != req.body.password) valid = false;
+    }
     if (valid) { 
     User.findOne({email: req.body.email}, function(err, user){
       if (err) console.log(err);
@@ -1506,8 +1550,8 @@ exports.register = function(req, res){
       }
     }
     var u = new User(body);
-    if (u.hashPassword()){
-      u.save(function(err, result){
+    if (u.provider){
+      u.save(function(err, result) {
         if (err) console.log(err);
         if (result) {
           req.logIn(result, function(err){
@@ -1522,8 +1566,28 @@ exports.register = function(req, res){
             });
           });
         }
+
       });
-    }
+    } else {
+      if (u.hashPassword()){
+        u.save(function(err, result){
+          if (err) console.log(err);
+          if (result) {
+            req.logIn(result, function(err){
+              if (err) console.log(err);
+              _mail.sendWelcomeMail(result);
+              checkAndUpdateOrg(result, function(err, saved){
+                if (saved.org_status.length > 0) {
+                  res.status(200).json({next: '/register/welcome'});
+                } else {
+                  res.status(200).json({next: '/register/interests'});
+                }
+              });
+            });
+          }
+        });
+      }
+    } 
   });
 }
 
@@ -1572,7 +1636,7 @@ exports.displaySuggestedFollow = function(req, res){
 };
 
 exports.displayAvatarUpload = function(req, res){
-  res.render('registration/avatar', {bodyId: 'registration'});
+  res.render('registration/avatar', {bodyId: 'registration', user: req.user});
 }
 
 exports.updateAvatar = function(req, res){

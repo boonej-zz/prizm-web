@@ -1,35 +1,40 @@
 - var ethnicities = ['African-American or Black', 'American Indian or Alaska Native', 'Asian', 'Caucasian or White', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander']
 - var religions = ['Anglican (Episcopal)', 'Bahá\'í', 'Buddhist', 'Caodalist', 'Cheondoist', 'Christian', 'Christian Scientist', 'Church of World Messianity', 'Congregationalist (UCC)', 'Disciples of Christ', 'Friend (Quaker)', 'Hindu', 'Jain', 'Jehovah\'s Witness', 'Jewish', 'Latter-day Saint (Morman)', 'Lutheran', 'Methodist', 'Moravian', 'Muslim', 'None', 'Orthodox', 'Other - Non-Christian', 'Pentacostal', 'Presbyterian', 'Rastafari', 'Reformed', 'Roman Catholic', 'Seicho-no-le-ist', 'Seventh Day Adventist', 'Sikh', 'Taoist', 'Unitarian Universalist (UU)', 'Wiccan (Pagan)', 'Yazidi']
+input(type='hidden' name='provider' value='#{u.provider}')
+input(type='hidden' name='provider_id' value='#{u.provider_id}')
+input(type='hidden' name='provider_token' value='#{u.provider_token}')
+input(type='hidden' name='profile_photo_url' value='#{u.profile_photo_url}')
 ul
   li
     label(for='first') First Name
-    input#first(type='text' name='first_name' required='required')
+    input#first(type='text' name='first_name' required='required' value='#{u.first_name||""}')
   li
     label(for='last') Last Name
-    input#last(type='text' name='last_name' required='required')
+    input#last(type='text' name='last_name' required='required' value='#{u.last_name||""}')
   li
     label(for='email') Email
-    input#email(type='email' name='email' required='required')
-  li
-    label(for='password') Password
-    input#password(type='password' name='password' required='required')
-  li
-    label(for='confirm') Confirm Password
-    input#confirm(type='password' name='confirm_password' required='required')
+    input#email(type='email' name='email' required='required' value='#{u.email||""}')
+  if (! u.provider) 
+    li
+      label(for='password') Password
+      input#password(type='password' name='password' required='required')
+    li
+      label(for='confirm') Confirm Password
+      input#confirm(type='password' name='confirm_password' required='required')
   li
     label.inline Gender
     span.radio
       label.radio(for='female') Female
-      input#female(type='radio' value='female' name='gender')
+      input#female(type='radio' value='female' name='gender' checked=u.gender == 'female')
     span.radio
       label.radio(for='male') Male
-      input#male(type='radio' value='male' name='gender')
+      input#male(type='radio' value='male' name='gender' checked=u.gender == 'male')
   li
     label(for='phone') Phone Number
     input#phone(type='text' name='phone_number' required='required')
   li
     label(for='birthdate') Birth Date
-    input#birthdate(type='date' name='birthday' required='required')
+    input#birthdate(type='date' name='birthday' required='required' value='#{u.birthday||""}')
   li
     label(for='code') Program Code
     input#program_code(type='string' name='program_code')

@@ -29,14 +29,15 @@ passport.use(new LocalStrategy({
 passport.use(new FacebookStrategy({
     clientID: '1408826952716972',
     clientSecret: '772f449b10c95a10a2a9a866339e5f90',
-    callbackURL: "https://www.prizmapp.com/login/facebook"
+    callbackURL: "https://prizmapp.dev:4433/login/facebook"
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log('Profile ID: ' + profile.id);
+    console.log(profile);
+    var t = accessToken;
     User.findOne({provider: 'facebook', provider_id: profile.id}, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done(null, false, profile, t );
       }
       done(null, user);
     });
@@ -46,14 +47,18 @@ passport.use(new FacebookStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: 'MzIoqUFCk7BYUNpCNxtGuhuLu',
     consumerSecret: 'yGhuwPvSljoVJoD4il2qtHZG0q4hWlXC87Mcdly0pxaFrMHEaf',
-    callbackURL: "https://www.prizmapp.com/login/twitter"
+    callbackURL: "https://prizmapp.dev:4433/login/twitter"
   },
   function(token, tokenSecret, profile, done) {
     console.log('Profile ID: ' + profile.id);
+    var data = {};
+    data.twitter_token = token;
+    data.profile = profile;
+    console.log(data);
     User.findOne({provider: 'twitter', provider_id: profile.id}, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done(null, false, data);
       }
       done(null, user);
     });
