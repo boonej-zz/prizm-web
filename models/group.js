@@ -31,6 +31,7 @@ groupSchema.pre('save', function(next){
   if (!this.create_date) {
     this.create_date = Date.now();
   }
+  this.name = this.name.toLowerCase();
   next();
 });
 

@@ -84,7 +84,6 @@ $(document).ready(function(){
 var poll = {
   posts: function(){
     if (messagePollCount > 0) {
-      console.log('polling');
       $.ajax({
         type: 'GET',
         contentType: 'application/json',
@@ -96,15 +95,12 @@ var poll = {
           current_time: new Date().toISOString()
         },
         success: function(){
-          console.log('success');
         },
         error: function(){
-          console.log('error');
         }
       })
       .done(function(data){
         lastPostDate = new Date().toISOString();
-        console.log(lastPostDate);
         if (data.count > 0) {
           newPostCount += data.count;
           var string = String(newPostCount) + ' new post';
@@ -123,7 +119,6 @@ var poll = {
            
           }, 4000);
         }
-        console.log('moving to activities');
         setTimeout('poll.activities()', 7500);
       });
     } else {
@@ -158,7 +153,6 @@ var poll = {
           setTimeout('poll.messages()', 7500);
         }, 4000);
       lastActivityDate = new Date().toISOString();
-      console.log(lastActivityDate);
     });
   },
   messages: function(){
@@ -504,16 +498,13 @@ var insight = {
     var valid = true;
     $('#newInsight input:not([type="file"])').each(function(){
       var $this = $(this);
-      console.log($this.attr('id') + ': ' + $this.val());
       if (! $this.val()){
         valid = false;
       }
     });
     if (!droppedFiles && !$('#newInsight input[type="file"]').val()) {
-      console.log('no file');
       valid = false;
     }
-    console.log(valid);
     $('button.next').attr('disabled', !valid);
   }
 };
@@ -540,13 +531,23 @@ var group = {
           $('button.save').attr('disabled', 'disabled');
         }
       });
+      $('#name').css('text-transform', 'lowercase');
+      $('#name').keydown(function(e){
+        var $this = $(this);
+        if (e.keyCode == 32) {
+          return false;
+        } else {
+          return true;
+        }
+      });
       $('#name').keyup(function(){
+        var $this = $(this);
         if ($(this).val().length > 0 && $('#description').val().length > 0){
           $('button.save').attr('disabled', false);
         } else {
           $('button.save').attr('disabled', 'disabled');
         }
-      });
+        });
     });
   },
   selectRadio: function(e){
