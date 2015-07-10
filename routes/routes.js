@@ -28,7 +28,7 @@ router.get('/users/followFix', function(req, res){
         var followers = [];
         var following = [];
         _.each(u.followers, function(f, i, l){
-          if (f._id && f.date && followString.indexOf(f._id) == -1) {
+          if (f._id && f.date && followString.indexOf(f._id) == -1 && !f._id._id) {
             followString = followString + f._id + '|';
             followers.push(f);
           }
