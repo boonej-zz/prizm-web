@@ -865,8 +865,6 @@ exports.handleTwitterLogin = function(req, res, next) {
         u.email = profile.email;
         u.gender = info.gender;
         u.profile_photo_url = profile.profile_image_url_https;
-        console.log(profile);
-        console.log(u);
         return res.render('registration/new', {social: u});
       }
       req.logIn(user, function(err) {

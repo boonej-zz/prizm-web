@@ -29,7 +29,7 @@ passport.use(new LocalStrategy({
 passport.use(new FacebookStrategy({
     clientID: '1408826952716972',
     clientSecret: '772f449b10c95a10a2a9a866339e5f90',
-    callbackURL: "https://prizmapp.dev:4433/login/facebook"
+    callbackURL: "https://www.prizmapp.com/login/facebook"
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
@@ -47,7 +47,7 @@ passport.use(new FacebookStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: 'MzIoqUFCk7BYUNpCNxtGuhuLu',
     consumerSecret: 'yGhuwPvSljoVJoD4il2qtHZG0q4hWlXC87Mcdly0pxaFrMHEaf',
-    callbackURL: "https://prizmapp.dev:4433/login/twitter"
+    callbackURL: "https://www.prizmapp.com/login/twitter"
   },
   function(token, tokenSecret, profile, done) {
     console.log('Profile ID: ' + profile.id);
