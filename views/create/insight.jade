@@ -3,7 +3,6 @@
     h2 Create Insight
     if(!insight)
       form#newInsight
-        input#creator(type='hidden' name='creator' value='')
         input#title(type='text' placeholder='Title' name='title')
         input#image.hidden(type='file' name='image' accept='image/*' onchange='insight.imageChanged(event)')
         #imageContainer.cursor( 
@@ -18,7 +17,7 @@
         input#hashtags(type='text' placeholder='Hashtags' name='hash_tags')
         .section.buttons
           button.cancel(onclick='modal.cancel()') Cancel
-          button.save.next Next
+          button.save.next(disabled='disabled') Next
     else
       form#sendInsight
         #previewImage(style='background-image: url("#{insight.file_path}")') 

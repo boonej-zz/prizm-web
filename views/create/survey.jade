@@ -16,7 +16,7 @@ mixin questions(n)
 mixin buttons(s)
   .buttons.section
     button.cancel(type='button' onclick='modal.cancel()') Cancel
-    button.save #{s}
+    button.save(disabled='disabled') #{s}
 
 
 .create-overlay(onclick='modal.cancel(event)')

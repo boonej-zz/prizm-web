@@ -380,6 +380,7 @@ var insight = {
       modal.showModal(html); 
       $('#newInsight #imageContainer').click(insight.showFileUpload);
       $('#newInsight').submit(insight.submitNewForm);
+      $('input').keyup(insight.validate);
     });
   },
   showFileUpload: function(){
@@ -442,6 +443,7 @@ var insight = {
             $('#imageContainer').css('background-image', 'url(' + im.target.result +')'); 
             $('#imageContainer').css('background-size', 'cover');
             $('#photoInstructions').hide();
+            insight.validate();
           }
         }(file));
         reader.readAsDataURL(file);
@@ -497,6 +499,22 @@ var insight = {
     var files = e.target.files || e.dataTransfer.files;
     insight.imageChanged(e);
     droppedFiles = files[0];
+  },
+  validate: function(e){
+    var valid = true;
+    $('#newInsight input:not([type="file"])').each(function(){
+      var $this = $(this);
+      console.log($this.attr('id') + ': ' + $this.val());
+      if (! $this.val()){
+        valid = false;
+      }
+    });
+    if (!droppedFiles && !$('#newInsight input[type="file"]').val()) {
+      console.log('no file');
+      valid = false;
+    }
+    console.log(valid);
+    $('button.next').attr('disabled', !valid);
   }
 };
 
@@ -736,6 +754,7 @@ var survey = {
     .done(function(html){
       modal.showModal(html);
       $('#newSurvey').submit(survey.submit);
+      $('#newSurvey input').keyup(survey.validate);
     });
   },
   changeQuestionType: function(e){
@@ -793,6 +812,7 @@ var survey = {
       scaleLi.appendChild(scaleSelect);
       $('#newSurvey ul').append(scaleLi);
     }
+    survey.validate();
   },
   answerChange: function(e){
     var currentCount = $('li.choice').length;
@@ -820,6 +840,7 @@ var survey = {
         $('#newSurvey li.choice:last-child').remove();
       }
     }
+    survey.validate();
   },
   submit: function(e){
     var d = $('#newSurvey').serialize();
@@ -841,6 +862,11 @@ var survey = {
         if (html) {
           modal.showModal(html);
           $('#newSurvey').submit(survey.submit);
+          if (!$('#newSurvey').hasClass('publish')) {
+            $('#newSurvey').keyup(survey.validate);
+          } else {
+            $('#newSurvey button.save').attr('disabled', false);
+          }
         }
       },
       error: function(err){
@@ -848,6 +874,16 @@ var survey = {
       }
     });
     return false;
+  },
+  validate: function(e){
+    var valid = true;
+    $('#newSurvey input').each(function(){
+      var $this = $(this);
+      if (!$this.val()) {
+        valid = false;
+      }
+    });
+    $('#newSurvey button.save').attr('disabled', !valid);
   }
 };
 
