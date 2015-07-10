@@ -223,9 +223,9 @@ userSchema.methods.fetchHomeFeedCriteria = function(next){
         }
         var criteria = {
         $or: [
-          {scope: 'public', status: 'active', creator: {$in: following}},
-          {scope: {$in: ['trust', 'public']}, status: 'active', creator: {$in: trustArray}},
-          {scope: {$in: ['trust', 'public']}, status: 'active', creator: {$in: orgUsers}},
+          {scope: 'public', category: {$ne: 'personal'}, status: 'active', creator: {$in: following}},
+          {scope: {$in: ['trust', 'public']}, category: {$ne: 'personal'}, status: 'active', creator: {$in: trustArray}},
+          {scope: {$in: ['trust', 'public']}, category: {$ne: 'personal'}, status: 'active', creator: {$in: orgUsers}},
           {creator: $user._id, status: 'active'}
         ],
         is_flagged: false

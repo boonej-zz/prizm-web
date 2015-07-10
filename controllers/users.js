@@ -2258,7 +2258,8 @@ exports.displayExploreFeed = function(req, res) {
   .find({
     scope: 'public',
     is_flagged: false,
-    status: 'active'
+    status: 'active',
+    category: {$ne: 'personal'}
   })
   .sort({create_date: -1, _id: -1})
   .limit(21)
