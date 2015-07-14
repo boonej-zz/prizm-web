@@ -72,7 +72,7 @@ router.get('/stats', function(req, res){
   var Organization = mongoose.model('Organization');
   var Stats = require('../lib/workers/stats');
   var User = mongoose.model('User');
-  User.findOne({_id: '53c73c8be1a8e10b5193550b', function(err, user){ 
+  User.findOne({_id: '53c73c8be1a8e10b5193550b'}, function(err, user){ 
     Organization.findOne({name: /Higher Altitude/i}, function(err, org){
       Stats.getWeeklyStats(org, function(stats){
         res.render('mail/stats_mail', {owner: user, organization: org, stats: stats});
