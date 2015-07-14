@@ -21,7 +21,7 @@ html
               - if (diff == 0) type='equal to'
               | You sent #{stats.notificationCount} notifications to 
               | #{stats.notificationTotal} members 
-              | this week, #{type} from last week's #{stats.lastNotificationCount}.
+              | this week, #{type} last week's #{stats.lastNotificationCount}.
             p(style='font-size: 16px')
               - diff = stats.messageCount - stats.lastMessageCount
               - type = diff > 0?'up from':'down from';
