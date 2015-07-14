@@ -1,0 +1,114 @@
+- var diff
+- var type
+html
+  head
+    body(style="background-color: #eef0f4; text-align: center; font-family: 'Helvetica', 'Arial', sans-serif; color: #47494d; font-size: 16px")
+      table(style='width: 670px; margin: 0 auto; border-collapse: collapse')
+        tr(style='background-color:#ffffff; text-align: left')
+          td(style='height: 88px; border-bottom: #dde3f1;')
+            div(style='height: 88px; width: 100%; border-bottom: 1px solid #dde3f1;')
+              img(src='http://www.prizmapp.com/images/logo.png' alt='Prizm'
+                  style='margin-top: 22px; height: 47px; width: 116px; margin-left: 20px;')
+        tr(style='background-color: #ffffff;')
+          td(style='padding: 30px; text-align: left;')
+            p(style='font-size: 16px')
+              | Hi #{organization.contact_first},
+            p(style='font-size: 16px')
+              | Here's your weekly update about #{organization.name} on Prizm.
+            p(style='font-size: 16px') 
+              - diff = stats.notificationCount - stats.lastNotificationCount
+              - type = diff > 0?'up from':'down from';
+              - if (diff == 0) type='equal to'
+              | You sent #{stats.notificationCount} notifications to 
+              | #{stats.notificationTotal} members 
+              | this week, #{type} from last week's #{stats.lastNotificationCount}.
+            p(style='font-size: 16px')
+              - diff = stats.messageCount - stats.lastMessageCount
+              - type = diff > 0?'up from':'down from';
+              - if (diff == 0) type='equal to'
+              | You sent #{stats.messageCount} messages to 
+              | #{stats.messageTotal} members this week, 
+              | #{type} last week's #{stats.lastMessageCount}.
+            p(style='font-size: 16px')
+              - diff = stats.insightCount - stats.lastInsightCount
+              - type = diff > 0?'up from':'down from';
+              - if (diff == 0) type='equal to'
+              | You sent #{stats.insightCount} insights to
+              | #{stats.insightTotal} members this week,
+              | #{type} last week's #{stats.lastInsightCount}.
+              br
+            p(style='font-size: 16px')
+              | #{stats.activePercent}% of your registered users logged
+              | in to Prizm this week - #{stats.activeMembers}/#{stats.totalMembers}
+              | (# logged in/total users).
+            if stats.mostActive.length > 0
+              p(style='font-size: 16px')
+                | Your #{stats.mostActive.length} most active members were:
+                ul(style='list-style: none; padding-left: 0')
+                  each user in stats.mostActive
+                    li(style='line-height: 30px; vertical-align: middle; padding-bottom: 8px; padding-top: 8px; margin: 0; border-bottom: 1px solid #dde3f1; border-top: 1px solid #dde3f1; width: 400px') 
+                      img(height=30 width=30 src='#{user.avatar}' style='border-radius: 50%; float: left; margin-right: 16px;')
+                      | #{user.name}
+            else
+              p(style='font-size: 16px')
+                | None of your members were active this week.
+            p(style='font-size: 16px')
+              if stats.trendingHashtags
+                | The most used hashtag among your members this week was 
+                | ##{stats.trendingHashtags._id}, 
+                - stats.lastTrendingHashtags = stats.lastTrendingHashtags || {_id: 'none'}
+                - var same = stats.trendingHashtags._id == stats.lastTrendingHashtags._id?'same as':'different than'
+                | #{same} last week's ##{stats.lastTrendingHashtags._id}.
+              else
+                | There were no trending hashtags among your members this week.
+            p(style='font-size: 16px')
+              | Your members' most popular post this week had 
+              | #{stats.popularPost.likes_count} likes and 
+              | #{stats.popularPost.comments_count} comments.
+              img(style='margin-top: 16px; height: 300px; width: 300px' 
+              src='#{stats.popularPost.file_path}')
+            p(style='font-size: 16px')
+              | Let us know if you have any questions,
+              br
+            p(style='font-size: 16px')
+              | Take care,
+              br
+              | The Prizm Team
+            p(style='font-size: 16px')
+              br
+              br
+              a(href="https://itunes.apple.com/us/app/prizm-app/id903458597?mt=8" style='font-size: 18px; text-decoration: none')
+                img(src="https://www.prizmapp.com/images/app_store.png" width=150) 
+              br
+              br
+              a(href="https://www.prizmapp.com/login" style='font-size: 18px; text-decoration: none')
+                img(src="https://www.prizmapp.com/images/google.png" width=150)
+              br
+              br
+            p(style='font-size: 16px')
+              | - The Prizm Team
+        tr(style='background-color: #ffffff')
+          td(style='text-align: center; padding: 20px;')
+            p(style='font-size: 14px; color: #25689a;') FOLLOW PRIZM
+            a(href='https://www.facebook.com/prizmapp'
+            style='text-decoration: none')
+              img(src='http://www.prizmapp.com/images/facebook.png'
+              style='height: 32px; width: 32px;'
+              alt='Facebook')
+            a(href='https://www.twitter.com/beprizmatic'
+            style='text-decoration: none; margin-left: 5px;')
+              img(src='http://www.prizmapp.com/images/twitter.png'
+              style='height: 32px; width: 32px;'
+              alt='Twitter')
+            a(href='https://www.instagram.com/beprizmatic'
+            style='text-decoration: none; margin-left: 5px;')
+              img(src='http://www.prizmapp.com/images/instagram.png'
+              style='height: 32px; width: 32px;'
+              alt='Instagram') 
+        tr(style='background-color: #ffffff')
+          td
+            div(style='height: 40px; width: 100%; border-bottom: 1px solid #dde3f1;')
+        tr
+          td(style='padding: 10px 0px')
+            p(style='font-size: 12px')
+              | Copyright &copy; 2015 Higher Altitude, Inc. All rights reserved.

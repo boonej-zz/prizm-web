@@ -93,6 +93,10 @@ passport.deserializeUser(function(email, done) {
     user.mixpanel = user.mixpanelProperties();
     user.heap = user.heapProperties();
     }
+    User.findOneAndUpdate({_id: user._id}, {$set: {last_login_date: Date.now()}}, 
+      function(err, res){
+        if (err) console.log(err); 
+      }); 
     done(err, user);
   });
 });
