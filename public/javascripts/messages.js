@@ -554,27 +554,33 @@ var messages = {
     }
   },
   drag: function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    counter++;
-    if (!$(document.body).hasClass('drag')) {
-      $(document.body).addClass('drag');
+    if (!$('#mewMessage').length) {
+      e.stopPropagation();
+      e.preventDefault();
+      counter++;
+      if (!$(document.body).hasClass('drag')) {
+        $(document.body).addClass('drag');
+      }
     }
   },
   dragEnd: function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    counter--;
-    if (counter < 1){
-      $(document.body).removeClass('drag');
-      counter = 0;
+    if (!$('#mewMessage').length){
+      e.stopPropagation();
+      e.preventDefault();
+      counter--;
+      if (counter < 1){
+        $(document.body).removeClass('drag');
+        counter = 0;
+      }
     }
   },
   drop: function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    $(document.body).removeClass('drag');
-    messages.uploadImage(e);
+    if (!$('#mewMessage').length) {
+      e.stopPropagation();
+      e.preventDefault();
+      $(document.body).removeClass('drag');
+      messages.uploadImage(e);
+    }
   }
 };
 

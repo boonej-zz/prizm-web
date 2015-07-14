@@ -509,6 +509,104 @@ var insight = {
   }
 };
 
+var nmessage = {
+  showNewMessageForm: function(){
+    var organization = $('input#selectedOrganization').val();
+    $.ajax({
+      method: 'GET',
+      url: '/messages/new',
+      contentType: 'text/html'
+    })
+    .done(function(html){
+      modal.showModal(html);
+      $('form#mewMessage').submit(nmessage.submit);
+      $('#mewMessage #imageContainer').click(function(){
+        $('input#messageImage').click();
+      });
+    });
+  },
+  submit: function(e){
+    var d = new FormData($('#mewMessage')[0]);
+    if (droppedFiles){
+      d.append('image', droppedFiles);
+    }
+    var group = $('select#group').val() || null;
+    if (group == '#all') group = false;
+    var headers = {};
+    if (group) {
+      headers = {group: group};
+    }
+    $.ajax({
+      method: 'POST',
+      url: '/messages',
+      contentType: false,
+      data: d,
+      cache: false,
+      processData: false,
+      success: function(html){
+        droppedFiles = false;
+        modal.cancel();
+        $.ajax({
+          type: 'GET',
+          url: '/messages',
+          headers: headers,
+          success: function(html){
+            var state = {members: 'messages'};
+            history.pushState(state, 'messages', 'messages');
+            document.open();
+            document.write(html);
+            document.close();
+          }
+        });
+      },
+      error: function(err){
+        droppedFiles = false;
+        alert('There was an error creating your message. Please try again later.');
+      }
+    });
+    return false;
+  },
+  imageChanged: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    if (window.File && window.FileReader && window.FileList && window.Blob){
+
+      var files = e.target.files || e.dataTransfer.files; 
+
+      var file;
+      var result = '';
+      for(var i = 0; file = files[i]; i++){
+        if(!file.type.match('image.*')){
+          continue;
+        }
+        reader = new FileReader();
+        reader.onload = (function(tfile){
+          return function(im) {
+            $('#imageContainer').css('background-image', 'url(' + im.target.result +')'); 
+            $('#imageContainer').css('background-size', 'cover');
+            $('#imageContainer .placeholder').hide();
+          }
+        }(file));
+        reader.readAsDataURL(file);
+      } 
+    } else {
+      alert('This browser does not support the File API.');
+    }
+  },
+  drag: function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  },
+  drop: function(e){
+    e.preventDefault();
+    nmessage.drag(e);
+    var files = e.target.files || e.dataTransfer.files;
+    nmessage.imageChanged(e);
+    droppedFiles = files[0];
+  }
+
+}
+
 var group = {
   showNewGroupForm: function(){
     var organization = $('input#selectedOrganization').val();

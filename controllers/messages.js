@@ -558,7 +558,7 @@ exports.createMessage = function(req, res){
   var group = req.get('group');
   group = group == 'all'?null:group;
 
-  var text = req.get('text');
+  var text = req.get('text') || req.body.text;
   if (organization &&  text) {
     var message = new Message({
       organization: organization,
@@ -594,7 +594,37 @@ exports.createMessage = function(req, res){
       }
     }); 
   } else {
-    res.status(400).send();
+    Image.uploadMessageImage(req, function(err, path, fields){
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+        return;
+      }
+      var data = {image_url: path || null, creator: user._id};
+      var allowed = ['text', 'organization', 'group'];
+      console.log(fields);
+      for (var prop in fields) {
+        if (_.indexOf(allowed, prop) != -1){
+          var value = fields[prop][0];
+          if (prop == 'group') {
+            if (value == '#all') {
+              value = null;
+            }
+          }
+          data[prop] = value;
+        }
+      }
+      var message = new Message(data);
+      message.save(function(err, data){
+        if (err) { 
+          console.log(err);
+          res.status(500).send('Invalid request');
+        } else {
+          res.status(200).send(data);
+        }
+      });
+    }); 
+
   }
 }
 

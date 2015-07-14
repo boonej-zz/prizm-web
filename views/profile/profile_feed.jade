@@ -14,7 +14,7 @@ each post in posts
               .category-icon(style="background-image: url('/images/icons/#{post.category}_icon.png')")
               if (post.external_provider)
                 .post-via
-                  | Post Via #{post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1)}
+                  | Post via #{post.external_provider.charAt(0).toUpperCase() + post.external_provider.slice(1)}
             .post-image(onclick='home.toggleComments(event)' prizm-data='#{post.id}')
               img.lazy(data-original='#{post.file_path}' prizm-data='#{post.id}')
             .post-footer

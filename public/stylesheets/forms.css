@@ -957,6 +957,83 @@ input#scope:not(:checked) + label::after  {
   margin-bottom: 44px;
 }
 
+#newMessageForm {
+  width: 30.563em;
+}
+
+#mewMessage input, #mewMessage .selectArea, #mewMessage textarea, 
+#mewMessage label, #mewMessage select {
+  display: block;
+  width: 86%;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-appearance: none;
+  font-size: 1.125em;
+  outline: none;
+}
+
+#mewMessage select {
+  height: 2.056em;
+  background-color: #fefefe;
+  border-radius: 0;
+  border: 0.063em solid #e4e5ea;
+  padding-left: 0.556em;
+  color: #818284;
+  font-weight: 400;
+  background-image: url('/images/icons/tooltiparrowmenu_icon_blue@2x.png');
+  background-size: 7px 4px;
+  background-repeat: no-repeat;
+  background-position-x: 97%;
+  background-position-y: center;
+}
+
+#mewMessage label {
+  color: #545358;
+  font-size: 1.125em;
+  font-weight: 600;
+  margin-top: 1.889em;
+}
+
+#mewMessage textarea {
+  height: 7.313em;
+  background-color: #fefefe;
+  border: 0.063em solid #e4e5ea;
+}
+
+#mewMessage .image-border {
+  display: block;
+  width: 86%;
+  margin: 2.3125em auto 0 auto;
+  height: 19.688em;
+  border: 0.063em solid #e4e5ea;
+}
+
+#mewMessage #imageContainer {
+  height: 17em;
+  border: 0.125em dashed rgba(0, 0, 0, 0.11);
+  border-radius: 3px;
+  width: 90.521%;
+  margin: 1.375em auto 0 auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#mewMessage #imageContainer .placeholder {
+  width: 11.75em;
+  color: #343642;
+  font-size: 0.875em;
+  font-weight: 300;
+  line-height: 1.313em;
+  margin: 14.1428em auto 0 auto;
+  text-align: center;
+}
+
+#mewMessage .buttons {
+  width: 86%;
+  margin: 3em auto 0 auto;
+  text-align: center;
+}
+
 @media screen and (max-width: 600px) {
 
   #newGroupForm {

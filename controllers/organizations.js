@@ -882,3 +882,17 @@ exports.updateSettings = function(req, res){
 
   }
 }
+
+exports.displayNewMessage = function(req, res){
+  var user = req.user;
+  Organization.findOne({owner: user._id})
+  .populate({path: 'groups', model: 'Group'})
+  .exec(function(err, org){
+    if (org) {
+      res.render('create/message', {organization: org});
+    } else {
+      if (err) console.log(err);
+      res.status(500).send('Forbidden');
+    }
+  });
+}

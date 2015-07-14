@@ -121,6 +121,8 @@ router.get('/profile/messages/:organization', _users.authRequired, function(req,
   _messages.displayUserMessagesFeed(req, res);
 });
 router.get('/organization/:organization/groups/:group/members', _users.authRequired, _messages.fetchViewed);
+
+router.get('/messages/new', _users.authRequired, _orgs.displayNewMessage);
 router.get('/messages', _users.authRequired, _messages.displayOwnerMessagesFeed);
 router.get('/messages/:group', _users.authRequired, _messages.fetchMessages);
 router.get('/profile/groups', _users.authRequired, _messages.newGroup);

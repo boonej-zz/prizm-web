@@ -1,0 +1,25 @@
+.create-overlay(onclick='modal.cancel(event)')
+  #newMessageForm.create-form
+    h2 Create Message
+    form#mewMessage
+      input(type='hidden' name='organization' value='#{organization._id}')
+      label(for='group') Groups
+      select#group(name='group')
+        option(value=false) #all 
+        each group in organization.groups
+          if group.status == 'active'
+            option(value='#{group._id}') #{group.name}
+      label(for='text') Message
+      textarea#text(name='text' value='')
+      .image-border
+        #imageContainer(ondragover='nmessage.drag(event)' ondrop='nmessage.drop(event)' )
+          .placeholder
+            | or drag and drop files onto this window to upload
+            br
+            | (limit file size to 2MB)
+      input#messageImage.hidden(type='file' accept='image/*' name='image' onchange='nmessage.imageChanged(event)')
+      .buttons
+        button.cancel Cancel
+        button.save Send
+ 
+
