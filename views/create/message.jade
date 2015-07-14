@@ -19,7 +19,7 @@
             | (limit file size to 2MB)
       input#messageImage.hidden(type='file' accept='image/*' name='image' onchange='nmessage.imageChanged(event)')
       .buttons
-        button.cancel Cancel
-        button.save Send
+        button.cancel(onclick='modal.cancel()') Cancel
+        button.save(disabled='disabled') Send
  
 

@@ -523,7 +523,15 @@ var nmessage = {
       $('#mewMessage #imageContainer').click(function(){
         $('input#messageImage').click();
       });
+      $('#mewMessage textarea').keyup(nmessage.keyup);
     });
+  },
+  keyup: function(e) {
+    if ($('#mewMessage textarea#text').val() || droppedFiles) {
+      $('#mewMessage button.save').attr('disabled', false);
+    } else if (!droppedFiles && ! $('#messageImage').val()) {
+        $('#mewMessage button.save').attr('disabled', true);
+    }
   },
   submit: function(e){
     var d = new FormData($('#mewMessage')[0]);
@@ -585,6 +593,7 @@ var nmessage = {
             $('#imageContainer').css('background-image', 'url(' + im.target.result +')'); 
             $('#imageContainer').css('background-size', 'cover');
             $('#imageContainer .placeholder').hide();
+            $('#mewMessage button.save').attr('disabled', false);
           }
         }(file));
         reader.readAsDataURL(file);
