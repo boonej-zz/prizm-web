@@ -10,7 +10,7 @@
       .comments-header
         .post-modal-avatar
           if post.creator.profile_photo_url
-            img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+            img(src='{post.creator.profile_photo_url}'
                 class='prizm-avatar-sm'
                 onclick='prizm.showProfile("#{post.creator._id}")')
           else
@@ -30,7 +30,7 @@
           .comment-container
             .post-modal-avatar
               if post.creator.profile_photo_url
-                img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                img(src='#{post.creator.profile_photo_url}'
                     class='prizm-avatar-sm'
                     onclick='prizm.showProfile("#{post.creator._id}")')
               else
@@ -46,7 +46,7 @@
           .comment-container
             .post-modal-avatar
               if post.comments[i].creator.profile_photo_url
-                img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+                img(src='#{post.comments[i].creator.profile_photo_url}'
                     class='prizm-avatar-sm'
                     onclick='prizm.showProfile("#{post.comments[i].creator._id}")')
               else

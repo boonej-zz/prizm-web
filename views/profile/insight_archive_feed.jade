@@ -1,5 +1,5 @@
 each insight in insights
-  - var profilePhoto = insight.creator.profile_photo_url?'https://' + insight.creator.profile_photo_url.substr(7):'/images/default-profile.png'
+  - var profilePhoto = insight.creator.profile_photo_url || '/images/default-profile.png'
   - var ownerLink = '/profiles/' + insight.creator._id
   li.archive
     .profile-icon(

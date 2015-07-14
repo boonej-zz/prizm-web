@@ -6,7 +6,7 @@
           td
             if request.to && String(request.to._id) != String(currentUser._id)
               if request.to.profile_photo_url
-                img(src='https://#{request.to.profile_photo_url.substr(7)}'
+                img(src='#{request.to.profile_photo_url}'
                     class='prizm-avatar-sm cursor' 
                     onclick='prizm.showProfile("#{request.to._id}")')
               else
@@ -15,7 +15,7 @@
                     onclick='prizm.showProfile("#{request.to._id}")')
             if request.from && String(request.from._id) != String(currentUser._id)
               if request.from.profile_photo_url
-                img(src='https://#{request.from.profile_photo_url.substr(7)}'
+                img(src='#{request.from.profile_photo_url}'
                     class='prizm-avatar-sm cursor' 
                     onclick='prizm.showProfile("#{request.from._id}")')
               else

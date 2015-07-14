@@ -8,7 +8,7 @@
     ul#section1.body.active
       each user in read
         - var profilePage = '/profiles/' + user._id
-        - var profileImage = user.profile_photo_url?'https://' + user.profile_photo_url.substr(7):'/images/default-profile.png'
+        - var profileImage = user.profile_photo_url || '/images/default-profile.png'
         li.user-cell
           .image
             .profile-avatar.cursor(style='background-image: url("#{profileImage}")'
@@ -18,7 +18,7 @@
               | #{user.name}
     ul#section2.body
       each user in unread
-        - var profileImage = user.profile_photo_url?'https://' + user.profile_photo_url.substr(7):'/images/default-profile.png'
+        - var profileImage = user.profile_photo_url || '/images/default-profile.png'
         li.user-cell
           .image
             .profile-avatar.cursor(style='background-image: url("#{profileImage}")'

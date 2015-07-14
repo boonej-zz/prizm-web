@@ -1,4 +1,4 @@
-- var profilePhoto = post.creator.profile_photo_url?'https://' + post.creator.profile_photo_url.substr(7):'/images/default-profile.png'
+- var profilePhoto = post.creator.profile_photo_url || '/images/default-profile.png'
 div#postModal.modal.fade(
   tabIndex='-1'
   role='dialog'
@@ -39,7 +39,7 @@ div#postModal.modal.fade(
                         | !{post.formattedText}
                       .comment-info
                   each comment, i in post.comments
-                    - var commentAvatar = comment.creator.profile_photo_url?'https://' + comment.creator.profile_photo_url.substr(7):'/images/profile/profile_default_avatar.png'
+                    - var commentAvatar = comment.creator.profile_photo_url || '/images/profile/profile_default_avatar.png'
                     .comment-container
                       .post-modal-avatar
                         img.prizm-avatar-sm(src='#{commentAvatar}' onclick='prizm.showProfile("#{comment.creator._id}")')

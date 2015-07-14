@@ -40,7 +40,7 @@ block content
         .slider-container
           .slider
             if user.profile_photo_url
-              img(src='https://#{user.profile_photo_url.substr(7)}'
+              img(src='#{user.profile_photo_url}'
                   class='prizm-avatar-md')
             else 
               img(src='/images/profile/profile_default_avatar.png' class='prizm-avatar-md')
@@ -62,7 +62,7 @@ block content
               - var defaultImage = '/images/profile/profile_default_avatar.png'
               - for (var i = 0; i < 3; i++)
                   .luminary-card
-                    img(src=luminaries[i] ? 'https://#{luminaries[i].profile_photo_url.substr(7)}' : defaultImage
+                    img(src=luminaries[i] ? '#{luminaries[i].profile_photo_url}' : defaultImage
                         class='prizm-avatar-md')
                     h4
                       if (luminaries[i])

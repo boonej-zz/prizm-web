@@ -822,5 +822,12 @@ userSchema.methods.joinOrganization = function(organization, next, approval){
   }
 };
 
+userSchema.post('init', function(user){
+  if (user.profile_photo_url) {
+    var r = new RegExp('https:/s');
+    user.profile_photo_url = user.profile_photo_url.replace(r, 'https://s');
+  }
+});
+
 mongoose.model('OrgStatus', orgStatusSchema);
 mongoose.model('User', userSchema);

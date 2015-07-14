@@ -6,7 +6,7 @@
           td
             if notification.from
               if notification.from.profile_photo_url
-                img(src='https://#{notification.from.profile_photo_url.substr(7)}'
+                img(src='#{notification.from.profile_photo_url}'
                     class='prizm-avatar-sm cursor' 
                     onclick='prizm.showProfile("#{notification.from._id}")')
               else

@@ -7,7 +7,7 @@ block head
 block content
   #uploadOverlay
     .text drop images here
-  - var ownerPhoto = organization.owner.profile_photo_url?'https://' + organization.owner.profile_photo_url.substr(7):'/images/default-profile.png'
+  - var ownerPhoto = organization.owner.profile_photo_url || '/images/default-profile.png'
   - var lastCreated = messages.length > 0?messages[0].create_date:new Date()
   input#selectedOrganization(type='hidden' value='#{organization._id}')
   input#selectedGroup(type='hidden' value=group?'#{group}':'all')

@@ -111,7 +111,7 @@ html
             .avatar-menu
               if (auth)
                   if currentUser.profile_photo_url
-                    img(src='https://#{currentUser.profile_photo_url.substr(7)}'
+                    img(src='#{currentUser.profile_photo_url}'
                         class='prizm-avatar-xs'
                         onclick='nav.toggleMenu(event)')
                   else
@@ -148,7 +148,7 @@ html
         .settings
           .settings-avatar-wrap
             .settings-avatar-menu
-              - var photo = currentUser.profile_photo_url?'https://' + currentUser.profile_photo_url.substr(7):'/images/default-profile.png';
+              - var photo = currentUser.profile_photo_url || '/images/default-profile.png'
 
               img(src='#{photo}'
                 class='prizm-avatar-xs'

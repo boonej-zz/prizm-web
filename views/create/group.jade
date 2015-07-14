@@ -31,9 +31,8 @@
           input#memberFilter(type='text' onkeyup='group.filterMembers(event)' placeholder='Search by member')
           .members-container.options
             each member in members
-              - var creatorPhoto = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
               div.option.cursor(onclick='group.selectRadio(event)')
-                .profile-icon.cursor(style="background-image: url('#{creatorPhoto}')")
+                .profile-icon.cursor(style="background-image: url('#{member.profile_photo_url}')")
                 .content
                   span.name #{member.name} 
                   - var gLeader = group?String(member._id) == String(group.leader):false

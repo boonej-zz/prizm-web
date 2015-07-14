@@ -16,8 +16,7 @@
             - if (member.phone_number) type.push('sms')
             - if (member.device_token) type.push('push')
             - type = type.join(' ')
-            - var creatorPhoto = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
-
+            - var creatorPhoto = member.profile_photo_url
             div.option.cursor.hidden(onclick='group.selectRadio(event)' class='#{type}')
               .profile-icon.cursor(style='background-image: url("#{creatorPhoto}")')
               .content

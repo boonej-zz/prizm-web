@@ -21,7 +21,7 @@ table.table.table-striped.members-table
         tr
           td
             if member.profile_photo_url
-              img(src='https://#{member.profile_photo_url.substr(7)}'
+              img(src='#{member.profile_photo_url}'
                   class='prizm-avatar-sm cursor' 
                   onclick='prizm.showProfile("#{member._id}")')
             else

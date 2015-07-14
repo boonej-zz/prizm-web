@@ -2,7 +2,7 @@ each post in posts
   li.post(id='#{post.id}' data-date='#{post.create_date.toISOString()}') 
             .post-header
               .cursor.profile-image(
-                style="background-image:url(#{post.creator.profile_photo_url?'https://'+post.creator.profile_photo_url.substr(7):'/images/profile/profile_default_avatar.png'})"
+                style="background-image:url(#{post.creator.profile_photo_url || '/images/profile/profile_default_avatar.png'})"
                  onclick='prizm.showProfile("#{post.creator._id}")'
               )
               h3.cursor(onclick='prizm.showProfile("#{post.creator._id}")')
@@ -47,7 +47,7 @@ each post in posts
                 .comment-container
                   .post-modal-avatar.post-comments-avatar
                     if post.creator.profile_photo_url
-                      img(src='https://#{post.creator.profile_photo_url.substr(7)}'
+                      img(src='#{post.creator.profile_photo_url}'
                           class='prizm-avatar-xs'
                           onclick='prizm.showProfile("#{post.creator._id}")')
                     else
@@ -63,7 +63,7 @@ each post in posts
                 .comment-container
                   .post-modal-avatar.post-comments-avatar
                     if post.comments[i].creator.profile_photo_url
-                      img(src='https://#{post.comments[i].creator.profile_photo_url.substr(7)}'
+                      img(src='#{post.comments[i].creator.profile_photo_url}'
                           class='prizm-avatar-xs'
                           onclick='prizm.showProfile("#{post.comments[i].creator._id}")')
                     else

@@ -1,7 +1,7 @@
 .comment-container
   .post-modal-avatar
     if comment.creator.profile_photo_url
-      img(src='https://#{comment.creator.profile_photo_url.substr(7)}'
+      img(src='#{comment.creator.profile_photo_url}'
         class='prizm-avatar-sm'
         onclick='profile.showProfile("#{comment.creator._id}")')
     else

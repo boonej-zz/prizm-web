@@ -9,7 +9,7 @@ block content
       h2 Suggested People to Follow
       ul#follow.cards
         each user in users
-          -var profilePhoto = user.profile_photo_url?'https://' + user.profile_photo_url.substr(7):'/images/default-profile.png'; 
+          -var profilePhoto = user.profile_photo_url || '/images/default-profile.png'; 
           -var city = user.city || false
           -var location = user.state || false
           -if (location) location = user.city?user.city + ', ' + location:location

@@ -8,7 +8,7 @@ div(class='modal fade'
       .modal-body
         each member in members
           - var memberID = member._id
-          - var photo = member.profile_photo_url?'https://' + member.profile_photo_url.substr(7):'/images/default-profile.png'
+          - var photo = member.profile_photo_url || '/images/default-profile.png'
           .member-card.hidden(data='#{member.id}')
             .front-member
               .member-info-top
