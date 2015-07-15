@@ -86,7 +86,7 @@ p {
 .tagline {
   padding-top: 48px;
   padding-bottom: 12px;
-  margin: 150px auto;
+  margin: 0 auto;
   font-size: 1.3em;
   width: 370px;
   clear: both;
@@ -194,14 +194,11 @@ a {
 /** SIDE NAVIGATION **/
 
 .dotNav {
-  position: relative;
-  top: -55%;
-  left: -7%;
+  position: fixed;
+  margin-top: 125px;
   z-index: 5;
   padding: 7px;
-  height: 0px;
-  float: right;
-  clear: right;
+  margin-left: 1146px;
 }
 
 .dotNav ul {
@@ -463,6 +460,7 @@ li#org-first{
 
 #luminary-quote {
   text-align: center;
+  height: 505px;
 }
 
 #quote {
@@ -588,15 +586,29 @@ li#org-first{
   height: 645px;
 }
 
+#partner-block-4 {
+  height: 645px;
+}
+
+#partner-block-5 {
+  height: 120px;
+}
+
 #partner-section-1 {
   margin-top: 200px;
 }
 
 #partner-section-2 {
   margin-top: 90px;
+  width: 630px;
 }
 
 #partner-section-3 {
+  margin-top: 125px
+}
+
+
+#partner-section-4 {
   margin-top: 125px
 }
 

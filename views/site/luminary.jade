@@ -1,19 +1,20 @@
 mixin sidenav
-  .dotNav
+  .dotNav(style='display:none')
     ul
       li
-        a(href='#lum-home')
+        a(href='#lum-home' elem='luminary-quote')
       li
-        a(href='#what-is-prizm')
+        a(href='#what-is-prizm' elem='luminary-block1')
       li
-        a(href='#what-does-a-luminary-do')
+        a(href='#what-does-a-luminary-do' elem='luminary-block2')
       li
-        a(href='#why-prizm')
+        a(href='#why-prizm' elem='luminary-block3')
 
 extends ../layouts/site_layout
 
 block content
   #luminary-quote.full-width.gray-background.topnav-offset
+    mixin sidenav
     #lum-home.anchor
     .wrap
       #quote
@@ -24,7 +25,6 @@ block content
           | - Coach John Wooden
       p.tagline
         | We are looking for role models in all<br>fields to engage with students on Prizm.
-    //- mixin sidenav
   #luminary-block1.full-width.blue-background
     #what-is-prizm.anchor
     .wrap
@@ -38,7 +38,6 @@ block content
           | students who are actively looking for a worthwhile post-high school 
           | experience. 
       #luminary-phone1.phone.right
-    mixin sidenav
   #luminary-block2.full-width.gray-background
     #what-does-a-luminary-do.anchor
     .wrap
@@ -60,7 +59,6 @@ block content
           | 2. Work with us to approve “Insights” in your area of expertise that 
           | will be sent to students on your behalf.
       #luminary-phone2.phone.left.topnav-offset
-    mixin sidenav
   #luminary-block3.full-width.blue-background
     #why-prizm.anchor
     .wrap
@@ -80,4 +78,3 @@ block content
           | Join others at the top of their games as a Luminary on Prizm and 
           | help show students the wide variety of opportunities out there for them!
       #luminary-phone3.phone.right.topnav-offset
-    mixin sidenav

@@ -1,22 +1,25 @@
 /* Fetch posts for endless scrolling */
+
 function elementInViewport(el){
   var top = el.offsetTop;
   var left = el.offsetLeft;
   var width = el.offsetWidth;
-  var height = el.offsetHeight;
-
+  var height = $(el).height();
+  var e = el; 
   while (el.offsetParent) {
     el = el.offsetParent;
     top += el.offsetTop;
     left += el.offsetLeft;
   }
+  
   if (left >= window.pageXOffset &&
       top <= (window.pageYOffset + window.innerHeight) &&
       left <= (window.pageXOffset + window.innerWidth) ){
     return true;
   }
   return false;
- };
+};
+
 
 function animatePosts() {
   var posts = $('.post');

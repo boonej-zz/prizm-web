@@ -1,80 +1,109 @@
 mixin sidenav
-  .dotNav
+  .dotNav(style='display:none')
     ul
       li
-        a(href='#partner-home')
+        a(href='#partner-home' elem='partner-header')
       li
-        a(href='#what-is-prizm')
+        a(href='#what-is-prizm' elem='partner-block-1')
       li
-        a(href='#custom-app')
+        a(href='#custom-app' elem='partner-block-2')
       li
-        a(href='#why-prizm')
+        a(href='#measure' elem='partner-block-3')
+      li
+        a(href='#why-prizm' elem='partner-block-4')
 
 extends ../layouts/site_layout
 
 block content
+  .wrap
+    mixin sidenav
+  #partner-home.anchor
   #partner-header.full-width.gray-background.topnav-offset
-    #partner-home.anchor
-    .wrap
-      h2#header-title
-          | Capture your members’ experiences and inspirations in a private, mobile community. 
-      p.tagline
-        | We are looking for organizations that<br>serve teens to partner with us on Prizm.
-      #find-out-more.blue-background(onclick='prizm.mailTo()')
-        p
-          | FIND OUT MORE
+      .wrap
+        h2#header-title
+          | Prizm creates a private digital community for your youth 
+          | development organization.
+        p.tagline
+          | Communicate and engage with your members on their smartphones. 
+          | Because let’s face it: that’s where they are.
+        #find-out-more.blue-background(onclick='prizm.mailTo()')
+          p
+            | FIND OUT MORE
   #partner-block-1.full-width.blue-background
     #what-is-prizm.anchor
     .wrap
       #partner-section-1.section.left
-        h2 What is Prizm?
+        h2 About
         p.text-box.column
-          | Prizm is a mobile app that allows organizations and their student 
-          | members to connect and share with each other securely. At the same 
-          | time, Prizm helps students explore and learn about new opportunities
-          | based on their interests via curated, digestible content called 
-          | “Insights” sent by Luminaries, colleges and companies looking for
-          | interns.
+          | Prizm makes it easy for you and your members to stay in 
+          | touch privately when they’re not in your scheduled in-person 
+          | activities. We designed Prizm so that organizations could 
+          | eliminate email, paper flyers, and clunky online surveys. 
+          | It’s time to start engaging with your members in a way that 
+          | makes sense to them.
       #partner-phone-1.phone.right.topnav-offset
-    mixin sidenav
   #partner-block-2.full-width.gray-background
     #custom-app.anchor
     .wrap
       #partner-section-2.section.right
         h2 Custom app without the hassle.
         p.text-box.column
-          | Organizations have the opportunity to create a private experience 
-          | through the use of a unique program code in Prizm. This gives 
-          | organizations the feeling of a customized app without having to 
-          | worry about any of the testing, coding or bug fixes.
-        h2 You can use the private, custom<br>experience in several ways:
-        p.text-box.column
-          | • Customize screens with your organization’s brand color.<br>
-          | • Send native mobile push notifications just to members.<br>
-          | • Send short survey questions and easily compile results.<br>
-          | • Send Insights with your content from your leadership.
-          | <br><br>
-          | Organization leadership will also have access to dashboards that 
-          | show student interests, trending topics and hashtags within the 
-          | membership, and levels of member engagement.
-      #partner-phone-2.section.left.topnav-offset
-    mixin sidenav
+          | Organizations have the opportunity to create a private 
+          | experience through the use of a unique program code in Prizm. 
+          | It’s like a custom app without having to worry about any of the 
+          | testing, coding or bug fixes.
+        ul.text-box.column
+          li
+            | Enable group message channels with your whole organization 
+            | and smaller sub-groups. 
+          li
+            | Send native mobile push notifications just to members.
+          li
+            | Access dashboards with member interests, trends, and engagement.
+          li
+            | Send short surveys and easily compile results.
+          li
+            | Customize screens with your organization’s brand color.
+          li
+            | Send Insights with your content from your leadership.
+       #partner-phone-2.section.left.topnav-offset
   #partner-block-3.full-width.blue-background
-    #why-prizm.anchor
+    #measure.anchor
     .wrap
       #partner-section-3.section.left
+        h2 Measure and Share Outcomes
+        p.text-box.column
+          | Prizm gives organizations access to dashboards that show 
+          | student interests, levels of engagement, and trending topics 
+          | and hashtags within the membership. Prizm’s survey tool also 
+          | allows organizations to easily create, push out and compile 
+          | survey results that can be shared with donors and board 
+          | leadership. Program directors can quickly understand and 
+          | respond to member needs with access to Prizm’s qualitative 
+          | and quantitative data.
+
+      #partner-phone-2.section.right.topnav-offset
+  #partner-block-4.full-width.gray-background
+    #why-prizm.anchor
+    .wrap
+      #partner-section-4.section.right
         h2 Why Prizm?
         p.text-box.column
-          | We began this project because we saw firsthand how the world has 
-          | changed with the adoption of mobile devices. The way people— especially
-          | teens— communicate and relate to each other has fundamentally 
-          | changed in the past 10 years. We know that community organizations 
-          | have a unique challenge in trying to engage their teen members 
-          | beyond the scheduled in-person activity. Our goal is to help teens stay
-          | connected to their clubs and organizations while learning about 
-          | future opportunities like college and internships.
-      #partner-phone-3.phone.right.topnav-offset
-    mixin sidenav
+          | We began this project because we saw firsthand how the world 
+          | has changed with the adoption of mobile devices. The way 
+          | people — especially teens — communicate and relate to each 
+          | other has fundamentally changed in the past 10 years. Today, 73% 
+          | of teenagers have or have access to a smartphone. We know that 
+          | community organizations have a unique challenge in trying to 
+          | engage their teen members with tools that aren’t effective 
+          | anymore. Our goal is to help organizations stay relevant to 
+          | their members, and teens stay connected to their clubs and 
+          | organizations while learning about future opportunities like 
+          | college and internships.
+      #partner-phone-3.phone.left.topnav-offset
+
+  #partner-block-5.full-width.blue-background
+
  
  
 
