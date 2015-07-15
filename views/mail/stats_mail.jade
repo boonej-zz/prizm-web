@@ -12,34 +12,48 @@ html
         tr(style='background-color: #ffffff;')
           td(style='padding: 30px; text-align: left;')
             p(style='font-size: 16px')
-              | Hi #{owner.contact_first},
+              | Hi #{owner.contact_first || organization.name},
             p(style='font-size: 16px')
               | Here's your weekly update about #{organization.name} on Prizm.
             p(style='font-size: 16px') 
               - diff = stats.notificationCount - stats.lastNotificationCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
-              | You sent #{stats.notificationCount} notifications to 
-              | #{stats.notificationTotal} members 
-              | this week, #{type} last week's #{stats.lastNotificationCount}.
+              | You sent 
+              strong #{stats.notificationCount} 
+              | notifications to 
+              strong #{stats.notificationTotal}
+              | members 
+              | this week, #{type} last week's 
+              strong #{stats.lastNotificationCount}.
             p(style='font-size: 16px')
               - diff = stats.messageCount - stats.lastMessageCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
-              | You sent #{stats.messageCount} messages to 
-              | #{stats.messageTotal} members this week, 
-              | #{type} last week's #{stats.lastMessageCount}.
+              | You sent 
+              strong #{stats.messageCount} 
+              | messages to 
+              strong #{stats.messageTotal} 
+              | members this week, 
+              | #{type} last week's 
+              strong #{stats.lastMessageCount}.
             p(style='font-size: 16px')
               - diff = stats.insightCount - stats.lastInsightCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
-              | You sent #{stats.insightCount} insights to
-              | #{stats.insightTotal} members this week,
-              | #{type} last week's #{stats.lastInsightCount}.
+              | You sent 
+              strong #{stats.insightCount} 
+              | insights to
+              strong #{stats.insightTotal} 
+              | members this week,
+              | #{type} last week's 
+              strong #{stats.lastInsightCount}.
               br
             p(style='font-size: 16px')
-              | #{stats.activePercent}% of your registered users logged
-              | in to Prizm this week - #{stats.activeMembers}/#{stats.totalMembers}
+              strong #{stats.activePercent}% 
+              of your registered users logged
+              | in to Prizm this week - 
+              strong #{stats.activeMembers}/#{stats.totalMembers}
               | (# logged in/total users).
             if stats.mostActive.length > 0
               p(style='font-size: 16px')
@@ -55,16 +69,19 @@ html
             p(style='font-size: 16px')
               if stats.trendingHashtags
                 | The most used hashtag among your members this week was 
-                | ##{stats.trendingHashtags._id}, 
+                strong ##{stats.trendingHashtags._id}, 
                 - stats.lastTrendingHashtags = stats.lastTrendingHashtags || {_id: 'none'}
                 - var same = stats.trendingHashtags._id == stats.lastTrendingHashtags._id?'same as':'different than'
-                | #{same} last week's ##{stats.lastTrendingHashtags._id}.
+                | #{same} last week's 
+                strong ##{stats.lastTrendingHashtags._id}.
               else
                 | There were no trending hashtags among your members this week.
             p(style='font-size: 16px')
               | Your members' most popular post this week had 
-              | #{stats.popularPost.likes_count} likes and 
-              | #{stats.popularPost.comments_count} comments.
+              strong #{stats.popularPost.likes_count} 
+              | likes and 
+              strong #{stats.popularPost.comments_count} 
+              | comments.
               img(style='margin-top: 16px; height: 300px; width: 300px' 
               src='#{stats.popularPost.file_path}')
             p(style='font-size: 16px')
