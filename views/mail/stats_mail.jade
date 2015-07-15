@@ -20,9 +20,9 @@ html
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
               | You sent 
-              strong #{stats.notificationCount} 
+              strong #{stats.notificationCount}  
               | notifications to 
-              strong #{stats.notificationTotal}
+              strong #{stats.notificationTotal} 
               | members 
               | this week, #{type} last week's 
               strong #{stats.lastNotificationCount}.
@@ -43,7 +43,7 @@ html
               - if (diff == 0) type='equal to'
               | You sent 
               strong #{stats.insightCount} 
-              | insights to
+              | insights to 
               strong #{stats.insightTotal} 
               | members this week,
               | #{type} last week's 
@@ -53,7 +53,7 @@ html
               strong #{stats.activePercent}% 
               of your registered users logged
               | in to Prizm this week - 
-              strong #{stats.activeMembers}/#{stats.totalMembers}
+              strong #{stats.activeMembers}/#{stats.totalMembers} 
               | (# logged in/total users).
             if stats.mostActive.length > 0
               p(style='font-size: 16px')
