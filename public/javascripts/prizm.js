@@ -131,28 +131,30 @@ $(function(){
 
   function redrawDotNav(){
     var offset = 75;
-       var $f = $('.dotNav li a:first');
+    var $f = $('.dotNav li a:first');
     var fEl = document.getElementById($f.attr('elem'));
-    if (elInViewport(fEl, offset)){
-      if ($('.dotNav').is(':visible')){
-        $('.dotNav').fadeOut(200);
-        console.log($f.height());
-      }
-    } else {
-      $('.dotNav li a').each(function(){
-        var $this = $(this);
-        var id = $this.attr('elem');
-        var el = document.getElementById(id);
-        if (el) {
-          if (elInViewport(el, 75)) {
-            $('.dotNav li').removeClass('active');
-            var $e = $('.dotNav a[elem="' + id + '"]').parent();
-            $e.addClass('active');
-          } 
+    if (fEl) {
+      if (elInViewport(fEl, offset)){
+        if ($('.dotNav').is(':visible')){
+          $('.dotNav').fadeOut(200);
+          console.log($f.height());
         }
-      });
-      if (!$('.dotNav').is(':visible')) {
-        $('.dotNav').fadeIn(300);
+      } else {
+        $('.dotNav li a').each(function(){
+          var $this = $(this);
+          var id = $this.attr('elem');
+          var el = document.getElementById(id);
+          if (el) {
+            if (elInViewport(el, 75)) {
+              $('.dotNav li').removeClass('active');
+              var $e = $('.dotNav a[elem="' + id + '"]').parent();
+              $e.addClass('active');
+            } 
+          }
+        });
+        if (!$('.dotNav').is(':visible')) {
+          $('.dotNav').fadeIn(300);
+        }
       }
     }
   }
