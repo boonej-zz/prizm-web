@@ -280,7 +280,7 @@ span.error {
 }
 
 .modal-overlay p {
-  margin: 50px;
+  padding: 50px;
 }
 
 .modal-overlay input {
