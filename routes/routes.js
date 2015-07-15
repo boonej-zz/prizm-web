@@ -73,7 +73,9 @@ router.get('/stats', function(req, res){
   var Stats = require('../lib/workers/stats');
   var User = mongoose.model('User');
   User.findOne({_id: '53c73c8be1a8e10b5193550b'}, function(err, user){ 
-    Organization.findOne({name: /Higher Altitude/i}, function(err, org){
+    Organization.findOne({name: /Higher Altitude/i})
+    .populate({path: 'owner', model: 'User'})
+    .exec(function(err, org){
       Stats.getWeeklyStats(org, function(stats){
         res.render('mail/stats_mail', {owner: user, organization: org, stats: stats});
       });
