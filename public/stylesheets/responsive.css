@@ -356,7 +356,7 @@
    margin-bottom: 50px;
   }
   
-  #partner-section-1, #partner-section-2, #partner-section-3 {
+  #partner-section-1, #partner-section-2, #partner-section-3, #partner-section-4 {
     margin: 0px auto;
    padding-top: 24px;
    width: 300px;
@@ -371,7 +371,11 @@
   }
 
   #partner-block-3 {
-    height: 780px;
+    height: 760px;
+  }
+
+  #partner-block-4 {
+    height: 800px;
   }
   
   #partner-phone-1 {

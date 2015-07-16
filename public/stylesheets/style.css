@@ -583,11 +583,11 @@ li#org-first{
 }
 
 #partner-block-3 {
-  height: 645px;
+  min-height: 645px;
 }
 
 #partner-block-4 {
-  height: 645px;
+  min-height: 645px;
 }
 
 #partner-block-5 {
