@@ -197,6 +197,7 @@ select {
   font-weight: 400;
   border: none;
   padding: 0 74.5px;
+  width: auto;
 }
 
 .registration .tagline {
