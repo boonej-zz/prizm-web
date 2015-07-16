@@ -12,6 +12,11 @@
     width: 300px;
   }
 
+  ul.text-box.column {
+    padding-left: 20px;
+    width: 280px;
+  }
+
   .right, .left {
     float: none;
   }
@@ -362,11 +367,11 @@
   }
 
   #partner-block-2 {
-    height: 1045px;
+    max-height: 1040px;
   }
 
   #partner-block-3 {
-    height: 819px;
+    height: 780px;
   }
   
   #partner-phone-1 {

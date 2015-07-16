@@ -579,7 +579,7 @@ li#org-first{
 }
 
 #partner-block-2 {
-  height: 645px;
+  min-height: 645px;
 }
 
 #partner-block-3 {
@@ -631,4 +631,9 @@ li#org-first{
   height: 570px;
   width: 400px;
   background-size: 400px 737px;
+}
+
+ul.text-box.column {
+  padding-left: 20px;
+  width: 540px;
 }

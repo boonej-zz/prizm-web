@@ -113,7 +113,11 @@ ul.themes li:last-child {
   margin-left: 8%;
 }
 
-ul.themes li:hover {
+ul.themes li label {
+  cursor: pointer;
+}
+
+ul.themes li.opt:hover {
   border-bottom: 4px solid #2444a2;
 }
 
