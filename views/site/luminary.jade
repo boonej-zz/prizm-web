@@ -12,8 +12,11 @@ mixin sidenav
 
 extends ../layouts/site_layout
 
+block head
+  script(type='text/javascript' src='/javascripts/snap.js')
+
 block content
-  #luminary-quote.full-width.gray-background.topnav-offset
+  #luminary-quote.full-width.gray-background.topnav-offset.snap
     #lum-home.anchor
     .wrap
       mixin sidenav
@@ -25,7 +28,7 @@ block content
           | - Coach John Wooden
       p.tagline
         | We are looking for role models in all<br>fields to engage with students on Prizm.
-  #luminary-block1.full-width.blue-background
+  #luminary-block1.full-width.blue-background.snap
     #what-is-prizm.anchor
     .wrap
       #lum-section-1.section.left
@@ -38,7 +41,7 @@ block content
           | students who are actively looking for a worthwhile post-high school 
           | experience. 
       #luminary-phone1.phone.right
-  #luminary-block2.full-width.gray-background
+  #luminary-block2.full-width.gray-background.snap
     #what-does-a-luminary-do.anchor
     .wrap
       #lum-section-2.section.right
@@ -59,7 +62,7 @@ block content
           | 2. Work with us to approve “Insights” in your area of expertise that 
           | will be sent to students on your behalf.
       #luminary-phone2.phone.left.topnav-offset
-  #luminary-block3.full-width.blue-background
+  #luminary-block3.full-width.blue-background.snap
     #why-prizm.anchor
     .wrap
       #lum-section-3.section.left

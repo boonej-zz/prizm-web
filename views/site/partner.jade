@@ -14,22 +14,25 @@ mixin sidenav
 
 extends ../layouts/site_layout
 
+block head
+  script(type='text/javascript' src='/javascripts/snap.js')
+
 block content
   .wrap
     mixin sidenav
   #partner-home.anchor
-  #partner-header.full-width.gray-background.topnav-offset
+  #partner-header.full-width.gray-background.topnav-offset.snap
       .wrap
         h2#header-title
-          | Prizm creates a private digital community for your youth 
-          | development organization.
+          | Create a private digital community for your youth development 
+          | organization. 
         p.tagline
           | Communicate and engage with your members on their smartphones. 
-          | Because let’s face it: that’s where they are.
+          | Meet them where they are.  
         #find-out-more.blue-background(onclick='prizm.mailTo()')
           p
             | FIND OUT MORE
-  #partner-block-1.full-width.blue-background
+  #partner-block-1.full-width.blue-background.snap
     #what-is-prizm.anchor
     .wrap
       #partner-section-1.section.left
@@ -42,7 +45,7 @@ block content
           | It’s time to start engaging with your members in a way that 
           | makes sense to them.
       #partner-phone-1.phone.right.topnav-offset
-  #partner-block-2.full-width.gray-background
+  #partner-block-2.full-width.gray-background.snap
     #custom-app.anchor
     .wrap
       #partner-section-2.section.right
@@ -67,7 +70,7 @@ block content
           li
             | Send Insights with your content from your leadership.
        #partner-phone-2.section.left.topnav-offset
-  #partner-block-3.full-width.blue-background
+  #partner-block-3.full-width.blue-background.snap
     #measure.anchor
     .wrap
       #partner-section-3.section.left
@@ -82,8 +85,8 @@ block content
           | respond to member needs with access to Prizm’s qualitative 
           | and quantitative data.
 
-      #partner-phone-2.section.right.topnav-offset
-  #partner-block-4.full-width.gray-background
+      #partner-phone-1.phone.right.topnav-offset
+  #partner-block-4.full-width.gray-background.snap
     #why-prizm.anchor
     .wrap
       #partner-section-4.section.right

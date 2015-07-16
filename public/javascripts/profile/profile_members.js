@@ -373,10 +373,8 @@ var members = {
       //$(target).children('.remove-menu').css('top', $(target).offset().top - 75 );
       $('tbody').css('overflow', 'hidden');
       $(target).children('.remove-menu').toggleClass('hidden');
-      $(target).parent().parent().append($(target).children('.remove-menu'));
     }
     else {
-      $(target).append($(target).parent().parent().children('.remove-menu'));
       $(target).children('.remove-menu').toggleClass('hidden');
       $('tbody').css('overflow', 'auto');
     }
