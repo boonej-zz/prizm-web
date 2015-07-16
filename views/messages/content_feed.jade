@@ -5,7 +5,12 @@
   form#changeName.hidden
     input(type='text' name='name' value='#{groupName?groupName.toLowerCase():""}' autofocus='autofocus')
   if isLeader && groupName
-    div#groupSettings(data-name='#{groupName}' onclick='messages.showEditGroup(event)')
+    #groupSettings(data-name='#{groupName}' onclick='messages.showEditGroup(event)')
+    #removeGroup(data-name='#{groupName}' onclick='messages.showRemoveTip(event)')
+      #removeTip.tooltip
+        p Are you sure you want to delete this group?
+        button.cancel Cancel
+        button.delete Delete
   span#groupMembers(onclick='messages.showMembers()') 
     span.group-count #{Number(count)}
   div#groupInfo(onclick='messages.showGroupInfo(event)' )
