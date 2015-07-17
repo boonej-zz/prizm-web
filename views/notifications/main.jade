@@ -8,28 +8,34 @@ block content
   .container.topnav-offset
     .notifications-header.page-header
       | Notifications
-    table#notifications
-      thead
-        tr
-          th Type
-          th Date
-          th Time
-          th Message
-          th Delivered
-          th Reply
-      tbody
-        each item in items
-          tr
-            td #{item.type}
-            td #{item.date}
-            td #{item.time}
-            td #{item.title}
-            td
-              if item.delivered
-                .delivered(onclick='notifications.showDelivered(event)'
-                 data-key='#{item.unique}')
-                   | #{item.delivered}
-            td
+    ul.notifications
+      li.head
+        .col Type
+        .col Date
+        .col Time
+        .col Message
+        .col Delivered
+        .col Reply
+      li.body
+        ul
+          each item in items
+            li 
+              .col #{item.type}
+              .col #{item.date}
+              .col #{item.time}
+              .col 
+                .title
+                  | #{item.title}
+                .message-tip
+                  | #{item.text}
+
+              .col
+                if item.delivered
+                  .delivered(onclick='notifications.showDelivered(event)'
+                    data-key='#{item.unique}')
+                    | #{item.delivered}
+              .col
+
   each item in items
     if item.delivered
       .modal-overlay.hidden(data-key='#{item.unique}' onclick='notifications.closeDelivered(event)')
