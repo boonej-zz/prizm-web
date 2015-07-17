@@ -10,7 +10,7 @@
       .comments-header
         .post-modal-avatar
           if post.creator.profile_photo_url
-            img(src='{post.creator.profile_photo_url}'
+            img(src='#{post.creator.profile_photo_url}'
                 class='prizm-avatar-sm'
                 onclick='prizm.showProfile("#{post.creator._id}")')
           else
