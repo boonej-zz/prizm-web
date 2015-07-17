@@ -241,97 +241,270 @@ ul#surveyAdmin {
 }
 
 ul#surveyAdmin li {
-  height: 3.75em;
-  line-height: 3.75em;
-  vertical-align: middle;
   width: 100%;
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid #c5c8cc;
-  box-shadow: 0 0.063em 0.063em rgba(0, 0, 0, 0.2);
+  display: block;
+  height: 3.75em;
 }
 
-#surveyAdmin .title-label, #surveyAdmin .title, #surveyAdmin .date-label, #surveyAdmin .date {
-  display: inline-block;
-  height: 100%;
-  line-height: 3.33em;
+ul#surveyAdmin li.control-board {
+  height: 3.75em;
+  line-height: 4em;
   vertical-align: middle;
-  float: left;
+  box-shadow: 0 0.063em 0.063em rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  background-color: #fefefe;
 }
 
-#surveyAdmin .title-label, #surveyAdmin .date-label {
-  color: #545358;
+ul#surveyAdmin li.control-board h3 {
   font-size: 1.125em;
-  font-weight: 600;
-  margin-right: 0.83em;
-  width: 12.93%;
+  line-height: 1.5em;
+  vertical-align: baseline;
+  margin: 0 0 0 1.3889em; 
+  padding-left: 1.34375em;
+  display: inline-block;
+  color: rgb(62, 106, 158);
+  background-image: url('/images/icons/dashboard.png');
+  background-repeat: no-repeat;
+  background-size: 0.94444em;
+  background-position: left 0.3em;
 }
 
-#surveyAdmin .date-label {
-  width: 11%;
-}
-
-#surveyAdmin .title, #surveyAdmin .date {
+ul#surveyAdmin li.head {
+  box-shadow: 0 0.031em 0 rgba(0, 0, 0, 0.2);
   color: #545358;
   font-weight: 400;
-  font-size: 0.94em;
-  width: 14.26%;
-  height: 1.77em;
-  line-height: 1.77em;
-  text-align: center;
-  vertical-align: middle;
-  margin-top: 1.14em;
-  border: 1px solid #e4e5ea;
-}
-
-#surveyAdmin .title {
-  margin-right: 4.5%;
-}
-
-#surveyAdmin .date {
-}
-button.details {
-  height: 100%;
-  width: 6.25%;
-  border: none;
-  outline: none;
-  background-image: url('/images/icons/button_details.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 1.66em;
-  background-color: inherit;
-  display: inline-block;
-  float: left;
-}
-
-button.resend {
-  margin-left: 8%;
-  width: 12.88%;
-  height: 2.306em;
-  margin-top: 1.07em;
-  font-size: 0.84em;
-  color: white;
-  float: left;
+  margin: 0;
   padding: 0;
-  line-height: 2.306px;
+  overflow: hidden;
+}
+
+ul#surveyAdmin li.body {
+  height: 600px;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+}
+
+ul#surveyAdmin li.body li {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+ul#surveyAdmin .col {
+  font-size: 0.938em; 
+  height: 4em;
+  line-height: 3.3em;
+  vertical-align: middle;
+  float: left;
+  padding: 0 0 0 1.66667em;
+  color: #545358;
+  margin: 0;
+}
+
+ul#surveyAdmin .col:not(:last-child) {
+  border-right: 1px solid #cbcbcb;
+}
+
+ul#surveyAdmin li.body li:first-child .col {
+  padding-top: 2em;
+  height: 6em;
+}
+
+ul#surveyAdmin .col:first-child {
+  width: 28.2%;
+}
+
+ul#surveyAdmin .col:nth-child(2) {
+  width: 24.8%;
+}
+
+ul#surveyAdmin .col:nth-child(3) {
+  width: 14.5%;
+}
+
+ul#surveyAdmin .col:nth-child(4) {
+  width: 32.5%;
+}
+
+ul#surveyAdmin li.head .col {
+  font-size: 1.125em;
+  font-weight: 400;
+  padding-left: 1.36111em;
   vertical-align: middle;
 }
 
-button.edit {
-  float: right;
-  clear: right;
-  width: 1.66em;
-  background: none;
-  background-image: url('/images/icons/edit_button_sm.png');
-  background-size: 1.66em;
-  background-repeat: no-repeat;
-  background-position: center;
-  border: none;
-  outline: none;
-  height: 1.66em;
-  margin-right: 0;
-  margin-top: 0.9em;
+.sortable {
+  cursor: pointer;
 }
 
+ul#surveyAdmin li.head .col.sortable:after {
+  content: '';
+  font-size: 1em;
+  width: 0.438em;
+  height: 0.25em;
+  background-size: 0.438em 0.25em;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-image: url('/images/icons/tooltip.png');
+  position: absolute;
+  margin-top: 1.875em;
+  margin-left: 0.6562em;
+}
 
+ul#surveyAdmin ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
+ul#surveyAdmin button {
+  -webkit-appearance: none;
+  border: none;
+  font-size: 1.06667em;
+  padding: 0;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  float: left;
+  margin-top: 1em;
+}
+
+ul#surveyAdmin button:not(:first-child) {
+  margin-left: 2.9375em;
+}
+
+ul#surveyAdmin button.summary {
+  width: 0.906em;
+  height: 1em;
+  background-image: url('/images/icons/survey_summary.png');
+}
+
+ul#surveyAdmin button.summary:hover {
+  /**
+  background-image: url('/images/icons/survey_summary_hover.png');
+  **/
+}
+
+ul#surveyAdmin button.graph {
+  width: 1em;
+  height: 0.875em;
+  background-image: url('/images/icons/survey_graph.png');
+}
+
+ul#surveyAdmin button.graph:hover {
+  background-image: url('/images/icons/survey_graph_hover.png');
+}
+
+ul#surveyAdmin button.resend {
+  width: 1.125em;
+  height: 0.78125em;
+  background-image: url('/images/icons/survey_resend.png');
+}
+
+ul#surveyAdmin button.resend:hover {
+  background-image: url('/images/icons/survey_resend_hover.png');
+}
+
+ul#surveyAdmin button.edit {
+  margin-top: 0.3958em;
+  width: 2.20833em;
+  height: 2.20833em;
+  background-image: url('/images/icons/survey_edit.png');
+  background-size: 1em;
+  background-position: center;
+}
+
+ul#surveyAdmin button.edit:hover {
+  background-image: url('/images/icons/survey_edit_hover.png');
+}
+
+ul#surveyAdmin button.edit.active {
+  background-image: url('/images/icons/survey_edit_hover.png');
+  border: 1px solid #c5c8cc;
+  border-radius: 3px;
+  box-shadow: 0 0.094em 0.156em rgba(0, 0, 0, 0.06);
+}
+
+.action-menu {
+  visibility: hidden;
+  position: absolute;
+  font-size: 0.8em;
+  padding: 0.625em;
+  margin: 0;
+  background-color: #fefefe;
+  border: 1px solid #c5c8cc;
+  border-radius: 2px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.06);
+  line-height: 1.2em;
+  margin-left: 20em;
+  z-index: 9999;
+}
+
+.action-menu:before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 9px 8px 9px 0px;
+  border-color: transparent #c5c8cc ;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: -8px;
+  top: 12px;
+
+}
+
+.action-menu:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 9px 8px 9px 0px;
+  border-color: transparent #fefefe;
+  display: block;
+  width: 0;
+  z-index: 0;
+  left: -7px;
+  top: 12px;
+}
+
+.action-menu .action-edit, .action-menu .action-delete  {
+  padding: 0 0 0 1.375em;
+  line-height: 1.3em;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  color: #9c9d9f;
+  background-position: left ;
+  height: 1.25em;
+  cursor: pointer;
+}
+
+.action-menu .action-edit:hover, .action-menu .action-delete:hover {
+  color: #3e6a9e;
+}
+
+.action-menu .action-edit {
+  margin: 0 0 1em 0;
+  background-image: url('/images/icons/action_edit.png');
+  background-size: 1.125em 1.25em;
+}
+
+.action-menu .action-delete {
+  background-image: url('/images/icons/action_delete.png');
+  background-size: 1.25em 1.25em;
+}
+
+.action-menu .action-edit:hover {
+  background-image: url('/images/icons/action_edit_selected.png');
+}
+
+.action-menu .action-delete:hover {
+  background-image: url('/images/icons/action_delete_selected.png');
+}
+
+ul#surveyAdmin button.edit.active + .action-menu {
+  visibility: visible;
+  z-index: 5000;
+}

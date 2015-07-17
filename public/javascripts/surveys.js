@@ -3,6 +3,23 @@ $(document).ready(function(){
 });
 
 var surveys = {
+  preloadIcons: function(){
+    var images = [];
+    var preload = [
+      //'/images/icons/survey_summary_hover.png',
+      '/images/icons/survey_graph_hover.png',
+      '/images/icons/survey_resend_hover.png',
+      '/images/icons/survey_edit_hover.png',
+      '/images/icons/action_edit_selected.png',
+      '/images/icons/action_delete_selected.png'
+    ];
+    for (var i = 0; i != preload.length; ++i) {
+      var im = new Image();
+      im.src = preload[i];
+      images.push(im);
+    }
+    return images;
+   },
    submit: function(e){
     var surveyID = $('#surveyID').val();
     var data = $(e.target).serialize();
@@ -28,5 +45,55 @@ var surveys = {
       }
     });
     return false;
+  },
+  sort: function(e){
+    var $rows = $('li.body ul li');
+    var type = $(e.target).attr('data-sort');
+    var sel = '.col[data-sort="' + type + '"]';
+    $rows.sort(function(a,b){
+      var asort, bsort;
+      if (type === 'date') {
+        asort = new Date($(a).children(sel).attr('data-date'));
+        bsort = new Date($(b).children(sel).attr('data-date'));
+      } else {
+        asort = $(a).children(sel).text();
+        bsort = $(b).children(sel).text();
+      }
+      console.log(asort + ' ' + bsort);
+      if (asort > bsort) {
+        if (type === 'date') {
+          return -1;
+        } 
+        return 1;
+      } else if (asort < bsort) {
+        if (type === 'date') {
+          return 1;
+        }
+        return -1;
+      }
+      return 0;
+    });
+    $rows.detach().appendTo('li.body ul');
+  },
+  bodyHandler: function(e) {
+    if (!$(e.target).is('.action-menu') && !$(e.target).parent().is('.action-menu')) {
+      $('#surveyAdmin button.edit').removeClass('active');
+      $('li.body').css('overflow', 'scroll');
+      $(window).unbind('click', surveys.bodyHandler);
+      $('#surveyAdmin button').bind('click', surveys.buttonHandler);
+    }
+  },
+  buttonHandler: function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    var action = $(e.target).attr('data-action');
+    var survey = $(e.target).attr('data-survey');
+    if (action === 'edit') {
+      $(e.target).addClass('active');
+      $(e.target).siblings('.action-menu').offset({top: $(e.target).offset().top});
+      $('li.body').css('overflow', 'hidden');
+      $('body').on('click', surveys.bodyHandler);
+      $('#surveyAdmin button').unbind('click', surveys.buttonHandler);
+    }
   }
 }

@@ -3,18 +3,38 @@ extends ../layouts/layout_app
 block head
   link(rel='stylesheet' type='text/css' href='/stylesheets/surveys.css')
   script(type='text/javascript' src='/javascripts/surveys.js')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      surveys.preloadIcons();
+      $('.col.sortable').click(surveys.sort);
+      $('.col button').click(surveys.buttonHandler);
+    });
 
 block content
   .container.topnav-offset
     .survey-header.page-header
       | Survey
     ul#surveyAdmin
-      each survey in surveys
-        li
-          button.details
-          .title-label Survey Name
-          .title #{survey.name}
-          .date-label Survey Date
-          .date #{survey.formattedDate}
-          button.resend Resend Survey
-          button.edit
+      li.control-board
+        h3 Dashboard
+      li.head
+        .col.sortable('data-sort'='name') Survey Name
+        .col.sortable('data-sort'='date') Survey Date
+        .col Responses
+        .col Action
+      li.body
+        ul
+          each survey in surveys
+            li
+              .col(data-sort='name') #{survey.name}
+              .col(data-sort='date' data-date='#{survey.create_date}') #{survey.formattedDate}
+              .col #{survey.completed.length}
+              .col
+                button.summary(data-survey='#{survey._id}' data-action='summary')
+                button.graph(data-survey='#{survey._id}' data-action='graph')
+                button.resend(data-survey='#{survey._id}' data-action='resend')
+                button.edit(data-survey='#{survey._id}' data-action='edit')
+                .action-menu
+                  .action-edit Edit
+                  .action-delete Delete
+

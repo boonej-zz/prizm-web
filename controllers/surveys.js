@@ -279,6 +279,7 @@ exports.adminPage = function(req, res){
       .populate({path: 'organization', select: {name: 1}})
       .populate({path: 'questions.answers', model: 'Answer'})
       .populate({path: 'groups', model: 'Group', select: {name: 1}})
+      .sort({create_date: -1, name: 1})
       .exec(function(err, surveys){
           if (err) console.log(err);
           if (surveys) {
