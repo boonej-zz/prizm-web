@@ -998,3 +998,29 @@ exports.showMessageViewOverlay = function(req, res){
     }
   });
 }
+
+exports.deleteGroup = function(req, res) {
+  var user = req.user;
+  var orgID = req.params.orgID;
+  var name = req.params.group;
+  Organization.findOne({owner: user._id, _id: orgID}, function(err, org){
+    if (org) {
+      Group.findOneAndUpdate({name: name, organization: orgID}, 
+        {$set: {status: 'inactive'}}, 
+        function(err, g) {
+          if (g) {
+            res.status(200).send();
+          } else {
+            if (err) console.log(err);
+            res.status(500).send('Server Error');
+          }
+
+      });
+    } else {
+      if (err) console.log(err);
+      res.status(403).send('unauthorized');
+    }
+  });
+  console.log(orgID);
+
+}

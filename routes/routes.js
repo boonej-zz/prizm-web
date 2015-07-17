@@ -172,6 +172,7 @@ router.get('/profile/settings/interests', _users.authRequired, _users.fetchInter
 router.get('/profile/settings/support', _users.authRequired, _users.fetchSupport);
 router.get('/profile/reset', _users.showPasswordModal);
 router.get('/organizations/:id/members', _users.authRequired, _users.displayMembers);
+router.delete('/organizations/:orgID/groups/:group', _users.authRequired, _messages.deleteGroup);
 router.get('/organizations/:id/members/new', _users.authRequired, _orgs.addMembers);
 router.post('/organizations/:id/members/new', _users.authRequired, _orgs.createInvites);
 router.post('/organizations/:id/members/invite', _users.authRequired, _orgs.sendInvites);

@@ -322,6 +322,71 @@ ul#topics li, ul#messages li, ul#members li {
   margin-left: 20px;
 }
 
+#removeTip {
+  position: absolute;
+  display: none;
+  background-color: #fefefe;
+  width: 10.5em;
+  margin-top: 3.8em; 
+  margin-left: -0.624em;
+  font-weight: 400;
+  font-size: 0.666em;
+  border: 1px #e4e5ea solid;
+  padding: 0.625em 0.75em 0.625em 0.75em;
+  line-height: 1.2em;
+  text-align: center;
+  z-index: 1;
+}
+
+#removeTip p {
+  width: 100%;
+  text-align: left;
+}
+
+#removeTip button {
+  font-size: 0.75em; 
+  width: 5.083em;
+  outline: none;
+  -webkit-appearance: none;
+  border: none;
+  background-color: #A8A9AD;
+  color: #fff;
+  display: inline-block;
+}
+
+#removeTip button.delete {
+  background-color: #334b8f;
+}
+
+#removeTip button:first {
+  margin-right: 1em;
+}
+
+#removeTip:before, #removeTip:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  font-size: 1em;
+  border-width: 0 0.5625em 0.5em 0.5625em;
+  display: block;
+  width: 0;
+  left: 0.624em;
+}
+
+#removeTip:before {
+  border-color: #e4e5ea transparent;
+  z-index: 0;
+  top: -0.5em;
+}
+
+#removeTip:after {
+
+  z-index: 1;
+  top: -0.4375em;
+  border-color: #fefefe transparent;
+}
+
+
 #groupInfo {
   height: 74px; 
   width: 24px;

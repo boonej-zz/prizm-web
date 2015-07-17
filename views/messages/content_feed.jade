@@ -6,11 +6,11 @@
     input(type='text' name='name' value='#{groupName?groupName.toLowerCase():""}' autofocus='autofocus')
   if isLeader && groupName
     #groupSettings(data-name='#{groupName}' onclick='messages.showEditGroup(event)')
-    #removeGroup(data-name='#{groupName}' onclick='messages.showRemoveTip(event)')
-      #removeTip.tooltip
+    #removeGroup(data-name='#{groupName}')
+      #removeTip
         p Are you sure you want to delete this group?
         button.cancel Cancel
-        button.delete Delete
+        button.delete(onclick='messages.deleteGroup(event)' data-name='#{groupName}') Delete
   span#groupMembers(onclick='messages.showMembers()') 
     span.group-count #{Number(count)}
   div#groupInfo(onclick='messages.showGroupInfo(event)' )

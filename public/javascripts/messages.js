@@ -24,6 +24,8 @@ var refreshTags = function(){
 
 function startPage(){
   refreshTags();
+  $('#removeGroup').unbind('click', messages.showRemoveTip);
+  $('#removeGroup').bind('click', messages.showRemoveTip);
   messages.scrollToLatest();
   $('#newMessage').submit(function(){
     var action = $('#newMessage').attr('data-action');
@@ -581,6 +583,35 @@ var messages = {
       $(document.body).removeClass('drag');
       messages.uploadImage(e);
     }
+  },
+  removeHandler: function(e){
+    var $c = $(e.target);
+    if ((!$c.is('#removeTip') && !$c.parent().is('#removeTip')) || $c.hasClass('cancel')) {
+      $('#removeTip').fadeOut('fast');
+      $('body').unbind('click', messages.removeHandler);
+      $('#removeGroup').bind('click', messages.showRemoveTip);
+    }
+  },
+  showRemoveTip: function(e){
+    $('#removeTip').fadeIn('fast', function(){
+      $('body').on('click', messages.removeHandler);
+      $('#removeGroup').unbind('click', messages.showRemoveTip);
+    });
+  },
+  deleteGroup: function(e) {
+    var name = $(e.target).attr('data-name');
+    var org = $('input#selectedOrganization').val();
+
+    $.ajax({
+      method: 'DELETE',
+      url: '/organizations/' + org + '/groups/' + name,
+      success: function(r){
+        window.location = window.location; 
+      },
+      error: function(e){
+        alert('This group could not be deleted at this time.');
+      }
+    });
   }
 };
 
