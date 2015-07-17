@@ -5,14 +5,7 @@ $(document).ready(function(){
 var surveys = {
   preloadIcons: function(){
     var images = [];
-    var preload = [
-      //'/images/icons/survey_summary_hover.png',
-      '/images/icons/survey_graph_hover.png',
-      '/images/icons/survey_resend_hover.png',
-      '/images/icons/survey_edit_hover.png',
-      '/images/icons/action_edit_selected.png',
-      '/images/icons/action_delete_selected.png'
-    ];
+    var preload = JSON.parse($('.preload').attr('data-images'));
     for (var i = 0; i != preload.length; ++i) {
       var im = new Image();
       im.src = preload[i];

@@ -383,9 +383,7 @@ ul#surveyAdmin button.summary {
 }
 
 ul#surveyAdmin button.summary:hover {
-  /**
   background-image: url('/images/icons/survey_summary_hover.png');
-  **/
 }
 
 ul#surveyAdmin button.graph {
