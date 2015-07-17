@@ -650,6 +650,13 @@ li#org-first{
   background-size: 400px 737px;
 }
 
+#partner-phone-4 {
+  background: url('/images/partner-phone4.png') no-repeat;
+  height: 565px;
+  width: 400px;
+  background-size: 400px 697px;
+}
+
 ul.text-box.column {
   padding-left: 20px;
   width: 540px;
