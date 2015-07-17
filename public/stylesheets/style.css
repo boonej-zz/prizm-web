@@ -592,7 +592,7 @@ li#org-first{
 }
 
 #partner-block-1 {
-  height: 640px;
+  min-height: 640px;
 }
 
 #partner-block-2 {
