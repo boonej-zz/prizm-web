@@ -378,9 +378,8 @@
     height: 800px;
   }
   
-  #partner-phone-1 {
+  #partner-phone-1, #partner-phone-4 {
     margin-top: 25px;
-    background: url('/images/partner-phone1.png') no-repeat;
     height: 382px;
     width: 280px;
     background-size: 280px 473px;
