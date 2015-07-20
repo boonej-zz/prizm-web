@@ -506,3 +506,167 @@ ul#surveyAdmin button.edit.active + .action-menu {
   visibility: visible;
   z-index: 5000;
 }
+
+/** RESULTS PAGE **/
+
+ul#surveyAdmin li.results, ul#surveyAdmin li.results li {
+  height: auto;
+}
+
+ul#surveyAdmin li.total {
+  font-size: 0.9375em;
+  height: 1.0333em;
+  padding-left: 5.2em;
+  margin-top: 1.3em;
+  color: #545358;
+  font-weight: 600;
+}
+
+ul#surveyAdmin li.total span {
+  display: inline-block;
+  height: 1.1em;
+  line-height: 1.1em;
+  vertical-align: top;
+  border-bottom: 1px solid #a8abb0;
+}
+
+ul#surveyAdmin li.results {
+  margin: 0;
+  width: 100%;
+}
+
+ul#surveyAdmin li.results .q-label {
+  display: inline-block;
+  font-size: 0.75em;
+  padding: 0.8333em 2em;
+  background-color: #f4f6f9;
+  color: #545358;
+  font-weight: 600;
+}
+
+ul#surveyAdmin li.results li.question {
+  padding: 3.3125em 4.875em 3.3125em 4.875em;
+  height: auto;
+  border-bottom: 1px solid #cbcbcb;
+}
+
+ul#surveyAdmin li.results .survey-row:last-child {
+  margin-top: 1em;
+}
+
+ul#surveyAdmin li.results .q-text {
+  display: inline-block;
+  font-size: 0.625em;
+  margin-left: 1.5em;
+  color: #545358;
+  font-weight: 400;
+}
+
+ul#surveyAdmin li.results .q-csv {
+  display: inline-block;
+  font-size: 0.469em;
+  width: 9.067em;
+  height: 2.4em;
+  vertical-align: middle;
+  text-align: left;
+  padding-left: 2.333em;
+  line-height: 2.6em;
+  background-color: #3e6a9e;
+  border: 0.031em solid #e2e4e8;
+  border-radius: 1px;
+  color: #fefefe;
+  background-image: url('/images/icons/export_csv.png');
+  background-repeat: no-repeat;
+  background-position: 5.5px center;
+  background-size: 7px 9px;
+  margin-right: 35.9333em;
+  cursor: pointer;
+}
+
+ul#surveyAdmin li.results .chart {
+  width: 16.656em;
+  height: 12.906em;
+  background-color: #f2f5fb;
+  padding-left: 1.65625em;
+  padding-top: 0.53125em;
+}
+
+ul#surveyAdmin li.results .chart.pie {
+  background-color: #fefefe;
+}
+
+ul#surveyAdmin .chart-data {
+  width: 21.063em;
+  height: auto;
+  background-color: #f2f5fb;
+  color: #545358;
+  margin: 0 0 0 auto;
+
+}
+
+ul#surveyAdmin .chart-body {
+  padding-bottom: 1.96875em;
+  padding-top: 1.96875em;
+}
+
+ul#surveyAdmin .chart-data .chart-row {
+  width: 100%;
+  padding: 0;
+}
+
+ul#surveyAdmin .chart-data .chart-header {
+  width: 100%;
+  height: 1.875em;
+  background-color: #e4e5ea;
+}
+
+ul#surveyAdmin .chart-data span {
+  display: inline-block;
+  text-align: right;
+}
+
+ul#surveyAdmin .chart-data .desc {
+  width: 53.7%;
+  padding-right: 1em;
+  font-size: 0.9375em;
+}
+
+ul#surveyAdmin .chart-data .val {
+  width: 8%;
+  text-align: center;
+  font-size: 0.53125em;
+}
+
+ul#surveyAdmin .chart-data .num {
+  width: 15%;
+  text-align: center;
+  font-size: 0.53125em;
+}
+
+ul#surveyAdmin .chart-data .per {
+  width: 18%;
+  text-align: center;
+  font-size: 0.53125em;
+}
+
+.left-half {
+  width: 50%;
+  text-align: left;
+  display: inline-block;
+  height: auto;
+  vertical-align: top;
+}
+
+.right-half {
+  width: 50%;
+  text-align: right;
+  display: inline-block;
+  height: auto;
+  vertical-align: top;
+}
+
+.margin-left {
+  width: 100%;
+  text-align: left;
+  height: auto;
+}

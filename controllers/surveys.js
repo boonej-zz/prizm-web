@@ -302,3 +302,71 @@ exports.adminPage = function(req, res){
   });
 
 };
+
+exports.results = function(req, res) {
+  var user = req.user;
+  var sid = req.params.id;
+  Organization.findOne({owner: user._id}, function(err, org){
+    if (org) {
+      Survey.findOne({_id: sid})
+      .populate({path: 'questions', model: 'Question'})
+      .populate({path: 'organization', select: {name: 1}})
+      .populate({path: 'groups', model: 'Group', select: {name: 1}})
+      .exec(function(err, survey){
+        Survey.populate(survey, {
+          path: 'questions.answers',
+          model: 'Answer'
+        }, function(err, survey){
+          var dataObject = {};
+          var values = {};
+          _.each(survey.questions, function(q, i){
+            dataObject[i] = {};
+            if (q.type == 'scale') {
+              for (var c = 1; c != q.scale + 1; ++c) {
+                dataObject[i][String(c)] = 0;
+              }
+            } else if (q.type == 'multiple') {
+              _.each(q.values, function(v){
+                dataObject[i][v.question] = 0;
+                values[String(v.order)] = v.question;
+              });
+            }
+            _.each(q.answers, function(a) {
+              if (q.type == 'scale') {
+                dataObject[String(i)][String(a.value)] += 1;
+              } else if (q.type == 'multiple') {
+                var key = values[String(a.value)];
+                dataObject[i][key] += 1;
+              }
+            });
+          });
+          var data = {};
+          var keys = _.keys(dataObject);
+          _.each(keys, function(k){
+            var item = dataObject[k];
+            data[k] = [];
+
+            data[k].push(['Option', 'Count']);
+            var iKeys = _.keys(item);
+            var numbers = [];
+            _.each(iKeys, function(ik){
+              data[k].push([ik, item[ik]]);
+            });
+          });
+          var util = require('util');
+          console.log(util.inspect(data));
+          res.render('surveys/results', {
+            currentUser: user,
+            auth: true,
+            survey: survey,
+            title: 'Survey',
+            bodyId: 'survey',
+            data: data 
+          });
+        });
+      });
+    } else {
+      res.status(403, 'Forbidden');
+    }
+  });
+}

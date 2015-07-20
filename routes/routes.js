@@ -235,6 +235,7 @@ router.post('/surveys/:survey_id/questions', _users.authRequired, _surveys.creat
 router.post('/surveys/:survey_id/groups', _users.authRequired, _surveys.publishSurvey);
 router.post('/surveys/:survey_id/answers', _surveys.answerQuestion);
 router.get('/surveys', _users.authRequired, _surveys.adminPage);
+router.get('/surveys/:id/results', _users.authRequired, _surveys.results);
 
 /** Redirect **/
 router.get('/redirect', function(req, res){

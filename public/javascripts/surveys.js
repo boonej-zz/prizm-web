@@ -88,5 +88,8 @@ var surveys = {
       $('body').on('click', surveys.bodyHandler);
       $('#surveyAdmin button').unbind('click', surveys.buttonHandler);
     }
+    if (action === 'graph') {
+      window.location = '/surveys/' + $(e.target).attr('data-survey') + '/results';
+    }
   }
 }
