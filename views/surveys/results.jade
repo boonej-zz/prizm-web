@@ -1,0 +1,175 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/surveys.css')
+  script(type='text/javascript' src='https://www.google.com/jsapi')
+  script(type='text/javascript' src='/javascripts/surveys.js')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      surveys.preloadIcons();
+      $('.col.sortable').click(surveys.sort);
+      $('.col button').click(surveys.buttonHandler);
+    });
+    google.load('visualization', '1.1', {packages:['corechart']});
+    google.setOnLoadCallback(drawCharts);
+    function drawCharts(){
+      var raw = !{JSON.stringify(data)};
+      var keys = [];
+      for (var k in raw) {
+        if (raw.hasOwnProperty(k)){
+          keys.push(k);
+        }
+      }
+      for (var i = 0; i < keys.length; ++i) {
+        console.log('in loop');
+        var sel = '#chart-' +  (i + 1);
+        var type = $(sel).attr('data-type');
+        var scale = $(sel).attr('data-scale');
+        var responses = $(sel).attr('data-responses');
+        var hticks = [];
+        if (type === 'scale') {
+          for (var p = 0; p != Number(scale); ++p) {
+            hticks.push(p + 1);
+          }
+          var vticks = [];
+          for (var p = 0; p != Number(responses); ++p) {
+            vticks.push(p)
+          }
+        }
+        var domEl = $(sel)[0];
+        var chartData = google.visualization.arrayToDataTable(raw[keys[i]]);
+        console.log('have chart data');
+        var view = new google.visualization.DataView(chartData);
+        var barOptions = {
+          backgroundColor: '#f2f5fb',
+          hAxis : {
+            format: '#',
+            ticks: hticks,
+            baseline: 0,
+            textStyle: {
+              fontName: 'Montserrat',
+              fontSize: 8
+            }
+
+          },
+          vAxis : {
+            ticks: vticks,
+            textStyle: {
+              fontName: 'Montserrat',
+              fontSize: 8
+            },
+            baseline: 0,
+            gridlines: {
+              color: '#f2f5fb'
+            }
+          },
+          series: {
+            0: {color: '#f28230', visibleInLegend: false}
+          },
+          bar: {
+            groupWidth: 10
+          },
+          legend: {
+            position: 'none'
+          }, 
+          chartArea: {
+            width: '91%',
+            height: '85%'
+          },
+          width: 266,
+          height: 206 
+        };
+        var pieOptions = {
+          backgroundColor: '#fefefe',
+          width: 218,
+          height: 158,
+          legend: 'none', 
+          chartArea: {
+            width: '91%',
+            height: '85%'
+          },
+          pieSliceText: 'label',
+          pieSliceTextStyle: {
+            color: '#fefefe',
+            fontName: 'Montserrat'
+          }
+
+
+        };
+        var chart;
+        if (type === 'scale') {
+          chart = new google.visualization.ColumnChart(domEl);
+          chart.draw(view, barOptions);
+        } else if (type === 'multiple') {
+          chart = new google.visualization.PieChart(domEl);
+          chart.draw(view, pieOptions);
+        }
+      }
+    }
+
+
+block content
+  .container.topnav-offset
+    .survey-header.page-header
+      | Survey
+    ul#surveyAdmin
+      li.control-board
+        h3 Dashboard
+      li.total
+        span
+          | #{survey.completed.length} Total Responses
+      li.results
+        ul
+          each question in survey.questions
+            - var cdata = {}
+            each answer in question.answers
+              if (cdata[String(answer.value)])
+                - cdata[String(answer.value)] += 1;
+              else
+                - cdata[String(answer.value)] = 1;
+            li.question
+              .survey-row
+                .left-half
+                  .q-label Question #{question.order}
+                  .q-text #{question.text}
+                .right-half
+                  .q-csv Export as CSV
+              .survey-row
+                .left-half
+                  .chart(id='chart-#{question.order}' class=question.type == 'multiple'?'pie':'' data-order='#{question.order}' data-type='#{question.type}' data-scale='#{question.scale}' data-responses='#{question.answers.length + 5}')
+                .right-half  
+                  .chart-data
+                    .chart-header
+                      span.desc
+                      span.val
+                      span.num #
+                      span.per %
+                    .chart-body
+                      - var i = 1
+                      if question.type == 'scale'
+                        while i <= question.scale 
+                          .chart-row
+                            - var val = cdata[i]||0
+                            span.desc 
+                              if i == 1
+                                | Strongly Disagree
+                              else if i == question.scale
+                                | Strongly Agree
+                            span.val  #{String(i)}
+                            span.num  #{val}
+                            span.per  #{(val/Number(question.answers.length))*100}%
+                            - i += 1
+                      else if question.type == 'multiple'
+                        - i = 0
+                        while i < question.values.length
+                          .chart-row
+                            - var val = cdata[i]||0
+                            span.desc #{question.values[i].question}
+                            span.val
+                            span.num #{val}
+                            span.per #{(val/Number(question.answers.length))*100}%
+                            - i = i + 1
+
+
+
+
