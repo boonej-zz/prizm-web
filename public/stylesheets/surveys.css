@@ -263,6 +263,7 @@ ul#surveyAdmin li.control-board h3 {
   vertical-align: baseline;
   display: inline-block;
   width: 33.3333%;
+  font-size: 1.125em;
 }
 
 ul#surveyAdmin li.control-board h3.active {
@@ -295,7 +296,6 @@ h3 span {
   background-repeat: no-repeat;
   background-size: 0.94444em;
   background-position: left 0.3em;
-  font-size: 0.667em;
   color: #545358;
   padding-left: 1.34375em;
   vertical-align: middle;
@@ -570,9 +570,9 @@ ul#surveyAdmin li.results, ul#surveyAdmin li.results li {
 }
 
 ul#surveyAdmin li.total {
-  font-size: 0.9375em;
+  font-size: 1.125em;
   height: 1.0333em;
-  padding-left: 5.2em;
+  padding-left: 4.3333em;
   margin-top: 1.3em;
   color: #545358;
   font-weight: 600;
@@ -592,10 +592,8 @@ ul#surveyAdmin li.results {
 }
 
 ul#surveyAdmin li.results .q-label {
-  display: inline-block;
-  font-size: 0.75em;
-  padding: 0.8333em 2em;
-  background-color: #f4f6f9;
+  display: block;
+  font-size: 1.125em;
   color: #545358;
   font-weight: 600;
 }
@@ -606,23 +604,26 @@ ul#surveyAdmin li.results li.question {
   border-bottom: 1px solid #cbcbcb;
 }
 
+ul#surveyAdmin li.results li.question:first-child {
+  padding-top: 1.78125em;
+}
+
 ul#surveyAdmin li.results .survey-row:last-child {
   margin-top: 1em;
 }
 
 ul#surveyAdmin li.results .q-text {
   display: inline-block;
-  font-size: 0.625em;
-  margin-left: 1.5em;
+  font-size: 1em;
   color: #545358;
   font-weight: 400;
 }
 
 ul#surveyAdmin li.results .q-csv {
   display: inline-block;
-  font-size: 0.469em;
-  width: 9.067em;
-  height: 2.4em;
+  font-size: 0.906em;
+  width: 9.3819em;
+  height: 2.483em;
   vertical-align: middle;
   text-align: left;
   padding-left: 2.333em;
@@ -634,8 +635,9 @@ ul#surveyAdmin li.results .q-csv {
   background-image: url('/images/icons/export_csv.png');
   background-repeat: no-repeat;
   background-position: 5.5px center;
-  background-size: 7px 9px;
-  margin-right: 35.9333em;
+  background-size: 14px 18px;
+  margin-right: 13.866em;
+  font-weight: 400;
   cursor: pointer;
 }
 
@@ -684,25 +686,25 @@ ul#surveyAdmin .chart-data span {
 ul#surveyAdmin .chart-data .desc {
   width: 53.7%;
   padding-right: 1em;
-  font-size: 0.9375em;
+  font-size: 1em;
 }
 
 ul#surveyAdmin .chart-data .val {
   width: 8%;
   text-align: center;
-  font-size: 0.53125em;
+  font-size: 0.75em;
 }
 
 ul#surveyAdmin .chart-data .num {
   width: 15%;
   text-align: center;
-  font-size: 0.53125em;
+  font-size: 0.75em;
 }
 
 ul#surveyAdmin .chart-data .per {
   width: 18%;
   text-align: center;
-  font-size: 0.53125em;
+  font-size: 0.75em;
 }
 
 .left-half {

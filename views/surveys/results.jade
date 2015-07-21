@@ -47,7 +47,7 @@ block head
             baseline: 0,
             textStyle: {
               fontName: 'Montserrat',
-              fontSize: 8,
+              fontSize: 9,
               color: '#545358'
             }
 
@@ -56,7 +56,7 @@ block head
             format: '#',
             textStyle: {
               fontName: 'Montserrat',
-              fontSize: 8,
+              fontSize: 9,
               color: '#545358'
             },
             baseline: 0,
@@ -112,6 +112,7 @@ block content
   script(type='text/javascript').
     surveys.preloadIcons()
   .container.topnav-offset
+    input#surveyID(type='hidden' value='#{survey._id}')
     .survey-header.page-header
       | Survey
     ul#surveyAdmin
@@ -140,7 +141,7 @@ block content
                   .q-label Question #{question.order}
                   .q-text #{question.text}
                 .right-half
-                  .q-csv Export as CSV
+                  .q-csv(onclick='surveys.exportCSV(event)' data-question='#{question._id}') Export as CSV
               .survey-row
                 .left-half
                   .chart(id='chart-#{question.order}' class=question.type == 'multiple'?'pie':'' data-order='#{question.order}' data-type='#{question.type}' data-scale='#{question.scale}' data-responses='#{question.answers.length + 5}')

@@ -103,5 +103,11 @@ var surveys = {
     $('.tab-block:first-child').addClass('active');
     $('ul#nonresponders').hide();
     $('ul#responders').show();
+  },
+  exportCSV: function(e) {
+    var surveyID = $('#surveyID').val();
+    var questionID = $(e.target).attr('data-question');
+    var path = '/surveys/' + surveyID + '/questions/' + questionID + '/export.csv';
+    window.location = path;
   }
 }

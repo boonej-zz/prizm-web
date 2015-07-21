@@ -509,3 +509,45 @@ exports.summary = function(req, res){
   });
 
 };
+
+exports.exportCSV = function(req, res) {
+  var user = req.user;
+  var sid = req.params.sid;
+  var qid = req.params.qid;
+  Organization.findOne({owner: user._id}, function(err, org){
+    if (org) {
+      Question.findOne({_id: qid})
+      .populate({path: 'answers', model: 'Answer'})
+      .exec(function(err, question){
+        Question.populate(question, {path: 'answers.user', model: 'User'}, function(err, question){
+          var csv = '';
+          var array = [];
+          array.push([question.text + ',,']);
+          array.push(['User,Date,Answer']);
+          _.each(question.answers, function(answer){
+            var line = [];
+            line.push(answer.user.name);
+            line.push(answer.create_date);
+            var value = answer.value;
+            if (question.type == 'multiple') {
+              _.each(question.values, function(qv){
+                if (qv.order == value) {
+                  value = qv.question;
+                }
+              });
+            }
+            line.push(value);
+            line = line.join(',');
+            array.push(line);
+          });
+          csv = array.join('\n');
+          res.status(200);
+          res.contentType('application/octet-stream');
+          res.send(csv);
+        });
+      }); 
+    } else {
+      res.status(403).send('Forbidden');
+    }
+  });
+};

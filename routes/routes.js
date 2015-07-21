@@ -237,6 +237,7 @@ router.post('/surveys/:survey_id/answers', _surveys.answerQuestion);
 router.get('/surveys', _users.authRequired, _surveys.adminPage);
 router.get('/surveys/:id/results', _users.authRequired, _surveys.results);
 router.get('/surveys/:id/summary', _users.authRequired, _surveys.summary);
+router.get('/surveys/:sid/questions/:qid/export.csv', _users.authRequired, _surveys.exportCSV);
 
 /** Redirect **/
 router.get('/redirect', function(req, res){
