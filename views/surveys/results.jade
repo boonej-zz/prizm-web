@@ -6,7 +6,6 @@ block head
   script(type='text/javascript' src='/javascripts/surveys.js')
   script(type='text/javascript').
     $(document).ready(function(){
-      surveys.preloadIcons();
       $('.col.sortable').click(surveys.sort);
       $('.col button').click(surveys.buttonHandler);
     });
@@ -109,6 +108,9 @@ block head
 
 
 block content
+  .preload(data-images='["/images/icons/export_csv.png", "/images/icons/dashboard.png", "/images/icons/dashboard_active.png", "/images/icons/results.png", "/images/icons/results_active.png", "/images/icons/summary.png", "/images/icons/summary_active.png"]')
+  script(type='text/javascript').
+    surveys.preloadIcons()
   .container.topnav-offset
     .survey-header.page-header
       | Survey
