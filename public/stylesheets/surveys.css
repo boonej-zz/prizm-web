@@ -255,20 +255,76 @@ ul#surveyAdmin li.control-board {
   box-shadow: 0 0.063em 0.063em rgba(0, 0, 0, 0.2);
   z-index: 10;
   background-color: #fefefe;
+  padding-left: 1.5625em;
+  padding-right: 1.5625em;
 }
 
 ul#surveyAdmin li.control-board h3 {
-  font-size: 1.125em;
-  line-height: 1.5em;
   vertical-align: baseline;
-  margin: 0 0 0 1.3889em; 
-  padding-left: 1.34375em;
   display: inline-block;
-  color: rgb(62, 106, 158);
-  background-image: url('/images/icons/dashboard.png');
+  width: 33.3333%;
+}
+
+ul#surveyAdmin li.control-board h3.active {
+}
+
+ul#surveyAdmin li.control-board h3:nth-child(2){
+  text-align: center;
+}
+
+ul#surveyAdmin li.control-board h3 span {
+  text-align: left;
+  cursor: pointer;
+}
+
+
+ul#surveyAdmin li.control-board h3 span.active {
+
+  color: #336c9f;
+} 
+
+
+
+ul#surveyAdmin li.control-board h3:nth-child(3) {
+  text-align: right;
+}
+
+
+
+h3 span {
   background-repeat: no-repeat;
   background-size: 0.94444em;
   background-position: left 0.3em;
+  font-size: 0.667em;
+  color: #545358;
+  padding-left: 1.34375em;
+  vertical-align: middle;
+  line-height: 1.5em;
+  display: inline-block;
+}
+
+h3 .dashboard {
+  background-image: url('/images/icons/dashboard.png');
+}
+
+h3 .dashboard.active {
+  background-image: url('/images/icons/dashboard_active.png');  
+}
+
+h3 .results {
+  background-image: url('/images/icons/results.png');
+}
+
+h3 .results.active {
+  background-image: url('/images/icons/results_active.png');
+}
+
+h3 .summary {
+  background-image: url('/images/icons/summary.png');
+}
+
+h3 .summary.active {
+  background-image: url('/images/icons/summary_active.png');
 }
 
 ul#surveyAdmin li.head {

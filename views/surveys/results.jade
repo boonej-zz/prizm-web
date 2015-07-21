@@ -48,18 +48,20 @@ block head
             baseline: 0,
             textStyle: {
               fontName: 'Montserrat',
-              fontSize: 8
+              fontSize: 8,
+              color: '#545358'
             }
 
           },
           vAxis : {
+            format: '#',
             textStyle: {
               fontName: 'Montserrat',
-              fontSize: 8
+              fontSize: 8,
+              color: '#545358'
             },
             baseline: 0,
             gridlines: {
-              color: '#f2f5fb'
             }
           },
           series: {
@@ -72,7 +74,7 @@ block head
             position: 'none'
           }, 
           chartArea: {
-            width: '91%',
+            width: '85%',
             height: '85%'
           },
           width: 266,
@@ -87,7 +89,6 @@ block head
             width: '91%',
             height: '85%'
           },
-          pieSliceText: 'label',
           pieSliceTextStyle: {
             color: '#fefefe',
             fontName: 'Montserrat'
@@ -113,7 +114,12 @@ block content
       | Survey
     ul#surveyAdmin
       li.control-board
-        h3 Dashboard
+        h3
+          span.dashboard(onclick='nav.navigate("/surveys")') Dashboard
+        h3
+          span.results.active Results
+        h3
+          span.summary Summary
       li.total
         span
           | #{survey.completed.length} Total Responses
