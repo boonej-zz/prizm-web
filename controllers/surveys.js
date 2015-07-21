@@ -370,3 +370,142 @@ exports.results = function(req, res) {
     }
   });
 }
+
+exports.summary = function(req, res){
+  var user = req.user;
+  var sid = req.params.id;
+  Organization.findOne({owner: user._id}, function(err, org){
+    if (org) {
+      Survey.findOne({_id: sid})
+      .populate({path: 'questions', model: 'Question'})
+      .populate({path: 'organization', select: {name: 1}})
+      .populate({path: 'groups', model: 'Group', select: {_id: 1, name: 1}})
+      .populate({path: 'completed', model: 'User', select: {_id: 1, name: 1, profile_photo_url: 1}})
+      .exec(function(err, survey){
+        Survey.populate(survey, {
+          path: 'questions.answers',
+          model: 'Answer'
+        }, function(err, survey){
+          Survey.find({creator: user._id, create_date: {$lte: survey.create_date}})
+          .sort({create_date: -1})
+          .limit(8)
+          .exec(function(err, surveys){
+            surveys = surveys.reverse();
+            var criteria = {
+              org_status : {
+                             $elemMatch: {
+                               status: 'active',
+                               organization: org._id,
+                           }
+                           }
+            };
+            var myGroupUsers = [];
+            User.find(criteria)
+            .select({_id: 1, org_status: 1, name: 1, profile_photo_url: 1})
+            .exec(function(err, users) {
+              var data = [['Date', 'Surveys Sent', 'Responses']];
+              _.each(surveys, function(s) {
+                var date = moment(s.create_date).format('M/D');
+                var pair = [];
+                pair.push(date);
+                var groupUsers = _.filter(users, function(obj){
+                  if (s.target_all) {
+                    return true;
+                  }
+                  var os = false;
+                  _.each(obj.org_status, function(o){
+                    if (String(o.organization) == String(org._id)){
+                      os = o;
+                    }
+                  });
+                  var uGroups = os.groups;
+                  var uNew = [];
+                  _.each(uGroups, function(g, i) {
+                    uNew.push(String(g));
+                  });
+                  var sGroups = s.groups;
+                  var sNew = [];
+                  _.each(sGroups, function(g, i) {
+                    sNew.push(String(g));
+                  });
+                  
+                  var intersection = _.intersection(sNew, uNew);
+                  if (sNew.length > 0) {
+                  }
+                  if (intersection.length > 0) {
+                    return true;
+                  }
+                  return false;
+                });
+                if (String(s._id) == String(survey._id)) {
+                  myGroupUsers = groupUsers;
+                }
+                pair.push(groupUsers.length);
+                pair.push(s.completed.length);
+                data.push(pair);
+              });
+              var completed = [];
+              _.each(survey.completed, function(u){
+                var obj = {};
+                obj.user = u;
+                var userAnswers = [];
+                _.each(survey.questions, function(q){
+                  var ans = _.filter(q.answers, function(a){
+                    if (String(a.user) == String (u._id)) {
+                      return true;
+                    }
+                    return false;
+                  });
+                  _.each(ans, function(a){
+                    userAnswers.push(a);
+                  });
+                });
+                var lastDate = false;
+                var firstDate = false;
+                console.log(userAnswers);
+                _.each(userAnswers, function(ua){
+                  console.log(ua);
+                  if (!lastDate) lastDate = ua.create_date;
+                  if (!firstDate) firstDate = ua.create_date;
+                  if (ua.createDate < firstDate) {
+                    firstDate = ua.createDate
+                  }
+                  if (ua.createDate > lastDate) {
+                    lastDate = ua.createDate;
+                  }
+                });
+                obj.start = moment(firstDate).format('h:mmA');
+                obj.finish = moment(lastDate).format('h:mmA');
+                obj.date = moment(lastDate).format('M/D/YYYY');
+                obj.duration = moment.utc(moment.duration(moment(lastDate).subtract(firstDate)).asMilliseconds()).format('HH:mm:ss');
+                completed.push(obj);
+              });
+              var nonresponders = _.filter(myGroupUsers, function(userObj){
+                var valid = true;
+                _.each(survey.completed, function(comp){
+                  if (String(userObj._id) == String(comp._id)) {
+                    valid = false;
+                  }
+                });
+                return valid;
+              });
+              res.render('surveys/summary', {
+                currentUser: user,
+                auth: true,
+                survey: survey,
+                title: 'Survey',
+                bodyId: 'survey',
+                data: data,
+                completed: completed,
+                nonresponders: nonresponders
+              });
+            });
+          });
+        });
+      });
+    } else {
+      res.status(403).send('Forbidden');
+    }
+  });
+
+};

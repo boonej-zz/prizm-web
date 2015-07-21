@@ -88,8 +88,20 @@ var surveys = {
       $('body').on('click', surveys.bodyHandler);
       $('#surveyAdmin button').unbind('click', surveys.buttonHandler);
     }
-    if (action === 'graph') {
-      window.location = '/surveys/' + $(e.target).attr('data-survey') + '/results';
+    if (action === 'results' || action === 'summary') {
+      window.location = '/surveys/' + $(e.target).attr('data-survey') + '/' + action;
     }
+  },
+  showNonresponders: function(e){
+    $('.tab-block').removeClass('active');
+    $('.tab-block:last-child').addClass('active');
+    $('ul#responders').hide();
+    $('ul#nonresponders').show();
+  },
+  showResponders: function(e){
+    $('.tab-block').removeClass('active');
+    $('.tab-block:first-child').addClass('active');
+    $('ul#nonresponders').hide();
+    $('ul#responders').show();
   }
 }

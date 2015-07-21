@@ -121,7 +121,7 @@ block content
         h3
           span.results.active Results
         h3
-          span.summary Summary
+          span.summary(onclick='nav.navigate("/surveys/#{survey._id}/summary")') Summary
       li.total
         span
           | #{survey.completed.length} Total Responses

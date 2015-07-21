@@ -726,3 +726,122 @@ ul#surveyAdmin .chart-data .per {
   text-align: left;
   height: auto;
 }
+
+/** SUMMARY PAGE **/
+
+ul#surveyAdmin li.summary-chart {
+  height: auto;
+  padding-top: 3.5em;
+  padding-bottom: 3.5em;
+}
+
+#summaryChart {
+  height: 248px;
+  width: 896px;
+  border: 1px solid #ddd;
+  margin: 0 auto;
+  display: block;
+}
+
+ul#surveyAdmin li.summary-responses {
+  height: auto;
+}
+
+ul#surveyAdmin li.summary-responses h4 {
+  font-size: 1.25em;
+  height: 2em;
+  line-height: 2em;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+  color: #545358;
+  background-color: #f4f5f7;
+  width: 100%;
+}
+
+ul#surveyAdmin li.summary-responses .tabs {
+  font-size: 1.125em;
+  height: 2.0869em;
+  width: 100%;
+  background-color: #fefefe;
+  border-bottom: 1px solid #c6c8cc;
+}
+
+.tabs .tab-block {
+  display: inline-block;
+  height: 100%;
+  width: 10.722em;
+  text-align: center;
+  color: #949292;
+  line-height: 2.0869em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.tabs .tab-block.active {
+  color: #334b8f;
+}
+
+.tabs .tab-block:first-child {
+  border-right: 1px solid #c6c8cc;
+}
+
+ul#surveyAdmin ul.user-list li {
+  padding-top: 1.4375em;
+  font-size: 1em;
+  height: 4.03em;
+  color: #7e7e7f;
+  border-bottom: 1px solid #c6c8cc;
+}
+
+ul#surveyAdmin ul.user-list li:first-child {
+  padding-top: 0;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+  color: #545358;
+}
+
+ul.user-list li div {
+  display: inline-block;
+}
+
+ul.user-list .name {
+  width: 45%;
+  padding-left: 1.53125em;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+ul.user-list .name .profile-avatar {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 2.1875em;
+  width: 2.1875em;
+  border: 1px solid #e1e2f3;
+  border-radius: 50%;
+  margin-right: 0.65625em;
+  vertical-align: top;
+  margin-top: -0.375em;
+}
+
+ul.user-list .name .profile-name {
+  vertical-align: top;
+}
+
+ul.user-list .date {
+  width: 17%;
+}
+
+ul.user-list .time {
+  width: 17%;
+}
+
+ul.user-list .duration {
+  width: 16%;
+}
+
+ul#nonresponders {
+  display: none;
+}

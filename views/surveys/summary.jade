@@ -1,0 +1,96 @@
+extends ../layouts/layout_app
+
+block head
+  link(rel='stylesheet' type='text/css' href='/stylesheets/surveys.css')
+  script(type='text/javascript' src='https://www.google.com/jsapi')
+  script(type='text/javascript' src='/javascripts/surveys.js')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $('.col.sortable').click(surveys.sort);
+      $('.col button').click(surveys.buttonHandler);
+    });
+    google.load('visualization', '1.1', {packages:['corechart']});
+    google.setOnLoadCallback(drawCharts);
+    function drawCharts() {
+      var raw = !{JSON.stringify(data)};
+      var chartData = google.visualization.arrayToDataTable(raw);
+      var view = new google.visualization.DataView(chartData);
+      var options = {
+        height: 246,
+        width: 894,
+        focusTarget: 'category',
+        chartArea: {
+          width: '85%',
+          height: '85%'
+        },
+        series: {
+          0: {
+            color: '#d7eab2'
+          },
+          1: {
+            color: '#9bca3e'
+          }
+        },
+        legend: {
+          position: 'top',
+          alignment: 'center'
+        }
+      };
+      var elem = document.getElementById('summaryChart');
+      var chart = new google.visualization.ColumnChart(elem);
+      chart.draw(view, options);
+    }
+
+block content
+  .preload(data-images='["/images/icons/export_csv.png", "/images/icons/dashboard.png", "/images/icons/dashboard_active.png", "/images/icons/results.png", "/images/icons/results_active.png", "/images/icons/summary.png", "/images/icons/summary_active.png"]')
+  script(type='text/javascript').
+    surveys.preloadIcons()
+  .container.topnav-offset
+    .survey-header.page-header
+      | Survey
+    ul#surveyAdmin
+      li.control-board
+        h3
+          span.dashboard(onclick='nav.navigate("/surveys")') Dashboard
+        h3
+          span.results(onclick='nav.navigate("/surveys/#{survey._id}/results")') Results
+        h3
+          span.summary.active Summary
+      li.summary-chart
+        #summaryChart
+      li.summary-responses
+        h4 Responses
+        .tabs
+          .tab-block.active(onclick='surveys.showResponders(event)') Respondents (#{survey.completed.length})
+          .tab-block(onclick='surveys.showNonresponders(event)') Non-Respondents (#{nonresponders.length})
+        ul#responders.user-list
+          li
+            .name Name
+            .date Date
+            .time Time
+            .duration Duration
+          each obj in completed
+            li
+              .name(onclick='nav.navigate("/profiles/#{obj.user._id}")')
+                - var profilePhoto = obj.user.profile_photo_url || '/images/default_profile.png'
+                .profile-avatar(style='background-image:url("#{profilePhoto}")')
+                .profile-name
+                  | #{obj.user.name}
+              .date #{obj.date}
+              .time #{obj.start}
+              .duration #{obj.duration}
+        ul#nonresponders.user-list
+          li
+            .name Name
+            .date Date
+            .time Time
+            .duration Duration
+          each obj in nonresponders
+            - var profilePhoto = obj.profile_photo_url || '/images/default_profile.png'
+            li
+              .name(onclick='nav.navigate("/profiles/#{obj._id}")') 
+                .profile-avatar(style='background-image:url("#{profilePhoto}")')
+                .profile-name #{obj.name}
+              .date
+              .time
+              .duration

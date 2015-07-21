@@ -18,7 +18,7 @@ block content
     ul#surveyAdmin
       li.control-board
         h3 
-          span.dashboard Dashboard
+          span.dashboard.active Dashboard
       li.head
         .col.sortable('data-sort'='name') Survey Name
         .col.sortable('data-sort'='date') Survey Date
@@ -33,7 +33,7 @@ block content
               .col #{survey.completed.length}
               .col
                 button.summary(data-survey='#{survey._id}' data-action='summary')
-                button.graph(data-survey='#{survey._id}' data-action='graph')
+                button.graph(data-survey='#{survey._id}' data-action='results')
                 button.resend(data-survey='#{survey._id}' data-action='resend')
                 button.edit(data-survey='#{survey._id}' data-action='edit')
                 .action-menu
