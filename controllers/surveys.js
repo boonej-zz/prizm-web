@@ -505,7 +505,7 @@ exports.exportCSV = function(req, res) {
                 if (q.type == 'multiple') {
                   _.each(q.values, function(qv){
                     if (qv.order == aw) {
-                      aw = qv.text;
+                      aw = qv.question;
                     }
                   });
                 }
