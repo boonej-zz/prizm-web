@@ -486,39 +486,48 @@ exports.summary = function(req, res){
 exports.exportCSV = function(req, res) {
   var user = req.user;
   var sid = req.params.sid;
-  var qid = req.params.qid;
   Organization.findOne({owner: user._id}, function(err, org){
     if (org) {
-      Question.findOne({_id: qid})
-      .populate({path: 'answers', model: 'Answer'})
-      .exec(function(err, question){
-        Question.populate(question, {path: 'answers.user', model: 'User'}, function(err, question){
-          var csv = '';
-          var array = [];
-          array.push([question.text + ',,']);
-          array.push(['User,Date,Answer']);
-          _.each(question.answers, function(answer){
-            var line = [];
-            line.push(answer.user.name);
-            line.push(answer.create_date);
-            var value = answer.value;
-            if (question.type == 'multiple') {
-              _.each(question.values, function(qv){
-                if (qv.order == value) {
-                  value = qv.question;
+      Survey.findOne({_id: sid})
+      .populate({path: 'questions', model: 'Question'})
+      .exec(function(err, survey){
+        Survey.populate(survey, {path: 'questions.answers', model: 'Answer'}, function(err, survey){
+          Survey.populate(survey, {path: 'questions.answers.user', model: 'User'}, function(err, survey){
+            var headers = [];
+            var body = [];
+            var answers = {};
+            headers.push('User');
+            headers.push('Time');
+            _.each(survey.questions, function(q){
+              headers.push(q.text);
+              _.each(q.answers, function(a){
+                var aw = a.value;
+                if (q.type == 'multiple') {
+                  _.each(question.values, function(qv){
+                    if (qv.order == aw) {
+                      aw = qv.question;
+                    }
+                  });
                 }
+                if (!answers[a.user._id]) {
+                  answers[a.user._id] = [a.user.name, a.create_date];
+                }
+                answers[a.user._id].push(aw);
               });
+            });
+            var csv = [];
+            csv.push(headers.join(','));
+            for (var key in answers) {
+              csv.push(answers[key].join(','));
             }
-            line.push(value);
-            line = line.join(',');
-            array.push(line);
+            csv = csv.join('\n');
+            res.status(200);
+            res.contentType('application/octet-stream');
+            res.send(csv);
+
           });
-          csv = array.join('\n');
-          res.status(200);
-          res.contentType('application/octet-stream');
-          res.send(csv);
         });
-      }); 
+      });
     } else {
       res.status(403).send('Forbidden');
     }

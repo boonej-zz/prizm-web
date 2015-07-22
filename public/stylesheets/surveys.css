@@ -619,7 +619,7 @@ ul#surveyAdmin li.results .q-text {
   font-weight: 400;
 }
 
-ul#surveyAdmin li.results .q-csv {
+ul#surveyAdmin .q-csv {
   display: inline-block;
   font-size: 0.906em;
   width: 9.3819em;
@@ -636,7 +636,7 @@ ul#surveyAdmin li.results .q-csv {
   background-repeat: no-repeat;
   background-position: 5.5px center;
   background-size: 14px 18px;
-  margin-right: 13.866em;
+  margin-right: 4.862em;
   font-weight: 400;
   cursor: pointer;
 }

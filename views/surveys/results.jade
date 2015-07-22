@@ -113,7 +113,6 @@ block content
   script(type='text/javascript').
     surveys.preloadIcons()
   .container.topnav-offset
-    input#surveyID(type='hidden' value='#{survey._id}')
     .survey-header.page-header
       | Survey
     ul#surveyAdmin
@@ -125,8 +124,13 @@ block content
         h3
           span.summary(onclick='nav.navigate("/surveys/#{survey._id}/summary")') Summary
       li.total
-        span
-          | #{survey.completed.length} Total Responses
+        .left-half
+          span
+            | #{survey.completed.length} Total Responses
+        .right-half
+          .q-csv(onclick='nav.navigate("/surveys/#{survey._id}/export.csv")')
+            | Export as CSV
+
       li.results
         ul
           each question in survey.questions
@@ -138,11 +142,8 @@ block content
                 - cdata[String(answer.value)] = 1;
             li.question
               .survey-row
-                .left-half
-                  .q-label Question #{question.order}
-                  .q-text #{question.text}
-                .right-half
-                  .q-csv(onclick='surveys.exportCSV(event)' data-question='#{question._id}') Export as CSV
+                .q-label Question #{question.order}
+                .q-text #{question.text}
               .survey-row
                 .left-half
                   .chart(id='chart-#{question.order}' class=question.type == 'multiple'?'pie':'' data-order='#{question.order}' data-type='#{question.type}' data-scale='#{question.scale}' data-responses='#{question.answers.length + 5}')
