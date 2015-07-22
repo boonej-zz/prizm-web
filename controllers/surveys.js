@@ -503,7 +503,7 @@ exports.exportCSV = function(req, res) {
               _.each(q.answers, function(a){
                 var aw = a.value;
                 if (q.type == 'multiple') {
-                  _.each(question.values, function(qv){
+                  _.each(q.values, function(qv){
                     if (qv.order == aw) {
                       aw = qv.text;
                     }
