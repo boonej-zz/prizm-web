@@ -985,8 +985,10 @@ var survey = {
   },
   validate: function(e){
     var valid = true;
-    $('#newSurvey input').each(function(){
+    $('#newSurvey input:not("#originalID")').each(function(){
       var $this = $(this);
+      console.log($this.attr('id'));
+      console.log($this.val());
       if (!$this.val()) {
         valid = false;
       }

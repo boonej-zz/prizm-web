@@ -733,7 +733,7 @@ ul#surveyAdmin .chart-data .per {
 
 ul#surveyAdmin li.summary-chart {
   height: auto;
-  padding-top: 3.5em;
+  padding-top: 0.96875em;
   padding-bottom: 3.5em;
 }
 
@@ -847,3 +847,13 @@ ul.user-list .duration {
 ul#nonresponders {
   display: none;
 }
+
+ul#surveyAdmin li.summary-tag {
+  height: auto;
+  font-size: 0.938em;
+  text-align: right;
+  color: #545358;
+  margin-top: 1.6em;
+  padding-right: 0.8em;
+}
+

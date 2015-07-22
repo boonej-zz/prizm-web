@@ -712,14 +712,8 @@ var authRequired = function (req, res, next) {
     });
     var groups = _.pluck(rawGroups, '_id');
     var criteria = {
-      organization: {$in: orgs},
-      completed: {$ne: user._id},
-      $or: [
-        {target_all: true},
-        {groups: 
-          {$in: groups}
-        }
-      ]
+      targeted_users: {$elemMatch: {user: user._id}},
+      completed: {$ne: user._id}
     }
     Survey.findOne(criteria)
     .populate({path: 'questions', model: 'Question'})

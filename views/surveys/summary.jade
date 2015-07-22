@@ -31,9 +31,9 @@ block head
             color: '#9bca3e'
           }
         },
-        legend: {
-          position: 'top',
-          alignment: 'center'
+        legend: 'none', 
+        vAxis: {
+          maxValue: #{survey.targeted_users?survey.targeted_users.length:-1}
         }
       };
       var elem = document.getElementById('summaryChart');
@@ -56,6 +56,13 @@ block content
           span.results(onclick='nav.navigate("/surveys/#{survey._id}/results")') Results
         h3
           span.summary.active Summary
+      li.summary-tag
+        - var res = survey.completed?survey.completed.length:0
+        - var tar = survey.targeted_users?survey.targeted_users.length:1
+        | #{res} Total Responses - 
+        | #{tar} Surveys Sent - 
+        | #{Math.round((res/tar)*100)}%
+        | Response Rate
       li.summary-chart
         #summaryChart
       li.summary-responses

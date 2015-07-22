@@ -44,6 +44,7 @@ var surveySchema = new mongoose.Schema({
   number_of_questions: {type: Number},
   questions: [ObjectId],
   completed: [ObjectId],
+  targeted_users: [{user: {type: ObjectId, ref: 'User'}, create_date: {type: Date}}],
   target_all: {type: Boolean, default: false}
 });
 

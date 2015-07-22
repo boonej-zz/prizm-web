@@ -1,17 +1,24 @@
-mixin questions(n)
+mixin questions(n, original)
   li
     label(for='question') Question #{n}
-    input#question(name='questions' type='text')
+    input#question(
+      name='questions' 
+      type='text' 
+      value='#{original?original.questions[n].text:""}')
   li
     label(for='type') Type
+    - var type = original?original.questions[n].type:''
     select#type(name='type' onchange='survey.changeQuestionType(event)')
-      option(value='scale') Scale
-      option(value='multiple') Multiple
+      option(value='scale'
+        selected=type=='scale'?'selected':false) Scale
+      option(value='multiple'
+        selected=type=='multiple'?'selected':false) Multiple
   li.scale
+    - var scale = original?original.questions[n].scale:5
     label(for='scale') Scale
     select#scale(name='scale')
-      option(value=5) 5
-      option(value=10 selected='selected') 10
+      option(value=5 selected=scale==5?'selected':false) 5
+      option(value=10 selected=scale==10?'selected':false) 10
 
 mixin buttons(s)
   .buttons.section
@@ -25,19 +32,20 @@ mixin buttons(s)
       h2 Create Survey
       form#newSurvey
         input#organizationID(type='hidden' value='#{organization._id}')
+        input#originalID(type='hidden' value='#{original? original._id : ""}')
         ul
           li
             label(for='name') Survey Name
             input#name(type='text' name='name')
           li
+            - var num = original?original.number_of_questions:1
+            - var i = 1
             label(for='number') Number of Questions
             select#number(name='number_of_questions')
-              option(value=1) 1
-              option(value=2) 2
-              option(value=3) 3
-              option(value=4) 4
-              option(value=5) 5
-          mixin questions(1)
+              while i < 6
+                option(value=i selected=num==i?'selected':false) #{i}
+                - i++
+          mixin questions(1, original)
         mixin buttons('Next')
     else if (survey.questions.length != survey.number_of_questions)
       h2 Create Survey

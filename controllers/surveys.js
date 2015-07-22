@@ -170,8 +170,17 @@ exports.publishSurvey = function(req, res){
               criteria.groups = {$in: groupIDs};
               survey.groups = groupIDs;
             }
-            User.find(criteria)
+            console.log(criteria);
+            User.find({active: true, org_status: {$elemMatch: criteria}})
             .exec(function(err, users){
+              var sent = Date.now();
+              _.each(users, function(u){
+                var obj = {user: u._id, create_date: sent};
+                if (!survey.targeted_users) {
+                  survey.targeted_users = [];
+                }
+                survey.targeted_users.push(obj);
+              });
               survey.save(function(err, s){
                 if (err) console.log(err);
                 res.status(200).send();
@@ -381,70 +390,35 @@ exports.summary = function(req, res){
       .populate({path: 'organization', select: {name: 1}})
       .populate({path: 'groups', model: 'Group', select: {_id: 1, name: 1}})
       .populate({path: 'completed', model: 'User', select: {_id: 1, name: 1, profile_photo_url: 1}})
+      .populate({path: 'targeted_users.user', model: 'User', select: {_id: 1, name:1, profile_photo_url: 1}})
       .exec(function(err, survey){
         Survey.populate(survey, {
           path: 'questions.answers',
           model: 'Answer'
         }, function(err, survey){
-          Survey.find({creator: user._id, create_date: {$lte: survey.create_date}})
-          .sort({create_date: -1})
-          .limit(8)
-          .exec(function(err, surveys){
-            surveys = surveys.reverse();
-            var criteria = {
-              org_status : {
-                             $elemMatch: {
-                               status: 'active',
-                               organization: org._id,
-                           }
-                           }
-            };
-            var myGroupUsers = [];
-            User.find(criteria)
-            .select({_id: 1, org_status: 1, name: 1, profile_photo_url: 1})
-            .exec(function(err, users) {
-              var data = [['Date', 'Surveys Sent', 'Responses']];
-              _.each(surveys, function(s) {
-                var date = moment(s.create_date).format('M/D');
-                var pair = [];
-                pair.push(date);
-                var groupUsers = _.filter(users, function(obj){
-                  if (s.target_all) {
-                    return true;
-                  }
-                  var os = false;
-                  _.each(obj.org_status, function(o){
-                    if (String(o.organization) == String(org._id)){
-                      os = o;
-                    }
-                  });
-                  var uGroups = os.groups;
-                  var uNew = [];
-                  _.each(uGroups, function(g, i) {
-                    uNew.push(String(g));
-                  });
-                  var sGroups = s.groups;
-                  var sNew = [];
-                  _.each(sGroups, function(g, i) {
-                    sNew.push(String(g));
-                  });
-                  
-                  var intersection = _.intersection(sNew, uNew);
-                  if (sNew.length > 0) {
-                  }
-                  if (intersection.length > 0) {
-                    return true;
-                  }
-                  return false;
-                });
-                if (String(s._id) == String(survey._id)) {
-                  myGroupUsers = groupUsers;
-                }
-                pair.push(groupUsers.length);
-                pair.push(s.completed.length);
-                data.push(pair);
-              });
-              var completed = [];
+          console.log(survey.targeted_users[0]);
+          var data = [['Date', 'Responses']];
+          var groupedAnswers = _.groupBy(survey.questions[0].answers, function(a){
+            var key = moment(a.create_date).format('M/D/YYYY');
+            return key;
+          });
+          var dates = _.keys(groupedAnswers);
+          console.log(dates);
+          var lastDate = new Date(dates[dates.length - 1]);
+          var keys = [];
+          for (var t = 7; t >=0; t--) {
+            var currentDate = new Date();
+            currentDate.setDate(lastDate.getDate() - t);
+            var key = moment(currentDate).format('M/D/YYYY');
+            keys.push(key);
+          }
+          _.each(keys, function(key){
+            var pair = [];
+            pair.push(moment(key).format('M/D'));
+            pair.push(groupedAnswers[key]?groupedAnswers[key].length:0);
+            data.push(pair);
+          });
+          var completed = [];
               _.each(survey.completed, function(u){
                 var obj = {};
                 obj.user = u;
@@ -467,11 +441,11 @@ exports.summary = function(req, res){
                   console.log(ua);
                   if (!lastDate) lastDate = ua.create_date;
                   if (!firstDate) firstDate = ua.create_date;
-                  if (ua.createDate < firstDate) {
-                    firstDate = ua.createDate
+                  if (ua.create_date < firstDate) {
+                    firstDate = ua.create_date
                   }
-                  if (ua.createDate > lastDate) {
-                    lastDate = ua.createDate;
+                  if (ua.create_date > lastDate) {
+                    lastDate = ua.create_date;
                   }
                 });
                 obj.start = moment(firstDate).format('h:mmA');
@@ -480,7 +454,8 @@ exports.summary = function(req, res){
                 obj.duration = moment.utc(moment.duration(moment(lastDate).subtract(firstDate)).asMilliseconds()).format('HH:mm:ss');
                 completed.push(obj);
               });
-              var nonresponders = _.filter(myGroupUsers, function(userObj){
+              var tUsers = _.pluck(survey.targeted_users, 'user');
+              var nonresponders = _.filter(tUsers, function(userObj){
                 var valid = true;
                 _.each(survey.completed, function(comp){
                   if (String(userObj._id) == String(comp._id)) {
@@ -499,8 +474,6 @@ exports.summary = function(req, res){
                 completed: completed,
                 nonresponders: nonresponders
               });
-            });
-          });
         });
       });
     } else {
