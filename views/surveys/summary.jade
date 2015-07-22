@@ -53,9 +53,9 @@ block content
         h3
           span.dashboard(onclick='nav.navigate("/surveys")') Dashboard
         h3
-          span.results(onclick='nav.navigate("/surveys/#{survey._id}/results")') Results
-        h3
           span.summary.active Summary
+        h3
+          span.results(onclick='nav.navigate("/surveys/#{survey._id}/results")') Results
       li.summary-tag
         - var res = survey.completed?survey.completed.length:0
         - var tar = survey.targeted_users?survey.targeted_users.length:1
