@@ -42,7 +42,7 @@ block head
     }
 
 block content
-  .preload(data-images='["/images/icons/export_csv.png", "/images/icons/dashboard.png", "/images/icons/dashboard_active.png", "/images/icons/results.png", "/images/icons/results_active.png", "/images/icons/summary.png", "/images/icons/summary_active.png"]')
+  .preload(data-images='["/images/icons/export_csv.png", "/images/icons/dashboard.png", "/images/icons/dashboard_active.png", "/images/icons/results.png", "/images/icons/results_active.png", "/images/icons/summary.png", "/images/icons/summary_active.png", "/images/icons/email.png", "/images/icons/email-hover.png"]')
   script(type='text/javascript').
     surveys.preloadIcons()
   .container.topnav-offset
@@ -89,15 +89,16 @@ block content
         ul#nonresponders.user-list
           li
             .name Name
-            .date Date
+            .date Date Sent
             .time Time
-            .duration Duration
+            .duration Resend
           each obj in nonresponders
-            - var profilePhoto = obj.profile_photo_url || '/images/default_profile.png'
+            - var profilePhoto = obj.user.profile_photo_url || '/images/default_profile.png'
             li
-              .name(onclick='nav.navigate("/profiles/#{obj._id}")') 
+              .name(onclick='nav.navigate("/profiles/#{obj.user._id}")') 
                 .profile-avatar(style='background-image:url("#{profilePhoto}")')
-                .profile-name #{obj.name}
-              .date
-              .time
-              .duration
+                .profile-name #{obj.user.name}
+              .date #{obj.sentDate}
+              .time #{obj.sentTime}
+              .duration.center
+                .resend

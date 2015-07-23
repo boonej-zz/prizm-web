@@ -454,16 +454,24 @@ exports.summary = function(req, res){
                 obj.duration = moment.utc(moment.duration(moment(lastDate).subtract(firstDate)).asMilliseconds()).format('HH:mm:ss');
                 completed.push(obj);
               });
-              var tUsers = _.pluck(survey.targeted_users, 'user');
+              var tUsers = survey.targeted_users;
               var nonresponders = _.filter(tUsers, function(userObj){
                 var valid = true;
                 _.each(survey.completed, function(comp){
-                  if (String(userObj._id) == String(comp._id)) {
+                  if (String(userObj.user._id) == String(comp._id)) {
                     valid = false;
                   }
                 });
                 return valid;
               });
+              var nr = [];
+              _.each(nonresponders, function(non){
+                non = non.toObject();
+                non.sentDate = moment(non.create_date).format('M/D/YYYY');
+                non.sentTime = moment(non.create_date).format('h:mmA');
+                nr.push(non);
+              });
+              console.log(nonresponders);
               res.render('surveys/summary', {
                 currentUser: user,
                 auth: true,
@@ -472,7 +480,7 @@ exports.summary = function(req, res){
                 bodyId: 'survey',
                 data: data,
                 completed: completed,
-                nonresponders: nonresponders
+                nonresponders: nr
               });
         });
       });

@@ -844,6 +844,11 @@ ul.user-list .duration {
   width: 16%;
 }
 
+ul.user-list .duration.center {
+  width: 16%;
+}
+
+
 ul#nonresponders {
   display: none;
 }
@@ -857,3 +862,16 @@ ul#surveyAdmin li.summary-tag {
   padding-right: 0.8em;
 }
 
+ul#surveyAdmin li .duration .resend {
+  width: 1.125em;
+  height: 0.781em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('/images/icons/email.png');
+  text-align: center;
+  cursor: pointer;
+}
+
+ul#surveyAdmin li .duration .resend:hover {
+  background-image: url('/images/icons/email-hover.png');
+}
