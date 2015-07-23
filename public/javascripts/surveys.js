@@ -42,6 +42,7 @@ var surveys = {
   sort: function(e){
     var $rows = $('li.body ul li');
     var type = $(e.target).attr('data-sort');
+    var order =  $(e.target).attr('data-order');
     var sel = '.col[data-sort="' + type + '"]';
     $rows.sort(function(a,b){
       var asort, bsort;
@@ -54,12 +55,12 @@ var surveys = {
       }
       console.log(asort + ' ' + bsort);
       if (asort > bsort) {
-        if (type === 'date') {
+        if (order == 'desc') {
           return -1;
         } 
         return 1;
       } else if (asort < bsort) {
-        if (type === 'date') {
+        if (order == 'desc') {
           return 1;
         }
         return -1;
@@ -72,9 +73,21 @@ var surveys = {
     if (!$(e.target).is('.action-menu') && !$(e.target).parent().is('.action-menu')) {
       $('#surveyAdmin button.edit').removeClass('active');
       $('li.body').css('overflow', 'scroll');
+      $('.col.sortable').removeClass('active');
       $(window).unbind('click', surveys.bodyHandler);
+      $('.col.sortable').unbind('click', surveys.sortHandler);
+      $('.col.sortable').bind('click', surveys.sortHandler);
+      $('#surveyAdmin button').unbind('click', surveys.buttonHandler);
       $('#surveyAdmin button').bind('click', surveys.buttonHandler);
     }
+  },
+  sortHandler: function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    $(e.target).addClass('active');
+    $('.col.sortable').unbind('click', surveys.sortHandler);
+    $('li.body').css('overflow', 'hidden');
+    $('body').on('click', surveys.bodyHandler);
   },
   buttonHandler: function(e){
     e.preventDefault();

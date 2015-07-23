@@ -5,7 +5,8 @@ block head
   script(type='text/javascript' src='/javascripts/surveys.js')
   script(type='text/javascript').
     $(document).ready(function(){
-      $('.col.sortable').click(surveys.sort);
+      $('.col.sortable').click(surveys.sortHandler);
+      $('.col.sortable .action-sort').click(surveys.sort);
       $('.col button').click(surveys.buttonHandler);
     });
 
@@ -20,8 +21,14 @@ block content
         h3 
           span.dashboard.active Dashboard
       li.head
-        .col.sortable('data-sort'='name') Survey Name
-        .col.sortable('data-sort'='date') Survey Date
+        .col.sortable Survey Name
+          .action-menu
+            .action-sort(data-order='asc' data-sort='name') Ascending
+            .action-sort(data-order='desc' data-sort='name') Descending
+        .col.sortable Survey Date
+          .action-menu
+            .action-sort(data-order='desc' data-sort='date') Newest
+            .action-sort(data-order='asc' data-sort='date') Oldest
         .col Responses
         .col Action
       li.body
