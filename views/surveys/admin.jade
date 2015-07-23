@@ -34,7 +34,7 @@ block content
       li.body
         ul
           each survey in surveys
-            li
+            li(data-survey='#{survey._id}')
               .col(data-sort='name') #{survey.name}
               .col(data-sort='date' data-date='#{survey.create_date}') #{survey.formattedDate}
               .col #{survey.completed.length}
@@ -45,5 +45,5 @@ block content
                 button.edit(data-survey='#{survey._id}' data-action='edit')
                 .action-menu
                   .action-edit Edit
-                  .action-delete Delete
+                  .action-delete(data-survey='#{survey._id}' onclick='surveys.delete(event)') Delete
 

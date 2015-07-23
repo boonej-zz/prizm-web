@@ -11,6 +11,13 @@ var Activity = mongoose.model('Activity');
 var User = mongoose.model('User');
 var moment = require('moment');
 
+var validateAdmin = function(user, next){
+  Organization.findOne({owner: user._id}, function(err, organization){
+    if (err) console.log(err);
+    next(organization);
+  });
+};
+
 exports.newSurvey = function(req, res){
   var user = req.user;
   Organization.findOne({owner: user._id})
@@ -199,6 +206,29 @@ exports.publishSurvey = function(req, res){
   });
 };
 
+exports.deleteSurvey = function(req, res){
+  var user = req.user;
+  var sid = req.params.sid;
+  validateAdmin(user, function(org){
+    console.log('Admin validated');
+    if (org){
+      Survey.findOne({_id: sid, organization: org._id}, function(err, survey){
+        if (survey) {
+          survey.status = 'inactive';
+          survey.save(function(err, s){
+            res.status(200).send();
+          });
+        } else {
+          if (err) console.log(err);
+          res.status(400).send();
+        }
+      });
+    } else {
+      res.status(403).send('Forbidden');
+    }
+  });
+}
+
 var finishSurvey = function(req, res) {
   var user = req.user;
   console.log('finishing survey');
@@ -283,7 +313,7 @@ exports.adminPage = function(req, res){
   var user = req.user;
   Organization.findOne({owner: user._id}, function(err, org){
     if (org){
-      Survey.find({creator: user._id})
+      Survey.find({creator: user._id, status: {$ne: 'inactive'}})
       .populate({path: 'questions', model: 'Question'})
       .populate({path: 'organization', select: {name: 1}})
       .populate({path: 'questions.answers', model: 'Answer'})

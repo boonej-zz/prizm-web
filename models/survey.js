@@ -35,6 +35,7 @@ questionSchema.pre('save', function(next){
 });
 
 var surveySchema = new mongoose.Schema({
+  status: {type: String, default: 'active'},
   name: {type: String, required: true},
   creator: {type: ObjectId, ref: 'User', required: true},
   create_date: {type: Date},
@@ -51,6 +52,9 @@ var surveySchema = new mongoose.Schema({
 surveySchema.pre('save', function(next){
   if (!this.create_date){
     this.create_date = Date.now();
+  }
+  if (!this.status) {
+    this.status = 'active';
   }
   this.modify_date = Date.now();
   next();

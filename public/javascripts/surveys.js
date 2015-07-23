@@ -69,6 +69,20 @@ var surveys = {
     });
     $rows.detach().appendTo('li.body ul');
   },
+  delete: function(e){
+    var sid = $(e.target).attr('data-survey');
+    var url = '/surveys/' + sid;
+    $.ajax({
+      method: 'DELETE',
+      url: url,
+      success: function(d){
+        $('li[data-survey="' + sid + '"]').remove();
+      },
+      error: function(e){
+        alert('This survey could not be deleted at this time.');
+      }
+    }); 
+  },
   bodyHandler: function(e) {
     if (!$(e.target).is('.action-menu') && !$(e.target).parent().is('.action-menu')) {
       $('#surveyAdmin button.edit').removeClass('active');
