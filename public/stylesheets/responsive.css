@@ -387,6 +387,7 @@
   }
   
   #partner-section-1, #partner-section-2, #partner-section-3, #partner-section-4 {
+    height: auto;
     margin: 0px auto;
    padding-top: 24px;
    width: 300px;
@@ -408,6 +409,17 @@
     width: 308px;
     background-size: 308px 490px;
   }
+
+.gray-barback, .blue-barback {
+  height: auto;
+}
+
+.blue-barback .wrap, .gray-barback .wrap {
+  min-height: 600px;
+  max-height: 1600px; 
+  height: auto;
+}
+
 
 
   #partner-phone-3 {
