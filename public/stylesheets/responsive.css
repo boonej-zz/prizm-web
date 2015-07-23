@@ -1,6 +1,6 @@
 @media screen and (max-width:500px) {
   body {
-    font-size: 14px;
+    font-size: 80%;
   }
 
   .wrap {
@@ -345,12 +345,32 @@
   }
   
   /** PARTNER **/
-  
-  #header-title {
-    font-size: 18px;
-    margin-top: -48px;
+
+  .minor-wrap {
     width: 300px;
   }
+
+  #partner-header .video-blurb {
+    font-size: 0.7em;
+    width: 300px;
+    height: 159px;
+    background-size: 300px 159px;
+    margin-top: -40em;
+  }
+
+  #partner-header .blurb {
+    width: 300px;
+  }
+  
+  #header-title {
+    font-size: 1.6em;
+    width: 300px;
+  }
+
+  .tagline {
+    1em;
+  }
+
   
   #find-out-more {
    margin-bottom: 50px;
