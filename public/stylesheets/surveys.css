@@ -723,6 +723,7 @@ ul#surveyAdmin .chart-data .desc {
   width: 53.7%;
   padding-right: 1em;
   font-size: 1em;
+  line-height: 1.8753em;
 }
 
 ul#surveyAdmin .chart-data .val {
