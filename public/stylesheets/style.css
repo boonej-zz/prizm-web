@@ -7,6 +7,10 @@ body {
   font-size: 100%;
 }
 
+.about.right a.underline {
+  text-decoration: underline;
+}
+
 .videooverlay {
   position: absolute;
   top: 0;

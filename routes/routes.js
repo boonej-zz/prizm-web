@@ -95,6 +95,10 @@ router.get('/partner', function(req, res){
   res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none'});
 });
 
+router.get('/partners', function(req, res){
+  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none'});
+});
+
 router.get('/luminary', function(req, res){
   res.render('site/luminary', { title: 'Prizm App | Luminary', selected: 'none'});
 });
