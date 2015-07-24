@@ -14,7 +14,7 @@ function onYouTubeIframeAPIReady() {
       },
       'onStateChange': function(e){
         if (e.data == YT.PlayerState.PAUSED || e.data == YT.PlayerState.ENDED){
-          $('.videooverlay').hide();
+          $('#ytVideo').hide();
         }
       }
     }
@@ -89,8 +89,9 @@ var prizm = {
     window.location = '/profiles/' + id;
   },
   playVideo: function(e){
-    if ($('.videooverlay').length > 0) {
-      $('.videooverlay').show();
+    if ($('iframe#ytVideo').length > 0) {
+      //$('.videooverlay').show();
+      $('#ytVideo').show();
       player.playVideo();
     } else {
       var overlay = document.createElement('div');
@@ -102,7 +103,7 @@ var prizm = {
       var videoDiv = document.createElement('div');
       videoDiv.id = 'ytVideo';
       overlay.appendChild(videoDiv);
-      document.body.appendChild(overlay);
+      //document.body.appendChild(overlay);
       var tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       var ft = document.getElementsByTagName('script')[0];
