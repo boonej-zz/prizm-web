@@ -89,6 +89,7 @@ p {
 }
 
 .bottom-bar-wrap {
+  min-height: 600px;
   display: block;
   height: 100%;
   width: 100%;
@@ -96,11 +97,13 @@ p {
 }
 
 .blue-barback {
+  min-height: 800px;
   height: 100%;
   background-color: #314991;
 }
 
 .gray-barback {
+  min-height: 800px;
   height: 100%;
   background-color: #e4e5ea;
 }
