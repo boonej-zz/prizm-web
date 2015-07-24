@@ -911,3 +911,76 @@ ul#surveyAdmin li .duration .resend {
 ul#surveyAdmin li .duration .resend:hover {
   background-image: url('/images/icons/email-hover.png');
 }
+
+/** OVERLAY **/
+#responses.modal-overlay .content {
+  width: 30.563em;
+  background-color: white;
+}
+
+#responses.modal-overlay .content h2 {
+  margin: 0;
+  overflow: hidden;
+}
+
+.content .avatar-area {
+  height: 7.531em;
+  background-color: #f6f7f8;
+  width: 100%;
+  text-align: center;
+  padding-top: 1.59375em;
+  margin: 0;
+}
+
+.content .profile-avatar {
+  width: 2.938em;
+  height: 2.969em;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  border: 0.063em solid #e1e2f3;
+  margin: 0 auto;
+}
+
+.content h3.name {
+  font-size: 1em;
+  font-weight: 400;
+  margin-top: 0.75em;
+  color: #545358;
+}
+
+.content ul.survey-responses {
+  list-style: none;
+  width: 100%;
+  padding: 0 0 3.9375em 3.9375em;
+}
+
+.content ul.survey-responses li {
+  height: 6.15625em;
+  margin: 0;
+  border-bottom: 1px solid #a8abb0;
+  padding: 0;
+  padding-top: 1.5em;
+  text-align: left;
+}
+
+.content ul.survey-responses .srow:last-child {
+  margin-top: .58375em;
+}
+
+.content ul.survey-responses .label {
+  font-size: 1em;
+  display: inline-block;
+  width: 8.15625em;
+  color: #545358;
+  font-weight: 600;
+  text-align: left;
+}
+
+.content ul.survey-responses .text {
+  font-size: 1em;
+  display: inline-block;
+  color: #545358;
+  font-weight: 400;
+}

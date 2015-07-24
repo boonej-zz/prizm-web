@@ -571,3 +571,63 @@ exports.exportCSV = function(req, res) {
     }
   });
 };
+
+exports.getUserResponses = function(req, res){
+  var user = req.user;
+  var uid = req.params.uid;
+  var sid = req.params.sid;
+  validateAdmin(user, function(org){
+    if (org){
+      Survey.findOne({_id: sid})
+      .populate({path: 'questions', model: 'Question'})
+      .exec(function(err, survey){
+        if (survey) {
+          Survey.populate(survey, 
+            {path: 'questions.answers', 
+            model: 'Answer'} ,
+            function(err, survey){
+              Survey.populate(survey, {
+                path: 'questions.answers.user', 
+                model: 'User', 
+                select: {_id: 1, name: 1, profile_photo_url: 1, first_name: 1}},
+              function(err, survey){
+                if (survey) {
+                  var questions = [];
+                  var surveyUser = false;
+                  _.each(survey.questions, function(q){
+                    var obj = {};
+                    obj.question = q.text;
+                    _.each(q.answers, function(a){
+                      if (String(a.user._id) == String(uid)) {
+                        surveyUser = a.user;
+                        var val = a.value;
+                        if (q.type == 'multiple'){
+                          _.each(q.values, function(v){
+                            if (v.order == a.value) {
+                              val = v.question;
+                            }
+                          });
+                        }
+                        obj.response = val;
+                        questions.push(obj);
+                      }
+                    });
+                  });
+
+                  res.render('surveys/details', {questions: questions, user: surveyUser});
+                } else {
+                  if (err) console.log(err);
+                  res.status(400).send();
+                }
+              });
+          }); 
+        } else {
+          if (err) console.log(err);
+          res.status(400).send();
+        }
+      });
+    } else {
+      res.status(403).send('Forbidden');
+    }
+  });
+};

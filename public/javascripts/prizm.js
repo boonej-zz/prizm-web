@@ -11,6 +11,11 @@ function onYouTubeIframeAPIReady() {
     events: {
       'onReady': function(e){
         e.target.playVideo();
+      },
+      'onStateChange': function(e){
+        if (e.data == YT.PlayerState.PAUSED || e.data == YT.PlayerState.ENDED){
+          $('.videooverlay').hide();
+        }
       }
     }
   });

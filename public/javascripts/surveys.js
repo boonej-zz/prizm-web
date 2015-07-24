@@ -136,5 +136,20 @@ var surveys = {
     var questionID = $(e.target).attr('data-question');
     var path = '/surveys/' + surveyID + '/questions/' + questionID + '/export.csv';
     window.location = path;
+  },
+  showUserResponses: function(e) {
+    var sid = $(e.target).attr('data-survey');
+    var uid = $(e.target).attr('data-user');
+    var url = '/surveys/' + sid + '/responses/' + uid;
+    console.log(url);
+    $.ajax({
+      method: 'GET',
+      url: url,
+      cache: false,
+      success: function(html){
+        console.log(html);
+        modal.showModal(html); 
+      }
+    })
   }
 }

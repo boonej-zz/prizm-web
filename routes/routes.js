@@ -231,6 +231,8 @@ router.post('/register/:id', _orgs.updateOrg);
 /* Surveys */
 router.get('/surveys/new', _users.authRequired, _surveys.newSurvey);
 router.post('/surveys', _users.authRequired, _surveys.createSurvey);
+
+router.get('/surveys/:sid/responses/:uid', _users.authRequired, _surveys.getUserResponses);
 router.post('/surveys/:survey_id/questions', _users.authRequired, _surveys.createQuestion);
 router.post('/surveys/:survey_id/groups', _users.authRequired, _surveys.publishSurvey);
 router.post('/surveys/:survey_id/answers', _surveys.answerQuestion);

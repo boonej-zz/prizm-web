@@ -78,10 +78,12 @@ block content
             .duration Duration
           each obj in completed
             li
-              .name(onclick='nav.navigate("/profiles/#{obj.user._id}")')
+              .name()
                 - var profilePhoto = obj.user.profile_photo_url || '/images/default_profile.png'
-                .profile-avatar(style='background-image:url("#{profilePhoto}")')
-                .profile-name
+                .profile-avatar(style='background-image:url("#{profilePhoto}")'
+                onclick='nav.navigate("/profiles/#{obj.user._id}")')
+                .profile-name(onclick='surveys.showUserResponses(event)' data-user='#{obj.user._id}'
+                  data-survey='#{survey._id}')
                   | #{obj.user.name}
               .date #{obj.date}
               .time #{obj.start}
