@@ -1,0 +1,20 @@
+#responses.modal-overlay(onclick='overlay.cancel(event)')
+  .content
+    h2 #{user.first_name}'s Responses
+    .avatar-area
+      - var profileImage = user.profile_photo_url || '/images/default-profile.png'
+      .profile-avatar(style='background-image: url("#{profileImage}")' 
+        onclick='nav.navigate("/profiles/#{user._id}")')
+      h3.name(onclick='nav.navigate("/profiles/#{user._id}")') #{user.name}
+    ul.survey-responses
+      - var i = 0;
+      while i != questions.length
+        - var q = questions[i]
+        li
+          div.srow
+            span.label Question #{i + 1}
+            span.text #{q.question}
+          div.srow
+            span.label Response
+            span.text #{q.response}
+        - ++i
