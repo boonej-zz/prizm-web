@@ -2,7 +2,7 @@
 - var type
 html
   head
-    body(style="background-color: #eef0f4; text-align: center; font-family: 'Helvetica', 'Arial', sans-serif; color: #47494d; font-size: 16px")
+    body(style="background-color: #eef0f4; text-align: center; font-family: 'Helvetica', 'Arial', sans-serif; color: #47494d; font-size: 20px; line-height: 1.3em;")
       table(style='width: 670px; margin: 0 auto; border-collapse: collapse')
         tr(style='background-color:#ffffff; text-align: left')
           td(style='height: 88px; border-bottom: #dde3f1;')
@@ -47,7 +47,7 @@ html
               span(style='float: left;height: 47px; width: 47px; border-radius: 50%; background-color: #{bgColor}; display: inline-block; margin-right: 16px; color: white; text-align: center; font-weight: 400; padding: 0; vertical-align: middle; line-height: 47px;') #{diff}
               | #{type} last week's #{stats.lastInsightCount}.
               br
-            p(style='font-size: 20px; line-height: 1.2em;')
+            p(style='font-size: 20px; ')
               strong #{stats.activePercent}% of your registered users 
               | logged in to Prizm this week 
               br
