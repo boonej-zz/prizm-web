@@ -11,87 +11,94 @@ html
                   style='margin-top: 22px; height: 47px; width: 116px; margin-left: 20px;')
         tr(style='background-color: #ffffff;')
           td(style='padding: 30px; text-align: left;')
-            p(style='font-size: 16px')
+            p(style='font-size: 24px; text-align: center; line-height: 29px;color: #324b8f; border-bottom: 1px solid #dde3f1; padding-bottom: 31px;')
               | Hi #{owner.contact_first || organization.name},
-            p(style='font-size: 16px')
-              | Here's your weekly update about #{organization.name} on Prizm.
-            p(style='font-size: 16px') 
+              br
+              | Here's your weekly update 
+              br 
+              | about #{organization.name} on Prizm.
+            p(style='font-size: 20px') 
               - diff = stats.notificationCount - stats.lastNotificationCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
-              | You sent 
-              strong #{stats.notificationCount}  
-              | notifications to 
-              strong #{stats.notificationTotal} 
-              | members 
-              | this week, #{type} last week's 
-              strong #{stats.lastNotificationCount}.
-            p(style='font-size: 16px')
+              | You sent #{stats.notificationCount} notifications to #{stats.notificationTotal} members  
+              | this week.
+              - var bgColor = diff>=0?'#23b856':'#f63547';
+              p(style='font-size: 20px; font-weight: 600; color: #545358; margin-top: -10px; line-height: 47px')
+                span(style='float: left;height: 47px; width: 47px; border-radius: 50%; background-color: #{bgColor}; display: inline-block; margin-right: 16px; color: white; text-align: center; font-weight: 400; padding: 0; vertical-align: middle; line-height: 47px;') #{diff} 
+                | #{type} last week's 
+                strong #{stats.lastNotificationCount}.
+            p(style='font-size: 20px')
               - diff = stats.messageCount - stats.lastMessageCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
-              | You sent 
-              strong #{stats.messageCount} 
-              | messages to 
-              strong #{stats.messageTotal} 
-              | members this week, 
-              | #{type} last week's 
-              strong #{stats.lastMessageCount}.
-            p(style='font-size: 16px')
+              | You sent #{stats.messageCount} messages to #{stats.messageTotal} members this week.  
+              - var bgColor = diff>=0?'#23b856':'#f63547';
+              p(style='font-size: 20px; font-weight: 600; color: #545358; margin-top: -10px; line-height: 47px')
+                span(style='float: left;height: 47px; width: 47px; border-radius: 50%; background-color: #{bgColor}; display: inline-block; margin-right: 16px; color: white; text-align: center; font-weight: 400; padding: 0; vertical-align: middle; line-height: 47px;') #{diff} 
+                | #{type} last week's 
+                strong #{stats.lastMessageCount}.
+            p(style='font-size: 20px')
               - diff = stats.insightCount - stats.lastInsightCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
-              | You sent 
-              strong #{stats.insightCount} 
-              | insights to 
-              strong #{stats.insightTotal} 
-              | members this week,
-              | #{type} last week's 
-              strong #{stats.lastInsightCount}.
+              | You sent #{stats.insightCount} insights to #{stats.insightTotal} members this week.
+            p(style='font-size: 20px; font-weight: 600; color: #545358; margin-top: -10px; line-height: 47px')
+              span(style='float: left;height: 47px; width: 47px; border-radius: 50%; background-color: #{bgColor}; display: inline-block; margin-right: 16px; color: white; text-align: center; font-weight: 400; padding: 0; vertical-align: middle; line-height: 47px;') #{diff}
+              | #{type} last week's #{stats.lastInsightCount}.
               br
-            p(style='font-size: 16px')
-              strong #{stats.activePercent}% 
-              of your registered users logged
-              | in to Prizm this week - 
-              strong #{stats.activeMembers}/#{stats.totalMembers} 
-              | (# logged in/total users).
+            p(style='font-size: 20px; line-height: 1.2em;')
+              strong #{stats.activePercent}% of your registered users 
+              | logged in to Prizm this week 
+              br
+              | #{stats.activeMembers}/#{stats.totalMembers} (# logged in/total users).
             if stats.mostActive.length > 0
               p(style='font-size: 16px')
-                | Your #{stats.mostActive.length} most active members were:
+                | Your 
+                strong #{stats.mostActive.length} most active members 
+                | were
                 ul(style='list-style: none; padding-left: 0')
                   each user in stats.mostActive
-                    li(style='line-height: 30px; vertical-align: middle; padding-bottom: 8px; padding-top: 8px; margin: 0; border-bottom: 1px solid #dde3f1; border-top: 1px solid #dde3f1; width: 400px') 
-                      img(height=30 width=30 src='#{user.avatar}' style='border-radius: 50%; float: left; margin-right: 16px;')
+                    li(style='line-height: 47px; vertical-align: middle; padding-bottom: 8px; padding-top: 8px; margin: 0;') 
+                      img(height=47 width=47 src='#{user.avatar}' style='border-radius: 50%; float: left; margin-right: 16px;')
                       | #{user.name}
             else
-              p(style='font-size: 16px')
+              p(style='font-size: 20px; font-weight: 600; padding-top: 30px; padding-bottom: 30px;')
                 | None of your members were active this week.
-            p(style='font-size: 16px')
+            p(style='font-size: 20px; border-bottom: 1px solid #dde3f1; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px;')
               if stats.trendingHashtags
-                | The most used hashtag among your members this week was 
+                | The most used hashtag among your members this 
+                br
+                | week was 
                 strong ##{stats.trendingHashtags._id}, 
+                br
                 - stats.lastTrendingHashtags = stats.lastTrendingHashtags || {_id: 'none'}
                 - var same = stats.trendingHashtags._id == stats.lastTrendingHashtags._id?'same as':'different than'
                 | #{same} last week's 
                 strong ##{stats.lastTrendingHashtags._id}.
               else
                 | There were no trending hashtags among your members this week.
-            p(style='font-size: 16px')
-              | Your members' most popular post this week had 
+            p(style='font-size: 20px; margin-top: 30px; padding-bottom: 15px; border-bottom: 1px solid #dde3f1;')
+              | Your members' 
+              strong most popular 
+              | post this week was 
+              br
+              | with 
               strong #{stats.popularPost.likes_count} 
               | likes and 
               strong #{stats.popularPost.comments_count} 
               | comments.
-              img(style='margin-top: 16px; height: 300px; width: 300px' 
+              br
+              img(style='margin-top: 30px; height: 320px; width: 320px' 
               src='#{stats.popularPost.file_path}')
-            p(style='font-size: 16px')
+            p(style='font-size: 20px; margin-top: 60px;')
               | Let us know if you have any questions,
               br
-            p(style='font-size: 16px')
+            p(style='font-size: 20px')
               | Take care,
               br
               | The Prizm Team
-            p(style='font-size: 16px')
+            p(style='font-size: 20px')
               br
               br
               a(href="https://itunes.apple.com/us/app/prizm-app/id903458597?mt=8" style='font-size: 18px; text-decoration: none')
