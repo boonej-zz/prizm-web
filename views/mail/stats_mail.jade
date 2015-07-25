@@ -11,13 +11,13 @@ html
                   style='margin-top: 22px; height: 47px; width: 116px; margin-left: 20px;')
         tr(style='background-color: #ffffff;')
           td(style='padding: 30px; text-align: left;')
-            p(style='font-size: 24px; text-align: center; line-height: 29px;color: #324b8f; border-bottom: 1px solid #dde3f1; padding-bottom: 31px;')
+            p(style='font-size: 24px; text-align: center; line-height: 29px;color: #324b8f; border-bottom: 1px solid #dde3f1; padding-bottom: 31px; margin: 0;')
               | Hi #{owner.contact_first || organization.name},
               br
               | Here's your weekly update 
               br 
               | about #{organization.name} on Prizm.
-            p(style='font-size: 20px') 
+            p(style='font-size: 20px; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px;') 
               - diff = stats.notificationCount - stats.lastNotificationCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
@@ -28,7 +28,7 @@ html
                 span(style='float: left;height: 47px; width: 47px; border-radius: 50%; background-color: #{bgColor}; display: inline-block; margin-right: 16px; color: white; text-align: center; font-weight: 400; padding: 0; vertical-align: middle; line-height: 47px;') #{diff} 
                 | #{type} last week's 
                 strong #{stats.lastNotificationCount}.
-            p(style='font-size: 20px')
+            p(style='font-size: 20px; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px; margin: 0;')
               - diff = stats.messageCount - stats.lastMessageCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
@@ -38,7 +38,7 @@ html
                 span(style='float: left;height: 47px; width: 47px; border-radius: 50%; background-color: #{bgColor}; display: inline-block; margin-right: 16px; color: white; text-align: center; font-weight: 400; padding: 0; vertical-align: middle; line-height: 47px;') #{diff} 
                 | #{type} last week's 
                 strong #{stats.lastMessageCount}.
-            p(style='font-size: 20px')
+            p(style='font-size: 20px; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px; margin: 0;')
               - diff = stats.insightCount - stats.lastInsightCount
               - type = diff > 0?'up from':'down from';
               - if (diff == 0) type='equal to'
@@ -47,13 +47,13 @@ html
               span(style='float: left;height: 47px; width: 47px; border-radius: 50%; background-color: #{bgColor}; display: inline-block; margin-right: 16px; color: white; text-align: center; font-weight: 400; padding: 0; vertical-align: middle; line-height: 47px;') #{diff}
               | #{type} last week's #{stats.lastInsightCount}.
               br
-            p(style='font-size: 20px; ')
+            p(style='font-size: 20px; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px; margin: 0;')
               strong #{stats.activePercent}% of your registered users 
               | logged in to Prizm this week 
               br
               | #{stats.activeMembers}/#{stats.totalMembers} (# logged in/total users).
             if stats.mostActive.length > 0
-              p(style='font-size: 20px')
+              p(style='font-size: 20px; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px; margin: 0;')
                 | Your 
                 strong #{stats.mostActive.length} most active members 
                 | were
@@ -63,9 +63,9 @@ html
                       img(height=47 width=47 src='#{user.avatar}' style='border-radius: 50%; float: left; margin-right: 16px;')
                       | #{user.name}
             else
-              p(style='font-size: 20px; font-weight: 600; padding-top: 30px; padding-bottom: 30px;')
+              p(style='font-size: 20px; font-weight: 600; padding-top: 30px; padding-bottom: 30px; border-top: 1px solid #dde3f1; margin: 0;')
                 | None of your members were active this week.
-            p(style='font-size: 20px; border-bottom: 1px solid #dde3f1; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px;')
+            p(style='font-size: 20px; border-top: 1px solid #dde3f1; padding-top: 30px; padding-bottom: 30px; margin: 0')
               if stats.trendingHashtags
                 | The most used hashtag among your members this 
                 br
@@ -78,7 +78,7 @@ html
                 strong ##{stats.lastTrendingHashtags._id}.
               else
                 | There were no trending hashtags among your members this week.
-            p(style='font-size: 20px; margin-top: 30px; padding-bottom: 15px; border-bottom: 1px solid #dde3f1;')
+            p(style='font-size: 20px; padding-top: 30px; padding-bottom: 15px; border-top: 1px solid #dde3f1; border-bottom: 1px solid #dde3f1; margin: 0;')
               | Your members' 
               strong most popular 
               | post this week was 
