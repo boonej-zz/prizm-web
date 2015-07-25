@@ -53,11 +53,11 @@ html
               br
               | #{stats.activeMembers}/#{stats.totalMembers} (# logged in/total users).
             if stats.mostActive.length > 0
-              p(style='font-size: 16px')
+              p(style='font-size: 20px')
                 | Your 
                 strong #{stats.mostActive.length} most active members 
                 | were
-                ul(style='list-style: none; padding-left: 0')
+                ul(style='list-style: none; padding-left: 0; font-size: 18px;')
                   each user in stats.mostActive
                     li(style='line-height: 47px; vertical-align: middle; padding-bottom: 8px; padding-top: 8px; margin: 0;') 
                       img(height=47 width=47 src='#{user.avatar}' style='border-radius: 50%; float: left; margin-right: 16px;')
