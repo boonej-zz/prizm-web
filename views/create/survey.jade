@@ -1,29 +1,49 @@
 mixin questions(n, original)
+  - var question = original && original.questions.length >= n?original.questions[n - 1]:false
+  - var type = question?question.type:''
   li
     label(for='question') Question #{n}
     input#question(
       name='questions' 
       type='text' 
-      value='#{original?original.questions[n].text:""}')
+      value='#{question?question.text:""}')
   li
     label(for='type') Type
-    - var type = original?original.questions[n].type:''
     select#type(name='type' onchange='survey.changeQuestionType(event)')
       option(value='scale'
         selected=type=='scale'?'selected':false) Scale
       option(value='multiple'
         selected=type=='multiple'?'selected':false) Multiple
-  li.scale
-    - var scale = original?original.questions[n].scale:5
-    label(for='scale') Scale
-    select#scale(name='scale')
-      option(value=5 selected=scale==5?'selected':false) 5
-      option(value=10 selected=scale==10?'selected':false) 10
+  if type == 'multiple'
+    li.multiple
+      label('for', 'answerCount') Answers
+      select#answerCount
+        - var i = 0;
+        while i < 5
+          - var va = question.values.length;
+          option(value=(i + 1), selected=va==(i + 1)?'selected':false) #{i+1}
+          - ++i
+    each v in question.values
+      li.choice
+        label(for='choice#{v.order}') #{v.order}.
+        input(type='text' name='values' value='#{v.question}')
+  else
+    li.scale
+      - var scale = question?question.scale:5
+      label(for='scale') Scale
+      select#scale(name='scale')
+        option(value=5 selected=scale==5?'selected':false) 5
+        option(value=10 selected=scale==10?'selected':false) 10
 
-mixin buttons(s)
+mixin buttons(s, n, original)
   .buttons.section
     button.cancel(type='button' onclick='modal.cancel()') Cancel
-    button.save(disabled='disabled') #{s}
+    - var dis= 'disabled'
+    if s == 'Next'
+      if (n && original) 
+        if (original.questions.length <= n)
+          - dis = false
+    button.save(disabled=dis) #{s}
 
 
 .create-overlay(onclick='modal.cancel(event)')
@@ -56,8 +76,8 @@ mixin buttons(s)
         name='order' 
         value='#{questionNumber}')
         ul
-          mixin questions(questionNumber)
-        mixin buttons('Next')
+          mixin questions(questionNumber, original)
+        mixin buttons('Next', questionNumber, original)
     else
       h2 Publish Survey
       form#newSurvey.publish

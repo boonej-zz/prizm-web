@@ -3,6 +3,19 @@ $(document).ready(function(){
 });
 
 var surveys = {
+  editSurvey: function(e) {
+    var sid = $(e.target).attr('data-survey');
+    $.ajax({
+      method: 'GET',
+      url: '/surveys/new',
+      headers: {survey: sid},
+      success: function(html){
+        modal.showModal(html);
+        $('#newSurvey').submit(survey.submit);
+        $('#newSurvey input').keyup(survey.validate);
+      }
+    });
+  },
   preloadIcons: function(){
     var images = [];
     var preload = JSON.parse($('.preload').attr('data-images'));

@@ -954,6 +954,7 @@ var survey = {
     var d = $('#newSurvey').serialize();
     var url = '/surveys';
     var sid = $('#surveyID').val();
+    var oid = $('#originalID').val();
     if ($(e.target).hasClass('question')){
       url = '/surveys/' + sid + '/questions';
     }
@@ -965,6 +966,7 @@ var survey = {
       url: url,
       cache: 'false',
       data: d,
+      headers: {original: oid},
       success: function(html){
         modal.cancel();
         if (html) {

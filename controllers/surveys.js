@@ -18,21 +18,42 @@ var validateAdmin = function(user, next){
   });
 };
 
+function renderNewSurveyForm(org, survey, res){
+  var options = {
+    organization: org,
+    original: survey
+  };
+  if (org){
+    res.render('create/survey', options);
+  } else {
+    res.status(403).send('Forbidden');
+  }
+}
+
 exports.newSurvey = function(req, res){
   var user = req.user;
+  var surveyID = req.get('survey');
   Organization.findOne({owner: user._id})
   .exec(function(err, org){
     if (err) console.log(err);
-    if (org){
-      res.render('create/survey', {organization: org});
+    if (surveyID) {
+      var oid = org._id || false;
+      Survey.findOne({_id: surveyID, organization: oid})
+      .populate({path: 'questions', model: 'Question'})
+      .exec(function(err, survey){
+        renderNewSurveyForm(org, survey, res);
+      });
     } else {
-      res.status(403).send('Forbidden');
+      renderNewSurveyForm(org, false, res);
     }
+   
   });
 };
 
 exports.createSurvey = function(req, res){
   var user = req.user;
+  var oid = req.get('original');
+  console.log(oid);
   Organization.findOne({owner: user._id})
   .populate({path: 'groups', model: 'Group'})
   .exec(function(err, org){
@@ -78,7 +99,17 @@ exports.createSurvey = function(req, res){
               console.log(err);
             }
             if (s) {
-              res.render('create/survey', {organization: org, survey: s}); 
+              if (oid) {
+                Survey.findOne({_id: oid})
+                .populate({path: 'questions', model: 'Question'})
+                .exec(function(err, original){
+                  if (err) console.log(err);
+                  console.log(original);
+                  res.render('create/survey', {organization: org, survey: s, original: original}); 
+                });
+              } else {
+                res.render('create/survey', {organization: org, survey: s}); 
+              }
             } else {
               res.status(500).send('Server error');
             }
@@ -97,6 +128,7 @@ exports.createSurvey = function(req, res){
 
 exports.createQuestion = function(req, res){
   var user = req.user;
+  var oid = req.get('original');
   Organization.findOne({owner: user._id})
   .populate({path: 'groups', model: 'Group'})
   .select({_id: 1, owner: 1, groups: 1})
@@ -131,7 +163,13 @@ exports.createQuestion = function(req, res){
               survey.save(function(err, s){
                 if (err) console.log(err);
                 if (s) {
-                  res.render('create/survey', {organization: org, survey: s});
+                  if (oid) {
+                    Survey.findOne({_id: oid}, function(err, original){
+                      res.render('create/survey', {organization: org, survey: s, original: original});  
+                    });
+                  } else {
+                    res.render('create/survey', {organization: org, survey: s});
+                  }
                 } else {
                   res.status(500).send(err);
                 }

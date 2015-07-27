@@ -44,5 +44,5 @@ block content
                 button.resend(data-survey='#{survey._id}' data-action='resend')
                 button.edit(data-survey='#{survey._id}' data-action='edit')
                 .action-menu
-                  .action-edit Edit
+                  .action-edit(data-survey='#{survey._id}' onclick='surveys.editSurvey(event)') Edit
                   .action-delete(data-survey='#{survey._id}' onclick='surveys.delete(event)') Delete
