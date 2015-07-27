@@ -11,7 +11,7 @@ html
                   style='margin-top: 22px; height: 47px; width: 116px; margin-left: 20px;')
         tr(style='background-color: #ffffff;')
           td(style='padding: 0px; text-align: left;')
-            p(style='padding: 0px; font-size: 24px; text-align: center; line-height: 29px;color: #324b8f; border-bottom: 1px solid #dde3f1; padding-bottom: 31px; margin: 0;')
+            p(style='padding: 0px; font-size: 24px; text-align: center; line-height: 29px;color: #324b8f; border-bottom: 1px solid #dde3f1; padding-bottom: 31px; margin: 0; padding-top: 30px;')
               | Hi #{owner.contact_first || organization.name},
               br
               | Here's your weekly update 
@@ -57,7 +57,7 @@ html
                 | Your 
                 strong #{stats.mostActive.length} most active members 
                 | were
-                ul(style='list-style: none; padding-left: 0; font-size: 18px;')
+                ul(style='list-style: none; padding-left: 30px; font-size: 18px;')
                   each user in stats.mostActive
                     li(style='line-height: 47px; vertical-align: middle; padding-bottom: 8px; padding-top: 8px; margin: 0;') 
                       img(height=47 width=47 src='#{user.avatar}' style='border-radius: 50%; float: left; margin-right: 16px;')
