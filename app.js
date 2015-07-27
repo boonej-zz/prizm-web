@@ -30,7 +30,7 @@ var sessionURL = process.env.SESSION_URL || 'mongodb://localhost/session';
 var app = express();
 var schedule = require('node-schedule');
 var stats = require('./lib/workers/stats');
-var j = schedule.scheduleJob('0 0 12 * * 1', function(){
+var j = schedule.scheduleJob('0 0 13 * * 1', function(){
   stats.sendStatsMail();
 });
 https.createServer(opts, app).listen(4433);
