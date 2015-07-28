@@ -17,6 +17,22 @@ var util = require('util');
 
 /* Website */
 router.get('/', _users.displayHomeFeed);
+router.get('/invitemail/:name', function(req, res){
+  var r = new RegExp(req.params.name, 'i');
+  var Organization = mongoose.model('Organization');
+  Organization.findOne({name: r})
+    .populate({path: 'owner', model: 'User'})
+    .exec( function(err, org){
+    var invite = {
+      code: 'dldfaj'
+    };
+    if (org) {
+      res.render('mail/invite_mail', {org: org, invite: invite});
+    } else {
+      res.send('No such group');
+    }
+  });
+});
 
 router.get('/users/followFix', function(req, res){
   var User = mongoose.model('User');
