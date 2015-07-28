@@ -82,6 +82,15 @@ surveySchema.methods.notifyUsers = function(users, next){
             return true;
           }
         });
+        notified = _.filter(notified, function(obj){
+          var valid = true;
+          _.each(survey.completed, function (c){
+            if (String(c) == String(obj.user._id)){
+              valid = false;
+            }
+          });
+          return(valid);
+        });
         console.log('Sending to ' + notified);
         var messageString = survey.creator.name + ' has sent you a new survey.'; 
         _.each(notified, function(u){

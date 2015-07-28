@@ -131,6 +131,9 @@ var surveys = {
     if (action === 'results' || action === 'summary') {
       window.location = '/surveys/' + $(e.target).attr('data-survey') + '/' + action;
     }
+    if (action === 'resend') {
+      surveys.resendNotification(e);
+    }
   },
   showNonresponders: function(e){
     $('.tab-block').removeClass('active');
@@ -167,7 +170,7 @@ var surveys = {
   },
   resendNotification: function(e){
     var sid = $(e.target).attr('data-survey');
-    var uid = $(e.target).attr('data-user');
+    var uid = $(e.target).attr('data-user') || false;
     var url = '/surveys/' + sid + '/notifications';
     $.ajax({
       method: 'POST',

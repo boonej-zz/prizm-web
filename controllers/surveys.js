@@ -677,13 +677,15 @@ exports.getUserResponses = function(req, res){
 
 exports.resendNotifications = function(req, res){
   var user = req.user;
-  var targets = req.body.targets;
-  if (! _.isArray(targets)) {
-    targets = [targets];
+  var targets = req.body.targets || false;
+  if (targets) {
+    if (! _.isArray(targets)) {
+      targets = [targets];
+    }
   }
   var surveyID = req.params.sid;
   validateAdmin(user, function(org){
-    if (org && targets && surveyID) {
+    if (org && surveyID) {
       Survey.findOneAndNotify({_id: surveyID}, targets, function(err, survey){
         if (err) console.log(err);
         if (survey) {
