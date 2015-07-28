@@ -42,6 +42,11 @@ block content
                 button.summary(data-survey='#{survey._id}' data-action='summary')
                 button.graph(data-survey='#{survey._id}' data-action='results')
                 button.resend(data-survey='#{survey._id}' data-action='resend')
+                .action-menu.resend
+                  p Would you like to resend a notification to non-respondents?
+                  .buttons
+                    button.cancel(onclick='surveys.cancelResend(event)') Cancel
+                    button.save(data-survey='#{survey._id}' onclick='surveys.resendNotification(event)') Resend
                 button.edit(data-survey='#{survey._id}' data-action='edit')
                 .action-menu
                   .action-edit(data-survey='#{survey._id}' onclick='surveys.editSurvey(event)') Edit

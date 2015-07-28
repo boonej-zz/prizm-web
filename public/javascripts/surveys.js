@@ -99,6 +99,7 @@ var surveys = {
   bodyHandler: function(e) {
     if (!$(e.target).is('.action-menu') && !$(e.target).parent().is('.action-menu')) {
       $('#surveyAdmin button.edit').removeClass('active');
+      $('#surveyAdmin button.resend').removeClass('active');
       $('li.body').css('overflow', 'scroll');
       $('.col.sortable').removeClass('active');
       $(window).unbind('click', surveys.bodyHandler);
@@ -121,18 +122,17 @@ var surveys = {
     e.stopPropagation();
     var action = $(e.target).attr('data-action');
     var survey = $(e.target).attr('data-survey');
-    if (action === 'edit') {
+    if (action === 'edit' || action =='resend') {
       $(e.target).addClass('active');
-      $(e.target).siblings('.action-menu').offset({top: $(e.target).offset().top});
+      var offset = $(e.target).offset().top;
+      if ($(e.target).hasClass('resend')) offset -= 15;
+      $(e.target).siblings('.action-menu').offset({top: offset});
       $('li.body').css('overflow', 'hidden');
       $('body').on('click', surveys.bodyHandler);
       $('#surveyAdmin button').unbind('click', surveys.buttonHandler);
     }
     if (action === 'results' || action === 'summary') {
       window.location = '/surveys/' + $(e.target).attr('data-survey') + '/' + action;
-    }
-    if (action === 'resend') {
-      surveys.resendNotification(e);
     }
   },
   showNonresponders: function(e){
@@ -185,5 +185,10 @@ var surveys = {
         alert('There was a problem sending your notification.');
       }
     });
+  },
+  cancelResend: function(e){
+    $('#surveyAdmin button.resend').removeClass('active');
+    $('#surveyAdmin button').unbind('click', surveys.buttonHandler);
+    $('#surveyAdmin button').bind('click', surveys.buttonHandler);
   }
 }

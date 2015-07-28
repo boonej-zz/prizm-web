@@ -563,12 +563,43 @@ ul#surveyAdmin button.edit.active {
   cursor: pointer;
 }
 
+ul#surveyAdmin .action-menu .buttons {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  height: 3em;
+} 
+
+.action-menu.resend {
+  margin-left: 13.5em;
+  margin-top: -60px;
+}
+
+ul#surveyAdmin .action-menu button {
+  background-color: #d6d6d7;
+  padding: 0.5em;
+  display: inline-block;
+  margin: 0;
+  margin: 0.5em 1em;
+  float: none;
+}
+
+ul#surveyAdmin .action-menu button.save {
+  background-color: #3e6a9e;
+}
+
 .action-menu .action-sort {
   margin: 1.2875em 1em 1.2875em 0;
 }
 
 .action-menu .action-edit:hover, .action-menu .action-delete:hover {
   color: #3e6a9e;
+}
+
+.action-menu p {
+  width: 15em;
+  margin: 0.5em auto;
+  text-align: center;
 }
 
 .action-menu .action-edit {
@@ -586,6 +617,10 @@ ul#surveyAdmin button.edit.active {
   background-size: 1.25em 1.25em;
 }
 
+.action-menu p {
+  
+}
+
 .action-menu .action-edit:hover {
   background-image: url('/images/icons/action_edit_selected.png');
 }
@@ -594,7 +629,7 @@ ul#surveyAdmin button.edit.active {
   background-image: url('/images/icons/action_delete_selected.png');
 }
 
-ul#surveyAdmin button.edit.active + .action-menu, .col.sortable.active .action-menu {
+ul#surveyAdmin button.edit.active + .action-menu, ul#surveyAdmin button.resend.active + .action-menu, .col.sortable.active .action-menu {
   visibility: visible;
   z-index: 5000;
 }
