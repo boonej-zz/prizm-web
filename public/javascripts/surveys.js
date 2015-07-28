@@ -164,5 +164,23 @@ var surveys = {
         modal.showModal(html); 
       }
     })
+  },
+  resendNotification: function(e){
+    var sid = $(e.target).attr('data-survey');
+    var uid = $(e.target).attr('data-user');
+    var url = '/surveys/' + sid + '/notifications';
+    $.ajax({
+      method: 'POST',
+      url: url,
+      cache: false,
+      contentType: 'application/json',
+      data: JSON.stringify({targets: uid }) ,
+      success: function(){
+        alert('Notification sent.');
+      },
+      error: function(){
+        alert('There was a problem sending your notification.');
+      }
+    });
   }
 }

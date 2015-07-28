@@ -228,6 +228,11 @@ exports.publishSurvey = function(req, res){
               });
               survey.save(function(err, s){
                 if (err) console.log(err);
+                s.notifyUsers(null, function(err, s){
+                  if (err) {
+                    console.log(err);
+                  }
+                });
                 res.status(200).send();
               });
 
@@ -668,4 +673,27 @@ exports.getUserResponses = function(req, res){
       res.status(403).send('Forbidden');
     }
   });
+};
+
+exports.resendNotifications = function(req, res){
+  var user = req.user;
+  var targets = req.body.targets;
+  if (! _.isArray(targets)) {
+    targets = [targets];
+  }
+  var surveyID = req.params.sid;
+  validateAdmin(user, function(org){
+    if (org && targets && surveyID) {
+      Survey.findOneAndNotify({_id: surveyID}, targets, function(err, survey){
+        if (err) console.log(err);
+        if (survey) {
+          res.status(200).send();
+        } else {
+          res.status(201).send();
+        }
+      }); 
+    } else {
+      res.status(403).send('Forbidden');
+    }
+  }); 
 };

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var _ = require('underscore');
+var iPush = require('../classes/i_push');
 
 var answerSchema = new mongoose.Schema({
   user: {type: ObjectId, ref: 'User', required: true},
@@ -59,6 +60,61 @@ surveySchema.pre('save', function(next){
   this.modify_date = Date.now();
   next();
 });
+
+surveySchema.methods.notifyUsers = function(users, next){
+  var model = this.model('Survey');
+  model.populate(
+    this,
+    {path: 'targeted_users.user', model: 'User'},
+    function(err, survey) {
+      model.populate(survey, {path: 'creator', model: 'User'}, function(err, survey){
+      if (survey) {
+        var notified = _.filter(survey.targeted_users, function(obj){
+          if (users) {
+            var valid = false;
+            _.each(users, function(u){
+              if (String(u) == String(obj.user._id)) {
+                valid = true;
+              }
+            });
+            return valid;
+          } else {
+            return true;
+          }
+        });
+        console.log('Sending to ' + notified);
+        var messageString = survey.creator.name + ' has sent you a new survey.'; 
+        _.each(notified, function(u){
+          iPush.sendNotification({
+            device: u.device_token,
+            alert: messageString,
+            payload: {survey: survey._id},
+            badge: 1
+          }, function(err, result){
+            if (err) console.log(err);
+            else console.log('Sent push');
+          }); 
+        });
+        next(err, survey);
+      } else {
+        console.log(err);
+        next(err, false);
+      }
+    }
+  );
+});
+}; 
+
+surveySchema.statics.findOneAndNotify = function(params, users, next){
+  this.findOne(params, function(err, survey){
+    if (!survey) {
+      if (err) console.log(err);
+      next(err, false);
+    } else {
+      survey.notifyUsers(users, next);
+    }
+  });
+}
 
 mongoose.model('Answer', answerSchema);
 mongoose.model('Question', questionSchema);
