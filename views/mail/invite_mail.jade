@@ -8,7 +8,11 @@ html
               - var prizm_style = 'margin-top: 22px; height: 47px; width: 116px; margin-left: 20px;'
               if org.owner.type == 'institution_verified'
                 - prizm_style = 'margin-top: 22px; height: 47px; width: 116px; margin-right: 20px; float: right'
-                img(src='#{org.logo_url}' style='height: 37px; width: 37px; margin-left: 20px; float: left; border-radius: 50%; margin-top: 27px ')
+                - var logo = org.logo_url || org.owner.profile_photo_url
+                - var r = new RegExp('https:/s');
+                - logo = logo.replace(r, 'https://s');
+                
+                img(src='#{logo}' style='height: 37px; width: 37px; margin-left: 20px; float: left; border-radius: 50%; margin-top: 27px ')
                 h3(style='float: left; height: 47px; margin-top: 27px; line-height: 42px; vertical-align: center; margin-bottom: 0; padding: 0; margin-left: 7px; font-size: 18px; font-weight: 300;') #{org.name}
               img(src='https://www.prizmapp.com/images/logo.png' alt='Prizm'
                 style='#{prizm_style}')
