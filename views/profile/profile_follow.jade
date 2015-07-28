@@ -23,7 +23,7 @@ else
                   | Follow
           .user-avatar
             if user.profile_photo_url
-              img(src='{user.profile_photo_url}'
+              img(src='#{user.profile_photo_url}'
                   class='prizm-avatar-lg cursor'
                   onclick='prizm.showProfile("#{user._id}")')
             else
