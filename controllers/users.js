@@ -748,7 +748,9 @@ exports.displayLogin = function(req, res) {
 
 exports.handlePrizmLogin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { next(err) }
+    if (err) { 
+      res.redirect('/login?failure=true');
+    }
     if (!user) {
       req.session.messages =  [info.message];
       res.redirect('/login?failure=true');
@@ -764,7 +766,8 @@ exports.handlePrizmLogin = function(req, res, next) {
       }
       //mixpanel.track('Login Success', user.mixpanelProperties());
       //mixpanel.people.set(String(user._id), user.mixpanelProperties());
-      res.redirect('/');
+      console.log('redirecting');
+      res.redirect('/'); 
       return;
       // if (user.type == 'institution_verified') {
       //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
@@ -944,6 +947,7 @@ var fetch = function(req, res, latest){
   var done = 0;
   fetchHomeFeed(user, {latest: latest}, function(err, posts) {
   posts = _time.addTimeSinceFieldToObjects(posts);
+  console.log('time since added');
   if (posts && posts.length > 0) {
   _.each(posts, function(post, idx, list){
     User.resolvePostTags(post, function(err, users){
@@ -1038,6 +1042,7 @@ exports.displayHomeFeed = function(req, res) {
             }
           });
         } else {
+          console.log('No post');
           fetch(req, res, false);
         }
       }
