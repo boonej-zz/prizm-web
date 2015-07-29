@@ -189,8 +189,15 @@ var checkAndUpdateOrg = function(user, next){
           });
 
         } else {
-
-          User.findOneAndUpdate({_id: user._id}, empty_set, next);
+          if (user.type == 'institution_verified') {
+            Organization.findOne({owner: user._id}, function(err, org){
+              if (org) {
+                User.findOneAndUpdate({_id: user._id}, {organization: org._id, theme: org.theme}, next);
+              }
+            });
+          } else {
+            User.findOneAndUpdate({_id: user._id}, empty_set, next);
+          }
         }
 
       });
