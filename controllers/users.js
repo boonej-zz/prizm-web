@@ -751,17 +751,21 @@ exports.handlePrizmLogin = function(req, res, next) {
     if (err) { next(err) }
     if (!user) {
       req.session.messages =  [info.message];
-      res.redirect('/login?failure=true')
+      res.redirect('/login?failure=true');
+      return;
     }
     req.logIn(user, function(err) {
       console.log('log in completed');
       if (err) { 
+        console.log('there was an error with login');
         mixpanel.track('Login Failure');
         next(err); 
+        return;
       }
       //mixpanel.track('Login Success', user.mixpanelProperties());
       //mixpanel.people.set(String(user._id), user.mixpanelProperties());
       res.redirect('/');
+      return;
       // if (user.type == 'institution_verified') {
       //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
       //     if (namespace) {
@@ -935,6 +939,52 @@ var fetchHomeFeed = function(user, params, next){
   });
 };
 
+var fetch = function(req, res, latest){
+  var user = req.user;
+  var done = 0;
+  fetchHomeFeed(user, {latest: latest}, function(err, posts) {
+  posts = _time.addTimeSinceFieldToObjects(posts);
+  if (posts && posts.length > 0) {
+  _.each(posts, function(post, idx, list){
+    User.resolvePostTags(post, function(err, users){
+      if (users && users.length > 0){
+        if (post.text) {
+          post.formattedText = _utils.replaceTagsFromUserList(post.text, users);
+        }
+        _.each(post.comments, function(comment, idx, list){
+          comment.formattedText = _utils.replaceTagsFromUserList(comment.text, users);
+        });
+      }
+      done += 1;
+      if (done == list.length){
+        if (latest) {
+          res.render('profile/profile_feed.jade', {
+            posts: posts 
+          });
+          
+        } else {
+          res.render('profile/profile_home', {
+            title: 'Home',
+            bodyId: 'home-feed',
+            auth: true,
+            currentUser: req.user,
+            posts: posts
+          });
+      }
+      }
+    });
+    
+  })} else {
+    res.render('profile/profile_home', {
+      title: 'Home',
+      bodyId: 'home-feed',
+      auth: true,
+      currentUser: req.user,
+      posts: []
+    }); 
+  };
+});};
+
 exports.displayHomeFeed = function(req, res) {
   if (!req.user) {
     if (req.get('action')){
@@ -976,49 +1026,8 @@ exports.displayHomeFeed = function(req, res) {
         } else {
 
         mixpanel.track('Home Feed Viewed', user.mixpanelProperties());
-        var fetch = function(req, res, latest){
-          fetchHomeFeed(user, {latest: latest}, function(err, posts) {
-          posts = _time.addTimeSinceFieldToObjects(posts);
-          if (posts && posts.length > 0) {
-          _.each(posts, function(post, idx, list){
-            User.resolvePostTags(post, function(err, users){
-              if (users && users.length > 0){
-                if (post.text) {
-                  post.formattedText = _utils.replaceTagsFromUserList(post.text, users);
-                }
-                _.each(post.comments, function(comment, idx, list){
-                  comment.formattedText = _utils.replaceTagsFromUserList(comment.text, users);
-                });
-              }
-              done += 1;
-              if (done == list.length){
-                if (latest) {
-                  res.render('profile/profile_feed.jade', {
-                    posts: posts 
-                  });
-                  
-                } else {
-                  res.render('profile/profile_home', {
-                    title: 'Home',
-                    bodyId: 'home-feed',
-                    auth: true,
-                    currentUser: req.user,
-                    posts: posts
-                  });
-              }
-              }
-            });
-            
-          })} else {
-            res.render('profile/profile_home', {
-              title: 'Home',
-              bodyId: 'home-feed',
-              auth: true,
-              currentUser: req.user,
-              posts: []
-            }); 
-          };
-        });};
+        console.log('grabbing home feed');
+        
        
         if (lastPost) {
           Post.findOne({_id: lastPost}, function(err, post){
