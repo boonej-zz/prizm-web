@@ -13,15 +13,27 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   },
   function(email, password, done) {
+    console.log('finding user');
     User.findOne({ email: email }, function(err, user) {
-      if (err) { return done(err); }
+      if (err) { 
+        console.log('had error');
+        done(err);
+        return;
+      }
+      
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        console.log('user not found');
+        done(null, false, { message: 'Incorrect username.' });
+        return;
       }
       if (!user.validatePassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        console.log('invalid password');
+        done(null, false, { message: 'Incorrect password.' });
+        return;
       }
-      return done(null, user);
+      console.log('complete no errors');
+      done(null, user);
+      return;
     });
   }
 ));
