@@ -89,6 +89,11 @@ block content
       #profileEdit.profile-edit-container(class='#{!edit?"hidden":""}')
         include edit
       .profile-posts-container.infinite_feed(class='#{edit?"hidden":""}')
+        button.follow(data-is-following='#{user.isFollowing}' onclick='profile.followToggle(event, "#{user._id}")' type='link')
+          if user.isFollowing
+            | Following
+          else
+            | Follow
         if (posts.length < 1)
           .col-sm-12
             h2 This profile has not created any posts yet

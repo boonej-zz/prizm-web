@@ -1169,7 +1169,15 @@ exports.displayProfileById = function(req, res) {
               };
             });
           });
-        } 
+        }
+
+        var following = _.pluck(currentUser.following, '_id');
+        user.isFollowing = false;
+        _.each(following, function(obj){
+          if (String(obj) == String(user._id)) {
+            user.isFollowing = true;
+          }
+        });
 
         headerImages =_profile.shufflePostImagesForProfileHeader(posts);
         var showMembers = false;

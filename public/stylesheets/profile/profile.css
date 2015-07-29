@@ -3,6 +3,19 @@
   padding: 0;
 }
 
+button.follow {
+  font-size: 1.125em;
+  color: white;
+  font-weight: 600;
+  padding: 0.7778em 1.2778em 0.6111em 1.3333em;
+  margin-left: 17px;
+  width: 6.889em;
+  display: block;
+  outline: none;
+  -webkit-appearance: none;
+  border: none;
+}
+
 ul#feed {
   list-style: none;
   text-indent: 0;
