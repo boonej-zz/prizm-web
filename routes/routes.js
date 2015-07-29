@@ -109,11 +109,11 @@ router.get('/privacy', function(req, res){
 });
 
 router.get('/partner', function(req, res){
-  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none'});
+  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none', bodyID: 'partner'});
 });
 
 router.get('/partners', function(req, res){
-  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none'});
+  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none', bodyID: 'partner'});
 });
 
 router.get('/luminary', function(req, res){

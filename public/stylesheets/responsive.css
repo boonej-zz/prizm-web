@@ -1,3 +1,114 @@
+@media screen and (max-width:1060px) {
+  body {
+    font-size: 88%;
+  }
+  
+  .wrap, .minor-wrap {
+    width: 968px;
+  }
+  
+  .overlay p {
+    width: 968px;
+  }
+
+  p.sign-up-desc {
+    margin-top: 60px;
+  }
+
+  #sign-up, #android {
+    margin-top: 10px;
+  }
+
+}
+
+@media screen and (max-width:800px) {
+  body {
+    font-size: 80%;
+  }
+  
+  .wrap, .minor-wrap {
+    width: 700px;
+  }
+  
+  .overlay p {
+    width: 700px;
+  }
+
+  p.sign-up-desc {
+    margin-top: 30px;
+  }
+
+  #sign-up, #android {
+    margin-top: 10px;
+  }
+
+  .menu-button {
+    margin-left: 30px;
+  }
+
+
+  #home-phone {
+    width: 360px;
+    height: 445px;
+    background-size: 360px 526px;
+  }
+
+  .home {
+    height: 340px;
+  }
+
+  .overlay {
+    top: 500px;
+  }
+
+  .phone {
+    width: 260px;
+    height: 386px;
+    background-size: 260px 520px;
+    background-repeat: no-repeat;
+  }
+
+  #about-phone, #mission-phone, .left {
+    margin-left: 10px !important;
+  }
+
+  #partner-phone-1, #partner-phone-4, #partner-phone-3, #luminary-phone1, #luminary-phone2, #luminary-phone3 {
+    width: 320px;
+    background-size: 320px 558px;
+  }
+
+  #partner-phone-2 {
+    width: 320px;
+    background-size: 320px 510px;
+  }
+
+  .gray-barback .wrap, .blue-barback .wrap {
+    height: 520px;
+  }
+
+  .section.right {
+    margin-right: 30px;
+  }
+
+  .blue-barback, .gray-barback {
+    height: 100%;
+    min-height: 200px;
+  }
+
+  .dotNav {
+    margin-left: 650px;
+  }
+  
+  #quote-avatar {
+    display: none;
+  }
+
+  #quote {
+    width: 600px;
+  }
+
+}
+
 @media screen and (max-width:500px) {
   body {
     font-size: 80%;
@@ -110,6 +221,7 @@
 
   .home {
     height: 524px;
+    width: 100%;
   }
 
   .home > h2 {
@@ -147,7 +259,7 @@
     height: 325px;
     width: 258px;
     background-size: 258px 411px;
-    margin-left: -280px;
+    margin-left: -276px;
     float: none;
   }
 
@@ -185,6 +297,10 @@
   .legal-block {
     top: 10px;
     margin: 20px auto;
+  }
+
+  .mission.right {
+    width: 100%;
   }
 
 

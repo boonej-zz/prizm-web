@@ -80,7 +80,7 @@ p {
 }
 
 .column {
-  width: 560px;
+  width: 100%;
   display: inline-block;
   margin-top: 15px;
   font-size: 1.2em;
@@ -166,10 +166,12 @@ p {
 
 .section.left {
   margin-left: 48px;
+  width: 46.67%;
 }
 
 .section.right {
   margin-right: 48px;
+  width: 46.67%;
 }
 
 /** STANDARD ELEMENTS **/
@@ -323,14 +325,14 @@ a {
 /** HOME **/
 
 .home {
-  clear: both;
   height: 584px;
   float: left;
+  width: 46.67%;
 }
 
 .home > h2 {
   font-weight: 300;
-  font-size: 38px;
+  font-size: 2.375em;
   margin-top: 100px;
 }
 
@@ -419,6 +421,7 @@ p.sign-up-desc {
 .about.right {
   margin-right: 48px;
   margin-top: 100px;
+  width: 46.67%;
 }
 
 .about.right a {
@@ -444,7 +447,8 @@ p.sign-up-desc {
 
 .insight.left {
   margin-left: 48px;
-  margin-top: 200px
+  margin-top: 200px;
+  width: 46.67%;
 }
 
 #insight-phone {
@@ -462,6 +466,7 @@ p.sign-up-desc {
 .mission.right {
   margin-right: 48px;
   margin-top: 200px;
+  width: 46.67%;
 }
 
 #mission-phone {
@@ -728,7 +733,7 @@ li#org-first{
 
 #partner-section-2 {
   margin-top: 90px;
-  width: 630px;
+  width: 42.5%;
 }
 
 #partner-section-3 {
@@ -770,5 +775,4 @@ li#org-first{
 
 ul.text-box.column {
   padding-left: 20px;
-  width: 540px;
 }
