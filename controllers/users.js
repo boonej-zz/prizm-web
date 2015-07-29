@@ -758,8 +758,8 @@ exports.handlePrizmLogin = function(req, res, next) {
         mixpanel.track('Login Failure');
         next(err); 
       }
-      mixpanel.track('Login Success', user.mixpanelProperties());
-      mixpanel.people.set(String(user._id), user.mixpanelProperties());
+      //mixpanel.track('Login Success', user.mixpanelProperties());
+      //mixpanel.people.set(String(user._id), user.mixpanelProperties());
       res.redirect('/');
       // if (user.type == 'institution_verified') {
       //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
