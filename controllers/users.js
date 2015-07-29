@@ -748,19 +748,19 @@ exports.displayLogin = function(req, res) {
 
 exports.handlePrizmLogin = function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err) }
+    if (err) { next(err) }
     if (!user) {
       req.session.messages =  [info.message];
-      return res.redirect('/login?failure=true')
+      res.redirect('/login?failure=true')
     }
     req.logIn(user, function(err) {
       if (err) { 
         mixpanel.track('Login Failure');
-        return next(err); 
+        next(err); 
       }
       mixpanel.track('Login Success', user.mixpanelProperties());
       mixpanel.people.set(String(user._id), user.mixpanelProperties());
-      return res.redirect('/');
+      res.redirect('/');
       // if (user.type == 'institution_verified') {
       //   _organizations.getNamespaceByOwnerId(user.id, function(err, namespace) {
       //     if (namespace) {
