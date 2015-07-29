@@ -76,8 +76,8 @@ $(document).ready(function(){
     $('.btn-create-post').removeClass('disabled');
   });
   if (window.location.hostname == 'www.prizmapp.com' || window.location.hostname == 'prizmapp.dev') {
-    poll.posts();
-    poll.unreadActivities();
+    //poll.posts();
+    //poll.unreadActivities();
   }
 });
 
@@ -89,6 +89,7 @@ var poll = {
         contentType: 'application/json',
         url:  '/',
         processData: false,
+        cache: false,
         headers: {
           action: 'newer',
           create_date: lastPostDate,
