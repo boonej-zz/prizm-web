@@ -951,6 +951,20 @@ input#personal + span {
 
 }
 
+@media screen and (max-width: 800px) {
+  .container.topnav-offset {
+    width: 700px;
+  }
+
+  .navbar .container {
+    width: 700px;
+  }
+
+  .navbar-title {
+    margin-left: 274px;
+  }
+}
+
 @media screen and (max-width:600px) {
  .body-push {
     left: 60%;

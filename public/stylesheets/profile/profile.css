@@ -836,8 +836,110 @@ form #inputComment {
 }
 
 
+@media screen and (max-width:800px){
+ #postModal .modal-dialog {
+    top: 5px;
+    bottom: 5px;
+    margin: 0 auto;
+    width: 520px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+  }
+
+  #postModal .post-image img {
+    width: 520px;
+    height: 520px;
+  }
+ 
+  .post-modal-right {
+    position: initial;
+    width: 520px;
+    bottom: 0px;
+    height: auto;
+  }
+
+  .post-modal-left {
+    width: 520px;
+    height: 520px;
+  }
+
+  .next-post-right {
+    display: none;
+  }
+
+  .next-post-left {
+    display: none;
+  }
+
+  .comments-header {
+    display: none;
+  }
+
+  .comment-scroll {
+    top: 64px;
+    position: initial;
+  }
+
+  .comments-post {
+    left: 0px;
+    z-index: 1000;
+  }
+
+  .comment-post {
+    width: 100%;
+  }
+  .comments-footer {
+    position: initial;
+  }
+
+  #profile .comment-post {
+    width: 452px;
+  } 
+
+  form #inputComment {
+    width: 100%;
+    padding-right: 68px;
+  }
+
+  .post-button {
+    padding: 0px;
+    width: 68px;
+    margin: 16px 8px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 35px;
+    position: absolute;
+    right: 0px;
+  }
+
+  .post-comments {
+    height: 64px;
+    top: 0px;
+    position: initial;
+  }
+
+  .post-comments > p {
+    line-height: 64px;
+    vertical-align: middle;
+    height: 64px;
+  }
+
+  .back-button {
+    background-image: url('/images/posts/btn_close@2x.png');
+    background-size: 20px;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+  }
+
+}
+
 /* Mobile Screen */
-@media screen and (max-width:600px) {
+@media screen and (max-width:800px) {
   #profile-header {
     height: 200px;
   }

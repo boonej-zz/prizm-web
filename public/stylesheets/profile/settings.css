@@ -80,6 +80,8 @@
   vertical-align: middle;
   text-align: center;
   background-color: #fefefe;
+  color: #828282;
+  line-height: 8px;
 }
 button[data-is-following="true"] {
   border: none;
@@ -267,7 +269,7 @@ ul.support li:first-child {
   font-size: 18px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .user-settings-header {
     display: none;
   }
@@ -280,7 +282,8 @@ ul.support li:first-child {
     position: fixed;
     height: auto;
     float: left;
-    width: 520px;
+    width: 100%;
+    left: 0;
     box-shadow: 0 3px 3px #c5c8cc; 
     top: -65px;
     transition: all 500ms linear; 
@@ -295,12 +298,13 @@ ul.support li:first-child {
   .right-box h3 {
     position: fixed;
     top: 75px;
-    width: 520px;
+    width: 100%;
+    left: 0;
     margin-top: 0;
     cursor: pointer;
     height: 60px;
     line-height: 60px;
-    z-index: 1000;
+    z-index: 500;
   }
 
   .right-box {
@@ -309,6 +313,7 @@ ul.support li:first-child {
     display: block;
     float: left;
     clear: both;
+    margin-top: 60px;
   }
   
   .settings-container {

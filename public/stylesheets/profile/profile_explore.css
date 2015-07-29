@@ -1,6 +1,5 @@
 .container.topnav-offset {
   padding: 0;
-  width: 986px;
 }
 
 .explore-header {
@@ -23,7 +22,7 @@
 }
 
 #explore-tab li {
-  width: 315px;
+  width: 33.333%;
   display: inline-block;
   font-size: 18px;
   font-weight: normal;
@@ -61,7 +60,7 @@
 }
 
 .nav-tabs, #latest, #popular, #featured {
-  margin-left: 23px;
+  margin: 0 auto;
 }
 
 .post-image img {
@@ -72,6 +71,18 @@
 .post-image.single-post img {
   width: 100%;
   height: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  #explore .post {
+    width: 233.33px;
+    height: 233.33px;
+  }
+
+  .post-image img {
+    width: 229px;
+    height: 229px;
+  }
 }
 
 @media screen and (max-width: 600px) {

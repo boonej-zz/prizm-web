@@ -786,7 +786,7 @@ ul.body {
 
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .container.topnav-offset {
     width: 520px;
     padding: 0;

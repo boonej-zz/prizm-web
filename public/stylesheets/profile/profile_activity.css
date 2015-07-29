@@ -1,5 +1,4 @@
 .container.topnav-offset {
-  width: 986px;
   padding: 0;
 }
 .table {
@@ -9,7 +8,7 @@
 
 .nav-tabs li
 {
-  width: 474px!important;
+  width: 50%!important;
   height: 42px; 
   line-height: 42px;
   text-align: center;
@@ -28,13 +27,13 @@
 
 
 .background-column {
-  width: 948px;
-  margin-left: 19px;
+  width: 97.93%;
+  margin: 0 auto;
 }
 
 .nav-tabs {
-  width: 948px;
-  margin-left: 19px;
+  width: 97.93%;
+  margin: 0 auto;
   border-bottom: none;
 }
 

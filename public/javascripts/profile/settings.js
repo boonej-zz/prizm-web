@@ -2,7 +2,7 @@ var prepHeader = function(){
   $('.left-box').removeClass('visible');
   $('.right-box h3').click(function(e){
     var width = $(window).width();
-    if (width < 601) {
+    if (width < 801) {
       $('.left-box').toggleClass('visible');
     }
   });

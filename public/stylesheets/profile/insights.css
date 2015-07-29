@@ -21,14 +21,14 @@
 
 #insightTab {
   display: block;
-  width: 942px;
+  width: 97.3%;
   height: 42px;
 }
 
 #insightTab li {
   cursor: pointer;
   display: inline-block;
-  width: 471px;
+  width: 50%;
   height: 42px;
   line-height: 42px;
   vertical-align: middle;
@@ -46,7 +46,7 @@
 
 #insights {
   list-style: none;
-  width: 942px;
+  width: 97.3%;
   margin-bottom: 40px;
   padding: 20px 0px;
   background-color: #fefefe;
@@ -57,7 +57,7 @@
 
 #insights li{
   display: block;
-  width: 512px; 
+  width: 54.35%; 
   margin: 22px auto 0px auto;
   border: 1px solid #e4e5ea;
   background-color: #ffffff;
@@ -171,12 +171,12 @@
 ul#insights .image {
   display: block;
   height: 510px;
-  width: 510px;
+  width: 100%;
 }
 
 ul#insights .image img {
   height: 510px;
-  width: 510px;
+  width: 100%;
 }
 
 ul#insights .image .hashtags {
@@ -214,7 +214,7 @@ ul#insights.archive {
 
 #insights li.archive>.content {
   height: 99px;
-  width: 739px;
+  width: 70%; 
   border-bottom: 1px solid #c5c8cc; 
   margin: 0 0 0 15px;
   padding: 0;
@@ -370,6 +370,22 @@ img.archive-image {
   background-image: url('/images/insights/shareicon.png');
   margin-right: 12px;
   margin-top: 27px;
+}
+
+@media screen and (max-width: 800px) {
+  ul#insights .image {
+    display: block;
+    height: 348px;
+    width: 348px;
+  }
+  ul#insights .image img {
+    width: 348px;
+    height: 348px;
+  }
+
+  #insights li.archive>.content {
+    width: 67%;
+  }
 }
 
 @media screen and (max-width: 600px) {

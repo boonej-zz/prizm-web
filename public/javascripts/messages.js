@@ -100,13 +100,13 @@ function startPage(){
     var count = '#groupMembers .group-count';
     var name = '#groupName';
     var info = '#groupInfo';
-    if (width < 601 && !$target.is(members)&&!$target.is(count)&&!$target.is(name)&&!$target.is(info)) {
+    if (width < 801 && !$target.is(members)&&!$target.is(count)&&!$target.is(name)&&!$target.is(info)) {
       $('.left-box').addClass('visible');
     }
   });
   $('.left-box .header').click(function(){
     var width = $(window).width();
-    if (width < 601) {
+    if (width < 801) {
       $('.left-box').removeClass('visible');
     }
   });
@@ -328,7 +328,7 @@ var messages = {
       isFetching = false;
       messages.scrollToLatest();
       var width = $(window).width();
-      if (width < 601) {
+      if (width < 801) {
         $('.left-box').removeClass('visible');
       }
       startPage();
