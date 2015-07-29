@@ -754,6 +754,7 @@ exports.handlePrizmLogin = function(req, res, next) {
       res.redirect('/login?failure=true')
     }
     req.logIn(user, function(err) {
+      console.log('log in completed');
       if (err) { 
         mixpanel.track('Login Failure');
         next(err); 
