@@ -51,7 +51,7 @@ router.get('/users/followFix', function(req, res){
         });
         followString = '';
         _.each(u.following, function(f, i, l){
-          if (f._id && f.date && followString.indexOf(f._id) == -1 && !f._id._id){
+          if (f._id && f.date && followString.indexOf(f._id) == -1 && f._id.length == 24){
             followString = followString + f._id + '|';
             following.push(f);
           }
