@@ -95,7 +95,7 @@ surveySchema.methods.notifyUsers = function(users, next){
         var messageString = survey.creator.name + ' has sent you a new survey.'; 
         _.each(notified, function(u){
           iPush.sendNotification({
-            device: u.device_token,
+            device: u.user.device_token,
             alert: messageString,
             payload: {survey: survey._id},
             badge: 1
