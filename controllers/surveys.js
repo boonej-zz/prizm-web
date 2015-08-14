@@ -277,7 +277,15 @@ var finishSurvey = function(req, res) {
   console.log('finishing survey');
   Survey.findOne({_id: req.params.survey_id}, function (err, s){
     if (s) {
-      s.completed.push(user._id);
+      var present = false;
+      _.each(s.completed, function(c){
+        if (String(c) == String(user._id)) {
+          present = true;
+        }
+      });
+      if (!present) {
+        s.completed.push(user._id);
+      }
       s.save(function(err, r){
         if (r) {
           res.status(200).json({action: 'finish'});
