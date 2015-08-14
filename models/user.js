@@ -299,7 +299,8 @@ userSchema.statics.allowedFields = function(){
     'type',
     'contact_first',
     'contact_last',
-    'contact_email'
+    'contact_email',
+    'enrollment'
   ];
 }
 
