@@ -1583,6 +1583,9 @@ exports.register = function(req, res){
       u.save(function(err, result) {
         if (err) console.log(err);
         if (result) {
+          if (result.type == 'institution') {
+            _mail.sendNewPartnerMail(result);
+          }
           req.logIn(result, function(err){
             if (err) console.log(err);
             _mail.sendWelcomeMail(result);
