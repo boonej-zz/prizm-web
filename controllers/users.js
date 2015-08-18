@@ -1576,6 +1576,9 @@ exports.register = function(req, res){
       }
     }
     var u = new User(body);
+    if (!u.first_name) {
+      u.first_name = u.name;
+    }
     if (u.provider){
       u.save(function(err, result) {
         if (err) console.log(err);
