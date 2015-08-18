@@ -1534,23 +1534,25 @@ var validate = function(req, res, next) {
       if (user) {
         res.status(400).json({error: 'This email address is already registered.'});
       } else {
-        var birthday = req.body.birthday;
-        if (birthday.indexOf('/') != -1) {
-          birthday = birthday.split('/');
-          birthday = [birthday[2], birthday[0] - 1, birthday[1]];
-        } else if (birthday.indexOf('-') != -1) {
-          birthday = birthday.split('-');
-          birthday = [birthday[0], birthday[1] - 1, birthday[2]] 
-        }
-        birthday = moment(birthday);
-        diff = moment().diff(birthday, 'years');
-        if (diff < 13) {
-          res.status(400).json({
-            error: 'You must be 13 years of age to create an account.'
-          });
-          return;
-        } else {
-          next();
+        if (req.body.type == 'user') {
+          var birthday = req.body.birthday;
+          if (birthday.indexOf('/') != -1) {
+            birthday = birthday.split('/');
+            birthday = [birthday[2], birthday[0] - 1, birthday[1]];
+          } else if (birthday.indexOf('-') != -1) {
+            birthday = birthday.split('-');
+            birthday = [birthday[0], birthday[1] - 1, birthday[2]] 
+          }
+          birthday = moment(birthday);
+          diff = moment().diff(birthday, 'years');
+          if (diff < 13) {
+            res.status(400).json({
+              error: 'You must be 13 years of age to create an account.'
+            });
+            return;
+          } else {
+            next();
+          }
         }
       }
     });
