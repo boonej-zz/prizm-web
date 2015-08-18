@@ -1553,6 +1553,8 @@ var validate = function(req, res, next) {
           } else {
             next();
           }
+        } else {
+          next();
         }
       }
     });
