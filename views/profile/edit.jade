@@ -4,7 +4,7 @@
 form
   input#userID(type='hidden' value='#{currentUser._id}')
   ul
-    if (currentUser.type == 'institution_verified')
+    if (currentUser.type == 'institution_verified' || currentUser.type == 'institution')
       - var founded = currentUser.date_founded?new Date(currentUser.date_founded):false
       - var foundedString = founded?founded.getFullYear() + '-' + (founded.getMonth() + 1) + '-' + founded.getDate():false
       li
