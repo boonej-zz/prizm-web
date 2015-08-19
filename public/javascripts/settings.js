@@ -1,5 +1,5 @@
 var droppedFiles = false;
-var colors = ['green', 'pink', 'red', 'blue', 'purple'];
+var colors = ['green', 'pink', 'red', 'orange', 'blue', 'purple', 'black'];
 
 $(document).ready(function(){
   $('form#branding').submit(settings.submitBranding);
