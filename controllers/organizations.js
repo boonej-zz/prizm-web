@@ -766,6 +766,15 @@ exports.updateSettings = function(req, res){
           var th = t?t._id:null;
           org.theme = th;
           org.save(function(err, o){
+            User.find({$or: [{org_status: {$elemMatch:{organization: org._id, status: 'active'}}}, {_id: org.owner}]})
+            .exec(function(err, users){
+              _.each(users, function(u){
+                u.theme = th;
+                u.save(function(err, r){
+                  if (err) console.log(err);
+                });
+              });
+            });
             res.status(200).send(o);
           });
         } else {
