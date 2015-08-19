@@ -490,7 +490,9 @@ exports.sendInvites = function(req, res){
   if (!_.isArray(invites)){
     invites = invites.split(',');
   }
-  Organization.findOne({_id: orgId}, function (err, org){
+  Organization.findOne({_id: orgId})
+   .populate({path: 'owner'})
+   .exec( function (err, org){
     if (err) console.log(err);
     if (org){
       Invite.find({_id: {$in: invites}}, function(err, objects){

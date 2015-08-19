@@ -117,7 +117,7 @@ ul.themes li label {
   cursor: pointer;
 }
 
-ul.themes li.opt:hover {
+ul.themes li.opt:hover, ul.themes li.opt.selected {
   border-bottom: 4px solid #2444a2;
 }
 
