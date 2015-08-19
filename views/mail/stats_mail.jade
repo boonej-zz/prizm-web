@@ -83,27 +83,29 @@ html
               strong most popular 
               | post this week was 
               br
+              img(style='margin-top: 30px; height: 320px; width: 320px' 
+              src='#{stats.popularPost.file_path}')
+              br
               | with 
               strong #{stats.popularPost.likes_count} 
               | likes and 
               strong #{stats.popularPost.comments_count} 
               | comments.
-              br
-              img(style='margin-top: 30px; height: 320px; width: 320px' 
-              src='#{stats.popularPost.file_path}')
+
             p(style='font-size: 20px; padding-top: 30px; border-top: 1px solid #dde3f1; border-bottom: 1px solid #dde3f1; margin: 30px;')
               | The 
               strong most popular 
               | post with your members this week was
+              br
+              img(style='margin-top: 30px; height: 320px; width: 320px' 
+              src='#{stats.trendingPost.file_path}')
               br
               | with 
               strong #{stats.trendingPost.likes_count} 
               | likes and 
               strong #{stats.trendingPost.comments_count} 
               | comments.
-              br
-              img(style='margin-top: 30px; height: 320px; width: 320px' 
-              src='#{stats.trendingPost.file_path}')
+
 
             p(style='font-size: 20px; margin-top: 60px; margin-left: 30px;')
               | Let us know if you have any questions,
