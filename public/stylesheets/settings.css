@@ -147,6 +147,14 @@ ul.themes li.opt:hover {
   background-color: #694c87;
 }
 
+.orange {
+  background-color: #df8832;
+}
+
+.black {
+  background-color: #34343c;
+}
+
 /** WELCOME SCREEN **/
 .welcome-drop {
   text-align: center;

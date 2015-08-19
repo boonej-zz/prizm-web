@@ -40,11 +40,17 @@ block content
               label.color.red(for='redTheme')
               input#redTheme(type='radio' name='theme' value='red')
             li.opt
+              input#orangeTheme(type='radio' name='theme' value='orange')
+              label.color.orange(for='orangeTheme')
+            li.opt
               input#blueTheme(type='radio' name='theme' value='blue')
               label.color.blue(for='blueTheme')
             li.opt
               input#purpleTheme(type='radio' name='theme' value='purple')
               label.color.purple(for='purpleTheme')
+            li.opt
+              input#blackTheme(type='radio' name='theme' value='black')
+              label.color.black(for='blackTheme')
             li
               #selectedTheme.color(class='#{org.theme?org.theme.background_url:"blue"}')
           .buttons
