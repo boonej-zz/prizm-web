@@ -57,8 +57,9 @@ div(class='modal fade'
                 h2 Interests
               .interests-container
                 ul
-                  each interest in member.interests
-                    if interest
-                      li.interests
-                        | #{interest.text}
+                  if member.interests
+                    each interest in member.interests
+                      if interest
+                        li.interests
+                          | #{interest.text}
 
