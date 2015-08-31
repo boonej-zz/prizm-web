@@ -12,39 +12,83 @@ var User = mongoose.model('User');
 var moment = require('moment');
 
 var validateAdmin = function(user, next){
-  Organization.findOne({owner: user._id}, function(err, organization){
-    if (err) console.log(err);
-    next(organization);
-  });
+  if (user.type == 'institution_verified') {
+    Organization.findOne({owner: user._id})
+    .populate({path: 'groups', model: 'Group'})
+    .exec( function(err, organization){
+      if (err) console.log(err);
+      next(organization);
+    });
+  } else if (user.isLeader){
+    console.log('is leader');
+    var orgID = false;
+    _.each(user.org_status, function(os) {
+      if (os.role == 'leader') {
+        orgID = os.organization;
+        orgID = orgID._id || orgID;
+      }
+    });
+    console.log(orgID);
+    if (orgID) {
+      Organization.findOne({_id: orgID})
+      .populate({path: 'groups', model: 'Group'})
+      .exec( function(err, organization){
+        if (err) console.log(err);
+        next(organization);
+      });
+
+    } else {
+      res.status(401).send('Forbidden');
+      return;
+    }
+
+
+  }
 };
 
-function renderNewSurveyForm(org, survey, res){
-  var options = {
-    organization: org,
-    original: survey
-  };
-  if (org){
+function renderNewSurveyForm(user, org, survey, res){
+  if (user.type == 'institution_verified') {
+    var options = {
+      organization: org,
+      original: survey
+    };
     res.render('create/survey', options);
+    return;
   } else {
-    res.status(403).send('Forbidden');
-  }
+    if (user.isLeader) {
+      validateAdmin(user, function(org){
+        console.log(org);
+        if (org) {
+          console.log('ther is an org');
+          var options = {
+            organization: org,
+            original: survey
+          };
+          res.render('create/survey', options);
+          return;
+        } else {
+          res.status(403).send('Forbidden');
+          return;
+        }
+      }); 
+    } 
+  }     
+  
 }
 
 exports.newSurvey = function(req, res){
   var user = req.user;
   var surveyID = req.get('survey');
-  Organization.findOne({owner: user._id})
-  .exec(function(err, org){
-    if (err) console.log(err);
+  validateAdmin(user, function(org){
     if (surveyID) {
       var oid = org._id || false;
       Survey.findOne({_id: surveyID, organization: oid})
       .populate({path: 'questions', model: 'Question'})
       .exec(function(err, survey){
-        renderNewSurveyForm(org, survey, res);
+        renderNewSurveyForm(user, org, survey, res);
       });
     } else {
-      renderNewSurveyForm(org, false, res);
+      renderNewSurveyForm(user, org, false, res);
     }
    
   });
@@ -54,10 +98,7 @@ exports.createSurvey = function(req, res){
   var user = req.user;
   var oid = req.get('original');
   console.log(oid);
-  Organization.findOne({owner: user._id})
-  .populate({path: 'groups', model: 'Group'})
-  .exec(function(err, org){
-    if (err) console.log(err);
+  validateAdmin(user, function(org){
     if (org){
       var questionObj = {
         text: req.body.questions,
@@ -129,11 +170,8 @@ exports.createSurvey = function(req, res){
 exports.createQuestion = function(req, res){
   var user = req.user;
   var oid = req.get('original');
-  Organization.findOne({owner: user._id})
-  .populate({path: 'groups', model: 'Group'})
-  .select({_id: 1, owner: 1, groups: 1})
-  .exec(function(err, org){
-    if (err) console.log(err);
+
+  validateAdmin(user, function(org){
     if (org){
       Survey.findOne({_id: req.params.survey_id}, function(err, survey){
         if (err) console.log(err);
@@ -190,9 +228,7 @@ exports.createQuestion = function(req, res){
 
 exports.publishSurvey = function(req, res){
  var user = req.user;
-  Organization.findOne({owner: user._id})
-  .exec(function(err, org){
-    if (err) console.log(err);
+ validateAdmin(user, function(org){
     if (org){
       Survey.findOne({_id: req.params.survey_id}, function(err, survey){
         if (survey) {

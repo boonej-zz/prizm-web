@@ -16,9 +16,44 @@ var _ = require('underscore');
 var Push = require('../classes/push_notification');
 var helpers = require('../lib/helpers');
 
+var validateAdmin = function(user, next){
+  console.log('validating admin');
+  if (user.type == 'institution_verified') {
+    Organization.findOne({owner: user._id})
+    .populate({path: 'groups', model: 'Group'})
+    .exec( function(err, organization){
+      if (err) console.log(err);
+      next(organization);
+    });
+  } else if (user.isLeader){
+    console.log('is leader');
+    var orgID = false;
+    _.each(user.org_status, function(os) {
+      if (os.role == 'leader') {
+        orgID = os.organization;
+        orgID = orgID._id || orgID;
+      }
+    });
+    if (orgID) {
+      Organization.findOne({owner: user._id})
+      .populate({path: 'groups', model: 'Group'})
+      .exec( function(err, organization){
+        if (err) console.log(err);
+        next(organization);
+      });
+
+    } else {
+      res.status(401).send('Forbidden');
+      return;
+    }
+
+
+  }
+};
+
 exports.createInsight = function(req, res){
-  var user = req.user;
   console.log('creating insight');
+  var user = req.user;
   Image.uploadInsight(req, function(err, path, fields){
     if (err) {
       console.log(err);
@@ -26,9 +61,7 @@ exports.createInsight = function(req, res){
       return;
     }
     console.log(path);
-    console.log('uploaded image');
     if (path) {
-      console.log('populating data');
       var data = {creator: user._id, file_path: path};
       var allowed = ['title', 'text', 'link', 'hash_tags'];
       for (var prop in fields) {
@@ -63,9 +96,7 @@ exports.createInsight = function(req, res){
           res.status(400).send();
         } else {
           console.log('finding organization');
-          Organization.findOne({owner: user._id})
-          .populate({path: 'groups', model: 'Group'})
-          .exec(function(err, org){
+          validateAdmin(user, function(org){
             console.log('found organization sending response');
             res.render('create/insight', {insight: insight, organization: org});
           });
@@ -81,7 +112,23 @@ exports.sendInsight = function(req, res){
   var insight_id = req.body.insight_id;
   var subject = req.body.subject;
   var groups = req.body.groups;
-  Organization.findOne({owner: user._id})
+  var criteria = {owner: user._id};
+  if (user.isLeader) {
+    var orgID = false; 
+    _.each(user.org_status, function(os){
+      if (os.role == 'leader') {
+        orgID = os.organization;
+        orgID = orgID._id || orgID;
+      }
+    });
+    if (orgID) {
+      criteria = {_id: orgID};
+    } else {
+      res.status(401).send('Forbidden');
+      return;
+    }
+  }
+  Organization.findOne(criteria)
    .exec(function(err, org){
     if (err) console.log(err);
     if (org) {
