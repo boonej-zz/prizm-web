@@ -2,6 +2,12 @@ var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var _ = require('underscore');
 var iPush = require('../classes/i_push');
+var path = require('path');
+var config = require('../config'); 
+var mandrill        = require('node-mandrill')(config.mandrill.client_secret);
+var mandrillEndpointSend = '/messages/send';
+var surveyMail = path.join(__dirname, '/../views/mail/survey_mail.jade');
+var jade = require('jade');
 
 var answerSchema = new mongoose.Schema({
   user: {type: ObjectId, ref: 'User', required: true},
@@ -94,6 +100,8 @@ surveySchema.methods.notifyUsers = function(users, next){
         console.log('Sending to ' + notified);
         var messageString = survey.creator.name + ' has sent you a new survey.'; 
         _.each(notified, function(u){
+          console.log(u.user.email);
+          var mailParams = {survey: survey, user: u.user, owner: survey.creator};
           iPush.sendNotification({
             device: u.user.device_token,
             alert: messageString,
@@ -102,7 +110,17 @@ surveySchema.methods.notifyUsers = function(users, next){
           }, function(err, result){
             if (err) console.log(err);
             else console.log('Sent push');
-          }); 
+          });
+          var mail = jade.renderFile(surveyMail, mailParams);
+          mandrill(mandrillEndpointSend, {message: {
+            to: [{email: u.user.email}],
+            from_email: survey.creator.email,
+            from_name: survey.creator.name,
+            subject: 'New Survey on Prizm',
+            html: mail}}, function (err, response){
+              if (err) console.log(err); 
+              console.log(response);
+            });
         });
         next(err, survey);
       } else {
