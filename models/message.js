@@ -18,6 +18,7 @@ var messageSchema = new mongoose.Schema({
   pretty_text: {type: String},
   web_text: {type: String},
   image_url: {type: String},
+  target: {type: ObjectId, ref: 'User'},
   meta: {
     message_id: {type: ObjectId, ref:'Message'},
     description: {type: String},

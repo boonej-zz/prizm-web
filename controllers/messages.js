@@ -101,6 +101,7 @@ exports.displayUserMessagesFeed = function(req, res){
         Message.fetchMessages(
           {
             organization: org,
+            target: null,
             group: null 
           },
           function(err, messages){
@@ -189,7 +190,8 @@ exports.displayOwnerMessagesFeed = function(req, res){
             Message.fetchMessages(
               {
                 organization: organization._id,
-                group: group || null 
+                group: group || null,
+                target: null 
               },
               function(err, messages){
                 if (err) console.log(err);
@@ -463,7 +465,7 @@ var fetchTotalMessageCount = function(user_id, org_id, next){
           return g.status != 'inactive';
         });
         groups = _.pluck(groups, '_id');
-        var criteria1 = {organization: org_id, group: null};
+        var criteria1 = {organization: org_id, group: null, target: null};
         var criteria2 = {organization: org_id, group: {$in: groups}};
         var criteria = {$or: [criteria1, criteria2]};
         countMessages(criteria, next);
