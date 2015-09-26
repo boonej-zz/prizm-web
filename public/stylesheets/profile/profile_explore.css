@@ -14,8 +14,8 @@
 #explore .post {
   margin-top: 0px;
   border: 0px solid transparent;
-  width: 315px;
-  height: 315px;
+  width: 33.333%;
+  height: 33.333%;
   padding: 0;
   margin: 0;
   display: inline-block;
@@ -64,8 +64,8 @@
 }
 
 .post-image img {
-  width: 313px;
-  height: 313px;
+  width: 100%;
+  height: 100%;
 }
 
 .post-image.single-post img {
