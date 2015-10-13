@@ -739,6 +739,9 @@ exports.updateSettings = function(req, res){
   if (action == 'branding'){
     var allowed = ['namespace', 'reply_to', 'display_name'];
     Image.uploadSettings(req, function(err, path, fields){
+      console.log(err);
+      console.log(fields);
+      console.log(path);
       Organization.findOne({_id: organization}, function(err, org){
         if (org) {
           if (String(org.owner) == String(user._id)){
@@ -756,6 +759,8 @@ exports.updateSettings = function(req, res){
         } else {
           res.status(403).send('Unauthorized');
         }
+        } else {
+          res.status(404).send('Not found');
         }
       });
     });
