@@ -54,7 +54,7 @@ var settings = {
   },
   submitWelcome: function(e){
     var org = $('#orgID').val();
-    var d = new FormData($('form#branding')[0]);
+    var d = new FormData($('form#welcome')[0]);
     if (droppedFiles) {
       d.append('image', droppedFiles);
     }
