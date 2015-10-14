@@ -2,15 +2,15 @@ extends ../layouts/layout_app
 
 block head
   link(rel='stylesheet' type='text/css' href='/stylesheets/surveys.css')
-  script(type='text/javascript' src='https://www.google.com/jsapi')
+  script(type='text/javascript' src='https://www.gstatic.com/charts/loader.js')
   script(type='text/javascript' src='/javascripts/surveys.js')
   script(type='text/javascript').
     $(document).ready(function(){
       $('.col.sortable').click(surveys.sort);
       $('.col button').click(surveys.buttonHandler);
     });
-    google.load('visualization', '1.1', {packages:['corechart']});
-    google.setOnLoadCallback(drawCharts);
+    google.charts.load('41', {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawCharts);
     function drawCharts(){
       var raw = !{JSON.stringify(data)};
       var keys = [];
@@ -38,7 +38,6 @@ block head
         var domEl = $(sel)[0];
         var chartData = google.visualization.arrayToDataTable(raw[keys[i]]);
         console.log('have chart data');
-        var view = new google.visualization.DataView(chartData);
         var barOptions = {
           backgroundColor: '#f2f5fb',
           hAxis : {
@@ -96,12 +95,15 @@ block head
 
 
         };
-        var chart;
         if (type === 'scale') {
-          chart = new google.visualization.ColumnChart(domEl);
+          var chart = new google.visualization.ColumnChart(domEl);
+
+          var view = new google.visualization.DataView(chartData);
           chart.draw(view, barOptions);
         } else if (type === 'multiple') {
-          chart = new google.visualization.PieChart(domEl);
+          var chart = new google.visualization.PieChart(domEl);
+
+          var view = new google.visualization.DataView(chartData);
           chart.draw(view, pieOptions);
         }
       }
