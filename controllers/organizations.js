@@ -790,7 +790,7 @@ exports.updateSettings = function(req, res){
       });
     });
   } else if (action == 'welcome'){
-    Image.uploadSettings(req, function(err, path, fields){
+    Image.uploadWelcome(req, function(err, path, fields){
       Organization.findOne({_id: organization}, function(err, org){
         if (org) {
           org.welcome_image_url = path;
