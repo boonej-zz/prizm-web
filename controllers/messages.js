@@ -479,6 +479,7 @@ var fetchTotalMessageCount = function(user_id, org_id, next){
 
 
 var sendMessageWithMutes = function(user, message, mutes ){
+  console.log(message);
   var send = String(user.id) != String(message.creator._id);
   
   if (send) {
