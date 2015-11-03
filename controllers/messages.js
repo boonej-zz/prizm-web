@@ -479,7 +479,6 @@ var fetchTotalMessageCount = function(user_id, org_id, next){
 
 
 var sendMessageWithMutes = function(user, message, mutes ){
-  console.log(message.group);
   var send = String(user.id) != String(message.creator._id);
   
   if (send) {
@@ -534,7 +533,7 @@ var notifyUsers = function(m){
       var criteriaa = {_id: organization.owner._id};
       var criteriab = {};  
       if (message.group){
-        criteriab.org_status = {$elemMatch: {status: 'active', organization: organization._id,  groups: {$elemMatch: {$eq: message.group}}}};
+        criteriab.org_status = {$elemMatch: {status: 'active', organization: organization._id,  groups: message.group._id}};
       } else {
         criteriab.org_status = {$elemMatch: {organization: organization._id, status: 'active'}};
       }
