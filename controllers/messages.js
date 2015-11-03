@@ -525,7 +525,7 @@ var notifyUsers = function(m){
   .populate({path: 'creator'})
   .populate({path: 'organization', select: '_id name owner'})
   .populate({path: 'organization.owner', select: '_id name'})
-  .populate({path: 'group', model: 'Group'})
+  .populate({path: 'group'})
   .exec(function(err, message){
     var organization = message.organization;
     if (organization) {
