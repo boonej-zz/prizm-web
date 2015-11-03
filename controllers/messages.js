@@ -20,6 +20,7 @@ var htmlparser = require('htmlparser');
 var utils = require('util');
 var S = require('string');
 var iPush = require('../classes/i_push');
+var Notify = require('../lib/helpers/notify');
 var Image = require('../lib/helpers/image');
 
 var markRead = function(messages, user_id){
@@ -492,6 +493,7 @@ var sendMessageWithMutes = function(user, message, mutes ){
       console.log('sending');
       if (user.device_token){
         message.prettyText(function(prettyText){
+          var titleString;
           var messageString = '#';
           var groupName = message.group?'#' + message.group.name:'all';
           if (message.group){
@@ -500,21 +502,16 @@ var sendMessageWithMutes = function(user, message, mutes ){
             messageString = messageString + 'all:';
           }
           if (message.text) {
-            messageString = messageString = message.creator.name + '\n' 
-              + prettyText;
+            titleString = groupName = ': '; 
+            titleString = titleString + m.creator.name;
+            messageString =  prettyText;
           } else {
             messageString = message.creator.name + ' just posted an image in ' 
               + groupName + '.';
           }
-          iPush.sendNotification({
-            device: user.device_token,
-            alert: messageString,
-            payload: {_id: message._id},
-            badge: c 
-          }, function(err, result){
-            if (err) console.log(err);
-            else console.log('Sent push'); 
-          });      
+          Notify.sendNote(user, { title: titleString, body: messageString, icon : 'notificationlgx_icon'});
+
+         
         });
       }
     }); 
