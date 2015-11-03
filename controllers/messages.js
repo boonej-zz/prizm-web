@@ -479,7 +479,7 @@ var fetchTotalMessageCount = function(user_id, org_id, next){
 
 
 var sendMessageWithMutes = function(user, message, mutes ){
-  console.log(message);
+  console.log(message.group);
   var send = String(user.id) != String(message.creator._id);
   
   if (send) {
@@ -510,6 +510,7 @@ var sendMessageWithMutes = function(user, message, mutes ){
             messageString = message.creator.name + ' just posted an image in ' 
               + groupName + '.';
           }
+          console.log({title: titleString, body: messageString, icon: 'something'});
           Notify.sendNote(user, { title: titleString, body: messageString, icon : 'notificationlgx_icon'});
 
          
