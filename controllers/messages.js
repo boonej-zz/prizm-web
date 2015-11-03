@@ -503,7 +503,7 @@ var sendMessageWithMutes = function(user, message, mutes ){
           }
           if (message.text) {
             titleString = groupName = ': '; 
-            titleString = titleString + m.creator.name;
+            titleString = titleString + message.creator.name;
             messageString =  prettyText;
           } else {
             messageString = message.creator.name + ' just posted an image in ' 
