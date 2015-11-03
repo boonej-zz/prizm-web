@@ -502,7 +502,7 @@ var sendMessageWithMutes = function(user, message, mutes ){
             messageString = messageString + 'all:';
           }
           if (message.text) {
-            titleString = groupName = ': '; 
+            titleString = groupName + ': '; 
             titleString = titleString + message.creator.name;
             messageString =  prettyText;
           } else {
