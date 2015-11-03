@@ -82,7 +82,8 @@ var userSchema = new mongoose.Schema({
   pwd_updated           : {type: Boolean, default: false},
   org_status            : [orgStatusSchema],
   theme                 : {type: ObjectIdType, ref: 'Theme', required: false},
-  visibility            : {type: String, default: null}
+  visibility            : {type: String, default: null},
+  google_devices        : {type: Array, default: []}
 },{ versionKey          : false });
 
 userSchema.statics.basicFields = function(){
