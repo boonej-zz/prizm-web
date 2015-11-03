@@ -495,11 +495,11 @@ var sendMessageWithMutes = function(user, message, mutes ){
         message.prettyText(function(prettyText){
           var titleString;
           var messageString = '#';
-          var groupName = message.group?'#' + message.group.name:'all';
+          var groupName = message.group?'#' + message.group.name:'#all';
           if (message.group){
             messageString = messageString + message.group.name + ':';
           } else {
-            messageString = messageString + 'all:';
+            messageString = messageString + '#all:';
           }
           if (message.text) {
             titleString = groupName + ': '; 
