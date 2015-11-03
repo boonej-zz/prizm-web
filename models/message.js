@@ -11,7 +11,7 @@ var messageSchema = new mongoose.Schema({
   create_date: {type: Date, default: null, required: false, index: true},
   modify_date: {type: Date, default: null, required: false, index: true},
   text: {type: String, default: ''},
-  group: {type: ObjectId, index: true},
+  group: {type: ObjectId,  ref: 'Group', index: true},
   organization: {type: ObjectId, ref: 'Organization', required: true, index: true},
   likes: {type: Array},
   likes_count: {type: Number, default: 0},
