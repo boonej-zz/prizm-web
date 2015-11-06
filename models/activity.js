@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
+var Push = require('../classes/push_notification');
 
 var activitySchema = new mongoose.Schema({
   from:              {type: ObjectId, ref: 'User', required: true},
@@ -18,6 +19,12 @@ var activitySchema = new mongoose.Schema({
 activitySchema.pre('save', function(next) {
   this.create_date = Date.now();
   next();
+});
+
+activitySchema.post('save', function(saved) {
+  new Push('activity', saved, function(result){
+    console.log(result);
+  });
 });
 
 mongoose.model('Activity', activitySchema);
