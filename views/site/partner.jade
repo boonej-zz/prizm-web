@@ -1,7 +1,7 @@
 mixin sidenav
-  .dotNav(style='display:none')
+  .dotNav()
     ul
-      li
+      li.active
         a(href='#partner-home' elem='partner-header')
       li
         a(href='#what-is-prizm' elem='partner-block-1')
@@ -15,7 +15,7 @@ mixin sidenav
 extends ../layouts/site_layout
 
 block head
-  script(type='text/javascript' src='/javascripts/snap.js')
+  //script(type='text/javascript' src='/javascripts/snap.js')
 
 block content
   .wrap
