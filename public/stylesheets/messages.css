@@ -198,6 +198,7 @@ ul#topics li, ul#messages li, ul#members li {
   display: inline-block;
   height: 74px;
   line-height: 74px;
+  width: 75%;
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
