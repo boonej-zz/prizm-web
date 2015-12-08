@@ -51,6 +51,8 @@ $(document).ready(function(){
         }
         else if (document.URL.indexOf('profile') > -1){
           feedType = 'profile';
+        } else if ($('#scrollType').val()) {
+          feedType = 'profile';
         } else {
           feedType = 'home';
         }
