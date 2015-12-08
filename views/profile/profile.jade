@@ -86,8 +86,9 @@ block content
           mixin profileInfo
         else
           mixin profileInfo
-      #profileEdit.profile-edit-container(class='#{!edit?"hidden":""}')
-        include edit
+      if currentUser.birthday != null 
+        #profileEdit.profile-edit-container(class='#{!edit?"hidden":""}')
+          include edit
       .profile-posts-container.infinite_feed(class='#{edit?"hidden":""}')
         button.follow(data-is-following='#{user.isFollowing}' onclick='profile.followToggle(event, "#{user._id}")' type='link')
           if user.isFollowing
