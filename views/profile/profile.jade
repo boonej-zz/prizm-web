@@ -86,7 +86,7 @@ block content
           mixin profileInfo
         else
           mixin profileInfo
-      if currentUser.birthday != null 
+      if currentUser.birthday != null || currentUser.type == 'institution_verified' 
         #profileEdit.profile-edit-container(class='#{!edit?"hidden":""}')
           include edit
       .profile-posts-container.infinite_feed(class='#{edit?"hidden":""}')
