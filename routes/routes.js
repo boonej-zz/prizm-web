@@ -121,7 +121,7 @@ router.get('/luminary', function(req, res){
 });
 
 router.get('/download', function(req, res){
-  res.render('site/download', { title: 'Prizm App | Download', selected: 'none'});
+  res.render('download', { title: 'Prizm App | Download', selected: 'none'});
 });
 
 /* Posts */
