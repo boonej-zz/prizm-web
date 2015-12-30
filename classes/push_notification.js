@@ -76,7 +76,7 @@ PushNotification.prototype.activity = function activity(){
     //fetch "to" user object
     findUserById(this.object.to, function(user){
       console.log('logging user returned from object'+JSON.stringify(user));
-      if(user && user._id && (user.device_token || user.google_devices.length > 0){
+      if(user && user._id && (user.device_token || user.google_devices.length > 0)){
         user.badge_count = user.badge_count + 1;
         self.device = user.device_token;
         self.payload = {_id: self.object._id};
