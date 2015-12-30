@@ -15,6 +15,7 @@ var _           = require('underscore'),
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Notify = require('../lib/helpers/notify.js');
 
 /**
  * Expose `PushNotification`
@@ -75,7 +76,7 @@ PushNotification.prototype.activity = function activity(){
     //fetch "to" user object
     findUserById(this.object.to, function(user){
       console.log('logging user returned from object'+JSON.stringify(user));
-      if(user && user._id && user.device_token){
+      if(user && user._id && (user.device_token || user.google_devices.length > 0){
         user.badge_count = user.badge_count + 1;
         self.device = user.device_token;
         self.payload = {_id: self.object._id};
@@ -109,7 +110,7 @@ PushNotification.prototype.activity = function activity(){
           console.log('logger user returned from from_user object:'+JSON.stringify(from_user));
           if(from_user && from_user._id){
             self.message = from_user.name + ' ' + action;
-            self.send();
+            Notify.sendNote(user, {title: from_user.name, body: action, icon: 'notificationlgx_icon'});
           }
         });
       }
@@ -118,8 +119,6 @@ PushNotification.prototype.activity = function activity(){
 };
 
 PushNotification.prototype.send = function send(){
-  console.log(this.message);
-  console.log(this.device);
   if(this.message && this.device){
     var self = this;
     var last_notification = Date.now();
