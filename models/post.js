@@ -45,7 +45,7 @@ var postSchema = new mongoose.Schema({
   flagged_count       : {type: Number, default: 0},
   flagged_reporters   : [{reporter_id: String, create_date: Date}],
   is_repost           : {type: Boolean, default: false},
-  origin_post_id      : {type: String, default: null},
+  origin_post_id      : {type: ObjectIdType, ref: 'Post',  default: null},
   external_provider   : {type: String, default: null},
   external_link       : {type: String, default: null},
   type                : {type: String, default: 'user'},
@@ -54,7 +54,54 @@ var postSchema = new mongoose.Schema({
   accolade_target     : {type: String, default: null}
 }, { versionKey: false});
 
+var corePostFields = {
+  _id: 1,
+  text: 1,
+  file_path: 1,
+  category: 1,
+  create_date: 1,
+  likes_count: 1,
+  comments_count: 1,
+  tags_count: 1,
+  hash_tags: 1,
+  is_repost: 1,
+  origin_post_id: 1,
+  scope: 1,
+  status: 1
+};
 
+postSchema.statics.fetchHomeFeed = function(params, next) {
+  
+  var fields = {_id: 1};
+  var model = this.model('Post');
+  var user = params.user || false;
+  var createDate = params.createDate || false;
+  var lastPost = params.lastPost || false;
+
+  if (!action) {
+    fields = corePostFields;
+  }
+
+  user.fetchHomeFeedCriteria(function(err, criteria) {
+
+    if (createDate) {
+      criteria.create_date = {'$gt': createDate};
+    }
+
+
+    model.find(criteria)
+      .select(fields)
+      .exec(function(err, posts){
+        var length = posts
+          ? posts.length
+          : 0;
+        var returnData = action
+          ? {count: length}
+          : posts;
+        next(err, returnData);    
+      });
+  }); 
+}
 
 postSchema.statics.findPostsForProfileByUserId = function(user_id, is_current, is_trust, next) {
   criteria = {

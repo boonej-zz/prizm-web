@@ -21,8 +21,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var MongoStore = require('connect-mongo')(session);
-var routes = require('./routes/routes');
-var adminRoute = require('./routes/admin');
+var routes = require('./routes/index');
 
 var herokuHostname = 'safe-lake-1236.herokuapp.com';
 var passport = require('passport');
@@ -85,9 +84,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(subdomain('admin', adminRoute));
+app.use(routes);
 
-app.use(subdomain('*', routes));
 
 
 /// catch 404 and forwarding to error handler

@@ -60,18 +60,12 @@ html
           else
             span.menu-button
               a(href='/#about') About
-          if (selected == 'insight')
-            span(class='menu-button selected')
-              a(href='/#insight') Insight
-          else
-            span.menu-button
-              a(href='/#insight') Insight
-          if (selected == 'mission')
-            span(class='menu-button selected')
-              a(href='/#mission') Mission
-          else
-            span.menu-button
-              a(href='/#mission') Mission
+          span(class=selected=='product'?'menu-button selected':'menu-button')
+            a(href='/#product') Product
+          span(class=selected=='why'?'menu-button selected':'menu-button')
+              a(href='/#why') Why
+          span(class=selected=='pricing'?'menu-button selected':'menu-button')
+            a(href='/#pricing') Pricing
           span(class='menu-button')
             a(href='http://beprizmatic.com') Blog
           span(class='menu-button')

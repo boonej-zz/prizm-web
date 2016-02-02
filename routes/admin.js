@@ -40,9 +40,6 @@ AWS.config.update({
   secretAccessKey: AWS_SECRET_KEY
 });
 
-router.get('/', function(req, res){
-  res.send(200);
-});
 
 /* Insights */
 

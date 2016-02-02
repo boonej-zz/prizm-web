@@ -1,4 +1,6 @@
-
+html {
+  font-size: 18px;
+}
 
 /** GLOBAL STYLE MODIFIERS **/
 body {
@@ -106,6 +108,14 @@ p {
   background-color: #314991;
 }
 
+#partner-header.hero {
+  background-image: url('/images/hero@2x.jpg');
+  background-size: 1536px 781px;
+  height: 781px;
+  background-position: center;
+
+}
+
 .gray-barback {
   min-height: 800px;
   height: 100%;
@@ -162,6 +172,26 @@ p {
   width: 16.4em;
   clear: both;
   font-weight: 300;
+}
+
+#header-title.main-blurb {
+  font-size: 3.25em;
+  line-height: 0.888em;
+  color: #ffffff;
+  width: 8.957em;
+  text-align: left;
+  font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  font-weight: 200;
+  padding-top: 3.829em;
+}
+
+#partner-header .description {
+  font-size: 1.444em;
+  font-weight: 200;
+  color: #ffffff;
+  width: 20.5em;
+  line-height: 1.1em;
+  margin: 1.2em auto 0 auto;
 }
 
 .section.left {
@@ -332,7 +362,7 @@ a {
 
 .home > h2 {
   font-weight: 300;
-  font-size: 2.375em;
+  font-size: 2.04em;
   margin-top: 100px;
 }
 
@@ -669,21 +699,26 @@ li#org-first{
 
 #partner-header button.watch {
   -webkit-appearance: none;
-  font-size: 0.875em;
-  width: 11.5714em;
+  font-size: 1em;
   text-align: left;
-  height: 3.7857em;
   border: none;
   color: white;
-  background-color: #314991;
-  padding-left: 3.07142em;
-  background-image: url('/images/play_icon.png');
+  background-color: transparent;
+  padding-left: 3.27142em;
+  background-image: url('/images/play-button@2x.png');
   background-repeat: no-repeat;
-  background-size: 1.7142em;
-  background-position: 0.858em center; 
+  background-size: 3.394em;
+  background-position: left 0.48em;
+  vertical-align: middle;
+  line-height: 3.394em;
   font-weight: 400;
-  margin-top: 13.6428em;
-  margin-left: 10px;
+  margin-top: 2.716em;
+}
+
+#partner-header .minor-wrap {
+  width: 29.6111em;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .video-blurb iframe.yt {
@@ -729,6 +764,24 @@ li#org-first{
 
 #partner-section-1 {
   margin-top: 125px;
+}
+
+.partner-block h2 {
+  font-weight: 600;
+}
+
+
+.partner-block h3 {
+  font-size: 1.2em;
+  font-weight: 500;
+  line-height: 1em;
+  margin: 1em 0;
+}
+
+#partner-section-1 p {
+  font-size: 1em;
+  width: 28.277em;
+  margin-top: 0;
 }
 
 #partner-section-2 {

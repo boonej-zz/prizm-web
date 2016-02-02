@@ -19,29 +19,23 @@ block head
 
 block content
   .wrap
-    mixin sidenav
   #partner-home.anchor
-  #partner-header.full-width.blue-barback.topnav-offset.snap
+  #partner-header.full-width.hero.topnav-offset.snap
+    .wrap
+      h2#header-title.main-blurb
+        | Meet your members where they are.
+      p.description
+        | Create a private digital community for your youth organization. 
+        | Communicate and engage with members on their smartphones.
+      .minor-wrap
+        button.watch Watch Video 
+
+  #about.partner-block.full-width.blue-barback.snap
     .gray-background
       .wrap
-        .blurb
-          h2#header-title
-            | Create a private digital community for your youth development 
-            | organization. 
-          p.tagline
-            | Communicate and engage with your members on their smartphones. 
-            | Meet them where they are.
-    .minor-wrap
-      .video-blurb(onclick='prizm.playVideo(event)')
-        button.watch WATCH VIDEO
-        #ytVideo
-
-  #partner-block-1.full-width.gray-barback.snap
-    #what-is-prizm.anchor
-    .blue-background
-      .wrap
-        #partner-section-1.section.left
-          h2 About
+        #partner-section-1.section.right
+          h2 About Prizm
+          h3 Built for organizations
           p.text-box.column
             | Prizm makes it easy for you and your members to stay in 
             | touch privately when they’re not in your scheduled in-person 
@@ -49,33 +43,20 @@ block content
             | eliminate email, paper flyers, and clunky online surveys. 
             | It’s time to start engaging with your members in a way that 
             | makes sense to them.
-        #partner-phone-1.phone.right.topnav-offset
-  #partner-block-2.full-width.blue-barback.snap
-    #custom-app.anchor
-    .gray-background
+        #partner-phone-1.phone.left.topnav-offset
+  #product.partner-block.full-width.gray-barback.snap
+    .blue-background
       .wrap
-        #partner-section-2.section.right
-          h2 Custom app without the hassle.
+        #partner-section-2.section.left
+          h2 Product
+          h3 Custom app without the hassle 
           p.text-box.column
-            | Organizations have the opportunity to create a private 
-            | experience through the use of a unique program code in Prizm. 
-            | It’s like a custom app without having to worry about any of the 
-            | testing, coding or bug fixes.
-          ul.text-box.column
-            li
-              | Enable group message channels with your whole organization 
-              | and smaller sub-groups. 
-            li
-              | Send native mobile push notifications just to members.
-            li
-              | Access dashboards with member interests, trends, and engagement.
-            li
-              | Send short surveys and easily compile results.
-            li
-              | Customize screens with your organization’s brand color.
-            li
-              | Send Insights with your content from your leadership.
-         #partner-phone-2.section.left.topnav-offset
+            | Prizm allows you to communicate and engage privately 
+            | with your members, whether they are using iPhones or 
+            | Android smartphones. The self-service customization 
+            | that Prizm offers gives you the feeling of a custom app 
+            | without having to worry about testing, coding or bug fixes.
+        #partner-phone-2.section.right.topnav-offset
   #partner-block-3.full-width.gray-barback.snap
     #measure.anchor
     .blue-background

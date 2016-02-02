@@ -108,12 +108,12 @@ router.get('/privacy', function(req, res){
   res.render('site/privacy', { title: 'Prizm App | Privacy', selected:'none'});
 });
 
-router.get('/partner', function(req, res){
-  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none', bodyID: 'partner'});
+router.get('/student', function(req, res){
+  res.render('site/index', { title: 'Prizm App | Student', selected: 'none', bodyID: 'partner'});
 });
 
 router.get('/partners', function(req, res){
-  res.render('site/partner', { title: 'Prizm App | Partners', selected: 'none', bodyID: 'partner'});
+  res.render('site/index', { title: 'Prizm App | Student', selected: 'none', bodyID: 'partner'});
 });
 
 router.get('/luminary', function(req, res){
