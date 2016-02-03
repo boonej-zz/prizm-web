@@ -7,6 +7,7 @@ body {
   font-weight: 100;
   height: 100%;
   font-size: 100%;
+  box-sizing: border-box;
 }
 
 .about.right a.underline {
@@ -90,7 +91,6 @@ p {
 
 .blue-background {
   background-color: #314991;
-  opacity: 1;
   color: #FFF;
 }
 
@@ -137,6 +137,7 @@ p {
 .gray-background {
   background-color: #e4e5ea;
 }
+
 
 .white-background {
   background-color: #EEF0F4;
@@ -697,10 +698,11 @@ li#org-first{
 
 }
 
-#partner-header button.watch {
+#main-screen button.watch {
   -webkit-appearance: none;
   font-size: 1em;
   text-align: left;
+  position: relative;
   border: none;
   color: white;
   background-color: transparent;
@@ -828,4 +830,361 @@ li#org-first{
 
 ul.text-box.column {
   padding-left: 20px;
+}
+
+#new-main #main-screen {
+  width: 100%;
+  height: 43.38em;
+
+}
+
+#overlay-image {
+  background-image: url('/images/hero@2x.jpg');
+  background-position: center ;
+  background-size: 100% auto ;
+  height: 43.38em;
+  width: 100%;
+  background-color: rgba(49.73,145,.3);
+  background-blend-mode: color;
+
+  position: absolute;
+}
+
+#underlay-color {
+  width: 100%;
+  height: 43.38em;
+  position: absolute;
+  background-color: rgba(49,73,145,.6);
+  background-blend-mode: darken;
+}
+
+#overlay-color {
+  width: 100%;
+  height: 43.38em;
+  background-color: rgba(49, 73, 145, .6);
+  position: absolute;
+  background-blend-mode: color;
+}
+
+
+#main-screen {
+  height: 43.38em;
+}
+
+#main-screen .wrap {
+  width: 29.61em;
+}
+
+#main-screen .header-title {
+  display: block;
+  font-size: 3.25em;
+  width: 10.07em;
+  height: 2.22em;
+  color: white;
+  position: relative;
+  line-height: 0.8889;
+  font-weight: 200;
+  padding-top: 3.2478em;
+}
+
+#main-screen .header-blurb {
+  display: block;
+  font-size: 1.444em;
+  width: 20.5em;
+  height: 3.5769em;
+  color: white;
+  position: relative;
+  line-height: 1.1em;
+  font-weight: 200; 
+}
+
+#main-about {
+  box-sizing: border-box;
+}
+
+#main-about #about-phone-1 {
+  display: block;
+  font-size: 1em;
+  background-image: url('/images/explore-phone.png');
+  background-size: 230px auto;
+  width: 230px;
+  margin-left: 13.9375em;
+  margin-top: 4.375em;
+  margin-bottom: 0;
+  height: 20.4444em;
+  padding: 0;
+  position: relative;
+}
+
+#new-home .section {
+  width: 19.5em;
+  margin-bottom: 0;
+}
+
+#new-home .section.right {
+  margin-right: 13.625em;
+}
+
+#new-home .section.left {
+  margin-left: 13.8125em;
+}
+
+
+#new-home .section h2 {
+  font-size: 1.333em;
+  font-weight: 600;
+  line-height: 0.9166em;
+  margin-top: 3.875em;
+}
+
+#new-home .section h3 {
+  font-size: 1.125em;
+  font-weight: 600;
+  margin: 1.3888em 0 0 0;
+}
+
+#new-home .section .text-box {
+  font-size: 0.875em;
+  margin-bottom: 0;
+}
+
+#new-home #product {
+  position: relative;
+  height: 31.625em;
+}
+
+#new-home #product-phone {
+  background-image: url('/images/product-phone.png');
+  background-size: 17.75em auto;
+  width: 17.75em;
+  height: 27.25em;
+  margin-top: 4.375em; 
+  margin-right: 14.3125em;
+}
+
+#new-home #connect-phone {
+  background-image: url('/images/connect-phone.png');
+  background-size: 17.75em auto;
+  width: 13.75em;
+  height: 20.5625em;
+  margin: 0 0 0 13.875em;
+  background-position: center center;
+
+}
+
+#new-home #connect {
+  position: relative;
+  height: 20.5625em;
+  padding: 0;
+  margin: 0;
+}
+
+#new-home #connect .section h3 {
+  margin-top: 3.2727em;
+}
+
+#new-home #engage {
+  position: relative;
+  height: 20.5625em;
+}
+
+#new-home #engage .section h3, #new-home #engage .section .text-box {
+  width: 23.25em;
+}
+
+#new-home #engage .section h3 {
+  margin-top: 5.75em;
+}
+
+#new-home #engage .section {
+  padding-top: 0em;
+}
+
+#new-home #engage-phone {
+  background-image: url('/images/engage-phone.png');
+  background-size: 17.75em auto;
+  width: 13.75em;
+  height: 20.5625em;
+  margin: 0 14em 0 0;
+  background-position: center center;
+
+}
+
+#new-home #measure {
+  position: relative;
+  height: 20.5625em; 
+}
+
+#new-home #measure-phone {
+  background-image: url('/images/measure-phone.png');
+  background-size: 17.75em auto;
+  width: 13.75em;
+  height: 20.5625em;
+  margin: 0 0 0 13.9375em;
+  background-position: center center;
+}
+
+#new-home #measure .section h3, #new-home #measure .section .text-box {
+  width: 24.125em;
+}
+
+
+
+#new-home #measure .section h3 {
+  margin-top: 5.5625em;
+}
+
+#manage {
+  height: 36.625em;
+  position-relative;
+  background-image: url('/images/lptop.png');
+  background-size: 42.0625em 29.1875em;
+  background-position: right 7.4375em;
+  background-repeat: no-repeat;
+}
+
+#new-home #manage .section h3, #new-home #manage .section .text-box {
+  width: 19.625;
+}
+
+#new-home #manage .section h3 {
+  margin-top: 14.0625em;
+}
+
+.truewhite-background {
+  background-color: #ffffff;
+}
+
+#bridge {
+  height: 36.625em;
+  position: relative;
+  background-image: url('/images/lptop-copy.png');
+  background-size: 42.0625em 29.1875em;
+  background-position: left 7.4375em;
+  background-repeat: no-repeat;
+}
+
+#new-home #bridge .section h3, #new-home #bridge .section .text-box {
+  width: 19.625;
+}
+
+#new-home #bridge .section h3 {
+  margin-top: 14.0625em;
+}
+
+#whyprizm {
+  height: 40em;
+  position: relative;
+  background-image: url('/images/whyprizm-phone.png');
+  background-position: 46.5em center;
+  background-repeat: no-repeat;
+}
+
+#new-home #whyprizm .section h3, #new-home #whyprizm .section .text-box {
+  width: 25.9375em;
+}
+
+#new-home #whyprizm .section h2 {
+  margin-top: 5.9583em;
+}
+
+#pricing {
+  text-align: center;
+  padding-top: 4.4375em;
+  color: #4a5568;
+}
+
+#pricing h2 {
+  text-decoration: underline;
+  text-decoration-color: #d0d2d7;
+  text-decoration-skip: ink;
+}
+
+#plans {
+  display: block;
+  width: 100%;
+  height: 20.5625em;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+  color: #4a5568;
+  margin-top: 4.75em;
+}
+
+#plans span {
+  display: inline-block;
+  position: relative;
+  float: left;
+  width: 16.5625em;
+  height:  23.5625em;
+  background-color: #ffffff;
+  text-align: center;
+  padding-top: 3em;
+  margin-left: 1.25em;
+  border: 1px solid #d7d9df inside;
+  border-radius: 4px;
+}
+
+#plans span:first-child {
+  margin-left: 0;
+}
+
+#plans .plan {
+  font-size: 0.875em;
+  line-height: 1.571428em;
+  vertical-align: top;
+  border-bottom: 1px solid #314991;
+  font-weight: 600;
+  width: auto;
+  display: inline;
+}
+
+#plans p.price {
+  font-size: 1em;
+  font-weight: 600;
+  margin-top: 2.5em;
+}
+
+#plans p.price-type, #plans p.users {
+  font-size: 0.875em;
+  line-height: 1.57142em;
+  margin-bottom:  0;
+  margin-top: 0;
+}
+
+#plans ul.features {
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 14.0625em;
+  width: 16.5625em;
+}
+
+#plans ul.features li {
+  margin: 0;
+  padding: 0;
+}
+
+#plans button {
+  -webkit-appearance: none;
+  border: none;
+  position: absolute;
+  font-size: 1em;
+  display: block;
+  bottom: 2.9375em;
+  margin-left: 4.5em;
+  margin-right: 4.5em;
+  color: white;
+  background-color: #628ad0;
+  height: 2.3125em;
+  width: 7.5em;
+  font-family: proxima_nova_ltlight, 'Helvetica', sans-serif; 
+  border-radius: 1.15625em;
+}
+
+p.disclaimer {
+  clear: both;
+  padding-top: 4em;
+  font-size: 0.875em;
+  color: #4a5568;
 }

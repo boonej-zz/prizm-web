@@ -1004,7 +1004,7 @@ exports.displayHomeFeed = function(req, res) {
     res.render('site/partner', {
       title: 'Prizm App',
       selected:'home',
-      bodyId: 'body-home'
+      bodyID: 'new-home'
     });
   }
   else {
