@@ -932,20 +932,21 @@ ul.text-box.column {
 
 #new-home .section h2 {
   font-size: 1.333em;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 0.9166em;
   margin-top: 3.875em;
 }
 
 #new-home .section h3 {
   font-size: 1.125em;
-  font-weight: 600;
+  font-weight: 500;
   margin: 1.3888em 0 0 0;
 }
 
 #new-home .section .text-box {
   font-size: 0.875em;
   margin-bottom: 0;
+  font-weight: 200;
 }
 
 #new-home #product {
