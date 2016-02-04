@@ -998,10 +998,13 @@ ul.text-box.column {
   background-image: url('/images/connect-phone.png');
   background-position: -2em center;
   background-repeat: no-repeat;
+  color: #4a5568;
 
 }
 
 #new-home #connect .section h3 {
+  color: #485366;
+
   margin-top: 3.2727em;
 }
 
@@ -1015,6 +1018,8 @@ ul.text-box.column {
   background-image: url('/images/engage-phone.png');
   background-position: right center;
   background-repeat: no-repeat;
+  color: #4a5568;
+
 }
 
 #new-home .wrap {
@@ -1030,6 +1035,8 @@ ul.text-box.column {
 }
 
 #new-home #engage .section h3 {
+  color: #485366;
+
   margin-top: 5.75em;
 }
 
@@ -1047,6 +1054,8 @@ ul.text-box.column {
   background-image: url('/images/measure-phone.png');
   background-repeat: no-repeat;
   background-position: -2em center;
+  color: #4a5568;
+
 }
 
 #new-home #measure .section h3, #new-home #measure .section .text-box {
@@ -1055,6 +1064,8 @@ ul.text-box.column {
 
 #new-home #measure .section h3 {
   margin-top: 5.5625em;
+  color: #485366;
+
 }
 
 #manage {
@@ -1064,6 +1075,8 @@ ul.text-box.column {
   background-size: 42.0625em 29.1875em;
   background-position: right 7.4375em;
   background-repeat: no-repeat;
+  color: #4a5568;
+
 }
 
 #new-home #manage .section h3, #new-home #manage .section .text-box {
@@ -1072,6 +1085,7 @@ ul.text-box.column {
 
 #new-home #manage .section h3 {
   margin-top: 14.0625em;
+  color: #485366;
 }
 
 .truewhite-background {
@@ -1085,6 +1099,8 @@ ul.text-box.column {
   background-size: 42.0625em 29.1875em;
   background-position: left 7.4375em;
   background-repeat: no-repeat;
+  color: #4a5568;
+
 }
 
 #new-home #bridge .section h3, #new-home #bridge .section .text-box {
@@ -1093,6 +1109,8 @@ ul.text-box.column {
 
 #new-home #bridge .section h3 {
   margin-top: 14.0625em;
+  color: #485366;
+
 }
 
 #whyprizm {
