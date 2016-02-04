@@ -23,7 +23,7 @@ mixin legal
       a(href="https://heapanalytics.com/?utm_source=badge")
         img(style="width:108px;height:41px" src="//heapanalytics.com/img/badge.png" alt="Heap | Mobile and Web Analytics")
     span.legal-span.wrap
-      | Copyright &copy; 2014 Prizm Powered by 
+      | Copyright &copy; 2016 Prizm Powered by 
       a.underline(href='http://www.higheraltitude.co') Higher Altitude, Inc.
       | - 
       a.underline(href='/privacy') Privacy Policy
@@ -52,7 +52,7 @@ html
       .nav-top.wrap
         a(href='/#home')
           img(id='logo'
-              src='/images/logo.png')
+              src='/images/prizmlogo.png')
         .menu
           if (selected == 'about')
             span(class='menu-button selected')
@@ -70,6 +70,8 @@ html
             a(href='http://beprizmatic.com') Blog
           span(class='menu-button')
             a(href='/login') Login
+          span.menu-button
+            a.sign-up-button(href="/register") Sign Up
           //- span(class='menu-button')
           //-   a(href='mailto:press@prizmapp.com')
         button(id='menu-button' onclick='prizm.menuClicked()')

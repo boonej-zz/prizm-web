@@ -224,16 +224,15 @@ a {
 }
 
 .selected {
-  border-bottom: 3px solid #536BB4;
 }
 
 /** NAVIGATION BAR **/
 
 #logo {
   cursor: pointer;
-  height: 72px;
-  width: 176px;
-  margin-top: 3px;
+  height: 47px;
+  width: 139px;
+  margin-top: 14px;
 }
 
 #alt-logo {
@@ -248,15 +247,15 @@ a {
 #navbar {
   position: fixed;
   top: 0px;
-  background-color: #e4e5ea;
+  background-color: #ffffff;
   z-index: 1000;
+  border-bottom: 1px #d4daea solid;
 }
 
 .nav-top {
     height: 75px;
     width: 1200px;
-    border-bottom: 1px #d4daea solid;
-    background-color: #e4e5ea;
+    background-color: #ffffff;
 }
 
 .nav-top h1 {
@@ -269,10 +268,10 @@ a {
 }
 
 .menu {
-  height: 70px;
+  height: 75px;
   float: right;
   clear: right;
-  vertical-align: baseline;
+  vertical-align: middle;
 }
 
 #menu-button {
@@ -281,19 +280,40 @@ a {
 
 .menu-button {
   display: inline-block;
-  margin-top: 48px;
   height: 25px;
-  margin-left: 75px;
+  margin-left: 35px;
+  line-height: 75px;
   vertical-align: middle;
 }
 
 .menu-button a {
-  height: 60px;
   display: inline-block;
-  vertical-align: middle;
-  font-size: 15px;
+  font-size: 14px;
   text-transform: uppercase;
 }
+
+.menu-button a:hover {
+  text-decoration: underline;
+ } 
+
+.menu-button a.sign-up-button {
+  display: inline-block;
+  width: 120px;
+  text-transform: uppercase;
+  font-size: 14px;
+  height: initial;
+  padding: 11px 0 10px 0;
+  background-color: #628ad0;
+  text-align: center;
+  line-height: initial;
+
+  border-radius: 18.5px;
+  color: #ffffff;
+}
+
+.menu-button a.sign-up-button:hover {
+  text-decoration: none;
+ } 
 
 /** SIDE NAVIGATION **/
 
@@ -700,19 +720,19 @@ li#org-first{
 
 #main-screen button.watch {
   -webkit-appearance: none;
-  font-size: 1em;
+  font-size: 1.125em;
   text-align: left;
   position: relative;
   border: none;
+  height: 83px;
   color: white;
   background-color: transparent;
-  padding-left: 3.27142em;
+  padding: 0 0px 0 103px;
+  line-height: 0px;
   background-image: url('/images/play-button@2x.png');
   background-repeat: no-repeat;
-  background-size: 3.394em;
-  background-position: left 0.48em;
-  vertical-align: middle;
-  line-height: 3.394em;
+  background-size: 101px 103px;
+  background-position: left top;
   font-weight: 400;
   margin-top: 2.716em;
 }
@@ -1039,7 +1059,7 @@ ul.text-box.column {
 #manage {
   height: 36.625em;
   position-relative;
-  background-image: url('/images/lptop.png');
+  background-image: url('/images/laptop-copy-1@2x.png');
   background-size: 42.0625em 29.1875em;
   background-position: right 7.4375em;
   background-repeat: no-repeat;
@@ -1060,7 +1080,7 @@ ul.text-box.column {
 #bridge {
   height: 36.625em;
   position: relative;
-  background-image: url('/images/lptop-copy.png');
+  background-image: url('/images/group@2x.png');
   background-size: 42.0625em 29.1875em;
   background-position: left 7.4375em;
   background-repeat: no-repeat;
