@@ -304,7 +304,7 @@ a {
  } 
 
  .menu-button.selected a {
-   color: #344d90;
+   color: #628ad0;
  }
 
 .menu-button a.sign-up-button {
@@ -548,6 +548,7 @@ p.sign-up-desc {
   text-align: center;
   vertical-align: middle;
   background-color: #e4e5ea;
+  color: #4a5568;
 }
 
 .legal-span {
@@ -591,11 +592,11 @@ p.sign-up-desc {
 }
 
 #follow-prizm {
-  color: #8698C5;
-  font-size: 1.2em;
+  color: #485366;
+  font-size: 1.25em;
   margin: 0 auto 20px auto;
   display: block;
-  width: 160px;
+  width: 100px;
   height: 2em;
   border-bottom: 1px solid #8698C5;
 }
@@ -1270,6 +1271,7 @@ p.disclaimer {
 
 #new-home .legal, #new-home .sign-up-area {
   background-color: white;
+  color: #4a5568;
 }
 
 #new-home .sign-up-area {
@@ -1278,4 +1280,57 @@ p.disclaimer {
   padding-top: 80px;
 }
 
+#scroll-down {
+  width: 54px;
+  height: 60px;
+  margin: 87px auto 0 auto;
+  
+}
+
+#scroll-down span {
+  height: 23px;
+  width: 54px;
+  background-size: 54px 23px;
+background-image: url('/images/arrow-down@2x.png');
+position: relative;
+    color: black;
+    display: block;
+        -webkit-animation-name: drop;
+          -webkit-animation-duration: 10s;
+            -webkit-animation-timing-function: linear;
+              -webkit-animation-delay: 0s;
+                -webkit-animation-iteration-count: infinite;
+                  -webkit-animation-play-state: running;
+                    animation-name: drop;
+                      animation-duration: 1s;
+                        animation-timing-function: linear;
+                          animation-delay: 0s;
+                            animation-iteration-count: infinite;
+                              animation-play-state: running;
+  position: relative;
+          -webkit-animation-name: drop;
+            -webkit-animation-duration: 10s;
+              -webkit-animation-timing-function: linear;
+                -webkit-animation-delay: 0s;
+                  -webkit-animation-iteration-count: infinite;
+                    -webkit-animation-play-state: running;
+                      animation-name: drop;
+                        animation-duration: 1s;
+                          animation-timing-function: linear;
+                            animation-delay: 0s;
+                              animation-iteration-count: infinite;
+                                animation-play-state: running;
+}
+
+@-webkit-keyframes drop {
+    0%   { top:0px;  opacity: 0;}
+      30%  { top:10px; opacity: 1;}
+        100% { top:25px; opacity: 0;}
+      }
+
+      @keyframes drop {
+          0%   { top:0px;  opacity: 0;}
+            30%  { top:10px; opacity: 1;}
+              100% { top:25px; opacity: 0;}
+            }
 
