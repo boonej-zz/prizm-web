@@ -854,7 +854,7 @@ ul.text-box.column {
 
 #new-main #main-screen {
   width: 100%;
-  height: 43.38em;
+  height: 47.0625em;
 
 }
 
@@ -862,7 +862,7 @@ ul.text-box.column {
   background-image: url('/images/hero@2x.jpg');
   background-position: center ;
   background-size: 100% auto ;
-  height: 43.38em;
+  height: 47.0625em;
   width: 100%;
   background-color: rgba(49.73,145,.3);
   background-blend-mode: color;
@@ -872,7 +872,7 @@ ul.text-box.column {
 
 #underlay-color {
   width: 100%;
-  height: 43.38em;
+  height: 47.0625em;
   position: absolute;
   background-color: rgba(49,73,145,.6);
   background-blend-mode: darken;
@@ -880,7 +880,7 @@ ul.text-box.column {
 
 #overlay-color {
   width: 100%;
-  height: 43.38em;
+  height: 47.0625em;
   background-color: rgba(49, 73, 145, .6);
   position: absolute;
   background-blend-mode: color;
@@ -888,28 +888,24 @@ ul.text-box.column {
 
 
 #main-screen {
-  height: 43.38em;
-}
-
-#main-screen .wrap {
-  width: 29.61em;
+  height: 47.0625em;
 }
 
 #main-screen .header-title {
   display: block;
-  font-size: 3.25em;
+  font-size: 4.11875em;
   width: 10.07em;
   height: 2.22em;
   color: white;
   position: relative;
   line-height: 0.8889;
   font-weight: 200;
-  padding-top: 3.2478em;
+  padding-top: 2.7314em;
 }
 
 #main-screen .header-blurb {
   display: block;
-  font-size: 1.444em;
+  font-size: 1.83125em;
   width: 20.5em;
   height: 3.5769em;
   color: white;
@@ -920,10 +916,12 @@ ul.text-box.column {
 
 #main-about {
   box-sizing: border-box;
+  height: 27.375em;
     }
 
 #main-about .wrap {
-  background-image: url('/images/explore-phone.png');
+  background-image: url('/images/explore-phone@2x.png');
+  background-size: 290px auto;
   background-position: -2em 4.375em;
   background-repeat: no-repeat;
   height: 27.375em;
@@ -942,8 +940,8 @@ ul.text-box.column {
 }
 
 #new-home .section {
-  width: 19.5em;
   margin: 0;
+  width: 34em;
 }
 
 #new-home .section.right {
@@ -954,23 +952,26 @@ ul.text-box.column {
 
 
 #new-home .section h2 {
-  font-size: 1.333em;
+  font-size: 1.625em;
   font-weight: 500;
   line-height: 0.9166em;
-  margin-top: 3.875em;
+  margin: 3.3692em 0 0 0;
+  padding: 0;
 }
 
 #new-home .section h3 {
-  font-size: 1.125em;
+  font-size: 1.25em;
   font-weight: 500;
-  margin: 1.3888em 0 0 0;
+  margin: 1.42em 0 0 0;
+  padding: 0;
 }
 
 #new-home .section .text-box {
-  font-size: 0.875em;
+  font-size: 1.1875em;
   margin-bottom: 0;
   font-weight: 200;
-  line-height: 1.57em;
+  margin-top: 0.924em;
+  line-height: 1.368em;
 }
 
 #new-home #product {
@@ -980,7 +981,8 @@ ul.text-box.column {
 }
 
 #new-home #product .wrap {
-  background-image: url('/images/product-phone.png');
+  background-image: url('/images/product-phone@2x.png');
+  background-size: 290px auto;
   background-position:  right 4.375em;
   background-repeat: no-repeat;
   height: 31.625em;
@@ -995,7 +997,8 @@ ul.text-box.column {
 
 #new-home #connect .wrap {
   height: 100%;
-  background-image: url('/images/connect-phone.png');
+  background-image: url('/images/connect-phone@2x.png');
+  background-size: 290px auto;
   background-position: -2em center;
   background-repeat: no-repeat;
   color: #4a5568;
@@ -1015,7 +1018,8 @@ ul.text-box.column {
 
 #new-home #engage .wrap {
   height: 100%;
-  background-image: url('/images/engage-phone.png');
+  background-image: url('/images/engage-phone@2x.png');
+  background-size: 290px auto;
   background-position: right center;
   background-repeat: no-repeat;
   color: #4a5568;
@@ -1023,7 +1027,7 @@ ul.text-box.column {
 }
 
 #new-home .wrap {
-  width: 47.1875em;
+  width: 65.5625em;
 }
 
 #new-home .nav-top.wrap {
@@ -1031,13 +1035,13 @@ ul.text-box.column {
 }
 
 #new-home #engage .section h3, #new-home #engage .section .text-box {
-  width: 23.25em;
+  width: 28.631568em;
 }
 
 #new-home #engage .section h3 {
   color: #485366;
 
-  margin-top: 5.75em;
+  margin-top: 3.65em;
 }
 
 #new-home #engage .section {
@@ -1059,11 +1063,11 @@ ul.text-box.column {
 }
 
 #new-home #measure .section h3, #new-home #measure .section .text-box {
-  width: 24.125em;
+  width: 28.63157em;
 }
 
 #new-home #measure .section h3 {
-  margin-top: 5.5625em;
+  margin-top: 4.45em;
   color: #485366;
 
 }
@@ -1084,7 +1088,7 @@ ul.text-box.column {
 }
 
 #new-home #manage .section h3 {
-  margin-top: 14.0625em;
+  margin-top: 9.2em;
   color: #485366;
 }
 
@@ -1108,7 +1112,7 @@ ul.text-box.column {
 }
 
 #new-home #bridge .section h3 {
-  margin-top: 14.0625em;
+  margin-top: 10.93em;
   color: #485366;
 
 }
