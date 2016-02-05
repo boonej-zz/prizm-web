@@ -556,7 +556,7 @@ p.sign-up-desc {
   margin-top: 50px;
   margin-bottom: 24px;
   padding-top: 12px;
-  border-top: 1px solid #D4DAEA;
+  border-top: 1px solid #4a5568;
 }
 
 .contact-button {
@@ -593,12 +593,12 @@ p.sign-up-desc {
 
 #follow-prizm {
   color: #485366;
-  font-size: 1.25em;
+  font-size: 20px;
   margin: 0 auto 20px auto;
   display: block;
   width: 100px;
   height: 2em;
-  border-bottom: 1px solid #8698C5;
+  border-bottom: 1px solid #485366;
 }
 
 .mixpanelbadge {
@@ -1283,7 +1283,7 @@ p.disclaimer {
 #scroll-down {
   width: 54px;
   height: 60px;
-  margin: 87px auto 0 auto;
+  margin: 37px auto 0 auto;
   
 }
 
