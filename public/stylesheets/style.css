@@ -167,6 +167,12 @@ p {
   top: -75px;
 }
 
+a#plans {
+  height: 1px;
+  width: 1px;
+  padding: 0;
+}
+
 .tagline {
   margin: 1.3em auto 0 auto;
   font-size: 1.25em;
@@ -287,14 +293,18 @@ a {
 }
 
 .menu-button a {
+  color: #485366;
   display: inline-block;
   font-size: 14px;
   text-transform: uppercase;
 }
 
 .menu-button a:hover {
-  text-decoration: underline;
  } 
+
+ .menu-button.selected a {
+   color: #344d90;
+ }
 
 .menu-button a.sign-up-button {
   display: inline-block;

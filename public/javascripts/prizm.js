@@ -132,15 +132,23 @@ $(function(){
 
 $(window).scroll(function(){
   var scrolled_val = $(document).scrollTop().valueOf();
-  var currentPageIsHome = document.getElementById("home-block");
+  var currentPageIsHome = document.getElementById("new-home");
+  console.log(currentPageIsHome);
   if (currentPageIsHome) {
-    var about = $('a[href="/#about"]').parent()
-    var insight = $('a[href="/#insight"]').parent()
-    var mission = $('a[href="/#mission"]').parent()
-    if (scrolled_val < 658) {
+    var about = $('a[href="/#about"]').parent();
+    var product = $('a[href="/#prizmproduct"]').parent();
+    var why = $('a[href="/#why"]').parent();
+    var pricing = $('a[href="/#plans"]').parent();
+    var aboutOffset = $('#about').offset().top;
+    var productOffset = $('#prizmproduct').offset().top;
+    var whyOffset = $('#why').offset().top;
+    var pricingOffset = $('#plans').offset().top;
+    if (scrolled_val < aboutOffset) {
+      console.log('in main section');
       $('.menu-button').toggleClass('selected', false);
     }
-    else if (scrolled_val > 658 && scrolled_val < 992) {
+    else if (scrolled_val > aboutOffset && scrolled_val < productOffset) {
+      console.log('in about block');
       if (about.hasClass('selected')) {
         return;
       }
@@ -149,22 +157,32 @@ $(window).scroll(function(){
         about.toggleClass('selected');
       }
     }
-    else if (scrolled_val > 1292 && scrolled_val < 1532) {
-      if (insight.hasClass('selected')) {
+    else if (scrolled_val > productOffset && scrolled_val < whyOffset) {
+      console.log('in product block');
+      if (product.hasClass('selected')) {
         return;
       }
       else {
         $('.menu-button').toggleClass('selected', false);
-        insight.toggleClass('selected');
+        product.toggleClass('selected');
       }
     }
-    else if (scrolled_val > 1932) {
-      if (mission.hasClass('selected')) {
+    else if (scrolled_val > whyOffset && scrolled_val < pricingOffset) {
+      if (why.hasClass('selected')) {
         return;
       }
       else {
         $('.menu-button').toggleClass('selected', false);
-        mission.toggleClass('selected');
+        why.toggleClass('selected');
+      }
+    }
+    else if (scrolled_val > pricingOffset) {
+      if (pricing.hasClass('selected')) {
+        return;
+      }
+      else {
+        $('.menu-button').toggleClass('selected', false);
+        pricing.toggleClass('selected');
       }
     }
   }
