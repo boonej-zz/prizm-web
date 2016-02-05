@@ -745,13 +745,22 @@ li#org-first{
   background-color: transparent;
   padding: 0 0px 0 103px;
   line-height: 0px;
-  background-image: url('/images/play-button@2x.png');
+  background-image: url('/images/play-button-default@2x.png');
   background-repeat: no-repeat;
   background-size: 101px 103px;
   background-position: left top;
   font-weight: 400;
   margin-top: 2.716em;
+  outline: none;
 }
+
+#main-screen button.watch:hover {
+  background-image: url('/images/play-button-hover@2x.png');
+ } 
+
+#main-screen button.watch:active {
+  background-image: url('/images/play-button-select@2x.png');
+ } 
 
 #partner-header .minor-wrap {
   width: 29.6111em;

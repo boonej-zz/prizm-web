@@ -1,14 +1,18 @@
 @media screen and (max-width:1060px) {
   body {
-    font-size: 88%;
+    font-size: 90%;
   }
   
-  .wrap, .minor-wrap {
+  .wrap, .minor-wrap, #new-home .nav-top.wrap {
     width: 968px;
   }
   
   .overlay p {
     width: 968px;
+  }
+
+  #overlay-image {
+    background-size: auto 100%;
   }
 
   p.sign-up-desc {
@@ -17,6 +21,10 @@
 
   #sign-up, #android {
     margin-top: 10px;
+  }
+
+  #bridge, #manage {
+    background-size: 508.5px 386px;
   }
 
 }
@@ -107,6 +115,10 @@
     width: 600px;
   }
 
+}
+
+@media screen and (max-width: 900) {
+  font-size: 80%;
 }
 
 @media screen and (max-width:500px) {
