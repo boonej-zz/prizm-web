@@ -596,9 +596,10 @@ p.sign-up-desc {
   font-size: 20px;
   margin: 0 auto 20px auto;
   display: block;
-  width: 100px;
+  width: 130px;
   height: 2em;
   border-bottom: 1px solid #485366;
+  text-transform: capitalize;
 }
 
 .mixpanelbadge {
@@ -1283,7 +1284,7 @@ p.disclaimer {
 #scroll-down {
   width: 54px;
   height: 60px;
-  margin: 37px auto 0 auto;
+  margin: 57px auto 0 auto;
   
 }
 
