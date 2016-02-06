@@ -172,6 +172,9 @@ a#plans {
   height: 1px;
   width: 1px;
   padding: 0;
+  display: initial;
+  color: initial;
+  margin-top: initial; 
 }
 
 .tagline {
@@ -325,7 +328,12 @@ a {
 
 .menu-button a.sign-up-button:hover {
   text-decoration: none;
- } 
+  background-color: #78a4f0;
+ }
+
+.menu-button a.sign-up-button:active {
+  background-color: #314991;
+}
 
 /** SIDE NAVIGATION **/
 
@@ -557,7 +565,6 @@ p.sign-up-desc {
   margin-top: 50px;
   margin-bottom: 24px;
   padding-top: 12px;
-  border-top: 1px solid #4a5568;
 }
 
 .contact-button {
@@ -599,7 +606,7 @@ p.sign-up-desc {
   display: block;
   width: 130px;
   height: 2em;
-  border-bottom: 1px solid #485366;
+  font-weight: 500;
   text-transform: capitalize;
 }
 
@@ -1222,9 +1229,10 @@ ul.text-box.column {
 }
 
 #pricing h2 {
-  text-decoration: underline;
-  text-decoration-color: #d0d2d7;
-  text-decoration-skip: ink;
+  display: inline-block;
+  border-bottom: 1px solid #d0d2d7;
+  padding-top: 3.03em;
+  
 }
 
 #plans {
@@ -1338,7 +1346,7 @@ p.disclaimer {
   
 }
 
-#scroll-down span {
+#scroll-down a {
   height: 23px;
   width: 54px;
   background-size: 54px 23px;
