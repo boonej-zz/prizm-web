@@ -757,6 +757,55 @@ li#org-first{
   outline: none;
 }
 
+button#watch {
+  display: block;
+  position: relative;
+  border: none;
+  -webkit-appearance: none;
+  outline: none;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  margin-top: 48.9px;
+}
+
+button#watch::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 17px;
+  left: 24px;
+  width: 0;
+  height: 0;
+  border-top: 14.0px solid transparent;
+  border-bottom: 14.0px solid transparent;
+  border-radius: 2px;
+  border-left: 20.8px solid #628ad0;
+  z-index: 1;
+  transition: all 0.3s;
+}
+
+button#watch::after {
+  content: 'Watch Video';
+  display: block;
+  position: relative;
+  width: 130px;
+  font-size: 18px;
+  color: white;
+  margin-left: 60.9px;
+}
+
+button#watch:hover::before {
+  border-left: 20.8px solid #78a4f0;
+}
+
+button#watch:active::before {
+  border-left: 20.8px solid #314991;
+}
+
+
 #main-screen button.watch:hover {
   background-image: url('/images/play-button-hover@2x.png');
  } 
@@ -945,6 +994,7 @@ ul.text-box.column {
 #main-about {
   box-sizing: border-box;
   height: 27.375em;
+  color: #4a5568;
     }
 
 #main-about .wrap {
