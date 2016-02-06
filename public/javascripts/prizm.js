@@ -144,10 +144,10 @@ $(window).scroll(function(){
     var product = $('a[href="/#prizmproduct"]').parent();
     var why = $('a[href="/#why"]').parent();
     var pricing = $('a[href="/#plans"]').parent();
-    var aboutOffset = $('#about').offset().top;
-    var productOffset = $('#prizmproduct').offset().top;
-    var whyOffset = $('#why').offset().top;
-    var pricingOffset = $('#plans').offset().top;
+    var aboutOffset = $('#about').offset().top -30;
+    var productOffset = $('#prizmproduct').offset().top - 30;
+    var whyOffset = $('#why').offset().top - 30;
+    var pricingOffset = $('#plans').offset().top -30;
     if (scrolled_val < aboutOffset) {
       console.log('in main section');
       $('.menu-button').toggleClass('selected', false);
