@@ -1339,6 +1339,21 @@ p.disclaimer {
   padding-top: 80px;
 }
 
+#back-up {
+  -webkit-appearance: none;
+  display: block;
+  width: 34px;
+  height: 34px;
+  background-color: rgba(97, 137, 208, 0.59);
+  border: none;
+  outline: none;
+  border-radius: 8px;
+}
+
+#back-up::before {
+  
+}
+
 #scroll-down {
   width: 54px;
   height: 60px;

@@ -112,9 +112,10 @@ router.get('/student', function(req, res){
   res.render('site/index', { title: 'Prizm App | Student', selected: 'none', bodyID: 'partner'});
 });
 
-router.get('/partners', function(req, res){
+router.get('/students', function(req, res){
   res.render('site/index', { title: 'Prizm App | Student', selected: 'none', bodyID: 'partner'});
 });
+
 
 router.get('/luminary', function(req, res){
   res.render('site/luminary', { title: 'Prizm App | Luminary', selected: 'none'});
