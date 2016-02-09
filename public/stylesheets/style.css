@@ -1066,8 +1066,8 @@ ul.text-box.column {
 }
 
 #new-home #product .wrap {
-  background-image: url('/images/product-phone@2x.png');
-  background-size: 290px auto;
+  background-image: url('/images/nohassle-phones@2x.png');
+  background-size: 344px auto;
   background-position:  right 4.375em;
   background-repeat: no-repeat;
   height: 31.625em;
@@ -1340,18 +1340,32 @@ p.disclaimer {
 }
 
 #back-up {
+  position: fixed;
+  width: 43px;
+  height: 61px;
+  background-image: url('/images/backup@2x.png');
+  background-size: 43px auto;
+  background-repeat: no-repeat;
   -webkit-appearance: none;
   display: block;
-  width: 34px;
-  height: 34px;
-  background-color: rgba(97, 137, 208, 0.59);
   border: none;
   outline: none;
-  border-radius: 8px;
+  z-index: 5000;
+  bottom: 68px;
+  margin-left: 62.354em;
+  transition: all 0.3s;
 }
 
-#back-up::before {
-  
+#back-up.hidden {
+  display: none;
+}
+
+#back-up:hover {
+  mix-blend-mode: luminosity;
+}
+
+.wrap.bwrap {
+  text-align: right;
 }
 
 #scroll-down {
