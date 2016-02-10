@@ -192,6 +192,14 @@ $(window).scroll(function(){
   }
 });
 
+$(document).ready(function(){
+  $('.menu-button a').click(function(){
+    if (menuActive) {
+      $('.menu').slideUp();
+    }
+  });
+});
+
 /* Luminary and Patner Side Nav */
 $(function(){
   $(window).bind('scroll',function(e){
