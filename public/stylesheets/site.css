@@ -309,7 +309,6 @@ span.menu-button a {
 
 #main-screen {
   color: white;
-  margin-top: 3.2757em;
 }
 
 #overlay-color {
@@ -323,16 +322,16 @@ span.menu-button a {
 }
 
 #main-screen .wrap {
-  height: 23.5em;
+  height: 26.2856em;
   width: 20.14285em;
-  margin: 0 auto;
+  margin: 3.2757em auto 0 auto;
   padding: 0;
 }
 
 #main-screen .header-title {
   position: relative;
   font-size: 2.25em;
-  padding-top: 2.53968em;
+  padding-top: 2.9524em;
   line-height: 0.8349em;
   font-weight: 200;
 }
@@ -341,7 +340,7 @@ span.menu-button a {
   position: relative;
   font-size: 0.9286em;
   line-height: 1.0769em;
-  padding-top: 1.3385em;
+  padding-top: 1.338em;
   font-weight: 400;
 
 }
@@ -411,17 +410,17 @@ button#watch::after {
   background-position: center 3.4286em;
   background-repeat: no-repeat;
   height: 59.1429em;
-  padding-top: 38.2143em;
+  padding-top: 38em;
   color: white;
 }
 
 #connect .wrap {
   background-image: url('/images/connect-phone@2x.png');
-  background-size: 344px auto;
+  background-size: 290px auto;
   background-position: center 3.4286em;
   background-repeat: no-repeat;
   height: 66.1429em;
-  padding-top: 46.5714em;
+  padding-top: 42em;
 }
 
 #engage .wrap {
@@ -430,7 +429,7 @@ button#watch::after {
   background-position: center 3.4286em;
   background-repeat: no-repeat;
   height: 61.2143em;
-  padding-top: 38.5714em;
+  padding-top: 42em;
 }
 
 #measure .wrap {
@@ -960,7 +959,7 @@ p.disclaimer {
   }
 
   #manage {
-    background-image: url('/images/laptop-copy-1@2x.png');
+    background-image: url('/images/laptop-copy-1-b@2x.png');
     background-size: 42.0625em 29.1875em;
     background-position: right 7.4375em;
     height: 36.625em
