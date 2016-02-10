@@ -1169,7 +1169,7 @@ ul.text-box.column {
 }
 
 #new-home #manage .section h3, #new-home #manage .section .text-box {
-  width: 19.625;
+  width: 19.625em;
 }
 
 #new-home #manage .section h3 {
@@ -1261,6 +1261,7 @@ ul.text-box.column {
   margin-left: 1.25em;
   border: 1px solid #d7d9df inside;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 #plans span:first-child {

@@ -12,18 +12,16 @@ mixin sidenav
       li
         a(href='#why-prizm' elem='partner-block-4')
 
-extends ../layouts/site_layout
+extends ../layouts/new_site_layout
 
 block head
   //script(type='text/javascript' src='/javascripts/snap.js')
 
 block content
-  .wrap
-
   #underlay-color
   #overlay-image
   #overlay-color
-  #main-screen.full-width.topnav-offset
+  #main-screen.full-width
     .wrap
       .header-title
         | Meet your members where they are.
@@ -147,7 +145,7 @@ block content
           ul.features
             li - Forever FREE
             li - Limited Email Support
-          button Get Started
+          button.blue Get Started
         span
           .plan LOCAL PLAN
           p.price $1
@@ -157,7 +155,7 @@ block content
             li - 30 Day 
               strong FREE TRIAL
             li - Email Support
-          button Get Started
+          button.blue Get Started
         span
           .plan REGIONAL PLAN
           p.price $1,000
@@ -167,7 +165,7 @@ block content
             li - 30 Day 
               strong FREE TRIAL
             li - Phone Support
-          button Get Started
+          button.blue Get Started
         span
           p.plan NATIONAL PLAN
           p.price Let's Talk
@@ -177,7 +175,7 @@ block content
             li - 30 Day 
               strong FREE TRIAL
             li - Annual Support Fee
-          button Contact Us
+          button.blue Contact Us
     p.disclaimer
       | You only pay for active users. No obligation and no credit card required.
 
