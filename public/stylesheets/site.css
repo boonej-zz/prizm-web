@@ -386,8 +386,8 @@ button#watch::after {
 }
 
 #main-about {
-  background-color: #e0e0e0;
-}
+  background-color: #eef0f4;
+} 
 
 #main-about .wrap {
   background-image: url('/images/explore-phone@2x.png');
@@ -960,8 +960,8 @@ p.disclaimer {
 
   #manage {
     background-image: url('/images/laptop-copy-1-b@2x.png');
-    background-size: 42.0625em 29.1875em;
-    background-position: right 7.4375em;
+    background-size: 42.0625em auto;
+    background-position: right 4.625em;
     height: 36.625em
   }
 
@@ -976,12 +976,13 @@ p.disclaimer {
 
   #bridge {
     background-image: url('/images/laptop-copy-2-b@2x.png');
-    background-position: left 7.4375em;
-    background-size: 42.0625em 29.1875em;
+    background-position: left 4.4375em;
+    background-size: 42.0625em auto;
   }
 
   #bridge .wrap {
     padding: 0;
+    height: 36.625em;
   }
 
   #whyprizm .wrap {
