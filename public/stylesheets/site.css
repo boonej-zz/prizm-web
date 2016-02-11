@@ -309,6 +309,8 @@ span.menu-button a {
 
 #main-screen {
   color: white;
+  position: relative;
+  margin-top: 3.2757em;
 }
 
 #overlay-color {
@@ -322,27 +324,26 @@ span.menu-button a {
 }
 
 #main-screen .wrap {
+  position: relative;
   height: 26.2856em;
   width: 20.14285em;
-  margin: 3.2757em auto 0 auto;
-  padding: 0;
+  margin: 0 auto;
 }
 
 #main-screen .header-title {
   position: relative;
-  font-size: 2.25em;
-  padding-top: 2.9524em;
+  font-size: 2.2143em;
   line-height: 0.8349em;
   font-weight: 200;
+  top: 2.2143em;
 }
 
 #main-screen .header-blurb {
   position: relative;
   font-size: 0.9286em;
   line-height: 1.0769em;
-  padding-top: 1.338em;
   font-weight: 400;
-
+  top: 77px;
 }
 
 button#watch {
@@ -354,7 +355,7 @@ button#watch {
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
-  margin-top: 3.4143em;
+  top: 120px;
 }
 
 button#watch::before {
@@ -391,11 +392,11 @@ button#watch::after {
 
 #main-about .wrap {
   background-image: url('/images/explore-phone@2x.png');
-  background-size: 290px auto;
-  background-position:  center 3.428em;
+  background-size: 290px 540px;
+  background-position:  center 3.4286em;
   background-repeat: no-repeat;
   height: 65.0714em;
-  padding-top: 42em;
+  padding-top: 572px;
   margin: 0 auto;
 }
 
@@ -406,11 +407,11 @@ button#watch::after {
 
 #product .wrap {
   background-image: url('/images/nohassle-phones@2x.png');
-  background-size: 290px auto;
+  background-size: 334px auto;
   background-position: center 3.4286em;
   background-repeat: no-repeat;
   height: 59.1429em;
-  padding-top: 38em;
+  padding-top: 563px;
   color: white;
 }
 
@@ -420,7 +421,7 @@ button#watch::after {
   background-position: center 3.4286em;
   background-repeat: no-repeat;
   height: 66.1429em;
-  padding-top: 42em;
+  padding-top: 568px;
 }
 
 #engage .wrap {
@@ -429,7 +430,7 @@ button#watch::after {
   background-position: center 3.4286em;
   background-repeat: no-repeat;
   height: 61.2143em;
-  padding-top: 42em;
+  padding-top: 568px;
 }
 
 #measure .wrap {
@@ -438,7 +439,11 @@ button#watch::after {
   background-position: center 3.4286em;
   background-repeat: no-repeat;
   height: 59.7413em;
-  padding-top: 42em; 
+  padding-top: 571px; 
+}
+
+#engage h3 {
+  width: 10.25em;
 }
 
 #manage {
@@ -450,7 +455,7 @@ button#watch::after {
 
 #manage .wrap {
   height: 39.4286em;
-  padding-top: 18.9286em;
+  padding-top: 265px;
 }
 
 #bridge {
@@ -462,7 +467,7 @@ button#watch::after {
 
 #bridge .wrap {
   height: 39.5714em; 
-  padding-top: 19em;
+  padding-top: 266px;
 }
 
 #whyprizm .wrap {
@@ -470,12 +475,12 @@ button#watch::after {
   background-size: 290px auto;
   background-position: center 3.4286em;
   background-repeat: no-repeat;
-  padding-top: 42em;
+  padding-top: 576px;
   height: 73.8571em;
 }
 
 #whyprizm h3 {
-  width: 14.7143em;
+  width: 10.3em;
 }
 
 #pricing {
@@ -522,24 +527,36 @@ button#watch::after {
 }
 
 #plans .price {
-  font-size: 1.4286em;
+  font-size: 1.1429em;
   font-weight: 500;
+  line-height: 1.3571em;
+}
+
+#plans .price-type {
+  font-size: 1em;
+  font-weight: 200;
+  line-height: 1.3571em;
 }
 
 #plans .users {
   font-size: 1em;
   font-weight: 200;
+  line-height: 1.3571em;
 }
 
 #plans ul.features {
   margin-top: 1.5em;
   margin-bottom: 2.8571em;
-  font-size: 1em;
   font-weight: 200;
 }
 
+
 #plans ul.features li {
   line-height: 1.6em;
+}
+
+#plans ul.features li:first {
+  font-size: 1.1429em;
 }
 
 p.disclaimer {
@@ -837,7 +854,7 @@ p.disclaimer {
     width: 10.07em;
     color: white;
     line-height: 0.8889em;
-    padding-top: 3.7264em;
+    top: 3.7264em;
   }
 
   #main-screen .header-blurb {
@@ -845,12 +862,19 @@ p.disclaimer {
     width: 20.5em;
     line-height: 1.1em;
     font-weight: 200;
+    top: 280px;
+  }
+
+  button#watch {
+    top: 330px;
   }
 
   #scroll-down {
     width: 54px;
     height: 60px;
-    margin: 57px auto 0 auto;
+    margin: 0 auto 0 auto;
+    position: relative;
+    top: 420px;
   }
 
   #scroll-down a {

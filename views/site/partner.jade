@@ -15,7 +15,13 @@ mixin sidenav
 extends ../layouts/new_site_layout
 
 block head
-  //script(type='text/javascript' src='/javascripts/snap.js')
+  script(src='/javascripts/lightgallery.js' type='text/javascript')
+  script(src='/javascripts/lg-video.js' type='text/javascript')
+  script(src='/javascripts/lg-autoplay.js' type='text/javascript')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $('.watch').lightGallery(); 
+    });
 
 block content
   #underlay-color
@@ -28,7 +34,8 @@ block content
       .header-blurb
         | Create a private digital community for your youth organization. 
         | Communicate and engage with members on their smartphones. 
-      button#watch(onclick='prizm.playVideo(event)')  
+      div.watch
+        button#watch(data-src='https://youtu.be/3vDLs2ug_ec')  
       #scroll-down
           a(href="/#about")
 
