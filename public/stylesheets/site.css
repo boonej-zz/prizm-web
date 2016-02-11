@@ -272,7 +272,7 @@ span.menu-button a {
 }
 
 #new-home .section h3 {
-    margin: 1.42em 0 0 0;
+    margin: 0.65em 0 0 0;
 }
 
 #new-home .section .text-box {
@@ -450,7 +450,7 @@ button#watch::after {
 
 #manage .wrap {
   height: 39.4286em;
-  padding-top: 16.9286em;
+  padding-top: 18.9286em;
 }
 
 #bridge {
@@ -462,7 +462,7 @@ button#watch::after {
 
 #bridge .wrap {
   height: 39.5714em; 
-  padding-top: 16.9286em;
+  padding-top: 19em;
 }
 
 #whyprizm .wrap {
@@ -490,7 +490,7 @@ button#watch::after {
   width: 3.0833em;
   font-weight: 500;
   padding: 0;
-  margin: 0 auto 2.5em auto;
+  margin: 0 auto 1.4583em auto;
 }
 
 #plans span {
