@@ -1,0 +1,27 @@
+extends ../layouts/new_site_layout
+
+block content
+  .wrap.topnav-offset
+    h2.full-width.underline Sign Up for Your 30-Day Trial
+    p
+      | No credit card required. Integration takes seconds.
+    form
+      ul
+        li
+          label(for="name") Organization Name
+          input(type="text" id="name" name="first_name")
+        li
+          label(for="type") Type
+          select
+            option -
+        li
+          label(for="email") Email
+          input(type="email" id="email" name="email")
+        li
+          label(for="password") Password
+          input(type="password" id="password" name="password")
+        li
+          label(for="confirm") Confirm Password
+          input(type="password" id="confirm" name="confirm")
+
+

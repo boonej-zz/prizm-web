@@ -1483,6 +1483,11 @@ var membersJSONRequest = function(req, res) {
 
 /* Registration */
 exports.displayRegistration = function(req, res) {
+  var type = req.query.type;
+  var plan = req.query.plan;
+  if (type && plan) {
+    res.render('site/get_started', {bodyID: 'getstarted'});
+  } else {
   Interest
     .find({is_subinterest: false})
     .populate('subinterests')
@@ -1503,6 +1508,7 @@ exports.displayRegistration = function(req, res) {
           });
         });
     });
+  }
 };
 
 var validate = function(req, res, next) {
