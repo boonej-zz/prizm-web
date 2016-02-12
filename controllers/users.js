@@ -1001,7 +1001,7 @@ exports.displayHomeFeed = function(req, res) {
     if (req.get('action')){
       res.status(400).send();
     }
-    res.render('site/partner', {
+    res.render('site/home', {
       title: 'Prizm App',
       selected:'home',
       bodyID: 'new-home'

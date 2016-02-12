@@ -5,23 +5,22 @@ block content
     h2.full-width.underline Sign Up for Your 30-Day Trial
     p
       | No credit card required. Integration takes seconds.
-    form
-      ul
-        li
-          label(for="name") Organization Name
-          input(type="text" id="name" name="first_name")
-        li
-          label(for="type") Type
-          select
-            option -
-        li
-          label(for="email") Email
-          input(type="email" id="email" name="email")
-        li
-          label(for="password") Password
-          input(type="password" id="password" name="password")
-        li
-          label(for="confirm") Confirm Password
-          input(type="password" id="confirm" name="confirm")
+    form#registration.v-flex
+      div.v-item.v-flex
+        label(for="name").v-item Organization Name
+        input#name.v-item(type="text" name="first_name")
+      div.v-item.v-flex
+        label.v-item(for="type") Type
+        select#type.v-item(name="type")
+          option -
+      div.v-item.v-flex
+        label.v-item(for="email") Email
+        input#email.v-item(type="email" name="email")
+      div.v-item.v-flex
+        label.v-item(for="password") Password
+        input#password.v-item(type="password" name="password")
+      div.v-item.v-flex
+        label.v-item(for="confirm") Confirm Password
+        input#confirm.v-item(type="password" name="confirm")
 
 
