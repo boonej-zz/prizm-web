@@ -737,7 +737,7 @@ form#registration {
 .computer {
   height: 667px;
   flex-basis: 544px;
-  background-size: contain;
+  background-size: 278px 187px;
   background-repeat: no-repeat;
   background-position: center;
 
