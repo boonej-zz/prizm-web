@@ -1069,7 +1069,7 @@ div#plans {
     background-image: none;
   }
 
-  .computer {
+  #manage .computer, #bridge .computer {
     height: 187px;
     width: 100%;
     margin-top: 49px;
@@ -1096,7 +1096,11 @@ div#plans {
     background-size: 400px auto;
   }
 
-  #manage .text, #bridge .text, #manage .computer, #bridge.computer {
+  .computer {
+    height: 200px;
+  }
+
+  #manage .text, #bridge .text {
     height: 300px;
   }
 
