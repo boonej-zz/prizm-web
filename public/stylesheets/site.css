@@ -77,7 +77,7 @@ a:hover {
 
 .anchor {
   background: url('/images/placeholder.png') no-repeat;
-  position: relative;
+  position: absolute;
   top: -75px;
 }
 
@@ -639,6 +639,7 @@ form#registration {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  position: relative;
   flex-wrap: wrap;
   align-content: center;
 }
