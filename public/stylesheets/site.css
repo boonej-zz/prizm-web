@@ -838,6 +838,13 @@ form#registration {
   margin: 0;
 }
 
+#pricing h3 {
+  font-size: 1.125em;
+  margin: 1.75em auto;
+  width: 19em;
+  font-weight: 300;
+}
+
 #pricing h2::after {
   content: '';
   display: block;
@@ -853,7 +860,7 @@ div#plans {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin: 57px auto 0 auto;
+  margin: 16px auto 0 auto;
   max-width: 1200px;
   flex-wrap: wrap;
 }
@@ -886,14 +893,18 @@ div#plans {
 }
 
 .plan .price {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 500;
-  margin-top: 43px;
+  margin-top: 17px;
 }
 
 .plan .price-type, .plan .users, .plan ul.features li {
-  font-size: 14px;
-  font-weight 200
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.plan .price-type {
+  margin-top: 22px;
 }
 
 .plan ul.features {
