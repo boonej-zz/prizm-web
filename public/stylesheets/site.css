@@ -900,9 +900,6 @@ div#plans {
   margin-top: 22px;
 }
 
-.plan ul.features li:first-child {
-  font-size: 16px;
-}
 
 .plan button {
   position: absolute;
