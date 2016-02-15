@@ -516,16 +516,17 @@ exports.summary = function(req, res){
           console.log(survey.targeted_users[0]);
           var data = [['Date', 'Responses']];
           var groupedAnswers = _.groupBy(survey.questions[0].answers, function(a){
-            var key = moment(a.create_date).format('M/D/YYYY');
+            var key = moment(a.create_date).utcOffset(-5).format('M/D/YYYY');
             return key;
           });
           var dates = _.keys(groupedAnswers);
           console.log(dates);
           var lastDate = new Date(dates[dates.length - 1]);
+          lastDate = moment(lastDate).utcOffset(-5);
           var keys = [];
           for (var t = 7; t >=0; t--) {
-            var currentDate = new Date();
-            currentDate.setDate(lastDate.getDate() - t);
+            var currentDate = lastDate;
+            currentDate.date(lastDate.date() - t);
             var key = moment(currentDate).format('M/D/YYYY');
             keys.push(key);
           }
@@ -565,9 +566,9 @@ exports.summary = function(req, res){
                     lastDate = ua.create_date;
                   }
                 });
-                obj.start = moment(firstDate).format('h:mmA');
-                obj.finish = moment(lastDate).format('h:mmA');
-                obj.date = moment(lastDate).format('M/D/YYYY');
+                obj.start = moment(firstDate).utcOffset(-5).format('h:mmA');
+                obj.finish = moment(lastDate).utcOffset(-5).format('h:mmA');
+                obj.date = moment(lastDate).utcOffset(-5).format('M/D/YYYY');
                 obj.duration = moment.utc(moment.duration(moment(lastDate).subtract(firstDate)).asMilliseconds()).format('HH:mm:ss');
                 completed.push(obj);
               });
