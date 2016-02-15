@@ -26,7 +26,7 @@
     "jade": "~1.7.0",
     "mime": "~1.2.11",
     "mixpanel": "~0.0.20",
-    "moment": "~2.8.1",
+    "moment": "~2.11.2",
     "mongodb": "~1.4.5",
     "mongoose": "~3.8.12",
     "monowrap": "^1.0.4",
