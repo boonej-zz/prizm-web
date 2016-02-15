@@ -513,27 +513,26 @@ exports.summary = function(req, res){
           path: 'questions.answers',
           model: 'Answer'
         }, function(err, survey){
-          console.log(survey.targeted_users[0]);
           var data = [['Date', 'Responses']];
           var groupedAnswers = _.groupBy(survey.questions[0].answers, function(a){
-            var key = new moment(a.create_date);
+            var key = moment(a.create_date);
             key = key.utcOffset(-5).format('M/D/YYYY');
             return key;
           });
           var dates = _.keys(groupedAnswers);
-          console.log(dates);
           var lastDate = new Date(dates[dates.length - 1]);
-          lastDate = moment(lastDate).utcOffset(-5);
+          lastDate = moment(lastDate);
           var keys = [];
           for (var t = 7; t >=0; t--) {
-            var currentDate = lastDate;
+            var currentDate = moment(lastDate.toDate());
             currentDate.date(lastDate.date() - t);
             var key = moment(currentDate).format('M/D/YYYY');
             keys.push(key);
           }
           _.each(keys, function(key){
             var pair = [];
-            pair.push(moment(key).format('M/D'));
+            var split = key.split('/');
+            pair.push(split[0] + '/' + split[1]);
             pair.push(groupedAnswers[key]?groupedAnswers[key].length:0);
             data.push(pair);
           });
@@ -555,9 +554,7 @@ exports.summary = function(req, res){
                 });
                 var lastDate = false;
                 var firstDate = false;
-                console.log(userAnswers);
                 _.each(userAnswers, function(ua){
-                  console.log(ua);
                   if (!lastDate) lastDate = ua.create_date;
                   if (!firstDate) firstDate = ua.create_date;
                   if (ua.create_date < firstDate) {
@@ -590,7 +587,6 @@ exports.summary = function(req, res){
                 non.sentTime = moment(non.create_date).format('h:mmA');
                 nr.push(non);
               });
-              console.log(nonresponders);
               res.render('surveys/summary', {
                 currentUser: user,
                 auth: true,
