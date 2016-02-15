@@ -1,5 +1,26 @@
 extends ../layouts/site_layout
 
+block menu
+  a(href='/students/#')
+          img(id='logo'
+              src='/images/prizmlogo.png')
+  .menu
+    if (selected == 'about')
+      span(class='menu-button selected')
+        a(href='/students#about') About
+    else
+      span.menu-button
+        a(href='/students#about') About
+    span(class=selected=='insight'?'menu-button selected':'menu-button')
+      a(href='/students#insight') Insight
+    span(class=selected=='mission'?'menu-button selected':'menu-button')
+        a(href='/students#mission') Mission
+    span(class='menu-button')
+      a(href='/login') Login
+    span.menu-button
+      a.sign-up-button(href="/register") Sign Up
+
+
 block content
   #home-block.full-width.gray-background.topnav-offset
     #home.anchor

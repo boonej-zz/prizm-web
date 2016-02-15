@@ -51,27 +51,8 @@ html
     body(id='#{bodyID}')
     #navbar.full-width
       .nav-top.wrap
-        a(href='/#new-home')
-          img(id='logo'
-              src='/images/prizmlogo.png')
-        .menu
-          if (selected == 'about')
-            span(class='menu-button selected')
-              a(href='/#about') About
-          else
-            span.menu-button
-              a(href='/#about') About
-          span(class=selected=='prizmproduct'?'menu-button selected':'menu-button')
-            a(href='/#prizmproduct') Product
-          span(class=selected=='why'?'menu-button selected':'menu-button')
-              a(href='/#why') Why
-          span(class=selected=='plans'?'menu-button selected':'menu-button')
-            a(href='/#plans') Pricing
-          span(class='menu-button')
-            a(href='/login') Login
-          span.menu-button
-            a.sign-up-button(href="/register") Sign Up
-          //- span(class='menu-button')
+        block menu
+                  //- span(class='menu-button')
           //-   a(href='mailto:press@prizmapp.com')
         button(id='menu-button' onclick='prizm.menuClicked()')
 
