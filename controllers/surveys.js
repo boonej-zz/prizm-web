@@ -516,7 +516,8 @@ exports.summary = function(req, res){
           console.log(survey.targeted_users[0]);
           var data = [['Date', 'Responses']];
           var groupedAnswers = _.groupBy(survey.questions[0].answers, function(a){
-            var key = moment(a.create_date).utcOffset(-5).format('M/D/YYYY');
+            var key = new moment(a.create_date);
+            key = key.utcOffset(-5).format('M/D/YYYY');
             return key;
           });
           var dates = _.keys(groupedAnswers);
