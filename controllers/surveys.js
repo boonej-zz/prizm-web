@@ -567,7 +567,11 @@ exports.summary = function(req, res){
                 obj.start = moment(firstDate).utcOffset(-5).format('h:mmA');
                 obj.finish = moment(lastDate).utcOffset(-5).format('h:mmA');
                 obj.date = moment(lastDate).utcOffset(-5).format('M/D/YYYY');
-                obj.duration = moment.utc(moment.duration(moment(lastDate).subtract(firstDate)).asMilliseconds()).format('HH:mm:ss');
+                var ms = moment(lastDate).diff(moment(firstDate));
+                var duration = moment.duration(ms);
+                console.log(duration);
+                var convert = moment.utc(duration.asMilliseconds()).format('HH:mm:ss');
+                obj.duration = convert;
                 completed.push(obj);
               });
               var tUsers = survey.targeted_users;
