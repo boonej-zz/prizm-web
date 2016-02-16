@@ -889,7 +889,7 @@ ul.user-list .name {
 }
 
 ul.user-list .name .profile-avatar {
-  background-size: cover;
+  background-size: 2.1875em 2.1875em;
   background-repeat: no-repeat;
   height: 2.1875em;
   width: 2.1875em;
