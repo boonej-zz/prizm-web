@@ -583,8 +583,8 @@ exports.summary = function(req, res){
               var nr = [];
               _.each(nonresponders, function(non){
                 non = non.toObject();
-                non.sentDate = moment(non.create_date).format('M/D/YYYY');
-                non.sentTime = moment(non.create_date).format('h:mmA');
+                non.sentDate = moment(non.create_date).utcOffset(-5).format('M/D/YYYY');
+                non.sentTime = moment(non.create_date).utcOffset(-5).format('h:mmA');
                 nr.push(non);
               });
               res.render('surveys/summary', {
