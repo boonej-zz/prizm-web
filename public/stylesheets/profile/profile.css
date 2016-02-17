@@ -16,6 +16,10 @@ button.follow {
   border: none;
 }
 
+#avatar {
+  display: inline-block;
+}
+
 ul#feed {
   list-style: none;
   text-indent: 0;

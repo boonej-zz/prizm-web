@@ -40,7 +40,7 @@ block content
         .slider-container
           .slider
             if user.profile_photo_url
-              div.prizm-avatar-md(style='background-image: url("#{user.profile_photo_url}");')
+              div#avatar.prizm-avatar-md(style='background-image: url("#{user.profile_photo_url}");')
             else 
               img(src='/images/profile/profile_default_avatar.png' class='prizm-avatar-md')
             if edit
