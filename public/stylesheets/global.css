@@ -42,6 +42,9 @@ div.container.topnav-offset {
   border: 1px #d4daea solid;
   border-radius: 50%;
   background-color: #d4daea;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 100%;
 }
 
 .prizm-avatar-xs {
