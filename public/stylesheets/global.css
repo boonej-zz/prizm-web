@@ -57,6 +57,19 @@ div.container.topnav-offset {
   width: 64px;
 }
 
+.prizm-avatar-sm.disabled_push::before {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 11px;
+  width: 11px;
+  background-color: rgb(241, 0, 5);
+  border-radius: 50%; 
+  z-index: 500;
+  margin-top: 20.5px;
+  margin-left: -14px;
+}
+
 .prizm-avatar-md {
   height: 96px;
   width: 96px;

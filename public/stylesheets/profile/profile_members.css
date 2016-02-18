@@ -945,7 +945,7 @@ li.member.selected a {
 }
 
 
-img.prizm-avatar-sm + .luminary, img.prizm-avatar-sm + .leader, img.prizm-avatar-sm + .ambassador {
+.prizm-avatar-sm + .luminary, .prizm-avatar-sm + .leader, .prizm-avatar-sm + .ambassador {
   content: '';
   display: block;
   position: absolute;
@@ -960,14 +960,14 @@ img.prizm-avatar-sm + .luminary, img.prizm-avatar-sm + .leader, img.prizm-avatar
   margin-left: 62px;
 }
 
-img.prizm-avatar-sm + .luminary {
+.prizm-avatar-sm + .luminary {
   background-image: url('/images/profile/luminary_icon_selected.png');
 }
 
-img.prizm-avatar-sm + .ambassador {
+.prizm-avatar-sm + .ambassador {
   background-image: url('/images/profile/ambassador_icon_selected@2x.png');
 }
 
-img.prizm-avatar-sm + .leader {
+.prizm-avatar-sm + .leader {
   background-image: url('/images/icons/leader_icon_selected.png');
 }

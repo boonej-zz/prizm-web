@@ -83,6 +83,7 @@ var userSchema = new mongoose.Schema({
   org_status            : [orgStatusSchema],
   theme                 : {type: ObjectIdType, ref: 'Theme', required: false},
   visibility            : {type: String, default: null},
+  push_enabled          : {type: Boolean, default: false},
   google_devices        : {type: Array, default: []}
 },{ versionKey          : false });
 
@@ -260,7 +261,8 @@ var orgFieldset = function(orgId, status){
     phone_number: 1,
     modify_date: 1,
     interests: 1,
-    device_token: 1
+    device_token: 1,
+    push_enabled: 1
   };
 };
 
