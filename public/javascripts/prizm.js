@@ -137,7 +137,8 @@ $(function(){
 
 $(window).scroll(function(){
   var scrolled_val = $(document).scrollTop().valueOf();
-  var currentPageIsHome = document.getElementById("new-home");
+  var currentPageIsHome = document.getElementById("new-home") ;
+  var currentPageIsStudent = document.getElementById("partner");
   if (currentPageIsHome) {
     var about = $('a[href="/#about"]').parent();
     var product = $('a[href="/#prizmproduct"]').parent();
@@ -187,6 +188,31 @@ $(window).scroll(function(){
           $('.menu-button').toggleClass('selected', false);
           pricing.toggleClass('selected');
         }
+      }
+    }
+  } else if (currentPageIsStudent) {
+    var about = $('a[href="/students#about"]').parent();
+    var insight = $('a[href="/students#insight"]').parent();
+    var mission = $('a[href="/students#mission"]').parent();
+    var aboutOffset = $('#about.anchor').offset().top - 100;
+    var insightOffset = $('#insight.anchor').offset().top - 30;
+    var missionOffset = $('#mission.anchor').offset().top - 30;
+    if (scrolled_val < aboutOffset) {
+      $('.menu-button').removeClass('selected');
+    } else if (scrolled_val < insightOffset) {
+      if (!about.hasClass('selected')) {
+        $('.menu-button').removeClass('selected');
+        about.addClass('selected');
+      }
+    } else if (scrolled_val < missionOffset) {
+      if (!insight.hasClass('selected')) {
+        $('.menu-button').removeClass('selected');
+        insight.addClass('selected');
+      }
+    } else {
+      if (!mission.hasClass('selected')) {
+        $('.menu-button').removeClass('selected');
+        mission.addClass('selected');
       }
     }
   }
