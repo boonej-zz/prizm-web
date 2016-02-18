@@ -152,7 +152,11 @@ button {
   -webkit-transition: all 0.3s;
 }
 
-button.blue {
+a.blue {
+  display: inline-block;
+}
+
+button.blue, a.blue {
   border-radius: 1.3214em;
   color: white;
   background-color: #628ad0;
@@ -164,11 +168,11 @@ button.blue {
 
 }
 
-button.blue:hover {
+button.blue:hover, a.blue:hover {
   background-color: #78a4f0; 
 }
 
-button.blue:active {
+button.blue:active, a.blue:active {
   background-color: #314991;
 }
 
@@ -914,7 +918,7 @@ div#plans {
 }
 
 
-.plan button {
+.plan button, .plan a.blue {
   position: absolute;
   bottom: 47px;
   left: 66px;
