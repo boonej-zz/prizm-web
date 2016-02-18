@@ -831,6 +831,12 @@ userSchema.post('init', function(user){
     var r = new RegExp('https:/s');
     user.profile_photo_url = user.profile_photo_url.replace(r, 'https://s');
   }
+  var genabled = user.google_devices && user.google_devices.length > 0;
+  if (user.device_token || genabled) {
+    user.push_enabled = true;
+  } else {
+    user.push_enabled = false;
+  }
 });
 
 mongoose.model('OrgStatus', orgStatusSchema);
