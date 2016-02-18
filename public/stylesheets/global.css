@@ -57,7 +57,7 @@ div.container.topnav-offset {
   width: 64px;
 }
 
-.prizm-avatar-sm.disabled_push::before {
+.push-disabled {
   content: '';
   position: absolute;
   display: block;
@@ -67,7 +67,27 @@ div.container.topnav-offset {
   border-radius: 50%; 
   z-index: 500;
   margin-top: 20.5px;
-  margin-left: -14px;
+  margin-left: 10px;
+}
+
+.push-disabled:hover::after {
+  content: 'Notifications disabled';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 23px;
+  display: block;
+  position: absolute;
+  margin-top: 14px;
+  margin-left: -11px;
+  padding-top: 16px;
+  padding-left: 17px; 
+  color: rgb(149, 150, 152);
+  width: 199px;
+  height: 54px;
+  background-image: url('/images/disabled_png.png');
+  background-size: 199px 54px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .prizm-avatar-md {

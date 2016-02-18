@@ -66,7 +66,9 @@ table.table.table-striped.members-table
         - var photo = member.profile_photo_url || '/images/default-profile.png'
         tr
           td
-            .prizm-avatar-sm.cursor(style='background-image: url("#{photo}")' class=member.push_enabled?'':'disabled_push' 
+            if (!member.push_enabled) 
+              .push-disabled
+            .prizm-avatar-sm.cursor(style='background-image: url("#{photo}")'  
                   onclick='prizm.showProfile("#{member._id}")')
             if creatorClass != ''
               div(class='#{creatorClass}')
