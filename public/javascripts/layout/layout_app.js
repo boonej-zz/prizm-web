@@ -937,9 +937,10 @@ var survey = {
         choiceLabel.appendChild(document.createTextNode(String(n) + '.'));
         choiceLi.appendChild(choiceLabel);
         var choiceInput = document.createElement('input');
-        choiceInput.setAttribute('id', 'choice1');
+        choiceInput.setAttribute('id', 'choice' + n);
         choiceInput.setAttribute('type', 'text');
         choiceInput.setAttribute('name', 'values'); 
+        choiceInput.addEventListener('keyup', survey.validate);
         choiceLi.appendChild(choiceInput);
         $('#newSurvey ul').append(choiceLi);
       }
@@ -990,8 +991,6 @@ var survey = {
     var valid = true;
     $('#newSurvey input:not("#originalID")').each(function(){
       var $this = $(this);
-      console.log($this.attr('id'));
-      console.log($this.val());
       if (!$this.val()) {
         valid = false;
       }
