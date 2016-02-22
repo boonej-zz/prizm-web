@@ -119,6 +119,28 @@ var prizm = {
   },
   playerReady: function(e){
     alert('ready');
+  },
+  typeNext: function(e) {
+    var b = $('.buttons button[selected="selected"]');
+    var p = 0;
+    if (b.hasClass('individual')) {
+      p = 4;
+    } else if (b.hasClass('organization')) {
+      p = 2;
+    }
+    $.get('/getstarted?p=' + p, function(res){
+      $('body').prepend(res);
+      $('#who.panel').remove();
+      window.scrollTo(0, 0); 
+    });
+    
+  },
+  stepsNext: function(e) {
+    $.get('/getstarted?p=3', function(res){
+      $('body').prepend(res);
+      $('#steps.panel').remove();
+      window.scrollTo(0, 0);
+    });
   }
 };
 

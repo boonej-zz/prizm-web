@@ -517,7 +517,7 @@ exports.updateUser = function(req, res) {
         res.status(500).send({error: err});
       }
       if (user) {
-        if (userType == 'ambassador' || userType == 'luminary') {
+        if (userType == 'luminary') {
           user.subtype = userType;
         }
         if (userType == 'leader' || userType == 'ambassador') {

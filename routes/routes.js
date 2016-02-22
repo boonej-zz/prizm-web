@@ -250,6 +250,31 @@ router.get('/register/welcome', _users.authRequired, _users.displayWelcome);
 router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
 router.post('/register/:id', _orgs.updateOrg);
 
+router.get('/getstarted', function(req, res){
+  var p = Number(req.query.p);
+  var view = '';
+  switch (p) {
+    case 1:
+      view = 'register/who';
+      break;
+    case 2:
+      view = 'register/steps';
+      break;
+    case 3:
+      view = 'register/organization_form';
+      break;
+    case 4:
+      view = 'register/individual_form';
+      break;
+    case 5:
+      view = 'register/steps_full';
+      break;
+    default:
+      break;
+  }
+  res.render(view);
+});
+
 /* Surveys */
 router.get('/surveys/new', _users.authRequired, _surveys.newSurvey);
 router.post('/surveys', _users.authRequired, _surveys.createSurvey);
