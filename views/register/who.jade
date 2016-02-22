@@ -1,0 +1,19 @@
+extends ../layouts/register_layout
+
+block form
+  #who.panel
+    h2 Tell us about yourself
+    .buttons
+      button.individual
+        | I am an individual
+      button.organization
+        | I am an organization
+    button.next.blue(disabled=true onclick='prizm.typeNext()') Next
+    script(type='text/javascript').
+      $(document).ready(function(){
+        $('.buttons button').click(function(){
+          $('.buttons button').attr('selected', false);
+          $(this).attr('selected', true);
+          $('button.next').attr('disabled', false);
+        });
+      });

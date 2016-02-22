@@ -1,0 +1,126 @@
+body {
+  background-color: rgb(244, 245, 247);
+}
+
+.panel {
+  display: flex;
+  margin: 106px auto 80px auto;
+  width: 600px;
+  background-color: white;
+  flex-direction: column;
+  text-align: center;
+}
+
+.panel h2 {
+  font-size: 30px;
+  color: rgb(84, 83, 88);
+  font-weight: 600; 
+  margin-top: 108px;
+}
+
+.panel .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 88px;
+}
+
+.buttons button {
+  display: block;
+  height: 170px;
+  width: 180px;
+  border: 1px solid rgb(197, 200, 204);
+  border-radius: 2px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.06);
+  background-color: rgb(254, 254, 254);
+  background-size: 64px;
+  background-repeat: no-repeat;
+  background-position: center 43.5px;
+  font-size: 16px;
+  font-weight: 500;
+  padding-top: 79px;
+  vertical-align: bottom;
+  color: rgb(84, 83, 88);
+}
+
+button.individual {
+  background-image: url('/images/individual.png');
+}
+
+button.organization {
+  background-image: url('/images/group.png');
+}
+
+button.next {
+  margin: 102.5px auto 86px auto;
+  width: 118px;
+  height: 37.5px;
+  border-radius: 37px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.panel p {
+  margin-top: 24.5px;
+  font-size: 18px;
+  color: rgb(84, 83, 88); 
+  font-weight: 300;
+}
+
+.panel ul.steps {
+  counter-reset: my-count;
+  text-align: left;
+  margin: 42.5px auto 0 auto;
+}
+
+.panel ul.steps li {
+  margin-top: 24px;
+  color: rgb(84, 83, 88);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.panel ul.steps li:before {
+  content: counter(my-count);
+  counter-increment: my-count;
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  background-color: rgb(98, 138, 208);
+  border-radius: 50%;
+  line-height: 45px;
+  vertical-align: middle;
+  color: white;
+  font-size: 16px; 
+  font-weight: 500;
+  margin-right: 12.5px;
+  text-align: center;
+}
+
+button.go {
+  cursor: pointer;
+  width: 118px;
+  height: 37.5px;
+  margin: 72px auto 86px auto;
+  line-height: 37.5px;
+  vertical-align: middle;
+}
+
+#register h2 {
+  padding-top: 41px;
+  margin: 0;
+  padding-bottom: 23.5px;
+  border-bottom: 1px solid rgb(197, 200, 204);
+}
+
+form#registration {
+  display: flex;
+  margin: 102px auto 80px auto;
+  flex-basis: 376px;
+  text-align: left;
+  flex-direction: column;
+}
+
+form#registration label {
+  display: block;
+}
