@@ -3,21 +3,62 @@
   p
     | No credit card required. Integration takes seconds.
   form#registration
+    input(type='hidden' name='type' value='institution_verified')
     .fieldset
       label(for="name") Organization Name
-      input#name.v-item(type="text" name="first_name")
+      input#name(type="text" name="name")
     .fieldset
       label(for="type") Type
-      select#type(name="type")
+      select#type(name="subtype")
         option -
+        option(value='community') Community
+        option(value='corporate') Corporate
+        option(value='education') Education
+        option(value='foundation') Foundation
+        option(value='military') Military
     .fieldset
       label(for="email") Email
       input#email(type="email" name="email")
     .fieldset
-      label.v-item(for="password") Password
-      input#password.v-item(type="password" name="password")
+      label(for="password") Password
+      input#password(type="password" name="password")
     .fieldset
-      label.v-item(for="confirm") Confirm Password
-      input#confirm.v-item(type="password" name="confirm")
-
-
+      label(for="confirm") Confirm Password
+      input#confirm(type="password" name="confirm_password")
+    .fieldset
+      label(for="zip") Zip Code
+      input#zip(type="number" name="zip_postal")
+    .fieldset
+      label(for="phone") Phone Number
+      input#phone(type="tel" name="phone_number")
+    .fieldset
+      label(for="first") Contact First Name
+      input#first(type="text" name="contact_first")
+    .fieldset
+      label(for="last") Contact Last Name
+      input#last(type="text" name="contact_last")
+    .fieldset
+      label(for="contactEmail") Contact Email
+      input#contactEmail(type="email" name="contact_email")
+    .fieldset
+      label(for="site") Website
+      input#site(type="text" name="website")
+    button.submit.blue START USING PRIZM
+  script(type="text/javascript").
+    $('form#registration').submit(function(e){
+      var data = $(e.target).serialize();
+      $.ajax({
+        method: 'POST',
+        url: '/users',
+        data: data,
+        cache: false,
+        success: function(d){
+          window.location = '/profile/members?firstVisit=true';  
+        },
+        error: function(e) {
+          alert('There was a problem creating your account. ' + 
+          e.responseJSON.error);
+        }
+      });
+      return false;
+    });

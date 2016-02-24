@@ -43,6 +43,10 @@ body {
   color: rgb(84, 83, 88);
 }
 
+.buttons button[selected='selected'] {
+  background-color: rgb(248, 248, 249) !important;
+}
+
 button.individual {
   background-image: url('/images/individual.png');
 }
@@ -114,13 +118,36 @@ button.go {
 }
 
 form#registration {
-  display: flex;
-  margin: 102px auto 80px auto;
-  flex-basis: 376px;
-  text-align: left;
+  margin: 86px auto 80px auto;
+  width: 62%;
   flex-direction: column;
+}
+
+.fieldset {
+  text-align: left;
 }
 
 form#registration label {
   display: block;
+  margin-top: 1em;
+  font-weight: 500;
+  color: rgb(84, 83, 88);
+}
+
+form input, form select {
+  -webkit-appearance: none;
+  border: 1px solid rgb(197, 200, 204);
+  height: 29px;
+  display: block;
+  width: 100%;
+  background-color: white;
+  border-radius: 0;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+button.submit {
+  font-size: 14px;
+  width: 198px;
+  margin: 60px auto 0 auto;
 }

@@ -236,6 +236,15 @@ img#logo {
   z-index: 900;
 }
 
+p.already {
+  display: inline-block;
+  color: rgb(75, 75, 75);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 75px;
+  margin-right: 25px;
+}
+
 button#menu-button {
   display: block;
   float: right;

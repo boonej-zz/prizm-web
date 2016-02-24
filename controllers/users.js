@@ -53,6 +53,7 @@ var ownerBody1Alt = '%s has just joined %s\'s Prizm group. Please go to your adm
 var ownerClosing = 'Thank you,';
 var ownerPush = '%s has requested to join your Prizm group. Please go to your admin page to approve or deny.';
 var ownerPushAlt = '%s has just joined your Prizm group. Please go to your admin page to review your members.';
+var randomstring = require('randomstring');
 
 
 var notifyOwnerJoined = function(owner, user, joined){
@@ -1514,11 +1515,13 @@ exports.displayRegistration = function(req, res) {
 var validate = function(req, res, next) {
   var required_user = ['email', 'password', 'confirm_password', 'birthday', 'gender', 'first_name', 'last_name',
       'phone_number'];
-  var required_institution = ['email', 'name', 'subtype', 'password', 'confirm_password', 'zip_postal', 'contact_first',
+  var required_institution = ['email', 'name', 'password', 'confirm_password', 'zip_postal', 'contact_first',
       'contact_last', 'contact_email', 'website'];
   var required = false;
+  console.log(req.body);
   if (req.body.type == 'user') required = required_user;
-  if (req.body.type == 'institution') required = required_institution;
+  if (req.body.type == 'institution' || req.body.type == 'institution_verified') required = required_institution;
+  console.log(required);
   if (required) {
     var valid = true;
     _.each(required, function(r){
@@ -1589,7 +1592,23 @@ exports.register = function(req, res){
       u.save(function(err, result) {
         if (err) console.log(err);
         if (result) {
-          if (result.type == 'institution') {
+          if (result.type == 'institution_verified') {
+            console.log('creating org');
+            var code = randomstring.generate({
+              length: 6,
+              readable: true,
+              charset: 'alphabetic',
+              capitalization: 'lowercase'
+            });
+
+            var org = new Organization({owner: user._id, 
+              name: user.first_name,
+              code: code
+            });
+            org.save(function(err, result){
+              if (err) console.log(err);
+            });
+              
             _mail.sendNewPartnerMail(result);
           }
           req.logIn(result, function(err){
@@ -1613,6 +1632,20 @@ exports.register = function(req, res){
           if (result) {
             req.logIn(result, function(err){
               if (err) console.log(err);
+              if (result.type == 'institution_verified') {
+            console.log('creating org');
+            var org = new Organization({owner: result._id, 
+              name: result.first_name,
+              code: randomstring.generate({
+
+              })});
+            console.log(org);
+            org.save(function(err, result){
+              if (err) console.log(err);
+            });
+              
+            _mail.sendNewPartnerMail(result);
+          }
               _mail.sendWelcomeMail(result);
               checkAndUpdateOrg(result, function(err, saved){
                 if (saved.org_status.length > 0) {
