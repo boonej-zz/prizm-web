@@ -128,7 +128,7 @@ var prizm = {
     } else if (b.hasClass('organization')) {
       p = 2;
     }
-    $.get('/getstarted?p=' + p, {user: #{user}}, function(res){
+    $.get('/getstarted?p=' + p, {user: '#{user}'}, function(res){
       $('body').prepend(res);
       $('#who.panel').remove();
       window.scrollTo(0, 0); 
