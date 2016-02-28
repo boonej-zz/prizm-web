@@ -253,11 +253,16 @@ router.get('/register/:id', _users.authRequired, _orgs.displayOrgRegistration);
 router.post('/register/:id', _orgs.updateOrg);
 
 router.get('/getstarted', function(req, res){
-  var p = Number(req.query.p);
+  var p = Number(req.query.p) || 1;
   var user = req.user || {};
 
-  if (req.get('user')) {
-    user = JSON.stringify(req.get('user'));
+  var tuser = req.get.user || false;
+  if (tuser && tuser != '') {
+    if (p == 1) {
+      user = JSON.stringify(tuser);
+    } else if (p != 2 && p != 6) {
+      user = JSON.parse(tuser);
+    }
   }
 
   var code = req.query.code;
