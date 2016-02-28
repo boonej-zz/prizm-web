@@ -34,10 +34,16 @@ block form
         } else if (b.hasClass('organization')) {
           p = 2;
         }
-        $.get('/getstarted?p=' + p, {user: '#{user}'}, function(res){
-          $('body').prepend(res);
-          $('#who.panel').remove();
-          window.scrollTo(0, 0); 
+        $.ajax({
+          url: '/getstarted?p=' + p,
+          type: 'GET',
+          headers = {user: '#{user}'},
+          success = function(res){
+            $('body').prepend(res);
+            $('#who.panel').remove();
+            window.scrollTo(0, 0); 
+          }
         });
+
 
       });

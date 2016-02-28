@@ -262,6 +262,8 @@ router.get('/getstarted', function(req, res){
       user = JSON.stringify(tuser);
     } else if (p != 2 && p != 6) {
       user = JSON.parse(tuser);
+    } else {
+      user = tuser;
     }
   }
 
