@@ -6,7 +6,7 @@
   button#no-code I don&#39t have a program code
   script(type='text/javascript').
     var loadPage = function(url){
-      $.get(url, {user: '#{user}', function(result){
+      $.get(url, {user: '#{user}'}, function(result){
         $('body').prepend(result);
         $('#code.panel').remove();
       });
