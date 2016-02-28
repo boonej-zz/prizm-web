@@ -819,7 +819,7 @@ exports.handleFacebookLogin = function(req, res, next) {
         u.provider_id = info.id;
         u.provider_token = token;
         u.profile_photo_url = 'https://graph.facebook.com/v2.4/' + info.id + '/picture?width=600';
-        res.render('register/who', {user: JSON.stringify(u)});
+        res.render('registration/new', {social: u});
         //return res.redirect('/login');
       }
       req.logIn(user, function(err) {
@@ -875,7 +875,7 @@ exports.handleTwitterLogin = function(req, res, next) {
         u.email = profile.email;
         u.gender = info.gender;
         u.profile_photo_url = profile.profile_image_url_https;
-        return res.render('register/who', {user: JSON.stringify(u)});
+        res.render('registration/new', {social: u});
       }
       req.logIn(user, function(err) {
         if (err) {
