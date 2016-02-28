@@ -1,0 +1,13 @@
+extends ../layouts/register_layout
+
+block menu 
+  a(href='/#new-home')
+          img(id='logo'
+              src='/images/prizmlogo.svg')
+  .menu
+    p.already Already have an account?
+    a.blue.login(href='/login') LOG IN
+
+
+block form
+  include steps

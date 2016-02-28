@@ -1,0 +1,20 @@
+#photo.panel
+  h2 Customize
+  p Add Photo to your Prizm
+  form#avatar
+    #imageContainer.cursor(
+      ondragover='register.drag(event)'
+      ondrop='register.drop(event)'
+      style=user.profile_photo_url?'background-image: url("#{user.profile_photo_url}")':'')
+      if (!user.profile_photo_url)
+        div#photoInstructions
+          | or drag and drop files onto this window to upload
+          br
+          | (please limit file size to 2MB)
+    input#imageFile(type='file' name='image' accept='image/*' onchange='register.imageChanged(event)')
+    button.save.blue Save
+  script(type='text/javascript').
+    $('#imageContainer').click(function(){
+      $('input#imageFile').click();
+    });
+    $('form#avatar').submit(register.uploadAvatar);

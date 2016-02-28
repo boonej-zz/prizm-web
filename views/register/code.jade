@@ -1,0 +1,23 @@
+#code.panel
+  h2 What is your program code?
+  form#program
+    input#code(type='text' name='program_code')
+    button.submit.next.blue Next
+  button#no-code I don&#39t have a program code
+  script(type='text/javascript').
+    var loadPage = function(url){
+      $.get(url, {user: #{user}, function(result){
+        $('body').prepend(result);
+        $('#code.panel').remove();
+      });
+    };
+
+    $('form#program').submit(function(e){
+      var url = '/getstarted?p=4&code=' + $('input#code').val();
+      loadPage(url);
+      return false;
+    });
+
+    $('button#no-code').click(function(){
+      loadPage('/getstarted?p=4');
+    });

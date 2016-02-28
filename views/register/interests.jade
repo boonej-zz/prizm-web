@@ -1,0 +1,62 @@
+#interests.panel
+  h2.full-width.underline What are you interested in?
+  p
+    | Please choose 3 or more categories and we'll share some good
+    | stuff with you
+  .interests-container
+    - var values = [1, 2, 3];
+    each interest in interests
+      - var grow = values[Math.floor(Math.random()*3)]
+      div.interests(data-interest='#{interest._id}' 
+        style='flex-grow: #{grow};')
+        | #{interest.text}
+      if (interest.subinterests && interest.subinterests.length > 0)
+        each subinterest in interest.subinterests
+          - grow = values[Math.floor(Math.random()*3)]
+          div.interests.hidden(class = '#{interest._id}' data-interest='#{subinterest._id}' 
+            style='flex-grow: #{grow};')
+            | #{subinterest.text}
+  button.next.blue(disabled='disabled') Next
+  script(type='text/javascript').
+    var loadPage = function(url) {
+      $.get(url, function(result){
+        $('body').prepend(result);
+        $('#interests.panel').remove();
+      });
+    };
+    $('.interests').click(function(e){
+      var $target = $(this);
+      var interest = $target.attr('data-interest');
+      var subInterestSelector = ' .' + interest;
+      var selected = $target.attr('selected');
+      $target.attr('selected', !selected);
+      $(subInterestSelector).removeClass('selected');
+      $(subInterestSelector).toggleClass('hidden');
+      if ($('.interests[selected="selected"]').length > 2) {
+        $('button.next').attr('disabled', false);
+      } else {
+        $('button.next').attr('disabled', 'disabled');
+      }
+
+    });
+    $('button.next').click(function(e){
+      var interests = [];
+      $('.interests[selected="selected"]').each(function(){
+        interests.push($(this).attr('data-interest'));
+      });
+      $.ajax({
+        type: 'POST',
+        cache: false,
+        url: '/register',
+        headers: {
+          dataType: 'interests'
+        },
+        data: {
+          interests: interests,
+          userId: '#{user._id}'
+        },
+        success: function(response) {
+          loadPage('/getstarted?p=9');
+        }
+      });
+    });
