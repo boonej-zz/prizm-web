@@ -166,6 +166,13 @@ form input, form select {
   padding-right: 1em;
 }
 
+form select {
+  background-image: url('/images/icons/disclosure_grey.png');
+  background-size: 21px 4px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
 button.submit {
   font-size: 14px;
   width: 198px;
