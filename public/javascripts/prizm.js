@@ -136,7 +136,7 @@ var prizm = {
     
   },
   stepsNext: function(e) {
-    $.get('/getstarted?p=3', {user: #{user}}, function(res){
+    $.get('/getstarted?p=3', {user: '#{user}'}, function(res){
       $('body').prepend(res);
       $('#steps.panel').remove();
       window.scrollTo(0, 0);
