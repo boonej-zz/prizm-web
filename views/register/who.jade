@@ -17,7 +17,7 @@ block form
         | I am an individual
       button.organization
         | I am an organization
-    button.next.blue(disabled=true onclick='prizm.typeNext()') Next
+    button.next.blue(disabled=true) Next
     script(type='text/javascript').
       $(document).ready(function(){
         $('.buttons button').click(function(){
@@ -25,4 +25,19 @@ block form
           $(this).attr('selected', true);
           $('button.next').attr('disabled', false);
         });
+      });
+      $('button.next').click(function(){
+        var b = $('.buttons button[selected="selected"]');
+        var p = 0;
+        if (b.hasClass('individual')) {
+          p = 6;
+        } else if (b.hasClass('organization')) {
+          p = 2;
+        }
+        $.get('/getstarted?p=' + p, {user: '#{user}'}, function(res){
+          $('body').prepend(res);
+          $('#who.panel').remove();
+          window.scrollTo(0, 0); 
+        });
+
       });
