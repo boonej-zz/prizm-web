@@ -25,6 +25,22 @@ body {
   margin-top: 88px;
 }
 
+label.inline {
+  display: inline-block !important;
+}
+
+input[type='radio'] {
+  height: 19px;
+  width: 19px;
+  border-radius: 50%;
+  padding: 0;
+}
+
+input[type='radio']:checked {
+  background-color: #3e6a9e;
+  border: none;
+}
+
 .buttons button {
   display: block;
   height: 170px;
@@ -101,6 +117,10 @@ button.next {
   text-align: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 button.go {
   cursor: pointer;
   width: 118px;
@@ -150,4 +170,224 @@ button.submit {
   font-size: 14px;
   width: 198px;
   margin: 60px auto 0 auto;
+}
+
+form#program {
+  padding-bottom: 24px;
+  margin-top: 48px;
+  border-bottom: 1px solid rgb(197, 200, 204);
+  text-align: center;
+}
+
+input#code {
+  width: 177px;
+  height: 20px;
+  background-color: rgb(248, 248, 249);
+  border: 1px solid rgb(197, 200, 204);
+  border-radius: 1px;
+  margin: 0 auto 269px auto;
+
+}
+
+button#no-code {
+  height: 62px;
+  color: rgb(62, 128, 243);
+  font-size: 15px;
+  font-weight: 300;
+  background-color: white;
+}
+
+span.radio {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  margin-left: 10%;
+}
+
+span.radio label {
+  width: auto !important;
+  font-size: 80%;
+}
+
+span.radio input {
+  margin: 8px auto;
+}
+
+#interests p {
+  width: 20em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.interests-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: rgb(248, 248, 249);
+  transition: all 0.3s;
+  margin-top: 48.5px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 300px;
+  overflow: scroll;
+  border: 1px solid rgb(248, 248, 249);
+}
+
+.interests-container .interests {
+  cursor: pointer;
+  height: 34.5px;
+  line-height: 34.5px;
+  vertical-align: middle;
+  background-color: white;
+  border-radius: 17.25px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin: 2.7px;
+  flex-basis: 26%;
+  color: #334b8f;
+  font-size: 16px;
+  font-weight: 300;
+  transition: all 0.3s;
+}
+
+.interests-container .interests[selected='selected'], .interests-container .interests[selected='selected']:hover {
+  background-color:  #3f6cb4;
+  border: none;
+  color: white;
+}
+
+.interests-container .interests:hover {
+  background-color: rgb(248, 248, 249);
+}
+
+#imageContainer {
+  background-image: url('/images/icons/upload_image.png');
+  background-size: initial;
+  width: 86%;
+  margin: 14px auto 40px auto;
+  border: 1px solid #e4e5ea;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#imageContainer:after {
+  content: '';
+  display: block;
+  height: 0;
+  padding-bottom: 100%;
+}
+
+#photoInstructions {
+  color: #343642;
+  font-size: 0.875em;
+  font-weight: 300;
+  line-height: 21px;
+  height: 34px;
+  text-align: center;
+  float: left;
+  margin-top: 65%;
+  width: 100%;
+}
+
+input#imageFile {
+  display: none;
+}
+
+#photo.panel {
+  padding-bottom: 40px;
+}
+
+div.follow {
+  width: 100%;
+  height: 465px;
+  overflow: auto;
+  text-align: center;
+  list-style: none;
+  padding-top: 15px;
+}
+
+.follow-card {
+  position: relative;
+  width: 70.8%;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #fbfbfb;
+  margin: 0 auto 40px auto;
+}
+
+.follow-card:after {
+  display: block;
+  height: 0;
+  margin-bottom: 100%;
+}
+
+button.follow {
+  position: absolute;
+  display: inline-block;
+  top: 16px;
+  right: 16px;
+  width: 102px;
+  height: 29px;
+  border: 1px solid #828282;
+  font-weight: 400;
+  font-size: 0.875em;
+  vertical-align: middle;
+  text-align: center;
+
+}
+
+.circle-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+  border-top: 1px solid rgb(241, 241, 241);
+  margin-top: 10px;
+}
+
+.user-circle {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  border: 3px solid #c5c8cc;
+  border-radius: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#follow .profile-avatar {
+  position: relative;
+  height: 95px;
+  width: 95px;
+  border: 1px solid #c5c8cc;
+  border-radius: 50%;
+  margin-top: 39px;
+  display: inline-block;
+  background-size: contain;
+  background-position: center;
+}
+
+p.name {
+  color: rgb(72, 72, 73);
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.location {
+  color: rgb(163, 164, 166);
+  display: inline-block;
+  font-size: 19px;
+  font-weight: 400;
+  margin-top: 9px;
+  background-image: url('/images/profile/members_location.png');
+  background-repeat: no-repeat;
+  padding-left: 19px;
+  line-height: 19px;
+  vertical-align: middle;
 }

@@ -124,11 +124,11 @@ var prizm = {
     var b = $('.buttons button[selected="selected"]');
     var p = 0;
     if (b.hasClass('individual')) {
-      p = 4;
+      p = 6;
     } else if (b.hasClass('organization')) {
       p = 2;
     }
-    $.get('/getstarted?p=' + p, function(res){
+    $.get('/getstarted?p=' + p, {user: #{user}}, function(res){
       $('body').prepend(res);
       $('#who.panel').remove();
       window.scrollTo(0, 0); 
@@ -136,7 +136,7 @@ var prizm = {
     
   },
   stepsNext: function(e) {
-    $.get('/getstarted?p=3', function(res){
+    $.get('/getstarted?p=3', {user: #{user}}, function(res){
       $('body').prepend(res);
       $('#steps.panel').remove();
       window.scrollTo(0, 0);

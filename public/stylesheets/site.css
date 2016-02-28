@@ -66,6 +66,12 @@ body {
   color: #485366;
 }
 
+.hidden {
+  display: none;
+}
+
+
+
 a {
   color: #4A4A4A;
   text-decoration: none;

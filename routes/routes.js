@@ -11,6 +11,8 @@ var _trusts   = require('../controllers/trusts');
 var _messages = require('../controllers/messages');
 var _surveys = require('../controllers/surveys');
 var Insights = require('../controllers/insights');
+var Interest = mongoose.model('Interest');
+var User = mongoose.model('User');
 var config    = require('../config');
 var passport  = require('passport');
 var util = require('util');
@@ -252,6 +254,13 @@ router.post('/register/:id', _orgs.updateOrg);
 
 router.get('/getstarted', function(req, res){
   var p = Number(req.query.p);
+  var user = req.user || {};
+
+  if (req.get('user')) {
+    user = JSON.stringify(req.get('user'));
+  }
+
+  var code = req.query.code;
   var view = '';
   switch (p) {
     case 1:
@@ -267,12 +276,37 @@ router.get('/getstarted', function(req, res){
       view = 'register/individual_form';
       break;
     case 5:
-      view = 'register/steps_full';
+      view = 'register/partnersteps';
+      break;
+    case 6:
+      view = 'register/code';
+      break;
+    case 7:
+      view = 'register/photo';
+      break;
+    case 8:
+      view = 'register/interests';
+      break;
+    case 9:
+      view = 'register/follow';
       break;
     default:
+      view = 'register/who';
       break;
   }
-  res.render(view);
+  if (p === 8) {
+    Interest.find({is_subinterest: false})
+    .populate({path: 'subinterests', model: 'Interest'})
+    .exec(function(err, interests){
+      res.render(view, {user: user, interests: interests, bodyId: 'registration'});
+    });
+  } else if (p === 9) {
+    User.fetchSuggestions(user, function(err, users){
+      res.render('register/follow', {users: users});
+    });
+  } else {
+    res.render(view, {user: user, code: code});
+  }
 });
 
 /* Surveys */

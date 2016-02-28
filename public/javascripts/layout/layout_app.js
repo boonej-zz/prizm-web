@@ -1005,7 +1005,7 @@ var login = {
     $('.back').css('display', 'inherit');
   },
   register: function() {
-    window.location = baseURL + '/register';
+    window.location = '/getstarted?p=1';
   },
   resetPassword: function(e) {
     $.ajax({
