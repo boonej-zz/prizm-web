@@ -37,8 +37,8 @@ block form
         $.ajax({
           url: '/getstarted?p=' + p,
           type: 'GET',
-          headers = {user: '#{user}'},
-          success = function(res){
+          headers : {user: '#{user}'},
+          success : function(res){
             $('body').prepend(res);
             $('#who.panel').remove();
             window.scrollTo(0, 0); 
