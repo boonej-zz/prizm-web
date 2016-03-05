@@ -120,7 +120,7 @@ router.get('/students', function(req, res){
 
 
 router.get('/luminary', function(req, res){
-  res.render('site/luminary', { title: 'Prizm App | Luminary', selected: 'none'});
+  res.render('site/luminary', { title: 'Prizm App | Luminary', selected: 'none', bodyID: 'luminary'});
 });
 
 router.get('/download', function(req, res){

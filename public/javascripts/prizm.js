@@ -161,6 +161,7 @@ $(window).scroll(function(){
   var scrolled_val = $(document).scrollTop().valueOf();
   var currentPageIsHome = document.getElementById("new-home") ;
   var currentPageIsStudent = document.getElementById("partner");
+  var currentPageIsLuminary = document.getElementById("luminary");
   if (currentPageIsHome) {
     var about = $('a[href="/#about"]').parent();
     var product = $('a[href="/#prizmproduct"]').parent();
@@ -235,6 +236,31 @@ $(window).scroll(function(){
       if (!mission.hasClass('selected')) {
         $('.menu-button').removeClass('selected');
         mission.addClass('selected');
+      }
+    }
+  } else if (currentPageIsLuminary) {
+    var what = $('a[href="/luminary#what"]').parent();
+    var who = $('a[href="/luminary#who"]').parent();
+    var why = $('a[href="/luminary#why"]').parent();
+    var whatOffset = $('#what.anchor').offset().top - 100;
+    var whoOffset = $('#who.anchor').offset().top - 30;
+    var whyOffset = $('#why.anchor').offset().top - 30;
+    if (scrolled_val < whatOffset)
+      $('.menu-button').removeClass('selected');
+    else if (scrolled_val < whoOffset) {
+      if (!what.hasClass('selected')){
+        $('.menu-button').removeClass('selected');
+        what.addClass('selected');
+      }
+    } else if (scrolled_val < whyOffset) {
+      if (!who.hasClass('selected')) {
+        $('.menu-button').removeClass('selected');
+        who.addClass('selected');
+      }
+    } else {
+      if (!why.hasClass('selected')) {
+        $('.menu-button').removeClass('selected');
+        why.addClass('selected');
       }
     }
   }

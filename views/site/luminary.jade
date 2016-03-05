@@ -13,23 +13,18 @@ mixin sidenav
 extends ../layouts/site_layout
 
 block head
-  script(type='text/javascript' src='/javascripts/snap.js')
 
 block menu
   a(href='/#new-home')
           img(id='logo'
               src='/images/prizmlogo.svg')
   .menu
-    if (selected == 'what')
-      span(class='menu-button selected')
-        a(href='/#what') What
-    else
-      span.menu-button
-        a(href='/luminary#what-is-prizm') What
-    span(class=selected=='luminary'?'menu-button selected':'menu-button')
-      a(href='/luminary#what-does-a-luminary-do') Luminary
+    span(class=selected=='what'?'menu-button selected':'menu-button')
+      a(href='/luminary#what') What
+    span(class=selected=='who'?'menu-button selected':'menu-button')
+      a(href='/luminary#who') Who
     span(class=selected=='why'?'menu-button selected':'menu-button')
-        a(href='/luminary#why-prizm') Why
+        a(href='/luminary#why') Why
     span(class='menu-button')
       a(href='/login') Login
     span.menu-button
@@ -41,7 +36,6 @@ block content
   #luminary-quote.full-width.gray-background.topnav-offset.snap
     #lum-home.anchor
     .wrap
-      mixin sidenav
       #quote
         #quote-avatar
         p.quote-main
@@ -51,7 +45,7 @@ block content
       p.tagline
         | We are looking for role models in all<br>fields to engage with students on Prizm.
   #luminary-block1.full-width.blue-background.snap
-    #what-is-prizm.anchor
+    #what.anchor
     .wrap
       #lum-section-1.section.left
         h2 What is Prizm?
@@ -64,7 +58,7 @@ block content
           | experience. 
       #luminary-phone1.phone.right
   #luminary-block2.full-width.gray-background.snap
-    #what-does-a-luminary-do.anchor
+    #who.anchor
     .wrap
       #lum-section-2.section.right
         h2 What does a Luminary do?<br>I don't have a lot of free time.
@@ -85,7 +79,7 @@ block content
           | will be sent to students on your behalf.
       #luminary-phone2.phone.left.topnav-offset
   #luminary-block3.full-width.blue-background.snap
-    #why-prizm.anchor
+    #why.anchor
     .wrap
       #lum-section-3.section.left
         h2 Why Prizm?
