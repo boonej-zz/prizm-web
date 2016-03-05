@@ -15,6 +15,28 @@ extends ../layouts/site_layout
 block head
   script(type='text/javascript' src='/javascripts/snap.js')
 
+block menu
+  a(href='/#new-home')
+          img(id='logo'
+              src='/images/prizmlogo.svg')
+  .menu
+    if (selected == 'what')
+      span(class='menu-button selected')
+        a(href='/#what') What
+    else
+      span.menu-button
+        a(href='/luminary#what-is-prizm') What
+    span(class=selected=='luminary'?'menu-button selected':'menu-button')
+      a(href='/luminary#what-does-a-luminary-do') Luminary
+    span(class=selected=='why'?'menu-button selected':'menu-button')
+        a(href='/luminary#why-prizm') Why
+    span(class='menu-button')
+      a(href='/login') Login
+    span.menu-button
+      a.sign-up-button(href="/getstarted?p=1") Sign Up
+
+
+
 block content
   #luminary-quote.full-width.gray-background.topnav-offset.snap
     #lum-home.anchor
