@@ -1207,3 +1207,131 @@ input#scope:not(:checked) + label::after  {
 
 }
 
+
+#email-instructions {
+  display: none;
+}
+
+#inperson-instructions {
+  display: none;
+  color: rgb(84, 83, 88);
+}
+
+#inperson-instructions p.subtitle {
+  width: 100%;
+  text-align: center;
+  margin-top: 38px;
+  margin-bottom: 65px;
+}
+
+#inperson-instructions .code {
+  display: inline-block;
+  height: 37px;
+  line-height: 37px;
+  width: 135px;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #e5e5ea;
+  background: #fefefe;
+  margin-top: 19px;
+}
+
+#inperson-instructions .badges {
+  display: inline-block;
+  width: 135px;
+  height: 109px;
+  background-image: url('/images/badges.png');
+  background-repeat: no-repeat;
+  margin-top: 20px;
+  margin-bottom: 34px;
+}
+
+.clear {
+  clear: both;
+}
+
+#left-instructions-phone {
+  height: 540px;
+  width: 290px;
+  background-image: url('/images/in-person-phone.png');
+  float: left;
+}
+
+#inperson-instructions ol {
+  padding: 0;
+  padding-top: 50px;
+  list-style-position: inside;
+}
+
+#imperson-instructions li {
+  font-size: 18px;
+  line-height: 1.5em;
+  text-indent: none;
+}
+
+
+#main-instructions
+{
+  padding-bottom: 31px;
+}
+
+#main-instructions ul 
+{
+  list-style: none;
+  margin: 36px 36px 35px 31px;
+  border: 1px solid #e4e5ea;
+  padding: 0;
+  color: #545358;
+}
+
+#main-instructions ul li
+{
+  padding: 20px 18px 20px 16px;
+  margin: 0;
+  text-indent: 0;
+  border-top: 1px solid #e4e5ea;
+  cursor: pointer;
+}
+
+#main-instructions ul li:hover
+{
+  background-color: #e4e5ea;
+}
+
+#main-instructions ul li:first-child
+{
+  border-top: none;
+}
+
+#emailb-icon, #personb-icon {
+  display: inline-block;
+  float: right;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#personb-icon {
+  background-image: url('/images/person_icon-copy.png');
+}
+
+#emailb-icon {
+  background-image: url('/images/email_icon.png');
+  
+}
+
+
+#newMemberForm h2 .back
+{
+  height: 23px;
+  width: 13px;
+  background-image: url('/images/left-arrow.png');
+  background-repeat: no-repeat;
+  float: left;
+  display: inline-block;
+  margin-top: 7px;
+  margin-left: 15px;
+  cursor: pointer;
+}

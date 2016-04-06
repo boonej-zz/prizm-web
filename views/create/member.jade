@@ -1,31 +1,68 @@
 .create-overlay(onclick='modal.cancel(event)')
   #newMemberForm.create-form
-    h2 
-      | Add New Members
-    form#newMember
-      select#selectGroups(name='group')
-        option(value='') Select Group
-        each group in groups
-          if (group.status == 'active')
-            option(value='#{group._id}') #{group.name}
-      input#selectedOrganization(type='hidden' value='#{organization._id}')
-      label(for='newMemberInput') Enter email address to add new members
-      textarea#newMemberInput(type='text' name='email')
-      div.tip
-        | Tip: you can copy &amp; paste a list of contacts
+    #main-instructions
+      h2
+        | Add New Members
+      ul
+        li#in-person(data-link='inperson-instructions') In-person Instructions
+          #personb-icon
+        li#email(data-link='email-instructions') Email Invite
+          #emailb-icon
+    #inperson-instructions
+      h2
+        .back
+        | In-person Instructions
+      p.subtitle Ask members to download Prizm
+      #left-instructions-phone
+      ol
+        li Download Prizm.
+        li Sign up for Prizm
+          .badges
+          p Use Program Code:
+          .code #{organization.code}
+      .clear
+      
+    #email-instructions
+      h2
+        .back
+        | Add New Members
+      form#newMember
+        select#selectGroups(name='group')
+          option(value='') Select Group
+          each group in groups
+            if (group.status == 'active')
+              option(value='#{group._id}') #{group.name}
+        input#selectedOrganization(type='hidden' value='#{organization._id}')
+        label(for='newMemberInput') Enter email address to add new members
+        textarea#newMemberInput(type='text' name='email')
+        div.tip
+          | Tip: you can copy &amp; paste a list of contacts
 
-      button#add(type='button' onclick='member.createInvites(event)') Add
-      div.description.primary
-        p
-          | These people have been invited to your organization but have not 
-          | yet accepted. Resend or delete the invitations using the icons 
-          | below.
-      div.description.secondary.hidden
-        p
-          | These people have been invited to join your organization. Please 
-          | review the list to ensure its accuracy.
-      ul#inviteList
-        include invites
-      #submitArea.description
-        button.cancel(type='button' onclick='modal.cancel()') Cancel
-        button.save(disabled='disabled') Send
+        button#add(type='button' onclick='member.createInvites(event)') Add
+        div.description.primary
+          p
+            | These people have been invited to your organization but have not 
+            | yet accepted. Resend or delete the invitations using the icons 
+            | below.
+        div.description.secondary.hidden
+          p
+            | These people have been invited to join your organization. Please 
+            | review the list to ensure its accuracy.
+        ul#inviteList
+          include invites
+        #submitArea.description
+          button.cancel(type='button' onclick='modal.cancel()') Cancel
+          button.save(disabled='disabled') Send
+script(type='text/javascript').
+  $('#main-instructions ul li').click(function() {
+    var $this = $(this);
+    $('#main-instructions').hide();
+    var link = '#' + $this.attr('data-link');
+    $(link).show();
+  });
+
+  $('#newMemberForm .back').click(function() {
+    $('#email-instructions').hide();
+    $('#inperson-instructions').hide();
+    $('#main-instructions').show();
+  });

@@ -1573,6 +1573,16 @@ var validate = function(req, res, next) {
   }
 }
 
+var generateCode = function(){
+  var text = "";
+  var possible = "abcdefghijklmnopqrstuvwxyz";
+
+  for( var i=0; i < 5; i++ )
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
+
 exports.register = function(req, res){
   validate(req, res, function(){
     var body = req.body;
@@ -1594,13 +1604,7 @@ exports.register = function(req, res){
         if (result) {
           if (result.type == 'institution_verified') {
             console.log('creating org');
-            var code = randomstring.generate({
-              length: 6,
-              readable: true,
-              charset: 'alphabetic',
-              capitalization: 'lowercase'
-            });
-
+            var code = generateCode(); 
             var org = new Organization({owner: user._id, 
               name: user.first_name,
               code: code
@@ -1636,9 +1640,7 @@ exports.register = function(req, res){
             console.log('creating org');
             var org = new Organization({owner: result._id, 
               name: result.first_name,
-              code: randomstring.generate({
-
-              })});
+              code: generateCode()});
             console.log(org);
             org.save(function(err, result){
               if (err) console.log(err);
