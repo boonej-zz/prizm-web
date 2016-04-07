@@ -25,6 +25,8 @@ block content
             | Who to Follow
           li.disabled(data-val='featured' onclick='settings.nav(event)') 
             | Featured
+          li.disabled(data-val='program_code' onclick='settings.nav(event)')
+            | Program Code
       .right-box
         h3 Theme Color
         form#theme.settings-form
@@ -83,7 +85,7 @@ block content
               label(for='display') Display Name
               input#display(type='text' name='display_name' value='#{org.display_name || ""}')
           .logo
-            label(for='logo' ) Upload Logo in Header
+            h4 Upload Image for Logo in Header
             - var background = org.logo_url?'background-image: url("' + org.logo_url + '"); background-size: cover':''
             div.logo-drop(ondragover='settings.drag(event)' ondrop='settings.drop(event)' style='#{background}' onclick='$("#imageFile").click()' data-preview='logo-drop')
               .instructions(class='#{org.logo_url?"hidden":""}')
@@ -149,5 +151,12 @@ block content
               checked=lead?'checked':false)
               .checkbox(onclick='$("#featuredLeaders").click()')
               label(for='featuredLeaders') Leaders
+          .buttons
+            button.save(type='submit') Save
+        form#program_code.settings-form.hidden
+          h4 Please enter the program code you would like your members to use:
+          ul
+            li
+              input#programCode(type='text' name ='code' value='#{org.code}')
           .buttons
             button.save(type='submit') Save

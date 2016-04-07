@@ -7,6 +7,7 @@ $(document).ready(function(){
   $('form#welcome').submit(settings.submitWelcome);
   $('form#follow').submit(settings.baseSubmit);
   $('form#featured').submit(settings.baseSubmit);
+  $('form#program_code').submit(settings.baseSubmit);
   $('label.color').click(function(){
     var $this = $(this);
     var f = $this.attr('for');
@@ -40,6 +41,9 @@ var settings = {
         break;
       case 'interests':
         title = 'Interests';
+        break;
+      case 'program_code':
+        title = 'Program Code';
         break;
       default:
         break;

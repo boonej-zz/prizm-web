@@ -49,6 +49,11 @@ h4 {
   width: 100%;
 }
 
+.logo h4 {
+  margin 0;
+  padding: 0;
+}
+
 .logo .label {
   width: 100%;
 }
@@ -199,6 +204,23 @@ ul.themes li.opt:hover, ul.themes li.opt.selected {
   margin-left: 3%;
   width: auto;
   font-weight: 400;
+}
+
+#program_code button
+{
+  margin-top: 36px;
+}
+
+#program_code li
+{
+  text-align: center;
+}
+
+input#programCode
+{
+  margin: 10px auto 0 auto;
+  text-align: center;
+  width: 100%;
 }
 
 

@@ -896,7 +896,22 @@ exports.updateSettings = function(req, res){
       }
     });
 
+  } else if (action == 'program_code' && req.body.code) {
+    Organization.findOne({_id: organization}, function(err, org){
+      org.code = req.body.code;
+      org.save(function(err, org) {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(org);
+        }
+      });
+    });
+  } else {
+    res.status(400).send();
   }
+
 }
 
 exports.displayNewMessage = function(req, res){
